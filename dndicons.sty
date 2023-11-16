@@ -1,5 +1,5 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{dndicons}[2023-11-15 DnD Icons Package]
+\ProvidesClass{dndicons}[2023-11-16 DnD Icons Package]
 
 \RequirePackage{tikz}
 \tikzset{
@@ -222,13 +222,19 @@
   }
 }
 
+\ExplSyntaxOn
+\NewDocumentCommand{\IfEmptyF}{ m m }{
+    \tl_if_empty:nF { #1 } { #2 }
+}
+\ExplSyntaxOff
+
 \NewDocumentCommand{\die}{ O{normal} m O{} m }{%
   \edef\dndicons@diceiconnrmlrg{#1}%
   \edef\dndicons@diceiconlrg{large}%
   \ifx\dndicons@diceiconnrmlrg\dndicons@diceiconlrg%
     \def\dndicons@diceiconfg{fglrg}\else%
     \def\dndicons@diceiconfg{fgnrm}\fi%
-  \ifx\dndicons@diceiconnrmlrg\dndicons@diceiconlrg\else\IfValueT{#4}{#4\,}\fi%
+  \ifx\dndicons@diceiconnrmlrg\dndicons@diceiconlrg\else\IfEmptyF{#4}{#4\,}\fi%
   \hspace{\dndiconsbeforesep}%
   \tikz[dnd icon,baseline=-3.5pt,fgnrm/.style={scale=.33},fglrg/.style={scale=.67},#3]{
     \node[#2,\dndicons@diceiconfg,font={\footnotesize},line cap=round,line join=round] (0cm,0cm) {\ifx\dndicons@diceiconnrmlrg\dndicons@diceiconlrg\textbf{#4}\fi};

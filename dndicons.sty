@@ -1,5 +1,5 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{dndicons}[2023-11-16 DnD Icons Package]
+\ProvidesClass{dndicons}[2023-11-19 DnD Icons Package]
 
 \RequirePackage{tikz}
 \tikzset{
@@ -203,6 +203,179 @@
   }
 }
 
+% cube (one)
+\pgfdeclareshape{sixside one}{
+  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
+  \anchor{text} % this is used to center the text in the node
+    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+
+  \foregroundpath{
+    \pgfpathrectanglecorners{\pgfpoint{.4cm}{.4cm}}{\pgfpoint{-.4cm}{-.4cm}}
+    \pgfusepath{draw} % draw rectangle
+    \foreach \x/\y in {
+        0cm/0cm
+    } {
+        \pgfpathcircle{\pgfpoint{\x}{\y}}{.075cm} 
+    }
+    \pgfusepath{fill}
+  }
+}
+
+% cube (two)
+\pgfdeclareshape{sixside two}{
+  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
+  \anchor{text} % this is used to center the text in the node
+    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+
+  \foregroundpath{
+    \pgfpathrectanglecorners{\pgfpoint{.4cm}{.4cm}}{\pgfpoint{-.4cm}{-.4cm}}
+    \pgfusepath{draw} % draw rectangle
+    \foreach \x/\y in {
+        .2cm/-.2cm, -.2cm/.2cm 
+    } {
+        \pgfpathcircle{\pgfpoint{\x}{\y}}{.075cm} 
+    }
+    \pgfusepath{fill}
+  }
+}
+
+% cube (three)
+\pgfdeclareshape{sixside three}{
+  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
+  \anchor{text} % this is used to center the text in the node
+    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+
+  \foregroundpath{
+    \pgfpathrectanglecorners{\pgfpoint{.4cm}{.4cm}}{\pgfpoint{-.4cm}{-.4cm}}
+    \pgfusepath{draw} % draw rectangle
+    \foreach \x/\y in {
+        .2cm/-.2cm, 0cm/0cm, -.2cm/.2cm 
+    } {
+        \pgfpathcircle{\pgfpoint{\x}{\y}}{.075cm} 
+    }
+    \pgfusepath{fill}
+  }
+}
+
+% cube (four)
+\pgfdeclareshape{sixside four}{
+  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
+  \anchor{text} % this is used to center the text in the node
+    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+
+  \foregroundpath{
+    \pgfpathrectanglecorners{\pgfpoint{.4cm}{.4cm}}{\pgfpoint{-.4cm}{-.4cm}}
+    \pgfusepath{draw} % draw rectangle
+    \foreach \x/\y in {
+        -.2cm/.2cm, .2cm/.2cm,
+        -.2cm/-.2cm, .2cm/-.2cm
+    } {
+        \pgfpathcircle{\pgfpoint{\x}{\y}}{.075cm} 
+    }
+    \pgfusepath{fill}
+  }
+}
+
+% cube (five)
+\pgfdeclareshape{sixside five}{
+  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
+  \anchor{text} % this is used to center the text in the node
+    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+
+  \foregroundpath{
+    \pgfpathrectanglecorners{\pgfpoint{.4cm}{.4cm}}{\pgfpoint{-.4cm}{-.4cm}}
+    \pgfusepath{draw} % draw rectangle
+    \foreach \x/\y in {
+        -.2cm/.2cm, .2cm/.2cm,
+        0cm/0cm,
+        -.2cm/-.2cm, .2cm/-.2cm
+    } {
+        \pgfpathcircle{\pgfpoint{\x}{\y}}{.075cm} 
+    }
+    \pgfusepath{fill}
+  }
+}
+
+% cube (six)
+\pgfdeclareshape{sixside six}{
+  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
+  \anchor{text} % this is used to center the text in the node
+    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+
+  \foregroundpath{
+    \pgfpathrectanglecorners{\pgfpoint{.4cm}{.4cm}}{\pgfpoint{-.4cm}{-.4cm}}
+    \pgfusepath{draw} % draw rectangle
+    \foreach \x/\y in {
+        -.2cm/.2cm, .2cm/.2cm,
+        -.2cm/0cm, .2cm/0cm,
+        -.2cm/-.2cm, .2cm/-.2cm
+    } {
+        \pgfpathcircle{\pgfpoint{\x}{\y}}{.075cm} 
+    }
+    \pgfusepath{fill}
+  }
+}
+
+% cube (seven)
+\pgfdeclareshape{sixside seven}{
+  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
+  \anchor{text} % this is used to center the text in the node
+    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+
+  \foregroundpath{
+    \pgfpathrectanglecorners{\pgfpoint{.4cm}{.4cm}}{\pgfpoint{-.4cm}{-.4cm}}
+    \pgfusepath{draw} % draw rectangle
+    \foreach \x/\y in {
+        -.2cm/.2cm, .2cm/.2cm,
+        -.2cm/0cm, 0cm/0cm, .2cm/0cm,
+        -.2cm/-.2cm, .2cm/-.2cm
+    } {
+        \pgfpathcircle{\pgfpoint{\x}{\y}}{.075cm} 
+    }
+    \pgfusepath{fill}
+  }
+}
+
+% cube (eight)
+\pgfdeclareshape{sixside eight}{
+  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
+  \anchor{text} % this is used to center the text in the node
+    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+
+  \foregroundpath{
+    \pgfpathrectanglecorners{\pgfpoint{.4cm}{.4cm}}{\pgfpoint{-.4cm}{-.4cm}}
+    \pgfusepath{draw} % draw rectangle
+    \foreach \x/\y in {
+        -.2cm/.2cm, 0cm/.2cm, .2cm/.2cm,
+        -.2cm/0cm, .2cm/0cm,
+        -.2cm/-.2cm, 0cm/-.2cm, .2cm/-.2cm
+    } {
+        \pgfpathcircle{\pgfpoint{\x}{\y}}{.075cm} 
+    }
+    \pgfusepath{fill}
+  }
+}
+
+% cube (nine)
+\pgfdeclareshape{sixside nine}{
+  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
+  \anchor{text} % this is used to center the text in the node
+    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+
+  \foregroundpath{
+    \pgfpathrectanglecorners{\pgfpoint{.4cm}{.4cm}}{\pgfpoint{-.4cm}{-.4cm}}
+    \pgfusepath{draw} % draw rectangle
+    \foreach \x/\y in {
+        -.2cm/.2cm, 0cm/.2cm, .2cm/.2cm,
+        -.2cm/0cm, 0cm/0cm, .2cm/0cm,
+        -.2cm/-.2cm, 0cm/-.2cm, .2cm/-.2cm
+    } {
+        \pgfpathcircle{\pgfpoint{\x}{\y}}{.075cm} 
+    }
+    \pgfusepath{fill}
+  }
+}
+
 % cube (fudge)
 \pgfdeclareshape{fudge}{
   \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
@@ -222,8 +395,40 @@
   }
 }
 
+% cube (fudge plus)
+\pgfdeclareshape{fudge plus}{
+  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
+  \anchor{text} % this is used to center the text in the node
+    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+
+  \foregroundpath{
+    \pgfpathrectanglecorners{\pgfpoint{.4cm}{.4cm}}{\pgfpoint{-.4cm}{-.4cm}}
+    \pgfusepath{draw} % draw rectangle
+    \pgfpathmoveto{\pgfpoint{0cm}{.15cm}}
+    \pgfpathlineto{\pgfpoint{0cm}{-.15cm}}
+    \pgfpathmoveto{\pgfpoint{-.15cm}{0cm}}
+    \pgfpathlineto{\pgfpoint{.15cm}{0cm}}
+    \pgfusepath{draw} 
+  }
+}
+
+% cube (fudge)
+\pgfdeclareshape{fudge minus}{
+  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
+  \anchor{text} % this is used to center the text in the node
+    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+
+  \foregroundpath{
+    \pgfpathrectanglecorners{\pgfpoint{.4cm}{.4cm}}{\pgfpoint{-.4cm}{-.4cm}}
+    \pgfusepath{draw} % draw rectangle
+    \pgfpathmoveto{\pgfpoint{-.15cm}{0cm}}
+    \pgfpathlineto{\pgfpoint{.15cm}{0cm}}
+    \pgfusepath{draw} 
+  }
+}
+
 \ExplSyntaxOn
-\NewDocumentCommand{\IfEmptyF}{ m m }{
+\NewDocumentCommand{\dndicons@ifEmptyF}{ m m }{
     \tl_if_empty:nF { #1 } { #2 }
 }
 \ExplSyntaxOff
@@ -234,7 +439,7 @@
   \ifx\dndicons@diceiconnrmlrg\dndicons@diceiconlrg%
     \def\dndicons@diceiconfg{fglrg}\else%
     \def\dndicons@diceiconfg{fgnrm}\fi%
-  \ifx\dndicons@diceiconnrmlrg\dndicons@diceiconlrg\else\IfEmptyF{#4}{#4\,}\fi%
+  \ifx\dndicons@diceiconnrmlrg\dndicons@diceiconlrg\else\dndicons@ifEmptyF{#4}{#4\,}\fi%
   \hspace{\dndiconsbeforesep}%
   \tikz[dnd icon,baseline=-3.5pt,fgnrm/.style={scale=.33},fglrg/.style={scale=.67},#3]{
     \node[#2,\dndicons@diceiconfg,font={\footnotesize},line cap=round,line join=round] (0cm,0cm) {\ifx\dndicons@diceiconnrmlrg\dndicons@diceiconlrg\textbf{#4}\fi};

@@ -6,7 +6,7 @@
 % available at http://www.latex-project.org/lppl/.
 
 \documentclass{ltxdoc}
-\def\fileversion{1.2.0}
+\def\fileversion{1.2.1}
 \def\filedate{20 November 2023}
 
 \usepackage{longtable, booktabs}
@@ -28,6 +28,7 @@
 \changes{v1.1.1}{2023/11/15}{Fudge dice icon added.}
 \changes{v1.1.2}{2023/11/16}{Bug fixed that caused wrong spacing when using dice icons without quantifier.}
 \changes{v1.2.0}{2023/11/20}{Corrections in the manual. Icons for six-sided dice with one to nine pips, plus sign and minus sign added.}
+\changes{v1.2.1}{2023/11/20}{Documentation of lengths for spacing added.}
 
 \bigskip
 
@@ -53,6 +54,12 @@ Because the package defines the icons as Ti\emph{k}Z shapes, every command can a
 
 In the following subsections, all commands and shapes are explained in detail. Inside a \verb+tikzpicture+ environment, it is possible to place a node using as option the name of one of the shapes defined by the package. For example, \verb+\node[eightside] {};+ would output a node with the relevant shape. See the below subsection for more detailed information.
 
+\begin{macro}{\dndiconsbeforesep}
+\begin{macro}{\dndiconsaftersep}
+The lengths \verb+\dndiconsbeforesep+ and \verb+\dndiconsaftersep+ define the width of the space that is added before and after the icon respectively. The default value of both lengths is 0.05em. 
+\end{macro}
+\end{macro}
+
 \subsection[Icon \textbackslash die]{Icon \cmd{\die}}
 
 \begin{macro}{\die}
@@ -64,7 +71,7 @@ The command takes two mandatory commands, the first of which describes the shape
 
 The command also takes two optional arguments, the second of which can take arbitrary Ti\emph{k}Z options to style the icon. The options affect the shape, not the integer when it is printed before the icon. As an example, \verb+\die{eightside}[blue, thick]{2}+ results in \die{eightside}[blue, thick]{2}.
 
-The first optional argument can take the value \verb+normal+ or \verb+large+, \verb+normal+ being the default value. With the value \verb+large+, the icon is drawn larger and the additional integer is printed inside of the shape instead of before it. As an example, \verb+\die[large]{eightside}{2}+ results in \die[large]{eightside}{2}. Note that the integer will always be printed on top of the shape, even if the shape does not have an open center as in the case of the \verb+fudge+ shape. 
+The first optional argument can take the value \verb+normal+ or \verb+large+, \verb+normal+ being the default value. With the value \verb+large+, the icon is drawn larger and the additional integer is printed inside of the shape instead of before it. As an example, \verb+\die[large]{eightside}{2}+ results in \die[large]{eightside}{2}. Note that the integer will always be printed on top of the shape, even if the shape does not have an open center as in the case of the \verb+fudge+ shapes or the shapes featuring pips. 
 \end{macro}
 
 \begin{longtable}{ p{17em} p{3em} p{\dimexpr\linewidth-20em-6\tabcolsep} }

@@ -17,6 +17,29 @@
 \CodelineIndex
 \RecordChanges
 
+\NewDocumentEnvironment{dndiconsexamplecolumn}{ O{0.4} }{%
+    \noindent%
+    \begin{minipage}[t]{#1\linewidth}%
+    \vspace{0pt}%
+}{ 
+    \vspace{0pt}%
+    \end{minipage}
+}
+
+\NewDocumentEnvironment{dndiconsiconlist}{ }{
+    \begin{longtable}{ @{} p{17em} p{3em} p{\dimexpr\linewidth-20em-4\tabcolsep} @{} }
+    \toprule
+    \textbf{Command} & \textbf{Icon} & \textbf{Shape} \\ 
+    \midrule\endhead
+}{
+    \bottomrule
+    \end{longtable}
+}
+
+\NewExpandableDocumentCommand{\dndiconsiconlistentry}{ m }{
+    \multicolumn{3}{ @{} l @{} }{#1}
+}
+
 \begin{document}
 
 \title{The \texttt{dndicons} package \\[5pt] \Large A set of high quality icons made with Ti\emph{k}Z for use in notes for tabletop role-playing games}
@@ -53,57 +76,77 @@ Once loaded, the package provides a set of commands that can be used to print ic
 
 \begin{macro}{dnd icons}
 All icons share the Ti\emph{k}Z style \verb+dnd icons+ that has no options per default but can be used to style all icons at once. For example, if the setting \verb+\tikzset{dnd icons/.append style={draw=red}}+ is placed at the beginning of the document, all icons will be drawn in red. Per default, the icons are drawn in the color of the surrounding text. 
+
+Note that it may be necessary to add the Ti\emph{k}Z option \verb+transform shape+ when applying transformations to the icons, because the icons are realised as Ti\emph{k}Z nodes which are not affected by some transformations per default.
 \end{macro}
 
 \begin{macro}{dnd icons/background color}
 In most cases, the icons are made of drawn paths. However, some icons can be used with a negative color scheme where the icon is drawn negatively inside a filled shape. Per default, the icons are drawn in white in such cases, but it might be desirable that the icons are in the same color as the background. To this end, the color can be changed using the Ti\emph{k}Z option \verb+dnd icons/background color+ in the following way:
 \end{macro}
 
-\bigskip\noindent
-\begin{minipage}{0.4\linewidth}%
+\begin{dndiconsexamplecolumn}%
     \colorbox{blue!50}{%
-        \spellschool{evocation}
+        \ability[negative]{charisma}
             [scale=2, transform shape]%
     }
-    %
+    
     \tikzset{
         dnd icons/background color={blue!50}
     }
     \colorbox{blue!50}{%
-        \spellschool{evocation}
+        \ability[negative]{charisma}
             [scale=2, transform shape]%
     }
-\end{minipage}%
-\begin{minipage}{0.6\linewidth}%
-    \begin{verbatim}
+\end{dndiconsexamplecolumn}%
+\begin{dndiconsexamplecolumn}[0.4]%
+\begin{verbatim}
 \colorbox{blue!50}{%
-    \spellschool{evocation}
+    \ability[negative]{charisma}
         [scale=2, transform shape]%
 }
-%
+
 \tikzset{
     dnd icons/background color={blue!50}
 }
 \colorbox{blue!50}{%
-    \spellschool{evocation}
+    \ability[negative]{charisma}
         [scale=2, transform shape]%
 }
-    \end{verbatim}%
-\end{minipage}
+\end{verbatim}%
+\end{dndiconsexamplecolumn}
 
 This feature can, of course, also be used to change the color of the icon independently from the color of the background.
 
+\begin{macro}{dnd icons/before sep}
+\begin{macro}{dnd icons/after sep}
+The Ti\emph{k}Z optins \verb+dnd icons/before sep+ and \verb+dnd icons/after sep+ are used to define the width of the space that is added before and after the icons respectively. The default value of both lengths is 0.05\,em. For example, setting the space before icons to 1\,cm can be achieved as follows:
+\end{macro}
+\end{macro}
+
+\begin{dndiconsexamplecolumn}%
+    Roll\die{eightside}{}a die!
+    
+    \tikzset{
+        dnd icons/before sep={1cm}
+    }
+    Roll\die{eightside}{}a die!
+\end{dndiconsexamplecolumn}%
+\begin{dndiconsexamplecolumn}[0.6]%
+    \begin{verbatim}
+Roll\die{eightside}{}a die!
+
+\tikzset{
+    dnd icons/before sep={1cm}
+}
+Roll\die{eightside}{}a die!
+    \end{verbatim}%
+\end{dndiconsexamplecolumn}
+
+\subsection{Icons}
+
 Because the package defines the icons as Ti\emph{k}Z shapes, every command can actually be used together with every shape. However, the combinations of shapes and commands as described in the following subsections are preferable.
 
-In the following subsections, all commands and shapes are explained in detail. Inside a \verb+tikzpicture+ environment, it is possible to place a node using as option the name of one of the shapes defined by the package. For example, \verb+\node[eightside] {};+ would output a node with the relevant shape. See the below subsection for more detailed information.
-
-\begin{macro}{\dndiconsbeforesep}
-\begin{macro}{\dndiconsaftersep}
-The lengths \verb+\dndiconsbeforesep+ and \verb+\dndiconsaftersep+ define the width of the space that is added before and after the icon respectively. The default value of both lengths is 0.05em. 
-\end{macro}
-\end{macro}
-
-\subsection[Icon \textbackslash die]{Icon \cmd{\die}}
+\subsubsection[Icon \textbackslash die]{Icon \cmd{\die}}
 
 \begin{macro}{\die}
 The command \cmd{\die}\oarg{style}\marg{shape}\oarg{options}\marg{integer} prints an icon to depict a die with a certain number of sides. Two special icons exist for a two-sided die (which would be equivalent to a coin) and for a hundred-sided die (which typically comes in the shape of a sphere). There is also a special icon for a fudge die. 
@@ -117,11 +160,8 @@ The command also takes two optional arguments, the second of which can take arbi
 The first optional argument can take the value \verb+normal+ or \verb+large+, \verb+normal+ being the default value. With \verb+large+ given as argument, the icon is drawn larger and the additional integer is printed inside of the shape instead of before it. As an example, \verb+\die[large]{eightside}{2}+ results in \die[large]{eightside}{2}. Note that the integer will always be printed on top of the shape, even if the shape does not have an open center as in the case of the \verb+fudge+ shapes or the shapes featuring pips. 
 \end{macro}
 
-\begin{longtable}{ p{17em} p{3em} p{\dimexpr\linewidth-20em-6\tabcolsep} }
-\toprule
-\textbf{Command} & \textbf{Icon} & \textbf{Shape} \\ 
-\midrule\endhead
-\multicolumn{3}{l}{\cmd{\die}\oarg{style}\marg{shape}\oarg{options}\marg{integer}} \\
+\begin{dndiconsiconlist}
+\dndiconsiconlistentry{\cmd{\die}\oarg{style}\marg{shape}\oarg{options}\marg{integer}} \\
     & \die{twoside}{} & \verb+twoside+ \\
     & \die{fourside}{} & \verb+fourside+ \\
     & \die{sixside}{} & \verb+sixside+ \\
@@ -142,10 +182,9 @@ The first optional argument can take the value \verb+normal+ or \verb+large+, \v
     & \die{sixside nine}{} & \verb+sixside nine+ \\
     & \die{fudge plus}{} & \verb+fudge plus+ \\
     & \die{fudge minus}{} & \verb+fudge minus+ \\
-\bottomrule
-\end{longtable}
+\end{dndiconsiconlist}
 
-\subsection[Icons \textbackslash ability and \textbackslash saving]{Icons \cmd{\ability} and \cmd{\saving}}
+\subsubsection[Icons \textbackslash ability and \textbackslash saving]{Icons \cmd{\ability} and \cmd{\saving}}
 
 \begin{macro}{\ability}
 The command \cmd{\ability}\oarg{style}\marg{shape}\oarg{options} prints icons depicting an ability of a character. The abilities are represented by animal-like shapes. The relevant shape should be given as mandatory argument to the command. The second optional argument can take arbitrary Ti\emph{k}Z options to style the icon.
@@ -159,11 +198,8 @@ The command \cmd{\saving}\oarg{style}\marg{shape}\oarg{options} prints the icons
 The first optional argument can take the value \verb+normal+ or \verb+empty+, \verb+normal+ being the default value. With \verb+empty+ given as argument, the icon inside the shield is not printed. In this case, the mandatory argument can be left empty. As an example, \verb+\saving[empty]{}+ results in \saving[empty]{}. 
 \end{macro}
 
-\begin{longtable}{ p{17em} p{3em} p{\dimexpr\linewidth-20em-6\tabcolsep} }
-\toprule
-\textbf{Command} & \textbf{Icon} & \textbf{Shape} \\ 
-\midrule\endhead
-\multicolumn{3}{l}{\cmd{\ability}\oarg{style}\marg{shape}\oarg{options}} \\
+\begin{dndiconsiconlist}
+\dndiconsiconlistentry{\cmd{\ability}\oarg{style}\marg{shape}\oarg{options}} \\
     & \ability{strength} & \verb+strength+ \\
     & \ability{dexterity} & \verb+dexterity+ \\
     & \ability{dexterity alt} & \verb+dexterity alt+ \\
@@ -175,7 +211,7 @@ The first optional argument can take the value \verb+normal+ or \verb+empty+, \v
     & \ability{armor} & \verb+armor+ \\
     & \ability{proficiency} & \verb+proficiency+ \\
 \midrule
-\multicolumn{3}{l}{\cmd{\saving}\marg{shape}\oarg{options}} \\
+\dndiconsiconlistentry{\cmd{\saving}\marg{shape}\oarg{options}} \\
     & \saving{strength} & \verb+strength+ \\
     & \saving{dexterity} & \verb+dexterity+ \\
     & \saving{dexterity alt} & \verb+dexterity alt+ \\
@@ -186,20 +222,16 @@ The first optional argument can take the value \verb+normal+ or \verb+empty+, \v
     & \saving{luck} & \verb+luck+ \\
     & \saving{armor} & \verb+armor+ \\
     & \saving{proficiency} & \verb+proficiency+ \\
-\bottomrule
-\end{longtable}
+\end{dndiconsiconlist}
 
-\subsection[Icon \textbackslash spell]{Icon \cmd{\spell}}
+\subsubsection[Icon \textbackslash spell]{Icon \cmd{\spell}}
 
 \begin{macro}{\spell}
 The command \cmd{\spell}\marg{shape}\oarg{options} prints icons depicting the effect of a spell or how it is to be effected. The optional argument can take arbitrary Ti\emph{k}Z options to style the icon.
 \end{macro}
 
-\begin{longtable}{ p{17em} p{3em} p{\dimexpr\linewidth-20em-6\tabcolsep} }
-\toprule
-\textbf{Command} & \textbf{Icon} & \textbf{Shape} \\ 
-\midrule\endhead
-\multicolumn{3}{l}{\cmd{\spell}\marg{shape}\oarg{options}} \\
+\begin{dndiconsiconlist}
+\dndiconsiconlistentry{\cmd{\spell}\marg{shape}\oarg{options}} \\
     & \spell{linear} & \verb+linear+ \\
     & \spell{conic} & \verb+conic+ \\
     & \spell{quadratic} & \verb+quadratic+ \\
@@ -210,10 +242,9 @@ The command \cmd{\spell}\marg{shape}\oarg{options} prints icons depicting the ef
     & \spell{somatic} & \verb+somatic+ \\
     & \spell{material} & \verb+material+ \\
     & \spell{focus} & \verb+focus+ \\
-\bottomrule
-\end{longtable}
+\end{dndiconsiconlist}
 
-\subsection[Icon \textbackslash spellschool]{Icon \cmd{\spellschool}}
+\subsubsection[Icon \textbackslash spellschool]{Icon \cmd{\spellschool}}
 
 \begin{macro}{\spellschool}
 The command \cmd{\spellschool}\oarg{style}\marg{shape}\oarg{options} prints icons that represent the school a spell belongs to. The second optional argument can take arbitrary Ti\emph{k}Z options to style the icon.
@@ -221,11 +252,8 @@ The command \cmd{\spellschool}\oarg{style}\marg{shape}\oarg{options} prints icon
 The first optional argument can take the value \verb+negative+ or \verb+positive+, \verb+negative+ being the default value. Per default the icon is drawn in white inside a filled escutcheon. With \verb+positive+ given as argument, the icon as well as the escutcheon are drawn in the currently selected color. As an example, \verb+\spellschool[positive]{evocation}+ results in \spellschool[positive]{evocation}.
 \end{macro}
 
-\begin{longtable}{ p{17em} p{3em} p{\dimexpr\linewidth-20em-6\tabcolsep} }
-\toprule
-\textbf{Command} & \textbf{Icon} & \textbf{Shape} \\ 
-\midrule\endhead
-\multicolumn{3}{l}{\cmd{\spellschool}\oarg{style}\marg{shape}\oarg{options}} \\
+\begin{dndiconsiconlist}
+\dndiconsiconlistentry{\cmd{\spellschool}\oarg{style}\marg{shape}\oarg{options}} \\
     & \spellschool{abjuration} & \verb+abjuration+ \\
     & \spellschool{conjuration} & \verb+conjuration+ \\
     & \spellschool{divination} & \verb+divination+ \\
@@ -234,10 +262,9 @@ The first optional argument can take the value \verb+negative+ or \verb+positive
     & \spellschool{illusion} & \verb+illusion+ \\
     & \spellschool{necromancy} & \verb+necromancy+ \\
     & \spellschool{transmutation} & \verb+transmutation+ \\
-\bottomrule
-\end{longtable}
+\end{dndiconsiconlist}
 
-\subsection[Icons \textbackslash damage, \textbackslash attack, and \textbackslash condition]{Icons \cmd{\damage}, \cmd{\attack}, and \cmd{\condition}}
+\subsubsection[Icons \textbackslash damage, \textbackslash attack, and \textbackslash condition]{Icons \cmd{\damage}, \cmd{\attack}, and \cmd{\condition}}
 
 \begin{macro}{\damage}
 The command \cmd{\damage}\marg{shape}\oarg{options} prints icons depicting the damage of an attack. The icon is printed inside a circle. The optional argument can take arbitrary Ti\emph{k}Z options to style the icon.
@@ -251,11 +278,8 @@ The command \cmd{\attack}\marg{shape}\oarg{options} prints icons depicting the k
 The command \cmd{\condition}\marg{shape}\oarg{options} prints icons depicting a condition of a character. The optional argument can take arbitrary Ti\emph{k}Z options to style the icon.
 \end{macro}
 
-\begin{longtable}{ p{17em} p{3em} p{\dimexpr\linewidth-20em-6\tabcolsep} }
-\toprule
-\textbf{Command} & \textbf{Icon} & \textbf{Shape} \\ 
-\midrule\endhead
-\multicolumn{3}{l}{\cmd{\damage}\marg{shape}\oarg{options}} \\
+\begin{dndiconsiconlist}
+\dndiconsiconlistentry{\cmd{\damage}\marg{shape}\oarg{options}} \\
     & \damage{acid} & \verb+acid+ \\
     & \damage{bludgeoning} & \verb+bludgeoning+ \\
     & \damage{cold} & \verb+cold+ \\
@@ -271,14 +295,14 @@ The command \cmd{\condition}\marg{shape}\oarg{options} prints icons depicting a 
     & \damage{thunder} & \verb+thunder+ \\
     & \damage{healing} & \verb+healing+ \\
 \midrule
-\multicolumn{3}{l}{\cmd{\attack}\marg{shape}\oarg{options}} \\
+\dndiconsiconlistentry{\cmd{\attack}\marg{shape}\oarg{options}} \\
     & \attack{melee} & \verb+melee+ \\
     & \attack{ranged} & \verb+ranged+ \\
     & \attack{magic} & \verb+magic+ \\
     & \attack{singlehanded} & \verb+singlehanded+ \\
     & \attack{doublehanded} & \verb+doublehanded+ \\
 \midrule
-\multicolumn{3}{l}{\cmd{\condition}\marg{shape}\oarg{options}} \\
+\dndiconsiconlistentry{\cmd{\condition}\marg{shape}\oarg{options}} \\
     & \condition{buff} & \verb+buff+ \\
     & \condition{blinded} & \verb+blinded+ \\
     & \condition{charmed} & \verb+charmed+ \\
@@ -297,22 +321,20 @@ The command \cmd{\condition}\marg{shape}\oarg{options} prints icons depicting a 
     & \condition{unconscious} & \verb+unconscious+ \\
     & \condition{hearing} & \verb+hearing+ \\
     & \condition{seeing} & \verb+seeing+ \\
-\bottomrule
-\end{longtable}
+\end{dndiconsiconlist}
 
 \subsection{Direct use of shapes}
 
 Because the icons are defined as Ti\emph{k}Z shapes, they can directly be applied to Ti\emph{k}Z nodes. However, the shapes don't have a shape border and no anchors except for the \verb+center+ anchor that sits exactly in the center of the shape. Therefore, if nodes with these shapes are connected using edges, the \verb+center+ anchor will be used to connect the nodes. If nodes with these shapes are being positioned, only the \verb+center+ anchor is available. Text content of these nodes is simply printed on top of the center of the node. Compare the following example.
 
-\bigskip\noindent
-\begin{minipage}{0.4\linewidth}%
+\begin{dndiconsexamplecolumn}%
     \begin{tikzpicture}
         \node[eightside, blue, thick] at (0,0) (A) {A};
         \node[charisma] at (2,0) (B) {B};
         \draw[red] (A) -- (B);
     \end{tikzpicture}
-\end{minipage}%
-\begin{minipage}{0.6\linewidth}%
+\end{dndiconsexamplecolumn}%
+\begin{dndiconsexamplecolumn}[0.6]%
     \begin{verbatim}
 \begin{tikzpicture}
     \node[eightside, blue, thick] 
@@ -321,7 +343,7 @@ Because the icons are defined as Ti\emph{k}Z shapes, they can directly be applie
     \draw[red] (A) -- (B);
 \end{tikzpicture}
     \end{verbatim}%
-\end{minipage}
+\end{dndiconsexamplecolumn}
 
 \subsection{Boxing of icons}
 
@@ -339,16 +361,15 @@ Using the command \cmd{\useprotecteddndicon}\marg{box name}, the previously defi
 
 Having created a boxed icon, it is safe to use it, for example, inside a Ti\emph{k}Z node:
 
-\bigskip\noindent
-\begin{minipage}{0.4\linewidth}%
+\begin{dndiconsexamplecolumn}%
     \begin{tikzpicture}
         \node[circle, draw, align=center] {
             \useprotecteddndicon{mybox} \\ 
             Roll a die!
         };
     \end{tikzpicture}
-\end{minipage}%
-\begin{minipage}{0.6\linewidth}%
+\end{dndiconsexamplecolumn}%
+\begin{dndiconsexamplecolumn}[0.6]%
     \begin{verbatim}
 \begin{tikzpicture}
     \node[circle, draw, align=center] {
@@ -357,7 +378,7 @@ Having created a boxed icon, it is safe to use it, for example, inside a Ti\emph
     };
 \end{tikzpicture}
     \end{verbatim}%
-\end{minipage}
+\end{dndiconsexamplecolumn}
 
 \end{document}
 

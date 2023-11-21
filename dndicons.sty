@@ -2,18 +2,22 @@
 \ProvidesClass{dndicons}[2023-11-21 DnD Icons Package (1.3.0)]
 
 \RequirePackage{tikz}
+\newlength{\dndicons@beforesep}
+\newlength{\dndicons@aftersep}
 \tikzset{
     dnd icons/background color/.code={
-        \colorlet{dndiconsbg}{#1}
+        \colorlet{dndicons@bg}{#1}
     },
     dnd icons/background color={white},
+    dnd icons/before sep/.code={
+        \setlength{\dndicons@beforesep}{#1}
+    },
+    dnd icons/before sep={.05em},
+    dnd icons/after sep/.code={
+        \setlength{\dndicons@aftersep}{#1}
+    },
     dnd icons/.style={}
 }
-
-\newlength{\dndiconsbeforesep}
-\setlength{\dndiconsbeforesep}{.05em}
-\newlength{\dndiconsaftersep}
-\setlength{\dndiconsaftersep}{.05em}
 
 % make tikz icons usable inside tikz environments
 \NewDocumentCommand{\provideprotecteddndicon}{ m o m O{} m }{%
@@ -444,12 +448,12 @@
     \def\dndicons@diceiconfg{fglrg}\else%
     \def\dndicons@diceiconfg{fgnrm}\fi%
   \ifx\dndicons@diceiconnrmlrg\dndicons@diceiconlrg\else\dndicons@ifEmptyF{#4}{#4\,}\fi%
-  \hspace{\dndiconsbeforesep}%
+  \hspace{\dndicons@beforesep}%
   \tikz[dnd icons,baseline=-3.5pt,fgnrm/.style={scale=.33},fglrg/.style={scale=.67},#3]{
     \node[#2,\dndicons@diceiconfg,font={\footnotesize},line cap=round,line join=round] (0cm,0cm) {\ifx\dndicons@diceiconnrmlrg\dndicons@diceiconlrg\textbf{#4}\fi};
     \path[draw=none,\dndicons@diceiconfg] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
   }%
-  \hspace{\dndiconsaftersep}%
+  \hspace{\dndicons@aftersep}%
 }
 
 % ABILITIES
@@ -820,21 +824,21 @@
   \ifx\dndicons@abilityiconposneg\dndicons@abilityiconneg%
     \def\dndicons@abilityiconfg{fgneg}\else%
     \def\dndicons@abilityiconfg{fgpos}\fi%
-  \hspace{\dndiconsbeforesep}%
-  \tikz[dnd icons,baseline=-3.5pt,fgpos/.style={draw},fgneg/.style={draw=dndiconsbg,line width=.6pt},#3]{
+  \hspace{\dndicons@beforesep}%
+  \tikz[dnd icons,baseline=-3.5pt,fgpos/.style={draw},fgneg/.style={draw=dndicons@bg,line width=.6pt},#3]{
     \ifx\dndicons@abilityiconposneg\dndicons@abilityiconneg%
       \path[scale=.5,fill] (0cm,0cm) circle (.45cm);
     \fi%
     \node[#2,\dndicons@abilityiconfg,scale=.33,line cap=round,line join=round] (0cm,0cm) {};
     \path[draw=none,scale=.33] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
   }%
-  \hspace{\dndiconsaftersep}%
+  \hspace{\dndicons@aftersep}%
 }
 
 \NewDocumentCommand{\saving}{ O{normal} m O{} }{%
   \edef\dndicons@abilityiconnrmemp{#1}%
   \edef\dndicons@abilityiconemp{empty}%
-  \hspace{\dndiconsbeforesep}%
+  \hspace{\dndicons@beforesep}%
   \tikz[dnd icons,baseline=-3.5pt,#3]{
     \path[scale=.33,draw] (-.45cm,.45cm) -- (.45cm,.45cm) -- (.45cm,-.05cm) arc (360:180:.45cm) -- cycle;
     \ifx\dndicons@abilityiconnrmemp\dndicons@abilityiconemp\else%
@@ -842,7 +846,7 @@
     \fi%
     \path[draw=none,scale=.33] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
   }%
-  \hspace{\dndiconsaftersep}%
+  \hspace{\dndicons@aftersep}%
 }
 
 % SPELLS
@@ -1037,12 +1041,12 @@
 }
 
 \NewDocumentCommand{\spell}{ m O{} }{%
-  \hspace{\dndiconsbeforesep}%
+  \hspace{\dndicons@beforesep}%
   \tikz[dnd icons,baseline=-3.5pt,#2]{
     \node[#1,draw,scale=.33,line cap=round,line join=round] (0cm,0cm) {}; 
     \path[draw=none,scale=.33] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
   }%
-  \hspace{\dndiconsaftersep}%
+  \hspace{\dndicons@aftersep}%
 }
 
 % SPELLSCHOOLS
@@ -1225,13 +1229,13 @@
   \ifx\dndicons@spellschooliconposneg\dndicons@spellschooliconpos%
     \def\dndicons@spellschooliconbg{bgneg}\else%
     \def\dndicons@spellschooliconbg{bgpos}\fi%
-  \hspace{\dndiconsbeforesep}%
-  \tikz[dnd icons,baseline=-3.5pt,fgpos/.style={draw=dndiconsbg,line width=.6pt},fgneg/.style={draw},bgpos/.style={fill},bgneg/.style={draw},#3]{
+  \hspace{\dndicons@beforesep}%
+  \tikz[dnd icons,baseline=-3.5pt,fgpos/.style={draw=dndicons@bg,line width=.6pt},fgneg/.style={draw},bgpos/.style={fill},bgneg/.style={draw},#3]{
     \path[scale=.33,\dndicons@spellschooliconbg] (-.475cm,.35cm) -- (-.35cm,.475cm) -- (.35cm,.475cm) -- (.475cm,.35cm) -- (.425cm,-.375cm) -- (0cm,-.475cm) -- (-.425cm,-.375cm) -- cycle;
     \node[#2,scale=.225,\dndicons@spellschooliconfg,line cap=round,line join=round] (0cm,0cm) {}; 
     \path[draw=none,scale=.33] ([yshift=-1pt].425,.425) rectangle ([yshift=1pt]-.425cm,-.425cm);
   }%
-  \hspace{\dndiconsaftersep}%
+  \hspace{\dndicons@aftersep}%
 }
 
 % DAMAGES
@@ -1560,14 +1564,14 @@
 }
 
 \NewDocumentCommand{\damage}{ m O{} }{%
-  \hspace{\dndiconsbeforesep}%
+  \hspace{\dndicons@beforesep}%
   \tikz[dnd icons,baseline=-3.5pt,#2]{
     \path[draw,scale=.33] (0cm,0cm) circle (.5cm);
     \node[#1,draw,scale=.225,line cap=round,line join=round] (0cm,0cm) {}; 
     \path[draw=none,scale=.33] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
     %\draw[red,scale=.33] (.425cm,.425cm) rectangle (-.425cm,-.425cm);
   }%
-  \hspace{\dndiconsaftersep}%
+  \hspace{\dndicons@aftersep}%
 }
 
 % ATTACKS
@@ -1718,13 +1722,13 @@
 }
 
 \NewDocumentCommand{\attack}{ m O{} }{%
-  \hspace{\dndiconsbeforesep}%
+  \hspace{\dndicons@beforesep}%
   \tikz[dnd icons,baseline=-3.5pt,#2]{
     \node[#1,draw,scale=.33,line cap=round,line join=round] (0cm,0cm) {}; 
     \path[draw=none,scale=.33] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
     %\draw[red,scale=.33] (.425cm,.425cm) rectangle (-.425cm,-.425cm);
   }%
-  \hspace{\dndiconsaftersep}%
+  \hspace{\dndicons@aftersep}%
 }
 
 % CONDITIONS
@@ -2223,13 +2227,13 @@
 }
 
 \NewDocumentCommand{\condition}{ m O{} }{%
-  \hspace{\dndiconsbeforesep}%
+  \hspace{\dndicons@beforesep}%
   \tikz[dnd icons,baseline=-3.5pt,#2]{
     \node[#1,draw,scale=.33,line cap=round,line join=round] (0cm,0cm) {}; 
     \path[draw=none,scale=.33] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
     %\draw[red,scale=.33] (.425cm,.425cm) rectangle (-.425cm,-.425cm);
   }%
-  \hspace{\dndiconsaftersep}%
+  \hspace{\dndicons@aftersep}%
 }
 
 \endinput

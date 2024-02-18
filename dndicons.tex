@@ -11,11 +11,15 @@
 
 \usepackage[T1]{fontenc}
 \usepackage{longtable, booktabs}
-\usepackage{dndicons}
+\usepackage[pics]{dndicons}
 
 \EnableCrossrefs
 \CodelineIndex
 \RecordChanges
+
+\RenewDocumentCommand{\PrintMacroName}{ m }{
+ \color{red}
+}
 
 \NewDocumentEnvironment{dndiconsexamplecolumn}{ O{0.4} }{%
     \noindent%
@@ -67,7 +71,15 @@ Since the commands to typeset the icons typeset \verb+tikzpicture+ environments,
 
 \section{Loading the package}
 
-The \verb+dndicons+ package is loaded by calling \verb+\usepackage{dndicons}+ in the preamble of the document. The package loads the \verb+tikz+ package. The package does not provide any options.
+The \verb+dndicons+ package is loaded by calling \verb+\usepackage{dndicons}+ in the preamble of the document. 
+
+\begin{macro}{pics}
+The package provides the option \verb+pics+. If the package is loaded with this option, every icon is also available as Ti\emph{k}Z pic. On the use of pics, see section \ref{sec:pics} below.
+\end{macro}
+
+\subsection{Dependencies}
+
+The package loads the \verb+tikz+ package which in turn loads the \verb+xcolor+ package. If you want to make use of certain options these packages provide, you need to load the packages with the relevant options beforehand or use, for example, \verb+\PassOptionsToPackage{svgnames}{xcolor}+.
 
 \section{Usage}
 
@@ -118,10 +130,8 @@ In most cases, the icons are made of drawn paths. However, some icons can be use
 
 This feature can, of course, also be used to change the color of the icon independently from the color of the background.
 
-\begin{macro}{dnd icons/before sep}
-\begin{macro}{dnd icons/after sep}
+\begin{macro}{dnd icons/before sep, dnd icons/after sep}
 The Ti\emph{k}Z optins \verb+dnd icons/before sep+ and \verb+dnd icons/after sep+ are used to define the width of the space that is added before and after the icons respectively. The default value of both lengths is 0.05\,em. For example, setting the space before icons to 1\,cm can be achieved as follows:
-\end{macro}
 \end{macro}
 
 \begin{dndiconsexamplecolumn}%
@@ -346,9 +356,9 @@ Because the icons are defined as Ti\emph{k}Z shapes, they can directly be applie
     \end{verbatim}%
 \end{dndiconsexamplecolumn}
 
-\subsection{Icons as pics}
+\subsection{Icons as pics}\label{sec:pics}
 
-Every icon is also available as Ti\emph{k}Z pic. The names of the pic always start with \verb+dnd icons+ followed by a space and the name of the relevant icon (see the lists above). For abilities, savings, spellschools and damages, additional pics exists where the name has the suffixes \verb+ability+, \verb+saving+, \verb+spellschool+, and \verb+damage+ respectively.
+If the package is loaded with the option \verb+pics+, every icon is also available as Ti\emph{k}Z pic. The names of the pic always start with \verb+dnd icons+ followed by a space and the name of the relevant icon (see the lists above). For abilities, savings, spellschools and damages, additional pics exists where the name has the suffixes \verb+ability+, \verb+saving+, \verb+spellschool+, and \verb+damage+ respectively.
 
 The icon is embedded as a node in the pic which has the name \verb+-node+. Thus, it is possible to name the pic and refer to the node inside. Due to the fact that the icon is a node, the option `transform shape` has to be used if transformations on the pic are to affect the node as well. It is easily possible to apply styles to the node using the Ti\emph{k}Z option \verb+every node+ as shown in the following example.
 
@@ -384,6 +394,20 @@ The icon is embedded as a node in the pic which has the name \verb+-node+. Thus,
 \end{tikzpicture}
     \end{verbatim}%
 \end{dndiconsexamplecolumn}
+
+\NewExpandableDocumentCommand{\ellipsis}{ }{%
+    \textcolor{gray}{...} %
+}
+
+\begin{macro}{dnd icons/create pic \textcolor{gray}{...}, from shape, 
+    from ability shape, 
+    from saving shape, 
+    from spellschool shape, 
+    from damage shape}
+The package defines five Ti\emph{k}Z keys that are used to create pics using the relevant node shapes. In normal circumstances, it is not necessary to use these keys. They are mentioned here primarily for reference. 
+\end{macro}
+
+\vspace*{3\baselineskip}
 
 \subsection{Boxing of icons}
 

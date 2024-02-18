@@ -17,10 +17,6 @@
 \CodelineIndex
 \RecordChanges
 
-\RenewDocumentCommand{\PrintMacroName}{ m }{
- \color{red}
-}
-
 \NewDocumentEnvironment{dndiconsexamplecolumn}{ O{0.4} }{%
     \noindent%
     \begin{minipage}[t]{#1\linewidth}%
@@ -394,10 +390,6 @@ The icon is embedded as a node in the pic which has the name \verb+-node+. Thus,
 \end{tikzpicture}
     \end{verbatim}%
 \end{dndiconsexamplecolumn}
-
-\NewExpandableDocumentCommand{\ellipsis}{ }{%
-    \textcolor{gray}{...} %
-}
 
 \begin{macro}{dnd icons/create pic \textcolor{gray}{...}, from shape, 
     from ability shape, 

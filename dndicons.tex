@@ -55,7 +55,7 @@
 \changes{v1.2.1}{2023/11/20}{Documentation of lengths for spacing added.}
 \changes{v1.2.2}{2023/11/21}{Corrections in the manual.}
 \changes{v1.3.0}{2023/11/21}{Option to set background color added. Renamed global option.}
-\changes{v1.3.1}{2024/02/18}{Correction of initializing code. Correction of after sep.}
+\changes{v1.3.1}{2024/02/18}{Correction of initializing code. Correction of default value of after sep. Addition of pics.}
 
 \bigskip
 
@@ -346,6 +346,45 @@ Because the icons are defined as Ti\emph{k}Z shapes, they can directly be applie
     \end{verbatim}%
 \end{dndiconsexamplecolumn}
 
+\subsection{Icons as pics}
+
+Every icon is also available as Ti\emph{k}Z pic. The names of the pic always start with \verb+dnd icons+ followed by a space and the name of the relevant icon (see the lists above). For abilities, savings, spellschools and damages, additional pics exists where the name has the suffixes \verb+ability+, \verb+saving+, \verb+spellschool+, and \verb+damage+ respectively.
+
+The icon is embedded as a node in the pic which has the name \verb+-node+. Thus, it is possible to name the pic and refer to the node inside. Due to the fact that the icon is a node, the option `transform shape` has to be used if transformations on the pic are to affect the node as well. It is easily possible to apply styles to the node using the Ti\emph{k}Z option \verb+every node+ as shown in the following example.
+
+\begin{dndiconsexamplecolumn}%
+    \begin{tikzpicture}
+    \pic[
+        transform shape,
+        scale=2, 
+        fill=blue, 
+        draw=red, 
+        every node/.style={
+            white,
+            thick
+        }
+    ] (p) {dnd icons charisma ability};
+    \draw (p-node) -- +(1,-1);
+    \end{tikzpicture}
+\end{dndiconsexamplecolumn}%
+\begin{dndiconsexamplecolumn}[0.6]%
+    \begin{verbatim}
+\begin{tikzpicture}
+    \pic[
+        transform shape,
+        scale=2, 
+        fill=blue, 
+        draw=red, 
+        every node/.style={
+            white,
+            thick
+        }
+    ] (p) {dnd icons charisma ability};
+    \draw (p-node) -- +(1,-1);
+\end{tikzpicture}
+    \end{verbatim}%
+\end{dndiconsexamplecolumn}
+
 \subsection{Boxing of icons}
 
 Because the icons cannot simply be used inside \verb+tikzpicture+ environments, the package provides a workaround to place icons inside of boxes for later use. Icons that are boxed this way can safely used inside \verb+tikzpicture+ environments. This might be necessary, if an icon should be used in inline text that sits inside a node.
@@ -380,6 +419,8 @@ Having created a boxed icon, it is safe to use it, for example, inside a Ti\emph
 \end{tikzpicture}
     \end{verbatim}%
 \end{dndiconsexamplecolumn}
+
+\PrintChanges
 
 \end{document}
 

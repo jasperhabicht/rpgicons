@@ -1,5 +1,5 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{dndicons}[2023-11-21 DnD Icons Package (1.3.0)]
+\ProvidesPackage{dndicons}[2024-02-18 DnD Icons Package (1.3.1)]
 
 \RequirePackage{tikz}
 \newlength{\dndicons@beforesep}
@@ -16,6 +16,7 @@
     dnd icons/after sep/.code={
         \setlength{\dndicons@aftersep}{#1}
     },
+    dnd icons/after sep={.05em},
     dnd icons/.style={}
 }
 

@@ -20,9 +20,10 @@
 \linespread{1.1}\selectfont
 \addtolength{\skip\footins}{1em plus 5pt}
 \makeatletter
+\renewcommand*{\thefootnote}{\fnsymbol{footnote}}
 \renewcommand{\@makefntext}[1]{%
     \parindent 1em%
-    \noindent\hbox to 2em{\normalfont\@thefnmark}~#1
+    \noindent\hbox to 1em{\normalfont\@thefnmark}~#1
 }
 \makeatother
 
@@ -107,7 +108,7 @@
     #1
 }{\vphantom{/g}\lstinline^#2^}
 
-\NewDocumentCommand{\cmd}{ m }{\small\texttt{\textbackslash #1}}
+\NewDocumentCommand{\cmd}{ m }{{\small\texttt{\textbackslash #1}}}
 
 \usepackage[pics]{dndicons}
 
@@ -130,7 +131,7 @@
 
 \Large A set of high quality icons made with Ti\emph{k}Z for use in notes for tabletop role-playing games \bigskip
 
-\large Jasper Habicht\footnote{E-mail: \href{mailto:mail@jasperhabicht.de}{mail@jasperhabicht.de}} \bigskip
+\large Jasper Habicht\,\footnote{E-mail: \href{mailto:mail@jasperhabicht.de}{mail@jasperhabicht.de}} \bigskip
 
 Version \dndiconsfileversion, released on \dndiconsfiledate \bigskip
 
@@ -145,6 +146,7 @@ Version \dndiconsfileversion, released on \dndiconsfiledate \bigskip
 \changes{v1.2.2}{2023/11/21}{Corrections in the manual.}
 \changes{v1.3.0}{2023/11/21}{Option to set background color added. Renamed global option.}
 \changes{v1.3.1}{2024/02/18}{Correction of initializing code. Correction of default value of after sep. Addition of pics.}
+\changes{v1.3.2}{2024/02/19}{Reformatting of the manual.}
 
 \bigskip
 
@@ -152,7 +154,7 @@ Version \dndiconsfileversion, released on \dndiconsfiledate \bigskip
 
 The \macro{dndicons} package provides a set of high quality icons made with Ti\emph{k}Z for use in notes for tabletop role-playing games. The icons are meant to be used in the body text, but they can also be used in other contexts such as graphics or diagrams.
 
-Since the commands to typeset the icons typeset \macro{tikzpicture} environments, these commands should not be used inside another \macro{tikzpicture}. However, because the package defines the icons as Ti\emph{k}Z shapes, it is possible to use the icons in \macro{tikzpicture} environments directly. Apart from that, as of version 1.1.0, the package provides a way to define custom commands to typeset the icons as boxed material which is safe to use in a \macro{tikzpicture} context.
+Since the commands to typeset the icons typeset \macro{tikzpicture} environments, these commands should not be used inside another \macro{tikzpicture}. However, because the package defines the icons as Ti\emph{k}Z shapes, it is possible to use the icons in \macro{tikzpicture} environments directly. Apart from that, as of version 1.1.0, the package provides a way to define custom commands to typeset the icons as boxed material which is safe to use in a \macro{tikzpicture} context. As of version 1.3.1, the package provides an additional way to use the icons as Ti\emph{k}Z pics.
 
 \section{Loading the package}
 
@@ -434,7 +436,7 @@ Because the icons cannot simply be used inside \macro{tikzpicture} environments,
 \begin{macrodef}|\provideprotecteddndicon|{<command>}[<style>]{<shape>}[<options>]{<box name>}\end{macrodef}
 The command \macro{\provideprotecteddndicon} creates a box containing the icon that would be created using one of the regular commands this package provides. 
 
-Using \macro{\provideprotecteddndicon{die}[large]{eightside}[blue, thick]{mybox}}, for example, the icon of an eight-sided die with the relevant style and Ti\emph{k}Z options would be stored in a new box named \macro{mybox}. Note that no integer can be added to the \cmd{die} command in this context.
+Using \macro{\provideprotecteddndicon{die}[large]{eightside}[blue, thick]{mybox}}, for example, the icon of an eight-sided die with the relevant style and Ti\emph{k}Z options would be stored in a new box named \macro{mybox}. Note that no integer can be added to the \macro{die} command in this context.
 
 \provideprotecteddndicon{die}[large]{eightside}[blue, thick]{mybox}
 

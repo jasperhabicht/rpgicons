@@ -2,8 +2,6 @@
 
 # The `dndicons` package
 
-*A set of high quality icons made with TikZ for use in notes for tabletop role-playing games*
-
 The `dndicons` package provides a set of high quality icons made with Ti*k*Z for use in notes for
 tabletop role-playing games. The icons are meant to be used in the body text, but they can also be
 used in other contexts such as graphics or diagrams.

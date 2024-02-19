@@ -1,3 +1,5 @@
+![Version 1.3.2](https://img.shields.io/badge/version-1.3.2-blue)
+
 # The `dndicons` package
 
 A set of high quality icons made with TikZ for use in notes for tabletop role-playing games

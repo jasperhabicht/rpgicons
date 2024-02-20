@@ -81,6 +81,7 @@
     outer arc=2.5pt,
     colframe=black!10,
     colback=black!10,
+    title style hook/.style={}
 }
 
 \NewTCBListing{macrodef}{ }{ 
@@ -114,7 +115,47 @@
     #1
 }{\vphantom{/g}\lstinline^#2^}
 
-\NewDocumentCommand{\cmd}{ m }{{\small\texttt{\textbackslash #1}}}
+\NewTotalTCBox{\titlemacro}{ s O{} m }{
+    verbatim,
+    size=tight,
+    arc=1pt,
+    outer arc=1pt,
+    top=0.5pt, 
+    bottom=0.5pt,
+    left=2pt, 
+    right=2pt,
+    boxrule=0pt,
+    colframe=black!10,
+    colback=black!10,
+    fontupper=\small\ttfamily,
+    title style hook,
+    #2
+}{\vphantom{/g}\IfBooleanT{#1}{\textbackslash}#3}
+
+\NewExpandableDocumentCommand{\printdoctitle}{ o m o m m o m }{%
+    \hypersetup{
+        pdfauthor={#5},
+        pdftitle={\IfValueTF{#1}{#1}{#2}},
+        pdfsubject={\IfValueTF{#3}{#3}{#4}}
+    }%
+    \begingroup%
+    \tcbset{
+        title style hook/.style={
+            boxrule=2pt,
+            fontupper=\huge\ttfamily
+        }
+    }%
+    \setlength{\parindent}{0pt}\sffamily%
+    \Huge{\bfseries #2}\bigskip\par
+    \Large #4\bigskip\par
+    \large #5%
+    \IfValueT{#6}{%
+        \,\footnote{#6}\bigskip\par
+    }%
+    #7 \bigskip\par
+    \rule{\textwidth}{.08em}%
+    \endgroup
+}
 
 \usepackage[pics]{dndicons}
 
@@ -130,19 +171,12 @@
 
 \begin{document}
 
-\begingroup
-\setlength{\parindent}{0pt}\sffamily
-\lstset{basicstyle=\huge\ttfamily}
-\Huge{\bfseries The \macro[boxrule=2pt]{dndicons} package}\bigskip
-
-\Large A set of high quality icons made with Ti\emph{k}Z for use in notes for tabletop role-playing games \bigskip
-
-\large Jasper Habicht\,\footnote{E-mail: \href{mailto:mail@jasperhabicht.de}{mail@jasperhabicht.de}} \bigskip
-
-Version \dndiconsfileversion, released on \dndiconsfiledate \bigskip
-
-\rule{\textwidth}{.08em}
-\endgroup
+\printdoctitle
+    [The dndicons package]
+    {The \titlemacro{dndicons} package}
+    {A set of high quality icons made with Ti\emph{k}Z for use in notes for tabletop role-playing games}
+    {Jasper Habicht}[E-mail: \href{mailto:mail@jasperhabicht.de}{mail@jasperhabicht.de}]
+    {Version \dndiconsfileversion, released on \dndiconsfiledate}
 
 \changes{v1.1.0}{2023/08/15}{First public release.}
 \changes{v1.1.1}{2023/11/15}{Fudge dice icon added.}
@@ -222,7 +256,7 @@ Roll\die{eightside}{}a die!
 
 Because the package defines the icons as Ti\emph{k}Z shapes, every command can actually be used together with every shape. However, the combinations of shapes and commands as described in the following subsections are preferable.
 
-\subsubsection[Icon \textbackslash die]{Icon \cmd{die}}
+\subsubsection[Icon \textbackslash die]{Icon \titlemacro*{die}}
 
 \begin{macrodef}|\die|[<style>]{<shape>}[<options>]{<integer>}\end{macrodef}
 The command \macro{\die} prints an icon to depict a die with a certain number of sides. Two special icons exist for a two-sided die (which would be equivalent to a coin) and for a hundred-sided die (which typically comes in the shape of a sphere). There is also a special icon for a fudge die. 
@@ -259,7 +293,7 @@ The first optional argument can take the value \macro{normal} or \macro{large}, 
     & \die{fudge minus}{} & \macro{fudge minus} \\
 \end{dndiconsiconlist}
 
-\subsubsection[Icons \textbackslash ability and \textbackslash saving]{Icons \cmd{ability} and \cmd{saving}}
+\subsubsection[Icons \textbackslash ability and \textbackslash saving]{Icons \titlemacro*{ability} and \titlemacro*{saving}}
 
 \begin{macrodef}|\ability|[<style>]{<shape>}[<options>]\end{macrodef}
 The command \macro{\ability} prints icons depicting an ability of a character. The abilities are represented by animal-like shapes. The relevant shape should be given as mandatory argument to the command. The second optional argument can take arbitrary Ti\emph{k}Z options to style the icon.
@@ -297,7 +331,7 @@ The first optional argument can take the value \macro{normal} or \macro{empty}, 
     & \saving{proficiency} & \macro{proficiency} \\
 \end{dndiconsiconlist}
 
-\subsubsection[Icon \textbackslash spell]{Icon \cmd{spell}}
+\subsubsection[Icon \textbackslash spell]{Icon \titlemacro*{spell}}
 
 \begin{macrodef}|\spell|{<shape>}[<options>]\end{macrodef}
 The command \macro{\spell} prints icons depicting the effect of a spell or how it is to be effected. The optional argument can take arbitrary Ti\emph{k}Z options to style the icon.
@@ -316,7 +350,7 @@ The command \macro{\spell} prints icons depicting the effect of a spell or how i
     & \spell{focus} & \macro{focus} \\
 \end{dndiconsiconlist}
 
-\subsubsection[Icon \textbackslash spellschool]{Icon \cmd{spellschool}}
+\subsubsection[Icon \textbackslash spellschool]{Icon \titlemacro*{spellschool}}
 
 \begin{macrodef}|\spellschool|[<style>]{<shape>}[<options>]\end{macrodef}
 The command \macro{\spellschool} prints icons that represent the school a spell belongs to. The second optional argument can take arbitrary Ti\emph{k}Z options to style the icon.
@@ -335,7 +369,7 @@ The first optional argument can take the value \macro{negative} or \macro{positi
     & \spellschool{transmutation} & \macro{transmutation} \\
 \end{dndiconsiconlist}
 
-\subsubsection[Icons \textbackslash damage, \textbackslash attack, and \textbackslash condition]{Icons \cmd{damage}, \cmd{attack}, and \cmd{condition}}
+\subsubsection[Icons \textbackslash damage, \textbackslash attack, and \textbackslash condition]{Icons \titlemacro*{damage}, \titlemacro*{attack}, and \titlemacro*{condition}}
 
 \begin{macrodef}|\damage|{<shape>}[<options>]\end{macrodef}
 The command \macro{\damage} prints icons depicting the damage of an attack. The icon is printed inside a circle. The optional argument can take arbitrary Ti\emph{k}Z options to style the icon.

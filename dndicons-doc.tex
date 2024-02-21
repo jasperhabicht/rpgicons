@@ -163,8 +163,14 @@
 \usepackage[pics]{dndicons}
 \NewCommandCopy\tikzdie\die
 \NewCommandCopy\tikzability\ability
-\let\die\undefined
-\let\ability\undefined
+\ExplSyntaxOn
+\cs_undefine:c { die }
+\cs_undefine:c { die ~ code }
+\cs_undefine:c { die ~ defaults }
+\cs_undefine:c { ability }
+\cs_undefine:c { ability ~ code }
+\cs_undefine:c { ability ~ defaults }
+\ExplSyntaxOff
 
 \usepackage{dndicons-l3draw}
 \NewCommandCopy\liiidie\die

@@ -1,4 +1,4 @@
-\ProvidesExplPackage {dndicons-l3draw} {2024-02-21} {1.4.1} 
+\ProvidesExplPackage {dndicons-l3draw} {2024-02-21} {1.4.2} 
     {DnD Icons Package (l3draw Variant)}
 \RequirePackage {l3draw}
 
@@ -1476,11 +1476,11 @@
     \draw_end:
 }
 
-\ProvideDocumentCommand { \dndiconsset } { m } {
+\NewDocumentCommand { \dndiconsset } { m } {
     \keys_set:nn { dndicons } { #1 }
 }
 
-\ProvideDocumentCommand { \die } { O{normal} m O{} m } {
+\NewDocumentCommand { \DndiconsDie } { O{normal} m O{} m } {
     \group_begin:
         \keys_set_groups:nnn { dndicons } { extra } { #3 }
         \hspace { \l_dndicons_icon_before_sep_dim }
@@ -1493,8 +1493,9 @@
         \hspace { \l_dndicons_icon_after_sep_dim }
     \group_end:
 }
+\cs_if_exist:NF \die { \NewCommandCopy \die \DndiconsDie }
 
-\ProvideDocumentCommand { \ability } { O{positive} m O{} } {
+\NewDocumentCommand { \DndiconsAbility } { O{positive} m O{} } {
     \group_begin:
         \keys_set_groups:nnn { dndicons } { extra } { #3 }
         \hspace { \l_dndicons_icon_before_sep_dim }
@@ -1506,8 +1507,9 @@
         \hspace { \l_dndicons_icon_after_sep_dim }
     \group_end:
 }
+\cs_if_exist:NF \ability { \NewCommandCopy \ability \DndiconsAbility }
 
-\ProvideDocumentCommand { \saving } { O{} m O{} } {
+\NewDocumentCommand { \DndiconsSaving } { O{} m O{} } {
     \group_begin:
         \keys_set_groups:nnn { dndicons } { extra } { #3 }
         \hspace { \l_dndicons_icon_before_sep_dim }
@@ -1519,8 +1521,9 @@
         \hspace { \l_dndicons_icon_after_sep_dim }
     \group_end:
 }
+\cs_if_exist:NF \saving { \NewCommandCopy \saving \DndiconsSaving }
 
-\ProvideDocumentCommand { \spell } { m O{} } {
+\NewDocumentCommand { \DndiconsSpell } { m O{} } {
     \group_begin:
         \keys_set_groups:nnn { dndicons } { extra } { #2 }
         \hspace { \l_dndicons_icon_before_sep_dim }
@@ -1528,8 +1531,9 @@
         \hspace { \l_dndicons_icon_after_sep_dim }
     \group_end:
 }
+\cs_if_exist:NF \spell { \NewCommandCopy \spell \DndiconsSpell }
 
-\ProvideDocumentCommand { \spellschool } { O{positive} m O{} } {
+\NewDocumentCommand { \DndiconsSpellschool } { O{positive} m O{} } {
     \group_begin:
         \keys_set_groups:nnn { dndicons } { extra } { #3 }
         \hspace { \l_dndicons_icon_before_sep_dim }
@@ -1541,8 +1545,9 @@
         \hspace { \l_dndicons_icon_after_sep_dim }
     \group_end:
 }
+\cs_if_exist:NF \spellschool { \NewCommandCopy \spellschool \DndiconsSpellschool }
 
-\ProvideDocumentCommand { \damage } { m O{} } {
+\NewDocumentCommand { \DndiconsDamage } { m O{} } {
     \group_begin:
         \keys_set_groups:nnn { dndicons } { extra } { #2 }
         \hspace { \l_dndicons_icon_before_sep_dim }
@@ -1550,8 +1555,9 @@
         \hspace { \l_dndicons_icon_after_sep_dim }
     \group_end:
 }
+\cs_if_exist:NF \damage { \NewCommandCopy \damage \DndiconsDamage }
 
-\ProvideDocumentCommand { \attack } { m O{} } {
+\NewDocumentCommand { \DndiconsAttack } { m O{} } {
     \group_begin:
         \keys_set_groups:nnn { dndicons } { extra } { #2 }
         \hspace { \l_dndicons_icon_before_sep_dim }
@@ -1559,8 +1565,9 @@
         \hspace { \l_dndicons_icon_after_sep_dim }
     \group_end:
 }
+\cs_if_exist:NF \attack { \NewCommandCopy \attack \DndiconsAttack }
 
-\ProvideDocumentCommand { \condition } { m O{} } {
+\NewDocumentCommand { \DndiconsCondition } { m O{} } {
     \group_begin:
         \keys_set_groups:nnn { dndicons } { extra } { #2 }
         \hspace { \l_dndicons_icon_before_sep_dim }
@@ -1568,5 +1575,6 @@
         \hspace { \l_dndicons_icon_after_sep_dim }
     \group_end:
 }
+\cs_if_exist:NF \condition { \NewCommandCopy \condition \DndiconsCondition }
 
 % EOF 

@@ -1,0 +1,41 @@
+\documentclass[multi=dndiconswrapper, border=10pt]{standalone}
+\RequirePackage[enable-debug]{expl3}
+
+\ExplSyntaxOn
+\debug_on:n{all}
+
+\RequirePackage{dndicons-l3draw}
+
+\clist_set:Nn \l_tmpa_clist {
+    twoside, fourside, sixside, eightside, tenside, twelveside, twentyside, hundredside,
+    fudge, sixside ~ one, sixside ~ two, sixside ~ three, sixside ~ four, sixside ~ five, 
+    sixside ~ six, sixside ~ seven, sixside ~ eight, sixside ~ nine, fudge ~ plus, fudge ~ minus,
+    strength, dexterity, dexterity ~ alt, constitution, intelligence, wisdom, charisma, luck, 
+    armor, proficiency,
+    linear, conic, quadratic, cubic, spheric, cylindric, verbal, somatic, material, focus,
+    abjuration, conjuration, divination, enchantment, evocation, illusion, necromancy, transmutation,
+    acid, bludgeoning, cold, fire, force, lightning, necrotic, piercing, poison, psychic,
+    radiant, slashing, thunder, healing, 
+    melee, ranged, magic, singlehanded, doublehanded,
+    buff, blinded, charmed, deafened, exhausted, frightened, grappled, incapacitated, invisible,
+    paralyzed, petrified, poisoned, restrained, stunned, unconscious, hearing, seeing
+}
+
+\NewDocumentEnvironment { dndiconswrapper } { m } {
+    \DndIconsUseIcon { #1 }
+}
+
+\ExplSyntaxOff
+
+\begin{document}
+
+\ExplSyntaxOn
+
+\dndiconsset{baseline=0pt, before ~ sep=0pt, after ~ sep=0pt}
+\clist_map_inline:Nn  \l_tmpa_clist {
+    \begin{dndiconswrapper} { #1 } \end{dndiconswrapper}
+}
+
+\ExplSyntaxOff
+
+\end{document}

@@ -1,4 +1,4 @@
-![Version 1.3.2](https://img.shields.io/badge/version-1.3.2-blue)
+![Version 1.4.1](https://img.shields.io/badge/version-1.4.1-blue)
 
 # The `dndicons` package
 
@@ -12,7 +12,7 @@ shapes, it is possible to use the icons in `tikzpicture` environments directly. 
 of version 1.1.0, the package provides a way to define custom commands to typeset the icons as 
 boxed material which is safe to use in a tikzpicture context. As of version 1.3.1, the package 
 provides an additional way to use the icons as Ti*k*Z pics. As of version 1.4.0, a variant of the package 
-provides an alternative way to typeset the icons using the `l3draw` packagee.
+provides an alternative way to typeset the icons using the `l3draw` package.
 
-The `dndicons` package is loaded by calling `\usepackage{dndicons}` in the preamble of the
+The `dndicons` package is loaded by calling `\usepackage{dndicons}` (or `\usepackage{dndicons-l3draw}` for the `l3draw` packagee variant) in the preamble of the
 document.

@@ -6,7 +6,7 @@
 % available at http://www.latex-project.org/lppl/.
 
 \documentclass[a4paper]{article}
-\def\dndiconsfileversion{1.4.0}
+\def\dndiconsfileversion{1.4.1}
 \def\dndiconsfiledate{21 February 2024}
 
 \usepackage[T1]{fontenc}
@@ -34,14 +34,17 @@
 \makeatother
 
 \tcbuselibrary{listings}
-\lstdefinelanguage{simpletex}{
-    keywords={},
-    delim=[is][\bfseries]{|}{|},
-}
-\lstdefinestyle{dndiconsdoc}{
+\lstdefinestyle{dndiconsdocmacro}{
     basicstyle=\small\ttfamily,
-    literate=*{<}{{{\color{gray}\guilsinglleft}}}1 {>}{{{\color{gray}\guilsinglright}}}1,
-    language=simpletex,
+    literate=*{<}{{{\color{black!50}\guilsinglleft}}}1 
+        {>}{{{\color{black!50}\guilsinglright}}}1,
+    keywords={},
+    moredelim=[is][\bfseries]{|}{|},
+    moredelim=[is][\color{black!50}]{!}{!},
+}
+\lstdefinestyle{dndiconsdoccodeexample}{
+    basicstyle=\small\ttfamily,
+    keywords={},
 }
 
 \hypersetup{colorlinks}
@@ -86,7 +89,7 @@
 
 \NewTCBListing{macrodef}{ }{ 
     listing only,
-    listing style={dndiconsdoc},
+    listing style={dndiconsdocmacro},
     grow to left by=2cm,
     boxrule=0pt,
     after={\par\smallskip\noindent}
@@ -95,7 +98,7 @@
 \NewTCBListing{codeexample}{ }{
     text side listing,
     lefthand width=5cm,
-    listing style={dndiconsdoc},
+    listing style={dndiconsdoccodeexample},
     after={\par\smallskip\noindent}
 }
 
@@ -199,6 +202,7 @@
 \changes{v1.3.2}{2024/02/19}{Reformatting of the manual.}
 \changes{v1.3.4}{2024/02/20}{Minor corrections of some shapes.}
 \changes{v1.4.0}{2024/02/21}{\titlemacro{l3draw} variant added.}
+\changes{v1.4.1}{2024/02/21}{Corrections in \titlemacro{l3draw} variant.}
 
 \bigskip
 
@@ -232,7 +236,7 @@ All icons share the Ti\emph{k}Z style \macro{dnd icons} that has no options per 
 
 Note that it may be necessary to add the Ti\emph{k}Z option \macro{transform shape} when applying transformations to the icons, because the icons are realised as Ti\emph{k}Z nodes which are not affected by some transformations per default.
 
-\begin{macrodef}dnd icons/background color\end{macrodef}
+\begin{macrodef}!dnd icons/!background color\end{macrodef}
 Some icons can be used with a negative color scheme where the icon is drawn negatively inside a filled shape. Per default, the icons are drawn in white in such cases, but it might be desirable that the icons are in the same color as the background. To this end, the color can be changed using the Ti\emph{k}Z option \macro{dnd icons/background color} in the following way:
 
 \begin{codeexample}
@@ -252,8 +256,9 @@ Some icons can be used with a negative color scheme where the icon is drawn nega
 This feature can, of course, also be used to change the color of the icon independently from the color of the background.
 
 \begin{macrodef}
-dnd icons/before sep
-dnd icons/after sep
+!dnd icons/!before sep
+!dnd icons/!after sep
+!dnd icons/!baseline
 \end{macrodef}
 The Ti\emph{k}Z options \macro{dnd icons/before sep} and \macro{dnd icons/after sep} are used to define the width of the space that is added before and after the icons respectively. The default value of both lengths is 0.05\,em. For example, setting the space before icons to 1\,cm can be achieved as follows:
 
@@ -265,6 +270,8 @@ Roll\die{eightside}{}a die!
 }
 Roll\die{eightside}{}a die!
 \end{codeexample}
+
+The option \macro{baseline} can be used to adjust the baseline of the icons. A larger value for the baseline will shift the icon downwards relative to the baseline of the surrounding text. The default value of the baseline is -3.5\,pt.
 
 \subsection{Icons}
 
@@ -475,11 +482,11 @@ The icon is embedded as a node in the pic which has the name \macro{-node}. Thus
 \end{codeexample}
 
 \begin{macrodef}
-dnd icons/create pic from shape
-dnd icons/create pic from ability shape
-dnd icons/create pic from saving shape 
-dnd icons/create pic from spellschool shape
-dnd icons/create pic from damage shape
+!dnd icons/!create pic from shape
+!dnd icons/!create pic from ability shape
+!dnd icons/!create pic from saving shape 
+!dnd icons/!create pic from spellschool shape
+!dnd icons/!create pic from damage shape
 \end{macrodef}
 The package defines five Ti\emph{k}Z keys that are used to create pics using the relevant node shapes. In normal circumstances, it is not necessary to use these keys. They are mentioned here primarily for reference. 
 
@@ -507,6 +514,11 @@ Having created a boxed icon, it is safe to use it, for example, inside a Ti\emph
     };
 \end{tikzpicture}
 \end{codeexample}
+
+% l3draw variant
+
+\RenewCommandCopy\die\liiidie
+\RenewCommandCopy\ability\liiiability
 
 \section[l3draw package variant]{\titlemacro[fontupper=\large\ttfamily]{l3draw} package variant}
 
@@ -538,7 +550,9 @@ line width
 scale
 rotate
 \end{macrodef}
-The \macro{\DndIconsUseIcon} command and the other commands based on this command can be used with some options that consist of key-value pairs and can be combined. 
+The \macro{\DndIconsUseIcon} command and the commands \macro{\die}, \macro{\ability}, \macro{\saving}, \macro{\spell}, \macro{\spellschool}, \macro{\damage}, \macro{\attack} and \macro{\condition} can be used with certain options that each consist of a key-value pair and can be combined. When used with the \macro{\DndIconsUseIcon} command or the other commands based on this command, these options should be used directly without wrapping them inside the \macro{style} option. 
+
+For example, \macro{\die{eightside}[color=blue, line width=0.8pt]{2}} would result in \die{eightside}[color=blue, line width=0.8pt]{2}.
 
 With the \macro{frame} option, one of four different frames can be selected that are drawn around the shape of the icon. The values \macro{ability} and \macro{damage} draw a circle around the shape. The value \macro{saving} draws a rounded shield and the value \macro{spellschool} draws an angular shield around the shape. The commands \macro{\ability}, \macro{\saving}, \macro{\spellschool} and \macro{\damage} make use of the relevant frame.
 
@@ -546,19 +560,16 @@ The \macro{background} option sets the color of the shape when it is printed ove
 
 The \macro{color} option sets the color of strokes and fills in general while the \macro{stroke} option and the \macro{fill} option set the color only for strokes or fills respectively. The \macro{line width} sets the line width for strokes. Using the \macro{scale} and \macro{rotate} options, the shape can be scaled and rotated.
 
-\subsection{Global options}
+\subsection{Setting options globally}
 
 \begin{macrodef}
 |\dndiconsset|
 \end{macrodef}
-Apart from setting the options to the commands directly, it is also possible to set them globally using the \macro{\dndiconsset} command. When the above described options for styling the icons are selected via \macro{\dndiconsset}, they need to be wrapped in the key \macro{style} as shown in the example below.
+Apart from setting the options to the commands directly, it is also possible to set them globally using the \macro{\dndiconsset} command. Globally set options are overridden by options that are selected directly.
 
-\RenewCommandCopy\ability\liiiability
 \begin{codeexample}
 \dndiconsset{
-    style={
-        color=blue
-    }
+    color=blue
 }
 
 \ability{charisma}
@@ -569,10 +580,10 @@ Apart from setting the options to the commands directly, it is also possible to 
 \begin{macrodef}
 before sep
 after sep
+baseline
 \end{macrodef}
-Similar to the settings of the main variant of the package, the spacing before and after the icons can be set using the options \macro{before sep} and \macro{after sep}
+Similar to the settings of the main variant of the package, the spacing before and after the icons can be set using the options \macro{before sep} and \macro{after sep}. The option \macro{baseline} can be used to adjust the baseline of the icons. These options can also be applied to the icon commands directly.
 
-\RenewCommandCopy\die\liiidie
 \begin{codeexample}
 Roll\die{eightside}{}a die!
 

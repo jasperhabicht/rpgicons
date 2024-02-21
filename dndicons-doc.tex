@@ -6,7 +6,7 @@
 % available at http://www.latex-project.org/lppl/.
 
 \documentclass[a4paper]{article}
-\def\dndiconsfileversion{1.4.1}
+\def\dndiconsfileversion{1.4.2}
 \def\dndiconsfiledate{21 February 2024}
 
 \usepackage[T1]{fontenc}
@@ -161,22 +161,7 @@
 }
 
 \usepackage[pics]{dndicons}
-\NewCommandCopy\tikzdie\die
-\NewCommandCopy\tikzability\ability
-\ExplSyntaxOn
-\cs_undefine:c { die }
-\cs_undefine:c { die ~ code }
-\cs_undefine:c { die ~ defaults }
-\cs_undefine:c { ability }
-\cs_undefine:c { ability ~ code }
-\cs_undefine:c { ability ~ defaults }
-\ExplSyntaxOff
-
 \usepackage{dndicons-l3draw}
-\NewCommandCopy\liiidie\die
-\NewCommandCopy\liiiability\ability
-\RenewCommandCopy\die\tikzdie
-\RenewCommandCopy\ability\tikzability
 
 \NewDocumentEnvironment{dndiconsiconlist}{ }{
     \begin{longtable}{ @{} p{20em} p{5em} p{\dimexpr\linewidth-25em-4\tabcolsep} @{} }
@@ -209,6 +194,7 @@
 \changes{v1.3.4}{2024/02/20}{Minor corrections of some shapes.}
 \changes{v1.4.0}{2024/02/21}{\titlemacro{l3draw} variant added.}
 \changes{v1.4.1}{2024/02/21}{Corrections in \titlemacro{l3draw} variant.}
+\changes{v1.4.2}{2024/02/21}{Define alternative set of commands in \titlemacro{l3draw} variant.}
 
 \bigskip
 
@@ -523,8 +509,8 @@ Having created a boxed icon, it is safe to use it, for example, inside a Ti\emph
 
 % l3draw variant
 
-\RenewCommandCopy\die\liiidie
-\RenewCommandCopy\ability\liiiability
+\RenewCommandCopy\die\DndiconsDie
+\RenewCommandCopy\ability\DndiconsAbility
 
 \section[l3draw package variant]{\titlemacro[fontupper=\large\ttfamily]{l3draw} package variant}
 
@@ -543,6 +529,18 @@ The commands of the main variant of the package \macro{\die}, \macro{\ability}, 
 The \macro{\DndIconsUseIcon} command has a starred version and two optional arguments as well as one mandatory argument. The mandatory argument holds the shape of the icon. All shapes that are described above for the main variant of the package are available. The second optional argument can be used to add an integer when used with shapes for dice.
 
 The starred version of the command is used to fill a frame with color instead of drawing its outline. Frames can be put around the shape via the relevant \macro{frame} option. 
+
+\begin{macrodef}
+|\DndiconsDie|[<style>]{<shape>}[<options>]{<integer>}
+|\DndiconsAbiliy|[<style>]{<shape>}[<options>]
+|\DndiconsSaving|[<style>]{<shape>}[<options>]
+|\DndiconsSpell|{<shape>}[<options>]
+|\DndiconsSpellschool|[<style>]{<shape>}[<options>]
+|\DndiconsDamage|{<shape>}[<options>]
+|\DndiconsAttack|{<shape>}[<options>]
+|\DndiconsCondition|{<shape>}[<options>]
+\end{macrodef}
+If that the \macro{dndicons} package is to be loaded together with the \macro{dndicons-l3draw} package or some other package that already defines one of the above described commands \macro{\die}, \macro{\ability}, \macro{\saving}, \macro{\spell}, \macro{\spellschool}, \macro{\damage}, \macro{\attack} or \macro{\condition}, this alternative set of commands can be used. These commands are exact copies of the relevant basic commands and take the same set or arguments. 
 
 \subsection{Icon options}
 

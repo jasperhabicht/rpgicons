@@ -4,18 +4,18 @@
 
 % DICE
 
-\cs_new:Nn \dndicons_draw_shape_twoside: {
+\cs_new:Npn \dndicons_draw_shape_twoside: {
     \draw_path_ellipse:nnn { 0cm , 0cm } { 0cm , .25cm } { .425cm , 0cm }
 }
 
-\cs_new:Nn \dndicons_draw_shape_fourside: {
+\cs_new:Npn \dndicons_draw_shape_fourside: {
     \draw_path_moveto:n { 0cm , .35cm }
     \draw_path_lineto:n { .433cm , -.4cm }
     \draw_path_lineto:n { -.433cm , -.4cm }
     \draw_path_close:
 }
 
-\cs_new:Nn \dndicons_draw_shape_sixside: {
+\cs_new:Npn \dndicons_draw_shape_sixside: {
     \draw_path_moveto:n { -.4cm , -.4cm }
     \draw_path_lineto:n { -.4cm , .4cm }
     \draw_path_lineto:n { .4cm , .4cm }
@@ -23,7 +23,7 @@
     \draw_path_close:
 }
 
-\cs_new:Nn \dndicons_draw_shape_eightside: {
+\cs_new:Npn \dndicons_draw_shape_eightside: {
     \draw_path_moveto:n { 0cm , .5cm }
     \draw_path_lineto:n { .433cm , .25cm }
     \draw_path_lineto:n { .433cm , -.25cm }
@@ -36,7 +36,7 @@
     \draw_path_close:
 }
 
-\cs_new:Nn \dndicons_draw_shape_tenside: {
+\cs_new:Npn \dndicons_draw_shape_tenside: {
     \draw_path_moveto:n { 0cm , .5cm }
     \draw_path_lineto:n { .475cm , .1cm }
     \draw_path_lineto:n { .475cm , -.1cm }
@@ -56,7 +56,7 @@
     \draw_path_lineto:n { 0cm , -.3cm }
 }
 
-\cs_new:Nn \dndicons_draw_shape_twelveside: {
+\cs_new:Npn \dndicons_draw_shape_twelveside: {
     \draw_path_moveto:n { 0cm , .5cm }
     \draw_path_lineto:n { 0.294cm , .405cm }
     \draw_path_lineto:n { .475cm , .173cm }
@@ -85,7 +85,7 @@
     \draw_path_lineto:n { -.332cm , .108cm }
 }
 
-\cs_new:Nn \dndicons_draw_shape_twentyside: {
+\cs_new:Npn \dndicons_draw_shape_twentyside: {
     \draw_path_moveto:n { 0cm , .5cm }
     \draw_path_lineto:n { .454cm , .262cm }
     \draw_path_lineto:n { .454cm , -.262cm }
@@ -110,7 +110,7 @@
     \draw_path_lineto:n { -.253cm , -.146cm }
 }
 
-\cs_new:Nn \dndicons_draw_shape_hundredside: {
+\cs_new:Npn \dndicons_draw_shape_hundredside: {
     \draw_path_circle:nn { 0cm, 0cm } { .425cm }
     \draw_path_moveto:n { .425cm , 0cm }
     \draw_path_arc:nnnn { 180 } { 50 } { -.425cm } { -.2cm }
@@ -121,7 +121,7 @@
 \clist_new:N \l_dndnicons_pips_clist
 \fp_new:N \l_dndnicons_pips_coordx_fp
 \fp_new:N \l_dndnicons_pips_coordy_fp
-\cs_new:Nn \dndicons_draw_shape_sixside_pips:n {
+\cs_new:Npn \dndicons_draw_shape_sixside_pips:n #1 {
     \str_case:nn { #1 } {
         { one } { \clist_set:Nn \l_dndnicons_pips_clist {
             { 0cm , 0cm }
@@ -171,7 +171,7 @@
     \dndicons_draw_shape_sixside:
 }
 
-\cs_new:Nn \dndicons_draw_shape_fudge: {
+\cs_new:Npn \dndicons_draw_shape_fudge: {
     \dndicons_draw_shape_sixside:
     \draw_path_moveto:n { -.15cm , .1cm }
     \draw_path_lineto:n { .15cm , .1cm }
@@ -181,7 +181,7 @@
     \draw_path_lineto:n { .15cm , -.2cm }
 }
 
-\cs_new:Nn \dndicons_draw_shape_fudge_plus: {
+\cs_new:Npn \dndicons_draw_shape_fudge_plus: {
     \dndicons_draw_shape_sixside:
     \draw_path_moveto:n { 0cm , .15cm }
     \draw_path_lineto:n { 0cm , -.15cm }
@@ -189,7 +189,7 @@
     \draw_path_lineto:n { .15cm , 0cm }
 }
 
-\cs_new:Nn \dndicons_draw_shape_fudge_minus: {
+\cs_new:Npn \dndicons_draw_shape_fudge_minus: {
     \dndicons_draw_shape_sixside:
     \draw_path_moveto:n { -.15cm , 0cm }
     \draw_path_lineto:n { .15cm , 0cm }
@@ -197,7 +197,7 @@
 
 % ABILITIES
 
-\cs_new:Nn \dndicons_draw_shape_strength: {
+\cs_new:Npn \dndicons_draw_shape_strength: {
     \draw_path_moveto:n { ( 0 , -.075cm ) + ( \draw_point_polar:nn { .425cm } { 90 } ) }
     \draw_path_arc:nnn { 90 } { 60 } { .425cm }
     \draw_path_arc:nnn { 200 } { -40 } { .1cm }
@@ -222,7 +222,7 @@
     \draw_path_arc:nnn { 90 } { 110 } { .1cm }
 }
 
-\cs_new:Nn \dndicons_draw_shape_constitution: {
+\cs_new:Npn \dndicons_draw_shape_constitution: {
     \draw_path_moveto:n { 0cm , .25cm }
     \draw_path_lineto:n { .125cm , .25cm }
     \draw_path_arc:nnn { -90 } { -30 } { .325cm }
@@ -255,7 +255,7 @@
     \draw_path_lineto:n { .075cm , -.1cm }
 }
 
-\cs_new:Nn \dndicons_draw_shape_wisdom: {
+\cs_new:Npn \dndicons_draw_shape_wisdom: {
     \draw_path_moveto:n { 0cm , .175cm }
     \draw_path_arc:nnn { 60 } { 90 } { .425cm }
     \draw_path_arc:nnn { 270 } { 240 } { .425cm }
@@ -273,7 +273,7 @@
     \draw_path_arc:nnn { 30 } { -90 } { .25cm }
 }
 
-\cs_new:Nn \dndicons_draw_shape_charisma: {
+\cs_new:Npn \dndicons_draw_shape_charisma: {
     \draw_path_moveto:n { 0cm , .15cm }
     \draw_path_arc:nnnn { 270 } { 190 } { .15cm } { .1cm }
     \draw_path_arc:nnnn { 10 } { 90 } { .175cm } { .225cm }
@@ -314,7 +314,7 @@
     \draw_path_lineto:n { .25cm , -.275cm }
 }
 
-\cs_new:Nn \dndicons_draw_shape_dexterity: {
+\cs_new:Npn \dndicons_draw_shape_dexterity: {
     \draw_path_moveto:n { ( 0 , -.075cm ) + ( \draw_point_polar:nn { .425cm } { 90 } ) }
     \draw_path_arc:nnn { 90 } { 65 } { .425cm }
     \draw_path_arc:nnnn { 200 } { 90 } { .1cm } { .075cm }
@@ -349,7 +349,7 @@
     \draw_path_lineto:n { .1cm , -.325cm }
 }
 
-\cs_new:Nn \dndicons_draw_shape_dexterity_alt: {
+\cs_new:Npn \dndicons_draw_shape_dexterity_alt: {
     \draw_path_moveto:n { ( 0 , -.15cm ) + ( \draw_point_polar:nn { .425cm } { 90 } ) }
     \draw_path_arc:nnn { 90 } { 75 } { .425cm }
     \draw_path_moveto:n { ( 0 , -.15cm ) + ( \draw_point_polar:nn { .425cm } { 90 } ) }
@@ -382,7 +382,7 @@
     \draw_path_lineto:n { .1cm , -.35cm }
 }
 
-\cs_new:Nn \dndicons_draw_shape_intelligence: {
+\cs_new:Npn \dndicons_draw_shape_intelligence: {
     \draw_path_moveto:n { ( 0cm , -.2cm ) + ( \draw_point_polar:nn { .425cm } { 90 } ) }
     \draw_path_arc:nnn { 90 } { 60 } { .25cm }
     \draw_path_lineto:n { ( 0cm , -.1cm ) + ( \draw_point_polar:nn { .6cm } { 60 } ) }
@@ -405,7 +405,7 @@
     \draw_path_lineto:n { .2cm , -.075cm }
 }
 
-\cs_new:Nn \dndicons_draw_shape_luck: {
+\cs_new:Npn \dndicons_draw_shape_luck: {
     \draw_path_moveto:n { .1cm , .15cm }
     \draw_path_lineto:n { .1cm , -.05cm }
     \draw_path_arc:nnn { -75 } { -15 } { .425cm }
@@ -426,7 +426,7 @@
     \draw_path_lineto:n { .05cm , -.325cm }
 }
 
-\cs_new:Nn \dndicons_draw_shape_armor: {
+\cs_new:Npn \dndicons_draw_shape_armor: {
     \draw_path_moveto:n { -.25cm , -.425cm }
     \draw_path_lineto:n { .25cm , -.425cm }
     \draw_path_lineto:n { .2cm , -.225cm }
@@ -453,7 +453,7 @@
     \draw_path_lineto:n { .2cm , -.225cm }
 }
 
-\cs_new:Nn \dndicons_draw_shape_proficiency: {
+\cs_new:Npn \dndicons_draw_shape_proficiency: {
     \draw_path_moveto:n { \draw_point_polar:nn { .35cm} { 90 } }
     \draw_path_lineto:n { \draw_point_polar:nn { .15cm} { 126 } }
     \draw_path_lineto:n { \draw_point_polar:nn { .35cm} { 162 } }
@@ -477,14 +477,14 @@
     \draw_path_lineto:n { \draw_point_polar:nn { .425cm} { 198 } }
 }
 
-\cs_new:Nn \dndicons_draw_shape_linear: {
+\cs_new:Npn \dndicons_draw_shape_linear: {
     \draw_path_circle:nn { -.4cm , 0cm } { 2pt }
     \draw_path_use_clear:n { fill }
     \draw_path_moveto:n { -.4cm , 0cm }
     \draw_path_lineto:n { .4cm , 0cm }
 }
 
-\cs_new:Nn \dndicons_draw_shape_conic: {
+\cs_new:Npn \dndicons_draw_shape_conic: {
     \draw_path_circle:nn { -.425cm , 0cm } { 2pt }
     \draw_path_use_clear:n { fill }
     \draw_path_ellipse:nnn { .2125cm , 0cm } { .2cm , 0cm } { 0cm , .425cm }
@@ -495,7 +495,7 @@
         .425cm * cos( asin( .2cm / ( .6375cm ) ) ) }
 }
 
-\cs_new:Nn \dndicons_draw_shape_quadratic: {
+\cs_new:Npn \dndicons_draw_shape_quadratic: {
     \draw_path_circle:nn { 0cm , 0cm } { 2pt }
     \draw_path_use_clear:n { fill }
     \draw_path_moveto:n { -.4cm , -.4cm }
@@ -505,7 +505,7 @@
     \draw_path_close:
 }
 
-\cs_new:Nn \dndicons_draw_shape_cubic: {
+\cs_new:Npn \dndicons_draw_shape_cubic: {
     \draw_path_circle:nn { .1125cm , -.1125cm } { 2pt }
     \draw_path_use_clear:n { fill }
     \draw_path_moveto:n { -.425cm , .425cm }
@@ -521,7 +521,7 @@
     \draw_path_lineto:n { .425cm , .2cm }
 }
 
-\cs_new:Nn \dndicons_draw_shape_spheric: {
+\cs_new:Npn \dndicons_draw_shape_spheric: {
     \draw_path_circle:nn { 0cm , 0cm } { 2pt }
     \draw_path_use_clear:n { fill }
     \draw_path_circle:nn { 0cm , 0cm } { .425cm }
@@ -531,7 +531,7 @@
     \draw_path_arc:nnnn { 270 } { 140 } { -.2cm } { .425cm }
 }
 
-\cs_new:Nn \dndicons_draw_shape_cylindric: {
+\cs_new:Npn \dndicons_draw_shape_cylindric: {
     \draw_path_circle:nn { 0cm , -.2125cm } { 2pt }
     \draw_path_use_clear:n { fill }
     \draw_path_ellipse:nnn { 0cm , .2125cm } { 0cm , .2cm } { .425cm , 0cm }
@@ -541,21 +541,21 @@
     \draw_path_lineto:n { .425cm , .2125cm }
 }
 
-\cs_new:Nn \dndicons_draw_shape_verbal: {
+\cs_new:Npn \dndicons_draw_shape_verbal: {
     \draw_path_moveto:n { -.35cm , 0cm }
     \draw_path_arc:nnn { 180 } { -115 } { .35cm }
     \draw_path_lineto:n { -.4cm , -.4cm }
     \draw_path_lineto:n { \draw_point_polar:nn { .35cm } { 215 } }
 }
 
-\cs_new:Nn \dndicons_draw_shape_somatic: {
+\cs_new:Npn \dndicons_draw_shape_somatic: {
     \draw_path_moveto:n { -.425cm , 0cm }
     \draw_path_arc:nnnn { 0 } { 270 } { -.425cm } { -.2cm }
     \draw_path_moveto:n { 0cm , -.425cm }
     \draw_path_arc:nnnn { 90 } { 360 } { -.2cm } { -.425cm }
 }
 
-\cs_new:Nn \dndicons_draw_shape_material: {
+\cs_new:Npn \dndicons_draw_shape_material: {
     \draw_path_moveto:n { -.4cm , .2cm }
     \draw_path_lineto:n { -.4cm , -.2cm }
     \draw_path_lineto:n { 0cm , -.4cm }
@@ -569,7 +569,7 @@
     \draw_path_lineto:n { 0cm , -.4cm }
 }
 
-\cs_new:Nn \dndicons_draw_shape_focus: {
+\cs_new:Npn \dndicons_draw_shape_focus: {
     \draw_path_circle:nn { 0cm , 0cm } { .35cm }
     \draw_path_moveto:n { -.15cm , 0 }
     \draw_path_lineto:n { -.425cm , 0 }
@@ -583,7 +583,7 @@
 
 % SPELLSCHOOLS
 
-\cs_new:Nn \dndicons_draw_shape_abjuration: {
+\cs_new:Npn \dndicons_draw_shape_abjuration: {
     \draw_path_moveto:n { 0cm , .025cm }
     \draw_path_arc:nnnn { 270 } { 390 } { .275cm } { .175cm }
     \draw_path_arc:nnn { 210 } { 120 } { .095cm }
@@ -598,7 +598,7 @@
     \draw_path_lineto:n { .25cm , -.3cm }
 }
 
-\cs_new:Nn \dndicons_draw_shape_conjuration: {
+\cs_new:Npn \dndicons_draw_shape_conjuration: {
     \draw_path_moveto:n { -.425cm , .425cm }
     \draw_path_lineto:n { 0cm , -.425cm }
     \draw_path_lineto:n { .425cm , .425cm }
@@ -610,7 +610,7 @@
     \draw_path_arc:nnn { 110 } { 70 } { -.5cm }
 }
 
-\cs_new:Nn \dndicons_draw_shape_divination: {
+\cs_new:Npn \dndicons_draw_shape_divination: {
     \draw_path_moveto:n { -.35cm , -.175cm }
     \draw_path_arc:nnnn { 180 } { 0 } { .15cm } { -.25cm }
     \draw_path_arc:nnn { 180 } { 90 } { .4cm }
@@ -619,7 +619,7 @@
     \draw_path_arc:nnn { 180 } { 90 } { .4cm }
 }
 
-\cs_new:Nn \dndicons_draw_shape_enchantment: {
+\cs_new:Npn \dndicons_draw_shape_enchantment: {
     \draw_path_moveto:n { -.2cm , -.425cm }
     \draw_path_lineto:n { -.2cm , .425cm }
     \draw_path_moveto:n { -.425cm , .175cm }
@@ -630,7 +630,7 @@
     \draw_path_arc:nnnn { 180 } { 0 } { .1cm } { -.2cm }
 }
 
-\cs_new:Nn \dndicons_draw_shape_evocation: {
+\cs_new:Npn \dndicons_draw_shape_evocation: {
     \draw_path_ellipse:nnn { 0cm , 0cm } { .325cm , 0cm } { 0cm , .225cm }
     \draw_path_moveto:n { 0cm , .425cm }
     \draw_path_lineto:n { 0cm , -.425cm }
@@ -654,7 +654,7 @@
     \draw_path_lineto:n { \draw_point_polar:nn { 330 } { .4cm} }
 }
 
-\cs_new:Nn \dndicons_draw_shape_illusion: {
+\cs_new:Npn \dndicons_draw_shape_illusion: {
     \draw_path_moveto:n { 0cm , .225cm }
     \draw_path_arc:nnn { 90 } { 30 } { .45cm }
     \draw_path_arc:nnn { 330 } { 210 } { .45cm }
@@ -669,7 +669,7 @@
     \draw_path_circle:nn { 0cm , .075cm } { .15cm }
 }
 
-\cs_new:Nn \dndicons_draw_shape_necromancy: {
+\cs_new:Npn \dndicons_draw_shape_necromancy: {
     \draw_path_moveto:n { \draw_point_polar:nn { .25cm} { 210 } }
     \draw_path_arc:nnn { 210 } { -30 } { .25cm }
     \draw_path_arc:nnn { 150 } { 390 } { .1cm }
@@ -677,7 +677,7 @@
     \draw_path_arc:nnn { 390 } { 150 } { .1cm }
 }
 
-\cs_new:Nn \dndicons_draw_shape_transmutation: {
+\cs_new:Npn \dndicons_draw_shape_transmutation: {
     \draw_path_moveto:n { -.25cm , .35cm }
     \draw_path_lineto:n { -.25cm , -.35cm }
     \draw_path_moveto:n { 0cm , .35cm }
@@ -690,7 +690,7 @@
 
 % DAMAGES
 
-\cs_new:Nn \dndicons_draw_shape_acid: {
+\cs_new:Npn \dndicons_draw_shape_acid: {
     \draw_path_moveto:n { ( -.175cm , .05cm ) + ( \draw_point_polar:nn { .175 } { -20 } ) }
     \draw_path_arc:nnn { -20 } { 200 } { -.175cm }
     \draw_path_lineto:n { 0cm , .425cm }
@@ -711,7 +711,7 @@
     }
 }
 
-\cs_new:Nn \dndicons_draw_shape_bludgeoning: {
+\cs_new:Npn \dndicons_draw_shape_bludgeoning: {
     \draw_path_moveto:n { -.2cm , .225cm }
     \draw_path_lineto:n { 0cm , .425cm }
     \draw_path_lineto:n { .425cm , 0cm }
@@ -725,7 +725,7 @@
     \draw_path_arc:nnn { 135 } { 315 } { -.05cm }
 }
 
-\cs_new:Nn \dndicons_draw_shape_cold: {
+\cs_new:Npn \dndicons_draw_shape_cold: {
     \draw_path_moveto:n { \draw_point_polar:nn { .425cm} { 90 } }
     \draw_path_lineto:n { \draw_point_polar:nn { .425cm} { 270 } }
     \draw_path_moveto:n { \draw_point_polar:nn { .35cm} { 110 } }
@@ -752,7 +752,7 @@
     \draw_path_lineto:n { \draw_point_polar:nn { .35cm} { 350 } }
 }
 
-\cs_new:Nn \dndicons_draw_shape_fire: {
+\cs_new:Npn \dndicons_draw_shape_fire: {
     \draw_path_moveto:n { .15cm , -.425cm }
     \draw_path_arc:nnnn { -60 } { 0 } { .45cm } { .375cm }
     \draw_path_curveto:nnn { .375cm , .15cm } { .15cm , .375cm } { -.05cm , .425cm }
@@ -766,7 +766,7 @@
     \draw_path_curveto:nnn { 0cm , -.2cm } { .05cm , -.1cm } { .05cm , .1cm }
 }
 
-\cs_new:Nn \dndicons_draw_shape_force: {
+\cs_new:Npn \dndicons_draw_shape_force: {
     \draw_path_moveto:n { \draw_point_polar:nn { .425cm} { 90 } }
     \draw_path_lineto:n { \draw_point_polar:nn { .15cm} { 120 } }
     \draw_path_lineto:n { \draw_point_polar:nn { .425cm} { 150 } }
@@ -783,14 +783,14 @@
     
 }
 
-\cs_new:Nn \dndicons_draw_shape_lightning: {
+\cs_new:Npn \dndicons_draw_shape_lightning: {
     \draw_path_moveto:n { 0cm , .425cm }
     \draw_path_lineto:n { -.25cm , -.15cm }
     \draw_path_lineto:n { .25cm , .15cm }
     \draw_path_lineto:n { 0cm , -.425cm }
 }
 
-\cs_new:Nn \dndicons_draw_shape_necrotic: {
+\cs_new:Npn \dndicons_draw_shape_necrotic: {
     \draw_path_moveto:n { -.35cm , -.425cm }
     \draw_path_lineto:n { -.35cm , .075cm }
     \draw_path_arc:nnn { 180 } { 0 } { .35cm }
@@ -802,7 +802,7 @@
     \draw_path_lineto:n { .15cm , .1cm }
 }
 
-\cs_new:Nn \dndicons_draw_shape_piercing: {
+\cs_new:Npn \dndicons_draw_shape_piercing: {
     \draw_path_moveto:n { -.425cm , .075cm }
     \draw_path_lineto:n { .3cm , .075cm }
     \draw_path_lineto:n { .425cm , 0cm }
@@ -818,7 +818,7 @@
     \draw_path_lineto:n { .25cm , -.425cm }
 }
 
-\cs_new:Nn \dndicons_draw_shape_poison: {
+\cs_new:Npn \dndicons_draw_shape_poison: {
     \draw_path_moveto:n { ( 0cm , .175cm ) + ( \draw_point_polar:nn { .25cm } { -40 } ) }
     \draw_path_arc:nnn { -40 } { 220 } { .25cm }
     \draw_path_lineto:n { -.15cm , -.1cm }
@@ -832,7 +832,7 @@
     \draw_path_lineto:n { .425cm , -.425cm }
 }
 
-\cs_new:Nn \dndicons_draw_shape_psychic: {
+\cs_new:Npn \dndicons_draw_shape_psychic: {
     \draw_path_moveto:n { .075cm , .4cm }
     \draw_path_arc:nnn { 90 } { 180 } { .425cm }
     \draw_path_arc:nnn { 180 } { 270 } { .375cm }
@@ -843,7 +843,7 @@
     \draw_path_arc:nnn { 270 } { 360 } { .125cm }
 }
 
-\cs_new:Nn \dndicons_draw_shape_radiant: {
+\cs_new:Npn \dndicons_draw_shape_radiant: {
     \draw_path_circle:nn { 0cm , 0cm } { .225cm }
     \draw_path_moveto:n { \draw_point_polar:nn { .425cm} { 15 } }
     \draw_path_arc:nnn { 15 } { 45 } { .425cm }
@@ -859,7 +859,7 @@
     \draw_path_arc:nnn { 315 } { 345 } { .425cm }
 }
 
-\cs_new:Nn \dndicons_draw_shape_slashing: {
+\cs_new:Npn \dndicons_draw_shape_slashing: {
     \draw_path_moveto:n { -.15cm , .225cm }
     \draw_path_lineto:n { -.275cm , .35cm }
     \draw_path_arc:nnn { 0 } { 240 } { .075cm }
@@ -883,7 +883,7 @@
     \draw_path_lineto:n { .275cm , .1cm }
 }
 
-\cs_new:Nn \dndicons_draw_shape_thunder: {
+\cs_new:Npn \dndicons_draw_shape_thunder: {
     \draw_path_moveto:n { .225cm , -.075cm }
     \draw_path_arc:nnn { -90 } { 120 } { .2cm }
     \draw_path_arc:nnn { 30 } { 180 } { .225cm }
@@ -898,7 +898,7 @@
     \draw_path_arc:nnn { 240 } { 300 } { .5cm }
 }
 
-\cs_new:Nn \dndicons_draw_shape_healing: {
+\cs_new:Npn \dndicons_draw_shape_healing: {
      \draw_path_moveto:n { 0cm , .125cm }
     \draw_path_arc:nnn { 0 } { 225 } { .2cm }    \draw_path_lineto:n { 0cm , -.375cm }
     \draw_path_moveto:n { 0cm , .125cm }
@@ -908,7 +908,7 @@
 
 % ATTACKS
 
-\cs_new:Nn \dndicons_draw_shape_melee: {
+\cs_new:Npn \dndicons_draw_shape_melee: {
     \draw_path_moveto:n { -.15cm , -.225cm }
     \draw_path_lineto:n { -.275cm , -.35cm }
     \draw_path_arc:nnn { 360 } { 90 } { .075cm }
@@ -928,7 +928,7 @@
     \draw_path_lineto:n { 0cm , 0cm }
 }
 
-\cs_new:Nn \dndicons_draw_shape_ranged: {
+\cs_new:Npn \dndicons_draw_shape_ranged: {
     \draw_path_moveto:n { 0cm , 0cm }
     \draw_path_lineto:n { 0cm , -.225cm }
     \draw_path_arc:nnn { 0 } { -30 } { .4cm }
@@ -947,7 +947,7 @@
     \draw_path_lineto:n { ( -.4cm , .225cm ) + ( \draw_point_polar:nn { .4cm } { 20 } ) }
 }
 
-\cs_new:Nn \dndicons_draw_shape_magic: {
+\cs_new:Npn \dndicons_draw_shape_magic: {
     \draw_path_moveto:n { -.225cm , -.425cm }
     \draw_path_lineto:n { -.425cm , -.225cm }
     \draw_path_lineto:n { -.3cm , -.1cm }
@@ -971,7 +971,7 @@
     \draw_path_circle:nn { .3cm , -.075cm } { .075cm }
 }
 
-\cs_new:Nn \dndicons_draw_shape_singlehanded: {
+\cs_new:Npn \dndicons_draw_shape_singlehanded: {
     \draw_path_moveto:n { -.25cm , -.425cm }
     \draw_path_lineto:n { .025cm , -.425cm }
     \draw_path_lineto:n { .325cm , -.125cm }
@@ -986,7 +986,7 @@
     \draw_path_lineto:n { -.425cm , -.25cm }
 }
 
-\cs_new:Nn \dndicons_draw_shape_doublehanded: {
+\cs_new:Npn \dndicons_draw_shape_doublehanded: {
     \draw_path_moveto:n { -.25cm , -.425cm }
     \draw_path_lineto:n { .025cm , -.425cm }
     \draw_path_lineto:n { .325cm , -.125cm }
@@ -1015,7 +1015,7 @@
 
 % CONDITIONS
 
-\cs_new:Nn \dndicons_draw_shape_buff: {
+\cs_new:Npn \dndicons_draw_shape_buff: {
     \draw_path_moveto:n { -.425cm , -.225cm }
     \draw_path_lineto:n { -.225cm , -.425cm }
     \draw_path_lineto:n { -.1cm , -.3cm }
@@ -1040,7 +1040,7 @@
     
 }
 
-\cs_new:Nn \dndicons_draw_shape_blinded: {
+\cs_new:Npn \dndicons_draw_shape_blinded: {
     \draw_path_moveto:n { 0cm , .225cm }
     \draw_path_arc:nnn { 90 } { 30 } { .45cm }
     \draw_path_arc:nnn { 330 } { 210 } { .45cm }
@@ -1053,7 +1053,7 @@
     \draw_path_lineto:n { .425cm , .425cm }
 }
 
-\cs_new:Nn \dndicons_draw_shape_charmed: {
+\cs_new:Npn \dndicons_draw_shape_charmed: {
     \draw_path_circle:nn { 0cm , 0cm } { .425cm }
     \draw_path_moveto:n { -.175cm , -.1cm }
     \draw_path_arc:nnn { 180 } { 360 } { .175cm }
@@ -1072,7 +1072,7 @@
     \draw_path_lineto:n { .175cm , 0cm }
 }
 
-\cs_new:Nn \dndicons_draw_shape_deafened: {
+\cs_new:Npn \dndicons_draw_shape_deafened: {
     \draw_path_moveto:n { -.175cm , -.275cm }
     \draw_path_arc:nnn { 180 } { 360 } { .15cm }
     \draw_path_lineto:n { .125cm , -.225cm }
@@ -1089,7 +1089,7 @@
     \draw_path_lineto:n { .425cm , .425cm }
 }
 
-\cs_new:Nn \dndicons_draw_shape_exhausted: {
+\cs_new:Npn \dndicons_draw_shape_exhausted: {
     \draw_path_circle:nn { 0cm , 0cm } { .425cm }
     \draw_path_moveto:n { -.175cm , -.225cm }
     \draw_path_arc:nnn { 180 } { 0 } { .175cm }
@@ -1100,7 +1100,7 @@
     \draw_path_arc:nnn { 180 } { 0 } { -.1cm }
 }
 
-\cs_new:Nn \dndicons_draw_shape_frightened: {
+\cs_new:Npn \dndicons_draw_shape_frightened: {
     \draw_path_circle:nn { 0cm , 0cm } { .425cm }
     \draw_path_moveto:n { -.175cm , -.225cm }
     \draw_path_arc:nnn { 180 } { 0 } { .175cm }
@@ -1109,7 +1109,7 @@
     \draw_path_circle:nn { .175cm , .125cm } { .075cm }
 }
 
-\cs_new:Nn \dndicons_draw_shape_grappled: {
+\cs_new:Npn \dndicons_draw_shape_grappled: {
     \draw_path_moveto:n { -.25cm , .3cm }
     \draw_path_arc:nnn { 90 } { -90 } { .075cm }
     \draw_path_lineto:n { -.35cm , .15cm }
@@ -1146,7 +1146,7 @@
     \draw_path_lineto:n { -.3cm , -.425cm }
 }
 
-\cs_new:Nn \dndicons_draw_shape_incapacitated: {
+\cs_new:Npn \dndicons_draw_shape_incapacitated: {
     \draw_path_moveto:n { \draw_point_polar:nn { .425cm} { 30 } }
     \draw_path_arc:nnn { 270 } { 210 } { .425cm }
     \draw_path_lineto:n { \draw_point_polar:nn { -.425cm} { 90 } }
@@ -1168,7 +1168,7 @@
     \draw_path_arc:nnn { 210 } { 150 } { .25cm }
 }
 
-\cs_new:Nn \dndicons_draw_shape_invisible: {
+\cs_new:Npn \dndicons_draw_shape_invisible: {
     \draw_path_moveto:n { \draw_point_polar:nn { .425cm} { -15 } }
     \draw_path_arc:nnn { -15 } { 15 } { .425cm }
     \draw_path_moveto:n { \draw_point_polar:nn { .425cm} { 30 } }
@@ -1187,7 +1187,7 @@
     \draw_path_arc:nnn { 300 } { 330 } { .425cm }
 }
 
-\cs_new:Nn \dndicons_draw_shape_paralyzed: {
+\cs_new:Npn \dndicons_draw_shape_paralyzed: {
     \draw_path_circle:nn { 0cm , 0cm } { .425cm }
     \draw_path_moveto:n { -.175cm , -.225cm }
     \draw_path_arc:nnn { 180 } { 0 } { .175cm }
@@ -1202,7 +1202,7 @@
     \draw_path_lineto:n { -.1cm , .2cm }
 }
 
-\cs_new:Nn \dndicons_draw_shape_petrified: {
+\cs_new:Npn \dndicons_draw_shape_petrified: {
     \draw_path_moveto:n { \draw_point_polar:nn { .425cm} { 45 } }
     \draw_path_lineto:n { \draw_point_polar:nn { .425cm} { 100 } }
     \draw_path_lineto:n { \draw_point_polar:nn { .425cm} { 135 } }
@@ -1232,7 +1232,7 @@
     \draw_path_lineto:n { .1cm , .1cm }
 }
 
-\cs_new:Nn \dndicons_draw_shape_poisoned: {
+\cs_new:Npn \dndicons_draw_shape_poisoned: {
     \draw_path_circle:nn { 0cm , 0cm } { .425cm }
     \draw_path_moveto:n { -.15cm , -.2cm }
     \draw_path_lineto:n { -.075cm , -.125cm }
@@ -1247,7 +1247,7 @@
     \draw_path_lineto:n { -.25cm , .025cm }
 }
     
-\cs_new:Nn \dndicons_draw_shape_prone: {
+\cs_new:Npn \dndicons_draw_shape_prone: {
     \draw_path_circle:nn { .2cm , -.125cm } { .125cm }
     \draw_path_moveto:n { -.425cm , 0cm }
     \draw_path_lineto:n { -.15cm , 0cm }
@@ -1265,7 +1265,7 @@
     \draw_path_arc:nnn { 0 } { 90 } { .1cm }
 }
 
-\cs_new:Nn \dndicons_draw_shape_restrained: {
+\cs_new:Npn \dndicons_draw_shape_restrained: {
     \draw_path_moveto:n { -.075cm , -.225cm }
     \draw_path_lineto:n { -.075cm , .225cm }
     \draw_path_arc:nnn { 90 } { 180 } { .125cm }
@@ -1298,7 +1298,7 @@
     \draw_path_close:   
 }
 
-\cs_new:Nn \dndicons_draw_shape_stunned: {
+\cs_new:Npn \dndicons_draw_shape_stunned: {
     \draw_path_circle:nn { 0cm , 0cm } { .425cm }
     \draw_path_ellipse:nnn { 0cm , -.175cm } { 0cm , .1cm } { .175cm , 0cm }
     \draw_path_moveto:n { ( -.175cm , .125cm ) + ( \draw_point_polar:nn { .125cm } { 90 } ) }
@@ -1325,7 +1325,7 @@
     \draw_path_close:
 }
 
-\cs_new:Nn \dndicons_draw_shape_unconscious: {
+\cs_new:Npn \dndicons_draw_shape_unconscious: {
     \draw_path_moveto:n { 0cm , .15cm }
     \draw_path_arc:nnnn { 90 } { -30 } { .425cm } { .15cm }
     \draw_path_moveto:n { 0cm , -.15cm }
@@ -1342,7 +1342,7 @@
     \draw_path_arc:nnn { 0 } { 90 } { .125cm }
 }
 
-\cs_new:Nn \dndicons_draw_shape_hearing: {
+\cs_new:Npn \dndicons_draw_shape_hearing: {
     \draw_path_moveto:n { -.175cm , -.275cm }
     \draw_path_arc:nnn { 180 } { 360 } { .15cm }
     \draw_path_lineto:n { .125cm , -.225cm }
@@ -1355,7 +1355,7 @@
     \draw_path_arc:nnn { 180 } { 45 } { .15cm }
 }
 
-\cs_new:Nn \dndicons_draw_shape_seeing: {
+\cs_new:Npn \dndicons_draw_shape_seeing: {
     \draw_path_moveto:n { 0cm , .225cm }
     \draw_path_arc:nnn { 90 } { 30 } { .45cm }
     \draw_path_arc:nnn { 330 } { 210 } { .45cm }
@@ -1366,11 +1366,11 @@
 
 % FRAMES
 
-\cs_new:Nn \dndicons_draw_frame_ability: {
+\cs_new:Npn \dndicons_draw_frame_ability: {
     \draw_path_circle:nn { 0cm , 0cm } { .45cm }
 }
 
-\cs_new:Nn \dndicons_draw_frame_saving: {
+\cs_new:Npn \dndicons_draw_frame_saving: {
     \draw_path_moveto:n { -.45cm, . 45cm }
     \draw_path_lineto:n { .45cm , .45cm }
     \draw_path_lineto:n { .45cm , -.05cm }
@@ -1378,7 +1378,7 @@
     \draw_path_close:
 }
 
-\cs_new:Nn \dndicons_draw_frame_spellschool: {
+\cs_new:Npn \dndicons_draw_frame_spellschool: {
     \draw_path_moveto:n { -.475cm, . 35cm }
     \draw_path_lineto:n { -.35cm , .475cm }
     \draw_path_lineto:n { .35cm , .475cm }
@@ -1389,7 +1389,7 @@
     \draw_path_close:
 }
 
-\cs_new:Nn \dndicons_draw_frame_damage: {
+\cs_new:Npn \dndicons_draw_frame_damage: {
     \draw_path_circle:nn { 0cm , 0cm } { .45cm }
 }
 
@@ -1493,7 +1493,7 @@
         \hspace { \l_dndicons_icon_after_sep_dim }
     \group_end:
 }
-\cs_if_exist:NF \die { \NewCommandCopy \die \DndiconsDie }
+\cs_if_exist:NF \die { \cs_new_eq:NN \die \DndiconsDie }
 
 \NewDocumentCommand { \DndiconsAbility } { O{positive} m O{} } {
     \group_begin:
@@ -1507,7 +1507,7 @@
         \hspace { \l_dndicons_icon_after_sep_dim }
     \group_end:
 }
-\cs_if_exist:NF \ability { \NewCommandCopy \ability \DndiconsAbility }
+\cs_if_exist:NF \ability { \cs_new_eq:NN \ability \DndiconsAbility }
 
 \NewDocumentCommand { \DndiconsSaving } { O{} m O{} } {
     \group_begin:
@@ -1521,7 +1521,7 @@
         \hspace { \l_dndicons_icon_after_sep_dim }
     \group_end:
 }
-\cs_if_exist:NF \saving { \NewCommandCopy \saving \DndiconsSaving }
+\cs_if_exist:NF \saving { \cs_new_eq:NN \saving \DndiconsSaving }
 
 \NewDocumentCommand { \DndiconsSpell } { m O{} } {
     \group_begin:
@@ -1531,7 +1531,7 @@
         \hspace { \l_dndicons_icon_after_sep_dim }
     \group_end:
 }
-\cs_if_exist:NF \spell { \NewCommandCopy \spell \DndiconsSpell }
+\cs_if_exist:NF \spell { \cs_new_eq:NN \spell \DndiconsSpell }
 
 \NewDocumentCommand { \DndiconsSpellschool } { O{positive} m O{} } {
     \group_begin:
@@ -1545,7 +1545,7 @@
         \hspace { \l_dndicons_icon_after_sep_dim }
     \group_end:
 }
-\cs_if_exist:NF \spellschool { \NewCommandCopy \spellschool \DndiconsSpellschool }
+\cs_if_exist:NF \spellschool { \cs_new_eq:NN \spellschool \DndiconsSpellschool }
 
 \NewDocumentCommand { \DndiconsDamage } { m O{} } {
     \group_begin:
@@ -1555,7 +1555,7 @@
         \hspace { \l_dndicons_icon_after_sep_dim }
     \group_end:
 }
-\cs_if_exist:NF \damage { \NewCommandCopy \damage \DndiconsDamage }
+\cs_if_exist:NF \damage { \cs_new_eq:NN \damage \DndiconsDamage }
 
 \NewDocumentCommand { \DndiconsAttack } { m O{} } {
     \group_begin:
@@ -1565,7 +1565,7 @@
         \hspace { \l_dndicons_icon_after_sep_dim }
     \group_end:
 }
-\cs_if_exist:NF \attack { \NewCommandCopy \attack \DndiconsAttack }
+\cs_if_exist:NF \attack { \cs_new_eq:NN \attack \DndiconsAttack }
 
 \NewDocumentCommand { \DndiconsCondition } { m O{} } {
     \group_begin:
@@ -1575,6 +1575,6 @@
         \hspace { \l_dndicons_icon_after_sep_dim }
     \group_end:
 }
-\cs_if_exist:NF \condition { \NewCommandCopy \condition \DndiconsCondition }
+\cs_if_exist:NF \condition { \cs_new_eq:NN \condition \DndiconsCondition }
 
 % EOF 

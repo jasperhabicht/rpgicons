@@ -1446,6 +1446,9 @@
     icon ~ style / rotate       .initial:n = { 0.0 } ,
 }
 
+\seq_new:N \l__dndicons_icon_shape_name_parts_seq
+\str_new:N \l__dndicons_icon_shape_name_str
+\coffin_new:N \l__dndicons_icon_label_coffin
 \NewDocumentCommand \DndIconsUseIcon { s O{} o m } {
     \draw_begin:
         \draw_cap_round:
@@ -1479,17 +1482,17 @@
         }
         \clist_if_in:noTF { sixside ~ one , sixside ~ two , sixside ~ three , sixside ~ four , 
             sixside ~ five , sixside ~ six , sixside ~ seven , sixside ~ eight , sixside ~ nine } {#4} {
-            \seq_set_split:Nnn \l_tmpa_seq { ~ } {#4}
-            \exp_args:Ne \dndicons_draw_shape_sixside_pips:n { \seq_item:Nn \l_tmpa_seq { 2 } }
+            \seq_set_split:Nnn \l__dndicons_icon_shape_name_parts_seq { ~ } {#4}
+            \exp_args:Ne \dndicons_draw_shape_sixside_pips:n { \seq_item:Nn \l__dndicons_icon_shape_name_parts_seq { 2 } }
         } {
-            \str_set:Nn \l_tmpa_str {#4}
-            \str_replace_all:Nnn \l_tmpa_str { ~ } { _ }
-            \use:c { dndicons_draw_shape_ \l_tmpa_str : }
+            \str_set:Nn \l__dndicons_icon_shape_name_str {#4}
+            \str_replace_all:Nnn \l__dndicons_icon_shape_name_str { ~ } { _ }
+            \use:c { dndicons_draw_shape_ \l__dndicons_icon_shape_name_str : }
         }
         \draw_path_use_clear:n { stroke }
         \IfValueT {#3} {
-            \hcoffin_set:Nn \l_tmpa_coffin {#3}
-            \draw_coffin_use:Nnn \l_tmpa_coffin { hc } { vc } 
+            \hcoffin_set:Nn \l__dndicons_icon_label_coffin {#3}
+            \draw_coffin_use:Nnn \l__dndicons_icon_label_coffin { hc } { vc } 
         }
         % \bool_if:NF \l__dndicons_compat_mode_bool {
         %     \draw_bb_from_path:n { 

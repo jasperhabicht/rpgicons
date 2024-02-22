@@ -28,8 +28,7 @@
 \makeatletter
 \renewcommand*{\thefootnote}{\fnsymbol{footnote}}
 \renewcommand{\@makefntext}[1]{%
-    \parindent 1em%
-    \noindent\hbox to 1em{\normalfont\@thefnmark}~#1
+    \noindent\hbox to 0.75em{\normalfont\@thefnmark\hss}~#1%
 }
 \makeatother
 
@@ -70,11 +69,43 @@
             \prop_item:cn { l_dndicons_doc_change_ 
             \int_to_roman:n { ##1 } _prop } { version } ] 
             ( \prop_item:cn { l_dndicons_doc_change_ 
-            \int_to_roman:n { ##1 } _prop } { date } ) \hfill \\
+            \int_to_roman:n { ##1 } _prop } { date } ) \\
             \prop_item:cn { l_dndicons_doc_change_ 
             \int_to_roman:n { ##1 } _prop } { changes }
     }
     \end{description}
+}
+
+\tl_new:N \l_dndicons_doc_doctitle_tl
+\NewExpandableDocumentCommand{\makedoctitle}{ o m o m m o m }{
+    \hypersetup{
+        pdfauthor={#5},
+        pdftitle={\IfValueTF{#1}{#1}{#2}},
+        pdfsubject={\IfValueTF{#3}{#3}{#4}}
+    }
+    \tl_set:Nn \l_dndicons_doc_doctitle_tl {
+        \group_begin:
+            \tcbset{
+                title ~ style ~ hook/.style={
+                    boxrule=2pt,
+                    fontupper=\huge\ttfamily
+                }
+            }
+            \setlength{\parindent}{0pt}\sffamily
+            \Huge{\bfseries #2}\par\bigskip
+            \Large #4\par\bigskip
+            \large #5
+            \IfValueT{#6}{
+                \,\footnote{#6}\par\bigskip
+            }
+            #7\par\bigskip
+            \rule{\textwidth}{.08em}
+        \group_end:
+    }
+}
+
+\NewExpandableDocumentCommand{\printdoctitle}{ }{
+    \tl_use:N \l_dndicons_doc_doctitle_tl
 }
 \ExplSyntaxOff
 
@@ -97,7 +128,7 @@
 
 \NewTCBListing{codeexample}{ }{
     text side listing,
-    lefthand width=5cm,
+    lefthand width=4.5cm,
     listing style={dndiconsdoccodeexample},
     after={\par\smallskip\noindent}
 }
@@ -135,31 +166,6 @@
     #2
 }{\vphantom{/g}\IfBooleanT{#1}{\textbackslash}#3}
 
-\NewExpandableDocumentCommand{\printdoctitle}{ o m o m m o m }{%
-    \hypersetup{
-        pdfauthor={#5},
-        pdftitle={\IfValueTF{#1}{#1}{#2}},
-        pdfsubject={\IfValueTF{#3}{#3}{#4}}
-    }%
-    \begingroup%
-    \tcbset{
-        title style hook/.style={
-            boxrule=2pt,
-            fontupper=\huge\ttfamily
-        }
-    }%
-    \setlength{\parindent}{0pt}\sffamily%
-    \Huge{\bfseries #2}\bigskip\par
-    \Large #4\bigskip\par
-    \large #5%
-    \IfValueT{#6}{%
-        \,\footnote{#6}\bigskip\par
-    }%
-    #7 \bigskip\par
-    \rule{\textwidth}{.08em}%
-    \endgroup
-}
-
 \usepackage[pics]{dndicons}
 \usepackage[compat]{dndicons-l3draw}
 
@@ -173,9 +179,7 @@
     \end{longtable}
 }
 
-\begin{document}
-
-\printdoctitle
+\makedoctitle
     [The dndicons package]
     {The \titlemacro{dndicons} package}
     {A set of high quality icons made with Ti\emph{k}Z for use in notes for tabletop role-playing games}
@@ -196,6 +200,10 @@
 \changes{v1.4.1}{2024/02/21}{Corrections in \titlemacro{l3draw} variant.}
 \changes{v1.4.2}{2024/02/21}{Define alternative set of commands in \titlemacro{l3draw} variant.}
 \changes{v1.4.3}{2024/02/22}{Added option to \titlemacro{l3draw} variant to enable upward compatibility.}
+
+\begin{document}
+
+\printdoctitle
 
 \bigskip
 
@@ -225,7 +233,7 @@ Once loaded, the package provides a set of commands that can be used to print ic
 \subsection{Global settings}
 
 \begin{macrodef}dnd icons\end{macrodef}
-All icons share the Ti\emph{k}Z style \macro{dnd icons} that has no options per default but can be used to style all icons at once. For example, if the setting \macro{\tikzset{dnd icons/.append style={draw=red}}} is placed at the beginning of the document, all icons will be drawn in red. Per default, the icons are drawn in the color of the surrounding text. 
+All icons share the Ti\emph{k}Z style \macro{dnd icons} that has no options per default but can be used to style all icons at once. For example, if \macro{\tikzset{dnd icons/.append style={draw=red}}} is placed at the beginning of the document, all icons will be drawn in red. Per default, the icons are drawn in the color of the surrounding text. 
 
 Note that it may be necessary to add the Ti\emph{k}Z option \macro{transform shape} when applying transformations to the icons, because the icons are realised as Ti\emph{k}Z nodes which are not affected by some transformations per default.
 
@@ -520,7 +528,7 @@ A variant of the package that uses the \macro{l3draw} package instead of the \ma
 \begin{macrodef}compat\end{macrodef}
 The \macro{dndicons-l3draw} package provides the option \macro{compat}. Since the \macro{l3draw} package is experimental and macro definitions can change, it can be useful not to use the most current macro definitions that may not yet be available in a local TeX installation. Loading the \macro{dndicons-l3draw} package with the option \macro{compat} ensures that only functions are used that are available in the TeX installation prior to the current one.
 
-The commands of the main variant of the package \macro{\die}, \macro{\ability}, \macro{\saving}, \macro{\spell}, \macro{\spellschool}, \macro{\damage}, \macro{\attack} and \macro{\condition} which are described above have the same functionality and can be used the same way as in the main variant of the package. However, the available options are different and described below in more detail.
+The commands of the main variant of the package, \macro{\die}, \macro{\ability}, \macro{\saving}, \macro{\spell}, \macro{\spellschool}, \macro{\damage}, \macro{\attack} and \macro{\condition}, which are described above have the same functionality and can be used the same way as in the main variant of the package. However, the available options are different and described below in more detail.
 
 \subsection{Icon commands}
 

@@ -902,7 +902,7 @@
     \draw_path_moveto:n { .225cm , -.075cm }
     \draw_path_arc:nnn { -90 } { 120 } { .2cm }
     \draw_path_arc:nnn { 30 } { 180 } { .225cm }
-    \draw_path_lineto:n { -.3cm , ( .125cm + cos( 30 ) * .2cm - sin( 30 ) * .225cm ) }
+    \draw_path_lineto:n { -.3cm , .125cm + cosd( 30 ) * .2cm - sind( 30 ) * .225cm }
     \draw_path_arc:nnn { 90 } { 180 } { .125cm }
     \draw_path_lineto:n { -.425cm , .05cm }
     \draw_path_arc:nnn { 180 } { 270 } { .125cm }
@@ -915,7 +915,8 @@
 
 \cs_new:Npn \dndicons_draw_shape_healing: {
      \draw_path_moveto:n { 0cm , .125cm }
-    \draw_path_arc:nnn { 0 } { 225 } { .2cm }    \draw_path_lineto:n { 0cm , -.375cm }
+    \draw_path_arc:nnn { 0 } { 225 } { .2cm }
+    \draw_path_lineto:n { 0cm , -.375cm }
     \draw_path_moveto:n { 0cm , .125cm }
     \draw_path_arc:nnn { 180 } { -45 } { .2cm }
     \draw_path_lineto:n { 0cm , -.375cm }

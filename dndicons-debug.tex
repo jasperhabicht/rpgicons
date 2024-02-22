@@ -2,9 +2,9 @@
 \RequirePackage[enable-debug]{expl3}
 
 \ExplSyntaxOn
-\debug_on:n{all}
+\debug_on:n { all }
 
-\RequirePackage[compat]{dndicons-l3draw}
+\RequirePackage [compat] {dndicons-l3draw}
 
 \clist_set:Nn \l_tmpa_clist {
     twoside, fourside, sixside, eightside, tenside, twelveside, twentyside, hundredside,
@@ -22,7 +22,7 @@
 }
 
 \NewDocumentEnvironment { dndiconswrapper } { m } {
-    \DndIconsUseIcon { #1 }
+    \DndIconsUseIcon {#1}
 }
 
 \ExplSyntaxOff
@@ -33,7 +33,7 @@
 
 \dndiconsset{baseline=0pt, before ~ sep=0pt, after ~ sep=0pt}
 \clist_map_inline:Nn  \l_tmpa_clist {
-    \begin{dndiconswrapper} { #1 } \end{dndiconswrapper}
+    \begin{dndiconswrapper} {#1} \end{dndiconswrapper}
 }
 
 \ExplSyntaxOff

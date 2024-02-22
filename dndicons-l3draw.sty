@@ -3,7 +3,7 @@
 
 \bool_new:N \l__dndicons_compat_mode_bool
 \keys_define:nn { dndicons } { 
-    package ~ option          .code:n = { \keys_set:nn { dndicons / package ~ option } { #1 } } ,
+    package ~ option          .code:n = { \keys_set:nn { dndicons / package ~ option } {#1} } ,
     package ~ option / compat .code:n = { \bool_set_true:N \l__dndicons_compat_mode_bool } ,
 }
 \ProcessKeyOptions [ dndicons / package ~ option ]
@@ -134,7 +134,7 @@
 \fp_new:N \l_dndnicons_pips_coordx_fp
 \fp_new:N \l_dndnicons_pips_coordy_fp
 \cs_new:Npn \dndicons_draw_shape_sixside_pips:n #1 {
-    \str_case:nn { #1 } {
+    \str_case:nn {#1} {
         { one } { \clist_set:Nn \l_dndnicons_pips_clist {
             { 0cm , 0cm }
         } }
@@ -1423,7 +1423,7 @@
 \cs_generate_variant:Nn \color_select:n { V }
 
 \keys_define:nn { dndicons } {
-    icon ~ style                .code:n    = { \keys_set:nn { dndicons } { #1 } } ,
+    icon ~ style                .code:n    = { \keys_set:nn { dndicons } {#1} } ,
     icon ~ style / before ~ sep .dim_set:N = \l_dndicons_icon_before_sep_dim ,
     icon ~ style / before ~ sep .initial:n = { 0.05em } ,
     icon ~ style / before ~ sep .groups:n  = { extra } , 
@@ -1435,9 +1435,9 @@
     icon ~ style / frame        .tl_set:N  = \l_dndicons_icon_frame_tl ,
     icon ~ style / background   .tl_set:N  = \l_dndicons_icon_background_tl ,
     icon ~ style / background   .initial:n = { white } ,
-    icon ~ style / color        .code:n    = { \color_select:n { #1 } } ,
-    icon ~ style / stroke       .code:n    = { \color_stroke:n { #1 } } ,
-    icon ~ style / fill         .code:n    = { \color_fill:n { #1 } } ,
+    icon ~ style / color        .code:n    = { \color_select:n {#1} } ,
+    icon ~ style / stroke       .code:n    = { \color_stroke:n {#1} } ,
+    icon ~ style / fill         .code:n    = { \color_fill:n {#1} } ,
     icon ~ style / line ~ width .dim_set:N = \l_dndicons_icon_linewidth_dim , 
     icon ~ style / line ~ width .initial:n = { \l_draw_default_linewidth_dim } , 
     icon ~ style / scale        .fp_set:N  = \l_dndicons_icon_transform_scale_fp ,
@@ -1451,27 +1451,25 @@
         \draw_cap_round:
         \draw_join_round:
         \bool_if:NTF \l__dndicons_compat_mode_bool {
-            \keys_set:nn { dndicons / icon ~ style } { #2 }
+            \keys_set:nn { dndicons / icon ~ style } {#2}
         } {
-            \keys_set_exclude_groups:nnn { dndicons / icon ~ style } { extra } { #2 }
+            \keys_set_exclude_groups:nnn { dndicons / icon ~ style } { extra } {#2}
         }
         \draw_linewidth:n { \l_dndicons_icon_linewidth_dim }
         \draw_transform_scale:n { \l_dndicons_icon_transform_scale_fp }
         \draw_transform_rotate:n { \l_dndicons_icon_transform_rotate_fp }
         \draw_baseline:n { \l_dndicons_icon_baseline_dim }
-        % \bool_if:NTF \l__dndicons_compat_mode_bool {
+        % \bool_if:NT \l__dndicons_compat_mode_bool {
             \draw_path_moveto:n { -.5cm , -.5cm - \l_dndicons_icon_linewidth_dim / 2 }
             \draw_path_lineto:n { -.5cm , .5cm + \l_dndicons_icon_linewidth_dim / 2 }
             \draw_path_lineto:n { .5cm , .5cm + \l_dndicons_icon_linewidth_dim / 2 }
             \draw_path_lineto:n { .5cm , -.5cm - \l_dndicons_icon_linewidth_dim / 2 }
             \draw_path_close:
             \draw_path_use_clear:n { clip }
-        % } {
-            % set bbox 
         % }
         \clist_if_in:noT { ability , saving , spellschool, damage } { \l_dndicons_icon_frame_tl } {
             \use:c { dndicons_draw_frame_ \l_dndicons_icon_frame_tl : }
-            \IfBooleanTF { #1 } {
+            \IfBooleanTF {#1} {
                 \draw_path_use_clear:n { fill }
                 \color_select:V { \l_dndicons_icon_background_tl }
             } {
@@ -1480,34 +1478,41 @@
             \draw_transform_scale:n { 0.675 } 
         }
         \clist_if_in:noTF { sixside ~ one , sixside ~ two , sixside ~ three , sixside ~ four , 
-            sixside ~ five , sixside ~ six , sixside ~ seven , sixside ~ eight , sixside ~ nine } { #4 } {
-            \seq_set_split:Nnn \l_tmpa_seq { ~ } { #4 }
+            sixside ~ five , sixside ~ six , sixside ~ seven , sixside ~ eight , sixside ~ nine } {#4} {
+            \seq_set_split:Nnn \l_tmpa_seq { ~ } {#4}
             \exp_args:Ne \dndicons_draw_shape_sixside_pips:n { \seq_item:Nn \l_tmpa_seq { 2 } }
         } {
-            \str_set:Nn \l_tmpa_str { #4 }
+            \str_set:Nn \l_tmpa_str {#4}
             \str_replace_all:Nnn \l_tmpa_str { ~ } { _ }
             \use:c { dndicons_draw_shape_ \l_tmpa_str : }
         }
         \draw_path_use_clear:n { stroke }
-        \IfValueT { #3 } {
-            \hcoffin_set:Nn \l_tmpa_coffin { #3 }
+        \IfValueT {#3} {
+            \hcoffin_set:Nn \l_tmpa_coffin {#3}
             \draw_coffin_use:Nnn \l_tmpa_coffin { hc } { vc } 
         }
+        % \bool_if:NF \l__dndicons_compat_mode_bool {
+        %     \draw_bb_from_path:n { 
+        %         \draw_path_rectangle_corners:nn 
+        %             { -.5cm , -.5cm - \l_dndicons_icon_linewidth_dim / 2 }
+        %             { .5cm , .5cm + \l_dndicons_icon_linewidth_dim / 2 }
+        %     }
+        % }
     \draw_end:
 }
 
 \NewDocumentCommand { \dndiconsset } { m } {
-    \keys_set:nn { dndicons / icon ~ style } { #1 }
+    \keys_set:nn { dndicons / icon ~ style } {#1}
 }
 
 \NewDocumentCommand { \DndiconsDie } { O{normal} m O{} m } {
     \group_begin:
-        \keys_set_groups:nnn { dndicons / icon ~ style } { extra } { #3 }
+        \keys_set_groups:nnn { dndicons / icon ~ style } { extra } {#3}
         \hspace { \l_dndicons_icon_before_sep_dim }
-        \str_if_eq:nnTF { large } { #1 } {
+        \str_if_eq:nnTF { large } {#1} {
             \DndIconsUseIcon[scale=.67, #3][#4]{#2}
         } {
-            \str_if_empty:nF { #4 } { #4 \, }
+            \str_if_empty:nF {#4} { #4 \, }
             \DndIconsUseIcon[scale=.33, #3]{#2}
         }
         \hspace { \l_dndicons_icon_after_sep_dim }
@@ -1517,9 +1522,9 @@
 
 \NewDocumentCommand { \DndiconsAbility } { O{positive} m O{} } {
     \group_begin:
-        \keys_set_groups:nnn { dndicons / icon ~ style } { extra } { #3 }
+        \keys_set_groups:nnn { dndicons / icon ~ style } { extra } {#3}
         \hspace { \l_dndicons_icon_before_sep_dim }
-        \str_if_eq:nnTF { negative } { #1 } {
+        \str_if_eq:nnTF { negative } {#1} {
             \DndIconsUseIcon*[frame=ability, scale=.33, #3]{#2} 
         } {
             \DndIconsUseIcon[scale=.33, #3]{#2}
@@ -1531,9 +1536,9 @@
 
 \NewDocumentCommand { \DndiconsSaving } { O{} m O{} } {
     \group_begin:
-        \keys_set_groups:nnn { dndicons / icon ~ style } { extra } { #3 }
+        \keys_set_groups:nnn { dndicons / icon ~ style } { extra } {#3}
         \hspace { \l_dndicons_icon_before_sep_dim }
-        \str_if_eq:nnTF { empty } { #1 } {
+        \str_if_eq:nnTF { empty } {#1} {
             \DndIconsUseIcon[frame=saving, scale=.33, #3]{} 
         } {
             \DndIconsUseIcon[frame=saving, scale=.33, #3]{#2}
@@ -1545,7 +1550,7 @@
 
 \NewDocumentCommand { \DndiconsSpell } { m O{} } {
     \group_begin:
-        \keys_set_groups:nnn { dndicons / icon ~ style } { extra } { #2 }
+        \keys_set_groups:nnn { dndicons / icon ~ style } { extra } {#2}
         \hspace { \l_dndicons_icon_before_sep_dim }
         \DndIconsUseIcon[scale=.33, #2]{#1} 
         \hspace { \l_dndicons_icon_after_sep_dim }
@@ -1555,9 +1560,9 @@
 
 \NewDocumentCommand { \DndiconsSpellschool } { O{positive} m O{} } {
     \group_begin:
-        \keys_set_groups:nnn { dndicons / icon ~ style } { extra } { #3 }
+        \keys_set_groups:nnn { dndicons / icon ~ style } { extra } {#3}
         \hspace { \l_dndicons_icon_before_sep_dim }
-        \str_if_eq:nnTF { negative } { #1 } {
+        \str_if_eq:nnTF { negative } {#1} {
             \DndIconsUseIcon*[frame=spellschool, scale=.33, #3]{#2} 
         } {
             \DndIconsUseIcon[frame=spellschool, scale=.33, #3]{#2}
@@ -1569,7 +1574,7 @@
 
 \NewDocumentCommand { \DndiconsDamage } { m O{} } {
     \group_begin:
-        \keys_set_groups:nnn { dndicons / icon ~ style } { extra } { #2 }
+        \keys_set_groups:nnn { dndicons / icon ~ style } { extra } {#2}
         \hspace { \l_dndicons_icon_before_sep_dim }
         \DndIconsUseIcon[frame=damage, scale=.33, #2]{#1} 
         \hspace { \l_dndicons_icon_after_sep_dim }
@@ -1579,7 +1584,7 @@
 
 \NewDocumentCommand { \DndiconsAttack } { m O{} } {
     \group_begin:
-        \keys_set_groups:nnn { dndicons / icon ~ style } { extra } { #2 }
+        \keys_set_groups:nnn { dndicons / icon ~ style } { extra } {#2}
         \hspace { \l_dndicons_icon_before_sep_dim }
         \DndIconsUseIcon[scale=.33, #2]{#1} 
         \hspace { \l_dndicons_icon_after_sep_dim }
@@ -1589,7 +1594,7 @@
 
 \NewDocumentCommand { \DndiconsCondition } { m O{} } {
     \group_begin:
-        \keys_set_groups:nnn { dndicons / icon ~ style } { extra } { #2 }
+        \keys_set_groups:nnn { dndicons / icon ~ style } { extra } {#2}
         \hspace { \l_dndicons_icon_before_sep_dim }
         \DndIconsUseIcon[scale=.33, #2]{#1} 
         \hspace { \l_dndicons_icon_after_sep_dim }

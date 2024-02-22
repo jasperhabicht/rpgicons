@@ -1517,9 +1517,9 @@
 
 \NewDocumentCommand { \DndiconsAbility } { O{positive} m O{} } {
     \group_begin:
-        \keys_set_groups:nnn { dndicons / icon ~ style } { extra } { #3 }
+        \keys_set_groups:nnn { dndicons / icon ~ style } { extra } {#3}
         \hspace { \l_dndicons_icon_before_sep_dim }
-        \str_if_eq:nnTF { negative } { #1 } {
+        \str_if_eq:nnTF { negative } {#1} {
             \DndIconsUseIcon*[frame=ability, scale=.33, #3]{#2} 
         } {
             \DndIconsUseIcon[scale=.33, #3]{#2}

@@ -1451,56 +1451,61 @@
 \coffin_new:N \l__dndicons_icon_label_coffin
 \NewDocumentCommand \DndIconsUseIcon { s O{} o m } {
     \draw_begin:
-        \draw_cap_round:
-        \draw_join_round:
-        \bool_if:NTF \l__dndicons_compat_mode_bool {
-            \keys_set:nn { dndicons / icon ~ style } {#2}
-        } {
-            \keys_set_exclude_groups:nnn { dndicons / icon ~ style } { extra } {#2}
-        }
-        \draw_linewidth:n { \l_dndicons_icon_linewidth_dim }
-        \draw_transform_scale:n { \l_dndicons_icon_transform_scale_fp }
-        \draw_transform_rotate:n { \l_dndicons_icon_transform_rotate_fp }
-        \draw_baseline:n { \l_dndicons_icon_baseline_dim }
-        % \bool_if:NT \l__dndicons_compat_mode_bool {
-            \draw_path_moveto:n { -.5cm , -.5cm - \l_dndicons_icon_linewidth_dim / 2 }
-            \draw_path_lineto:n { -.5cm , .5cm + \l_dndicons_icon_linewidth_dim / 2 }
-            \draw_path_lineto:n { .5cm , .5cm + \l_dndicons_icon_linewidth_dim / 2 }
-            \draw_path_lineto:n { .5cm , -.5cm - \l_dndicons_icon_linewidth_dim / 2 }
-            \draw_path_close:
-            \draw_path_use_clear:n { clip }
-        % }
-        \clist_if_in:noT { ability , saving , spellschool, damage } { \l_dndicons_icon_frame_tl } {
-            \use:c { dndicons_draw_frame_ \l_dndicons_icon_frame_tl : }
-            \IfBooleanTF {#1} {
-                \draw_path_use_clear:n { fill }
-                \color_select:V { \l_dndicons_icon_background_tl }
+        \draw_scope_begin: 
+            \draw_cap_round:
+            \draw_join_round:
+            \bool_if:NTF \l__dndicons_compat_mode_bool {
+                \keys_set:nn { dndicons / icon ~ style } {#2}
             } {
-                \draw_path_use_clear:n { stroke }
+                \keys_set_exclude_groups:nnn { dndicons / icon ~ style } { extra } {#2}
             }
-            \draw_transform_scale:n { 0.675 } 
-        }
-        \clist_if_in:noTF { sixside ~ one , sixside ~ two , sixside ~ three , sixside ~ four , 
-            sixside ~ five , sixside ~ six , sixside ~ seven , sixside ~ eight , sixside ~ nine } {#4} {
-            \seq_set_split:Nnn \l__dndicons_icon_shape_name_parts_seq { ~ } {#4}
-            \exp_args:Ne \dndicons_draw_shape_sixside_pips:n { \seq_item:Nn \l__dndicons_icon_shape_name_parts_seq { 2 } }
-        } {
-            \str_set:Nn \l__dndicons_icon_shape_name_str {#4}
-            \str_replace_all:Nnn \l__dndicons_icon_shape_name_str { ~ } { _ }
-            \use:c { dndicons_draw_shape_ \l__dndicons_icon_shape_name_str : }
-        }
-        \draw_path_use_clear:n { stroke }
-        \IfValueT {#3} {
-            \hcoffin_set:Nn \l__dndicons_icon_label_coffin {#3}
-            \draw_coffin_use:Nnn \l__dndicons_icon_label_coffin { hc } { vc } 
-        }
-        % \bool_if:NF \l__dndicons_compat_mode_bool {
-        %     \draw_bb_from_path:n { 
-        %         \draw_path_rectangle_corners:nn 
-        %             { -.5cm , -.5cm - \l_dndicons_icon_linewidth_dim / 2 }
-        %             { .5cm , .5cm + \l_dndicons_icon_linewidth_dim / 2 }
-        %     }
-        % }
+            \draw_linewidth:n { \l_dndicons_icon_linewidth_dim }
+            \draw_transform_scale:n { \l_dndicons_icon_transform_scale_fp }
+            \draw_transform_rotate:n { \l_dndicons_icon_transform_rotate_fp }
+            \draw_baseline:n { \l_dndicons_icon_baseline_dim }
+            \bool_if:NTF \l__dndicons_compat_mode_bool {
+                \draw_path_moveto:n { -.5cm , -.5cm - \l_dndicons_icon_linewidth_dim / 2 }
+                \draw_path_lineto:n { -.5cm , .5cm + \l_dndicons_icon_linewidth_dim / 2 }
+                \draw_path_lineto:n { .5cm , .5cm + \l_dndicons_icon_linewidth_dim / 2 }
+                \draw_path_lineto:n { .5cm , -.5cm - \l_dndicons_icon_linewidth_dim / 2 }
+                \draw_path_close:
+                \draw_path_use_clear:n { clip }
+            } {
+                \draw_path_rectangle_corners:nn 
+                    { -.5cm , -.5cm - \l_dndicons_icon_linewidth_dim / 2 }
+                    { .5cm , .5cm + \l_dndicons_icon_linewidth_dim / 2 }
+                \draw_path_replace_bb:
+                \bool_set_false:N \l_draw_bb_update_bool    
+            }
+            \draw_scope_begin: 
+                \clist_if_in:noT { ability , saving , spellschool, damage } { \l_dndicons_icon_frame_tl } {
+                    \use:c { dndicons_draw_frame_ \l_dndicons_icon_frame_tl : }
+                    \IfBooleanTF {#1} {
+                        \draw_path_use_clear:n { fill }
+                        \color_select:V { \l_dndicons_icon_background_tl }
+                    } {
+                        \draw_path_use_clear:n { stroke }
+                    }
+                    \draw_transform_scale:n { 0.675 } 
+                } 
+                \clist_if_in:noTF { sixside ~ one , sixside ~ two , sixside ~ three , sixside ~ four , 
+                    sixside ~ five , sixside ~ six , sixside ~ seven , sixside ~ eight , sixside ~ nine } {#4} {
+                    \seq_set_split:Nnn \l__dndicons_icon_shape_name_parts_seq { ~ } {#4}
+                    \exp_args:Ne \dndicons_draw_shape_sixside_pips:n { 
+                        \seq_item:Nn \l__dndicons_icon_shape_name_parts_seq { 2 } 
+                    }
+                } {
+                    \str_set:Nn \l__dndicons_icon_shape_name_str {#4}
+                    \str_replace_all:Nnn \l__dndicons_icon_shape_name_str { ~ } { _ }
+                    \use:c { dndicons_draw_shape_ \l__dndicons_icon_shape_name_str : }
+                }
+                \draw_path_use_clear:n { stroke }
+                \IfValueT {#3} {
+                    \hcoffin_set:Nn \l__dndicons_icon_label_coffin {#3}
+                    \draw_coffin_use:Nnn \l__dndicons_icon_label_coffin { hc } { vc } 
+                }
+            \draw_scope_end:
+        \draw_scope_end:
     \draw_end:
 }
 

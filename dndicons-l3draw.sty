@@ -1457,7 +1457,8 @@
         \bool_if:NTF \l__dndicons_compat_mode_bool {
             \keys_set:nn { dndicons / icon ~ style } {#2}
         } {
-            \keys_set_exclude_groups:nnn { dndicons / icon ~ style } { extra } {#2}
+            \keys_set:nn { dndicons / icon ~ style } {#2}
+%            \keys_set_exclude_groups:nnn { dndicons / icon ~ style } { extra } {#2}
         }
         \draw_linewidth:n { \l_dndicons_icon_linewidth_dim }
         \draw_transform_scale:n { \l_dndicons_icon_transform_scale_fp }
@@ -1495,13 +1496,12 @@
             \hcoffin_set:Nn \l__dndicons_icon_label_coffin {#3}
             \draw_coffin_use:Nnn \l__dndicons_icon_label_coffin { hc } { vc } 
         }
-        % \bool_if:NF \l__dndicons_compat_mode_bool {
-        %     \draw_bb_from_path:n { 
-        %         \draw_path_rectangle_corners:nn 
-        %             { -.5cm , -.5cm - \l_dndicons_icon_linewidth_dim / 2 }
-        %             { .5cm , .5cm + \l_dndicons_icon_linewidth_dim / 2 }
-        %     }
-        % }
+        \bool_if:NF \l__dndicons_compat_mode_bool {
+            \draw_path_rectangle_corners:nn 
+                { -.5cm , -.5cm - \l_dndicons_icon_linewidth_dim / 2 }
+                { .5cm , .5cm + \l_dndicons_icon_linewidth_dim / 2 }
+            \draw_path_replace_bb:
+        }
     \draw_end:
 }
 

@@ -167,7 +167,7 @@
 }{\vphantom{/g}\IfBooleanT{#1}{\textbackslash}#3}
 
 \usepackage[pics]{dndicons}
-\usepackage[compat]{dndicons-l3draw}
+\usepackage{dndicons-l3draw}
 
 \NewDocumentEnvironment{dndiconsiconlist}{ }{
     \begin{longtable}{ @{} p{20em} p{5em} p{\dimexpr\linewidth-25em-4\tabcolsep} @{} }
@@ -541,8 +541,8 @@ Having created a boxed icon, it is safe to use it, for example, inside a Ti\emph
 
 A variant of the package that uses the \macro{l3draw} package instead of the \macro{tikz} package is loaded by calling \macro{\usepackage{dndicons-l3draw}} in the preamble of the document. The \macro{l3draw} package is an experimental package that provides only basic drawing functionality and therefore loads quicker than Ti*k*Z. The \macro{l3draw} variant thus only supports a certain set of option for styling the icons. 
 
-\begin{macrodef}compat\end{macrodef}
-The \macro{dndicons-l3draw} package provides the option \macro{compat}. Since the \macro{l3draw} package is experimental and macro definitions can change, it can be useful not to use the most current macro definitions that may not yet be available in a local TeX installation. Loading the \macro{dndicons-l3draw} package with the option \macro{compat} ensures that only functions are used that are available in the TeX installation prior to the current one.
+\begin{macrodef}edge\end{macrodef}
+Since the \macro{l3draw} package is experimental and subject to ongoing updates, the \macro{dndicons-l3draw} package provides a fallback to set of established and more stable macro definitions (being available since the last major TeX Live release) which is active per default. Loading the \macro{dndicons-l3draw} package with the option \macro{edge} will use functions that are only available in the most recent version of the \macro{l3draw} package.
 
 The commands of the main variant of the package, \macro{\die}, \macro{\ability}, \macro{\saving}, \macro{\spell}, \macro{\spellschool}, \macro{\damage}, \macro{\attack} and \macro{\condition}, which are described above have the same functionality and can be used the same way as in the main variant of the package. However, the available options are different and described below in more detail.
 

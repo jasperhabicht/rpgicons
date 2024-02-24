@@ -1,10 +1,10 @@
 \ProvidesExplPackage {dndicons-l3draw} {2024-02-24} {1.4.4} 
     {DnD Icons Package (l3draw Variant)}
 
-\bool_new:N \l__dndicons_compat_mode_bool
+\bool_new:N \l__dndicons_edge_mode_bool
 \keys_define:nn { dndicons } { 
-    package ~ option          .code:n = { \keys_set:nn { dndicons / package ~ option } {#1} } ,
-    package ~ option / compat .code:n = { \bool_set_true:N \l__dndicons_compat_mode_bool } ,
+    package ~ option        .code:n = { \keys_set:nn { dndicons / package ~ option } {#1} } ,
+    package ~ option / edge .code:n = { \bool_set_true:N \l__dndicons_edge_mode_bool } ,
 }
 \ProcessKeyOptions [ dndicons / package ~ option ]
 
@@ -24,14 +24,14 @@
 }
 
 \cs_new:Npn \dndicons_draw_shape_sixside: {
-    \bool_if:NTF \l__dndicons_compat_mode_bool {
+    \bool_if:NTF \l__dndicons_edge_mode_bool {
+        \draw_path_rectangle_corners:nn { -.4cm , -.4cm } { .4cm , .4cm }
+    } {
         \draw_path_moveto:n { -.4cm , -.4cm }
         \draw_path_lineto:n { -.4cm , .4cm }
         \draw_path_lineto:n { .4cm , .4cm }
         \draw_path_lineto:n { .4cm , -.4cm }
         \draw_path_close:
-    } {
-        \draw_path_rectangle_corners:nn { -.4cm , -.4cm } { .4cm , .4cm }
     }
 }
 
@@ -510,14 +510,14 @@
 \cs_new:Npn \dndicons_draw_shape_quadratic: {
     \draw_path_circle:nn { 0cm , 0cm } { 2pt }
     \draw_path_use_clear:n { fill }
-    \bool_if:NTF \l__dndicons_compat_mode_bool {
+    \bool_if:NTF \l__dndicons_edge_mode_bool {
+        \draw_path_rectangle_corners:nn { -.4cm , -.4cm } { .4cm , .4cm }
+    } {
         \draw_path_moveto:n { -.4cm , -.4cm }
         \draw_path_lineto:n { -.4cm , .4cm }
         \draw_path_lineto:n { .4cm , .4cm }
         \draw_path_lineto:n { .4cm , -.4cm }
         \draw_path_close:
-    } {
-        \draw_path_rectangle_corners:nn { -.4cm , -.4cm } { .4cm , .4cm }
     }
 }
 
@@ -1455,28 +1455,28 @@
         \draw_scope_begin: 
             \draw_cap_round:
             \draw_join_round:
-            \bool_if:NTF \l__dndicons_compat_mode_bool {
-                \keys_set:nn { dndicons / icon ~ style } {#2}
-            } {
+            \bool_if:NTF \l__dndicons_edge_mode_bool {
                 \keys_set_exclude_groups:nnn { dndicons / icon ~ style } { extra } {#2}
-            }
+            } {
+                \keys_set:nn { dndicons / icon ~ style } {#2}
+            } 
             \draw_linewidth:n { \l_dndicons_icon_linewidth_dim }
             \draw_transform_scale:n { \l_dndicons_icon_transform_scale_fp }
             \draw_transform_rotate:n { \l_dndicons_icon_transform_rotate_fp }
             \draw_baseline:n { \l_dndicons_icon_baseline_dim }
-            \bool_if:NTF \l__dndicons_compat_mode_bool {
+            \bool_if:NTF \l__dndicons_edge_mode_bool {
+                \draw_path_rectangle_corners:nn 
+                    { -.5cm , -.5cm - \l_dndicons_icon_linewidth_dim / 2 }
+                    { .5cm , .5cm + \l_dndicons_icon_linewidth_dim / 2 }
+                \draw_path_replace_bb:
+                \bool_set_false:N \l_draw_bb_update_bool    
+            } {
                 \draw_path_moveto:n { -.5cm , -.5cm - \l_dndicons_icon_linewidth_dim / 2 }
                 \draw_path_lineto:n { -.5cm , .5cm + \l_dndicons_icon_linewidth_dim / 2 }
                 \draw_path_lineto:n { .5cm , .5cm + \l_dndicons_icon_linewidth_dim / 2 }
                 \draw_path_lineto:n { .5cm , -.5cm - \l_dndicons_icon_linewidth_dim / 2 }
                 \draw_path_close:
                 \draw_path_use_clear:n { clip }
-            } {
-                \draw_path_rectangle_corners:nn 
-                    { -.5cm , -.5cm - \l_dndicons_icon_linewidth_dim / 2 }
-                    { .5cm , .5cm + \l_dndicons_icon_linewidth_dim / 2 }
-                \draw_path_replace_bb:
-                \bool_set_false:N \l_draw_bb_update_bool    
             }
             \draw_scope_begin: 
                 \clist_if_in:noT { ability , saving , spellschool, damage } { \l_dndicons_icon_frame_tl } {

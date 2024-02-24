@@ -27,7 +27,112 @@
         \setlength{\dndicons@baseline}{#1}
     },
     dnd icons/baseline={-3.5pt},
-    dnd icons/.style={}
+    dnd icons/.style={},
+    dnd icons/every node/.style={
+        line cap=round,
+        line join=round
+    },
+    % 
+    dnd icons/every die/.style={},
+    dnd icons/every ability/.style={},
+    dnd icons/every saving/.style={},
+    dnd icons/every spell/.style={},
+    dnd icons/every spellschool/.style={},
+    dnd icons/every damage/.style={},
+    dnd icons/every attack/.style={},
+    dnd icons/every condition/.style={},
+    %
+    dnd icons/every twoside/.style={},
+    dnd icons/every fourside/.style={},
+    dnd icons/every sixside/.style={},
+    dnd icons/every eightside/.style={},
+    dnd icons/every tenside/.style={},
+    dnd icons/every twelveside/.style={},
+    dnd icons/every twentyside/.style={},
+    dnd icons/every hundredside/.style={},
+    dnd icons/every fudge/.style={},
+    dnd icons/every sixside one/.style={},
+    dnd icons/every sixside two/.style={},
+    dnd icons/every sixside three/.style={},
+    dnd icons/every sixside four/.style={},
+    dnd icons/every sixside five/.style={},
+    dnd icons/every sixside six/.style={},
+    dnd icons/every sixside seven/.style={},
+    dnd icons/every sixside eight/.style={},
+    dnd icons/every sixside nine/.style={},
+    dnd icons/every fudge plus/.style={},
+    dnd icons/every fudge minus/.style={},
+    %
+    dnd icons/every strength/.style={},
+    dnd icons/every dexterity/.style={},
+    dnd icons/every dexterity alt/.style={},
+    dnd icons/every constitution/.style={},
+    dnd icons/every intelligence/.style={},
+    dnd icons/every wisdom/.style={},
+    dnd icons/every charisma/.style={},
+    dnd icons/every luck/.style={},
+    dnd icons/every armor/.style={},
+    dnd icons/every proficiency/.style={},
+    %
+    dnd icons/every linear/.style={},
+    dnd icons/every conic/.style={},
+    dnd icons/every quadratic/.style={},
+    dnd icons/every cubic/.style={},
+    dnd icons/every spheric/.style={},
+    dnd icons/every cylindric/.style={},
+    dnd icons/every verbal/.style={},
+    dnd icons/every somatic/.style={},
+    dnd icons/every material/.style={},
+    dnd icons/every focus/.style={},
+    %
+    dnd icons/every abjuration/.style={},
+    dnd icons/every conjuration/.style={},
+    dnd icons/every divination/.style={},
+    dnd icons/every enchantment/.style={},
+    dnd icons/every evocation/.style={},
+    dnd icons/every illusion/.style={},
+    dnd icons/every necromancy/.style={},
+    dnd icons/every transmutation/.style={},
+    %
+    dnd icons/every acid/.style={},
+    dnd icons/every bludgeoning/.style={},
+    dnd icons/every cold/.style={},
+    dnd icons/every fire/.style={},
+    dnd icons/every force/.style={},
+    dnd icons/every lightning/.style={},
+    dnd icons/every necrotic/.style={},
+    dnd icons/every piercing/.style={},
+    dnd icons/every poison/.style={},
+    dnd icons/every psychic/.style={},
+    dnd icons/every radiant/.style={},
+    dnd icons/every slashing/.style={},
+    dnd icons/every thunder/.style={},
+    dnd icons/every healing/.style={},
+    %
+    dnd icons/every melee/.style={},
+    dnd icons/every ranged/.style={},
+    dnd icons/every magic/.style={},
+    dnd icons/every singlehanded/.style={},
+    dnd icons/every doublehanded/.style={},
+    % 
+    dnd icons/every buff/.style={},
+    dnd icons/every blinded/.style={},
+    dnd icons/every charmed/.style={},
+    dnd icons/every deafened/.style={},
+    dnd icons/every exhausted/.style={},
+    dnd icons/every frightened/.style={},
+    dnd icons/every grappled/.style={},
+    dnd icons/every incapacitated/.style={},
+    dnd icons/every invisible/.style={},
+    dnd icons/every paralyzed/.style={},
+    dnd icons/every petrified/.style={},
+    dnd icons/every poisoned/.style={},
+    dnd icons/every prone/.style={},
+    dnd icons/every restrained/.style={},
+    dnd icons/every stunned/.style={},
+    dnd icons/every unconscious/.style={},
+    dnd icons/every hearing/.style={},
+    dnd icons/every seeing/.style={},
 }
 
 % make tikz icons usable inside tikz environments
@@ -460,9 +565,11 @@
     \def\dndicons@diceiconfg{fgnrm}\fi%
   \ifx\dndicons@diceiconnrmlrg\dndicons@diceiconlrg\else\dndicons@ifEmptyF{#4}{#4\,}\fi%
   \hspace{\dndicons@beforesep}%
-  \tikz[dnd icons,baseline=\dndicons@baseline,fgnrm/.style={scale=.33},fglrg/.style={scale=.67},#3]{
-    \node[#2,\dndicons@diceiconfg,font={\footnotesize},line cap=round,line join=round] (0cm,0cm) {\ifx\dndicons@diceiconnrmlrg\dndicons@diceiconlrg\textbf{#4}\fi};
-    \path[draw=none,\dndicons@diceiconfg] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
+  \tikz[dnd icons, dnd icons/every die, dnd icons/every #2,
+    baseline=\dndicons@baseline, fgnrm/.style={scale=.33}, fglrg/.style={scale=.67}, #3] {
+    \node[#2, \dndicons@diceiconfg, font={\footnotesize}, line cap=round, line join=round] (0cm,0cm) 
+      {\ifx\dndicons@diceiconnrmlrg\dndicons@diceiconlrg\textbf{#4}\fi};
+    \path[draw=none, \dndicons@diceiconfg] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
   }%
   \hspace{\dndicons@aftersep}%
 }
@@ -836,12 +943,13 @@
     \def\dndicons@abilityiconfg{fgneg}\else%
     \def\dndicons@abilityiconfg{fgpos}\fi%
   \hspace{\dndicons@beforesep}%
-  \tikz[dnd icons,baseline=\dndicons@baseline,fgpos/.style={draw},fgneg/.style={draw=dndicons@bg,line width=.6pt},#3]{
+  \tikz[dnd icons, dnd icons/every ability, dnd icons/every #2,
+    baseline=\dndicons@baseline, fgpos/.style={draw}, fgneg/.style={draw=dndicons@bg, line width=.6pt}, #3] {
     \ifx\dndicons@abilityiconposneg\dndicons@abilityiconneg%
       \path[scale=.5,fill] (0cm,0cm) circle[radius=.45cm];
     \fi%
-    \node[#2,\dndicons@abilityiconfg,scale=.33,line cap=round,line join=round] (0cm,0cm) {};
-    \path[draw=none,scale=.33] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
+    \node[#2, \dndicons@abilityiconfg, scale=.33] (0cm,0cm) {};
+    \path[draw=none, scale=.33] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
   }%
   \hspace{\dndicons@aftersep}%
 }
@@ -849,13 +957,18 @@
 \NewDocumentCommand{\saving}{ O{normal} m O{} }{%
   \edef\dndicons@abilityiconnrmemp{#1}%
   \edef\dndicons@abilityiconemp{empty}%
+  \ifx\dndicons@abilityiconnrmemp\dndicons@abilityiconemp%
+    \def\dndicons@savingstyle{}\else%
+    \def\dndicons@savingstyle{dnd icons/every #2}\fi%
   \hspace{\dndicons@beforesep}%
-  \tikz[dnd icons,baseline=\dndicons@baseline,#3]{
-    \path[draw,scale=.33] (-.45cm,.45cm) -- (.45cm,.45cm) -- (.45cm,-.05cm) arc[start angle=360,end angle=180,radius=.45cm] -- cycle;
+  \tikz[dnd icons, dnd icons/every saving, \dndicons@savingstyle,
+    baseline=\dndicons@baseline, #3] {
+    \path[draw, scale=.33] (-.45cm,.45cm) -- (.45cm,.45cm) -- (.45cm,-.05cm) 
+      arc[start angle=360, end angle=180, radius=.45cm] -- cycle;
     \ifx\dndicons@abilityiconnrmemp\dndicons@abilityiconemp\else%
-      \node[#2,draw,scale=.225,line cap=round,line join=round] (0cm,0cm) {};
+      \node[#2, draw,scale=.225] (0cm,0cm) {};
     \fi%
-    \path[draw=none,scale=.33] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
+    \path[draw=none, scale=.33] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
   }%
   \hspace{\dndicons@aftersep}%
 }
@@ -1053,9 +1166,10 @@
 
 \NewDocumentCommand{\spell}{ m O{} }{%
   \hspace{\dndicons@beforesep}%
-  \tikz[dnd icons,baseline=\dndicons@baseline,#2]{
-    \node[#1,draw,scale=.33,line cap=round,line join=round] (0cm,0cm) {}; 
-    \path[draw=none,scale=.33] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
+  \tikz[dnd icons, dnd icons/every spell, dnd icons/every #1,
+    baseline=\dndicons@baseline, #2] {
+    \node[#1, draw,scale=.33] (0cm,0cm) {}; 
+    \path[draw=none, scale=.33] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
   }%
   \hspace{\dndicons@aftersep}%
 }
@@ -1241,10 +1355,13 @@
     \def\dndicons@spellschooliconbg{bgneg}\else%
     \def\dndicons@spellschooliconbg{bgpos}\fi%
   \hspace{\dndicons@beforesep}%
-  \tikz[dnd icons,baseline=\dndicons@baseline,fgpos/.style={draw=dndicons@bg,line width=.6pt},fgneg/.style={draw},bgpos/.style={fill},bgneg/.style={draw},#3]{
-    \path[scale=.33,\dndicons@spellschooliconbg] (-.475cm,.35cm) -- (-.35cm,.475cm) -- (.35cm,.475cm) -- (.475cm,.35cm) -- (.425cm,-.375cm) -- (0cm,-.475cm) -- (-.425cm,-.375cm) -- cycle;
-    \node[#2,scale=.225,\dndicons@spellschooliconfg,line cap=round,line join=round] (0cm,0cm) {}; 
-    \path[draw=none,scale=.33] ([yshift=-1pt].425,.425) rectangle ([yshift=1pt]-.425cm,-.425cm);
+  \tikz[dnd icons, dnd icons/every spellschool, dnd icons/every #2,
+    baseline=\dndicons@baseline, fgpos/.style={draw=dndicons@bg, line width=.6pt}, fgneg/.style={draw},
+    bgpos/.style={fill}, bgneg/.style={draw}, #3] {
+    \path[scale=.33, \dndicons@spellschooliconbg] (-.475cm,.35cm) 
+      -- (-.35cm,.475cm) -- (.35cm,.475cm) -- (.475cm,.35cm) -- (.425cm,-.375cm) -- (0cm,-.475cm) -- (-.425cm,-.375cm) -- cycle;
+    \node[#2, scale=.225, \dndicons@spellschooliconfg] (0cm,0cm) {}; 
+    \path[draw=none, scale=.33] ([yshift=-1pt].425,.425) rectangle ([yshift=1pt]-.425cm,-.425cm);
   }%
   \hspace{\dndicons@aftersep}%
 }
@@ -1576,11 +1693,11 @@
 
 \NewDocumentCommand{\damage}{ m O{} }{%
   \hspace{\dndicons@beforesep}%
-  \tikz[dnd icons,baseline=\dndicons@baseline,#2]{
-    \path[draw,scale=.33] (0cm,0cm) circle[radius=.5cm];
-    \node[#1,draw,scale=.225,line cap=round,line join=round] (0cm,0cm) {}; 
-    \path[draw=none,scale=.33] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
-    %\draw[red,scale=.33] (.425cm,.425cm) rectangle (-.425cm,-.425cm);
+  \tikz[dnd icons, dnd icons/every damage, dnd icons/every #1,
+    baseline=\dndicons@baseline, #2] {
+    \path[draw, scale=.33] (0cm,0cm) circle[radius=.5cm];
+    \node[#1, draw, scale=.225] (0cm,0cm) {}; 
+    \path[draw=none, scale=.33] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
   }%
   \hspace{\dndicons@aftersep}%
 }
@@ -1734,10 +1851,10 @@
 
 \NewDocumentCommand{\attack}{ m O{} }{%
   \hspace{\dndicons@beforesep}%
-  \tikz[dnd icons,baseline=\dndicons@baseline,#2]{
-    \node[#1,draw,scale=.33,line cap=round,line join=round] (0cm,0cm) {}; 
-    \path[draw=none,scale=.33] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
-    %\draw[red,scale=.33] (.425cm,.425cm) rectangle (-.425cm,-.425cm);
+  \tikz[dnd icons, dnd icons/every attack, dnd icons/every #1,
+    baseline=\dndicons@baseline, #2] {
+    \node[#1, draw, scale=.33] (0cm,0cm) {}; 
+    \path[draw=none, scale=.33] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
   }%
   \hspace{\dndicons@aftersep}%
 }
@@ -2239,14 +2356,13 @@
 
 \NewDocumentCommand{\condition}{ m O{} }{%
   \hspace{\dndicons@beforesep}%
-  \tikz[dnd icons,baseline=\dndicons@baseline,#2]{
-    \node[#1,draw,scale=.33,line cap=round,line join=round] (0cm,0cm) {}; 
-    \path[draw=none,scale=.33] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
-    %\draw[red,scale=.33] (.425cm,.425cm) rectangle (-.425cm,-.425cm);
+  \tikz[dnd icons, dnd icons/every condition, dnd icons/every #1,
+    baseline=\dndicons@baseline, #2] {
+    \node[#1, draw, scale=.33] (0cm,0cm) {}; 
+    \path[draw=none, scale=.33] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
   }%
   \hspace{\dndicons@aftersep}%
 }
-
 
 % make tikz icons available as pics
 \ifdndicons@pics
@@ -2255,44 +2371,46 @@
   dnd icons/create pic from shape/.code={%
     \tikzset{
       dnd icons #1/.pic={
-        \node[#1,draw,scale=.33,line cap=round,line join=round] (0cm,0cm) (-node) {}; 
-        \path[draw=none,scale=.33] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
+        \node[#1, draw, scale=.33] (0cm,0cm) (-node) {}; 
+        \path[draw=none, scale=.33] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
       }
     }%
   },
   dnd icons/create pic from ability shape/.code={%
     \tikzset{
       dnd icons #1 ability/.pic={
-        \path[scale=.5,pic actions] (0cm,0cm) circle[radius=.45cm];
-        \node[#1,draw,scale=.33,line cap=round,line join=round] (0cm,0cm) (-node) {}; 
-        \path[draw=none,scale=.33] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
+        \path[scale=.5, pic actions] (0cm,0cm) circle[radius=.45cm];
+        \node[#1, draw, scale=.33] (0cm,0cm) (-node) {}; 
+        \path[draw=none, scale=.33] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
       }
     }%
   },
   dnd icons/create pic from saving shape/.code={%
     \tikzset{
       dnd icons #1 saving/.pic={
-        \path[draw,scale=.33,pic actions] (-.45cm,.45cm) -- (.45cm,.45cm) -- (.45cm,-.05cm) arc[start angle=360,end angle=180,radius=.45cm] -- cycle;
-        \node[#1,draw,scale=.225,line cap=round,line join=round] (0cm,0cm) (-node) {}; 
-        \path[draw=none,scale=.33] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
+        \path[draw, scale=.33, pic actions] (-.45cm,.45cm) -- (.45cm,.45cm) -- (.45cm,-.05cm) 
+          arc[start angle=360, end angle=180, radius=.45cm] -- cycle;
+        \node[#1, draw, scale=.225] (0cm,0cm) (-node) {}; 
+        \path[draw=none, scale=.33] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
       }
     }%
   },
   dnd icons/create pic from spellschool shape/.code={%
     \tikzset{
       dnd icons #1 spellschool/.pic={
-        \path[draw,scale=.33,pic actions] (-.475cm,.35cm) -- (-.35cm,.475cm) -- (.35cm,.475cm) -- (.475cm,.35cm) -- (.425cm,-.375cm) -- (0cm,-.475cm) -- (-.425cm,-.375cm) -- cycle;
-        \node[#1,draw,scale=.225,line cap=round,line join=round] (0cm,0cm) (-node) {}; 
-        \path[draw=none,scale=.33] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
+        \path[draw, scale=.33, pic actions] (-.475cm,.35cm) 
+          -- (-.35cm,.475cm) -- (.35cm,.475cm) -- (.475cm,.35cm) -- (.425cm,-.375cm) -- (0cm,-.475cm) -- (-.425cm,-.375cm) -- cycle;
+        \node[#1, draw, scale=.225] (0cm,0cm) (-node) {}; 
+        \path[draw=none, scale=.33] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
       }
     }%
   },
   dnd icons/create pic from damage shape/.code={
     \tikzset{
       dnd icons #1 damage/.pic={
-        \path[draw,scale=.33,pic actions] (0cm,0cm) circle[radius=.5cm];
-        \node[#1,draw,scale=.225,line cap=round,line join=round] (0cm,0cm) (-node) {}; 
-        \path[draw=none,scale=.33] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
+        \path[draw, scale=.33, pic actions] (0cm,0cm) circle[radius=.5cm];
+        \node[#1, draw, scale=.225] (0cm,0cm) (-node) {}; 
+        \path[draw=none, scale=.33] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
       }
     }
   },

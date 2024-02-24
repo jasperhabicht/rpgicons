@@ -200,7 +200,7 @@
 \changes{v1.4.1}{2024/02/21}{Corrections in \titlemacro{l3draw} variant.}
 \changes{v1.4.2}{2024/02/21}{Define alternative set of commands in \titlemacro{l3draw} variant.}
 \changes{v1.4.3}{2024/02/22}{Added option to \titlemacro{l3draw} variant to enable upward compatibility.}
-\changes{v1.4.4}{2024/02/24}{Correction of recent \titlemacro{l3draw} code.}
+\changes{v1.4.4}{2024/02/24}{Added styles for every instance of command or shape, correction of recent \titlemacro{l3draw} code.}
 
 \begin{document}
 
@@ -448,6 +448,21 @@ The command \macro{\condition} prints icons depicting a condition of a character
     & \condition{seeing} & \macro{seeing} \\
 \end{dndiconsiconlist}
 
+\subsection{Icon styles}
+
+\begin{macrodef}
+!dnd icons/!every die
+!dnd icons/!every ability
+!dnd icons/!every saving
+!dnd icons/!every spell
+!dnd icons/!every spellschool
+!dnd icons/!every damage
+!dnd icons/!every attack
+!dnd icons/!every condition
+!dnd icons/!every <shape>
+\end{macrodef}
+Using Ti\emph{k}Z styles, all instances of a certain command or a certain shape can be styled at once. These styles all follow the pattern \macro{dnd icons/every} followed by a space and the name of the command or the shape. For example, \macro{\tikzset{dnd icons/every die/.append style={red}}} can be used to draw in red all icons created using the \macro{\die} command. To draw every instace of the \macro{charisma} shape in red, \macro{\tikzset{dnd icons/every charisma/.append style={red}}} can be used.
+
 \subsection{Direct use of shapes}
 
 Because the icons are defined as Ti\emph{k}Z shapes, they can directly be applied to Ti\emph{k}Z nodes. However, the shapes don't have a shape border and no anchors except for the \macro{center} anchor that sits exactly in the center of the shape. Therefore, if nodes with these shapes are connected using edges, the \macro{center} anchor will be used to connect the nodes. If nodes with these shapes are being positioned, only the \macro{center} anchor is available. Text content of these nodes is simply printed on top of the center of the node. Compare the following example.
@@ -474,7 +489,7 @@ The icon is embedded as a node in the pic which has the name \macro{-node}. Thus
         scale=2, 
         fill=blue, 
         draw=red, 
-        every node/.style={
+        every node/.append style={
             white,
             thick
         }

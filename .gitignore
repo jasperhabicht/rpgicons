@@ -6,4 +6,4 @@
 *.out
 *.synctex.gz
 
-dndicons-debug.tex
+testfiles/*

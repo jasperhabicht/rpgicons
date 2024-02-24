@@ -1,0 +1,2010 @@
+%%
+%% This is file `l3draw.sty',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% l3draw.dtx  (with options: `package')
+%% l3draw-boxes.dtx  (with options: `package')
+%% l3draw-layers.dtx  (with options: `package')
+%% l3draw-paths.dtx  (with options: `package')
+%% l3draw-points.dtx  (with options: `package')
+%% l3draw-scopes.dtx  (with options: `package')
+%% l3draw-softpath.dtx  (with options: `package')
+%% l3draw-state.dtx  (with options: `package')
+%% l3draw-transforms.dtx  (with options: `package')
+%% 
+%% Copyright (C) 2018-2024 The LaTeX Project
+%% 
+%% It may be distributed and/or modified under the conditions of
+%% the LaTeX Project Public License (LPPL), either version 1.3c of
+%% this license or (at your option) any later version.  The latest
+%% version of this license is in the file:
+%% 
+%%    http://www.latex-project.org/lppl.txt
+%% 
+%% This file is part of the "l3experimental bundle" (The Work in LPPL)
+%% and all files in that bundle must be distributed together.
+%% 
+%% File: l3draw.dtx
+\RequirePackage{expl3}
+
+\ProvidesExplPackage{l3draw}{2024-02-20}{}
+  {L3 Experimental core drawing support}
+\scan_new:N \s__draw_mark
+\scan_new:N \s__draw_stop
+\quark_new:N \q__draw_recursion_tail
+\quark_new:N \q__draw_recursion_stop
+\__kernel_quark_new_test:N \__draw_if_recursion_tail_stop_do:Nn
+%% File: l3draw-boxes.dtx
+\box_new:N \l__draw_tmp_box
+\cs_new_protected:Npn \draw_box_use:N #1
+  {
+    \__draw_box_use:Nnnnnnn #1
+      { 0pt } { -\box_dp:N #1 } { \box_wd:N #1 } { \box_ht:N #1 }
+  }
+\cs_new_protected:Npn \draw_box_use:Nn #1#2
+  {
+    \__draw_box_use:nNnnnn {#2} #1
+      { 0pt } { -\box_dp:N #1 } { \box_wd:N #1 } { \box_ht:N #1 }
+  }
+\cs_new_protected:Npn \__draw_box_use:nNnnnn #1#2#3#4#5#6
+  {
+    \draw_scope_begin:
+      \draw_transform_shift:n {#1}
+      \__draw_box_use:Nnnnnnn #2 {#3} {#4} {#5} {#6}
+    \draw_scope_end:
+  }
+\cs_new_protected:Npn \__draw_box_use:Nnnnnnn #1#2#3#4#5
+  {
+    \bool_if:NT \l_draw_bb_update_bool
+      {
+        \__draw_point_process:nn
+          { \__draw_path_update_limits:nn }
+          { \draw_point_transform:n { #2 , #3 } }
+        \__draw_point_process:nn
+          { \__draw_path_update_limits:nn }
+          { \draw_point_transform:n { #4 , #3 } }
+        \__draw_point_process:nn
+          { \__draw_path_update_limits:nn }
+          { \draw_point_transform:n { #4 , #5 } }
+        \__draw_point_process:nn
+          { \__draw_path_update_limits:nn }
+          { \draw_point_transform:n { #2 , #5 } }
+      }
+    \group_begin:
+      \hbox_set:Nn \l__draw_tmp_box
+        {
+          \use:e
+            {
+              \__draw_backend_box_use:Nnnnn #1
+                { \fp_use:N \l__draw_matrix_a_fp }
+                { \fp_use:N \l__draw_matrix_b_fp }
+                { \fp_use:N \l__draw_matrix_c_fp }
+                { \fp_use:N \l__draw_matrix_d_fp }
+            }
+        }
+      \hbox_set:Nn \l__draw_tmp_box
+        {
+          \__kernel_kern:n { \l__draw_xshift_dim }
+          \box_move_up:nn { \l__draw_yshift_dim }
+            { \box_use_drop:N \l__draw_tmp_box }
+        }
+      \box_set_ht:Nn \l__draw_tmp_box { 0pt }
+      \box_set_dp:Nn \l__draw_tmp_box { 0pt }
+      \box_set_wd:Nn \l__draw_tmp_box { 0pt }
+      \box_use_drop:N \l__draw_tmp_box
+    \group_end:
+  }
+\cs_new_protected:Npn \draw_coffin_use:Nnn #1#2#3
+  {
+    \__draw_coffin_use:nNnn { \__draw_box_use:Nnnnnnn }
+      #1 {#2} {#3}
+  }
+\cs_new_protected:Npn \draw_coffin_use:Nnnn #1#2#3#4
+  {
+    \__draw_coffin_use:nNnn { \__draw_box_use:nNnnnn {#4} }
+      #1 {#2} {#3}
+  }
+\cs_new_protected:Npn \__draw_coffin_use:nNnn #1#2#3#4
+  {
+    \group_begin:
+      \hbox_set:Nn \l__draw_tmp_box
+        { \coffin_typeset:Nnnnn #2 {#3} {#4} { 0pt } { 0pt } }
+      #1 \l__draw_tmp_box
+        { \box_wd:N \l__draw_tmp_box - \coffin_wd:N #2 }
+        { -\box_dp:N \l__draw_tmp_box }
+        { \box_wd:N \l__draw_tmp_box }
+        { \box_ht:N \l__draw_tmp_box }
+    \group_end:
+  }
+%% File: l3draw-layers.dtx
+\cs_new_protected:Npn \draw_layer_new:n #1
+  {
+    \str_if_eq:nnTF {#1} { main }
+      { \msg_error:nnn { draw } { main-reserved } }
+      {
+        \box_new:c { g__draw_layer_ #1 _box }
+        \box_new:c { l__draw_layer_ #1 _box }
+      }
+  }
+\tl_new:N \l__draw_layer_tl
+\tl_set:Nn \l__draw_layer_tl { main }
+\bool_new:N \l__draw_layer_close_bool
+\clist_new:N \l_draw_layers_clist
+\clist_set:Nn \l_draw_layers_clist { main }
+\clist_new:N \g__draw_layers_clist
+\cs_new_protected:Npn \draw_layer_begin:n #1
+  {
+    \group_begin:
+      \box_if_exist:cTF { g__draw_layer_ #1 _box }
+        {
+          \str_if_eq:VnTF \l__draw_layer_tl {#1}
+            { \bool_set_false:N \l__draw_layer_close_bool }
+            {
+              \bool_set_true:N \l__draw_layer_close_bool
+              \tl_set:Nn \l__draw_layer_tl {#1}
+              \box_gset_wd:cn { g__draw_layer_ #1 _box } { 0pt }
+              \hbox_gset:cw { g__draw_layer_ #1 _box }
+                \box_use_drop:c { g__draw_layer_ #1 _box }
+                \group_begin:
+            }
+          \draw_linewidth:n { \l_draw_default_linewidth_dim }
+        }
+        {
+          \str_if_eq:nnTF {#1} { main }
+            { \msg_error:nnn { draw } { unknown-layer } {#1} }
+            { \msg_error:nnn { draw } { main-layer } }
+        }
+  }
+\cs_new_protected:Npn \draw_layer_end:
+  {
+      \bool_if:NT \l__draw_layer_close_bool
+        {
+            \group_end:
+          \hbox_gset_end:
+        }
+    \group_end:
+  }
+\cs_new_protected:Npn \__draw_layers_insert:
+  {
+    \clist_map_inline:Nn \l_draw_layers_clist
+      {
+        \str_if_eq:nnTF {##1} { main }
+          {
+            \box_set_wd:Nn \l__draw_layer_main_box { 0pt }
+            \box_use_drop:N \l__draw_layer_main_box
+          }
+          {
+            \__draw_backend_scope_begin:
+            \box_gset_wd:cn { g__draw_layer_ ##1 _box } { 0pt }
+            \box_use_drop:c { g__draw_layer_ ##1 _box }
+            \__draw_backend_scope_end:
+          }
+      }
+  }
+\cs_new_protected:Npn \__draw_layers_save:
+  {
+    \clist_map_inline:Nn \l_draw_layers_clist
+      {
+        \str_if_eq:nnF {##1} { main }
+          {
+            \box_set_eq:cc { l__draw_layer_ ##1 _box }
+              { g__draw_layer_ ##1 _box }
+          }
+      }
+  }
+\cs_new_protected:Npn \__draw_layers_restore:
+  {
+    \clist_map_inline:Nn \l_draw_layers_clist
+      {
+        \str_if_eq:nnF {##1} { main }
+          {
+            \box_gset_eq:cc { g__draw_layer_ ##1 _box }
+              { l__draw_layer_ ##1 _box }
+          }
+      }
+  }
+\msg_new:nnnn { draw } { main-layer }
+  { Material~cannot~be~added~to~'main'~layer. }
+  { The~main~layer~may~only~be~accessed~at~the~top~level. }
+\msg_new:nnn { draw } { main-reserved }
+  { The~'main'~layer~is~reserved. }
+\msg_new:nnnn { draw } { unknown-layer }
+  { Layer~'#1'~has~not~been~created. }
+  { You~have~tried~to~use~layer~'#1',~but~it~was~never~set~up. }
+%% File: l3draw-paths.dtx
+\tl_new:N \l__draw_path_tmp_tl
+\fp_new:N \l__draw_path_tmpa_fp
+\fp_new:N \l__draw_path_tmpb_fp
+\dim_new:N \g__draw_path_lastx_dim
+\dim_new:N \g__draw_path_lasty_dim
+\dim_new:N \g__draw_path_xmax_dim
+\dim_new:N \g__draw_path_xmin_dim
+\dim_new:N \g__draw_path_ymax_dim
+\dim_new:N \g__draw_path_ymin_dim
+\cs_new_protected:Npn \__draw_path_update_limits:nn #1#2
+  {
+    \dim_gset:Nn \g__draw_path_xmax_dim
+      { \dim_max:nn \g__draw_path_xmax_dim {#1} }
+    \dim_gset:Nn \g__draw_path_xmin_dim
+      { \dim_min:nn \g__draw_path_xmin_dim {#1} }
+    \dim_gset:Nn \g__draw_path_ymax_dim
+      { \dim_max:nn \g__draw_path_ymax_dim {#2} }
+    \dim_gset:Nn \g__draw_path_ymin_dim
+      { \dim_min:nn \g__draw_path_ymin_dim {#2} }
+    \bool_if:NT \l_draw_bb_update_bool
+      {
+        \dim_gset:Nn \g__draw_xmax_dim
+          { \dim_max:nn \g__draw_xmax_dim {#1} }
+        \dim_gset:Nn \g__draw_xmin_dim
+          { \dim_min:nn \g__draw_xmin_dim {#1} }
+        \dim_gset:Nn \g__draw_ymax_dim
+          { \dim_max:nn \g__draw_ymax_dim {#2} }
+        \dim_gset:Nn \g__draw_ymin_dim
+          { \dim_min:nn \g__draw_ymin_dim {#2} }
+      }
+  }
+\cs_new_protected:Npn \__draw_path_reset_limits:
+  {
+    \dim_gset:Nn \g__draw_path_xmax_dim { -\c_max_dim }
+    \dim_gset:Nn \g__draw_path_xmin_dim {  \c_max_dim }
+    \dim_gset:Nn \g__draw_path_ymax_dim { -\c_max_dim }
+    \dim_gset:Nn \g__draw_path_ymin_dim {  \c_max_dim }
+  }
+\cs_new_protected:Npn \__draw_path_update_last:nn #1#2
+  {
+    \dim_gset:Nn \g__draw_path_lastx_dim {#1}
+    \dim_gset:Nn \g__draw_path_lasty_dim {#2}
+  }
+\dim_new:N \l__draw_corner_xarc_dim
+\dim_new:N \l__draw_corner_yarc_dim
+\bool_new:N \l__draw_corner_arc_bool
+\cs_new_protected:Npn \draw_path_corner_arc:nn #1#2
+  {
+    \dim_set:Nn \l__draw_corner_xarc_dim {#1}
+    \dim_set:Nn \l__draw_corner_yarc_dim {#2}
+    \bool_lazy_and:nnTF
+      { \dim_compare_p:nNn \l__draw_corner_xarc_dim = { 0pt } }
+      { \dim_compare_p:nNn \l__draw_corner_yarc_dim = { 0pt } }
+      { \bool_set_false:N \l__draw_corner_arc_bool }
+      { \bool_set_true:N \l__draw_corner_arc_bool }
+  }
+\cs_new_protected:Npn \__draw_path_mark_corner:
+  {
+    \bool_if:NT \l__draw_corner_arc_bool
+      {
+        \__draw_softpath_roundpoint:VV
+          \l__draw_corner_xarc_dim
+          \l__draw_corner_yarc_dim
+      }
+  }
+\cs_new_protected:Npn \draw_path_moveto:n #1
+  {
+    \__draw_point_process:nn
+      { \__draw_path_moveto:nn }
+      { \draw_point_transform:n {#1} }
+  }
+\cs_new_protected:Npn \__draw_path_moveto:nn #1#2
+  {
+    \__draw_path_update_limits:nn {#1} {#2}
+    \__draw_softpath_moveto:nn {#1} {#2}
+    \__draw_path_update_last:nn {#1} {#2}
+  }
+\cs_new_protected:Npn \draw_path_lineto:n #1
+  {
+    \__draw_point_process:nn
+      { \__draw_path_lineto:nn }
+      { \draw_point_transform:n {#1} }
+  }
+\cs_new_protected:Npn \__draw_path_lineto:nn #1#2
+  {
+    \__draw_path_mark_corner:
+    \__draw_path_update_limits:nn {#1} {#2}
+    \__draw_softpath_lineto:nn {#1} {#2}
+    \__draw_path_update_last:nn {#1} {#2}
+  }
+\cs_new_protected:Npn \draw_path_curveto:nnn #1#2#3
+  {
+    \__draw_point_process:nnnn
+      {
+        \__draw_path_mark_corner:
+        \__draw_path_curveto:nnnnnn
+      }
+      { \draw_point_transform:n {#1} }
+      { \draw_point_transform:n {#2} }
+      { \draw_point_transform:n {#3} }
+  }
+\cs_new_protected:Npn \__draw_path_curveto:nnnnnn #1#2#3#4#5#6
+  {
+    \__draw_path_update_limits:nn {#1} {#2}
+    \__draw_path_update_limits:nn {#3} {#4}
+    \__draw_path_update_limits:nn {#5} {#6}
+    \__draw_softpath_curveto:nnnnnn {#1} {#2} {#3} {#4} {#5} {#6}
+    \__draw_path_update_last:nn {#5} {#6}
+  }
+\cs_new_protected:Npn \draw_path_close:
+  {
+    \__draw_path_mark_corner:
+    \__draw_softpath_closepath:
+  }
+\cs_new_protected:Npn \draw_path_canvas_moveto:n #1
+  { \__draw_point_process:nn { \__draw_path_moveto:nn } {#1} }
+\cs_new_protected:Npn \draw_path_canvas_lineto:n #1
+  { \__draw_point_process:nn { \__draw_path_lineto:nn } {#1} }
+\cs_new_protected:Npn \draw_path_canvas_curveto:nnn #1#2#3
+  {
+    \__draw_point_process:nnnn
+      {
+        \__draw_path_mark_corner:
+        \__draw_path_curveto:nnnnnn
+      }
+      {#1} {#2} {#3}
+  }
+\cs_new_protected:Npn \draw_path_curveto:nn #1#2
+  {
+    \__draw_point_process:nnn
+      { \__draw_path_curveto:nnnn }
+      { \draw_point_transform:n {#1} }
+      { \draw_point_transform:n {#2} }
+  }
+\cs_new_protected:Npn \__draw_path_curveto:nnnn #1#2#3#4
+  {
+    \fp_set:Nn \l__draw_path_tmpa_fp { \c__draw_path_curveto_b_fp * #1 }
+    \fp_set:Nn \l__draw_path_tmpb_fp { \c__draw_path_curveto_b_fp * #2 }
+    \use:e
+      {
+        \__draw_path_mark_corner:
+        \__draw_path_curveto:nnnnnn
+          {
+            \fp_to_dim:n
+              {
+                  \c__draw_path_curveto_a_fp * \g__draw_path_lastx_dim
+                + \l__draw_path_tmpa_fp
+              }
+          }
+          {
+            \fp_to_dim:n
+              {
+                  \c__draw_path_curveto_a_fp * \g__draw_path_lasty_dim
+                + \l__draw_path_tmpb_fp
+              }
+          }
+          {
+            \fp_to_dim:n
+              { \c__draw_path_curveto_a_fp * #3 + \l__draw_path_tmpa_fp }
+          }
+          {
+            \fp_to_dim:n
+              { \c__draw_path_curveto_a_fp * #4 + \l__draw_path_tmpb_fp }
+          }
+          {#3}
+          {#4}
+      }
+  }
+\fp_const:Nn \c__draw_path_curveto_a_fp { 1 / 3 }
+\fp_const:Nn \c__draw_path_curveto_b_fp { 2 / 3 }
+\cs_new_protected:Npn \draw_path_arc:nnn #1#2#3
+  { \draw_path_arc:nnnn {#1} {#2} {#3} {#3} }
+\cs_new_protected:Npn \draw_path_arc:nnnn #1#2#3#4
+  {
+    \use:e
+      {
+        \__draw_path_arc:nnnn
+          { \fp_eval:n {#1} }
+          { \fp_eval:n {#2} }
+          { \fp_to_dim:n {#3} }
+          { \fp_to_dim:n {#4} }
+      }
+  }
+\cs_new_protected:Npn \__draw_path_arc:nnnn #1#2#3#4
+  {
+    \fp_compare:nNnTF {#1} > {#2}
+      { \__draw_path_arc:nnNnn {#1} {#2} - {#3} {#4} }
+      { \__draw_path_arc:nnNnn {#1} {#2} + {#3} {#4} }
+  }
+\cs_new_protected:Npn \__draw_path_arc:nnNnn #1#2#3#4#5
+  {
+    \fp_set:Nn \l__draw_path_arc_start_fp {#1}
+    \fp_set:Nn \l__draw_path_arc_delta_fp { abs( #1 - #2 ) }
+    \fp_while_do:nNnn { \l__draw_path_arc_delta_fp } > { 90 }
+      {
+        \fp_compare:nNnTF \l__draw_path_arc_delta_fp > { 115 }
+          {
+            \__draw_path_arc_auxi:eennNnn
+              { \fp_to_decimal:N \l__draw_path_arc_start_fp }
+              { \fp_eval:n { \l__draw_path_arc_start_fp #3 90 } }
+              { 90 } {#2}
+              #3 {#4} {#5}
+          }
+          {
+            \__draw_path_arc_auxi:eennNnn
+              { \fp_to_decimal:N \l__draw_path_arc_start_fp }
+              { \fp_eval:n { \l__draw_path_arc_start_fp #3 60 } }
+              { 60 } {#2}
+              #3 {#4} {#5}
+          }
+      }
+    \__draw_path_mark_corner:
+    \__draw_path_arc_auxi:enenNnn
+      { \fp_to_decimal:N \l__draw_path_arc_start_fp }
+      {#2}
+      { \fp_eval:n { abs( \l__draw_path_arc_start_fp - #2 ) } }
+      {#2}
+      #3 {#4} {#5}
+  }
+\cs_new_protected:Npn \__draw_path_arc_auxi:nnnnNnn #1#2#3#4#5#6#7
+  {
+    \use:e
+      {
+        \__draw_path_arc_auxii:nnnNnnnn
+          {#1} {#2} {#4} #5 {#6} {#7}
+          {
+            \fp_to_dim:n
+              {
+                \cs_if_exist_use:cF
+                  { c__draw_path_arc_ #3 _fp }
+                  { 4/3 * tand( 0.25 * #3 ) }
+                  * #6
+              }
+          }
+          {
+            \fp_to_dim:n
+              {
+                \cs_if_exist_use:cF
+                  { c__draw_path_arc_ #3 _fp }
+                  { 4/3 * tand( 0.25 * #3 ) }
+                  * #7
+              }
+          }
+      }
+  }
+\cs_generate_variant:Nn \__draw_path_arc_auxi:nnnnNnn { ene , ee }
+\cs_new_protected:Npn \__draw_path_arc_auxii:nnnNnnnn #1#2#3#4#5#6#7#8
+  {
+    \tl_clear:N \l__draw_path_tmp_tl
+    \__draw_point_process:nn
+      { \__draw_path_arc_auxiii:nn }
+      {
+        \__draw_point_transform_noshift:n
+          { \draw_point_polar:nnn {#7} {#8} { #1 #4 90 } }
+      }
+    \__draw_point_process:nnn
+      { \__draw_path_arc_auxiv:nnnn }
+      {
+        \draw_point_transform:n
+          { \draw_point_polar:nnn {#5} {#6} {#1} }
+      }
+      {
+        \draw_point_transform:n
+          { \draw_point_polar:nnn {#5} {#6} {#2} }
+      }
+    \__draw_point_process:nn
+      { \__draw_path_arc_auxv:nn }
+      {
+        \__draw_point_transform_noshift:n
+          { \draw_point_polar:nnn {#7} {#8} { #2 #4 -90 } }
+      }
+    \exp_after:wN \__draw_path_curveto:nnnnnn \l__draw_path_tmp_tl
+    \fp_set:Nn \l__draw_path_arc_delta_fp { abs ( #2 - #3 ) }
+    \fp_set:Nn \l__draw_path_arc_start_fp {#2}
+  }
+\cs_new_protected:Npn \__draw_path_arc_auxiii:nn #1#2
+  {
+    \__draw_path_arc_aux_add:nn
+      { \g__draw_path_lastx_dim + #1 }
+      { \g__draw_path_lasty_dim + #2 }
+  }
+\cs_new_protected:Npn \__draw_path_arc_auxiv:nnnn #1#2#3#4
+  {
+    \__draw_path_arc_aux_add:nn
+      { \g__draw_path_lastx_dim - #1 + #3 }
+      { \g__draw_path_lasty_dim - #2 + #4 }
+  }
+\cs_new_protected:Npn \__draw_path_arc_auxv:nn #1#2
+  {
+    \exp_after:wN \__draw_path_arc_auxvi:nn
+      \l__draw_path_tmp_tl {#1} {#2}
+  }
+\cs_new_protected:Npn \__draw_path_arc_auxvi:nn #1#2#3#4#5#6
+  {
+    \tl_set:Nn \l__draw_path_tmp_tl { {#1} {#2} }
+    \__draw_path_arc_aux_add:nn
+      { #5 + #3 }
+      { #6 + #4 }
+    \tl_put_right:Nn \l__draw_path_tmp_tl { {#3} {#4} }
+  }
+\cs_new_protected:Npn \__draw_path_arc_aux_add:nn #1#2
+  {
+    \tl_put_right:Ne \l__draw_path_tmp_tl
+      { { \fp_to_dim:n {#1} } { \fp_to_dim:n {#2} } }
+  }
+\fp_new:N \l__draw_path_arc_delta_fp
+\fp_new:N \l__draw_path_arc_start_fp
+\fp_const:cn { c__draw_path_arc_90_fp } { 4/3 * (sqrt(2) - 1) }
+\fp_const:cn { c__draw_path_arc_60_fp } { 4/3 * tand(15) }
+\cs_new_protected:Npn \draw_path_arc_axes:nnnn #1#2#3#4
+  {
+    \group_begin:
+      \draw_transform_triangle:nnn { 0cm , 0cm } {#3} {#4}
+      \draw_path_arc:nnn {#1} {#2} { 1pt }
+    \group_end:
+  }
+\cs_new_protected:Npn \draw_path_ellipse:nnn #1#2#3
+  {
+    \__draw_point_process:nnnn
+      { \__draw_path_ellipse:nnnnnn }
+      { \draw_point_transform:n {#1} }
+      { \__draw_point_transform_noshift:n {#2} }
+      { \__draw_point_transform_noshift:n {#3} }
+  }
+\cs_new_protected:Npn \__draw_path_ellipse:nnnnnn #1#2#3#4#5#6
+  {
+    \use:e
+      {
+        \__draw_path_moveto:nn
+          { \fp_to_dim:n { #1 + #3 } } { \fp_to_dim:n { #2 + #4 } }
+        \__draw_path_ellipse_arci:nnnnnn   {#1} {#2} {#3} {#4} {#5} {#6}
+        \__draw_path_ellipse_arcii:nnnnnn  {#1} {#2} {#3} {#4} {#5} {#6}
+        \__draw_path_ellipse_arciii:nnnnnn {#1} {#2} {#3} {#4} {#5} {#6}
+        \__draw_path_ellipse_arciv:nnnnnn  {#1} {#2} {#3} {#4} {#5} {#6}
+      }
+    \__draw_softpath_closepath:
+    \__draw_path_moveto:nn {#1} {#2}
+  }
+\cs_new:Npn \__draw_path_ellipse_arci:nnnnnn #1#2#3#4#5#6
+  {
+    \__draw_path_curveto:nnnnnn
+      { \fp_to_dim:n { #1 + #3 + #5 * \c__draw_path_ellipse_fp } }
+      { \fp_to_dim:n { #2 + #4 + #6 * \c__draw_path_ellipse_fp } }
+      { \fp_to_dim:n { #1 + #3 * \c__draw_path_ellipse_fp + #5 } }
+      { \fp_to_dim:n { #2 + #4 * \c__draw_path_ellipse_fp + #6 } }
+      { \fp_to_dim:n { #1 + #5 } }
+      { \fp_to_dim:n { #2 + #6 } }
+  }
+\cs_new:Npn \__draw_path_ellipse_arcii:nnnnnn #1#2#3#4#5#6
+  {
+    \__draw_path_curveto:nnnnnn
+      { \fp_to_dim:n { #1 - #3 * \c__draw_path_ellipse_fp + #5 } }
+      { \fp_to_dim:n { #2 - #4 * \c__draw_path_ellipse_fp + #6 } }
+      { \fp_to_dim:n { #1 - #3 + #5 * \c__draw_path_ellipse_fp } }
+      { \fp_to_dim:n { #2 - #4 + #6 * \c__draw_path_ellipse_fp } }
+      { \fp_to_dim:n { #1 - #3 } }
+      { \fp_to_dim:n { #2 - #4 } }
+  }
+\cs_new:Npn \__draw_path_ellipse_arciii:nnnnnn #1#2#3#4#5#6
+  {
+    \__draw_path_curveto:nnnnnn
+      { \fp_to_dim:n { #1 - #3 - #5 * \c__draw_path_ellipse_fp } }
+      { \fp_to_dim:n { #2 - #4 - #6 * \c__draw_path_ellipse_fp } }
+      { \fp_to_dim:n { #1 - #3 * \c__draw_path_ellipse_fp - #5 } }
+      { \fp_to_dim:n { #2 - #4 * \c__draw_path_ellipse_fp - #6 } }
+      { \fp_to_dim:n { #1 - #5 } }
+      { \fp_to_dim:n { #2 - #6 } }
+  }
+\cs_new:Npn \__draw_path_ellipse_arciv:nnnnnn #1#2#3#4#5#6
+  {
+    \__draw_path_curveto:nnnnnn
+      { \fp_to_dim:n { #1 + #3 * \c__draw_path_ellipse_fp - #5 } }
+      { \fp_to_dim:n { #2 + #4 * \c__draw_path_ellipse_fp - #6 } }
+      { \fp_to_dim:n { #1 + #3 - #5 * \c__draw_path_ellipse_fp } }
+      { \fp_to_dim:n { #2 + #4 - #6 * \c__draw_path_ellipse_fp } }
+      { \fp_to_dim:n { #1 + #3 } }
+      { \fp_to_dim:n { #2 + #4 } }
+  }
+\fp_const:Nn \c__draw_path_ellipse_fp { \fp_use:c { c__draw_path_arc_90_fp } }
+\cs_new_protected:Npn \draw_path_circle:nn #1#2
+  { \draw_path_ellipse:nnn {#1} { #2 , 0pt } { 0pt , #2 } }
+\cs_new_protected:Npn \draw_path_rectangle:nn #1#2
+  {
+    \__draw_point_process:nnn
+      {
+        \bool_lazy_or:nnTF
+          { \l__draw_corner_arc_bool }
+          { \l__draw_matrix_active_bool }
+          { \__draw_path_rectangle_rounded:nnnn }
+          { \__draw_path_rectangle:nnnn }
+      }
+      {#1}
+      {#2}
+  }
+\cs_new_protected:Npn \__draw_path_rectangle:nnnn #1#2#3#4
+  {
+    \__draw_path_update_limits:nn {#1} {#2}
+    \__draw_path_update_limits:nn { #1 + #3 } { #2 + #4 }
+    \__draw_softpath_rectangle:nnnn {#1} {#2} {#3} {#4}
+    \__draw_path_update_last:nn {#1} {#2}
+  }
+\cs_new_protected:Npn \__draw_path_rectangle_rounded:nnnn #1#2#3#4
+  {
+    \draw_path_moveto:n { #1 + #3 , #2 + #4 }
+    \draw_path_lineto:n { #1 , #2 + #4 }
+    \draw_path_lineto:n { #1 , #2 }
+    \draw_path_lineto:n { #1 + #3 , #2 }
+    \draw_path_close:
+    \draw_path_moveto:n { #1 , #2 }
+  }
+\cs_new_protected:Npn \draw_path_rectangle_corners:nn #1#2
+  {
+    \__draw_point_process:nnn
+      { \__draw_path_rectangle_corners:nnnnn {#1} }
+      {#1} {#2}
+  }
+\cs_new_protected:Npn \__draw_path_rectangle_corners:nnnnn #1#2#3#4#5
+  { \draw_path_rectangle:nn {#1} { #4 - #2 , #5 - #3 } }
+\cs_new_protected:Npn \draw_path_grid:nnnn #1#2#3#4
+  {
+    \__draw_point_process:nnn
+      {
+        \__draw_path_grid_auxi:eennnn
+          { \dim_eval:n { \dim_abs:n {#1} } }
+          { \dim_eval:n { \dim_abs:n {#2} } }
+      }
+      {#3} {#4}
+  }
+\cs_new_protected:Npn \__draw_path_grid_auxi:nnnnnn #1#2#3#4#5#6
+  {
+    \dim_compare:nNnTF {#3} > {#5}
+      { \__draw_path_grid_auxii:nnnnnn {#1} {#2} {#5} {#4} {#3} {#6} }
+      { \__draw_path_grid_auxii:nnnnnn {#1} {#2} {#3} {#4} {#5} {#6} }
+  }
+\cs_generate_variant:Nn \__draw_path_grid_auxi:nnnnnn { ee }
+\cs_new_protected:Npn \__draw_path_grid_auxii:nnnnnn #1#2#3#4#5#6
+  {
+    \dim_compare:nNnTF {#4} > {#6}
+      { \__draw_path_grid_auxiii:nnnnnn {#1} {#2} {#3} {#6} {#5} {#4} }
+      { \__draw_path_grid_auxiii:nnnnnn {#1} {#2} {#3} {#4} {#5} {#6} }
+  }
+\cs_new_protected:Npn \__draw_path_grid_auxiii:nnnnnn #1#2#3#4#5#6
+  {
+    \__draw_path_grid_auxiv:eennnnnn
+      { \fp_to_dim:n { #1 * trunc(#3/(#1)) } }
+      { \fp_to_dim:n { #2 * trunc(#4/(#2)) } }
+      {#1} {#2} {#3} {#4} {#5} {#6}
+  }
+\cs_new_protected:Npn \__draw_path_grid_auxiv:nnnnnnnn #1#2#3#4#5#6#7#8
+  {
+    \dim_step_inline:nnnn
+      {#1}
+      {#3}
+      {#7}
+      {
+        \draw_path_moveto:n { ##1 , #6 }
+        \draw_path_lineto:n { ##1 , #8 }
+      }
+    \dim_step_inline:nnnn
+      {#2}
+      {#4}
+      {#8}
+      {
+        \draw_path_moveto:n { #5 , ##1 }
+        \draw_path_lineto:n { #7 , ##1 }
+      }
+  }
+\cs_generate_variant:Nn \__draw_path_grid_auxiv:nnnnnnnn { ee }
+\bool_new:N \l__draw_path_use_clip_bool
+\bool_new:N \l__draw_path_use_fill_bool
+\bool_new:N \l__draw_path_use_stroke_bool
+\bool_new:N \l__draw_path_use_clear_bool
+\cs_new_protected:Npn \draw_path_use:n #1
+  {
+    \tl_if_blank:nF {#1}
+      { \__draw_path_use:n {#1} }
+  }
+\cs_new_protected:Npn \draw_path_use_clear:n #1
+  {
+    \bool_lazy_or:nnTF
+      { \tl_if_blank_p:n {#1} }
+      { \str_if_eq_p:nn {#1} { clear } }
+      {
+        \__draw_softpath_clear:
+        \__draw_path_reset_limits:
+      }
+      { \__draw_path_use:n { #1 , clear } }
+  }
+\cs_new_protected:Npn \draw_path_replace_bb:
+  {
+    \__draw_reset_bb:
+    \__draw_path_use_bb:
+    \__draw_softpath_clear:
+    \__draw_path_reset_limits:
+  }
+\cs_new_protected:Npn \__draw_path_use:n #1
+  {
+    \bool_set_false:N \l__draw_path_use_clip_bool
+    \bool_set_false:N \l__draw_path_use_fill_bool
+    \bool_set_false:N \l__draw_path_use_stroke_bool
+    \clist_map_inline:nn {#1}
+      {
+        \cs_if_exist:cTF { l__draw_path_use_ ##1 _ bool }
+          { \bool_set_true:c { l__draw_path_use_ ##1 _ bool } }
+          {
+            \cs_if_exist_use:cF { __draw_path_use_action_ ##1 : }
+              { \msg_error:nnn { draw } { invalid-path-action } {##1} }
+          }
+      }
+    \__draw_softpath_round_corners:
+    \bool_lazy_and:nnT
+      { \l_draw_bb_update_bool }
+      { \l__draw_path_use_stroke_bool }
+      { \__draw_path_use_stroke_bb: }
+    \__draw_softpath_use:
+    \bool_if:NT \l__draw_path_use_clip_bool
+      {
+        \__draw_backend_clip:
+        \bool_set_false:N \l_draw_bb_update_bool
+        \bool_lazy_or:nnF
+          { \l__draw_path_use_fill_bool }
+          { \l__draw_path_use_stroke_bool }
+          { \__draw_backend_discardpath: }
+      }
+    \bool_lazy_or:nnT
+      { \l__draw_path_use_fill_bool }
+      { \l__draw_path_use_stroke_bool }
+      {
+        \use:c
+          {
+            __draw_backend_
+            \bool_if:NT \l__draw_path_use_fill_bool { fill }
+            \bool_if:NT \l__draw_path_use_stroke_bool { stroke }
+            :
+          }
+      }
+    \bool_if:NT \l__draw_path_use_clear_bool
+      { \__draw_softpath_clear: }
+  }
+\cs_new_protected:Npn \__draw_path_use_action_draw:
+  {
+    \bool_set_true:N \l__draw_path_use_stroke_bool
+  }
+\cs_new_protected:Npn \__draw_path_use_action_fillstroke:
+  {
+    \bool_set_true:N \l__draw_path_use_fill_bool
+    \bool_set_true:N \l__draw_path_use_stroke_bool
+  }
+\cs_new_protected:Npn \__draw_path_use_bb:
+  {
+    \__draw_path_use_bb:NnNN x { max } + 0
+    \__draw_path_use_bb:NnNN y { max } + 0
+    \__draw_path_use_bb:NnNN x { min } - 0
+    \__draw_path_use_bb:NnNN y { min } - 0
+  }
+\cs_new_protected:Npn \__draw_path_use_stroke_bb:
+  {
+    \__draw_path_use_bb:NnNN x { max } + 5
+    \__draw_path_use_bb:NnNN y { max } + 5
+    \__draw_path_use_bb:NnNN x { min } - 5
+    \__draw_path_use_bb:NnNN y { min } - 5
+  }
+\cs_new_protected:Npn \__draw_path_use_bb:NnNN #1#2#3#4
+  {
+    \dim_compare:nNnF { \dim_use:c { g__draw_ #1#2 _dim } } = { #3 -\c_max_dim }
+      {
+        \dim_gset:cn { g__draw_ #1#2 _dim }
+          {
+            \use:c { dim_ #2 :nn }
+              { \dim_use:c { g__draw_ #1#2 _dim } }
+              {
+                  \dim_use:c { g__draw_path_ #1#2 _dim }
+                #3 0.#4 \g__draw_linewidth_dim
+              }
+          }
+      }
+  }
+\dim_new:N \l__draw_path_lastx_dim
+\dim_new:N \l__draw_path_lasty_dim
+\dim_new:N \l__draw_path_xmax_dim
+\dim_new:N \l__draw_path_xmin_dim
+\dim_new:N \l__draw_path_ymax_dim
+\dim_new:N \l__draw_path_ymin_dim
+\dim_new:N \l__draw_softpath_lastx_dim
+\dim_new:N \l__draw_softpath_lasty_dim
+\bool_new:N \l__draw_softpath_corners_bool
+\cs_new_protected:Npn \draw_path_scope_begin:
+  {
+    \group_begin:
+      \dim_set_eq:NN \l__draw_path_lastx_dim \g__draw_path_lastx_dim
+      \dim_set_eq:NN \l__draw_path_lasty_dim \g__draw_path_lasty_dim
+      \dim_set_eq:NN \l__draw_path_xmax_dim \g__draw_path_xmax_dim
+      \dim_set_eq:NN \l__draw_path_xmin_dim \g__draw_path_xmin_dim
+      \dim_set_eq:NN \l__draw_path_ymax_dim \g__draw_path_ymax_dim
+      \dim_set_eq:NN \l__draw_path_ymin_dim \g__draw_path_ymin_dim
+      \dim_set_eq:NN \l__draw_softpath_lastx_dim \g__draw_softpath_lastx_dim
+      \dim_set_eq:NN \l__draw_softpath_lasty_dim \g__draw_softpath_lasty_dim
+      \__draw_path_reset_limits:
+      \__draw_softpath_save:
+  }
+\cs_new_protected:Npn \draw_path_scope_end:
+  {
+      \__draw_softpath_restore:
+      \dim_gset_eq:NN \g__draw_softpath_lastx_dim \l__draw_softpath_lastx_dim
+      \dim_gset_eq:NN \g__draw_softpath_lasty_dim \l__draw_softpath_lasty_dim
+      \dim_gset_eq:NN \g__draw_path_xmax_dim \l__draw_path_xmax_dim
+      \dim_gset_eq:NN \g__draw_path_xmin_dim \l__draw_path_xmin_dim
+      \dim_gset_eq:NN \g__draw_path_ymax_dim \l__draw_path_ymax_dim
+      \dim_gset_eq:NN \g__draw_path_ymin_dim \l__draw_path_ymin_dim
+      \dim_gset_eq:NN \g__draw_path_lastx_dim \l__draw_path_lastx_dim
+      \dim_gset_eq:NN \g__draw_path_lasty_dim \l__draw_path_lasty_dim
+    \group_end:
+  }
+\msg_new:nnnn { draw } { invalid-path-action }
+  { Invalid~action~'#1'~for~path. }
+  { Paths~can~be~used~with~actions~'draw',~'clip',~'fill'~or~'stroke'. }
+%% File: l3draw-points.dtx
+\cs_new:Npn \__draw_point_process:nn #1#2
+  {
+    \__draw_point_process_auxi:en
+      { \draw_point:n {#2} }
+      {#1}
+  }
+\cs_new:Npn \__draw_point_process_auxi:nn #1#2
+  { \__draw_point_process_auxii:nw {#2} #1 \s__draw_stop }
+\cs_generate_variant:Nn \__draw_point_process_auxi:nn { e }
+\cs_new:Npn \__draw_point_process_auxii:nw #1 #2 , #3 \s__draw_stop
+  { #1 {#2} {#3} }
+\cs_new:Npn \__draw_point_process:nnn #1#2#3
+  {
+    \__draw_point_process_auxiii:een
+      { \draw_point:n {#2} }
+      { \draw_point:n {#3} }
+      {#1}
+  }
+\cs_new:Npn \__draw_point_process_auxiii:nnn #1#2#3
+  { \__draw_point_process_auxiv:nw {#3} #1 \s__draw_mark #2 \s__draw_stop }
+\cs_generate_variant:Nn \__draw_point_process_auxiii:nnn { ee }
+\cs_new:Npn \__draw_point_process_auxiv:nw #1 #2 , #3 \s__draw_mark #4 , #5 \s__draw_stop
+  { #1 {#2} {#3} {#4} {#5} }
+\cs_new:Npn \__draw_point_process:nnnn #1#2#3#4
+  {
+    \__draw_point_process_auxv:eeen
+      { \draw_point:n {#2} }
+      { \draw_point:n {#3} }
+      { \draw_point:n {#4} }
+      {#1}
+  }
+\cs_new:Npn \__draw_point_process_auxv:nnnn #1#2#3#4
+  { \__draw_point_process_auxvi:nw {#4} #1 \s__draw_mark #2 \s__draw_mark #3 \s__draw_stop }
+\cs_generate_variant:Nn \__draw_point_process_auxv:nnnn { eee }
+\cs_new:Npn \__draw_point_process_auxvi:nw
+  #1 #2 , #3 \s__draw_mark #4 , #5 \s__draw_mark #6 , #7 \s__draw_stop
+  { #1 {#2} {#3} {#4} {#5} {#6} {#7} }
+\cs_new:Npn \__draw_point_process:nnnnn #1#2#3#4#5
+  {
+    \__draw_point_process_auxvii:eeeen
+      { \draw_point:n {#2} }
+      { \draw_point:n {#3} }
+      { \draw_point:n {#4} }
+      { \draw_point:n {#5} }
+      {#1}
+  }
+\cs_new:Npn \__draw_point_process_auxvii:nnnnn #1#2#3#4#5
+  {
+    \__draw_point_process_auxviii:nw
+      {#5} #1 \s__draw_mark #2 \s__draw_mark #3 \s__draw_mark #4 \s__draw_stop
+  }
+\cs_generate_variant:Nn \__draw_point_process_auxvii:nnnnn { eeee }
+\cs_new:Npn \__draw_point_process_auxviii:nw
+  #1 #2 , #3 \s__draw_mark #4 , #5 \s__draw_mark #6 , #7 \s__draw_mark #8 , #9 \s__draw_stop
+  { #1 {#2} {#3} {#4} {#5} {#6} {#7} {#8} {#9} }
+\cs_new:Npn \draw_point:n #1
+  { \__draw_point_to_dim:e { \fp_eval:n {#1} } }
+\cs_new:Npn \__draw_point_to_dim:n #1
+  { \__draw_point_to_dim:w #1 }
+\cs_generate_variant:Nn \__draw_point_to_dim:n { e }
+\cs_new:Npn \__draw_point_to_dim:w ( #1 , ~ #2 ) { #1pt , #2pt }
+\cs_new:Npn \draw_point_polar:nn #1#2
+  { \draw_point_polar:nnn {#1} {#1} {#2} }
+\cs_new:Npn \draw_point_polar:nnn #1#2#3
+  { \__draw_draw_polar:enn { \fp_eval:n {#3} } {#1} {#2} }
+\cs_new:Npn \__draw_draw_polar:nnn #1#2#3
+  { \draw_point:n { cosd(#1) * (#2) , sind(#1) * (#3) } }
+\cs_generate_variant:Nn \__draw_draw_polar:nnn { e }
+\cs_new:Npn \draw_point_unit_vector:n #1
+  { \__draw_point_process:nn { \__draw_point_unit_vector:nn } {#1} }
+\cs_new:Npn \__draw_point_unit_vector:nn #1#2
+  {
+    \__draw_point_unit_vector:nnn
+      { \fp_eval:n { (sqrt(#1 * #1 + #2 * #2)) } }
+      {#1} {#2}
+  }
+\cs_new:Npn \__draw_point_unit_vector:nnn #1#2#3
+  {
+    \fp_compare:nNnTF {#1} = \c_zero_fp
+      { 0pt, 1pt }
+      {
+        \draw_point:n
+          { ( #2 , #3 ) / #1 }
+      }
+  }
+\cs_generate_variant:Nn \__draw_point_unit_vector:nnn { e }
+\cs_new:Npn \draw_point_intersect_lines:nnnn #1#2#3#4
+  {
+    \__draw_point_process:nnnnn
+      { \__draw_point_intersect_lines:nnnnnnnn }
+      {#1} {#2} {#3} {#4}
+  }
+\cs_new:Npn \__draw_point_intersect_lines:nnnnnnnn #1#2#3#4#5#6#7#8
+  {
+    \__draw_point_intersect_lines_aux:eeeeee
+      { \fp_eval:n { #1 * #4 - #2 * #3 } }
+      { \fp_eval:n { #5 * #8 - #6 * #7 } }
+      { \fp_eval:n { #1 - #3 } }
+      { \fp_eval:n { #5 - #7 } }
+      { \fp_eval:n { #2 - #4 } }
+      { \fp_eval:n { #6 - #8 } }
+  }
+\cs_new:Npn \__draw_point_intersect_lines_aux:nnnnnn #1#2#3#4#5#6
+  {
+    \draw_point:n
+      {
+        ( #2 * #3 - #1 * #4 , #2 * #5 - #1 * #6 )
+          / ( #4 * #5 - #6 * #3 )
+      }
+  }
+\cs_generate_variant:Nn \__draw_point_intersect_lines_aux:nnnnnn { eeeeee }
+\cs_new:Npn \draw_point_intersect_circles:nnnnn #1#2#3#4#5
+  {
+    \__draw_point_process:nnn
+      { \__draw_point_intersect_circles_auxi:nnnnnnn {#2} {#4} {#5} }
+      {#1} {#3}
+  }
+\cs_new:Npn \__draw_point_intersect_circles_auxi:nnnnnnn #1#2#3#4#5#6#7
+  {
+    \__draw_point_intersect_circles_auxii:eennnnn
+      { \fp_eval:n {#1} } { \fp_eval:n {#2} } {#4} {#5} {#6} {#7} {#3}
+  }
+\cs_new:Npn \__draw_point_intersect_circles_auxii:nnnnnnn #1#2#3#4#5#6#7
+  {
+    \__draw_point_intersect_circles_auxiii:eennnnn
+      { \fp_eval:n { #5 - #3 } }
+      { \fp_eval:n { #6 - #4 } }
+      {#1} {#2} {#3} {#4} {#7}
+  }
+\cs_generate_variant:Nn \__draw_point_intersect_circles_auxii:nnnnnnn { ee }
+\cs_new:Npn \__draw_point_intersect_circles_auxiii:nnnnnnn #1#2#3#4#5#6#7
+  {
+    \__draw_point_intersect_circles_auxiv:ennnnnnn
+      { \fp_eval:n { sqrt( #1 * #1 + #2 * #2 ) } }
+      {#1} {#2} {#3} {#4} {#5} {#6} {#7}
+  }
+\cs_generate_variant:Nn \__draw_point_intersect_circles_auxiii:nnnnnnn { ee }
+\cs_new:Npn \__draw_point_intersect_circles_auxiv:nnnnnnnn #1#2#3#4#5#6#7#8
+  {
+    \__draw_point_intersect_circles_auxv:eennnnnnn
+      { \fp_eval:n { 1 / #1 } }
+      { \fp_eval:n { #4 * #4 } }
+      {#1} {#2} {#3} {#5} {#6} {#7} {#8}
+  }
+\cs_generate_variant:Nn \__draw_point_intersect_circles_auxiv:nnnnnnnn { e }
+\cs_new:Npn \__draw_point_intersect_circles_auxv:nnnnnnnnn #1#2#3#4#5#6#7#8#9
+  {
+    \__draw_point_intersect_circles_auxvi:ennnnnnn
+      { \fp_eval:n { 0.5 * #1 * ( #2 + #3 * #3 - #6 * #6 ) } }
+      {#1} {#2} {#4} {#5} {#7} {#8} {#9}
+  }
+\cs_generate_variant:Nn \__draw_point_intersect_circles_auxv:nnnnnnnnn { ee }
+\cs_new:Npn \__draw_point_intersect_circles_auxvi:nnnnnnnn #1#2#3#4#5#6#7#8
+  {
+    \__draw_point_intersect_circles_auxvii:eeennnn
+      { \fp_eval:n { #1 * #2 } }
+      { \int_if_odd:nTF {#8} { 1 } { -1 } }
+      { \fp_eval:n { sqrt ( #3 - #1 * #1 ) * #2 } }
+      {#4} {#5} {#6} {#7}
+  }
+\cs_generate_variant:Nn \__draw_point_intersect_circles_auxvi:nnnnnnnn { e }
+\cs_new:Npn \__draw_point_intersect_circles_auxvii:nnnnnnn #1#2#3#4#5#6#7
+  {
+    \draw_point:n
+      { #6 + #4 * #1 + #2 * #3 * #5 , #7 + #5 * #1 + -1 * #2 * #3 * #4 }
+  }
+\cs_generate_variant:Nn \__draw_point_intersect_circles_auxvii:nnnnnnn { eee }
+\cs_new:Npn \draw_point_intersect_line_circle:nnnnn #1#2#3#4#5
+  {
+    \__draw_point_process:nnnn
+      { \__draw_point_intersect_line_circle_auxi:nnnnnnnn {#4} {#5} }
+      {#1} {#2} {#3}
+  }
+\cs_new:Npn \__draw_point_intersect_line_circle_auxi:nnnnnnnn #1#2#3#4#5#6#7#8
+  {
+    \__draw_point_intersect_line_circle_auxii:ennnnnnn
+      { \fp_eval:n {#1} } {#3} {#4} {#5} {#6} {#7} {#8} {#2}
+  }
+\cs_new:Npn \__draw_point_intersect_line_circle_auxii:nnnnnnnn #1#2#3#4#5#6#7#8
+  {
+    \__draw_point_intersect_line_circle_auxiii:eeennnnn
+      { \fp_eval:n { (#4-#2)*(#4-#2)+(#5-#3)*(#5-#3) } }
+      { \fp_eval:n { 2*((#4-#2)*(#2-#6)+(#5-#3)*(#3-#7)) } }
+      { \fp_eval:n { (#6*#6+#7*#7)+(#2*#2+#3*#3)-(2*(#6*#2+#7*#3))-(#1*#1) } }
+      {#2} {#3} {#4} {#5} {#8}
+  }
+\cs_generate_variant:Nn \__draw_point_intersect_line_circle_auxii:nnnnnnnn { e }
+\cs_new:Npn \__draw_point_intersect_line_circle_auxiii:nnnnnnnn #1#2#3#4#5#6#7#8
+  {
+    \__draw_point_intersect_line_circle_auxiv:eennnnnn
+      { \fp_eval:n {  #2 * #2 - 4 * #1 * #3 } }
+      { \int_if_odd:nTF {#8} { 1 } { -1 } }
+      {#1} {#2} {#4} {#5} {#6} {#7}
+  }
+\cs_generate_variant:Nn \__draw_point_intersect_line_circle_auxiii:nnnnnnnn { eee }
+\cs_new:Npn \__draw_point_intersect_line_circle_auxiv:nnnnnnnn #1#2#3#4#5#6#7#8
+  {
+    \__draw_point_intersect_line_circle_auxv:ennnn
+      { \fp_eval:n { (-1 * #4 + #2 * sqrt(#1)) / (2 * #3) } }
+      {#5} {#6} {#7} {#8}
+  }
+\cs_generate_variant:Nn \__draw_point_intersect_line_circle_auxiv:nnnnnnnn { ee }
+\cs_new:Npn \__draw_point_intersect_line_circle_auxv:nnnnn #1#2#3#4#5
+  {
+    \draw_point:n
+      { #2 + #1 * (#4 - #2), #3 + #1 * (#5 - #3) }
+  }
+\cs_generate_variant:Nn \__draw_point_intersect_line_circle_auxv:nnnnn { e }
+\cs_new:Npn \draw_point_interpolate_line:nnn #1#2#3
+  {
+    \__draw_point_process:nnn
+      { \__draw_point_interpolate_line_aux:ennnn { \fp_eval:n {#1} } }
+      {#2} {#3}
+  }
+\cs_new:Npn \__draw_point_interpolate_line_aux:nnnnn #1#2#3#4#5
+  {
+    \__draw_point_interpolate_line_aux:ennnnn { \fp_eval:n { 1 - #1 } }
+      {#1} {#2} {#3} {#4} {#5}
+  }
+\cs_generate_variant:Nn \__draw_point_interpolate_line_aux:nnnnn { e }
+\cs_new:Npn \__draw_point_interpolate_line_aux:nnnnnn #1#2#3#4#5#6
+  { \draw_point:n { #2 * #3 + #1 * #5 , #2 * #4 + #1 * #6 } }
+\cs_generate_variant:Nn \__draw_point_interpolate_line_aux:nnnnnn { e }
+\cs_new:Npn \draw_point_interpolate_distance:nnn #1#2#3
+  {
+    \__draw_point_process:nn
+      { \__draw_point_interpolate_distance:nnnn {#1} {#3} }
+      {#2}
+  }
+\cs_new:Npn \__draw_point_interpolate_distance:nnnn #1#2#3#4
+  {
+    \__draw_point_process:nn
+      {
+        \__draw_point_interpolate_distance:ennnn
+          { \fp_eval:n {#1} } {#3} {#4}
+      }
+      { \draw_point_unit_vector:n { ( #2 ) - ( #3 , #4 ) } }
+  }
+\cs_new:Npn \__draw_point_interpolate_distance:nnnnn #1#2#3#4#5
+  { \draw_point:n { #2 + #1 * #4 , #3 + #1 * #5 } }
+\cs_generate_variant:Nn \__draw_point_interpolate_distance:nnnnn { e }
+\cs_new:Npn \draw_point_interpolate_arcaxes:nnnnnn #1#2#3#4#5#6
+  {
+    \__draw_point_process:nnnn
+      { \__draw_point_interpolate_arcaxes_auxi:nnnnnnnnn {#1} {#5} {#6} }
+      {#2} {#3} {#4}
+  }
+\cs_new:Npn \__draw_point_interpolate_arcaxes_auxi:nnnnnnnnn #1#2#3#4#5#6#7#8#9
+  {
+    \__draw_point_interpolate_arcaxes_auxii:ennnnnnnn
+      { \fp_eval:n {#1} } {#2} {#3} {#4} {#5} {#6} {#7} {#8} {#9}
+  }
+\cs_new:Npn \__draw_point_interpolate_arcaxes_auxii:nnnnnnnnn #1#2#3#4#5#6#7#8#9
+  {
+    \__draw_point_interpolate_arcaxes_auxiii:ennnnnn
+      { \fp_eval:n { #1 * (#3) + ( 1 - #1 ) * (#2) } }
+      {#4} {#5} {#6} {#7} {#8} {#9}
+  }
+\cs_generate_variant:Nn \__draw_point_interpolate_arcaxes_auxii:nnnnnnnnn { e }
+\cs_new:Npn \__draw_point_interpolate_arcaxes_auxiii:nnnnnnn #1#2#3#4#5#6#7
+  {
+    \__draw_point_interpolate_arcaxes_auxiv:eennnnnn
+      { \fp_eval:n { cosd (#1) } }
+      { \fp_eval:n { sind (#1) } }
+      {#2} {#3} {#4} {#5} {#6} {#7}
+  }
+\cs_generate_variant:Nn \__draw_point_interpolate_arcaxes_auxiii:nnnnnnn { e }
+\cs_new:Npn \__draw_point_interpolate_arcaxes_auxiv:nnnnnnnn #1#2#3#4#5#6#7#8
+  {
+    \draw_point:n
+      { #3 + #1 * #5 + #2 * #7 , #4 + #1 * #6 + #2 * #8 }
+  }
+\cs_generate_variant:Nn \__draw_point_interpolate_arcaxes_auxiv:nnnnnnnn { ee }
+\cs_new:Npn \draw_point_interpolate_curve:nnnnnn #1#2#3#4#5
+  {
+    \__draw_point_process:nnnnn
+      { \__draw_point_interpolate_curve_auxi:nnnnnnnnn {#1} }
+      {#2} {#3} {#4} {#5}
+  }
+\cs_new:Npn \__draw_point_interpolate_curve_auxi:nnnnnnnnn #1#2#3#4#5#6#7#8#9
+  {
+    \__draw_point_interpolate_curve_auxii:ennnnnnnn
+      { \fp_eval:n {#1} }
+      {#2} {#3} {#4} {#5} {#6} {#7} {#8} {#9}
+  }
+\cs_new:Npn \__draw_point_interpolate_curve_auxii:nnnnnnnnn
+  #1#2#3#4#5#6#7#8#9
+  {
+    \__draw_point_interpolate_curve_auxiii:ennnnn
+      { \fp_eval:n { 1 - #1 } }
+      {#1}
+      { {#2} {#3} } { {#4} {#5} } { {#6} {#7} } { {#8} {#9} }
+  }
+\cs_generate_variant:Nn \__draw_point_interpolate_curve_auxii:nnnnnnnnn { e }
+\cs_new:Npn \__draw_point_interpolate_curve_auxiii:nnnnnn #1#2#3#4#5#6
+  {
+    \__draw_point_interpolate_curve_auxiv:nnnnnn {#1} {#2} #3 #4
+    \__draw_point_interpolate_curve_auxiv:nnnnnn {#1} {#2} #4 #5
+    \__draw_point_interpolate_curve_auxiv:nnnnnn {#1} {#2} #5 #6
+    \prg_do_nothing:
+    \__draw_point_interpolate_curve_auxvi:n { {#1} {#2} }
+  }
+\cs_generate_variant:Nn \__draw_point_interpolate_curve_auxiii:nnnnnn { e }
+\cs_new:Npn \__draw_point_interpolate_curve_auxiv:nnnnnn #1#2#3#4#5#6
+  {
+    \__draw_point_interpolate_curve_auxv:eew
+      { \fp_eval:n { #1 * #3 + #2 * #5 } }
+      { \fp_eval:n { #1 * #4 + #2 * #6 } }
+  }
+\cs_new:Npn \__draw_point_interpolate_curve_auxv:nnw
+  #1#2#3 \prg_do_nothing: #4#5
+  {
+    #3
+    \prg_do_nothing:
+    #4 { #5 {#1} {#2} }
+  }
+\cs_generate_variant:Nn \__draw_point_interpolate_curve_auxv:nnw { ee }
+\cs_new:Npn \__draw_point_interpolate_curve_auxvi:n #1
+  { \__draw_point_interpolate_curve_auxvii:nnnnnnnn #1 }
+\cs_new:Npn \__draw_point_interpolate_curve_auxvii:nnnnnnnn #1#2#3#4#5#6#7#8
+  {
+    \__draw_point_interpolate_curve_auxviii:eeeenn
+      { \fp_eval:n { #1 * #5 + #2 * #3 } }
+      { \fp_eval:n { #1 * #6 + #2 * #4 } }
+      { \fp_eval:n { #1 * #7 + #2 * #5 } }
+      { \fp_eval:n { #1 * #8 + #2 * #6 } }
+      {#1} {#2}
+  }
+\cs_new:Npn \__draw_point_interpolate_curve_auxviii:nnnnnn #1#2#3#4#5#6
+  {
+    \draw_point:n
+      { #5 * #3 + #6 * #1 , #5 * #4 + #6 * #2 }
+  }
+\cs_generate_variant:Nn \__draw_point_interpolate_curve_auxviii:nnnnnn { eeee }
+\dim_new:N \l__draw_xvec_x_dim
+\dim_new:N \l__draw_xvec_y_dim
+\dim_new:N \l__draw_yvec_x_dim
+\dim_new:N \l__draw_yvec_y_dim
+\dim_new:N \l__draw_zvec_x_dim
+\dim_new:N \l__draw_zvec_y_dim
+\cs_new_protected:Npn \draw_xvec:n #1
+  { \__draw_vec:nn { x } {#1} }
+\cs_new_protected:Npn \draw_yvec:n #1
+  { \__draw_vec:nn { y } {#1} }
+\cs_new_protected:Npn \draw_zvec:n #1
+  { \__draw_vec:nn { z } {#1} }
+\cs_new_protected:Npn \__draw_vec:nn #1#2
+  {
+    \__draw_point_process:nn { \__draw_vec:nnn {#1} } {#2}
+  }
+\cs_new_protected:Npn \__draw_vec:nnn #1#2#3
+  {
+    \dim_set:cn { l__draw_ #1 vec_x_dim } {#2}
+    \dim_set:cn { l__draw_ #1 vec_y_dim } {#3}
+  }
+\draw_xvec:n { 1cm , 0cm }
+\draw_yvec:n { 0cm , 1cm }
+\draw_zvec:n { -0.385cm , -0.385cm }
+\cs_new:Npn \draw_point_vec:nn #1#2
+  { \__draw_point_vec:ee { \fp_eval:n {#1} } { \fp_eval:n {#2} } }
+\cs_new:Npn \__draw_point_vec:nn #1#2
+  {
+    \draw_point:n
+      {
+        #1 * \l__draw_xvec_x_dim + #2 * \l__draw_yvec_x_dim ,
+        #1 * \l__draw_xvec_y_dim + #2 * \l__draw_yvec_y_dim
+      }
+  }
+\cs_generate_variant:Nn \__draw_point_vec:nn { ee }
+\cs_new:Npn \draw_point_vec:nnn #1#2#3
+  {
+    \__draw_point_vec:eee
+      { \fp_eval:n {#1} } { \fp_eval:n {#2} } { \fp_eval:n {#3} }
+  }
+\cs_new:Npn \__draw_point_vec:nnn #1#2#3
+  {
+    \draw_point:n
+      {
+            #1 * \l__draw_xvec_x_dim
+          + #2 * \l__draw_yvec_x_dim
+          + #3 * \l__draw_zvec_x_dim
+        ,
+            #1 * \l__draw_xvec_y_dim
+          + #2 * \l__draw_yvec_y_dim
+          + #3 * \l__draw_zvec_y_dim
+    }
+  }
+\cs_generate_variant:Nn \__draw_point_vec:nnn { eee }
+\cs_new:Npn \draw_point_vec_polar:nn #1#2
+  { \draw_point_vec_polar:nnn {#1} {#1} {#2} }
+\cs_new:Npn \draw_point_vec_polar:nnn #1#2#3
+  { \__draw_draw_vec_polar:enn { \fp_eval:n {#3} } {#1} {#2} }
+\cs_new:Npn \__draw_draw_vec_polar:nnn #1#2#3
+  {
+    \draw_point:n
+      {
+        cosd(#1) * (#2) * \l__draw_xvec_x_dim ,
+        sind(#1) * (#3) * \l__draw_yvec_y_dim
+      }
+  }
+\cs_generate_variant:Nn \__draw_draw_vec_polar:nnn { e }
+\cs_new:Npn \draw_point_transform:n #1
+  {
+    \__draw_point_process:nn
+      { \__draw_point_transform:nn } {#1}
+  }
+\cs_new:Npn \__draw_point_transform:nn #1#2
+  {
+    \bool_if:NTF \l__draw_matrix_active_bool
+      {
+        \draw_point:n
+          {
+            (
+                \l__draw_matrix_a_fp * #1
+              + \l__draw_matrix_c_fp * #2
+              + \l__draw_xshift_dim
+            )
+            ,
+            (
+                \l__draw_matrix_b_fp * #1
+              + \l__draw_matrix_d_fp * #2
+              + \l__draw_yshift_dim
+            )
+        }
+      }
+      {
+        \draw_point:n
+          {
+              (#1, #2)
+            + ( \l__draw_xshift_dim , \l__draw_yshift_dim )
+          }
+      }
+  }
+\cs_new:Npn \__draw_point_transform_noshift:n #1
+  {
+    \__draw_point_process:nn
+      { \__draw_point_transform_noshift:nn } {#1}
+  }
+\cs_new:Npn \__draw_point_transform_noshift:nn #1#2
+  {
+    \bool_if:NTF \l__draw_matrix_active_bool
+      {
+        \draw_point:n
+          {
+            (
+                \l__draw_matrix_a_fp * #1
+              + \l__draw_matrix_c_fp * #2
+            )
+            ,
+            (
+                \l__draw_matrix_b_fp * #1
+              + \l__draw_matrix_d_fp * #2
+            )
+        }
+      }
+      { \draw_point:n { (#1, #2) } }
+  }
+%% File: l3draw-scopes.dtx
+\dim_new:N \g__draw_xmax_dim
+\dim_new:N \g__draw_xmin_dim
+\dim_new:N \g__draw_ymax_dim
+\dim_new:N \g__draw_ymin_dim
+\bool_new:N \l_draw_bb_update_bool
+\box_new:N \l__draw_main_box
+\box_new:N \l__draw_layer_main_box
+\int_new:N \g__draw_id_int
+\cs_new_protected:Npn \__draw_reset_bb:
+  {
+    \dim_gset:Nn \g__draw_xmax_dim { -\c_max_dim }
+    \dim_gset:Nn \g__draw_xmin_dim {  \c_max_dim }
+    \dim_gset:Nn \g__draw_ymax_dim { -\c_max_dim }
+    \dim_gset:Nn \g__draw_ymin_dim {  \c_max_dim }
+  }
+\cs_new_protected:Npn \draw_begin:
+  {
+    \group_begin:
+      \int_gincr:N \g__draw_id_int
+      \hbox_set:Nw \l__draw_main_box
+        \__draw_backend_begin:
+        \__draw_reset_bb:
+        \__draw_path_reset_limits:
+        \bool_set_true:N \l_draw_bb_update_bool
+        \draw_transform_matrix_reset:
+        \draw_transform_shift_reset:
+        \__draw_softpath_clear:
+        \draw_linewidth:n { \l_draw_default_linewidth_dim }
+        \color_select:n { . }
+        \draw_nonzero_rule:
+        \draw_cap_butt:
+        \draw_join_miter:
+        \draw_miterlimit:n { 10 }
+        \draw_dash_pattern:nn { } { 0cm }
+        \hbox_set:Nw \l__draw_layer_main_box
+  }
+\cs_new_protected:Npn \draw_end:
+  {
+          \__draw_baseline_finalise:w
+          \exp_args:NNNV \hbox_set_end:
+          \clist_set:Nn \l_draw_layers_clist \l_draw_layers_clist
+          \__draw_layers_insert:
+        \__draw_backend_end:
+      \hbox_set_end:
+      \dim_compare:nNnT \g__draw_xmin_dim = \c_max_dim
+        {
+          \dim_gzero:N \g__draw_xmax_dim
+          \dim_gzero:N \g__draw_xmin_dim
+          \dim_gzero:N \g__draw_ymax_dim
+          \dim_gzero:N \g__draw_ymin_dim
+        }
+      \__draw_finalise:
+      \box_set_wd:Nn \l__draw_main_box
+        { \g__draw_xmax_dim - \g__draw_xmin_dim }
+      \mode_leave_vertical:
+      \box_use_drop:N \l__draw_main_box
+    \group_end:
+  }
+\cs_new_protected:Npn \__draw_finalise:
+  {
+    \hbox_set:Nn \l__draw_main_box
+      {
+        \skip_horizontal:n { -\g__draw_xmin_dim }
+        \box_move_down:nn
+          { \g__draw_ymin_dim }
+          { \box_use_drop:N \l__draw_main_box }
+      }
+    \box_set_dp:Nn \l__draw_main_box { 0pt }
+    \box_set_ht:Nn \l__draw_main_box
+      { \g__draw_ymax_dim - \g__draw_ymin_dim }
+  }
+\cs_new_protected:Npn \__draw_finalise_baseline:n #1
+  {
+    \hbox_set:Nn \l__draw_main_box
+      {
+        \skip_horizontal:n { -\g__draw_xmin_dim }
+        \box_move_down:nn
+          {#1}
+          { \box_use_drop:N \l__draw_main_box }
+      }
+    \box_set_dp:Nn \l__draw_main_box
+      {
+        \dim_max:nn
+          { #1 - \g__draw_ymin_dim }
+          { 0pt }
+      }
+    \box_set_ht:Nn \l__draw_main_box
+      { \g__draw_ymax_dim - #1 }
+  }
+\bool_new:N \l__draw_baseline_bool
+\dim_new:N \l__draw_baseline_dim
+\cs_new_protected:Npn \draw_baseline:n #1
+  {
+    \bool_set_true:N \l__draw_baseline_bool
+    \dim_set:Nn \l__draw_baseline_dim { \fp_to_dim:n {#1} }
+  }
+\cs_new_protected:Npn \__draw_baseline_finalise:w #1 \__draw_finalise:
+  {
+    \bool_if:NTF \l__draw_baseline_bool
+      {
+        \use:e
+          {
+            \exp_not:n {#1}
+            \__draw_finalise_baseline:n { \dim_use:N \l__draw_baseline_dim }
+          }
+      }
+      { #1 \__draw_finalise: }
+  }
+\dim_new:N \l__draw_linewidth_dim
+\tl_new:N \l__draw_fill_color_tl
+\tl_new:N \l__draw_stroke_color_tl
+\cs_new_protected:Npn \draw_scope_begin:
+  {
+    \__draw_backend_scope_begin:
+    \group_begin:
+      \dim_set_eq:NN \l__draw_linewidth_dim \g__draw_linewidth_dim
+      \draw_path_scope_begin:
+  }
+\cs_new_protected:Npn \draw_scope_end:
+  {
+      \draw_path_scope_end:
+      \dim_gset_eq:NN \g__draw_linewidth_dim \l__draw_linewidth_dim
+    \group_end:
+    \__draw_backend_scope_end:
+  }
+\dim_new:N \l__draw_xmax_dim
+\dim_new:N \l__draw_xmin_dim
+\dim_new:N \l__draw_ymax_dim
+\dim_new:N \l__draw_ymin_dim
+\cs_new_protected:Npn \__draw_scope_bb_begin:
+  {
+    \group_begin:
+      \dim_set_eq:NN \l__draw_xmax_dim \g__draw_xmax_dim
+      \dim_set_eq:NN \l__draw_xmin_dim \g__draw_xmin_dim
+      \dim_set_eq:NN \l__draw_ymax_dim \g__draw_ymax_dim
+      \dim_set_eq:NN \l__draw_ymin_dim \g__draw_ymin_dim
+      \__draw_reset_bb:
+  }
+\cs_new_protected:Npn \__draw_scope_bb_end:
+  {
+      \dim_gset_eq:NN \g__draw_xmax_dim \l__draw_xmax_dim
+      \dim_gset_eq:NN \g__draw_xmin_dim \l__draw_xmin_dim
+      \dim_gset_eq:NN \g__draw_ymax_dim \l__draw_ymax_dim
+      \dim_gset_eq:NN \g__draw_ymin_dim \l__draw_ymin_dim
+    \group_end:
+  }
+\cs_new_protected:Npn \draw_suspend_begin:
+  {
+    \__draw_scope_bb_begin:
+    \draw_path_scope_begin:
+    \draw_transform_matrix_reset:
+    \draw_transform_shift_reset:
+    \__draw_layers_save:
+  }
+\cs_new_protected:Npn \draw_suspend_end:
+  {
+    \__draw_layers_restore:
+    \draw_path_scope_end:
+    \__draw_scope_bb_end:
+  }
+%% File: l3draw-softpath.dtx
+\tl_new:N \g__draw_softpath_main_tl
+\tl_new:N \l__draw_softpath_tmp_tl
+\bool_new:N \g__draw_softpath_corners_bool
+\cs_new_protected:Npn \__draw_softpath_add:n
+  { \tl_build_gput_right:Nn \g__draw_softpath_main_tl }
+\cs_generate_variant:Nn \__draw_softpath_add:n { o, e }
+\cs_new_protected:Npn \__draw_softpath_use:
+  {
+    \tl_build_get_intermediate:NN
+      \g__draw_softpath_main_tl
+      \l__draw_softpath_tmp_tl
+    \l__draw_softpath_tmp_tl
+  }
+\cs_new_protected:Npn \__draw_softpath_clear:
+  {
+    \tl_build_gbegin:N \g__draw_softpath_main_tl
+    \bool_gset_false:N \g__draw_softpath_corners_bool
+  }
+\cs_new_protected:Npn \__draw_softpath_save:
+  {
+    \tl_build_gend:N \g__draw_softpath_main_tl
+    \tl_set_eq:NN
+      \l__draw_softpath_main_tl
+      \g__draw_softpath_main_tl
+    \bool_set_eq:NN
+      \l__draw_softpath_corners_bool
+      \g__draw_softpath_corners_bool
+    \__draw_softpath_clear:
+  }
+\cs_new_protected:Npn \__draw_softpath_restore:
+  {
+    \__draw_softpath_clear:
+    \__draw_softpath_add:o \l__draw_softpath_main_tl
+    \bool_gset_eq:NN
+      \g__draw_softpath_corners_bool
+      \l__draw_softpath_corners_bool
+  }
+\dim_new:N \g__draw_softpath_lastx_dim
+\dim_new:N \g__draw_softpath_lasty_dim
+\bool_new:N \g__draw_softpath_move_bool
+\bool_gset_true:N \g__draw_softpath_move_bool
+\cs_new_protected:Npn \__draw_softpath_closepath:
+  {
+    \__draw_softpath_add:e
+      {
+        \__draw_softpath_close_op:nn
+          { \dim_use:N \g__draw_softpath_lastx_dim }
+          { \dim_use:N \g__draw_softpath_lasty_dim }
+      }
+  }
+\cs_new_protected:Npn \__draw_softpath_curveto:nnnnnn #1#2#3#4#5#6
+  {
+    \__draw_softpath_add:n
+      {
+        \__draw_softpath_curveto_opi:nn {#1} {#2}
+        \__draw_softpath_curveto_opii:nn {#3} {#4}
+        \__draw_softpath_curveto_opiii:nn {#5} {#6}
+      }
+  }
+\cs_new_protected:Npn \__draw_softpath_lineto:nn #1#2
+  {
+    \__draw_softpath_add:n
+      { \__draw_softpath_lineto_op:nn {#1} {#2} }
+  }
+\cs_new_protected:Npn \__draw_softpath_moveto:nn #1#2
+  {
+    \__draw_softpath_add:n
+      { \__draw_softpath_moveto_op:nn {#1} {#2} }
+    \bool_if:NT \g__draw_softpath_move_bool
+      {
+        \dim_gset:Nn \g__draw_softpath_lastx_dim {#1}
+        \dim_gset:Nn \g__draw_softpath_lasty_dim {#2}
+      }
+  }
+\cs_new_protected:Npn \__draw_softpath_rectangle:nnnn #1#2#3#4
+  {
+    \__draw_softpath_add:n
+      {
+        \__draw_softpath_rectangle_opi:nn {#1} {#2}
+        \__draw_softpath_rectangle_opii:nn {#3} {#4}
+      }
+  }
+\cs_new_protected:Npn \__draw_softpath_roundpoint:nn #1#2
+  {
+    \__draw_softpath_add:n
+      { \__draw_softpath_roundpoint_op:nn {#1} {#2} }
+    \bool_gset_true:N \g__draw_softpath_corners_bool
+  }
+\cs_generate_variant:Nn \__draw_softpath_roundpoint:nn { VV }
+\cs_new_protected:Npn \__draw_softpath_close_op:nn #1#2
+  { \__draw_backend_closepath: }
+\cs_new_protected:Npn \__draw_softpath_curveto_opi:nn #1#2
+  { \__draw_softpath_curveto_opi:nnNnnNnn {#1} {#2} }
+\cs_new_protected:Npn \__draw_softpath_curveto_opi:nnNnnNnn #1#2#3#4#5#6#7#8
+  { \__draw_backend_curveto:nnnnnn {#1} {#2} {#4} {#5} {#7} {#8} }
+\cs_new_protected:Npn \__draw_softpath_curveto_opii:nn #1#2
+  { \__draw_softpath_curveto_opii:nn }
+\cs_new_protected:Npn \__draw_softpath_curveto_opiii:nn #1#2
+  { \__draw_softpath_curveto_opiii:nn }
+\cs_new_protected:Npn \__draw_softpath_lineto_op:nn #1#2
+  { \__draw_backend_lineto:nn {#1} {#2} }
+\cs_new_protected:Npn \__draw_softpath_moveto_op:nn #1#2
+  { \__draw_backend_moveto:nn {#1} {#2} }
+\cs_new_protected:Npn \__draw_softpath_roundpoint_op:nn #1#2 { }
+\cs_new_protected:Npn \__draw_softpath_rectangle_opi:nn #1#2
+  { \__draw_softpath_rectangle_opi:nnNnn {#1} {#2} }
+\cs_new_protected:Npn \__draw_softpath_rectangle_opi:nnNnn #1#2#3#4#5
+  { \__draw_backend_rectangle:nnnn {#1} {#2} {#4} {#5} }
+  \cs_new_protected:Npn \__draw_softpath_rectangle_opii:nn #1#2 { }
+\tl_new:N \l__draw_softpath_main_tl
+\tl_new:N \l__draw_softpath_part_tl
+\tl_new:N \l__draw_softpath_curve_end_tl
+\fp_new:N \l__draw_softpath_lastx_fp
+\fp_new:N \l__draw_softpath_lasty_fp
+\dim_new:N \l__draw_softpath_corneri_dim
+\dim_new:N \l__draw_softpath_cornerii_dim
+\tl_new:N \l__draw_softpath_first_tl
+\tl_new:N \l__draw_softpath_move_tl
+\fp_const:Nn \c__draw_softpath_arc_fp { 4/3 * (sqrt(2) - 1) }
+\cs_new_protected:Npn \__draw_softpath_round_corners:
+  {
+    \bool_if:NT \g__draw_softpath_corners_bool
+      {
+        \group_begin:
+          \tl_clear:N \l__draw_softpath_main_tl
+          \tl_clear:N \l__draw_softpath_part_tl
+          \fp_zero:N \l__draw_softpath_lastx_fp
+          \fp_zero:N \l__draw_softpath_lasty_fp
+          \tl_clear:N \l__draw_softpath_first_tl
+          \tl_clear:N \l__draw_softpath_move_tl
+          \tl_build_gend:N \g__draw_softpath_main_tl
+          \exp_after:wN \__draw_softpath_round_loop:Nnn
+            \g__draw_softpath_main_tl
+            \q__draw_recursion_tail ? ?
+            \q__draw_recursion_stop
+        \group_end:
+      }
+    \bool_gset_false:N \g__draw_softpath_corners_bool
+  }
+\cs_new_protected:Npn \__draw_softpath_round_loop:Nnn #1#2#3
+  {
+    \__draw_if_recursion_tail_stop_do:Nn #1 { \__draw_softpath_round_end: }
+    \token_if_eq_meaning:NNTF #1 \__draw_softpath_roundpoint_op:nn
+      { \__draw_softpath_round_action:nn {#2} {#3} }
+      {
+        \tl_if_empty:NT \l__draw_softpath_first_tl
+          { \tl_set:Nn \l__draw_softpath_first_tl { {#2} {#3} } }
+        \fp_set:Nn \l__draw_softpath_lastx_fp {#2}
+        \fp_set:Nn \l__draw_softpath_lasty_fp {#3}
+        \token_if_eq_meaning:NNTF #1 \__draw_softpath_moveto_op:nn
+          {
+            \tl_put_right:No \l__draw_softpath_main_tl
+              \l__draw_softpath_move_tl
+            \tl_put_right:No \l__draw_softpath_main_tl
+              \l__draw_softpath_part_tl
+            \tl_set:Nn \l__draw_softpath_move_tl { #1 {#2} {#3} }
+            \tl_clear:N \l__draw_softpath_first_tl
+            \tl_clear:N \l__draw_softpath_part_tl
+          }
+          { \tl_put_right:Nn \l__draw_softpath_part_tl { #1 {#2} {#3} } }
+        \__draw_softpath_round_loop:Nnn
+      }
+  }
+\cs_new_protected:Npn \__draw_softpath_round_action:nn #1#2
+  {
+    \dim_set:Nn \l__draw_softpath_corneri_dim {#1}
+    \dim_set:Nn \l__draw_softpath_cornerii_dim {#2}
+    \bool_lazy_and:nnTF
+      { \dim_compare_p:nNn \l__draw_softpath_corneri_dim = { 0pt } }
+      { \dim_compare_p:nNn \l__draw_softpath_cornerii_dim = { 0pt } }
+      { \__draw_softpath_round_loop:Nnn }
+      { \__draw_softpath_round_action:Nnn }
+  }
+\cs_new_protected:Npn \__draw_softpath_round_action:Nnn #1#2#3
+  {
+    \tl_if_empty:NT \l__draw_softpath_first_tl
+      { \tl_set:Nn \l__draw_softpath_first_tl { {#2} {#3} } }
+    \token_if_eq_meaning:NNTF #1 \__draw_softpath_curveto_opi:nn
+      { \__draw_softpath_round_action_curveto:NnnNnn }
+      {
+        \token_if_eq_meaning:NNTF #1 \__draw_softpath_close_op:nn
+          { \__draw_softpath_round_action_close: }
+          {
+            \token_if_eq_meaning:NNTF #1 \__draw_softpath_lineto_op:nn
+              { \__draw_softpath_round_lookahead:NnnNnn }
+              { \__draw_softpath_round_loop:Nnn }
+          }
+      }
+      #1 {#2} {#3}
+  }
+\cs_new_protected:Npn \__draw_softpath_round_action_curveto:NnnNnn
+  #1#2#3#4#5#6
+  {
+    \tl_put_right:Nn \l__draw_softpath_part_tl
+      { #1 {#2} {#3} #4 {#5} {#6} }
+    \fp_set:Nn \l__draw_softpath_lastx_fp {#5}
+    \fp_set:Nn \l__draw_softpath_lasty_fp {#6}
+    \__draw_softpath_round_lookahead:NnnNnn
+  }
+\cs_new_protected:Npn \__draw_softpath_round_action_close:
+  {
+    \bool_lazy_and:nnTF
+      { ! \tl_if_empty_p:N \l__draw_softpath_first_tl }
+      { ! \tl_if_empty_p:N \l__draw_softpath_move_tl }
+      {
+        \exp_after:wN \__draw_softpath_round_close:nn
+          \l__draw_softpath_first_tl
+      }
+      { \__draw_softpath_round_loop:Nnn }
+  }
+\cs_new_protected:Npn \__draw_softpath_round_lookahead:NnnNnn #1#2#3#4#5#6
+  {
+    \bool_lazy_any:nTF
+      {
+        { \token_if_eq_meaning_p:NN #4 \__draw_softpath_lineto_op:nn }
+        { \token_if_eq_meaning_p:NN #4 \__draw_softpath_curveto_opi:nn }
+        { \token_if_eq_meaning_p:NN #4 \__draw_softpath_close_op:nn }
+      }
+      {
+        \__draw_softpath_round_calc:NnnNnn
+          \__draw_softpath_round_loop:Nnn
+          {#5} {#6}
+      }
+      {
+        \token_if_eq_meaning:NNTF #4 \__draw_softpath_roundpoint_op:nn
+          { \__draw_softpath_round_roundpoint:NnnNnnNnn }
+          { \__draw_softpath_round_loop:Nnn }
+      }
+    #1 {#2} {#3}
+    #4 {#5} {#6}
+  }
+\cs_new_protected:Npn \__draw_softpath_round_roundpoint:NnnNnnNnn
+  #1#2#3#4#5#6#7#8#9
+  {
+    \__draw_softpath_round_calc:NnnNnn
+      \__draw_softpath_round_loop:Nnn
+      {#8} {#9}
+      #1 {#2} {#3}
+    #4 {#5} {#6} #7 {#8} {#9}
+  }
+\cs_new_protected:Npn \__draw_softpath_round_calc:NnnNnn #1#2#3#4#5#6
+  {
+    \tl_set:Ne \l__draw_softpath_curve_end_tl
+      {
+        \draw_point_interpolate_distance:nnn
+          \l__draw_softpath_cornerii_dim
+          { #5 , #6 } { #2 , #3 }
+      }
+    \tl_put_right:Ne \l__draw_softpath_part_tl
+      {
+        \exp_not:N #4
+        \__draw_softpath_round_calc:eVnnnn
+          {
+            \draw_point_interpolate_distance:nnn
+              \l__draw_softpath_corneri_dim
+              { #5 , #6 }
+              {
+                \l__draw_softpath_lastx_fp ,
+                \l__draw_softpath_lasty_fp
+              }
+          }
+          \l__draw_softpath_curve_end_tl
+          {#5} {#6} {#2} {#3}
+      }
+    \fp_set:Nn \l__draw_softpath_lastx_fp {#5}
+    \fp_set:Nn \l__draw_softpath_lasty_fp {#6}
+    #1
+  }
+\cs_new:Npn \__draw_softpath_round_calc:nnnnnn #1#2#3#4#5#6
+  {
+    \__draw_softpath_round_calc:nnnnw {#3} {#4} {#5} {#6}
+      #1 \s__draw_mark #2 \s__draw_stop
+  }
+\cs_generate_variant:Nn \__draw_softpath_round_calc:nnnnnn { eV }
+\cs_new:Npn \__draw_softpath_round_calc:nnnnw
+  #1#2#3#4 #5 , #6 \s__draw_mark #7 , #8 \s__draw_stop
+  {
+    {#5} {#6}
+    \exp_not:N \__draw_softpath_curveto_opi:nn
+      {
+        \fp_to_dim:n
+          { #5 + \c__draw_softpath_arc_fp * ( #1 - #5 ) }
+      }
+      {
+        \fp_to_dim:n
+          { #6 + \c__draw_softpath_arc_fp * ( #2 - #6 ) }
+      }
+    \exp_not:N \__draw_softpath_curveto_opii:nn
+      {
+        \fp_to_dim:n
+          { #7 + \c__draw_softpath_arc_fp * ( #1 - #7 ) }
+      }
+      {
+        \fp_to_dim:n
+          { #8 + \c__draw_softpath_arc_fp* ( #2 - #8 ) }
+      }
+    \exp_not:N \__draw_softpath_curveto_opiii:nn
+      {#7} {#8}
+  }
+\cs_new_protected:Npn \__draw_softpath_round_close:nn #1#2
+  {
+    \use:e
+      {
+        \__draw_softpath_round_calc:NnnNnn
+          {
+            \tl_set:Ne \exp_not:N \l__draw_softpath_move_tl
+              {
+                \__draw_softpath_moveto_op:nn
+                \exp_not:N \exp_after:wN
+                  \exp_not:N \__draw_softpath_round_close:w
+                  \exp_not:N \l__draw_softpath_curve_end_tl
+                    \s__draw_stop
+              }
+            \use:e
+              {
+                \exp_not:N \exp_not:N \exp_not:N \use_i:nnnn
+                  {
+                    \__draw_softpath_round_loop:Nnn
+                      \__draw_softpath_close_op:nn
+                      \exp_not:N \exp_after:wN
+                        \exp_not:N \__draw_softpath_round_close:w
+                        \exp_not:N \l__draw_softpath_curve_end_tl
+                          \s__draw_stop
+                  }
+              }
+          }
+          {#1} {#2}
+          \__draw_softpath_lineto_op:nn
+          \exp_after:wN \use_none:n \l__draw_softpath_move_tl
+      }
+  }
+\cs_new:Npn \__draw_softpath_round_close:w #1 , #2 \s__draw_stop { {#1} {#2} }
+\cs_new_protected:Npn \__draw_softpath_round_end:
+  {
+    \tl_put_right:No \l__draw_softpath_main_tl
+      \l__draw_softpath_move_tl
+    \tl_put_right:No \l__draw_softpath_main_tl
+      \l__draw_softpath_part_tl
+    \tl_build_gbegin:N \g__draw_softpath_main_tl
+    \__draw_softpath_add:o \l__draw_softpath_main_tl
+  }
+%% File: l3draw-state.dtx
+\dim_new:N \g__draw_linewidth_dim
+\dim_new:N \l_draw_default_linewidth_dim
+\dim_set:Nn \l_draw_default_linewidth_dim { 0.4pt }
+\cs_new_protected:Npn \draw_linewidth:n #1
+  {
+    \dim_gset:Nn \g__draw_linewidth_dim { \fp_to_dim:n {#1} }
+    \__draw_backend_linewidth:n \g__draw_linewidth_dim
+  }
+\cs_new_protected:Npn \draw_dash_pattern:nn #1#2
+  {
+    \group_begin:
+      \seq_set_from_clist:Nn \l__draw_tmp_seq {#1}
+      \seq_set_map:NNn \l__draw_tmp_seq \l__draw_tmp_seq
+        { \fp_to_dim:n {##1} }
+      \use:e
+        {
+          \__draw_backend_dash_pattern:nn
+            { \seq_use:Nn \l__draw_tmp_seq { , } }
+            { \fp_to_dim:n {#2} }
+        }
+    \group_end:
+  }
+\seq_new:N \l__draw_tmp_seq
+\cs_new_protected:Npn \draw_miterlimit:n #1
+  { \exp_args:Ne \__draw_backend_miterlimit:n { \fp_eval:n {#1} } }
+\cs_new_protected:Npn \draw_cap_butt: { \__draw_backend_cap_butt: }
+\cs_new_protected:Npn \draw_cap_rectangle: { \__draw_backend_cap_rectangle: }
+\cs_new_protected:Npn \draw_cap_round: { \__draw_backend_cap_round: }
+\cs_new_protected:Npn \draw_evenodd_rule: { \__draw_backend_evenodd_rule: }
+\cs_new_protected:Npn \draw_nonzero_rule: { \__draw_backend_nonzero_rule: }
+\cs_new_protected:Npn \draw_join_bevel: { \__draw_backend_join_bevel: }
+\cs_new_protected:Npn \draw_join_miter: { \__draw_backend_join_miter: }
+\cs_new_protected:Npn \draw_join_round: { \__draw_backend_join_round: }
+%% File: l3draw-transforms.dtx
+\bool_new:N \l__draw_matrix_active_bool
+\fp_new:N \l__draw_matrix_a_fp
+\fp_new:N \l__draw_matrix_b_fp
+\fp_new:N \l__draw_matrix_c_fp
+\fp_new:N \l__draw_matrix_d_fp
+\dim_new:N \l__draw_xshift_dim
+\dim_new:N \l__draw_yshift_dim
+\cs_new_protected:Npn \draw_transform_matrix_reset:
+  {
+    \fp_set:Nn \l__draw_matrix_a_fp { 1 }
+    \fp_zero:N \l__draw_matrix_b_fp
+    \fp_zero:N \l__draw_matrix_c_fp
+    \fp_set:Nn \l__draw_matrix_d_fp { 1 }
+  }
+\cs_new_protected:Npn \draw_transform_shift_reset:
+  {
+    \dim_zero:N \l__draw_xshift_dim
+    \dim_zero:N \l__draw_yshift_dim
+  }
+\draw_transform_matrix_reset:
+\draw_transform_shift_reset:
+\cs_new_protected:Npn \draw_transform_matrix_absolute:nnnn #1#2#3#4
+  {
+    \fp_set:Nn \l__draw_matrix_a_fp {#1}
+    \fp_set:Nn \l__draw_matrix_b_fp {#2}
+    \fp_set:Nn \l__draw_matrix_c_fp {#3}
+    \fp_set:Nn \l__draw_matrix_d_fp {#4}
+    \bool_lazy_all:nTF
+      {
+        { \fp_compare_p:nNn \l__draw_matrix_a_fp = \c_one_fp }
+        { \fp_compare_p:nNn \l__draw_matrix_b_fp = \c_zero_fp }
+        { \fp_compare_p:nNn \l__draw_matrix_c_fp = \c_zero_fp }
+        { \fp_compare_p:nNn \l__draw_matrix_d_fp = \c_one_fp }
+      }
+      { \bool_set_false:N \l__draw_matrix_active_bool }
+      { \bool_set_true:N \l__draw_matrix_active_bool }
+  }
+\cs_new_protected:Npn \draw_transform_shift_absolute:n #1
+  {
+    \__draw_point_process:nn
+      { \__draw_transform_shift_absolute:nn } {#1}
+  }
+\cs_new_protected:Npn \__draw_transform_shift_absolute:nn #1#2
+  { \__draw_transform_shift:nnnn { 0pt } { 0pt } {#1} {#2} }
+\cs_new_protected:Npn \draw_transform_matrix:nnnn #1#2#3#4
+  {
+    \use:e
+      {
+        \__draw_transform:nnnn
+          { \fp_eval:n {#1} }
+          { \fp_eval:n {#2} }
+          { \fp_eval:n {#3} }
+          { \fp_eval:n {#4} }
+      }
+  }
+\cs_new_protected:Npn \__draw_transform:nnnn #1#2#3#4
+  {
+    \use:e
+      {
+        \draw_transform_matrix_absolute:nnnn
+          { #1 * \l__draw_matrix_a_fp + #2 * \l__draw_matrix_c_fp }
+          { #1 * \l__draw_matrix_b_fp + #2 * \l__draw_matrix_d_fp }
+          { #3 * \l__draw_matrix_a_fp + #4 * \l__draw_matrix_c_fp }
+          { #3 * \l__draw_matrix_b_fp + #4 * \l__draw_matrix_d_fp }
+        }
+  }
+\cs_new_protected:Npn \draw_transform_shift:n #1
+  {
+    \__draw_point_process:nn
+      { \__draw_transform_shift:nn } {#1}
+  }
+\cs_new_protected:Npn \__draw_transform_shift:nn #1#2
+  {
+    \__draw_transform_shift:nnnn
+      \l__draw_xshift_dim
+      \l__draw_yshift_dim
+      {#1} {#2}
+  }
+\cs_new_protected:Npn \__draw_transform_shift:nnnn #1#2#3#4
+  {
+    \dim_set:Nn \l__draw_xshift_dim
+      {
+        \fp_to_dim:n
+          {
+            #1 +
+            ( #3 * \l__draw_matrix_a_fp + #4 * \l__draw_matrix_b_fp )
+          }
+      }
+    \dim_set:Nn \l__draw_yshift_dim
+      {
+        \fp_to_dim:n
+          {
+            #2 +
+            ( #3 * \l__draw_matrix_c_fp + #4 * \l__draw_matrix_d_fp )
+          }
+      }
+  }
+\cs_new_protected:Npn \draw_transform_matrix_invert:
+  {
+    \bool_if:NT \l__draw_matrix_active_bool
+      {
+        \__draw_transform_invert:e
+          {
+            \fp_eval:n
+              {
+                1 /
+                  (
+                      \l__draw_matrix_a_fp * \l__draw_matrix_d_fp
+                    - \l__draw_matrix_b_fp * \l__draw_matrix_c_fp
+                  )
+              }
+          }
+      }
+  }
+\cs_new_protected:Npn \__draw_transform_invert:n #1
+  {
+    \fp_set:Nn \l__draw_matrix_a_fp
+      { \l__draw_matrix_d_fp * #1 }
+    \fp_set:Nn \l__draw_matrix_b_fp
+      { -\l__draw_matrix_b_fp * #1 }
+    \fp_set:Nn \l__draw_matrix_c_fp
+      { -\l__draw_matrix_c_fp * #1 }
+    \fp_set:Nn \l__draw_matrix_d_fp
+      { \l__draw_matrix_a_fp * #1 }
+  }
+\cs_generate_variant:Nn \__draw_transform_invert:n { e }
+\cs_new_protected:Npn \draw_transform_shift_invert:
+  {
+    \dim_set:Nn \l__draw_xshift_dim { -\l__draw_xshift_dim }
+    \dim_set:Nn \l__draw_yshift_dim { -\l__draw_yshift_dim }
+  }
+\cs_new_protected:Npn \draw_transform_triangle:nnn #1#2#3
+  {
+    \__draw_point_process:nnn
+      {
+        \__draw_point_process:nn
+          { \__draw_transform_triangle:nnnnnn }
+          {#1}
+      }
+      {#2} {#3}
+  }
+\cs_new_protected:Npn \__draw_transform_triangle:nnnnnn #1#2#3#4#5#6
+  {
+    \use:e
+      {
+        \draw_transform_matrix_absolute:nnnn
+          { #3 - #1 }
+          { #4 - #2 }
+          { #5 - #1 }
+          { #6 - #2 }
+        \draw_transform_shift_absolute:n { #1 , #2 }
+      }
+  }
+\cs_new_protected:Npn \draw_transform_scale:n #1
+  { \draw_transform_matrix:nnnn { #1 } { 0 } { 0 } { #1 } }
+\cs_new_protected:Npn \draw_transform_xscale:n #1
+  { \draw_transform_matrix:nnnn { #1 } { 0 } { 0 } { 1 } }
+\cs_new_protected:Npn \draw_transform_yscale:n #1
+  { \draw_transform_matrix:nnnn { 1 } { 0 } { 0 } { #1 } }
+\cs_new_protected:Npn \draw_transform_xshift:n #1
+  { \draw_transform_shift:n { #1 , 0pt } }
+\cs_new_protected:Npn \draw_transform_yshift:n #1
+  { \draw_transform_shift:n { 0pt , #1 } }
+\cs_new_protected:Npn \draw_transform_xslant:n #1
+  { \draw_transform_matrix:nnnn { 1 } { 0 } { #1 } { 1 } }
+\cs_new_protected:Npn \draw_transform_yslant:n #1
+  { \draw_transform_matrix:nnnn { 1 } { #1 } { 0 } { 1 } }
+\cs_new_protected:Npn \draw_transform_rotate:n #1
+  { \__draw_transform_rotate:e { \fp_eval:n {#1} } }
+\cs_new_protected:Npn \__draw_transform_rotate:n #1
+  {
+    \__draw_transform_rotate:ee
+      { \fp_eval:n { cosd(#1) } }
+      { \fp_eval:n { sind(#1) } }
+  }
+\cs_generate_variant:Nn \__draw_transform_rotate:n { e }
+\cs_new_protected:Npn \__draw_transform_rotate:nn #1#2
+  { \draw_transform_matrix:nnnn {#1} {#2} { -#2 } { #1 } }
+\cs_generate_variant:Nn \__draw_transform_rotate:nn { ee }
+%% 
+%%
+%% End of file `l3draw.sty'.

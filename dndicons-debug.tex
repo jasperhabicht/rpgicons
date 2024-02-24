@@ -5,6 +5,7 @@
 \debug_on:n { all }
 
 \RequirePackage [ compat ] { dndicons-l3draw }
+\RequirePackage [ compat ] { dndicons-l3draw }
 
 \clist_set:Nn \l_tmpa_clist {
     twoside, fourside, sixside, eightside, tenside, twelveside, twentyside, hundredside,
@@ -32,6 +33,8 @@
 \ExplSyntaxOn
 
 \dndiconsset { baseline = 0pt , before ~ sep = 0pt , after ~ sep = 0pt }
+\clist_map_inline:Nn \l_tmpa_clist {
+\dndiconsset{baseline = 0pt, before ~ sep = 0pt, after ~ sep = 0pt}
 \clist_map_inline:Nn \l_tmpa_clist {
     \begin{dndiconswrapper} {#1} \end{dndiconswrapper}
 }

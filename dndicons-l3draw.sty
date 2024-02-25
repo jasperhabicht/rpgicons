@@ -1447,10 +1447,45 @@
     icon ~ style / rotate       .initial:n = { 0.0 } ,
 }
 
+\clist_new:N \l__dndicons_types_clist
+\clist_set:Nn \l__dndicons_types_clist {
+    die , ability , saving , spell , spellschool , damage , attack , condition
+}
+
+\clist_map_inline:Nn \l__dndicons_types_clist {
+    \tl_new:c { l_dndicons_types_every_ #1 _style_tl }
+    \keys_define:nn { dndicons } {
+        icon ~ style / every ~ #1 .tl_set:c = { l_dndicons_types_every_ #1 _style_tl } 
+    }
+}
+
+\clist_new:N \l__dndicons_shapes_clist
+\clist_set:Nn \l__dndicons_shapes_clist {
+    twoside , fourside , sixside , eightside , tenside , twelveside , twentyside , hundredside ,
+    fudge , sixside ~ one , sixside ~ two , sixside ~ three, sixside ~ four, sixside ~ five , 
+    sixside ~ six , sixside ~ seven, sixside ~ eight, sixside ~ nine, fudge ~ plus, fudge ~ minus ,
+    strength , dexterity , dexterity ~ alt , constitution , intelligence , wisdom , charisma , luck , 
+    armor , proficiency ,
+    linear , conic , quadratic , cubic , spheric , cylindric , verbal , somatic , material , focus ,
+    abjuration , conjuration , divination , enchantment , evocation , illusion , necromancy , transmutation ,
+    acid , bludgeoning , cold , fire , force , lightning , necrotic , piercing , poison , psychic ,
+    radiant , slashing , thunder , healing , 
+    melee , ranged , magic , singlehanded , doublehanded ,
+    buff , blinded , charmed , deafened , exhausted , frightened , grappled , incapacitated , invisible ,
+    paralyzed , petrified , poisoned , prone , restrained , stunned , unconscious , hearing , seeing
+}
+
+\clist_map_inline:Nn \l__dndicons_shapes_clist {
+    \tl_new:c { l_dndicons_shapes_every_ #1 _style_tl }
+    \keys_define:nn { dndicons } {
+        icon ~ style / every ~ #1 .tl_set:c = { l_dndicons_shapes_every_ #1 _style_tl } 
+    }
+}
+
 \seq_new:N \l__dndicons_icon_shape_name_parts_seq
 \str_new:N \l__dndicons_icon_shape_name_str
 \coffin_new:N \l__dndicons_icon_label_coffin
-\NewDocumentCommand \DndIconsUseIcon { s O{} o m } {
+\NewDocumentCommand \DndIconsUseIcon { s O{} O{} m } {
     \draw_begin:
         \draw_scope_begin: 
             \draw_cap_round:
@@ -1460,6 +1495,7 @@
             } {
                 \keys_set:nn { dndicons / icon ~ style } {#2}
             } 
+            \keys_set:ne { dndicons / icon ~ style } { \use:c { l_dndicons_shapes_every_ #4 _style_tl } }
             \draw_linewidth:n { \l_dndicons_icon_linewidth_dim }
             \draw_transform_scale:n { \l_dndicons_icon_transform_scale_fp }
             \draw_transform_rotate:n { \l_dndicons_icon_transform_rotate_fp }
@@ -1517,6 +1553,7 @@
 \NewDocumentCommand { \DndiconsDie } { O{normal} m O{} m } {
     \group_begin:
         \keys_set_groups:nnn { dndicons / icon ~ style } { extra } {#3}
+        \keys_set:ne { dndicons / icon ~ style } { \l_dndicons_types_every_die_style_tl }
         \hspace { \l_dndicons_icon_before_sep_dim }
         \str_if_eq:nnTF { large } {#1} {
             \DndIconsUseIcon[scale=.67, #3][#4]{#2}
@@ -1532,6 +1569,7 @@
 \NewDocumentCommand { \DndiconsAbility } { O{positive} m O{} } {
     \group_begin:
         \keys_set_groups:nnn { dndicons / icon ~ style } { extra } {#3}
+        \keys_set:ne { dndicons / icon ~ style } { \l_dndicons_types_every_ability_style_tl }
         \hspace { \l_dndicons_icon_before_sep_dim }
         \str_if_eq:nnTF { negative } {#1} {
             \DndIconsUseIcon*[frame=ability, scale=.33, #3]{#2} 
@@ -1546,6 +1584,7 @@
 \NewDocumentCommand { \DndiconsSaving } { O{} m O{} } {
     \group_begin:
         \keys_set_groups:nnn { dndicons / icon ~ style } { extra } {#3}
+        \keys_set:ne { dndicons / icon ~ style } { \l_dndicons_types_every_saving_style_tl }
         \hspace { \l_dndicons_icon_before_sep_dim }
         \str_if_eq:nnTF { empty } {#1} {
             \DndIconsUseIcon[frame=saving, scale=.33, #3]{} 
@@ -1560,6 +1599,7 @@
 \NewDocumentCommand { \DndiconsSpell } { m O{} } {
     \group_begin:
         \keys_set_groups:nnn { dndicons / icon ~ style } { extra } {#2}
+        \keys_set:ne { dndicons / icon ~ style } { \l_dndicons_types_every_spell_style_tl }
         \hspace { \l_dndicons_icon_before_sep_dim }
         \DndIconsUseIcon[scale=.33, #2]{#1} 
         \hspace { \l_dndicons_icon_after_sep_dim }
@@ -1570,6 +1610,7 @@
 \NewDocumentCommand { \DndiconsSpellschool } { O{positive} m O{} } {
     \group_begin:
         \keys_set_groups:nnn { dndicons / icon ~ style } { extra } {#3}
+        \keys_set:ne { dndicons / icon ~ style } { \l_dndicons_types_every_spellschool_style_tl }
         \hspace { \l_dndicons_icon_before_sep_dim }
         \str_if_eq:nnTF { negative } {#1} {
             \DndIconsUseIcon*[frame=spellschool, scale=.33, #3]{#2} 
@@ -1584,6 +1625,7 @@
 \NewDocumentCommand { \DndiconsDamage } { m O{} } {
     \group_begin:
         \keys_set_groups:nnn { dndicons / icon ~ style } { extra } {#2}
+        \keys_set:ne { dndicons / icon ~ style } { \l_dndicons_types_every_damage_style_tl }
         \hspace { \l_dndicons_icon_before_sep_dim }
         \DndIconsUseIcon[frame=damage, scale=.33, #2]{#1} 
         \hspace { \l_dndicons_icon_after_sep_dim }
@@ -1594,6 +1636,7 @@
 \NewDocumentCommand { \DndiconsAttack } { m O{} } {
     \group_begin:
         \keys_set_groups:nnn { dndicons / icon ~ style } { extra } {#2}
+        \keys_set:ne { dndicons / icon ~ style } { \l_dndicons_types_every_attack_style_tl }
         \hspace { \l_dndicons_icon_before_sep_dim }
         \DndIconsUseIcon[scale=.33, #2]{#1} 
         \hspace { \l_dndicons_icon_after_sep_dim }
@@ -1604,6 +1647,7 @@
 \NewDocumentCommand { \DndiconsCondition } { m O{} } {
     \group_begin:
         \keys_set_groups:nnn { dndicons / icon ~ style } { extra } {#2}
+        \keys_set:ne { dndicons / icon ~ style } { \l_dndicons_types_every_condition_style_tl }
         \hspace { \l_dndicons_icon_before_sep_dim }
         \DndIconsUseIcon[scale=.33, #2]{#1} 
         \hspace { \l_dndicons_icon_after_sep_dim }

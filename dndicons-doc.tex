@@ -517,8 +517,9 @@ The icon is embedded as a node in the pic which has the name \macro{-node}. Thus
 !dnd icons/!create pic from saving shape 
 !dnd icons/!create pic from spellschool shape
 !dnd icons/!create pic from damage shape
+!dnd icons/!create every style
 \end{macrodef}
-The package defines five Ti\emph{k}Z keys that are used to create pics using the relevant node shapes. In normal circumstances, it is not necessary to use these keys. They are mentioned here primarily for reference. 
+The package defines five Ti\emph{k}Z keys that are used to create pics using the relevant node shapes. Another key is defined to create keys that can be used to style all instances of a command or shape. In normal circumstances, it is not necessary to use these keys. They are mentioned here only for reference. 
 
 \subsection{Boxing of icons}
 
@@ -604,6 +605,19 @@ With the \macro{frame} option, one of four different frames can be selected that
 The \macro{background} option sets the color of the shape when it is printed over a filled frame which can be achieved by setting the \macro{negative} option for the \macro{\ability} or the \macro{\spellschool} command or using the starred version of the \macro{\DndIconsUseIcon} command.
 
 The \macro{color} option sets the color of strokes and fills in general while the \macro{stroke} option and the \macro{fill} option set the color only for strokes or fills respectively. The \macro{line width} sets the line width for strokes. Using the \macro{scale} and \macro{rotate} options, the shape can be scaled and rotated.
+
+\begin{macrodef}
+every die
+every ability
+every saving
+every spell
+every spellschool
+every damage
+every attack
+every condition
+every <shape>
+\end{macrodef}
+Styles following the pattern \macro{dnd icons/every} followed by a space and the name of the command or the shape can be used to apply styles to every instance of this command or shape. For example, \macro{\dndiconsset{every die={color={red}}}} can be used to draw in red all icons created using the \macro{\die} command. Calling \macro{\dndiconsset{every charisma={color={red}}}} will draw every instace of the \macro{charisma} shape in red.
 
 \subsection{Setting options globally}
 

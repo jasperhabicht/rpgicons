@@ -1,5 +1,5 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{dndicons}[2024-02-24 DnD Icons Package (1.4.4)]
+\ProvidesPackage{dndicons}[2024-02-25 DnD Icons Package (1.5.0)]
 
 % provide pics option
 \newif\ifdndicons@pics\dndicons@picsfalse
@@ -10,6 +10,22 @@
 \newlength{\dndicons@beforesep}
 \newlength{\dndicons@aftersep}
 \newlength{\dndicons@baseline}
+
+\def\dndicons@allshapes{%
+  twoside, fourside, sixside, eightside, tenside, twelveside, twentyside, hundredside,
+  fudge, sixside one, sixside two, sixside three, sixside four, sixside five, 
+  sixside six, sixside seven, sixside eight, sixside nine, fudge plus, fudge minus,
+  strength, dexterity, dexterity alt, constitution, intelligence, wisdom, charisma, luck, 
+  armor, proficiency,
+  linear, conic, quadratic, cubic, spheric, cylindric, verbal, somatic, material, focus,
+  abjuration, conjuration, divination, enchantment, evocation, illusion, necromancy, transmutation,
+  acid, bludgeoning, cold, fire, force, lightning, necrotic, piercing, poison, psychic,
+  radiant, slashing, thunder, healing, 
+  melee, ranged, magic, singlehanded, doublehanded,
+  buff, blinded, charmed, deafened, exhausted, frightened, grappled, incapacitated, invisible,
+  paralyzed, petrified, poisoned, prone, restrained, stunned, unconscious, hearing, seeing%
+}
+
 \tikzset{
     dnd icons/background color/.code={
         \colorlet{dndicons@bg}{#1}
@@ -42,97 +58,14 @@
     dnd icons/every attack/.style={},
     dnd icons/every condition/.style={},
     %
-    dnd icons/every twoside/.style={},
-    dnd icons/every fourside/.style={},
-    dnd icons/every sixside/.style={},
-    dnd icons/every eightside/.style={},
-    dnd icons/every tenside/.style={},
-    dnd icons/every twelveside/.style={},
-    dnd icons/every twentyside/.style={},
-    dnd icons/every hundredside/.style={},
-    dnd icons/every fudge/.style={},
-    dnd icons/every sixside one/.style={},
-    dnd icons/every sixside two/.style={},
-    dnd icons/every sixside three/.style={},
-    dnd icons/every sixside four/.style={},
-    dnd icons/every sixside five/.style={},
-    dnd icons/every sixside six/.style={},
-    dnd icons/every sixside seven/.style={},
-    dnd icons/every sixside eight/.style={},
-    dnd icons/every sixside nine/.style={},
-    dnd icons/every fudge plus/.style={},
-    dnd icons/every fudge minus/.style={},
-    %
-    dnd icons/every strength/.style={},
-    dnd icons/every dexterity/.style={},
-    dnd icons/every dexterity alt/.style={},
-    dnd icons/every constitution/.style={},
-    dnd icons/every intelligence/.style={},
-    dnd icons/every wisdom/.style={},
-    dnd icons/every charisma/.style={},
-    dnd icons/every luck/.style={},
-    dnd icons/every armor/.style={},
-    dnd icons/every proficiency/.style={},
-    %
-    dnd icons/every linear/.style={},
-    dnd icons/every conic/.style={},
-    dnd icons/every quadratic/.style={},
-    dnd icons/every cubic/.style={},
-    dnd icons/every spheric/.style={},
-    dnd icons/every cylindric/.style={},
-    dnd icons/every verbal/.style={},
-    dnd icons/every somatic/.style={},
-    dnd icons/every material/.style={},
-    dnd icons/every focus/.style={},
-    %
-    dnd icons/every abjuration/.style={},
-    dnd icons/every conjuration/.style={},
-    dnd icons/every divination/.style={},
-    dnd icons/every enchantment/.style={},
-    dnd icons/every evocation/.style={},
-    dnd icons/every illusion/.style={},
-    dnd icons/every necromancy/.style={},
-    dnd icons/every transmutation/.style={},
-    %
-    dnd icons/every acid/.style={},
-    dnd icons/every bludgeoning/.style={},
-    dnd icons/every cold/.style={},
-    dnd icons/every fire/.style={},
-    dnd icons/every force/.style={},
-    dnd icons/every lightning/.style={},
-    dnd icons/every necrotic/.style={},
-    dnd icons/every piercing/.style={},
-    dnd icons/every poison/.style={},
-    dnd icons/every psychic/.style={},
-    dnd icons/every radiant/.style={},
-    dnd icons/every slashing/.style={},
-    dnd icons/every thunder/.style={},
-    dnd icons/every healing/.style={},
-    %
-    dnd icons/every melee/.style={},
-    dnd icons/every ranged/.style={},
-    dnd icons/every magic/.style={},
-    dnd icons/every singlehanded/.style={},
-    dnd icons/every doublehanded/.style={},
-    % 
-    dnd icons/every buff/.style={},
-    dnd icons/every blinded/.style={},
-    dnd icons/every charmed/.style={},
-    dnd icons/every deafened/.style={},
-    dnd icons/every exhausted/.style={},
-    dnd icons/every frightened/.style={},
-    dnd icons/every grappled/.style={},
-    dnd icons/every incapacitated/.style={},
-    dnd icons/every invisible/.style={},
-    dnd icons/every paralyzed/.style={},
-    dnd icons/every petrified/.style={},
-    dnd icons/every poisoned/.style={},
-    dnd icons/every prone/.style={},
-    dnd icons/every restrained/.style={},
-    dnd icons/every stunned/.style={},
-    dnd icons/every unconscious/.style={},
-    dnd icons/every hearing/.style={},
-    dnd icons/every seeing/.style={},
+    dnd icons/create every style/.code={
+      \tikzset{
+        dnd icons/every #1/.style={}
+      }
+    },
+    dnd icons/create every style/.list/.expanded={%
+      \dndicons@allshapes%
+    }
 }
 
 % make tikz icons usable inside tikz environments
@@ -557,7 +490,7 @@
 }
 \ExplSyntaxOff
 
-\NewDocumentCommand{\die}{ O{normal} m O{} m }{%
+\NewDocumentCommand{\dndiconsdie}{ O{normal} m O{} m }{%
   \edef\dndicons@diceiconnrmlrg{#1}%
   \edef\dndicons@diceiconlrg{large}%
   \ifx\dndicons@diceiconnrmlrg\dndicons@diceiconlrg%
@@ -573,6 +506,7 @@
   }%
   \hspace{\dndicons@aftersep}%
 }
+\@ifundefined{die}{\NewCommandCopy\die\dndiconsdie}{}
 
 % ABILITIES
 
@@ -936,7 +870,7 @@
   }
 }
 
-\NewDocumentCommand{\ability}{ O{positive} m O{} }{%
+\NewDocumentCommand{\dndiconsability}{ O{positive} m O{} }{%
   \edef\dndicons@abilityiconposneg{#1}%
   \edef\dndicons@abilityiconneg{negative}%
   \ifx\dndicons@abilityiconposneg\dndicons@abilityiconneg%
@@ -953,8 +887,9 @@
   }%
   \hspace{\dndicons@aftersep}%
 }
+\@ifundefined{ability}{\NewCommandCopy\ability\dndiconsability}{}
 
-\NewDocumentCommand{\saving}{ O{normal} m O{} }{%
+\NewDocumentCommand{\dndiconssaving}{ O{normal} m O{} }{%
   \edef\dndicons@abilityiconnrmemp{#1}%
   \edef\dndicons@abilityiconemp{empty}%
   \ifx\dndicons@abilityiconnrmemp\dndicons@abilityiconemp%
@@ -972,6 +907,7 @@
   }%
   \hspace{\dndicons@aftersep}%
 }
+\@ifundefined{saving}{\NewCommandCopy\saving\dndiconssaving}{}
 
 % SPELLS
 
@@ -1164,7 +1100,7 @@
   }
 }
 
-\NewDocumentCommand{\spell}{ m O{} }{%
+\NewDocumentCommand{\dndiconsspell}{ m O{} }{%
   \hspace{\dndicons@beforesep}%
   \tikz[dnd icons, dnd icons/every spell, dnd icons/every #1,
     baseline=\dndicons@baseline, #2] {
@@ -1173,6 +1109,7 @@
   }%
   \hspace{\dndicons@aftersep}%
 }
+\@ifundefined{spell}{\NewCommandCopy\spell\dndiconsspell}{}
 
 % SPELLSCHOOLS
 
@@ -1345,7 +1282,7 @@
   }
 }
 
-\NewDocumentCommand{\spellschool}{ O{negative} m O{} }{%
+\NewDocumentCommand{\dndiconsspellschool}{ O{negative} m O{} }{%
   \edef\dndicons@spellschooliconposneg{#1}%
   \edef\dndicons@spellschooliconpos{positive}%
   \ifx\dndicons@spellschooliconposneg\dndicons@spellschooliconpos%
@@ -1365,6 +1302,7 @@
   }%
   \hspace{\dndicons@aftersep}%
 }
+\@ifundefined{spellschool}{\NewCommandCopy\spellschool\dndiconsspellschool}{}
 
 % DAMAGES
 
@@ -1691,7 +1629,7 @@
   }
 }
 
-\NewDocumentCommand{\damage}{ m O{} }{%
+\NewDocumentCommand{\dndiconsdamage}{ m O{} }{%
   \hspace{\dndicons@beforesep}%
   \tikz[dnd icons, dnd icons/every damage, dnd icons/every #1,
     baseline=\dndicons@baseline, #2] {
@@ -1701,6 +1639,7 @@
   }%
   \hspace{\dndicons@aftersep}%
 }
+\@ifundefined{damage}{\NewCommandCopy\damage\dndiconsdamage}{}
 
 % ATTACKS
 
@@ -1849,7 +1788,7 @@
   }
 }
 
-\NewDocumentCommand{\attack}{ m O{} }{%
+\NewDocumentCommand{\dndiconsattack}{ m O{} }{%
   \hspace{\dndicons@beforesep}%
   \tikz[dnd icons, dnd icons/every attack, dnd icons/every #1,
     baseline=\dndicons@baseline, #2] {
@@ -1858,6 +1797,7 @@
   }%
   \hspace{\dndicons@aftersep}%
 }
+\@ifundefined{attack}{\NewCommandCopy\attack\dndiconsattack}{}
 
 % CONDITIONS
 
@@ -2363,6 +2303,7 @@
   }%
   \hspace{\dndicons@aftersep}%
 }
+\@ifundefined{condition}{\NewCommandCopy\condition\dndiconscondition}{}
 
 % make tikz icons available as pics
 \ifdndicons@pics
@@ -2371,62 +2312,61 @@
   dnd icons/create pic from shape/.code={%
     \tikzset{
       dnd icons #1/.pic={
-        \node[#1, draw, scale=.33] (0cm,0cm) (-node) {}; 
-        \path[draw=none, scale=.33] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
-      }
+        \begin{scope}[every node/.append style={#1}, dnd icons/every #1]
+          \node[draw, scale=.33] (0cm,0cm) (-node) {}; 
+          \path[draw=none, scale=.33] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
+        \end{scope}
+      },
     }%
   },
   dnd icons/create pic from ability shape/.code={%
     \tikzset{
       dnd icons #1 ability/.pic={
-        \path[scale=.5, pic actions] (0cm,0cm) circle[radius=.45cm];
-        \node[#1, draw, scale=.33] (0cm,0cm) (-node) {}; 
-        \path[draw=none, scale=.33] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
+        \begin{scope}[every node/.append style={#1}, dnd icons/every ability, dnd icons/every #1]
+          \path[scale=.5, pic actions] (0cm,0cm) circle[radius=.45cm];
+          \node[draw, scale=.33] (0cm,0cm) (-node) {}; 
+          \path[draw=none, scale=.33] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
+        \end{scope}
       }
     }%
   },
   dnd icons/create pic from saving shape/.code={%
     \tikzset{
       dnd icons #1 saving/.pic={
-        \path[draw, scale=.33, pic actions] (-.45cm,.45cm) -- (.45cm,.45cm) -- (.45cm,-.05cm) 
-          arc[start angle=360, end angle=180, radius=.45cm] -- cycle;
-        \node[#1, draw, scale=.225] (0cm,0cm) (-node) {}; 
-        \path[draw=none, scale=.33] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
+        \begin{scope}[every node/.append style={#1}, dnd icons/every saving, dnd icons/every #1]
+          \path[draw, scale=.33, pic actions] (-.45cm,.45cm) -- (.45cm,.45cm) -- (.45cm,-.05cm) 
+            arc[start angle=360, end angle=180, radius=.45cm] -- cycle;
+          \node[#1, draw, scale=.225] (0cm,0cm) (-node) {}; 
+          \path[draw=none, scale=.33] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
+        \end{scope}
       }
     }%
   },
   dnd icons/create pic from spellschool shape/.code={%
     \tikzset{
       dnd icons #1 spellschool/.pic={
-        \path[draw, scale=.33, pic actions] (-.475cm,.35cm) 
-          -- (-.35cm,.475cm) -- (.35cm,.475cm) -- (.475cm,.35cm) -- (.425cm,-.375cm) -- (0cm,-.475cm) -- (-.425cm,-.375cm) -- cycle;
-        \node[#1, draw, scale=.225] (0cm,0cm) (-node) {}; 
-        \path[draw=none, scale=.33] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
+        \begin{scope}[every node/.append style={#1}, dnd icons/every spellschool, dnd icons/every #1]
+          \path[draw, scale=.33, pic actions] (-.475cm,.35cm) 
+            -- (-.35cm,.475cm) -- (.35cm,.475cm) -- (.475cm,.35cm) -- (.425cm,-.375cm) -- (0cm,-.475cm) -- (-.425cm,-.375cm) -- cycle;
+          \node[#1, draw, scale=.225] (0cm,0cm) (-node) {}; 
+          \path[draw=none, scale=.33] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
+        \end{scope}
       }
     }%
   },
   dnd icons/create pic from damage shape/.code={
     \tikzset{
       dnd icons #1 damage/.pic={
-        \path[draw, scale=.33, pic actions] (0cm,0cm) circle[radius=.5cm];
-        \node[#1, draw, scale=.225] (0cm,0cm) (-node) {}; 
-        \path[draw=none, scale=.33] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
+        \begin{scope}[every node/.append style={#1}, dnd icons/every damage, dnd icons/every #1]
+          \path[draw, scale=.33, pic actions] (0cm,0cm) circle[radius=.5cm];
+          \node[#1, draw, scale=.225] (0cm,0cm) (-node) {}; 
+          \path[draw=none, scale=.33] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
+        \end{scope}
       }
     }
   },
-  dnd icons/create pic from shape/.list={%
-    twoside, fourside, sixside, eightside, tenside, twelveside, twentyside, hundredside,
-    fudge, sixside one, sixside two, sixside three, sixside four, sixside five, 
-    sixside six, sixside seven, sixside eight, sixside nine, fudge plus, fudge minus,
-    strength, dexterity, dexterity alt, constitution, intelligence, wisdom, charisma, luck, 
-    armor, proficiency,
-    linear, conic, quadratic, cubic, spheric, cylindric, verbal, somatic, material, focus,
-    abjuration, conjuration, divination, enchantment, evocation, illusion, necromancy, transmutation,
-    acid, bludgeoning, cold, fire, force, lightning, necrotic, piercing, poison, psychic,
-    radiant, slashing, thunder, healing, 
-    melee, ranged, magic, singlehanded, doublehanded,
-    buff, blinded, charmed, deafened, exhausted, frightened, grappled, incapacitated, invisible,
-    paralyzed, petrified, poisoned, restrained, stunned, unconscious, hearing, seeing%
+  dnd icons/create pic from shape/.list/.expanded={%
+    \dndicons@allshapes%
   },
   dnd icons/create pic from ability shape/.list={%
     strength, dexterity, dexterity alt, constitution, intelligence, wisdom, charisma, luck, 

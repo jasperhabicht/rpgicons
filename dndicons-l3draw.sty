@@ -1485,6 +1485,9 @@
 \seq_new:N \l__dndicons_icon_shape_name_parts_seq
 \str_new:N \l__dndicons_icon_shape_name_str
 \coffin_new:N \l__dndicons_icon_label_coffin
+\bool_if:NF \l__dndicons_edge_mode_bool {
+    \cs_generate_variant:Nn { \keys_set:nn } { ne }
+}
 \NewDocumentCommand \DndIconsUseIcon { s O{} O{} m } {
     \draw_begin:
         \draw_scope_begin: 

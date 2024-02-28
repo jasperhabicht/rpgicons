@@ -324,7 +324,7 @@ Roll\die{eightside}{}a die!
 Roll\die{eightside}{}a die!
 \end{codeexample}
 
-The option \macro{baseline} can be used to adjust the baseline of the icons. A larger value for the baseline will shift the icon downwards relative to the baseline of the surrounding text. The default value of the baseline is -3.5\,pt.
+The option \macro{baseline} can be used to adjust the baseline of the icons. A larger value for the baseline will shift the icon downwards relative to the baseline of the surrounding text. The default value of the baseline is \textminus 3.5\,pt.
 
 \subsection{Icons}
 
@@ -340,7 +340,7 @@ Because the package defines the icons as Ti\emph{k}Z shapes, every command can a
 |\dndiconsattack|{<shape>}[<options>]
 |\dndiconscondition|{<shape>}[<options>]
 \end{macrodef}
-The package defines a set of alternative commands which can be used in cases where another package defines one of the basic commands \macro{\die}, \macro{\ability}, \macro{\saving}, \macro{\spell}, \macro{\spellschool}, \macro{\damage}, \macro{\attack} or \macro{\condition} which are described below in detail. These alternative commands are exact copies of the relevant basic commands and take the same set or arguments. 
+The package defines a set of alternative commands which can be used in cases where another package defines one of the basic commands \macro{\die}, \macro{\ability}, \macro{\saving}, \macro{\spell}, \macro{\spellschool}, \macro{\damage}, \macro{\attack} or \macro{\condition} which are described in the following in detail. These alternative commands are exact copies of the relevant basic commands and take the same set or arguments. 
 
 \subsubsection[Icon \textbackslash die]{Icon \titlemacro*{die}}
 
@@ -349,7 +349,7 @@ The command \macro{\die} prints an icon to depict a die with a certain number of
 
 For the six-sided die, nine additional shapes exists representing the values one to nine as pips. Also, additional shapes exist representing the plus or minus side of a fudge die.
 
-The command takes two mandatory commands, the first of which describes the shape (see previous subsection) and the second can take an integer that is placed in front of the shape. Thus, \macro{\die{eightside}{2}} results in \die{eightside}{2} (meaning 2 eight-sided dice are rolled).
+The command takes two mandatory commands, the first of which describes the shape (see the lists below) and the second can take an integer that is placed in front of the shape. For example, \macro{\die{eightside}{2}} results in \die{eightside}{2} (meaning two eight-sided dice are rolled).
 
 The command also takes two optional arguments, the second of which can take arbitrary Ti\emph{k}Z options to style the icon. The options affect the shape, not the integer when it is printed before the icon. As an example, \macro{\die{eightside}[blue, thick]{2}} results in \die{eightside}[blue, thick]{2}.
 
@@ -608,12 +608,13 @@ A variant of the package that uses the \macro{l3draw} package instead of the \ma
 \begin{macrodef}edge\end{macrodef}
 The \macro{l3draw} package is experimental and subject to ongoing updates. Therefore, the \macro{l3draw} variant of the \macro{dndicons} package provides a fallback to established and more stable macro definitions (being available since the last major TeX Live release) which is active per default. Loading the \macro{l3draw} variant of the package with the option \macro{edge} will use functions that are only available in the most recent version of the \macro{l3draw} package.
 
+\label{macro:opacity}
 \begin{macrodef}opacity\end{macrodef}
 With the \macro{opacity} option, the \macro{l3draw} variant of the \macro{dndicons} package supports transparency using the \macro{l3opacity} package. Since transparency requires management of the PDF settings, it is necessary to call \macro{\DocumentMetadata{}} before loading a \macro{\documentclass}. The \macro{l3opacity} package is experimental.
 
 \subsection{Icon commands}
 
-The commands of the main variant of the \macro{dndicons} package, \macro{\die}, \macro{\ability}, \macro{\saving}, \macro{\spell}, \macro{\spellschool}, \macro{\damage}, \macro{\attack} and \macro{\condition}, which are described above have the same functionality and can be used the same way as in the main variant of the package. However, the available options are different and described below in more detail.
+The commands of the main variant of the \macro{dndicons} package, \macro{\die}, \macro{\ability}, \macro{\saving}, \macro{\spell}, \macro{\spellschool}, \macro{\damage}, \macro{\attack} and \macro{\condition}, which are described above have the same functionality and can be used the same way as in the main variant of the package. However, the available options are different and described in the following in detail.
 
 \begin{macrodef}
 |\DndIconsUseIcon|[<options>][<integer>]{<shape>}
@@ -663,7 +664,7 @@ With the \macro{frame} option, one of four different frames can be selected that
 
 The \macro{background} option sets the color of the shape when it is printed over a filled frame which can be achieved by setting the \macro{negative} option for the \macro{\ability} or the \macro{\spellschool} command or using the starred version of the \macro{\DndIconsUseIcon} command.
 
-The \macro{color} option sets the color of strokes, fills and text in general while the \macro{stroke} option, the \macro{fill} option and the \macro{text} option set the color only for strokes, fills or text respectively. Similarly, the \macro{opacity} macro sets the opacity generally, while the options \macro{stroke opacity}, \macro{fill opacity} and \macro{text opacity} allow for setting the opacity of strokes, fill and text separately. The opacity styles are only available when loading the package with the \macro{opacity} option (see above). The \macro{line width} sets the line width for strokes. Using the \macro{scale} and \macro{rotate} options, the shape can be scaled and rotated.
+The \macro{color} option sets the color of strokes, fills and text in general while the \macro{stroke} option, the \macro{fill} option and the \macro{text} option set the color only for strokes, fills or text respectively. Similarly, the \macro{opacity} macro sets the opacity generally, while the options \macro{stroke opacity}, \macro{fill opacity} and \macro{text opacity} allow for setting the opacity of strokes, fill and text separately. The opacity styles are only available when loading the package with the \macro{opacity} option (see the \hyperref{macro:opacity}{description above}). The \macro{line width} sets the line width for strokes. Using the \macro{scale} and \macro{rotate} options, the shape can be scaled and rotated.
 
 \begin{macrodef}
 every die

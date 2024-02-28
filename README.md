@@ -1,4 +1,4 @@
-![Version 1.5.0](https://img.shields.io/badge/version-1.5.0-blue)
+![Version 1.5.1](https://img.shields.io/badge/version-1.5.1-blue)
 
 # The `dndicons` package
 

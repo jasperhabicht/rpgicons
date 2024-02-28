@@ -198,7 +198,11 @@
                 \draw_suspend_end: 
             }
             \draw_scope_begin:
-                \draw_transform_shift:n { \draw_point_polar:nn { 0.33cm } { 60 * ##1 + 10 } }
+                \draw_transform_shift:n { 
+                    \draw_point_transform:n {
+                     \draw_point_polar:nn { 0.33cm } { 60 * ##1 + 10 } 
+                    }
+                }
                 \draw_coffin_use:Nnn \l_tmpa_coffin { hc } { vc } 
             \draw_scope_end:
         }

@@ -169,6 +169,42 @@
 \usepackage[pics]{dndicons}
 \usepackage{dndicons-l3draw}
 
+\ExplSyntaxOn
+\clist_new:N \l_dndicons_doc_logo_icons_clist
+\clist_new:N \l_dndicons_doc_logo_colors_clist
+\cs_generate_variant:Nn { \color_set:nnn } { nne }
+
+\clist_set:Nn \l_dndicons_doc_logo_colors_clist { 
+    264653 , 287271 , 2a9d8f , e9c46a , f4a261 , e76f51 
+}
+\int_step_inline:nn { \clist_count:N \l_dndicons_doc_logo_colors_clist } {
+    \color_set:nne { dndiconslogo \int_to_roman:n { #1 } } { HTML } {
+        \clist_item:Nn \l_dndicons_doc_logo_colors_clist { #1 }
+    }
+}
+\clist_set:Nn \l_dndicons_doc_logo_icons_clist { 
+    twentyside , charisma , armor , buff , ranged , proficiency 
+}
+
+\NewDocumentCommand{\dndiconslogo}{ O{1} }{
+    \draw_begin:
+        \draw_transform_scale:n { #1 }
+        \int_step_inline:nn { \clist_count:N \l_dndicons_doc_logo_icons_clist } {
+            \hcoffin_set:Nn \l_tmpa_coffin { 
+                \draw_suspend_begin: 
+                    \DndiconsAbility[negative]{ 
+                        \clist_item:Nn \l_dndicons_doc_logo_icons_clist { ##1 } 
+                    }[color=dndiconslogo \int_to_roman:n { ##1 } ] 
+                \draw_suspend_end: 
+            }
+            \draw_coffin_use:Nnnn \l_tmpa_coffin { hc } { vc } { 
+                \draw_point_polar:nn { 0.33cm } { 60 * ##1 + 10 } 
+            }
+        }
+    \draw_end:
+}
+\ExplSyntaxOff
+
 \NewDocumentEnvironment{dndiconsiconlist}{ }{
     \begin{longtable}{ @{} p{20em} p{5em} p{\dimexpr\linewidth-25em-4\tabcolsep} @{} }
     \toprule
@@ -205,6 +241,11 @@
 \changes{v1.5.1}{2024/02/28}{Addition of opacity to \titlemacro{l3draw} variant.}
 
 \begin{document}
+
+\vspace*{-1cm}
+\noindent\dndiconslogo[3]
+
+\bigskip
 
 \printdoctitle
 

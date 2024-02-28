@@ -6,8 +6,8 @@
 % available at http://www.latex-project.org/lppl/.
 
 \documentclass[a4paper]{article}
-\def\dndiconsfileversion{1.5.0}
-\def\dndiconsfiledate{25 February 2024}
+\def\dndiconsfileversion{1.5.1}
+\def\dndiconsfiledate{28 February 2024}
 
 \usepackage[T1]{fontenc}
 \usepackage{Alegreya}
@@ -202,6 +202,7 @@
 \changes{v1.4.3}{2024/02/22}{Added option to \titlemacro{l3draw} variant to enable upward compatibility.}
 \changes{v1.4.4}{2024/02/24}{Added styles for every instance of command or shape, correction of recent \titlemacro{l3draw} code.}
 \changes{v1.5.0}{2024/02/25}{Alternative set of commands defined, added support of styles in pics.}
+\changes{v1.5.1}{2024/02/28}{Addition of opacity to \titlemacro{l3draw} variant.}
 
 \begin{document}
 
@@ -558,9 +559,12 @@ A variant of the package that uses the \macro{l3draw} package instead of the \ma
 \begin{macrodef}edge\end{macrodef}
 The \macro{l3draw} package is experimental and subject to ongoing updates. Therefore, the \macro{l3draw} variant of the \macro{dndicons} package provides a fallback to established and more stable macro definitions (being available since the last major TeX Live release) which is active per default. Loading the \macro{l3draw} variant of the package with the option \macro{edge} will use functions that are only available in the most recent version of the \macro{l3draw} package.
 
-The commands of the main variant of the package, \macro{\die}, \macro{\ability}, \macro{\saving}, \macro{\spell}, \macro{\spellschool}, \macro{\damage}, \macro{\attack} and \macro{\condition}, which are described above have the same functionality and can be used the same way as in the main variant of the package. However, the available options are different and described below in more detail.
+\begin{macrodef}opacity\end{macrodef}
+With the \macro{opacity} option, the \macro{l3draw} variant of the \macro{dndicons} package supports transparency using the \macro{l3opacity} package. Since transparency requires management of the PDF settings, it is necessary to call \macro{\DocumentMetadata{}} before loading a \macro{\documentclass}. The \macro{l3opacity} package is experimental.
 
 \subsection{Icon commands}
+
+The commands of the main variant of the \macro{dndicons} package, \macro{\die}, \macro{\ability}, \macro{\saving}, \macro{\spell}, \macro{\spellschool}, \macro{\damage}, \macro{\attack} and \macro{\condition}, which are described above have the same functionality and can be used the same way as in the main variant of the package. However, the available options are different and described below in more detail.
 
 \begin{macrodef}
 |\DndIconsUseIcon|[<options>][<integer>]{<shape>}
@@ -588,10 +592,16 @@ If that the \macro{dndicons} package is to be loaded together with the \macro{dn
 
 \begin{macrodef}
 frame
-background
-color
 stroke
 fill
+text
+color
+background
+stroke opacity 
+fill opacity
+text opacity
+opacity 
+background opacity
 line width
 scale
 rotate
@@ -604,7 +614,7 @@ With the \macro{frame} option, one of four different frames can be selected that
 
 The \macro{background} option sets the color of the shape when it is printed over a filled frame which can be achieved by setting the \macro{negative} option for the \macro{\ability} or the \macro{\spellschool} command or using the starred version of the \macro{\DndIconsUseIcon} command.
 
-The \macro{color} option sets the color of strokes and fills in general while the \macro{stroke} option and the \macro{fill} option set the color only for strokes or fills respectively. The \macro{line width} sets the line width for strokes. Using the \macro{scale} and \macro{rotate} options, the shape can be scaled and rotated.
+The \macro{color} option sets the color of strokes, fills and text in general while the \macro{stroke} option, the \macro{fill} option and the \macro{text} option set the color only for strokes, fills or text respectively. Similarly, the \macro{opacity} macro sets the opacity generally, while the options \macro{stroke opacity}, \macro{fill opacity} and \macro{text opacity} allow for setting the opacity of strokes, fill and text separately. The opacity styles are only available when loading the package with the \macro{opacity} option (see above). The \macro{line width} sets the line width for strokes. Using the \macro{scale} and \macro{rotate} options, the shape can be scaled and rotated.
 
 \begin{macrodef}
 every die

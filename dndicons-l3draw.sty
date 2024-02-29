@@ -1451,6 +1451,7 @@
 \fp_new:N \l_dndicons_icon_opacity_text_fp
 \fp_new:N \l_dndicons_icon_opacity_background_fp
 \fp_new:N \l_dndicons_icon_transform_scale_fp
+\fp_new:N \l_dndicons_icon_transform_scale_inner_fp
 \fp_new:N \l_dndicons_icon_transform_rotate_fp
 
 \cs_generate_variant:Nn \prop_to_keyval:N { c }
@@ -1501,6 +1502,8 @@
     icon ~ style / line ~ width         .initial:n = { \l_draw_default_linewidth_dim } , 
     icon ~ style / scale                .fp_set:N  = \l_dndicons_icon_transform_scale_fp ,
     icon ~ style / scale                .initial:n = { 1.0 } ,
+    icon ~ style / scale ~ inner        .fp_set:N  = \l_dndicons_icon_transform_scale_inner_fp ,
+    icon ~ style / scale ~ inner        .initial:n = { 0.675 } ,
     icon ~ style / rotate               .fp_set:N  = \l_dndicons_icon_transform_rotate_fp ,
     icon ~ style / rotate               .initial:n = { 0.0 } ,
 }
@@ -1623,7 +1626,7 @@
                     } {
                         \draw_path_use_clear:n { stroke }
                     }
-                    \draw_transform_scale:n { 0.675 } 
+                    \draw_transform_scale:n { \l_dndicons_icon_transform_scale_inner_fp } 
                 } 
                 \clist_if_in:neTF { sixside ~ one , sixside ~ two , sixside ~ three , sixside ~ four , 
                     sixside ~ five , sixside ~ six , sixside ~ seven , sixside ~ eight , sixside ~ nine } {#4} {

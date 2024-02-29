@@ -882,8 +882,8 @@
     \ifx\dndicons@abilityiconposneg\dndicons@abilityiconneg%
       \path[scale=.5,fill] (0cm,0cm) circle[radius=.45cm];
     \fi%
-    \node[#2, \dndicons@abilityiconfg, scale=.33] (0cm,0cm) {};
-    \path[draw=none, scale=.33] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
+    \node[#2, \dndicons@abilityiconfg, scale=.333] (0cm,0cm) {};
+    \path[draw=none, scale=.333] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
   }%
   \hspace{\dndicons@aftersep}%
 }
@@ -898,12 +898,12 @@
   \hspace{\dndicons@beforesep}%
   \tikz[dnd icons, dnd icons/every saving, \dndicons@savingstyle,
     baseline=\dndicons@baseline, #3] {
-    \path[draw, scale=.33] (-.45cm,.45cm) -- (.45cm,.45cm) -- (.45cm,-.05cm) 
+    \path[draw, scale=.333] (-.45cm,.45cm) -- (.45cm,.45cm) -- (.45cm,-.05cm) 
       arc[start angle=360, end angle=180, radius=.45cm] -- cycle;
     \ifx\dndicons@abilityiconnrmemp\dndicons@abilityiconemp\else%
       \node[#2, draw,scale=.225] (0cm,0cm) {};
     \fi%
-    \path[draw=none, scale=.33] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
+    \path[draw=none, scale=.333] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
   }%
   \hspace{\dndicons@aftersep}%
 }
@@ -1104,8 +1104,8 @@
   \hspace{\dndicons@beforesep}%
   \tikz[dnd icons, dnd icons/every spell, dnd icons/every #1,
     baseline=\dndicons@baseline, #2] {
-    \node[#1, draw,scale=.33] (0cm,0cm) {}; 
-    \path[draw=none, scale=.33] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
+    \node[#1, draw,scale=.333] (0cm,0cm) {}; 
+    \path[draw=none, scale=.333] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
   }%
   \hspace{\dndicons@aftersep}%
 }
@@ -1298,7 +1298,7 @@
     \path[scale=.33, \dndicons@spellschooliconbg] (-.475cm,.35cm) 
       -- (-.35cm,.475cm) -- (.35cm,.475cm) -- (.475cm,.35cm) -- (.425cm,-.375cm) -- (0cm,-.475cm) -- (-.425cm,-.375cm) -- cycle;
     \node[#2, scale=.225, \dndicons@spellschooliconfg] (0cm,0cm) {}; 
-    \path[draw=none, scale=.33] ([yshift=-1pt].425,.425) rectangle ([yshift=1pt]-.425cm,-.425cm);
+    \path[draw=none, scale=.333] ([yshift=-1pt].425,.425) rectangle ([yshift=1pt]-.425cm,-.425cm);
   }%
   \hspace{\dndicons@aftersep}%
 }
@@ -1633,9 +1633,9 @@
   \hspace{\dndicons@beforesep}%
   \tikz[dnd icons, dnd icons/every damage, dnd icons/every #1,
     baseline=\dndicons@baseline, #2] {
-    \path[draw, scale=.33] (0cm,0cm) circle[radius=.5cm];
+    \path[draw, scale=.333] (0cm,0cm) circle[radius=.5cm];
     \node[#1, draw, scale=.225] (0cm,0cm) {}; 
-    \path[draw=none, scale=.33] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
+    \path[draw=none, scale=.333] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
   }%
   \hspace{\dndicons@aftersep}%
 }
@@ -1792,8 +1792,8 @@
   \hspace{\dndicons@beforesep}%
   \tikz[dnd icons, dnd icons/every attack, dnd icons/every #1,
     baseline=\dndicons@baseline, #2] {
-    \node[#1, draw, scale=.33] (0cm,0cm) {}; 
-    \path[draw=none, scale=.33] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
+    \node[#1, draw, scale=.333] (0cm,0cm) {}; 
+    \path[draw=none, scale=.333] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
   }%
   \hspace{\dndicons@aftersep}%
 }
@@ -2298,8 +2298,8 @@
   \hspace{\dndicons@beforesep}%
   \tikz[dnd icons, dnd icons/every condition, dnd icons/every #1,
     baseline=\dndicons@baseline, #2] {
-    \node[#1, draw, scale=.33] (0cm,0cm) {}; 
-    \path[draw=none, scale=.33] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
+    \node[#1, draw, scale=.333] (0cm,0cm) {}; 
+    \path[draw=none, scale=.333] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
   }%
   \hspace{\dndicons@aftersep}%
 }
@@ -2313,8 +2313,8 @@
     \tikzset{
       dnd icons #1/.pic={
         \begin{scope}[every node/.append style={#1}, dnd icons/every #1]
-          \node[draw, scale=.33] (0cm,0cm) (-node) {}; 
-          \path[draw=none, scale=.33] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
+          \node[draw, scale=.333] (0cm,0cm) (-node) {}; 
+          \path[draw=none, scale=.333] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
         \end{scope}
       },
     }%
@@ -2324,8 +2324,8 @@
       dnd icons #1 ability/.pic={
         \begin{scope}[every node/.append style={#1}, dnd icons/every ability, dnd icons/every #1]
           \path[scale=.5, pic actions] (0cm,0cm) circle[radius=.45cm];
-          \node[draw, scale=.33] (0cm,0cm) (-node) {}; 
-          \path[draw=none, scale=.33] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
+          \node[draw, scale=.333] (0cm,0cm) (-node) {}; 
+          \path[draw=none, scale=.333] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
         \end{scope}
       }
     }%
@@ -2337,7 +2337,7 @@
           \path[draw, scale=.33, pic actions] (-.45cm,.45cm) -- (.45cm,.45cm) -- (.45cm,-.05cm) 
             arc[start angle=360, end angle=180, radius=.45cm] -- cycle;
           \node[#1, draw, scale=.225] (0cm,0cm) (-node) {}; 
-          \path[draw=none, scale=.33] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
+          \path[draw=none, scale=.333] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
         \end{scope}
       }
     }%
@@ -2349,7 +2349,7 @@
           \path[draw, scale=.33, pic actions] (-.475cm,.35cm) 
             -- (-.35cm,.475cm) -- (.35cm,.475cm) -- (.475cm,.35cm) -- (.425cm,-.375cm) -- (0cm,-.475cm) -- (-.425cm,-.375cm) -- cycle;
           \node[#1, draw, scale=.225] (0cm,0cm) (-node) {}; 
-          \path[draw=none, scale=.33] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
+          \path[draw=none, scale=.333] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
         \end{scope}
       }
     }%
@@ -2360,7 +2360,7 @@
         \begin{scope}[every node/.append style={#1}, dnd icons/every damage, dnd icons/every #1]
           \path[draw, scale=.33, pic actions] (0cm,0cm) circle[radius=.5cm];
           \node[#1, draw, scale=.225] (0cm,0cm) (-node) {}; 
-          \path[draw=none, scale=.33] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
+          \path[draw=none, scale=.333] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
         \end{scope}
       }
     }

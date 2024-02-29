@@ -1681,10 +1681,10 @@
         \str_set:Ne \l__dndicons_icon_integer_str { #4 }
         \hspace { \l_dndicons_icon_before_sep_dim }
         \str_if_eq:neTF { large } { #1 } {
-            \DndIconsUseIcon[scale=.67, #3][#1]{#2}
+            \DndIconsUseIcon[scale=.675, #3][#1]{#2}
         } {
             \str_if_empty:NF \l__dndicons_icon_integer_str { \str_use:N \l__dndicons_icon_integer_str \, }
-            \DndIconsUseIcon[scale=.33, #3]{#2}
+            \DndIconsUseIcon[scale=.333, #3]{#2}
         }
         \hspace { \l_dndicons_icon_after_sep_dim }
     \group_end:
@@ -1697,9 +1697,9 @@
         \keys_set:ne { dndicons / icon ~ style } { \prop_to_keyval:N \l_dndicons_types_every_ability_style_prop }
         \hspace { \l_dndicons_icon_before_sep_dim }
         \str_if_eq:neTF { negative } { #1 } {
-            \DndIconsUseIcon*[frame=ability, scale=.33, #3]{#2} 
+            \DndIconsUseIcon*[frame=ability, scale=.333, #3]{#2} 
         } {
-            \DndIconsUseIcon[scale=.33, #3]{#2}
+            \DndIconsUseIcon[scale=.333, #3]{#2}
         }
         \hspace { \l_dndicons_icon_after_sep_dim }
     \group_end:
@@ -1712,9 +1712,9 @@
         \keys_set:ne { dndicons / icon ~ style } { \prop_to_keyval:N \l_dndicons_types_every_saving_style_prop }
         \hspace { \l_dndicons_icon_before_sep_dim }
         \str_if_eq:neTF { empty } { #1 } {
-            \DndIconsUseIcon[frame=saving, scale=.33, #3]{} 
+            \DndIconsUseIcon[frame=saving, scale=.333, #3]{} 
         } {
-            \DndIconsUseIcon[frame=saving, scale=.33, #3]{#2}
+            \DndIconsUseIcon[frame=saving, scale=.333, #3]{#2}
         }
         \hspace { \l_dndicons_icon_after_sep_dim }
     \group_end:
@@ -1726,7 +1726,7 @@
         \keys_set_groups:nne { dndicons / icon ~ style } { extra } {#2}
         \keys_set:ne { dndicons / icon ~ style } { \prop_to_keyval:N \l_dndicons_types_every_spell_style_prop }
         \hspace { \l_dndicons_icon_before_sep_dim }
-        \DndIconsUseIcon[scale=.33, #2]{#1} 
+        \DndIconsUseIcon[scale=.333, #2]{#1} 
         \hspace { \l_dndicons_icon_after_sep_dim }
     \group_end:
 }
@@ -1738,9 +1738,9 @@
         \keys_set:ne { dndicons / icon ~ style } { \prop_to_keyval:N \l_dndicons_types_every_spellschool_style_prop }
         \hspace { \l_dndicons_icon_before_sep_dim }
         \str_if_eq:neTF { negative } { #1 } {
-            \DndIconsUseIcon*[frame=spellschool, scale=.33, #3]{#2} 
+            \DndIconsUseIcon*[frame=spellschool, scale=.333, #3]{#2} 
         } {
-            \DndIconsUseIcon[frame=spellschool, scale=.33, #3]{#2}
+            \DndIconsUseIcon[frame=spellschool, scale=.333, #3]{#2}
         }
         \hspace { \l_dndicons_icon_after_sep_dim }
     \group_end:
@@ -1752,7 +1752,7 @@
         \keys_set_groups:nne { dndicons / icon ~ style } { extra } {#2}
         \keys_set:ne { dndicons / icon ~ style } { \prop_to_keyval:N \l_dndicons_types_every_damage_style_prop }
         \hspace { \l_dndicons_icon_before_sep_dim }
-        \DndIconsUseIcon[frame=damage, scale=.33, #2]{#1} 
+        \DndIconsUseIcon[frame=damage, scale=.333, #2]{#1} 
         \hspace { \l_dndicons_icon_after_sep_dim }
     \group_end:
 }
@@ -1763,7 +1763,7 @@
         \keys_set_groups:nne { dndicons / icon ~ style } { extra } {#2}
         \keys_set:ne { dndicons / icon ~ style } { \prop_to_keyval:N \l_dndicons_types_every_attack_style_prop }
         \hspace { \l_dndicons_icon_before_sep_dim }
-        \DndIconsUseIcon[scale=.33, #2]{#1} 
+        \DndIconsUseIcon[scale=.333, #2]{#1} 
         \hspace { \l_dndicons_icon_after_sep_dim }
     \group_end:
 }
@@ -1774,7 +1774,7 @@
         \keys_set_groups:nne { dndicons / icon ~ style } { extra } {#2}
         \keys_set:ne { dndicons / icon ~ style } { \prop_to_keyval:N \l_dndicons_types_every_condition_style_prop }
         \hspace { \l_dndicons_icon_before_sep_dim }
-        \DndIconsUseIcon[scale=.33, #2]{#1} 
+        \DndIconsUseIcon[scale=.333, #2]{#1} 
         \hspace { \l_dndicons_icon_after_sep_dim }
     \group_end:
 }

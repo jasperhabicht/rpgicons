@@ -499,7 +499,7 @@
   \ifx\dndicons@diceiconnrmlrg\dndicons@diceiconlrg\else\dndicons@ifEmptyF{#4}{#4\,}\fi%
   \hspace{\dndicons@beforesep}%
   \tikz[dnd icons, dnd icons/every die, dnd icons/every #2,
-    baseline=\dndicons@baseline, fgnrm/.style={scale=.33}, fglrg/.style={scale=.67}, #3] {
+    baseline=\dndicons@baseline, fgnrm/.style={scale=.333}, fglrg/.style={scale=.675}, #3] {
     \node[#2, \dndicons@diceiconfg, font={\footnotesize}, line cap=round, line join=round] (0cm,0cm) 
       {\ifx\dndicons@diceiconnrmlrg\dndicons@diceiconlrg\textbf{#4}\fi};
     \path[draw=none, \dndicons@diceiconfg] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
@@ -1295,7 +1295,7 @@
   \tikz[dnd icons, dnd icons/every spellschool, dnd icons/every #2,
     baseline=\dndicons@baseline, fgpos/.style={draw=dndicons@bg, line width=.6pt}, fgneg/.style={draw},
     bgpos/.style={fill}, bgneg/.style={draw}, #3] {
-    \path[scale=.33, \dndicons@spellschooliconbg] (-.475cm,.35cm) 
+    \path[scale=.333, \dndicons@spellschooliconbg] (-.475cm,.35cm) 
       -- (-.35cm,.475cm) -- (.35cm,.475cm) -- (.475cm,.35cm) -- (.425cm,-.375cm) -- (0cm,-.475cm) -- (-.425cm,-.375cm) -- cycle;
     \node[#2, scale=.225, \dndicons@spellschooliconfg] (0cm,0cm) {}; 
     \path[draw=none, scale=.333] ([yshift=-1pt].425,.425) rectangle ([yshift=1pt]-.425cm,-.425cm);
@@ -2334,7 +2334,7 @@
     \tikzset{
       dnd icons #1 saving/.pic={
         \begin{scope}[every node/.append style={#1}, dnd icons/every saving, dnd icons/every #1]
-          \path[draw, scale=.33, pic actions] (-.45cm,.45cm) -- (.45cm,.45cm) -- (.45cm,-.05cm) 
+          \path[draw, scale=.333, pic actions] (-.45cm,.45cm) -- (.45cm,.45cm) -- (.45cm,-.05cm) 
             arc[start angle=360, end angle=180, radius=.45cm] -- cycle;
           \node[#1, draw, scale=.225] (0cm,0cm) (-node) {}; 
           \path[draw=none, scale=.333] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
@@ -2346,7 +2346,7 @@
     \tikzset{
       dnd icons #1 spellschool/.pic={
         \begin{scope}[every node/.append style={#1}, dnd icons/every spellschool, dnd icons/every #1]
-          \path[draw, scale=.33, pic actions] (-.475cm,.35cm) 
+          \path[draw, scale=.333, pic actions] (-.475cm,.35cm) 
             -- (-.35cm,.475cm) -- (.35cm,.475cm) -- (.475cm,.35cm) -- (.425cm,-.375cm) -- (0cm,-.475cm) -- (-.425cm,-.375cm) -- cycle;
           \node[#1, draw, scale=.225] (0cm,0cm) (-node) {}; 
           \path[draw=none, scale=.333] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
@@ -2358,7 +2358,7 @@
     \tikzset{
       dnd icons #1 damage/.pic={
         \begin{scope}[every node/.append style={#1}, dnd icons/every damage, dnd icons/every #1]
-          \path[draw, scale=.33, pic actions] (0cm,0cm) circle[radius=.5cm];
+          \path[draw, scale=.333, pic actions] (0cm,0cm) circle[radius=.5cm];
           \node[#1, draw, scale=.225] (0cm,0cm) (-node) {}; 
           \path[draw=none, scale=.333] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
         \end{scope}

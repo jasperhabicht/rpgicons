@@ -4,9 +4,11 @@
 \bool_new:N \l__dndicons_edge_mode_bool
 \bool_new:N \l__dndicons_use_opacity_bool
 \keys_define:nn { dndicons } { 
-    package ~ option           .code:n = { \keys_set:nn { dndicons / package ~ option } {#1} } ,
-    package ~ option / edge    .code:n = { \bool_set_true:N \l__dndicons_edge_mode_bool } ,
-    package ~ option / opacity .code:n = { \bool_set_true:N \l__dndicons_use_opacity_bool } ,
+    package ~ option           .code:n     = { \keys_set:nn { dndicons / package ~ option } {#1} } ,
+    package ~ option / edge    .bool_set:N = \l__dndicons_edge_mode_bool ,
+    package ~ option / edge    .default:n  = { true } ,
+    package ~ option / opacity .bool_set:N = \l__dndicons_use_opacity_bool ,
+    package ~ option / opacity .default:n  = { true } ,
 }
 \ProcessKeyOptions [ dndicons / package ~ option ]
 

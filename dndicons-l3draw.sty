@@ -1,4 +1,5 @@
 \ProvidesExplPackage {dndicons-l3draw} {2024-03-06} {1.5.4} 
+\ProvidesExplPackage {dndicons-l3draw} {2024-03-06} {1.5.4} 
     {DnD Icons Package (l3draw Variant)}
 
 \bool_new:N \l__dndicons_edge_mode_bool
@@ -1449,18 +1450,26 @@
 \tl_new:N \l_dndicons_icon_color_text_tl
 \tl_new:N \l_dndicons_icon_color_background_tl
 
+
 \fp_new:N \l_dndicons_icon_opacity_stroke_fp
+\fp_set:Nn \l_dndicons_icon_opacity_stroke_fp { 1.0 }
 \fp_set:Nn \l_dndicons_icon_opacity_stroke_fp { 1.0 }
 \fp_new:N \l_dndicons_icon_opacity_fill_fp
 \fp_set:Nn \l_dndicons_icon_opacity_fill_fp { 1.0 }
+\fp_set:Nn \l_dndicons_icon_opacity_fill_fp { 1.0 }
 \fp_new:N \l_dndicons_icon_opacity_text_fp
 \fp_set:Nn \l_dndicons_icon_opacity_text_fp { 1.0 }
+\fp_set:Nn \l_dndicons_icon_opacity_text_fp { 1.0 }
 \fp_new:N \l_dndicons_icon_opacity_background_fp
+\fp_set:Nn \l_dndicons_icon_opacity_background_fp { 1.0 }
+
 \fp_set:Nn \l_dndicons_icon_opacity_background_fp { 1.0 }
 
 \fp_new:N \l_dndicons_icon_transform_scale_fp
 \fp_new:N \l_dndicons_icon_transform_scale_inner_fp
 \fp_new:N \l_dndicons_icon_transform_rotate_fp
+
+\bool_new:N \l_dndicons_icon_accessible_bool
 
 \bool_new:N \l_dndicons_icon_accessible_bool
 
@@ -1470,6 +1479,24 @@
 \cs_generate_variant:Nn \color_stroke:n { V }
 \cs_generate_variant:Nn \color_fill:n { V }
 
+\bool_new:N \l__dndicons_opacity_warning_bool
+\cs_new:Npn \__dndicons_opacity_check: {
+    \bool_lazy_and:nnT { 
+        \bool_not_p:n { \l__dndicons_opacity_warning_bool }
+    } {
+        \bool_not_p:n { \l__dndicons_use_opacity_bool } 
+    } {
+        \msg_warning:nn { dndicons } { opacity-option-missing }
+        \bool_set_true:N \l__dndicons_opacity_warning_bool
+    }
+}
+\cs_new:Npn \__dndicons_accessible_check: {
+    \IfDocumentMetadataTF { } {
+        \msg_error:nn { dndicons } { documentmetadata-missing }
+    }
+}
+
+\cs_generate_variant:Nn \bool_set:Nn { Ne }
 \bool_new:N \l__dndicons_opacity_warning_bool
 \cs_new:Npn \__dndicons_opacity_check: {
     \bool_lazy_and:nnT { 
@@ -1625,7 +1652,87 @@
         \pdf_bdc:nn { Span } { /ActualText ~ ( ~ #4 ~ ) ~ /Alt ~ ( ~ #4 ~ ) } 
         \hbox_overlap_right:n { \pdffakespace }
     } 
+    \bool_if:NT \l_dndicons_icon_accessible_bool { 
+        \pdf_bdc:nn { Span } { /ActualText ~ ( ~ #4 ~ ) ~ /Alt ~ ( ~ #4 ~ ) } 
+        \hbox_overlap_right:n { \pdffakespace }
+    } 
     \draw_begin:
+        \draw_cap_round:
+        \draw_join_round:
+        \bool_if:NTF \l__dndicons_edge_mode_bool {
+            \keys_set_exclude_groups:nne { dndicons / icon ~ style } { extra } {#2}
+        } {
+            % l3keys cs name fix
+            \keys_set:ne { dndicons / icon ~ style } {#2}
+        } 
+        \str_set:Ne \l__dndicons_icon_shape_name_str {#4}
+        \str_replace_all:Nnn \l__dndicons_icon_shape_name_str { ~ } { _ }
+        \str_if_empty:NF \l__dndicons_icon_shape_name_str {
+            \keys_set:ne { dndicons / icon ~ style } { 
+                \prop_to_keyval:c { l_dndicons_shapes_every_ \l__dndicons_icon_shape_name_str _style_prop } 
+            }
+        }
+        \color_stroke:V { \l_dndicons_icon_color_stroke_tl }
+        \color_fill:V { \l_dndicons_icon_color_fill_tl }
+        \bool_if:NT \l__dndicons_use_opacity_bool {
+            \opacity_stroke:n { \l_dndicons_icon_opacity_stroke_fp }
+            \opacity_fill:n { \l_dndicons_icon_opacity_fill_fp }
+        }
+        \draw_linewidth:n { \l_dndicons_icon_linewidth_dim }
+        \draw_transform_scale:n { \l_dndicons_icon_transform_scale_fp }
+        \draw_transform_rotate:n { \l_dndicons_icon_transform_rotate_fp }
+        \draw_baseline:n { \l_dndicons_icon_baseline_dim }
+        \bool_if:NTF \l__dndicons_edge_mode_bool {
+            \draw_path_rectangle_corners:nn 
+                { -.5cm , -.5cm - \l_dndicons_icon_linewidth_dim / 2 }
+                { .5cm , .5cm + \l_dndicons_icon_linewidth_dim / 2 }
+            \draw_path_replace_bb:
+            \bool_set_false:N \l_draw_bb_update_bool    
+        } {
+            % l3draw rectangle fix
+            % l3draw bounding box workaround
+            \draw_path_moveto:n { -.5cm , -.5cm - \l_dndicons_icon_linewidth_dim / 2 }
+            \draw_path_lineto:n { -.5cm , .5cm + \l_dndicons_icon_linewidth_dim / 2 }
+            \draw_path_lineto:n { .5cm , .5cm + \l_dndicons_icon_linewidth_dim / 2 }
+            \draw_path_lineto:n { .5cm , -.5cm - \l_dndicons_icon_linewidth_dim / 2 }
+            \draw_path_close:
+            \draw_path_use_clear:n { clip }
+        }
+        \draw_scope_begin: 
+            \clist_if_in:neT { ability , saving , spellschool , damage } { \l_dndicons_icon_frame_tl } {
+                \use:c { dndicons_draw_frame_ \l_dndicons_icon_frame_tl : }
+                \IfBooleanTF {#1} {
+                    \draw_path_use_clear:n { fill }
+                    \color_select:V { \l_dndicons_icon_color_background_tl }
+                    \bool_if:NT \l__dndicons_use_opacity_bool {
+                        \opacity_select:n { \l_dndicons_icon_opacity_background_fp }
+                    }            
+                } {
+                    \draw_path_use_clear:n { stroke }
+                }
+                \draw_transform_scale:n { \l_dndicons_icon_transform_scale_inner_fp } 
+            } 
+            \clist_if_in:neTF { sixside ~ one , sixside ~ two , sixside ~ three , sixside ~ four , 
+                sixside ~ five , sixside ~ six , sixside ~ seven , sixside ~ eight , sixside ~ nine } {#4} {
+                \seq_set_split:Nee \l__dndicons_icon_shape_name_parts_seq 
+                    { \c_underscore_str } { \l__dndicons_icon_shape_name_str }
+                \exp_args:Ne \dndicons_draw_shape_sixside_pips:n { 
+                    \seq_item:Nn \l__dndicons_icon_shape_name_parts_seq { 2 } 
+                }
+            } {
+                \use:c { dndicons_draw_shape_ \l__dndicons_icon_shape_name_str : }
+            }
+            \draw_path_use_clear:n { stroke }
+            \IfValueT {#3} {
+                \draw_scope_begin:
+                    \color_select:V { \l_dndicons_icon_color_text_tl }
+                    \bool_if:NT \l__dndicons_use_opacity_bool {
+                        \opacity_select:n { \l_dndicons_icon_opacity_text_fp }
+                    }
+                    \hcoffin_set:Ne \l__dndicons_icon_label_coffin {#3}
+                    \draw_coffin_use:Nnn \l__dndicons_icon_label_coffin { hc } { vc } 
+                \draw_scope_end:
+            }
         \draw_cap_round:
         \draw_join_round:
         \bool_if:NTF \l__dndicons_edge_mode_bool {
@@ -1707,15 +1814,20 @@
     \bool_if:NT \l_dndicons_icon_accessible_bool { 
         \pdf_emc: 
     }
+    \bool_if:NT \l_dndicons_icon_accessible_bool { 
+        \pdf_emc: 
+    }
 }
 
 \NewDocumentCommand { \dndiconsset } { m } {
+    \keys_set:ne { dndicons / icon ~ style } { #1 }
     \keys_set:ne { dndicons / icon ~ style } { #1 }
 }
 
 \str_new:N \l__dndicons_icon_integer_str
 \cs_generate_variant:Nn \str_if_eq:nnTF { ne }
 \NewDocumentCommand { \DndiconsDie } { O{normal} m O{} m } {
+    \group_begin: 
     \group_begin: 
         \keys_set_groups:nne { dndicons / icon ~ style } { extra } {#3}
         \keys_set:ne { dndicons / icon ~ style } { \prop_to_keyval:N \l_dndicons_types_every_die_style_prop }

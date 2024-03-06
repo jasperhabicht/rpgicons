@@ -6,8 +6,8 @@
 % available at http://www.latex-project.org/lppl/.
 
 \documentclass[a4paper]{article}
-\def\dndiconsfileversion{1.5.3}
-\def\dndiconsfiledate{3 March 2024}
+\def\dndiconsfileversion{1.5.4}
+\def\dndiconsfiledate{6 March 2024}
 
 \usepackage[T1]{fontenc}
 \usepackage{Alegreya}
@@ -249,6 +249,7 @@
 \changes{v1.5.1}{2024/02/28}{Addition of opacity to \titlemacro{l3draw} variant.}
 \changes{v1.5.2}{2024/02/29}{Unification of scaling, minor corrections.}
 \changes{v1.5.3}{2024/03/03}{Optimsation of code in \titlemacro{l3draw} variant.}
+\changes{v1.5.4}{2024/03/06}{Correction of baseline settings in \titlemacro{l3draw} variant, added accessibililty support for \titlemacro{l3draw} variant.}
 
 \begin{document}
 
@@ -670,6 +671,11 @@ The \macro{background} option sets the color of the shape when it is printed ove
 The \macro{color} option sets the color of strokes, fills and text in general while the \macro{stroke} option, the \macro{fill} option and the \macro{text} option set the color only for strokes, fills or text respectively. Similarly, the \macro{opacity} macro sets the opacity generally, while the options \macro{stroke opacity}, \macro{fill opacity} and \macro{text opacity} allow for setting the opacity of strokes, fill and text separately. The opacity styles are only available when loading the package with the \macro{opacity} option (see the \hyperref{macro:opacity}{description above}). The \macro{line width} sets the line width for strokes. Using the \macro{scale} and \macro{rotate} options, the shape can be scaled and rotated.
 
 The \macro{scale inner} option can be used to change the scaling of the icon when placed inside a frame when using the \macro{\ability}, \macro{\saving}, \macro{\spellschool} and \macro{\damage} macros. The default value is 0.675.
+
+\begin{macrodef}
+accessible
+\end{macrodef}
+The \macro{accessible} option adds an alternative text to the relevant icon, making it accessible. It adds \macro{\ActualText} and \macro{\Alt} marks in the PDF which means that the shape of the relevant icon is read by screen readers and extracted when copied. It is necessary to call \macro{\DocumentMetadata{}} before loading a \macro{\documentclass}, preferably with tagging enabled. 
 
 \begin{macrodef}
 every die

@@ -1497,16 +1497,13 @@
     icon ~ style / after ~ sep          .dim_set:N  = \l_dndicons_icon_after_sep_dim ,
     icon ~ style / after ~ sep          .initial:n  = { 0.05em } ,
     icon ~ style / accessible           .groups:n   = { extra } , 
-    icon ~ style / accessible           .code:n     = {
-        \__dndicons_accessible_check:
-        \bool_set:Ne \l_dndicons_icon_accessible_bool {
-            \str_case:nn { #1 } { 
-                { true } { \c_true_bool }
-                { false } { \c_false_bool }
-            } 
-        }
+    icon ~ style / accessible           .meta:nn    = { icon ~ style } { 
+            __accessible_check , 
+            __accessible = {#1} 
     } ,
     icon ~ style / accessible           .default:n  = { true } ,
+    icon ~ style / __accessible_check   .code:n     = { \__dndicons_accessible_check: } ,
+    icon ~ style / __accessible         .bool_set:N = \l_dndicons_icon_accessible_bool ,
     icon ~ style / baseline             .dim_set:N  = \l_dndicons_icon_baseline_dim ,
     icon ~ style / baseline             .initial:n  = { -3.5pt } ,
     icon ~ style / frame                .tl_set:N   = \l_dndicons_icon_frame_tl ,
@@ -1524,28 +1521,36 @@
     } ,
     icon ~ style / background           .tl_set:N   = \l_dndicons_icon_color_background_tl ,
     icon ~ style / background           .initial:n  = { white } ,
-    icon ~ style / stroke ~ opacity     .code:n     = {
-        \__dndicons_opacity_check:
+    icon ~ style / stroke ~ opacity     .meta:nn    = { icon ~ style } { 
+        __opactiy_check ,
+        __stroke_opactiy = {#1}
+    } ,
+    icon ~ style / fill ~ opacity       .meta:nn    = { icon ~ style } { 
+        __opactiy_check ,
+        __fill_opactiy = {#1}
+    } ,
+    icon ~ style / text ~ opacity       .meta:nn    = { icon ~ style } { 
+        __opactiy_check ,
+        __text_opactiy = {#1}
+    } ,
+    icon ~ style / opacity              .meta:nn    = { icon ~ style } { 
+        __opactiy_check ,
+        __opactiy = {#1}
+    } ,
+    icon ~ style / background ~ opacity .meta:nn    = { icon ~ style } { 
+        __opactiy_check ,
+        __background_opactiy = {#1}
+    } ,
+    icon ~ style / __opacity_check      .code:n     = \__dndicons_opacity_check: ,
+    icon ~ style / __stroke_opacity     .fp_set:N   = \l_dndicons_icon_opacity_stroke_fp ,
+    icon ~ style / __fill_opacity       .fp_set:N   = \l_dndicons_icon_opacity_fill_fp ,
+    icon ~ style / __text_opacity       .fp_set:N   = \l_dndicons_icon_opacity_text_fp ,
+    icon ~ style / __opacity            .code:n     = { 
         \fp_set:Nn \l_dndicons_icon_opacity_stroke_fp {#1}
-    } ,
-    icon ~ style / fill ~ opacity       .code:n     = {
-        \__dndicons_opacity_check:
         \fp_set:Nn \l_dndicons_icon_opacity_fill_fp {#1}
-    } ,
-    icon ~ style / text ~ opacity       .code:n     = {
-        \__dndicons_opacity_check:
         \fp_set:Nn \l_dndicons_icon_opacity_text_fp {#1}
     } ,
-    icon ~ style / opacity              .code:n     = { 
-        \__dndicons_opacity_check:
-        \fp_set:Nn \l_dndicons_icon_opacity_stroke_fp {#1}
-        \fp_set:Nn \l_dndicons_icon_opacity_fill_fp {#1}
-        \fp_set:Nn \l_dndicons_icon_opacity_text_fp {#1}
-    } ,
-    icon ~ style / background ~ opacity .code:n     = {
-        \__dndicons_opacity_check:
-        \fp_set:Nn \l_dndicons_icon_opacity_background_fp {#1}
-    } ,
+    icon ~ style / _background_opacity  .fp_set:N   = \l_dndicons_icon_opacity_background_fp ,
     icon ~ style / line ~ width         .dim_set:N  = \l_dndicons_icon_linewidth_dim , 
     icon ~ style / line ~ width         .initial:n  = { \l_draw_default_linewidth_dim } , 
     icon ~ style / scale                .fp_set:N   = \l_dndicons_icon_transform_scale_fp ,

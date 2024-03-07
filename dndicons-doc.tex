@@ -675,8 +675,11 @@ The \macro{scale inner} option can be used to change the scaling of the icon whe
 
 \begin{macrodef}
 accessible
+accessible = basic
+accessible = full
+accessible = false
 \end{macrodef}
-The \macro{accessible} option adds a replacement text to the relevant icon which will can be copied to the clipboard. It also adds an \macro{\Alt} mark in the PDF which means that the shape of the relevant icon is read by screen readers. It is necessary to call \macro{\DocumentMetadata{}} before loading a \macro{\documentclass}, preferably with tagging enabled to make use of the \macro{accessible} option. Note that depending on the compiler and PDF viewer, there might be line breaks or no spaces before and after the replacement text.
+Using the \macro{accessible} option with no value or the value \macro{basic}, a replacement text to the relevant icon can be added which can be copied to the clipboard. The value \macro{full} additionally places an \macro{\Alt} mark in the PDF which means that the shape of the relevant icon is read by screen readers. For this to work, is necessary to call \macro{\DocumentMetadata{}} before loading a \macro{\documentclass}, preferably with tagging enabled to make use of the \macro{accessible} option. The value \macro{full} can be used to disable the function explicitly. Note that depending on the compiler and PDF viewer, there might be line breaks or no spaces before and after the replacement text. 
 
 \begin{macrodef}
 every die

@@ -1462,7 +1462,8 @@
 \fp_new:N \l_dndicons_icon_transform_scale_inner_fp
 \fp_new:N \l_dndicons_icon_transform_rotate_fp
 
-\bool_new:N \l_dndicons_icon_accessible_bool
+\bool_new:N \l_dndicons_icon_accessible_basic_bool
+\bool_new:N \l_dndicons_icon_accessible_full_bool
 
 \cs_generate_variant:Nn \prop_to_keyval:N { c }
 
@@ -1496,8 +1497,20 @@
     icon ~ style / after ~ sep          .groups:n   = { extra } , 
     icon ~ style / after ~ sep          .dim_set:N  = \l_dndicons_icon_after_sep_dim ,
     icon ~ style / after ~ sep          .initial:n  = { 0.05em } ,
-    icon ~ style / accessible           .bool_set:N = \l_dndicons_icon_accessible_bool ,
-    icon ~ style / accessible           .default:n  = { true } ,
+    icon ~ style / accessible           .choice:    ,
+    icon ~ style / accessible / false   .code:n     = {
+        \bool_set_false:N \l_dndicons_icon_accessible_basic_bool
+        \bool_set_false:N \l_dndicons_icon_accessible_full_bool
+    } ,
+    icon ~ style / accessible / basic   .code:n     = {
+        \bool_set_true:N \l_dndicons_icon_accessible_basic_bool
+        \bool_set_false:N \l_dndicons_icon_accessible_full_bool
+    } ,
+    icon ~ style / accessible / full    .code:n     = {
+        \bool_set_true:N \l_dndicons_icon_accessible_basic_bool
+        \bool_set_true:N \l_dndicons_icon_accessible_full_bool
+    } ,
+    icon ~ style / accessible           .default:n  = { basic } ,
     icon ~ style / baseline             .dim_set:N  = \l_dndicons_icon_baseline_dim ,
     icon ~ style / baseline             .initial:n  = { -3.5pt } ,
     icon ~ style / frame                .tl_set:N   = \l_dndicons_icon_frame_tl ,
@@ -1608,7 +1621,7 @@
 \cs_generate_variant:Nn \keys_set_exclude_groups:nnn { nne }
 \cs_generate_variant:Nn \prop_set_from_keyval:Nn { Ne }
 \NewDocumentCommand \DndIconsUseIcon { s O{} O{} m } {
-    \bool_if:NT \l_dndicons_icon_accessible_bool { 
+    \bool_if:NT \l_dndicons_icon_accessible_full_bool { 
         \__dndicons_accessible_check:
         \pdf_bdc:nn { Span } { /Alt ~ ( #4 ) }
     }
@@ -1638,7 +1651,7 @@
         \draw_transform_scale:n { \l_dndicons_icon_transform_scale_fp }
         \draw_transform_rotate:n { \l_dndicons_icon_transform_rotate_fp }
         \draw_baseline:n { \l_dndicons_icon_baseline_dim }
-        \bool_if:NT \l_dndicons_icon_accessible_bool { 
+        \bool_if:NT \l_dndicons_icon_accessible_basic_bool { 
             \draw_scope_begin:
                 \bool_if:NTF \l__dndicons_edge_mode_bool {
                     \draw_path_rectangle_corners:nn 
@@ -1655,7 +1668,11 @@
                     \draw_path_close:
                     \draw_path_use_clear:n { clip }
                 }
-                \hcoffin_set:Nn \l__dndicons_icon_accessible_coffin { \pdffakespace #4 \pdffakespace }
+                \bool_if:NTF \l_dndicons_icon_accessible_full_bool { 
+                    \hcoffin_set:Nn \l__dndicons_icon_accessible_coffin { \pdffakespace #4 \pdffakespace }
+                } {
+                    \hcoffin_set:Nn \l__dndicons_icon_accessible_coffin { #4 }
+                }
                 \coffin_resize:Nnn \l__dndicons_icon_accessible_coffin { 1cm } { 1cm }
                 \draw_coffin_use:Nnnn \l__dndicons_icon_accessible_coffin { hc } { vc } { 0cm , 0cm }
             \draw_scope_end:
@@ -1713,7 +1730,7 @@
             }
         \draw_scope_end:
     \draw_end:
-    \bool_if:NT \l_dndicons_icon_accessible_bool { 
+    \bool_if:NT \l_dndicons_icon_accessible_full_bool { 
         \pdf_emc:
     }
 }

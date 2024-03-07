@@ -1,4 +1,4 @@
-\ProvidesExplPackage {dndicons-l3draw} {2024-03-06} {1.5.4} 
+\ProvidesExplPackage {dndicons-l3draw} {2024-03-07} {1.5.5} 
     {DnD Icons Package (l3draw Variant)}
 
 \bool_new:N \l__dndicons_edge_mode_bool
@@ -1496,14 +1496,8 @@
     icon ~ style / after ~ sep          .groups:n   = { extra } , 
     icon ~ style / after ~ sep          .dim_set:N  = \l_dndicons_icon_after_sep_dim ,
     icon ~ style / after ~ sep          .initial:n  = { 0.05em } ,
-    icon ~ style / accessible           .groups:n   = { extra } , 
-    icon ~ style / accessible           .meta:nn    = { icon ~ style } { 
-            __accessible_check , 
-            __accessible = {#1} 
-    } ,
+    icon ~ style / accessible           .bool_set:N = \l_dndicons_icon_accessible_bool ,
     icon ~ style / accessible           .default:n  = { true } ,
-    icon ~ style / __accessible_check   .code:n     = { \__dndicons_accessible_check: } ,
-    icon ~ style / __accessible         .bool_set:N = \l_dndicons_icon_accessible_bool ,
     icon ~ style / baseline             .dim_set:N  = \l_dndicons_icon_baseline_dim ,
     icon ~ style / baseline             .initial:n  = { -3.5pt } ,
     icon ~ style / frame                .tl_set:N   = \l_dndicons_icon_frame_tl ,
@@ -1521,36 +1515,28 @@
     } ,
     icon ~ style / background           .tl_set:N   = \l_dndicons_icon_color_background_tl ,
     icon ~ style / background           .initial:n  = { white } ,
-    icon ~ style / stroke ~ opacity     .meta:nn    = { icon ~ style } { 
-        __opactiy_check ,
-        __stroke_opactiy = {#1}
+    icon ~ style / stroke ~ opacity     .code:n     = { 
+        \__dndicons_opacity_check: 
+        \fp_set:Nn \l_dndicons_icon_opacity_stroke_fp {#1}
     } ,
-    icon ~ style / fill ~ opacity       .meta:nn    = { icon ~ style } { 
-        __opactiy_check ,
-        __fill_opactiy = {#1}
+    icon ~ style / fill ~ opacity       .code:n     = { 
+        \__dndicons_opacity_check: 
+        \fp_set:Nn \l_dndicons_icon_opacity_fill_fp {#1}
     } ,
-    icon ~ style / text ~ opacity       .meta:nn    = { icon ~ style } { 
-        __opactiy_check ,
-        __text_opactiy = {#1}
+    icon ~ style / text ~ opacity       .code:n     = { 
+        \__dndicons_opacity_check: 
+        \fp_set:Nn \l_dndicons_icon_opacity_text_fp {#1}
     } ,
-    icon ~ style / opacity              .meta:nn    = { icon ~ style } { 
-        __opactiy_check ,
-        __opactiy = {#1}
-    } ,
-    icon ~ style / background ~ opacity .meta:nn    = { icon ~ style } { 
-        __opactiy_check ,
-        __background_opactiy = {#1}
-    } ,
-    icon ~ style / __opacity_check      .code:n     = \__dndicons_opacity_check: ,
-    icon ~ style / __stroke_opacity     .fp_set:N   = \l_dndicons_icon_opacity_stroke_fp ,
-    icon ~ style / __fill_opacity       .fp_set:N   = \l_dndicons_icon_opacity_fill_fp ,
-    icon ~ style / __text_opacity       .fp_set:N   = \l_dndicons_icon_opacity_text_fp ,
-    icon ~ style / __opacity            .code:n     = { 
+    icon ~ style / opacity              .code:n     = { 
+        \__dndicons_opacity_check: 
         \fp_set:Nn \l_dndicons_icon_opacity_stroke_fp {#1}
         \fp_set:Nn \l_dndicons_icon_opacity_fill_fp {#1}
         \fp_set:Nn \l_dndicons_icon_opacity_text_fp {#1}
     } ,
-    icon ~ style / _background_opacity  .fp_set:N   = \l_dndicons_icon_opacity_background_fp ,
+    icon ~ style / background ~ opacity .code:n     = { 
+        \__dndicons_opacity_check: 
+        \fp_set:Nn \l_dndicons_icon_opacity_background_fp {#1}
+    } ,
     icon ~ style / line ~ width         .dim_set:N  = \l_dndicons_icon_linewidth_dim , 
     icon ~ style / line ~ width         .initial:n  = { \l_draw_default_linewidth_dim } , 
     icon ~ style / scale                .fp_set:N   = \l_dndicons_icon_transform_scale_fp ,
@@ -1608,6 +1594,7 @@
 }
 
 \seq_new:N \l__dndicons_icon_shape_name_parts_seq
+\coffin_new:N \l__dndicons_icon_accessible_coffin
 \coffin_new:N \l__dndicons_icon_label_coffin
 \bool_if:NF \l__dndicons_edge_mode_bool {
     % l3keys cs name fix
@@ -1622,9 +1609,9 @@
 \cs_generate_variant:Nn \prop_set_from_keyval:Nn { Ne }
 \NewDocumentCommand \DndIconsUseIcon { s O{} O{} m } {
     \bool_if:NT \l_dndicons_icon_accessible_bool { 
-        \pdf_bdc:nn { Span } { /ActualText ~ ( ~ #4 ~ ) ~ /Alt ~ ( ~ #4 ~ ) } 
-        \hbox_overlap_right:n { \pdffakespace }
-    } 
+        \__dndicons_accessible_check:
+        \pdf_bdc:nn { Span } { /Alt ~ ( #4 ) }
+    }
     \draw_begin:
         \draw_cap_round:
         \draw_join_round:
@@ -1651,6 +1638,28 @@
         \draw_transform_scale:n { \l_dndicons_icon_transform_scale_fp }
         \draw_transform_rotate:n { \l_dndicons_icon_transform_rotate_fp }
         \draw_baseline:n { \l_dndicons_icon_baseline_dim }
+        \bool_if:NT \l_dndicons_icon_accessible_bool { 
+            \draw_scope_begin:
+                \bool_if:NTF \l__dndicons_edge_mode_bool {
+                    \draw_path_rectangle_corners:nn 
+                        { -.5cm , .5cm }
+                        { .5cm , .5cm }
+                    \draw_path_use_clear:n { clip }
+                } {
+                    % l3draw rectangle fix
+                    % l3draw bounding box workaround
+                    \draw_path_moveto:n { -.5cm , .5cm }
+                    \draw_path_lineto:n { -.5cm , .5cm }
+                    \draw_path_lineto:n { .5cm , .5cm }
+                    \draw_path_lineto:n { .5cm , .5cm }
+                    \draw_path_close:
+                    \draw_path_use_clear:n { clip }
+                }
+                \hcoffin_set:Nn \l__dndicons_icon_accessible_coffin { \pdffakespace #4 \pdffakespace }
+                \coffin_resize:Nnn \l__dndicons_icon_accessible_coffin { 1cm } { 1cm }
+                \draw_coffin_use:Nnnn \l__dndicons_icon_accessible_coffin { hc } { vc } { 0cm , 0cm }
+            \draw_scope_end:
+        }
         \bool_if:NTF \l__dndicons_edge_mode_bool {
             \draw_path_rectangle_corners:nn 
                 { -.5cm , -.5cm - \l_dndicons_icon_linewidth_dim / 2 }
@@ -1705,7 +1714,7 @@
         \draw_scope_end:
     \draw_end:
     \bool_if:NT \l_dndicons_icon_accessible_bool { 
-        \pdf_emc: 
+        \pdf_emc:
     }
 }
 

@@ -6,8 +6,8 @@
 % available at http://www.latex-project.org/lppl/.
 
 \documentclass[a4paper]{article}
-\def\dndiconsfileversion{1.5.4}
-\def\dndiconsfiledate{6 March 2024}
+\def\dndiconsfileversion{1.5.5}
+\def\dndiconsfiledate{7 March 2024}
 
 \usepackage[T1]{fontenc}
 \usepackage{Alegreya}
@@ -248,8 +248,9 @@
 \changes{v1.5.0}{2024/02/25}{Alternative set of commands defined, added support of styles in pics.}
 \changes{v1.5.1}{2024/02/28}{Addition of opacity to \titlemacro{l3draw} variant.}
 \changes{v1.5.2}{2024/02/29}{Unification of scaling, minor corrections.}
-\changes{v1.5.3}{2024/03/03}{Optimsation of code in \titlemacro{l3draw} variant.}
+\changes{v1.5.3}{2024/03/03}{Optimisation of code in \titlemacro{l3draw} variant.}
 \changes{v1.5.4}{2024/03/06}{Correction of baseline settings in \titlemacro{l3draw} variant, added accessibililty support for \titlemacro{l3draw} variant.}
+\changes{v1.5.5}{2024/03/07}{Optimsation of accessibililty support for \titlemacro{l3draw} variant.}
 
 \begin{document}
 
@@ -675,7 +676,7 @@ The \macro{scale inner} option can be used to change the scaling of the icon whe
 \begin{macrodef}
 accessible
 \end{macrodef}
-The \macro{accessible} option adds an alternative text to the relevant icon, making it accessible. It adds \macro{\ActualText} and \macro{\Alt} marks in the PDF which means that the shape of the relevant icon is read by screen readers and extracted when copied. It is necessary to call \macro{\DocumentMetadata{}} before loading a \macro{\documentclass}, preferably with tagging enabled. 
+The \macro{accessible} option adds a replacement text to the relevant icon which will can be copied to the clipboard. It also adds an \macro{\Alt} mark in the PDF which means that the shape of the relevant icon is read by screen readers. It is necessary to call \macro{\DocumentMetadata{}} before loading a \macro{\documentclass}, preferably with tagging enabled to make use of the \macro{accessible} option. Note that depending on the compiler and PDF viewer, there might be line breaks or no spaces before and after the replacement text.
 
 \begin{macrodef}
 every die

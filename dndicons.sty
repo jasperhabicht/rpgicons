@@ -1,5 +1,5 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{dndicons}[2024-03-07 DnD Icons Package (1.5.5)]
+\ProvidesPackage{dndicons}[2024-03-15 DnD Icons Package (1.6.0)]
 
 % provide pics option
 \newif\ifdndicons@pics\dndicons@picsfalse
@@ -15,8 +15,8 @@
   twoside, fourside, sixside, eightside, tenside, twelveside, twentyside, hundredside,
   fudge, sixside one, sixside two, sixside three, sixside four, sixside five, 
   sixside six, sixside seven, sixside eight, sixside nine, fudge plus, fudge minus,
-  strength, dexterity, dexterity alt, constitution, intelligence, wisdom, charisma, luck, 
-  armor, proficiency,
+  strength, dexterity, dexterity alt, constitution, intelligence, wisdom, charisma, 
+  resilience, sanity, perception, luck, armor, proficiency,
   linear, conic, quadratic, cubic, spheric, cylindric, verbal, somatic, material, focus,
   abjuration, conjuration, divination, enchantment, evocation, illusion, necromancy, transmutation,
   acid, bludgeoning, cold, fire, force, lightning, necrotic, piercing, poison, psychic,
@@ -44,9 +44,11 @@
     },
     dnd icons/baseline={-3.5pt},
     dnd icons/.style={},
-    dnd icons/every node/.style={
+    dnd icons/.append style={
+      every node/.style={
         line cap=round,
         line join=round
+      }
     },
     % 
     dnd icons/every die/.style={},
@@ -500,7 +502,7 @@
   \hspace{\dndicons@beforesep}%
   \tikz[dnd icons, dnd icons/every die, dnd icons/every #2,
     baseline=\dndicons@baseline, fgnrm/.style={scale=.333}, fglrg/.style={scale=.675}, #3] {
-    \node[#2, \dndicons@diceiconfg, font={\footnotesize}, line cap=round, line join=round] (0cm,0cm) 
+    \node[#2, \dndicons@diceiconfg, font={\footnotesize}] (0cm,0cm) 
       {\ifx\dndicons@diceiconnrmlrg\dndicons@diceiconlrg\textbf{#4}\fi};
     \path[draw=none, \dndicons@diceiconfg] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
   }%
@@ -770,6 +772,113 @@
     \pgfpatharc{150}{210}{.15cm}
     \pgfpatharc{100}{170}{.15cm}
     \pgfpathlineto{\pgfpoint{.25cm}{-.275cm}}
+    \pgfusepath{draw} % draw shape
+  }
+}
+
+% resilience
+\pgfdeclareshape{resilience}{
+  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
+  \anchor{text} % this is used to center the text in the node
+    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+
+  \foregroundpath{
+    \pgfpathmoveto{\pgfpointadd{\pgfpoint{-.425cm}{-.475cm}}{\pgfpointpolar{65}{.5cm}}}
+    \pgfpatharc{65}{90}{.5cm}
+    \pgfpathlineto{\pgfpointadd{\pgfpoint{0cm}{-.075cm}}{\pgfpointpolar{135}{.55cm}}}
+    \pgfpatharc{135}{45}{.55cm}
+    \pgfpathlineto{\pgfpoint{.425cm}{.025cm}}
+    \pgfpatharc{90}{115}{.5cm}
+    \pgfpathmoveto{\pgfpoint{.2cm}{.3cm}}
+    \pgfpathlineto{\pgfpoint{.125cm}{.275cm}}
+    \pgfpathlineto{\pgfpoint{.2cm}{.15cm}}
+    \pgfpathmoveto{\pgfpoint{.125cm}{.075cm}}
+    \pgfpathlineto{\pgfpoint{.05cm}{.05cm}}
+    \pgfpathmoveto{\pgfpoint{.15cm}{-.1cm}}
+    \pgfpatharc{200}{230}{.4cm}
+    \pgfpathmoveto{\pgfpoint{-.2cm}{.3cm}}
+    \pgfpathlineto{\pgfpoint{-.125cm}{.275cm}}
+    \pgfpathlineto{\pgfpoint{-.2cm}{.15cm}}
+    \pgfpathmoveto{\pgfpoint{-.125cm}{.075cm}}
+    \pgfpathlineto{\pgfpoint{-.05cm}{.05cm}}
+    \pgfpathmoveto{\pgfpoint{-.15cm}{-.1cm}}
+    \pgfpatharc{340}{310}{.4cm}
+    \pgfpathmoveto{\pgfpoint{-.065cm}{-.075cm}}
+    \pgfpathlineto{\pgfpoint{-.045cm}{-.425cm}}
+    \pgfpathlineto{\pgfpoint{.045cm}{-.425cm}}
+    \pgfpathlineto{\pgfpoint{.065cm}{-.075cm}}
+    \pgfusepath{draw} % draw shape
+  }
+}
+
+% sanity
+\pgfdeclareshape{sanity}{
+  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
+  \anchor{text} % this is used to center the text in the node
+    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+
+  \foregroundpath{
+    \pgfpathmoveto{\pgfpointadd{\pgfpoint{-.125cm + .175cm * sin(30)}{.425cm - .175cm * cos(30)}}
+      {\pgfpointpolar{210}{.175cm}}}
+    \pgfpatharc{210}{120}{.175cm}
+    \pgfpathlineto{\pgfpointpolar{110}{.25cm}}
+    \pgfpatharc{110}{70}{.25cm}
+    \pgfpathlineto{\pgfpoint{.125cm}{.425cm}}
+    \pgfpatharc{420}{330}{.175cm}
+    \pgfpathmoveto{\pgfpoint{.25cm}{.1cm}}
+    \pgfpatharc{390}{305}{.15cm}
+    \pgfpathmoveto{\pgfpoint{-.25cm}{.1cm}}
+    \pgfpatharc{150}{235}{.15cm}
+    \pgfpathmoveto{\pgfpoint{-.15cm}{.075cm}}
+    \pgfpathlineto{\pgfpoint{-.1cm}{.05cm}}
+    \pgfpathlineto{\pgfpoint{-.1cm}{.025cm}}
+    \pgfpathmoveto{\pgfpoint{.15cm}{.075cm}}
+    \pgfpathlineto{\pgfpoint{.1cm}{.05cm}}
+    \pgfpathlineto{\pgfpoint{.1cm}{.025cm}}
+    \pgfpathmoveto{\pgfpointadd{\pgfpoint{-.55cm}{-.35cm}}
+      {\pgfpointadd{\pgfpointpolar{135}{.125cm and .075cm}}{\pgfpointpolar{20}{.55cm}}}}
+    \pgfpatharc{380}{360}{.55cm}
+    \pgfpatharc{135}{405}{.125cm and .075cm}
+    \pgfpatharc{180}{160}{.55cm}
+    \pgfusepath{draw} % draw shape
+  }
+}
+
+% perception
+\pgfdeclareshape{perception}{
+  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
+  \anchor{text} % this is used to center the text in the node
+    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+
+  \foregroundpath{ 
+    \pgfpathmoveto{\pgfpointadd{\pgfpoint{0cm}{.35cm}}{\pgfpointpolar{150}{.125cm}}}
+    \pgfpatharc{150}{390}{.125cm}
+    \pgfpathmoveto{\pgfpoint{-.3cm}{.425cm}}
+    \pgfpatharc{180}{360}{.3cm and .2cm}
+    \pgfpathmoveto{\pgfpointadd{\pgfpoint{0cm}{.425cm}}{\pgfpointpolar{330}{.3cm and .2cm}}}
+    \pgfpatharc{270}{350}{.15cm and .1cm}
+    \pgfpathmoveto{\pgfpointadd{\pgfpoint{0cm}{.425cm}}{\pgfpointpolar{210}{.3cm and .2cm}}}
+    \pgfpatharc{270}{190}{.15cm and .1cm}
+    \pgfpathmoveto{\pgfpoint{-.2cm}{.15cm}}
+    \pgfpathlineto{\pgfpoint{-.375cm}{.125cm}}
+    \pgfpatharc{210}{250}{.225cm}
+    \pgfpathmoveto{\pgfpoint{.2cm}{.15cm}}
+    \pgfpathlineto{\pgfpoint{.375cm}{.125cm}}
+    \pgfpatharc{330}{290}{.225cm}
+    \pgfpathmoveto{\pgfpoint{-.15cm}{0cm}}
+    \pgfpathlineto{\pgfpoint{-.075cm}{-.025cm}}
+    \pgfpathlineto{\pgfpoint{-.075cm}{-.05cm}}
+    \pgfpathmoveto{\pgfpoint{.15cm}{0cm}}
+    \pgfpathlineto{\pgfpoint{.075cm}{-.025cm}}
+    \pgfpathlineto{\pgfpoint{.075cm}{-.05cm}}
+    \pgfpathmoveto{\pgfpointadd{\pgfpoint{-.075cm}{-.35cm + .075cm * ( 2 + sqrt(3) )}}
+      {\pgfpointpolar{195}{.1cm and .075cm}}}
+    \pgfpathlineto{\pgfpointadd{\pgfpoint{0cm}{-.35cm}}{\pgfpointpolar{195}{.1cm and .075cm}}}
+    \pgfpatharc{195}{345}{.1cm and .075cm}
+    \pgfpathlineto{\pgfpointadd{\pgfpoint{.075cm}{-.35cm + .075cm * ( 2 + sqrt(3) )}}
+      {\pgfpointpolar{345}{.1cm and .075cm}}}
+    \pgfpathmoveto{\pgfpoint{.025cm}{-.325cm}}
+    \pgfpatharc{0}{180}{.025cm}
     \pgfusepath{draw} % draw shape
   }
 }
@@ -2369,12 +2478,12 @@
     \dndicons@allshapes%
   },
   dnd icons/create pic from ability shape/.list={%
-    strength, dexterity, dexterity alt, constitution, intelligence, wisdom, charisma, luck, 
-    armor, proficiency%
+    strength, dexterity, dexterity alt, constitution, intelligence, wisdom, charisma, 
+    resilience, sanity, perception, luck, armor, proficiency%
   },
   dnd icons/create pic from saving shape/.list={%
-    strength, dexterity, dexterity alt, constitution, intelligence, wisdom, charisma, luck, 
-    armor, proficiency%
+    strength, dexterity, dexterity alt, constitution, intelligence, wisdom, charisma, 
+    resilience, sanity, perception, luck, armor, proficiency%
   },
   dnd icons/create pic from spellschool shape/.list={%
     abjuration, conjuration, divination, enchantment, evocation, illusion, necromancy, transmutation%

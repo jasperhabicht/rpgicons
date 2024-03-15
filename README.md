@@ -16,6 +16,6 @@ boxed material which is safe to use in a tikzpicture context. As of version 1.3.
 provides an additional way to use the icons as Ti*k*Z pics. As of version 1.4.0, a variant of the 
 package provides an alternative way to typeset the icons using the `l3draw` package.
 
-The `dndicons` package is installed by copying the relevant `.sty` file into the working of `texmf`
+The `dndicons` package is installed by copying the relevant `.sty` file into the working or `texmf`
 directory. The package is loaded by calling `\usepackage{dndicons}` (or 
 `\usepackage{dndicons-l3draw}` for the `l3draw` packagee variant) in the preamble of the document.

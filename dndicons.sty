@@ -1,5 +1,5 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{dndicons}[2024-03-15 DnD Icons Package (1.6.0)]
+\ProvidesPackage{dndicons}[2024-03-15 DnD Icons Package (1.6.1)]
 
 % provide pics option
 \newif\ifdndicons@pics\dndicons@picsfalse
@@ -989,9 +989,11 @@
   \tikz[dnd icons, dnd icons/every ability, dnd icons/every #2,
     baseline=\dndicons@baseline, fgpos/.style={draw}, fgneg/.style={draw=dndicons@bg, line width=.6pt}, #3] {
     \ifx\dndicons@abilityiconposneg\dndicons@abilityiconneg%
-      \path[scale=.5,fill] (0cm,0cm) circle[radius=.45cm];
+      \path[scale=.333, fill] (0cm,0cm) circle[radius=.45cm];
+      \node[#2, \dndicons@abilityiconfg, scale=.225] (0cm,0cm) {};
+    \else
+      \node[#2, \dndicons@abilityiconfg, scale=.333] (0cm,0cm) {};
     \fi%
-    \node[#2, \dndicons@abilityiconfg, scale=.333] (0cm,0cm) {};
     \path[draw=none, scale=.333] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
   }%
   \hspace{\dndicons@aftersep}%
@@ -2432,8 +2434,8 @@
     \tikzset{
       dnd icons #1 ability/.pic={
         \begin{scope}[every node/.append style={#1}, dnd icons/every ability, dnd icons/every #1]
-          \path[scale=.5, pic actions] (0cm,0cm) circle[radius=.45cm];
-          \node[draw, scale=.333] (0cm,0cm) (-node) {}; 
+          \path[scale=.333, pic actions] (0cm,0cm) circle[radius=.45cm];
+          \node[draw, scale=.225] (0cm,0cm) (-node) {}; 
           \path[draw=none, scale=.333] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
         \end{scope}
       }

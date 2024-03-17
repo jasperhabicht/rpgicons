@@ -1970,14 +1970,17 @@
 
 \seq_new:N \l__dndicons_roll_syntax_seq
 \tl_new:N \l__dndicons_roll_syntax_part_tl
+\regex_new:N \l__dndicons_roll_syntax_split_regex 
+\regex_new:N \l__dndicons_roll_syntax_plusminus_regex 
+\regex_new:N \l__dndicons_roll_syntax_times_regex 
 \bool_if:NTF \l__dndicons_unicode_mode_bool {
-    \regex_const:Nn \l__dndicons_roll_syntax_split_regex { \s*([\+\-\x{2212}x\*\x{00D7}])\s* }
-    \regex_const:Nn \l__dndicons_roll_syntax_plusminus_regex { \A([\+\-\x{2212}])\Z }
-    \regex_const:Nn \l__dndicons_roll_syntax_times_regex { \A([x\*\x{00D7}])\Z }
+    \regex_set:Nn \l__dndicons_roll_syntax_split_regex { \s*([\+\-\x{2212}x\*\x{00D7}])\s* }
+    \regex_set:Nn \l__dndicons_roll_syntax_plusminus_regex { \A([\+\-\x{2212}])\Z }
+    \regex_set:Nn \l__dndicons_roll_syntax_times_regex { \A([x\*\x{00D7}])\Z }
 } {
-    \regex_const:Nn \l__dndicons_roll_syntax_split_regex { \s*([\+\-x\*\x{00D7}])\s* }
-    \regex_const:Nn \l__dndicons_roll_syntax_plusminus_regex { \A([\+\-])\Z }
-    \regex_const:Nn \l__dndicons_roll_syntax_times_regex { \A([x\*\x{00D7}])\Z }
+    \regex_set:Nn \l__dndicons_roll_syntax_split_regex { \s*([\+\-x\*\x{00D7}])\s* }
+    \regex_set:Nn \l__dndicons_roll_syntax_plusminus_regex { \A([\+\-])\Z }
+    \regex_set:Nn \l__dndicons_roll_syntax_times_regex { \A([x\*\x{00D7}])\Z }
 }
 \regex_new:N \l__dndicons_roll_syntax_dice_regex 
 \cs_new:Npn \dndicons_roll_syntax_parse:n #1 {

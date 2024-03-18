@@ -26,7 +26,12 @@
 }
 \msg_new:nnn { dndicons } { opacity-option-missing } {
     \msg_warning_text:n { dnicons } \iow_newline:
-    In ~ order ~ to ~ use ~ opacity, ~ the ~ package ~ must ~ be ~ loaded ~ with ~ the ~ `opacity` ~ option.
+    In ~ order ~ to ~ use ~ opacity, ~ the ~ package ~ must ~ be ~ loaded ~ with ~ the ~ `opacity' ~ option.
+}
+\msg_new:nnn { dndicons } { l3draw-old } {
+    \msg_warning_text:n { dnicons } \iow_newline:
+    The ~ version ~ of ~ the ~ `l3draw' ~  package ~ is ~ older ~ than ~ 2024-03-14. ~
+    Consider ~ using ~ the ~ `compat' ~ option.
 }
 
 \bool_if:NT \l__dndicons_use_opacity_bool {
@@ -42,6 +47,12 @@
 }
 
 \RequirePackage { l3draw }
+
+\IfPackageAtLeastTF { l3draw } { 2024-03-14 } { } {
+    \bool_if:NF \l__dndicons_compat_mode_bool {
+        \msg_warning:nn { dndicons } { l3draw-old }
+    }
+}
 
 % DICE
 
@@ -1970,14 +1981,17 @@
 
 \seq_new:N \l__dndicons_roll_syntax_seq
 \tl_new:N \l__dndicons_roll_syntax_part_tl
+\regex_new:N \l__dndicons_roll_syntax_split_regex 
+\regex_new:N \l__dndicons_roll_syntax_plusminus_regex 
+\regex_new:N \l__dndicons_roll_syntax_times_regex 
 \bool_if:NTF \l__dndicons_unicode_mode_bool {
-    \regex_const:Nn \l__dndicons_roll_syntax_split_regex { \s*([\+\-\x{2212}x\*\x{00D7}])\s* }
-    \regex_const:Nn \l__dndicons_roll_syntax_plusminus_regex { \A([\+\-\x{2212}])\Z }
-    \regex_const:Nn \l__dndicons_roll_syntax_times_regex { \A([x\*\x{00D7}])\Z }
+    \regex_set:Nn \l__dndicons_roll_syntax_split_regex { \s*([\+\-\x{2212}x\*\x{00D7}])\s* }
+    \regex_set:Nn \l__dndicons_roll_syntax_plusminus_regex { \A([\+\-\x{2212}])\Z }
+    \regex_set:Nn \l__dndicons_roll_syntax_times_regex { \A([x\*\x{00D7}])\Z }
 } {
-    \regex_const:Nn \l__dndicons_roll_syntax_split_regex { \s*([\+\-x\*\x{00D7}])\s* }
-    \regex_const:Nn \l__dndicons_roll_syntax_plusminus_regex { \A([\+\-])\Z }
-    \regex_const:Nn \l__dndicons_roll_syntax_times_regex { \A([x\*\x{00D7}])\Z }
+    \regex_set:Nn \l__dndicons_roll_syntax_split_regex { \s*([\+\-x\*\x{00D7}])\s* }
+    \regex_set:Nn \l__dndicons_roll_syntax_plusminus_regex { \A([\+\-])\Z }
+    \regex_set:Nn \l__dndicons_roll_syntax_times_regex { \A([x\*\x{00D7}])\Z }
 }
 \regex_new:N \l__dndicons_roll_syntax_dice_regex 
 \cs_new:Npn \dndicons_roll_syntax_parse:n #1 {

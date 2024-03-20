@@ -1951,9 +1951,9 @@
 % ROLL SYNTAX
 
 \regex_new:N \l__dndicons_roll_syntax_die_regex
-\cs_generate_variant:Nn \regex_set:Nn { Nx }
+\cs_generate_variant:Nn \regex_set:Nn { Ne }
 \cs_new:Npn \dndicons_roll_syntax_die_set:n #1 {
-    \regex_set:Nx \l__dndicons_roll_syntax_die_regex { [ \clist_use:nn {#1} { } ] }
+    \regex_set:Ne \l__dndicons_roll_syntax_die_regex { [ \clist_use:nn {#1} { } ] }
 }
 
 \keys_define:nn { dndicons } {

@@ -289,13 +289,13 @@ The L3 variant of the package loads the \macro{l3draw} package. If the package i
 
 The PGF variant of the package loads the \macro{tikz} package which in turn loads the \macro{xcolor} package. To make use of specific options these packages provide, you need to load the packages with the relevant options beforehand or use, such as \macro{\PassOptionsToPackage{svgnames}{xcolor}}.
 
-\subsection{Main user commands}
+\section{Main user commands}
 
 Regardless of the variant of the package, a set of user commands is always available. These are described in the following. Depending on the use of the L3 or the PGF veriant, certain specific commands or options are available that are explained in the following sections in further detail.
 
 Because of the way the package defines the icons, every of the below described user commands can actually be used together with every shape. However, the combinations of shapes and commands as described in the following subsections are preferable.
 
-\subsubsection[Command \textbackslash die]{Command \titlemacro*{die}}
+\subsection[Command \textbackslash die]{Command \titlemacro*{die}}
 
 \begin{macrodef}|\die|[<style>]{<shape>}[<options>]{<integer>}\end{macrodef}
 The command \macro{\die} prints an icon to depict a die with a certain number of sides. Two special icons exist for a two-sided die (which would be equivalent to a coin) and for a hundred-sided die (which typically comes in the shape of a sphere). There is also a special icon for a fudge die. 
@@ -332,7 +332,7 @@ The first optional argument can take the value \macro{normal} or \macro{large}, 
     & \die{fudge minus}{} & \macro{fudge minus} \\
 \end{dndiconsiconlist}
 
-\subsubsection[Commands \textbackslash ability and \textbackslash saving]{Commands \titlemacro*{ability} and \titlemacro*{saving}}
+\subsection[Commands \textbackslash ability and \textbackslash saving]{Commands \titlemacro*{ability} and \titlemacro*{saving}}
 
 \begin{macrodef}|\ability|[<style>]{<shape>}[<options>]\end{macrodef}
 The command \macro{\ability} prints icons depicting an ability of a character. The abilities are represented by animal-like shapes. The relevant shape should be given as mandatory argument to the command. The second optional argument can take additional options to style the icon.
@@ -376,7 +376,7 @@ The first optional argument can take the value \macro{normal} or \macro{empty}, 
     & \saving{proficiency} & \macro{proficiency} \\
 \end{dndiconsiconlist}
 
-\subsubsection[Command \textbackslash spell]{Command \titlemacro*{spell}}
+\subsection[Command \textbackslash spell]{Command \titlemacro*{spell}}
 
 \begin{macrodef}|\spell|{<shape>}[<options>]\end{macrodef}
 The command \macro{\spell} prints icons depicting the effect of a spell or how it is to be effected. The optional argument can take additional options to style the icon.
@@ -395,7 +395,7 @@ The command \macro{\spell} prints icons depicting the effect of a spell or how i
     & \spell{focus} & \macro{focus} \\
 \end{dndiconsiconlist}
 
-\subsubsection[Command \textbackslash spellschool]{Command \titlemacro*{spellschool}}
+\subsection[Command \textbackslash spellschool]{Command \titlemacro*{spellschool}}
 
 \begin{macrodef}|\spellschool|[<style>]{<shape>}[<options>]\end{macrodef}
 The command \macro{\spellschool} prints icons that represent the school a spell belongs to. The second optional argument can take additional options to style the icon.
@@ -414,7 +414,7 @@ The first optional argument can take the value \macro{negative} or \macro{positi
     & \spellschool{transmutation} & \macro{transmutation} \\
 \end{dndiconsiconlist}
 
-\subsubsection[Commands \textbackslash damage, \textbackslash attack, and \textbackslash condition]{Commands \titlemacro*{damage}, \titlemacro*{attack}, and \titlemacro*{condition}}
+\subsection[Commands \textbackslash damage, \textbackslash attack, and \textbackslash condition]{Commands \titlemacro*{damage}, \titlemacro*{attack}, and \titlemacro*{condition}}
 
 \begin{macrodef}|\damage|{<shape>}[<options>]\end{macrodef}
 The command \macro{\damage} prints icons depicting the damage of an attack. The icon is printed inside a circle. The optional argument can take additional options to style the icon.

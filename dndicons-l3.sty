@@ -1,4 +1,4 @@
-\ProvidesExplPackage {dndicons-l3} {2024-03-20} {1.7.1} 
+\ProvidesExplPackage {dndicons-l3} {2024-03-24} {1.8.0} 
     {DnD Icons Package (l3 Variant)}
 
 \bool_new:N \l__dndicons_unicode_mode_bool
@@ -11,12 +11,11 @@
 
 \bool_new:N \l__dndicons_compat_mode_bool
 \bool_new:N \l__dndicons_use_opacity_bool
-\keys_define:nn { dndicons } { 
-    package ~ options           .code:n     = { \keys_set:nn { dndicons / package ~ options } {#1} } ,
-    package ~ options / compat  .bool_set:N = \l__dndicons_compat_mode_bool ,
-    package ~ options / compat  .default:n  = { true } ,
-    package ~ options / opacity .bool_set:N = \l__dndicons_use_opacity_bool ,
-    package ~ options / opacity .default:n  = { true } ,
+\keys_define:nn { dndicons / package ~ options } { 
+    compat      .bool_set:N = \l__dndicons_compat_mode_bool ,
+    compat      .default:n  = { true } ,
+    opacity     .bool_set:N = \l__dndicons_use_opacity_bool ,
+    opacity     .default:n  = { true } ,
 }
 \ProcessKeyOptions [ dndicons / package ~ options ]
 
@@ -1593,75 +1592,74 @@
 }
 
 \cs_generate_variant:Nn \bool_set:Nn { Ne }
-\keys_define:nn { dndicons } {
-    local ~ options                        .code:n     = { \keys_set:nn { dndicons } {#1} } ,
-    local ~ options / before ~ sep         .groups:n   = { extra } , 
-    local ~ options / before ~ sep         .dim_set:N  = \l_dndicons_icon_before_sep_dim ,
-    local ~ options / before ~ sep         .initial:n  = { 0.05em } ,
-    local ~ options / after ~ sep          .groups:n   = { extra } , 
-    local ~ options / after ~ sep          .dim_set:N  = \l_dndicons_icon_after_sep_dim ,
-    local ~ options / after ~ sep          .initial:n  = { 0.05em } ,
-    local ~ options / accessible           .choice:    ,
-    local ~ options / accessible / false   .code:n     = {
+\keys_define:nn { dndicons / local ~ options } {
+    before ~ sep         .groups:n   = { extra } , 
+    before ~ sep         .dim_set:N  = \l_dndicons_icon_before_sep_dim ,
+    before ~ sep         .initial:n  = { 0.05em } ,
+    after ~ sep          .groups:n   = { extra } , 
+    after ~ sep          .dim_set:N  = \l_dndicons_icon_after_sep_dim ,
+    after ~ sep          .initial:n  = { 0.05em } ,
+    accessible           .choice:    ,
+    accessible / false   .code:n     = {
         \bool_set_false:N \l_dndicons_icon_accessible_basic_bool
         \bool_set_false:N \l_dndicons_icon_accessible_full_bool
     } ,
-    local ~ options / accessible / basic   .code:n     = {
+    accessible / basic   .code:n     = {
         \bool_set_true:N \l_dndicons_icon_accessible_basic_bool
         \bool_set_false:N \l_dndicons_icon_accessible_full_bool
     } ,
-    local ~ options / accessible / full    .code:n     = {
+    accessible / full    .code:n     = {
         \bool_set_true:N \l_dndicons_icon_accessible_basic_bool
         \bool_set_true:N \l_dndicons_icon_accessible_full_bool
     } ,
-    local ~ options / accessible           .default:n  = { basic } ,
-    local ~ options / baseline             .dim_set:N  = \l_dndicons_icon_baseline_dim ,
-    local ~ options / baseline             .initial:n  = { -3.5pt } ,
-    local ~ options / frame                .tl_set:N   = \l_dndicons_icon_frame_tl ,
-    local ~ options / frame                .initial:n  = { } ,
-    local ~ options / stroke               .tl_set:N   = \l_dndicons_icon_color_stroke_tl ,
-    local ~ options / stroke               .initial:n  = { . } ,
-    local ~ options / fill                 .tl_set:N   = \l_dndicons_icon_color_fill_tl ,
-    local ~ options / fill                 .initial:n  = { . } ,
-    local ~ options / text                 .tl_set:N   = \l_dndicons_icon_color_text_tl ,
-    local ~ options / text                 .initial:n  = { . } ,
-    local ~ options / color                .code:n     = {
+    accessible           .default:n  = { basic } ,
+    baseline             .dim_set:N  = \l_dndicons_icon_baseline_dim ,
+    baseline             .initial:n  = { -3.5pt } ,
+    frame                .tl_set:N   = \l_dndicons_icon_frame_tl ,
+    frame                .initial:n  = { } ,
+    stroke               .tl_set:N   = \l_dndicons_icon_color_stroke_tl ,
+    stroke               .initial:n  = { . } ,
+    fill                 .tl_set:N   = \l_dndicons_icon_color_fill_tl ,
+    fill                 .initial:n  = { . } ,
+    text                 .tl_set:N   = \l_dndicons_icon_color_text_tl ,
+    text                 .initial:n  = { . } ,
+    color                .code:n     = {
         \tl_set:Nn \l_dndicons_icon_color_stroke_tl {#1}
         \tl_set:Nn \l_dndicons_icon_color_fill_tl {#1}
         \tl_set:Nn \l_dndicons_icon_color_text_tl {#1}
     } ,
-    local ~ options / background           .tl_set:N   = \l_dndicons_icon_color_background_tl ,
-    local ~ options / background           .initial:n  = { white } ,
-    local ~ options / stroke ~ opacity     .code:n     = { 
+    background           .tl_set:N   = \l_dndicons_icon_color_background_tl ,
+    background           .initial:n  = { white } ,
+    stroke ~ opacity     .code:n     = { 
         \__dndicons_opacity_check: 
         \fp_set:Nn \l_dndicons_icon_opacity_stroke_fp {#1}
     } ,
-    local ~ options / fill ~ opacity       .code:n     = { 
+    fill ~ opacity       .code:n     = { 
         \__dndicons_opacity_check: 
         \fp_set:Nn \l_dndicons_icon_opacity_fill_fp {#1}
     } ,
-    local ~ options / text ~ opacity       .code:n     = { 
+    text ~ opacity       .code:n     = { 
         \__dndicons_opacity_check: 
         \fp_set:Nn \l_dndicons_icon_opacity_text_fp {#1}
     } ,
-    local ~ options / opacity              .code:n     = { 
+    opacity              .code:n     = { 
         \__dndicons_opacity_check: 
         \fp_set:Nn \l_dndicons_icon_opacity_stroke_fp {#1}
         \fp_set:Nn \l_dndicons_icon_opacity_fill_fp {#1}
         \fp_set:Nn \l_dndicons_icon_opacity_text_fp {#1}
     } ,
-    local ~ options / background ~ opacity .code:n     = { 
+    background ~ opacity .code:n     = { 
         \__dndicons_opacity_check: 
         \fp_set:Nn \l_dndicons_icon_opacity_background_fp {#1}
     } ,
-    local ~ options / line ~ width         .dim_set:N  = \l_dndicons_icon_linewidth_dim , 
-    local ~ options / line ~ width         .initial:n  = { \l_draw_default_linewidth_dim } , 
-    local ~ options / scale                .fp_set:N   = \l_dndicons_icon_transform_scale_fp ,
-    local ~ options / scale                .initial:n  = { 1.0 } ,
-    local ~ options / scale ~ inner        .fp_set:N   = \l_dndicons_icon_transform_scale_inner_fp ,
-    local ~ options / scale ~ inner        .initial:n  = { 0.675 } ,
-    local ~ options / rotate               .fp_set:N   = \l_dndicons_icon_transform_rotate_fp ,
-    local ~ options / rotate               .initial:n  = { 0.0 } ,
+    line ~ width         .dim_set:N  = \l_dndicons_icon_linewidth_dim , 
+    line ~ width         .initial:n  = { \l_draw_default_linewidth_dim } , 
+    scale                .fp_set:N   = \l_dndicons_icon_transform_scale_fp ,
+    scale                .initial:n  = { 1.0 } ,
+    scale ~ inner        .fp_set:N   = \l_dndicons_icon_transform_scale_inner_fp ,
+    scale ~ inner        .initial:n  = { 0.675 } ,
+    rotate               .fp_set:N   = \l_dndicons_icon_transform_rotate_fp ,
+    rotate               .initial:n  = { 0.0 } ,
 }
 
 \clist_const:Nn \c__dndicons_types_clist {
@@ -1673,8 +1671,8 @@
     \str_set:Nn \l__dndicons_icon_shape_name_str {#1}
     \str_replace_all:Nnn \l__dndicons_icon_shape_name_str { ~ } { _ }
     \clist_new:c { l_dndicons_types_every_ \l__dndicons_icon_shape_name_str _style_clist }
-    \keys_define:nn { dndicons } {
-        local ~ options / every ~ #1 .code:n = { 
+    \keys_define:nn { dndicons / local ~ options } {
+        every ~ #1 .code:n = { 
             \clist_set:cn { 
                 l_dndicons_types_every_ \l__dndicons_icon_shape_name_str _style_clist
             } {##1}   
@@ -1701,8 +1699,8 @@
     \str_set:Nn \l__dndicons_icon_shape_name_str {#1}
     \str_replace_all:Nnn \l__dndicons_icon_shape_name_str { ~ } { _ }
     \clist_new:c { l_dndicons_shapes_every_ \l__dndicons_icon_shape_name_str _style_clist }
-    \keys_define:nn { dndicons } {
-        local ~ options / every ~ #1 .code:n = { 
+    \keys_define:nn { dndicons / local ~ options } {
+        every ~ #1 .code:n = { 
             \clist_set:cn { 
                 l_dndicons_shapes_every_ \l__dndicons_icon_shape_name_str _style_clist
             } {##1}   
@@ -1956,9 +1954,9 @@
     \regex_set:Ne \l__dndicons_roll_syntax_die_regex { [ \clist_use:nn {#1} { } ] }
 }
 
-\keys_define:nn { dndicons } {
-    local ~ options / roll ~ syntax        .code:n     = { \dndicons_roll_syntax_die_set:n {#1} } ,
-    local ~ options / roll ~ syntax        .initial:n  = { d , D } ,
+\keys_define:nn { dndicons / local ~ options } {
+    roll ~ syntax        .code:n     = { \dndicons_roll_syntax_die_set:n {#1} } ,
+    roll ~ syntax        .initial:n  = { d , D } ,
 }
 
 \cs_new:Npn \dndicons_roll_syntax_convert:n #1 {

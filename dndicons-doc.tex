@@ -1,13 +1,18 @@
-%% Start of file `dndicons-doc.tex`.
-%% Copyright 2024 Jasper Habicht (mail@jasperhabicht.de).
-%
+% File: dndicons-doc.tex 
+% Copyright 2024 Jasper Habicht (mail@jasperhabicht.de).
+% 
 % This work may be distributed and/or modified under the
 % conditions of the LaTeX Project Public License version 1.3c,
 % available at http://www.latex-project.org/lppl/.
-
+% 
+% This file is part of the `dndicons'  package (The Work in LPPL)
+% and all files in that bundle must be distributed together.
+% 
+% This work has the LPPL maintenance status `author-maintained'.
+% 
 \documentclass[a4paper]{article}
-\def\dndiconsfileversion{1.8.0}
-\def\dndiconsfiledate{24 March 2024}
+\def\dndiconsfileversion{1.8.1}
+\def\dndiconsfiledate{25 March 2024}
 
 \usepackage[T1]{fontenc}
 \usepackage{Alegreya}
@@ -166,8 +171,8 @@
     #2
 }{\vphantom{/g}\IfBooleanT{#1}{\textbackslash}#3}
 
-\usepackage[pics]{dndicons-pgf}
 \usepackage{dndicons-l3}
+\usepackage[pics]{dndicons-pgf}
 
 \ExplSyntaxOn
 \clist_new:N \l_dndicons_doc_logo_icons_clist
@@ -304,7 +309,7 @@ For the six-sided die, nine additional shapes exists representing the values one
 
 The command takes two mandatory commands, the first of which describes the shape (see the lists below) and the second can take an integer that is placed in front of the shape. For example, \macro{\die{eightside}{2}} results in \die{eightside}{2} (meaning two eight-sided dice are rolled).
 
-The command also takes two optional arguments, the second of which can take additional options to style the icon. The options affect the shape, not the integer when it is printed before the icon. As an example, \macro{\die{eightside}[blue, thick]{2}} results in \die{eightside}[blue, thick]{2}.
+The command also takes two optional arguments, the second of which can take additional options to style the icon. The options affect the shape, not the integer when it is printed before the icon. These options differ depending on the package variant. See the relevant sections below.
 
 The first optional argument can take the value \macro{normal} or \macro{large}, \macro{normal} being the default value. With \macro{large} given as argument, the icon is drawn larger and the additional integer is printed inside of the shape instead of before it. As an example, \macro{\die[large]{eightside}{2}} results in \die[large]{eightside}{2}. Note that the integer will always be printed on top of the shape, even if the shape does not have an open center as in the case of the \macro{fudge} shapes or the shapes featuring pips. 
 
@@ -648,7 +653,7 @@ The PGF variant of the package defines a set of commands on which the user comma
 
 \subsection{Icon styles}
 
-Using the PGF variant of the package, all icons can by styled using arbitrary Ti\emph{k}Z styles in general. 
+Using the PGF variant of the package, all icons can by styled using arbitrary Ti\emph{k}Z styles in general. As an example, \macro{\die{eightside}[blue, thick]{2}} results in \die{eightside}[blue, thick]{2}.
 
 \begin{macrodef}
 !dnd icons/!every die

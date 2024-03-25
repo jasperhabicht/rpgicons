@@ -1,4 +1,16 @@
-\ProvidesExplPackage {dndicons-l3} {2024-03-24} {1.8.0} 
+% File: dndicons-l3.sty 
+% Copyright 2024 Jasper Habicht (mail@jasperhabicht.de).
+% 
+% This work may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License version 1.3c,
+% available at http://www.latex-project.org/lppl/.
+% 
+% This file is part of the `dndicons'  package (The Work in LPPL)
+% and all files in that bundle must be distributed together.
+% 
+% This work has the LPPL maintenance status `author-maintained'.
+% 
+\ProvidesExplPackage {dndicons-l3} {2024-03-25} {1.8.1} 
     {DnD Icons Package (l3 Variant)}
 
 \bool_new:N \l__dndicons_unicode_mode_bool
@@ -1715,10 +1727,10 @@
     % l3keys cs name fix
     \cs_generate_variant:Nn \keys_set:nn { ne }
     \cs_generate_variant:Nn \str_set:Nn { Ne }
-    \cs_generate_variant:Nn \hcoffin_set:Nn { Ne }
     \cs_generate_variant:Nn \seq_set_split:Nnn { Nee }
 }
 \prg_generate_conditional_variant:Nnn \clist_if_in:nn { ne } { T , TF }
+\cs_generate_variant:Nn \hcoffin_set:Nn { Ne }
 \cs_generate_variant:Nn \keys_set_groups:nnn { nne }
 \cs_generate_variant:Nn \keys_set_exclude_groups:nnn { nne }
 \NewDocumentCommand \DndIconsUseIcon { s O{} o m } {

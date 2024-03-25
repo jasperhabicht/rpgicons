@@ -1,5 +1,17 @@
+% File: dndicons-pgf.sty 
+% Copyright 2024 Jasper Habicht (mail@jasperhabicht.de).
+% 
+% This work may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License version 1.3c,
+% available at http://www.latex-project.org/lppl/.
+% 
+% This file is part of the `dndicons'  package (The Work in LPPL)
+% and all files in that bundle must be distributed together.
+% 
+% This work has the LPPL maintenance status `author-maintained'.
+% 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{dndicons-pgf}[2024-03-24 DnD Icons Package (PGF Variant) (1.8.0)]
+\ProvidesPackage{dndicons-pgf}[2024-03-25 DnD Icons Package (PGF Variant) (1.8.1)]
 
 % provide pics option
 \newif\ifdndicons@pics\dndicons@picsfalse
@@ -2405,7 +2417,7 @@
   }
 }
 
-\NewDocumentCommand{\condition}{ m O{} }{%
+\NewDocumentCommand{\dndiconscondition}{ m O{} }{%
   \hspace{\dndicons@beforesep}%
   \tikz[dnd icons, dnd icons/every condition, dnd icons/every #1,
     baseline=\dndicons@baseline, #2] {

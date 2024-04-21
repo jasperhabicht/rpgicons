@@ -27,3 +27,4 @@ loaded per default. The PGF or `l3draw` variants can be loaded directly via
 `\usepackage{dndicons-pgf}` or`\usepackage{dndicons-l3}`.
 
 This package including all files is subject to the LPPL 1.3c license.
+Copyright 2024 Jasper Habicht (mail(at)jasperhabicht.de).

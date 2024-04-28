@@ -11,7 +11,7 @@
 % This work has the LPPL maintenance status `author-maintained'.
 % 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{dndicons-pgf}[2024-03-25 DnD Icons Package (PGF Variant) (1.8.1)]
+\ProvidesPackage{dndicons-pgf}[2024-04-28 DnD Icons Package (PGF Variant) (1.8.2)]
 
 % provide pics option
 \newif\ifdndicons@pics\dndicons@picsfalse
@@ -2509,5 +2509,88 @@
 }
 
 \fi
+
+% ROLL SYNTAX
+
+\ExplSyntaxOn
+
+\cs_if_exist:NF \dndicons_roll_syntax_parse:n {
+
+  \bool_new:N \l__dndicons_unicode_mode_bool
+  \sys_if_engine_luatex:T {
+      \bool_set_true:N \l__dndicons_unicode_mode_bool
+  }
+  \sys_if_engine_xetex:T {
+      \bool_set_true:N \l__dndicons_unicode_mode_bool
+  }
+
+  \regex_new:N \l__dndicons_roll_syntax_die_regex
+  \cs_generate_variant:Nn \regex_set:Nn { Ne }
+  \cs_new:Npn \dndicons_roll_syntax_die_set:n #1 {
+      \regex_set:Ne \l__dndicons_roll_syntax_die_regex { [ \clist_use:nn {#1} { } ] }
+  }
+
+  \cs_new:Npn \dndicons_roll_syntax_convert:n #1 {
+      \str_case:nnF {#1} {
+          { 2 } { twoside }
+          { 4 } { fourside }
+          { 6 } { sixside }
+          { 8 } { eightside }
+          { 10 } { tenside }
+          { 12 } { twelveside }
+          { 20 } { twentyside }
+          { 100 } { hundredside }
+          { F } { fudge }
+      } 
+      {#1}
+  }
+
+  \seq_new:N \l__dndicons_roll_syntax_seq
+  \tl_new:N \l__dndicons_roll_syntax_part_tl
+  \regex_new:N \l__dndicons_roll_syntax_split_regex 
+  \regex_new:N \l__dndicons_roll_syntax_plusminus_regex 
+  \regex_new:N \l__dndicons_roll_syntax_times_regex 
+  \bool_if:NTF \l__dndicons_unicode_mode_bool {
+      \regex_set:Nn \l__dndicons_roll_syntax_split_regex { \s*([\+\-\x{2212}x\*\x{00D7}])\s* }
+      \regex_set:Nn \l__dndicons_roll_syntax_plusminus_regex { \A([\+\-\x{2212}])\Z }
+      \regex_set:Nn \l__dndicons_roll_syntax_times_regex { \A([x\*\x{00D7}])\Z }
+  } {
+      \regex_set:Nn \l__dndicons_roll_syntax_split_regex { \s*([\+\-x\*\x{00D7}])\s* }
+      \regex_set:Nn \l__dndicons_roll_syntax_plusminus_regex { \A([\+\-])\Z }
+      \regex_set:Nn \l__dndicons_roll_syntax_times_regex { \A([x\*\x{00D7}])\Z }
+  }
+  \regex_new:N \l__dndicons_roll_syntax_dice_regex 
+  \cs_new:Npn \dndicons_roll_syntax_parse:n #1 {
+      \regex_set:Nn \l__dndicons_roll_syntax_dice_regex { \A(\d*)\ur{l__dndicons_roll_syntax_die_regex}([F\d]+)\Z }
+      \regex_split:NnN \l__dndicons_roll_syntax_split_regex {#1} \l__dndicons_roll_syntax_seq
+      \seq_map_inline:Nn \l__dndicons_roll_syntax_seq { 
+          \tl_set:Ne \l__dndicons_roll_syntax_part_tl {##1}
+          \regex_replace_case_once:nNTF {
+              { \l__dndicons_roll_syntax_plusminus_regex } { \c{,} $\1$ \c{,} }
+              { \l__dndicons_roll_syntax_times_regex } { \c{,} $\c{times}$ \c{,} }
+              { \l__dndicons_roll_syntax_dice_regex } 
+                  { \c{ dndiconsdie } { \c{ dndicons_roll_syntax_convert:n } { \2 } } { \1 } }
+          } \l__dndicons_roll_syntax_part_tl 
+          { \tl_use:N \l__dndicons_roll_syntax_part_tl } 
+          { \tl_use:N \l__dndicons_roll_syntax_part_tl }
+      }
+  }
+
+}
+
+\tikzset{
+    dnd ~ icons/roll ~ syntax/.code={
+        \dndicons_roll_syntax_die_set:n {#1}
+    },
+    dnd ~ icons/roll ~ syntax={d,D}
+}
+
+\NewDocumentCommand{\dndiconsroll}{ m }{
+    \dndicons_roll_syntax_parse:n {#1}   
+}
+
+\ExplSyntaxOff
+
+\@ifundefined{roll}{\NewCommandCopy\roll\dndiconsroll}{}
 
 \endinput

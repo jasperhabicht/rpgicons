@@ -1,4 +1,4 @@
-![Version 1.8.1](https://img.shields.io/badge/version-1.8.1-blue)
+![Version 1.8.2](https://img.shields.io/badge/version-1.8.2-blue)
 
 <img width="200" alt="dndicons-example" src="https://github.com/jasperhabicht/dndicons/assets/6378801/81a1d0aa-7a4f-4f83-bbdc-3bc3332023b2" /> 
 

@@ -1859,7 +1859,7 @@
         \str_set:Ne \l__dndicons_icon_integer_str {#4}
         \hspace { \l_dndicons_icon_before_sep_dim }
         \str_if_eq:neTF { large } {#1} {
-            \DndIconsUseIcon[scale=.675, #3][#1]{#2}
+            \DndIconsUseIcon[scale=.675, #3][#4]{#2}
         } {
             \str_if_empty:NF \l__dndicons_icon_integer_str { \str_use:N \l__dndicons_icon_integer_str \, }
             \DndIconsUseIcon[scale=.333, #3]{#2}

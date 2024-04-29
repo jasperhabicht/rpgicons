@@ -1,29 +1,29 @@
-% File: dndicons-pgf.sty 
+% File: rpgicons-pgf.sty 
 % Copyright 2024 Jasper Habicht (mail(at)jasperhabicht.de).
 % 
 % This work may be distributed and/or modified under the
 % conditions of the LaTeX Project Public License version 1.3c,
 % available at http://www.latex-project.org/lppl/.
 % 
-% This file is part of the `dndicons'  package (The Work in LPPL)
+% This file is part of the `rpgicons'  package (The Work in LPPL)
 % and all files in that bundle must be distributed together.
 % 
 % This work has the LPPL maintenance status `author-maintained'.
 % 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{dndicons-pgf}[2024-04-28 DnD Icons Package (PGF Variant) (1.8.2)]
+\ProvidesPackage{rpgicons-pgf}[2024-04-28 rpg Icons Package (PGF Variant) (1.8.2)]
 
 % provide pics option
-\newif\ifdndicons@pics\dndicons@picsfalse
-\DeclareOption{pics}{\dndicons@picstrue}
+\newif\ifrpgicons@pics\rpgicons@picsfalse
+\DeclareOption{pics}{\rpgicons@picstrue}
 \ProcessOptions\relax
 
 \RequirePackage{tikz}
-\newlength{\dndicons@beforesep}
-\newlength{\dndicons@aftersep}
-\newlength{\dndicons@baseline}
+\newlength{\rpgicons@beforesep}
+\newlength{\rpgicons@aftersep}
+\newlength{\rpgicons@baseline}
 
-\def\dndicons@allshapes{%
+\def\rpgicons@allshapes{%
   twoside, fourside, sixside, eightside, tenside, twelveside, twentyside, hundredside,
   fudge, sixside one, sixside two, sixside three, sixside four, sixside five, 
   sixside six, sixside seven, sixside eight, sixside nine, fudge plus, fudge minus,
@@ -39,53 +39,53 @@
 }
 
 \tikzset{
-    dnd icons/background color/.code={
-        \colorlet{dndicons@bg}{#1}
+    rpg icons/background color/.code={
+        \colorlet{rpgicons@bg}{#1}
     },
-    dnd icons/background color={white},
-    dnd icons/before sep/.code={
-        \setlength{\dndicons@beforesep}{#1}
+    rpg icons/background color={white},
+    rpg icons/before sep/.code={
+        \setlength{\rpgicons@beforesep}{#1}
     },
-    dnd icons/before sep={.05em},
-    dnd icons/after sep/.code={
-        \setlength{\dndicons@aftersep}{#1}
+    rpg icons/before sep={.05em},
+    rpg icons/after sep/.code={
+        \setlength{\rpgicons@aftersep}{#1}
     },
-    dnd icons/after sep={.05em},
-    dnd icons/baseline/.code={
-        \setlength{\dndicons@baseline}{#1}
+    rpg icons/after sep={.05em},
+    rpg icons/baseline/.code={
+        \setlength{\rpgicons@baseline}{#1}
     },
-    dnd icons/baseline={-3.5pt},
-    dnd icons/.style={},
-    dnd icons/.append style={
+    rpg icons/baseline={-3.5pt},
+    rpg icons/.style={},
+    rpg icons/.append style={
       every node/.style={
         line cap=round,
         line join=round
       }
     },
     % 
-    dnd icons/every die/.style={},
-    dnd icons/every ability/.style={},
-    dnd icons/every saving/.style={},
-    dnd icons/every spell/.style={},
-    dnd icons/every spellschool/.style={},
-    dnd icons/every damage/.style={},
-    dnd icons/every attack/.style={},
-    dnd icons/every condition/.style={},
+    rpg icons/every die/.style={},
+    rpg icons/every ability/.style={},
+    rpg icons/every saving/.style={},
+    rpg icons/every spell/.style={},
+    rpg icons/every spellschool/.style={},
+    rpg icons/every damage/.style={},
+    rpg icons/every attack/.style={},
+    rpg icons/every condition/.style={},
     %
-    dnd icons/create every style/.code={
+    rpg icons/create every style/.code={
       \tikzset{
-        dnd icons/every #1/.style={}
+        rpg icons/every #1/.style={}
       }
     },
-    dnd icons/create every style/.list/.expanded={%
-      \dndicons@allshapes%
+    rpg icons/create every style/.list/.expanded={%
+      \rpgicons@allshapes%
     }
 }
 
 % make tikz icons usable inside tikz environments
-\NewDocumentCommand{\provideprotecteddndicon}{ m o m O{} m }{%
-    \expandafter\newsavebox\csname dndicons@protectbox@#5\endcsname%
-    \expandafter\savebox\csname dndicons@protectbox@#5\endcsname{%
+\NewDocumentCommand{\provideprotectedrpgicon}{ m o m O{} m }{%
+    \expandafter\newsavebox\csname rpgicons@protectbox@#5\endcsname%
+    \expandafter\savebox\csname rpgicons@protectbox@#5\endcsname{%
         \IfValueTF{#2}{%
             \csname #1\endcsname[#2]{#3}[#4]{}%
         }{%
@@ -94,8 +94,8 @@
     }%
 }
 
-\NewDocumentCommand{\useprotecteddndicon}{ m }{%
-    \expandafter\usebox\csname dndicons@protectbox@#1\endcsname%
+\NewDocumentCommand{\useprotectedrpgicon}{ m }{%
+    \expandafter\usebox\csname rpgicons@protectbox@#1\endcsname%
 }
 
 % DICE
@@ -499,28 +499,28 @@
 }
 
 \ExplSyntaxOn
-\NewDocumentCommand{\dndicons@ifEmptyF}{ m m }{
+\NewDocumentCommand{\rpgicons@ifEmptyF}{ m m }{
     \tl_if_empty:nF { #1 } { #2 }
 }
 \ExplSyntaxOff
 
-\NewDocumentCommand{\dndiconsdie}{ O{normal} m O{} m }{%
-  \edef\dndicons@diceiconnrmlrg{#1}%
-  \edef\dndicons@diceiconlrg{large}%
-  \ifx\dndicons@diceiconnrmlrg\dndicons@diceiconlrg%
-    \def\dndicons@diceiconfg{fglrg}\else%
-    \def\dndicons@diceiconfg{fgnrm}\fi%
-  \ifx\dndicons@diceiconnrmlrg\dndicons@diceiconlrg\else\dndicons@ifEmptyF{#4}{#4\,}\fi%
-  \hspace{\dndicons@beforesep}%
-  \tikz[dnd icons, dnd icons/every die, dnd icons/every #2,
-    baseline=\dndicons@baseline, fgnrm/.style={scale=.333}, fglrg/.style={scale=.675}, #3] {
-    \node[#2, \dndicons@diceiconfg, font={\footnotesize}] (0cm,0cm) 
-      {\ifx\dndicons@diceiconnrmlrg\dndicons@diceiconlrg\textbf{#4}\fi};
-    \path[draw=none, \dndicons@diceiconfg] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
+\NewDocumentCommand{\rpgiconsdie}{ O{normal} m O{} m }{%
+  \edef\rpgicons@diceiconnrmlrg{#1}%
+  \edef\rpgicons@diceiconlrg{large}%
+  \ifx\rpgicons@diceiconnrmlrg\rpgicons@diceiconlrg%
+    \def\rpgicons@diceiconfg{fglrg}\else%
+    \def\rpgicons@diceiconfg{fgnrm}\fi%
+  \ifx\rpgicons@diceiconnrmlrg\rpgicons@diceiconlrg\else\rpgicons@ifEmptyF{#4}{#4\,}\fi%
+  \hspace{\rpgicons@beforesep}%
+  \tikz[rpg icons, rpg icons/every die, rpg icons/every #2,
+    baseline=\rpgicons@baseline, fgnrm/.style={scale=.333}, fglrg/.style={scale=.675}, #3] {
+    \node[#2, \rpgicons@diceiconfg, font={\footnotesize}] (0cm,0cm) 
+      {\ifx\rpgicons@diceiconnrmlrg\rpgicons@diceiconlrg\textbf{#4}\fi};
+    \path[draw=none, \rpgicons@diceiconfg] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
   }%
-  \hspace{\dndicons@aftersep}%
+  \hspace{\rpgicons@aftersep}%
 }
-\@ifundefined{die}{\NewCommandCopy\die\dndiconsdie}{}
+\@ifundefined{die}{\NewCommandCopy\die\rpgiconsdie}{}
 
 % ABILITIES
 
@@ -991,46 +991,46 @@
   }
 }
 
-\NewDocumentCommand{\dndiconsability}{ O{positive} m O{} }{%
-  \edef\dndicons@abilityiconposneg{#1}%
-  \edef\dndicons@abilityiconneg{negative}%
-  \ifx\dndicons@abilityiconposneg\dndicons@abilityiconneg%
-    \def\dndicons@abilityiconfg{fgneg}\else%
-    \def\dndicons@abilityiconfg{fgpos}\fi%
-  \hspace{\dndicons@beforesep}%
-  \tikz[dnd icons, dnd icons/every ability, dnd icons/every #2,
-    baseline=\dndicons@baseline, fgpos/.style={draw}, fgneg/.style={draw=dndicons@bg, line width=.6pt}, #3] {
-    \ifx\dndicons@abilityiconposneg\dndicons@abilityiconneg%
+\NewDocumentCommand{\rpgiconsability}{ O{positive} m O{} }{%
+  \edef\rpgicons@abilityiconposneg{#1}%
+  \edef\rpgicons@abilityiconneg{negative}%
+  \ifx\rpgicons@abilityiconposneg\rpgicons@abilityiconneg%
+    \def\rpgicons@abilityiconfg{fgneg}\else%
+    \def\rpgicons@abilityiconfg{fgpos}\fi%
+  \hspace{\rpgicons@beforesep}%
+  \tikz[rpg icons, rpg icons/every ability, rpg icons/every #2,
+    baseline=\rpgicons@baseline, fgpos/.style={draw}, fgneg/.style={draw=rpgicons@bg, line width=.6pt}, #3] {
+    \ifx\rpgicons@abilityiconposneg\rpgicons@abilityiconneg%
       \path[scale=.333, fill] (0cm,0cm) circle[radius=.45cm];
-      \node[#2, \dndicons@abilityiconfg, scale=.225] (0cm,0cm) {};
+      \node[#2, \rpgicons@abilityiconfg, scale=.225] (0cm,0cm) {};
     \else
-      \node[#2, \dndicons@abilityiconfg, scale=.333] (0cm,0cm) {};
+      \node[#2, \rpgicons@abilityiconfg, scale=.333] (0cm,0cm) {};
     \fi%
     \path[draw=none, scale=.333] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
   }%
-  \hspace{\dndicons@aftersep}%
+  \hspace{\rpgicons@aftersep}%
 }
-\@ifundefined{ability}{\NewCommandCopy\ability\dndiconsability}{}
+\@ifundefined{ability}{\NewCommandCopy\ability\rpgiconsability}{}
 
-\NewDocumentCommand{\dndiconssaving}{ O{normal} m O{} }{%
-  \edef\dndicons@abilityiconnrmemp{#1}%
-  \edef\dndicons@abilityiconemp{empty}%
-  \ifx\dndicons@abilityiconnrmemp\dndicons@abilityiconemp%
-    \def\dndicons@savingstyle{}\else%
-    \def\dndicons@savingstyle{dnd icons/every #2}\fi%
-  \hspace{\dndicons@beforesep}%
-  \tikz[dnd icons, dnd icons/every saving, \dndicons@savingstyle,
-    baseline=\dndicons@baseline, #3] {
+\NewDocumentCommand{\rpgiconssaving}{ O{normal} m O{} }{%
+  \edef\rpgicons@abilityiconnrmemp{#1}%
+  \edef\rpgicons@abilityiconemp{empty}%
+  \ifx\rpgicons@abilityiconnrmemp\rpgicons@abilityiconemp%
+    \def\rpgicons@savingstyle{}\else%
+    \def\rpgicons@savingstyle{rpg icons/every #2}\fi%
+  \hspace{\rpgicons@beforesep}%
+  \tikz[rpg icons, rpg icons/every saving, \rpgicons@savingstyle,
+    baseline=\rpgicons@baseline, #3] {
     \path[draw, scale=.333] (-.45cm,.45cm) -- (.45cm,.45cm) -- (.45cm,-.05cm) 
       arc[start angle=360, end angle=180, radius=.45cm] -- cycle;
-    \ifx\dndicons@abilityiconnrmemp\dndicons@abilityiconemp\else%
+    \ifx\rpgicons@abilityiconnrmemp\rpgicons@abilityiconemp\else%
       \node[#2, draw,scale=.225] (0cm,0cm) {};
     \fi%
     \path[draw=none, scale=.333] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
   }%
-  \hspace{\dndicons@aftersep}%
+  \hspace{\rpgicons@aftersep}%
 }
-\@ifundefined{saving}{\NewCommandCopy\saving\dndiconssaving}{}
+\@ifundefined{saving}{\NewCommandCopy\saving\rpgiconssaving}{}
 
 % SPELLS
 
@@ -1223,16 +1223,16 @@
   }
 }
 
-\NewDocumentCommand{\dndiconsspell}{ m O{} }{%
-  \hspace{\dndicons@beforesep}%
-  \tikz[dnd icons, dnd icons/every spell, dnd icons/every #1,
-    baseline=\dndicons@baseline, #2] {
+\NewDocumentCommand{\rpgiconsspell}{ m O{} }{%
+  \hspace{\rpgicons@beforesep}%
+  \tikz[rpg icons, rpg icons/every spell, rpg icons/every #1,
+    baseline=\rpgicons@baseline, #2] {
     \node[#1, draw,scale=.333] (0cm,0cm) {}; 
     \path[draw=none, scale=.333] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
   }%
-  \hspace{\dndicons@aftersep}%
+  \hspace{\rpgicons@aftersep}%
 }
-\@ifundefined{spell}{\NewCommandCopy\spell\dndiconsspell}{}
+\@ifundefined{spell}{\NewCommandCopy\spell\rpgiconsspell}{}
 
 % SPELLSCHOOLS
 
@@ -1405,27 +1405,27 @@
   }
 }
 
-\NewDocumentCommand{\dndiconsspellschool}{ O{negative} m O{} }{%
-  \edef\dndicons@spellschooliconposneg{#1}%
-  \edef\dndicons@spellschooliconpos{positive}%
-  \ifx\dndicons@spellschooliconposneg\dndicons@spellschooliconpos%
-    \def\dndicons@spellschooliconfg{fgneg}\else%
-    \def\dndicons@spellschooliconfg{fgpos}\fi%
-  \ifx\dndicons@spellschooliconposneg\dndicons@spellschooliconpos%
-    \def\dndicons@spellschooliconbg{bgneg}\else%
-    \def\dndicons@spellschooliconbg{bgpos}\fi%
-  \hspace{\dndicons@beforesep}%
-  \tikz[dnd icons, dnd icons/every spellschool, dnd icons/every #2,
-    baseline=\dndicons@baseline, fgpos/.style={draw=dndicons@bg, line width=.6pt}, fgneg/.style={draw},
+\NewDocumentCommand{\rpgiconsspellschool}{ O{negative} m O{} }{%
+  \edef\rpgicons@spellschooliconposneg{#1}%
+  \edef\rpgicons@spellschooliconpos{positive}%
+  \ifx\rpgicons@spellschooliconposneg\rpgicons@spellschooliconpos%
+    \def\rpgicons@spellschooliconfg{fgneg}\else%
+    \def\rpgicons@spellschooliconfg{fgpos}\fi%
+  \ifx\rpgicons@spellschooliconposneg\rpgicons@spellschooliconpos%
+    \def\rpgicons@spellschooliconbg{bgneg}\else%
+    \def\rpgicons@spellschooliconbg{bgpos}\fi%
+  \hspace{\rpgicons@beforesep}%
+  \tikz[rpg icons, rpg icons/every spellschool, rpg icons/every #2,
+    baseline=\rpgicons@baseline, fgpos/.style={draw=rpgicons@bg, line width=.6pt}, fgneg/.style={draw},
     bgpos/.style={fill}, bgneg/.style={draw}, #3] {
-    \path[scale=.333, \dndicons@spellschooliconbg] (-.475cm,.35cm) 
+    \path[scale=.333, \rpgicons@spellschooliconbg] (-.475cm,.35cm) 
       -- (-.35cm,.475cm) -- (.35cm,.475cm) -- (.475cm,.35cm) -- (.425cm,-.375cm) -- (0cm,-.475cm) -- (-.425cm,-.375cm) -- cycle;
-    \node[#2, scale=.225, \dndicons@spellschooliconfg] (0cm,0cm) {}; 
+    \node[#2, scale=.225, \rpgicons@spellschooliconfg] (0cm,0cm) {}; 
     \path[draw=none, scale=.333] ([yshift=-1pt].425,.425) rectangle ([yshift=1pt]-.425cm,-.425cm);
   }%
-  \hspace{\dndicons@aftersep}%
+  \hspace{\rpgicons@aftersep}%
 }
-\@ifundefined{spellschool}{\NewCommandCopy\spellschool\dndiconsspellschool}{}
+\@ifundefined{spellschool}{\NewCommandCopy\spellschool\rpgiconsspellschool}{}
 
 % DAMAGES
 
@@ -1440,12 +1440,12 @@
     \pgfpatharc{-20}{200}{-.175cm}
     \pgfpathlineto{\pgfpoint{0cm}{.425cm}}
     \pgfpathclose
-    \newdimen\dndicons@py
-    \pgfextracty{\dndicons@py}{\pgfpointadd{\pgfpoint{0cm}{-.175cm}}{\pgfpointpolar{20}{-.25cm}}}
-    \pgfpathmoveto{\pgfpoint{-.425cm}{\dndicons@py}}
+    \newdimen\rpgicons@py
+    \pgfextracty{\rpgicons@py}{\pgfpointadd{\pgfpoint{0cm}{-.175cm}}{\pgfpointpolar{20}{-.25cm}}}
+    \pgfpathmoveto{\pgfpoint{-.425cm}{\rpgicons@py}}
     \pgfpathlineto{\pgfpointadd{\pgfpoint{0cm}{-.175cm}}{\pgfpointpolar{20}{-.25cm}}}
     \pgfpatharc{20}{160}{-.25cm}
-    \pgfpathlineto{\pgfpoint{.425cm}{\dndicons@py}}
+    \pgfpathlineto{\pgfpoint{.425cm}{\rpgicons@py}}
     \pgfusepath{draw} % draw shape
   }
 }
@@ -1719,10 +1719,10 @@
     \pgfpathmoveto{\pgfpoint{.225cm}{-.075cm}}
     \pgfpatharc{-90}{120}{.2cm}
     \pgfpatharc{30}{180}{.225cm}
-    \newdimen\dndicons@qy
+    \newdimen\rpgicons@qy
     \pgfmathparse{.125cm+cos(30)*.2cm-sin(30)*.225cm}
-    \dndicons@qy=\pgfmathresult pt
-    \pgfpathlineto{\pgfpoint{-.3cm}{\dndicons@qy}}
+    \rpgicons@qy=\pgfmathresult pt
+    \pgfpathlineto{\pgfpoint{-.3cm}{\rpgicons@qy}}
     \pgfpatharc{90}{180}{.125cm}
     \pgfpathlineto{\pgfpoint{-.425cm}{.05cm}}
     \pgfpatharc{180}{270}{.125cm}
@@ -1752,17 +1752,17 @@
   }
 }
 
-\NewDocumentCommand{\dndiconsdamage}{ m O{} }{%
-  \hspace{\dndicons@beforesep}%
-  \tikz[dnd icons, dnd icons/every damage, dnd icons/every #1,
-    baseline=\dndicons@baseline, #2] {
+\NewDocumentCommand{\rpgiconsdamage}{ m O{} }{%
+  \hspace{\rpgicons@beforesep}%
+  \tikz[rpg icons, rpg icons/every damage, rpg icons/every #1,
+    baseline=\rpgicons@baseline, #2] {
     \path[draw, scale=.333] (0cm,0cm) circle[radius=.5cm];
     \node[#1, draw, scale=.225] (0cm,0cm) {}; 
     \path[draw=none, scale=.333] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
   }%
-  \hspace{\dndicons@aftersep}%
+  \hspace{\rpgicons@aftersep}%
 }
-\@ifundefined{damage}{\NewCommandCopy\damage\dndiconsdamage}{}
+\@ifundefined{damage}{\NewCommandCopy\damage\rpgiconsdamage}{}
 
 % ATTACKS
 
@@ -1911,16 +1911,16 @@
   }
 }
 
-\NewDocumentCommand{\dndiconsattack}{ m O{} }{%
-  \hspace{\dndicons@beforesep}%
-  \tikz[dnd icons, dnd icons/every attack, dnd icons/every #1,
-    baseline=\dndicons@baseline, #2] {
+\NewDocumentCommand{\rpgiconsattack}{ m O{} }{%
+  \hspace{\rpgicons@beforesep}%
+  \tikz[rpg icons, rpg icons/every attack, rpg icons/every #1,
+    baseline=\rpgicons@baseline, #2] {
     \node[#1, draw, scale=.333] (0cm,0cm) {}; 
     \path[draw=none, scale=.333] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
   }%
-  \hspace{\dndicons@aftersep}%
+  \hspace{\rpgicons@aftersep}%
 }
-\@ifundefined{attack}{\NewCommandCopy\attack\dndiconsattack}{}
+\@ifundefined{attack}{\NewCommandCopy\attack\rpgiconsattack}{}
 
 % CONDITIONS
 
@@ -2417,35 +2417,35 @@
   }
 }
 
-\NewDocumentCommand{\dndiconscondition}{ m O{} }{%
-  \hspace{\dndicons@beforesep}%
-  \tikz[dnd icons, dnd icons/every condition, dnd icons/every #1,
-    baseline=\dndicons@baseline, #2] {
+\NewDocumentCommand{\rpgiconscondition}{ m O{} }{%
+  \hspace{\rpgicons@beforesep}%
+  \tikz[rpg icons, rpg icons/every condition, rpg icons/every #1,
+    baseline=\rpgicons@baseline, #2] {
     \node[#1, draw, scale=.333] (0cm,0cm) {}; 
     \path[draw=none, scale=.333] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
   }%
-  \hspace{\dndicons@aftersep}%
+  \hspace{\rpgicons@aftersep}%
 }
-\@ifundefined{condition}{\NewCommandCopy\condition\dndiconscondition}{}
+\@ifundefined{condition}{\NewCommandCopy\condition\rpgiconscondition}{}
 
 % make tikz icons available as pics
-\ifdndicons@pics
+\ifrpgicons@pics
 
 \tikzset{
-  dnd icons/create pic from shape/.code={%
+  rpg icons/create pic from shape/.code={%
     \tikzset{
-      dnd icons #1/.pic={
-        \begin{scope}[every node/.append style={#1}, dnd icons/every #1]
+      rpg icons #1/.pic={
+        \begin{scope}[every node/.append style={#1}, rpg icons/every #1]
           \node[draw, scale=.333] (0cm,0cm) (-node) {}; 
           \path[draw=none, scale=.333] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
         \end{scope}
       },
     }%
   },
-  dnd icons/create pic from ability shape/.code={%
+  rpg icons/create pic from ability shape/.code={%
     \tikzset{
-      dnd icons #1 ability/.pic={
-        \begin{scope}[every node/.append style={#1}, dnd icons/every ability, dnd icons/every #1]
+      rpg icons #1 ability/.pic={
+        \begin{scope}[every node/.append style={#1}, rpg icons/every ability, rpg icons/every #1]
           \path[scale=.333, pic actions] (0cm,0cm) circle[radius=.45cm];
           \node[draw, scale=.225] (0cm,0cm) (-node) {}; 
           \path[draw=none, scale=.333] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
@@ -2453,10 +2453,10 @@
       }
     }%
   },
-  dnd icons/create pic from saving shape/.code={%
+  rpg icons/create pic from saving shape/.code={%
     \tikzset{
-      dnd icons #1 saving/.pic={
-        \begin{scope}[every node/.append style={#1}, dnd icons/every saving, dnd icons/every #1]
+      rpg icons #1 saving/.pic={
+        \begin{scope}[every node/.append style={#1}, rpg icons/every saving, rpg icons/every #1]
           \path[draw, scale=.333, pic actions] (-.45cm,.45cm) -- (.45cm,.45cm) -- (.45cm,-.05cm) 
             arc[start angle=360, end angle=180, radius=.45cm] -- cycle;
           \node[#1, draw, scale=.225] (0cm,0cm) (-node) {}; 
@@ -2465,10 +2465,10 @@
       }
     }%
   },
-  dnd icons/create pic from spellschool shape/.code={%
+  rpg icons/create pic from spellschool shape/.code={%
     \tikzset{
-      dnd icons #1 spellschool/.pic={
-        \begin{scope}[every node/.append style={#1}, dnd icons/every spellschool, dnd icons/every #1]
+      rpg icons #1 spellschool/.pic={
+        \begin{scope}[every node/.append style={#1}, rpg icons/every spellschool, rpg icons/every #1]
           \path[draw, scale=.333, pic actions] (-.475cm,.35cm) 
             -- (-.35cm,.475cm) -- (.35cm,.475cm) -- (.475cm,.35cm) -- (.425cm,-.375cm) -- (0cm,-.475cm) -- (-.425cm,-.375cm) -- cycle;
           \node[#1, draw, scale=.225] (0cm,0cm) (-node) {}; 
@@ -2477,10 +2477,10 @@
       }
     }%
   },
-  dnd icons/create pic from damage shape/.code={
+  rpg icons/create pic from damage shape/.code={
     \tikzset{
-      dnd icons #1 damage/.pic={
-        \begin{scope}[every node/.append style={#1}, dnd icons/every damage, dnd icons/every #1]
+      rpg icons #1 damage/.pic={
+        \begin{scope}[every node/.append style={#1}, rpg icons/every damage, rpg icons/every #1]
           \path[draw, scale=.333, pic actions] (0cm,0cm) circle[radius=.5cm];
           \node[#1, draw, scale=.225] (0cm,0cm) (-node) {}; 
           \path[draw=none, scale=.333] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
@@ -2488,21 +2488,21 @@
       }
     }
   },
-  dnd icons/create pic from shape/.list/.expanded={%
-    \dndicons@allshapes%
+  rpg icons/create pic from shape/.list/.expanded={%
+    \rpgicons@allshapes%
   },
-  dnd icons/create pic from ability shape/.list={%
+  rpg icons/create pic from ability shape/.list={%
     strength, dexterity, dexterity alt, constitution, intelligence, wisdom, charisma, 
     resilience, sanity, perception, luck, armor, proficiency%
   },
-  dnd icons/create pic from saving shape/.list={%
+  rpg icons/create pic from saving shape/.list={%
     strength, dexterity, dexterity alt, constitution, intelligence, wisdom, charisma, 
     resilience, sanity, perception, luck, armor, proficiency%
   },
-  dnd icons/create pic from spellschool shape/.list={%
+  rpg icons/create pic from spellschool shape/.list={%
     abjuration, conjuration, divination, enchantment, evocation, illusion, necromancy, transmutation%
   },
-  dnd icons/create pic from damage shape/.list={%
+  rpg icons/create pic from damage shape/.list={%
     acid, bludgeoning, cold, fire, force, lightning, necrotic, piercing, poison, psychic,
     radiant, slashing, thunder, healing%
   }
@@ -2514,23 +2514,23 @@
 
 \ExplSyntaxOn
 
-\cs_if_exist:NF \dndicons_roll_syntax_parse:n {
+\cs_if_exist:NF \rpgicons_roll_syntax_parse:n {
 
-  \bool_new:N \l__dndicons_unicode_mode_bool
+  \bool_new:N \l__rpgicons_unicode_mode_bool
   \sys_if_engine_luatex:T {
-      \bool_set_true:N \l__dndicons_unicode_mode_bool
+      \bool_set_true:N \l__rpgicons_unicode_mode_bool
   }
   \sys_if_engine_xetex:T {
-      \bool_set_true:N \l__dndicons_unicode_mode_bool
+      \bool_set_true:N \l__rpgicons_unicode_mode_bool
   }
 
-  \regex_new:N \l__dndicons_roll_syntax_die_regex
+  \regex_new:N \l__rpgicons_roll_syntax_die_regex
   \cs_generate_variant:Nn \regex_set:Nn { Ne }
-  \cs_new:Npn \dndicons_roll_syntax_die_set:n #1 {
-      \regex_set:Ne \l__dndicons_roll_syntax_die_regex { [ \clist_use:nn {#1} { } ] }
+  \cs_new:Npn \rpgicons_roll_syntax_die_set:n #1 {
+      \regex_set:Ne \l__rpgicons_roll_syntax_die_regex { [ \clist_use:nn {#1} { } ] }
   }
 
-  \cs_new:Npn \dndicons_roll_syntax_convert:n #1 {
+  \cs_new:Npn \rpgicons_roll_syntax_convert:n #1 {
       \str_case:nnF {#1} {
           { 2 } { twoside }
           { 4 } { fourside }
@@ -2545,52 +2545,52 @@
       {#1}
   }
 
-  \seq_new:N \l__dndicons_roll_syntax_seq
-  \tl_new:N \l__dndicons_roll_syntax_part_tl
-  \regex_new:N \l__dndicons_roll_syntax_split_regex 
-  \regex_new:N \l__dndicons_roll_syntax_plusminus_regex 
-  \regex_new:N \l__dndicons_roll_syntax_times_regex 
-  \bool_if:NTF \l__dndicons_unicode_mode_bool {
-      \regex_set:Nn \l__dndicons_roll_syntax_split_regex { \s*([\+\-\x{2212}x\*\x{00D7}])\s* }
-      \regex_set:Nn \l__dndicons_roll_syntax_plusminus_regex { \A([\+\-\x{2212}])\Z }
-      \regex_set:Nn \l__dndicons_roll_syntax_times_regex { \A([x\*\x{00D7}])\Z }
+  \seq_new:N \l__rpgicons_roll_syntax_seq
+  \tl_new:N \l__rpgicons_roll_syntax_part_tl
+  \regex_new:N \l__rpgicons_roll_syntax_split_regex 
+  \regex_new:N \l__rpgicons_roll_syntax_plusminus_regex 
+  \regex_new:N \l__rpgicons_roll_syntax_times_regex 
+  \bool_if:NTF \l__rpgicons_unicode_mode_bool {
+      \regex_set:Nn \l__rpgicons_roll_syntax_split_regex { \s*([\+\-\x{2212}x\*\x{00D7}])\s* }
+      \regex_set:Nn \l__rpgicons_roll_syntax_plusminus_regex { \A([\+\-\x{2212}])\Z }
+      \regex_set:Nn \l__rpgicons_roll_syntax_times_regex { \A([x\*\x{00D7}])\Z }
   } {
-      \regex_set:Nn \l__dndicons_roll_syntax_split_regex { \s*([\+\-x\*\x{00D7}])\s* }
-      \regex_set:Nn \l__dndicons_roll_syntax_plusminus_regex { \A([\+\-])\Z }
-      \regex_set:Nn \l__dndicons_roll_syntax_times_regex { \A([x\*\x{00D7}])\Z }
+      \regex_set:Nn \l__rpgicons_roll_syntax_split_regex { \s*([\+\-x\*\x{00D7}])\s* }
+      \regex_set:Nn \l__rpgicons_roll_syntax_plusminus_regex { \A([\+\-])\Z }
+      \regex_set:Nn \l__rpgicons_roll_syntax_times_regex { \A([x\*\x{00D7}])\Z }
   }
-  \regex_new:N \l__dndicons_roll_syntax_dice_regex 
-  \cs_new:Npn \dndicons_roll_syntax_parse:n #1 {
-      \regex_set:Nn \l__dndicons_roll_syntax_dice_regex { \A(\d*)\ur{l__dndicons_roll_syntax_die_regex}([F\d]+)\Z }
-      \regex_split:NnN \l__dndicons_roll_syntax_split_regex {#1} \l__dndicons_roll_syntax_seq
-      \seq_map_inline:Nn \l__dndicons_roll_syntax_seq { 
-          \tl_set:Ne \l__dndicons_roll_syntax_part_tl {##1}
+  \regex_new:N \l__rpgicons_roll_syntax_dice_regex 
+  \cs_new:Npn \rpgicons_roll_syntax_parse:n #1 {
+      \regex_set:Nn \l__rpgicons_roll_syntax_dice_regex { \A(\d*)\ur{l__rpgicons_roll_syntax_die_regex}([F\d]+)\Z }
+      \regex_split:NnN \l__rpgicons_roll_syntax_split_regex {#1} \l__rpgicons_roll_syntax_seq
+      \seq_map_inline:Nn \l__rpgicons_roll_syntax_seq { 
+          \tl_set:Ne \l__rpgicons_roll_syntax_part_tl {##1}
           \regex_replace_case_once:nNTF {
-              { \l__dndicons_roll_syntax_plusminus_regex } { \c{,} $\1$ \c{,} }
-              { \l__dndicons_roll_syntax_times_regex } { \c{,} $\c{times}$ \c{,} }
-              { \l__dndicons_roll_syntax_dice_regex } 
-                  { \c{ dndiconsdie } { \c{ dndicons_roll_syntax_convert:n } { \2 } } { \1 } }
-          } \l__dndicons_roll_syntax_part_tl 
-          { \tl_use:N \l__dndicons_roll_syntax_part_tl } 
-          { \tl_use:N \l__dndicons_roll_syntax_part_tl }
+              { \l__rpgicons_roll_syntax_plusminus_regex } { \c{,} $\1$ \c{,} }
+              { \l__rpgicons_roll_syntax_times_regex } { \c{,} $\c{times}$ \c{,} }
+              { \l__rpgicons_roll_syntax_dice_regex } 
+                  { \c{ rpgiconsdie } { \c{ rpgicons_roll_syntax_convert:n } { \2 } } { \1 } }
+          } \l__rpgicons_roll_syntax_part_tl 
+          { \tl_use:N \l__rpgicons_roll_syntax_part_tl } 
+          { \tl_use:N \l__rpgicons_roll_syntax_part_tl }
       }
   }
 
 }
 
 \tikzset{
-    dnd ~ icons/roll ~ syntax/.code={
-        \dndicons_roll_syntax_die_set:n {#1}
+    rpg ~ icons/roll ~ syntax/.code={
+        \rpgicons_roll_syntax_die_set:n {#1}
     },
-    dnd ~ icons/roll ~ syntax={d,D}
+    rpg ~ icons/roll ~ syntax={d,D}
 }
 
-\NewDocumentCommand{\dndiconsroll}{ m }{
-    \dndicons_roll_syntax_parse:n {#1}   
+\NewDocumentCommand{\rpgiconsroll}{ m }{
+    \rpgicons_roll_syntax_parse:n {#1}   
 }
 
 \ExplSyntaxOff
 
-\@ifundefined{roll}{\NewCommandCopy\roll\dndiconsroll}{}
+\@ifundefined{roll}{\NewCommandCopy\roll\rpgiconsroll}{}
 
 \endinput

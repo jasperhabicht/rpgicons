@@ -1,18 +1,18 @@
-% File: dndicons-doc.tex 
+% File: rpgicons-doc.tex 
 % Copyright 2024 Jasper Habicht (mail(at)jasperhabicht.de).
 % 
 % This work may be distributed and/or modified under the
 % conditions of the LaTeX Project Public License version 1.3c,
 % available at http://www.latex-project.org/lppl/.
 % 
-% This file is part of the `dndicons'  package (The Work in LPPL)
+% This file is part of the `rpgicons'  package (The Work in LPPL)
 % and all files in that bundle must be distributed together.
 % 
 % This work has the LPPL maintenance status `author-maintained'.
 % 
 \documentclass[a4paper]{article}
-\def\dndiconsfileversion{1.8.2}
-\def\dndiconsfiledate{28 April 2024}
+\def\rpgiconsfileversion{1.8.2}
+\def\rpgiconsfiledate{28 April 2024}
 
 \usepackage[T1]{fontenc}
 \usepackage{Alegreya}
@@ -38,7 +38,7 @@
 \makeatother
 
 \tcbuselibrary{listings}
-\lstdefinestyle{dndiconsdocmacro}{
+\lstdefinestyle{rpgiconsdocmacro}{
     basicstyle=\small\ttfamily,
     literate=*{<}{{{\color{black!50}\guilsinglleft}}}1 
         {>}{{{\color{black!50}\guilsinglright}}}1,
@@ -46,7 +46,7 @@
     moredelim=[is][\bfseries]{|}{|},
     moredelim=[is][\color{black!50}]{!}{!},
 }
-\lstdefinestyle{dndiconsdoccodeexample}{
+\lstdefinestyle{rpgiconsdoccodeexample}{
     basicstyle=\small\ttfamily,
     keywords={},
 }
@@ -54,41 +54,41 @@
 \hypersetup{colorlinks}
 
 \ExplSyntaxOn
-\int_new:N \l_dndicons_doc_change_int
+\int_new:N \l_rpgicons_doc_change_int
 \NewDocumentCommand{\changes}{ m m m }{
-    \int_incr:N \l_dndicons_doc_change_int
-    \prop_new:c { l_dndicons_doc_change_ 
-        \int_to_roman:n { \l_dndicons_doc_change_int } _prop }
-    \prop_put:cnn { l_dndicons_doc_change_ 
-        \int_to_roman:n { \l_dndicons_doc_change_int } _prop } { version } {#1}
-    \prop_put:cnn { l_dndicons_doc_change_ 
-        \int_to_roman:n { \l_dndicons_doc_change_int } _prop } { date } {#2}
-    \prop_put:cnn { l_dndicons_doc_change_ 
-        \int_to_roman:n { \l_dndicons_doc_change_int } _prop } { changes } {#3}
+    \int_incr:N \l_rpgicons_doc_change_int
+    \prop_new:c { l_rpgicons_doc_change_ 
+        \int_to_roman:n { \l_rpgicons_doc_change_int } _prop }
+    \prop_put:cnn { l_rpgicons_doc_change_ 
+        \int_to_roman:n { \l_rpgicons_doc_change_int } _prop } { version } {#1}
+    \prop_put:cnn { l_rpgicons_doc_change_ 
+        \int_to_roman:n { \l_rpgicons_doc_change_int } _prop } { date } {#2}
+    \prop_put:cnn { l_rpgicons_doc_change_ 
+        \int_to_roman:n { \l_rpgicons_doc_change_int } _prop } { changes } {#3}
 }
 \NewDocumentCommand{\printchanges}{ }{
     \section{Changes}
     \begin{description}
-    \int_step_inline:nn { \l_dndicons_doc_change_int } {
+    \int_step_inline:nn { \l_rpgicons_doc_change_int } {
         \item[ 
-            \prop_item:cn { l_dndicons_doc_change_ 
+            \prop_item:cn { l_rpgicons_doc_change_ 
             \int_to_roman:n { ##1 } _prop } { version } ] 
-            ( \prop_item:cn { l_dndicons_doc_change_ 
+            ( \prop_item:cn { l_rpgicons_doc_change_ 
             \int_to_roman:n { ##1 } _prop } { date } ) \\
-            \prop_item:cn { l_dndicons_doc_change_ 
+            \prop_item:cn { l_rpgicons_doc_change_ 
             \int_to_roman:n { ##1 } _prop } { changes }
     }
     \end{description}
 }
 
-\tl_new:N \l_dndicons_doc_doctitle_tl
+\tl_new:N \l_rpgicons_doc_doctitle_tl
 \NewExpandableDocumentCommand{\makedoctitle}{ o m o m m o m }{
     \hypersetup{
         pdfauthor={#5},
         pdftitle={\IfValueTF{#1}{#1}{#2}},
         pdfsubject={\IfValueTF{#3}{#3}{#4}}
     }
-    \tl_set:Nn \l_dndicons_doc_doctitle_tl {
+    \tl_set:Nn \l_rpgicons_doc_doctitle_tl {
         \group_begin:
             \tcbset{
                 title ~ style ~ hook/.style={
@@ -110,7 +110,7 @@
 }
 
 \NewExpandableDocumentCommand{\printdoctitle}{ }{
-    \tl_use:N \l_dndicons_doc_doctitle_tl
+    \tl_use:N \l_rpgicons_doc_doctitle_tl
 }
 \ExplSyntaxOff
 
@@ -125,7 +125,7 @@
 
 \NewTCBListing{macrodef}{ }{ 
     listing only,
-    listing style={dndiconsdocmacro},
+    listing style={rpgiconsdocmacro},
     grow to left by=2cm,
     boxrule=0pt,
     after={\par\smallskip\noindent}
@@ -134,7 +134,7 @@
 \NewTCBListing{codeexample}{ }{
     text side listing,
     lefthand width=4.5cm,
-    listing style={dndiconsdoccodeexample},
+    listing style={rpgiconsdoccodeexample},
     after={\par\smallskip\noindent}
 }
 
@@ -171,35 +171,35 @@
     #2
 }{\vphantom{/g}\IfBooleanT{#1}{\textbackslash}#3}
 
-\usepackage{dndicons-l3}
-\usepackage[pics]{dndicons-pgf}
+\usepackage{rpgicons-l3}
+\usepackage[pics]{rpgicons-pgf}
 
 \ExplSyntaxOn
-\clist_new:N \l_dndicons_doc_logo_icons_clist
-\clist_new:N \l_dndicons_doc_logo_colors_clist
+\clist_new:N \l_rpgicons_doc_logo_icons_clist
+\clist_new:N \l_rpgicons_doc_logo_colors_clist
 \cs_generate_variant:Nn { \color_set:nnn } { nne }
 
-\clist_set:Nn \l_dndicons_doc_logo_colors_clist { 
+\clist_set:Nn \l_rpgicons_doc_logo_colors_clist { 
     264653 , 287271 , 2a9d8f , e9c46a , f4a261 , e76f51 
 }
-\int_step_inline:nn { \clist_count:N \l_dndicons_doc_logo_colors_clist } {
-    \color_set:nne { dndiconslogo \int_to_roman:n { #1 } } { HTML } {
-        \clist_item:Nn \l_dndicons_doc_logo_colors_clist { #1 }
+\int_step_inline:nn { \clist_count:N \l_rpgicons_doc_logo_colors_clist } {
+    \color_set:nne { rpgiconslogo \int_to_roman:n { #1 } } { HTML } {
+        \clist_item:Nn \l_rpgicons_doc_logo_colors_clist { #1 }
     }
 }
-\clist_set:Nn \l_dndicons_doc_logo_icons_clist { 
+\clist_set:Nn \l_rpgicons_doc_logo_icons_clist { 
     twentyside , charisma , armor , buff , ranged , proficiency 
 }
 
-\NewDocumentCommand{\dndiconslogo}{ O{1} }{
+\NewDocumentCommand{\rpgiconslogo}{ O{1} }{
     \draw_begin:
         \draw_transform_scale:n { #1 }
-        \int_step_inline:nn { \clist_count:N \l_dndicons_doc_logo_icons_clist } {
+        \int_step_inline:nn { \clist_count:N \l_rpgicons_doc_logo_icons_clist } {
             \hcoffin_set:Nn \l_tmpa_coffin { 
                 \draw_suspend_begin: 
-                    \DndiconsAbility[negative]{ 
-                        \clist_item:Nn \l_dndicons_doc_logo_icons_clist { ##1 } 
-                    }[color=dndiconslogo \int_to_roman:n { ##1 } ] 
+                    \RPGIconsAbility[negative]{ 
+                        \clist_item:Nn \l_rpgicons_doc_logo_icons_clist { ##1 } 
+                    }[color=rpgiconslogo \int_to_roman:n { ##1 } ] 
                 \draw_suspend_end: 
             }
             \draw_scope_begin:
@@ -218,7 +218,7 @@
 }
 \ExplSyntaxOff
 
-\NewDocumentEnvironment{dndiconsiconlist}{ }{
+\NewDocumentEnvironment{rpgiconsiconlist}{ }{
     \begin{longtable}{ @{} p{20em} p{5em} p{\dimexpr\linewidth-25em-4\tabcolsep} @{} }
     \toprule
     \textbf{Command} & \textbf{Icon} & \textbf{Shape} \\ 
@@ -229,11 +229,11 @@
 }
 
 \makedoctitle
-    [The dndicons package]
-    {The \titlemacro{dndicons} package}
+    [The rpgicons package]
+    {The \titlemacro{rpgicons} package}
     {A set of high-quality icons for use in notes for tabletop role-playing games}
     {Jasper Habicht}[E-mail: \href{mailto:mail@jasperhabicht.de}{mail@jasperhabicht.de}]
-    {Version \dndiconsfileversion, released on \dndiconsfiledate}
+    {Version \rpgiconsfileversion, released on \rpgiconsfiledate}
 
 \changes{v1.1.0}{2023/08/15}{First public release.}
 \changes{v1.1.1}{2023/11/15}{Fudge dice icon added.}
@@ -265,7 +265,7 @@
 \begin{document}
 
 \vspace*{-1cm}
-\noindent\dndiconslogo[4]
+\noindent\rpgiconslogo[4]
 
 \bigskip
 
@@ -275,19 +275,19 @@
 
 \section{Introduction}
 
-The \macro{dndicons} package provides a set of high-quality icons for use in notes for tabletop role-playing games. The icons are meant to be used in the body text, but they can also be used in other contexts such as graphics or diagrams.
+The \macro{rpgicons} package provides a set of high-quality icons for use in notes for tabletop role-playing games. The icons are meant to be used in the body text, but they can also be used in other contexts such as graphics or diagrams.
 
 The package comes in two variants, a L3 variant based on the \macro{l3draw} package which is loaded per default and a PGF veriant based on PGF/Ti\emph{k}Z.
 
 \section{Loading the package}
 
-To install the package, copy the relevant package files \macro{dndicons.sty}, \macro{dndicons-l3.sty} and \macro{dndicons-pgf.sty} into the working directory or into the \macro{texmf} directory. After the package has been installted, the \macro{dndicons} package is loaded by calling \macro{\usepackage{dndicons}} in the preamble of the document. 
+To install the package, copy the relevant package files \macro{rpgicons.sty}, \macro{rpgicons-l3.sty} and \macro{rpgicons-pgf.sty} into the working directory or into the \macro{texmf} directory. After the package has been installted, the \macro{rpgicons} package is loaded by calling \macro{\usepackage{rpgicons}} in the preamble of the document. 
 
 \begin{macrodef}l3\end{macrodef}
-The L3 variant of the package is loaded by default. To load it explicitly, the package can be loaded using the option \macro{l3}. Alternatively, \macro{\usepackage{dndicons-l3}} can be called instead.
+The L3 variant of the package is loaded by default. To load it explicitly, the package can be loaded using the option \macro{l3}. Alternatively, \macro{\usepackage{rpgicons-l3}} can be called instead.
 
 \begin{macrodef}pgf\end{macrodef}
-To load the PGF variant of the package the package needs to be loaded with the option \macro{pgf}. Alternatively, \macro{\usepackage{dndicons-pgf}} can be called instead.
+To load the PGF variant of the package the package needs to be loaded with the option \macro{pgf}. Alternatively, \macro{\usepackage{rpgicons-pgf}} can be called instead.
 
 \subsection{Dependencies}
 
@@ -303,7 +303,9 @@ Because of the way the package defines the icons, every of the below described u
 
 \subsection[Command \textbackslash die]{Command \titlemacro*{die}}
 
-\begin{macrodef}|\die|[<style>]{<shape>}[<options>]{<integer>}\end{macrodef}
+\begin{macrodef}
+|\die|[<style>]{<shape>}[<options>]{<integer>}
+\end{macrodef}
 The command \macro{\die} prints an icon to depict a die with a certain number of sides. Two special icons exist for a two-sided die (which would be equivalent to a coin) and for a hundred-sided die (which typically comes in the shape of a sphere). There is also a special icon for a fudge die. 
 
 For the six-sided die, nine additional shapes exists representing the values one to nine as pips. Also, additional shapes exist representing the plus or minus side of a fudge die.
@@ -314,7 +316,7 @@ The command also takes two optional arguments, the second of which can take addi
 
 The first optional argument can take the value \macro{normal} or \macro{large}, \macro{normal} being the default value. With \macro{large} given as argument, the icon is drawn larger and the additional integer is printed inside of the shape instead of before it. As an example, \macro{\die[large]{eightside}{2}} results in \die[large]{eightside}{2}. Note that the integer will always be printed on top of the shape, even if the shape does not have an open center as in the case of the \macro{fudge} shapes or the shapes featuring pips. 
 
-\begin{dndiconsiconlist}
+\begin{rpgiconsiconlist}
 \macro{\die} 
     & \die{twoside}{} & \macro{twoside} \\
     & \die{fourside}{} & \macro{fourside} \\
@@ -336,21 +338,25 @@ The first optional argument can take the value \macro{normal} or \macro{large}, 
     & \die{sixside nine}{} & \macro{sixside nine} \\
     & \die{fudge plus}{} & \macro{fudge plus} \\
     & \die{fudge minus}{} & \macro{fudge minus} \\
-\end{dndiconsiconlist}
+\end{rpgiconsiconlist}
 
 \subsection[Commands \textbackslash ability and \textbackslash saving]{Commands \titlemacro*{ability} and \titlemacro*{saving}}
 
-\begin{macrodef}|\ability|[<style>]{<shape>}[<options>]\end{macrodef}
+\begin{macrodef}
+|\ability|[<style>]{<shape>}[<options>]
+\end{macrodef}
 The command \macro{\ability} prints icons depicting an ability of a character. The abilities are represented by animal-like shapes. The relevant shape should be given as mandatory argument to the command. The second optional argument can take additional options to style the icon.
 
 The first optional argument can take the value \macro{positive} or \macro{negative}, \macro{positive} being the default value. With \macro{negative} given as argument, the icon is drawn negative inside a circle. As an example, \macro{\ability[negative]{charisma}} results in \ability[negative]{charisma}.
 
-\begin{macrodef}|\saving|[<style>]{<shape>}[<options>]\end{macrodef}
+\begin{macrodef}
+|\saving|[<style>]{<shape>}[<options>]
+\end{macrodef}
 The command \macro{\saving} prints the icons that can be typeset using the \macro{\ability} command inside a small shield. It can take the same values for the mandatory argument as the \macro{\ability} command. The optional argument can take additional options to style the icon.
 
 The first optional argument can take the value \macro{normal} or \macro{empty}, \macro{normal} being the default value. With \macro{empty} given as argument, the icon inside the shield is not printed. In this case, the mandatory argument can be left empty. As an example, \macro{\saving[empty]{}} results in \saving[empty]{}. 
 
-\begin{dndiconsiconlist}
+\begin{rpgiconsiconlist}
 \macro{\ability} 
     & \ability{strength} & \macro{strength} \\
     & \ability{dexterity} & \macro{dexterity} \\
@@ -380,14 +386,16 @@ The first optional argument can take the value \macro{normal} or \macro{empty}, 
     & \saving{luck} & \macro{luck} \\
     & \saving{armor} & \macro{armor} \\
     & \saving{proficiency} & \macro{proficiency} \\
-\end{dndiconsiconlist}
+\end{rpgiconsiconlist}
 
 \subsection[Command \textbackslash spell]{Command \titlemacro*{spell}}
 
-\begin{macrodef}|\spell|{<shape>}[<options>]\end{macrodef}
+\begin{macrodef}
+|\spell|{<shape>}[<options>]
+\end{macrodef}
 The command \macro{\spell} prints icons depicting the effect of a spell or how it is to be effected. The optional argument can take additional options to style the icon.
 
-\begin{dndiconsiconlist}
+\begin{rpgiconsiconlist}
 \macro{\spell} 
     & \spell{linear} & \macro{linear} \\
     & \spell{conic} & \macro{conic} \\
@@ -399,16 +407,18 @@ The command \macro{\spell} prints icons depicting the effect of a spell or how i
     & \spell{somatic} & \macro{somatic} \\
     & \spell{material} & \macro{material} \\
     & \spell{focus} & \macro{focus} \\
-\end{dndiconsiconlist}
+\end{rpgiconsiconlist}
 
 \subsection[Command \textbackslash spellschool]{Command \titlemacro*{spellschool}}
 
-\begin{macrodef}|\spellschool|[<style>]{<shape>}[<options>]\end{macrodef}
+\begin{macrodef}
+|\spellschool|[<style>]{<shape>}[<options>]
+\end{macrodef}
 The command \macro{\spellschool} prints icons that represent the school a spell belongs to. The second optional argument can take additional options to style the icon.
 
 The first optional argument can take the value \macro{negative} or \macro{positive}, \macro{negative} being the default value. Per default the icon is drawn in white inside a filled escutcheon. With \macro{positive} given as argument, the icon as well as the escutcheon are drawn in the currently selected color. As an example, \macro{\spellschool[positive]{evocation}} results in \spellschool[positive]{evocation}.
 
-\begin{dndiconsiconlist}
+\begin{rpgiconsiconlist}
 \macro{\spellschool} 
     & \spellschool{abjuration} & \macro{abjuration} \\
     & \spellschool{conjuration} & \macro{conjuration} \\
@@ -418,20 +428,26 @@ The first optional argument can take the value \macro{negative} or \macro{positi
     & \spellschool{illusion} & \macro{illusion} \\
     & \spellschool{necromancy} & \macro{necromancy} \\
     & \spellschool{transmutation} & \macro{transmutation} \\
-\end{dndiconsiconlist}
+\end{rpgiconsiconlist}
 
 \subsection[Commands \textbackslash damage, \textbackslash attack, and \textbackslash condition]{Commands \titlemacro*{damage}, \titlemacro*{attack}, and \titlemacro*{condition}}
 
-\begin{macrodef}|\damage|{<shape>}[<options>]\end{macrodef}
+\begin{macrodef}
+|\damage|{<shape>}[<options>]
+\end{macrodef}
 The command \macro{\damage} prints icons depicting the damage of an attack. The icon is printed inside a circle. The optional argument can take additional options to style the icon.
 
-\begin{macrodef}|\attack|{<shape>}[<options>]\end{macrodef}
+\begin{macrodef}
+|\attack|{<shape>}[<options>]
+\end{macrodef}
 The command \macro{\attack} prints icons depicting the kind of an attack. The optional argument can take additional options to style the icon.
 
-\begin{macrodef}|\condition|{<shape>}[<options>]\end{macrodef}
+\begin{macrodef}
+|\condition|{<shape>}[<options>]
+\end{macrodef}
 The command \macro{\condition} prints icons depicting a condition of a character. The optional argument can take additional options to style the icon.
 
-\begin{dndiconsiconlist}
+\begin{rpgiconsiconlist}
 \macro{\damage} 
     & \damage{acid} & \macro{acid} \\
     & \damage{bludgeoning} & \macro{bludgeoning} \\
@@ -474,13 +490,13 @@ The command \macro{\condition} prints icons depicting a condition of a character
     & \condition{unconscious} & \macro{unconscious} \\
     & \condition{hearing} & \macro{hearing} \\
     & \condition{seeing} & \macro{seeing} \\
-\end{dndiconsiconlist}
+\end{rpgiconsiconlist}
 
 % l3 variant
 
 \section{Specifics of the L3 package variant}
 
-The L3 variant of the package that uses the \macro{l3draw} package is loaded by default or explicitly by either calling \macro{\usepackage[l3]{dndicons}} or \macro{\usepackage{dndicons-l3}} in the preamble of the document after having installed the files \macro{dndicons.sty} and \macro{dndicons-l3.sty}. The \macro{l3draw} package is an experimental package that provides only basic drawing functionality. The L3 variant thus only supports a certain set of option for styling the icons. 
+The L3 variant of the package that uses the \macro{l3draw} package is loaded by default or explicitly by either calling \macro{\usepackage[l3]{rpgicons}} or \macro{\usepackage{rpgicons-l3}} in the preamble of the document after having installed the files \macro{rpgicons.sty} and \macro{rpgicons-l3.sty}. The \macro{l3draw} package is an experimental package that provides only basic drawing functionality. The L3 variant thus only supports a certain set of option for styling the icons. 
 
 The L3 variant of the package does not load the \macro{xcolor} package, but makes use of the \macro{l3color} module which uses a similar syntax like the \macro{xcolor} package, but color defintions made using the \macro{l3color} module are not directly usable via commands provided by the \macro{xcolor} package. Therefore, setting a color using the \macro{\color} macro provided by the \macro{xcolor} package won't affect the color of the icons.
 
@@ -494,24 +510,24 @@ With the \macro{opacity} option, the L3 variant of the package supports transpar
 \subsection{Icon commands}
 
 \begin{macrodef}
-|\DndIconsUseIcon|[<options>][<integer>]{<shape>}
-|\DndIconsUseIcon*|[<options>][<integer>]{<shape>}
+|\RPGIconsUseIcon|[<options>][<integer>]{<shape>}
+|\RPGIconsUseIcon*|[<options>][<integer>]{<shape>}
 \end{macrodef}
-\macro{\DndIconsUseIcon} is the primary command to typeset icons using the L3 variant of the package. The commands \macro{\die}, \macro{\ability}, \macro{\saving}, \macro{\spell}, \macro{\spellschool}, \macro{\damage}, \macro{\attack} and \macro{\condition} are based on this command. 
+\macro{\RPGIconsUseIcon} is the primary command to typeset icons using the L3 variant of the package. The commands \macro{\die}, \macro{\ability}, \macro{\saving}, \macro{\spell}, \macro{\spellschool}, \macro{\damage}, \macro{\attack} and \macro{\condition} are based on this command. 
 
-The \macro{\DndIconsUseIcon} command has a starred version and two optional arguments as well as one mandatory argument. The mandatory argument holds the shape of the icon. The second optional argument can be used to add an integer when used with shapes for dice.
+The \macro{\RPGIconsUseIcon} command has a starred version and two optional arguments as well as one mandatory argument. The mandatory argument holds the shape of the icon. The second optional argument can be used to add an integer when used with shapes for dice.
 
 The starred version of the command is used to fill a frame with color instead of drawing its outline. Frames can be put around the shape via the relevant \macro{frame} option. 
 
 \begin{macrodef}
-|\DndiconsDie|[<style>]{<shape>}[<options>]{<integer>}
-|\DndiconsAbiliy|[<style>]{<shape>}[<options>]
-|\DndiconsSaving|[<style>]{<shape>}[<options>]
-|\DndiconsSpell|{<shape>}[<options>]
-|\DndiconsSpellschool|[<style>]{<shape>}[<options>]
-|\DndiconsDamage|{<shape>}[<options>]
-|\DndiconsAttack|{<shape>}[<options>]
-|\DndiconsCondition|{<shape>}[<options>]
+|\RGPIconsDie|[<style>]{<shape>}[<options>]{<integer>}
+|\RGPIconsAbiliy|[<style>]{<shape>}[<options>]
+|\RGPIconsSaving|[<style>]{<shape>}[<options>]
+|\RGPIconsSpell|{<shape>}[<options>]
+|\RGPIconsSpellschool|[<style>]{<shape>}[<options>]
+|\RGPIconsDamage|{<shape>}[<options>]
+|\RGPIconsAttack|{<shape>}[<options>]
+|\RGPIconsCondition|{<shape>}[<options>]
 \end{macrodef}
 The L3 variant of the package defines a set of commands on which the user commands \macro{\die}, \macro{\ability}, \macro{\saving}, \macro{\spell}, \macro{\spellschool}, \macro{\damage}, \macro{\attack} and \macro{\condition} are based. This set of commands can be used in cases where another package defines one of these user commands. These user commands are exact copies of this set of commands.
 
@@ -534,13 +550,13 @@ scale
 scale inner
 rotate
 \end{macrodef}
-The \macro{\DndIconsUseIcon} command and the commands \macro{\die}, \macro{\ability}, \macro{\saving}, \macro{\spell}, \macro{\spellschool}, \macro{\damage}, \macro{\attack} and \macro{\condition} can be used with certain options that each consist of a key-value pair and can be combined. When used with the \macro{\DndIconsUseIcon} command or the other commands based on this command, these options should be used directly without wrapping them inside the \macro{style} option. 
+The \macro{\RPGIconsUseIcon} command and the commands \macro{\die}, \macro{\ability}, \macro{\saving}, \macro{\spell}, \macro{\spellschool}, \macro{\damage}, \macro{\attack} and \macro{\condition} can be used with certain options that each consist of a key-value pair and can be combined. When used with the \macro{\RPGIconsUseIcon} command or the other commands based on this command, these options should be used directly without wrapping them inside the \macro{style} option. 
 
 For example, \macro{\die{eightside}[color=blue, line width=0.8pt]{2}} would result in \die{eightside}[color=blue, line width=0.8pt]{2}.
 
 With the \macro{frame} option, one of four different frames can be selected that are drawn around the shape of the icon. The values \macro{ability} and \macro{damage} draw a circle around the shape. The value \macro{saving} draws a rounded shield and the value \macro{spellschool} draws an angular shield around the shape. The commands \macro{\ability}, \macro{\saving}, \macro{\spellschool} and \macro{\damage} make use of the relevant frame.
 
-Some icons can be used with a negative color scheme where the icon is drawn negatively inside a filled shape. Per default, the icons are drawn in white in such cases, but it might be desirable that the icons are in the same color as the background. To this end, the \macro{background} option sets the color of the shape when it is printed over a filled frame which can be achieved by setting the \macro{negative} option for the \macro{\ability} or the \macro{\spellschool} command or using the starred version of the \macro{\DndIconsUseIcon} command.
+Some icons can be used with a negative color scheme where the icon is drawn negatively inside a filled shape. Per default, the icons are drawn in white in such cases, but it might be desirable that the icons are in the same color as the background. To this end, the \macro{background} option sets the color of the shape when it is printed over a filled frame which can be achieved by setting the \macro{negative} option for the \macro{\ability} or the \macro{\spellschool} command or using the starred version of the \macro{\RPGIconsUseIcon} command.
 
 The \macro{color} option sets the color of strokes, fills and text in general while the \macro{stroke} option, the \macro{fill} option and the \macro{text} option set the color only for strokes, fills or text respectively. Similarly, the \macro{opacity} macro sets the opacity generally, while the options \macro{stroke opacity}, \macro{fill opacity} and \macro{text opacity} allow for setting the opacity of strokes, fill and text separately. The opacity styles are only available when loading the package with the \macro{opacity} option (see the \hyperref{macro:opacity}{description above}). The \macro{line width} sets the line width for strokes. Using the \macro{scale} and \macro{rotate} options, the shape can be scaled and rotated.
 
@@ -565,17 +581,17 @@ every attack
 every condition
 every <shape>
 \end{macrodef}
-Styles following the pattern \macro{dnd icons/every} followed by a space and the name of the command or the shape can be used to apply styles to every instance of this command or shape. For example, \macro{\dndiconsset{every die={color={red}}}} can be used to draw in red all icons created using the \macro{\die} command. Calling \macro{\dndiconsset{every charisma={color={red}}}} will draw every instace of the \macro{charisma} shape in red.
+Styles following the pattern \macro{rpg icons/every} followed by a space and the name of the command or the shape can be used to apply styles to every instance of this command or shape. For example, \macro{\rpgiconsset{every die={color={red}}}} can be used to draw in red all icons created using the \macro{\die} command. Calling \macro{\rpgiconsset{every charisma={color={red}}}} will draw every instace of the \macro{charisma} shape in red.
 
 \subsection{Setting options globally}
 
 \begin{macrodef}
-|\dndiconsset|
+|\rpgiconsset|
 \end{macrodef}
-Apart from setting the options to the commands directly, it is also possible to set them globally using the \macro{\dndiconsset} command. Globally set options are overridden by options that are selected directly.
+Apart from setting the options to the commands directly, it is also possible to set them globally using the \macro{\rpgiconsset} command. Globally set options are overridden by options that are selected directly.
 
 \begin{codeexample}
-\dndiconsset{
+\rpgiconsset{
     color=blue
 }
 
@@ -594,7 +610,7 @@ The spacing before and after the icons can be set using the options \macro{befor
 \begin{codeexample}
 Roll\die{eightside}{}a die!
 
-\dndiconsset{
+\rpgiconsset{
     before sep={1cm}
 }
 Roll\die{eightside}{}a die!
@@ -604,7 +620,7 @@ Roll\die{eightside}{}a die!
 
 \begin{macrodef}
 |\roll|{<roll syntax>}
-|\DndiconsRoll|{<roll syntax>}
+|\RGPIconsRoll|{<roll syntax>}
 \end{macrodef}
 The \macro{\roll} macro can be used to quickly typeset dice rolls with the relevant icons using the established dice rolling syntax. This syntax consists of a sequence of dice and numbers concatenated by mathematical operators (plus, minus or times). Typically, the letter \macro{d} is used to denote a die with a certain number of sides. For example \macro{d6} denotes a six-sided die. A number can be added to specify the number of such dice that are rolled together. The letter to denote the die can be changed using the option \macro{roll syntax}. 
 
@@ -612,23 +628,23 @@ For example, \macro{2d6 + 3d4 - 1} means ``roll two six-sided dice and three fou
 
 The die notations \macro{d2}, \macro{d4}, \macro{d6}, \macro{d8}, \macro{d10}, \macro{d12}, \macro{d20} and \macro{d100} are defined. To denote a fudge die, \macro{dF} can be used. To denote that the lowest or highest die should be removed from the result, the letters \macro{L} and \macro{H} can be used. The syntax \macro{2d6 x 2} or \macro{2d6 * 2} can be used to denote several rolls with the same set of dice.
 
-If the \macro{dndicons} package is to be loaded together with some other package that defines the command \macro{\roll}, the command \macro{\DndiconsRoll} can be used. This alternative command is an exact copy of the \macro{\roll} command. 
+If the \macro{rpgicons} package is to be loaded together with some other package that defines the command \macro{\roll}, the command \macro{\RGPIconsRoll} can be used. This alternative command is an exact copy of the \macro{\roll} command. 
 
 \begin{macrodef}
 roll syntax
 \end{macrodef}
 The option \macro{roll syntax} can be used to change the character that denotes a die in the dice rolling syntax. Multiple characters can be given using a comma separated list. The default setting is \macro{d,D} which allows notations such as \macro{2d6} or \macro{2D6}. 
 
-With \macro{\dndiconsset{roll syntax={w,W}}}, for example, notations such as \macro{2w6} or \macro{2W6} could be used. 
+With \macro{\rpgiconsset{roll syntax={w,W}}}, for example, notations such as \macro{2w6} or \macro{2W6} could be used. 
 
 % PGF variant
 
-\RenewCommandCopy\die\dndiconsdie
-\RenewCommandCopy\ability\dndiconsability
+\RenewCommandCopy\die\rpgiconsdie
+\RenewCommandCopy\ability\rpgiconsability
 
 \section{Specifics of the PGF package variant}
 
-The PGF variant of the package is loaded by either calling \macro{\usepackage[pgf]{dndicons}} or \macro{\usepackage{dndicons-pgf}} in the preamble of the document after having installed the files \macro{dndicons.sty} and \macro{dndicons-pgf.sty}. 
+The PGF variant of the package is loaded by either calling \macro{\usepackage[pgf]{rpgicons}} or \macro{\usepackage{rpgicons-pgf}} in the preamble of the document after having installed the files \macro{rpgicons.sty} and \macro{rpgicons-pgf.sty}. 
 
 Since the commands to typeset the icons with the PGF variant of the package use \macro{tikzpicture} environments, these commands should not be used inside another \macro{tikzpicture}. However, because the package defines the icons as Ti\emph{k}Z shapes, it is possible to use the icons in \macro{tikzpicture} environments directly. 
 
@@ -642,14 +658,14 @@ The PGF variant of the package provides the option \macro{pics}. If the package 
 \subsection{Icon commands}
 
 \begin{macrodef}
-|\dndiconsdie|[<style>]{<shape>}[<options>]{<integer>}
-|\dndiconsability|[<style>]{<shape>}[<options>]
-|\dndiconssaving|[<style>]{<shape>}[<options>]
-|\dndiconsspell|{<shape>}[<options>]
-|\dndiconsspellschool|[<style>]{<shape>}[<options>]
-|\dndiconsdamage|{<shape>}[<options>]
-|\dndiconsattack|{<shape>}[<options>]
-|\dndiconscondition|{<shape>}[<options>]
+|\rpgiconsdie|[<style>]{<shape>}[<options>]{<integer>}
+|\rpgiconsability|[<style>]{<shape>}[<options>]
+|\rpgiconssaving|[<style>]{<shape>}[<options>]
+|\rpgiconsspell|{<shape>}[<options>]
+|\rpgiconsspellschool|[<style>]{<shape>}[<options>]
+|\rpgiconsdamage|{<shape>}[<options>]
+|\rpgiconsattack|{<shape>}[<options>]
+|\rpgiconscondition|{<shape>}[<options>]
 \end{macrodef}
 The PGF variant of the package defines a set of commands on which the user commands \macro{\die}, \macro{\ability}, \macro{\saving}, \macro{\spell}, \macro{\spellschool}, \macro{\damage}, \macro{\attack} and \macro{\condition} are based. This set of commands can be used in cases where another package defines one of these user commands. These user commands are exact copies of this set of commands.
 
@@ -658,27 +674,27 @@ The PGF variant of the package defines a set of commands on which the user comma
 Using the PGF variant of the package, all icons can by styled using arbitrary Ti\emph{k}Z styles in general. As an example, \macro{\die{eightside}[blue, thick]{2}} results in \die{eightside}[blue, thick]{2}.
 
 \begin{macrodef}
-!dnd icons/!every die
-!dnd icons/!every ability
-!dnd icons/!every saving
-!dnd icons/!every spell
-!dnd icons/!every spellschool
-!dnd icons/!every damage
-!dnd icons/!every attack
-!dnd icons/!every condition
-!dnd icons/!every <shape>
+!rpg icons/!every die
+!rpg icons/!every ability
+!rpg icons/!every saving
+!rpg icons/!every spell
+!rpg icons/!every spellschool
+!rpg icons/!every damage
+!rpg icons/!every attack
+!rpg icons/!every condition
+!rpg icons/!every <shape>
 \end{macrodef}
-Using Ti\emph{k}Z styles, all instances of a certain command or a certain shape can be styled at once. These styles all follow the pattern \macro{dnd icons/every} followed by a space and the name of the command or the shape. For example, \macro{\tikzset{dnd icons/every die/.append style={red}}} can be used to draw in red all icons created using the \macro{\die} command. To draw every instace of the \macro{charisma} shape in red, \macro{\tikzset{dnd icons/every charisma/.append style={red}}} can be used.
+Using Ti\emph{k}Z styles, all instances of a certain command or a certain shape can be styled at once. These styles all follow the pattern \macro{rpg icons/every} followed by a space and the name of the command or the shape. For example, \macro{\tikzset{rpg icons/every die/.append style={red}}} can be used to draw in red all icons created using the \macro{\die} command. To draw every instace of the \macro{charisma} shape in red, \macro{\tikzset{rpg icons/every charisma/.append style={red}}} can be used.
 
 \subsection{Setting styles lobally}
 
-\begin{macrodef}dnd icons\end{macrodef}
-All icons share the Ti\emph{k}Z style \macro{dnd icons} that has no options per default but can be used to style all icons at once. For example, if \macro{\tikzset{dnd icons/.append style={draw=red}}} is placed at the beginning of the document, all icons will be drawn in red. Per default, the icons are drawn in the color of the surrounding text. 
+\begin{macrodef}rpg icons\end{macrodef}
+All icons share the Ti\emph{k}Z style \macro{rpg icons} that has no options per default but can be used to style all icons at once. For example, if \macro{\tikzset{rpg icons/.append style={draw=red}}} is placed at the beginning of the document, all icons will be drawn in red. Per default, the icons are drawn in the color of the surrounding text. 
 
 Note that it may be necessary to add the Ti\emph{k}Z option \macro{transform shape} when applying transformations to the icons, because the icons are realised as Ti\emph{k}Z nodes which are not affected by some transformations per default.
 
-\begin{macrodef}!dnd icons/!background color\end{macrodef}
-Some icons can be used with a negative color scheme where the icon is drawn negatively inside a filled shape. Per default, the icons are drawn in white in such cases, but it might be desirable that the icons are in the same color as the background. To this end, the color can be changed using the Ti\emph{k}Z option \macro{dnd icons/background color} in the following way:
+\begin{macrodef}!rpg icons/!background color\end{macrodef}
+Some icons can be used with a negative color scheme where the icon is drawn negatively inside a filled shape. Per default, the icons are drawn in white in such cases, but it might be desirable that the icons are in the same color as the background. To this end, the color can be changed using the Ti\emph{k}Z option \macro{rpg icons/background color} in the following way:
 
 \begin{codeexample}
 \colorbox{blue!50}{%
@@ -687,7 +703,7 @@ Some icons can be used with a negative color scheme where the icon is drawn nega
 }
 
 \tikzset{
-    dnd icons/background color={blue!50}
+    rpg icons/background color={blue!50}
 }
 \colorbox{blue!50}{%
     \ability[negative]{charisma}
@@ -697,17 +713,17 @@ Some icons can be used with a negative color scheme where the icon is drawn nega
 This feature can, of course, also be used to change the color of the icon independently from the color of the background.
 
 \begin{macrodef}
-!dnd icons/!before sep
-!dnd icons/!after sep
-!dnd icons/!baseline
+!rpg icons/!before sep
+!rpg icons/!after sep
+!rpg icons/!baseline
 \end{macrodef}
-The Ti\emph{k}Z options \macro{dnd icons/before sep} and \macro{dnd icons/after sep} are used to define the width of the space that is added before and after the icons respectively. The default value of both lengths is 0.05\,em. For example, setting the space before icons to 1\,cm can be achieved as follows:
+The Ti\emph{k}Z options \macro{rpg icons/before sep} and \macro{rpg icons/after sep} are used to define the width of the space that is added before and after the icons respectively. The default value of both lengths is 0.05\,em. For example, setting the space before icons to 1\,cm can be achieved as follows:
 
 \begin{codeexample}
 Roll\die{eightside}{}a die!
 
 \tikzset{
-    dnd icons/before sep={1cm}
+    rpg icons/before sep={1cm}
 }
 Roll\die{eightside}{}a die!
 \end{codeexample}
@@ -731,22 +747,22 @@ Because the icons are defined as Ti\emph{k}Z shapes, they can directly be applie
 
 Because the icons cannot simply be used inside \macro{tikzpicture} environments, the PGF variant of the package provides a workaround to place icons inside of boxes for later use. Icons that are boxed this way can safely used inside \macro{tikzpicture} environments. This might be necessary, if an icon should be used in inline text that sits inside a node.
 
-\begin{macrodef}|\provideprotecteddndicon|{<command>}[<style>]{<shape>}[<options>]{<box name>}\end{macrodef}
-The command \macro{\provideprotecteddndicon} creates a box containing the icon that would be created using one of the regular commands this package provides. 
+\begin{macrodef}|\provideprotectedrpgicon|{<command>}[<style>]{<shape>}[<options>]{<box name>}\end{macrodef}
+The command \macro{\provideprotectedrpgicon} creates a box containing the icon that would be created using one of the regular commands this package provides. 
 
-\macro{\provideprotecteddndicon{die}[large]{eightside}[blue, thick]{mybox}}, for example, stores the icon of an eight-sided die with the relevant style and Ti\emph{k}Z options in a new box named \macro{mybox}. Note that no integer can be added to the \macro{die} command in this context.
+\macro{\provideprotectedrpgicon{die}[large]{eightside}[blue, thick]{mybox}}, for example, stores the icon of an eight-sided die with the relevant style and Ti\emph{k}Z options in a new box named \macro{mybox}. Note that no integer can be added to the \macro{die} command in this context.
 
-\provideprotecteddndicon{die}[large]{eightside}[blue, thick]{mybox}
+\provideprotectedrpgicon{die}[large]{eightside}[blue, thick]{mybox}
 
-\begin{macrodef}|\useprotecteddndicon|{<box name>}\end{macrodef}
-Using the command \macro{\useprotecteddndicon}, the previously defined box can be used to place the relevant icon. With the above definition, \macro{\useprotecteddndicon{mybox}} would result in \useprotecteddndicon{mybox}.
+\begin{macrodef}|\useprotectedrpgicon|{<box name>}\end{macrodef}
+Using the command \macro{\useprotectedrpgicon}, the previously defined box can be used to place the relevant icon. With the above definition, \macro{\useprotectedrpgicon{mybox}} would result in \useprotectedrpgicon{mybox}.
 
 Having created a boxed icon, it is safe to use it, for example, inside a Ti\emph{k}Z node:
 
 \begin{codeexample}
 \begin{tikzpicture}
     \node[circle, draw, align=center] {
-        \useprotecteddndicon{mybox} \\ 
+        \useprotectedrpgicon{mybox} \\ 
         Roll a die!
     };
 \end{tikzpicture}
@@ -755,7 +771,7 @@ Having created a boxed icon, it is safe to use it, for example, inside a Ti\emph
 
 \subsection{Icons as pics}\label{sec:pics}
 
-If the PGF variant of the package is loaded with the option \macro{pics}, every icon is also available as Ti\emph{k}Z pic. The names of the pic always start with \macro{dnd icons} followed by a space and the name of the relevant icon (see the lists above). For abilities, savings, spellschools and damages, additional pics exists where the name has the suffixes \macro{ability}, \macro{saving}, \macro{spellschool}, and \macro{damage} respectively.
+If the PGF variant of the package is loaded with the option \macro{pics}, every icon is also available as Ti\emph{k}Z pic. The names of the pic always start with \macro{rpg icons} followed by a space and the name of the relevant icon (see the lists above). For abilities, savings, spellschools and damages, additional pics exists where the name has the suffixes \macro{ability}, \macro{saving}, \macro{spellschool}, and \macro{damage} respectively.
 
 The icon is embedded as a node in the pic which has the name \macro{-node}. Thus, it is possible to name the pic and refer to the node inside. Due to the fact that the icon is a node, the option `transform shape` has to be used if transformations on the pic are to affect the node as well. It is easily possible to apply styles to the node using the Ti\emph{k}Z option \macro{every node} as shown in the following example.
 
@@ -770,18 +786,18 @@ The icon is embedded as a node in the pic which has the name \macro{-node}. Thus
             white,
             thick
         }
-    ] (p) {dnd icons charisma ability};
+    ] (p) {rpg icons charisma ability};
     \draw[red] (p-node) -- +(2,0);
 \end{tikzpicture}
 \end{codeexample}
 
 \begin{macrodef}
-!dnd icons/!create pic from shape
-!dnd icons/!create pic from ability shape
-!dnd icons/!create pic from saving shape 
-!dnd icons/!create pic from spellschool shape
-!dnd icons/!create pic from damage shape
-!dnd icons/!create every style
+!rpg icons/!create pic from shape
+!rpg icons/!create pic from ability shape
+!rpg icons/!create pic from saving shape 
+!rpg icons/!create pic from spellschool shape
+!rpg icons/!create pic from damage shape
+!rpg icons/!create every style
 \end{macrodef}
 The PGF variant of the package defines five Ti\emph{k}Z keys that are used to create pics using the relevant node shapes. Another key is defined to create keys that can be used to style all instances of a command or shape. In normal circumstances, it is not necessary to use these keys. They are mentioned here only for reference. 
 
@@ -789,22 +805,22 @@ The PGF variant of the package defines five Ti\emph{k}Z keys that are used to cr
 
 \begin{macrodef}
 |\roll|{<roll syntax>}
-|\dndiconsroll|{<roll syntax>}
+|\rpgiconsroll|{<roll syntax>}
 \end{macrodef}
-The \macro{\roll} macro can be used to quickly typeset dice rolls with the relevant icons using the established dice rolling syntax. This syntax consists of a sequence of dice and numbers concatenated by mathematical operators (plus, minus or times). Typically, the letter \macro{d} is used to denote a die with a certain number of sides. For example \macro{d6} denotes a six-sided die. A number can be added to specify the number of such dice that are rolled together. The letter to denote the die can be changed using the Ti\emph{k}Z style \macro{dnd icons/roll syntax}. 
+The \macro{\roll} macro can be used to quickly typeset dice rolls with the relevant icons using the established dice rolling syntax. This syntax consists of a sequence of dice and numbers concatenated by mathematical operators (plus, minus or times). Typically, the letter \macro{d} is used to denote a die with a certain number of sides. For example \macro{d6} denotes a six-sided die. A number can be added to specify the number of such dice that are rolled together. The letter to denote the die can be changed using the Ti\emph{k}Z style \macro{rpg icons/roll syntax}. 
 
 For example, \macro{2d6 + 3d4 - 1} means ``roll two six-sided dice and three four-sided dice and subtract one from the result''. The command \macro{\roll{2d6 + 3d4 - 1}} results in \roll{2d6 + 3d4 - 1}.
 
 The die notations \macro{d2}, \macro{d4}, \macro{d6}, \macro{d8}, \macro{d10}, \macro{d12}, \macro{d20} and \macro{d100} are defined. To denote a fudge die, \macro{dF} can be used. To denote that the lowest or highest die should be removed from the result, the letters \macro{L} and \macro{H} can be used. The syntax \macro{2d6 x 2} or \macro{2d6 * 2} can be used to denote several rolls with the same set of dice.
 
-If the \macro{dndicons} package is to be loaded together with some other package that defines the command \macro{\roll}, the command \macro{\dndiconsroll} can be used. This alternative command is an exact copy of the \macro{\roll} command. 
+If the \macro{rpgicons} package is to be loaded together with some other package that defines the command \macro{\roll}, the command \macro{\rpgiconsroll} can be used. This alternative command is an exact copy of the \macro{\roll} command. 
 
 \begin{macrodef}
-!dnd icons/!roll syntax
+!rpg icons/!roll syntax
 \end{macrodef}
-The Ti\emph{k}Z style \macro{dnd icons/roll syntax} can be used to change the character that denotes a die in the dice rolling syntax. Multiple characters can be given using a comma separated list. The default setting is \macro{d,D} which allows notations such as \macro{2d6} or \macro{2D6}. 
+The Ti\emph{k}Z style \macro{rpg icons/roll syntax} can be used to change the character that denotes a die in the dice rolling syntax. Multiple characters can be given using a comma separated list. The default setting is \macro{d,D} which allows notations such as \macro{2d6} or \macro{2D6}. 
 
-With \macro{\tikzset{dnd icons/roll syntax={w,W}}}, for example, notations such as \macro{2w6} or \macro{2W6} could be used. 
+With \macro{\tikzset{rpg icons/roll syntax={w,W}}}, for example, notations such as \macro{2w6} or \macro{2W6} could be used. 
 
 % =====
 
@@ -812,4 +828,4 @@ With \macro{\tikzset{dnd icons/roll syntax={w,W}}}, for example, notations such 
 
 \end{document}
 
-%% End of file `dndicons-doc.tex`.
+%% End of file `rpgicons-doc.tex`.

@@ -1,0 +1,33 @@
+% File: rpgicons.sty 
+% Copyright 2024 Jasper Habicht (mail(at)jasperhabicht.de).
+% 
+% This work may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License version 1.3c,
+% available at http://www.latex-project.org/lppl/.
+% 
+% This file is part of the `rpgicons'  package (The Work in LPPL)
+% and all files in that bundle must be distributed together.
+% 
+% This work has the LPPL maintenance status `author-maintained'.
+% 
+\ProvidesExplPackage {rpgicons} {2024-04-28} {1.8.2} 
+    {rpg Icons Package}
+
+\bool_new:N \l__rpgicons_use_legacy_variant_bool
+\clist_new:N \l__rpgicons_forwarded_options_clist
+\keys_define:nn { rpgicons / select ~ variant } { 
+    l3        .bool_set:N = \l__rpgicons_use_legacy_variant_bool ,
+    l3        .default:n  = { false } ,
+    pgf       .bool_set:N = \l__rpgicons_use_legacy_variant_bool ,
+    pgf       .default:n  = { true } ,
+    unknown   .code:n     = { \clist_put_right:Nn \l__rpgicons_forwarded_options_clist {#1} }
+}
+\ProcessKeyOptions [ rpgicons / select ~ variant ]
+
+\bool_if:NTF \l__rpgicons_use_legacy_variant_bool {
+  \RequirePackage [ \l__rpgicons_forwarded_options_clist ] { rpgicons-pgf }
+} {
+  \RequirePackage [ \l__rpgicons_forwarded_options_clist ] { rpgicons-l3 }
+}
+
+% EOF

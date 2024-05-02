@@ -277,11 +277,11 @@
 
 The \macro{rpgicons} package provides a set of high-quality icons for use in notes for tabletop role-playing games. The icons are meant to be used in the body text, but they can also be used in other contexts such as graphics or diagrams.
 
-The package comes in two variants, a L3 variant based on the \macro{l3draw} package which is loaded per default and a PGF veriant based on PGF/Ti\emph{k}Z.
+The package comes in two variants, a L3 variant based on the \macro{l3draw} package which is loaded per default and a PGF variant based on PGF/Ti\emph{k}Z.
 
 \section{Loading the package}
 
-To install the package, copy the relevant package files \macro{rpgicons.sty}, \macro{rpgicons-l3.sty} and \macro{rpgicons-pgf.sty} into the working directory or into the \macro{texmf} directory. After the package has been installted, the \macro{rpgicons} package is loaded by calling \macro{\usepackage{rpgicons}} in the preamble of the document. 
+To install the package, copy the relevant package files \macro{rpgicons.sty}, \macro{rpgicons-l3.sty} and \macro{rpgicons-pgf.sty} into the working directory or into the \macro{texmf} directory. After the package has been installed, the \macro{rpgicons} package is loaded by calling \macro{\usepackage{rpgicons}} in the preamble of the document. 
 
 \begin{macrodef}l3\end{macrodef}
 The L3 variant of the package is loaded by default. To load it explicitly, the package can be loaded using the option \macro{l3}. Alternatively, \macro{\usepackage{rpgicons-l3}} can be called instead.
@@ -297,7 +297,7 @@ The PGF variant of the package loads the \macro{tikz} package which in turn load
 
 \section{Main user commands}
 
-Regardless of the variant of the package, a set of user commands is always available. These are described in the following. Depending on the use of the L3 or the PGF veriant, certain specific commands or options are available that are explained in the following sections in further detail.
+Regardless of the variant of the package, a set of user commands is always available. These are described in the following. Depending on the use of the L3 or the PGF variant, certain specific commands or options are available that are explained in the following sections in further detail.
 
 Because of the way the package defines the icons, every of the below described user commands can actually be used together with every shape. However, the combinations of shapes and commands as described in the following subsections are preferable.
 
@@ -498,7 +498,7 @@ The command \macro{\condition} prints icons depicting a condition of a character
 
 The L3 variant of the package that uses the \macro{l3draw} package is loaded by default or explicitly by either calling \macro{\usepackage[l3]{rpgicons}} or \macro{\usepackage{rpgicons-l3}} in the preamble of the document after having installed the files \macro{rpgicons.sty} and \macro{rpgicons-l3.sty}. The \macro{l3draw} package is an experimental package that provides only basic drawing functionality. The L3 variant thus only supports a certain set of option for styling the icons. 
 
-The L3 variant of the package does not load the \macro{xcolor} package, but makes use of the \macro{l3color} module which uses a similar syntax like the \macro{xcolor} package, but color defintions made using the \macro{l3color} module are not directly usable via commands provided by the \macro{xcolor} package. Therefore, setting a color using the \macro{\color} macro provided by the \macro{xcolor} package won't affect the color of the icons.
+The L3 variant of the package does not load the \macro{xcolor} package, but makes use of the \macro{l3color} module which uses a similar syntax like the \macro{xcolor} package, but color definitions made using the \macro{l3color} module are not directly usable via commands provided by the \macro{xcolor} package. Therefore, setting a color using the \macro{\color} macro provided by the \macro{xcolor} package won't affect the color of the icons.
 
 \begin{macrodef}compat\end{macrodef}
 The \macro{l3draw} package is experimental and subject to ongoing updates. Loading the L3 variant of the package with the option \macro{compat} will use macro definitions that have been available since the last major TeX Live release as replacement for certain functions that only became available in the most recent versions of the \macro{l3draw} and related packages.
@@ -581,7 +581,7 @@ every attack
 every condition
 every <shape>
 \end{macrodef}
-Styles following the pattern \macro{rpg icons/every} followed by a space and the name of the command or the shape can be used to apply styles to every instance of this command or shape. For example, \macro{\rpgiconsset{every die={color={red}}}} can be used to draw in red all icons created using the \macro{\die} command. Calling \macro{\rpgiconsset{every charisma={color={red}}}} will draw every instace of the \macro{charisma} shape in red.
+Styles following the pattern \macro{rpg icons/every} followed by a space and the name of the command or the shape can be used to apply styles to every instance of this command or shape. For example, \macro{\rpgiconsset{every die={color={red}}}} can be used to draw in red all icons created using the \macro{\die} command. Calling \macro{\rpgiconsset{every charisma={color={red}}}} will draw every instance of the \macro{charisma} shape in red.
 
 \subsection{Setting options globally}
 

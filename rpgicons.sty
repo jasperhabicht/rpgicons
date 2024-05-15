@@ -22,8 +22,7 @@
     pgf       .default:n  = { true } ,
     pics      .code:n     = { \clist_put_right:Nn \l__rpgicons_forwarded_options_clist { pics } } ,
     compat    .code:n     = { \clist_put_right:Nn \l__rpgicons_forwarded_options_clist { compat } } ,
-    opacity   .code:n     = { \clist_put_right:Nn \l__rpgicons_forwarded_options_clist { opacity } } ,
-    unknown   .code:n     = { \clist_put_right:Nn \l__rpgicons_forwarded_options_clist {#1} }
+    opacity   .code:n     = { \clist_put_right:Nn \l__rpgicons_forwarded_options_clist { opacity } } 
 }
 \ProcessKeyOptions [ rpgicons / select ~ variant ]
 

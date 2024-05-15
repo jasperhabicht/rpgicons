@@ -11,8 +11,8 @@
 % This work has the LPPL maintenance status `maintained'.
 % 
 \documentclass[a4paper]{article}
-\def\rpgiconsfileversion{1.8.2}
-\def\rpgiconsfiledate{28 April 2024}
+\def\rpgiconsfileversion{1.8.3}
+\def\rpgiconsfiledate{15 May 2024}
 
 \usepackage[T1]{fontenc}
 \usepackage{Alegreya}
@@ -261,6 +261,7 @@
 \changes{v1.7.0}{2024/03/16}{Macro for easy typesetting using roll dice syntax added in L3 variant, compatibility mode updated.}
 \changes{v1.8.0}{2024/03/24}{Unified wrapper to load either package variant.}
 \changes{v1.8.2}{2024/04/28}{Roll dice syntax for PGF variant.}
+\changes{v1.8.3}{2024/05/15}{Minor compatibility fix. Example of how to use pics added to ducumentation.}
 
 \begin{document}
 
@@ -800,6 +801,42 @@ The icon is embedded as a node in the pic which has the name \macro{-node}. Thus
 !rpg icons/!create every style
 \end{macrodef}
 The PGF variant of the package defines five Ti\emph{k}Z keys that are used to create pics using the relevant node shapes. Another key is defined to create keys that can be used to style all instances of a command or shape. In normal circumstances, it is not necessary to use these keys. They are mentioned here only for reference. 
+
+The following example shows how to create the drawing on the first page of this documentation using Ti\emph{k}Z pics. We need to call \macro{rpg icons/create pic from ability shape} for the shapes \macro{twentyside}, \macro{buff} and \macro{ranged}, because per default no pics are defined for these shapes in combination with ability. Note the use of \macro{\space} to ensure correct use of spaces in the pic name as spaces are gobbled after commands in TeX.
+
+\begin{codeexample}
+\tikzset{
+    rpg icons/%
+    create pic from ability shape/%
+    .list={
+        twentyside, 
+        buff, 
+        ranged
+    },
+    rpg icons/every ability/.style={
+        ultra thick,
+        draw=white,
+        line join=round,
+        line cap=round
+    }
+}
+
+\begin{tikzpicture}[scale=4]
+    \foreach \x/\c [count=\i] in {
+        twentyside/264653, 
+        charisma/287271, 
+        armor/2a9d8f, 
+        buff/e9c46a, 
+        ranged/f4a261, 
+        proficiency/e76f51
+    } {
+        \definecolor{color}{HTML}{\c}
+        \pic[fill=color, transform shape] 
+            at ({60*\i+10}:{0.33cm}) 
+            {rpg icons \x\space ability};
+    }
+\end{tikzpicture}
+\end{codeexample}
 
 \subsection{Roll dice syntax}
 

@@ -10,7 +10,7 @@
 % 
 % This work has the LPPL maintenance status `maintained'.
 % 
-\ProvidesExplPackage {rpgicons} {2024-04-28} {1.8.2} 
+\ProvidesExplPackage {rpgicons} {2024-05-15} {1.8.3} 
     {rpg Icons Package}
 
 \bool_new:N \l__rpgicons_use_legacy_variant_bool
@@ -20,6 +20,9 @@
     l3        .default:n  = { false } ,
     pgf       .bool_set:N = \l__rpgicons_use_legacy_variant_bool ,
     pgf       .default:n  = { true } ,
+    pics      .code:n     = { \clist_put_right:Nn \l__rpgicons_forwarded_options_clist { pics } } ,
+    compat    .code:n     = { \clist_put_right:Nn \l__rpgicons_forwarded_options_clist { compat } } ,
+    opacity   .code:n     = { \clist_put_right:Nn \l__rpgicons_forwarded_options_clist { opacity } } ,
     unknown   .code:n     = { \clist_put_right:Nn \l__rpgicons_forwarded_options_clist {#1} }
 }
 \ProcessKeyOptions [ rpgicons / select ~ variant ]

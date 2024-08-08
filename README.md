@@ -1,4 +1,4 @@
-![Version 1.8.3](https://img.shields.io/badge/version-1.8.3-blue)
+![Version 1.8.4](https://img.shields.io/badge/version-1.8.4-blue)
 
 <img width="200" alt="rpgicons-example" src="https://github.com/jasperhabicht/rpgicons/assets/6378801/81a1d0aa-7a4f-4f83-bbdc-3bc3332023b2" /> 
 

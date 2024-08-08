@@ -10,8 +10,8 @@
 % 
 % This work has the LPPL maintenance status `maintained'.
 % 
-\ProvidesExplPackage {rpgicons-l3} {2024-05-15} {1.8.3} 
-    {rpg Icons Package (l3 Variant)}
+\ProvidesExplPackage {rpgicons-l3} {2024-08-08} {1.8.4} 
+    {RPG Icons Package (l3 Variant)}
 
 \bool_new:N \l__rpgicons_unicode_mode_bool
 \sys_if_engine_luatex:T {
@@ -792,22 +792,22 @@
     \draw_path_lineto:n { 0cm , -.425cm }
     \draw_path_moveto:n { -.425cm , 0cm }
     \draw_path_lineto:n { .425cm , 0cm }
-    \draw_path_moveto:n { \draw_point_polar:nnn { 30 } { .325cm } { .225cm } }
-    \draw_path_lineto:n { \draw_point_polar:nn { 30 } { .4cm} }
-    \draw_path_moveto:n { \draw_point_polar:nnn { 60 } { .325cm } { .225cm } }
-    \draw_path_lineto:n { \draw_point_polar:nn { 60 } { .4cm} }
-    \draw_path_moveto:n { \draw_point_polar:nnn { 120 } { .325cm } { .225cm } }
-    \draw_path_lineto:n { \draw_point_polar:nn { 120 } { .4cm} }
-    \draw_path_moveto:n { \draw_point_polar:nnn { 150 } { .325cm } { .225cm } }
-    \draw_path_lineto:n { \draw_point_polar:nn { 150 } { .4cm} }
-    \draw_path_moveto:n { \draw_point_polar:nnn { 210 } { .325cm } { .225cm } }
-    \draw_path_lineto:n { \draw_point_polar:nn { 210 } { .4cm} }
-    \draw_path_moveto:n { \draw_point_polar:nnn { 240 } { .325cm } { .225cm } }
-    \draw_path_lineto:n { \draw_point_polar:nn { 240 } { .4cm} }
-    \draw_path_moveto:n { \draw_point_polar:nnn { 300 } { .325cm } { .225cm } }
-    \draw_path_lineto:n { \draw_point_polar:nn { 300 } { .4cm} }
-    \draw_path_moveto:n { \draw_point_polar:nnn { 330 } { .325cm } { .225cm } }
-    \draw_path_lineto:n { \draw_point_polar:nn { 330 } { .4cm} }
+    \draw_path_moveto:n { \draw_point_polar:nnn { .325cm } { .225cm } { 30 } }
+    \draw_path_lineto:n { \draw_point_polar:nn { .4cm } { 30 } }
+    \draw_path_moveto:n { \draw_point_polar:nnn { .325cm } { .225cm } { 60 } }
+    \draw_path_lineto:n { \draw_point_polar:nn { .4cm } { 60 } }
+    \draw_path_moveto:n { \draw_point_polar:nnn { .325cm } { .225cm } { 120 } }
+    \draw_path_lineto:n { \draw_point_polar:nn { .4cm } { 120 } }
+    \draw_path_moveto:n { \draw_point_polar:nnn { .325cm } { .225cm } { 150 } }
+    \draw_path_lineto:n { \draw_point_polar:nn { .4cm } { 150 } }
+    \draw_path_moveto:n { \draw_point_polar:nnn { .325cm } { .225cm } { 210 } }
+    \draw_path_lineto:n { \draw_point_polar:nn { .4cm } { 210 } }
+    \draw_path_moveto:n { \draw_point_polar:nnn { .325cm } { .225cm } { 240 } }
+    \draw_path_lineto:n { \draw_point_polar:nn { .4cm } { 240 } }
+    \draw_path_moveto:n { \draw_point_polar:nnn { .325cm } { .225cm } { 300 } }
+    \draw_path_lineto:n { \draw_point_polar:nn { .4cm } { 300 } }
+    \draw_path_moveto:n { \draw_point_polar:nnn { .325cm } { .225cm } { 330 } }
+    \draw_path_lineto:n { \draw_point_polar:nn { .4cm } { 330 } }
 }
 
 \cs_new:Npn \rpgicons_draw_shape_illusion: {
@@ -1546,7 +1546,7 @@
 }
 
 \cs_new:Npn \rpgicons_draw_frame_damage: {
-    \draw_path_circle:nn { 0cm , 0cm } { .45cm }
+    \draw_path_circle:nn { 0cm , 0cm } { .5cm }
 }
 
 % USER COMMANDS
@@ -1910,7 +1910,7 @@
 }
 \cs_if_exist:NF \spell { \cs_new_eq:NN \spell \RPGIconsSpell }
 
-\NewDocumentCommand { \RPGIconsSpellschool } { O{positive} m O{} } {
+\NewDocumentCommand { \RPGIconsSpellschool } { O{negative} m O{} } {
     \group_begin:
         \keys_set_groups:nne { rpgicons / local ~ options } { extra } {#3}
         \keys_set:ne { rpgicons / local ~ options } { \clist_use:Nn \l_rpgicons_types_every_spellschool_style_clist { , } }

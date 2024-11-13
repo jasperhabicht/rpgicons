@@ -11,8 +11,8 @@
 % This work has the LPPL maintenance status `maintained'.
 % 
 \documentclass[a4paper]{article}
-\def\rpgiconsfileversion{1.8.4}
-\def\rpgiconsfiledate{8 August 2024}
+\def\rpgiconsfileversion{1.8.5}
+\def\rpgiconsfiledate{13 November 2024}
 
 \usepackage[T1]{fontenc}
 \usepackage{Alegreya}
@@ -570,7 +570,7 @@ accessible = basic
 accessible = full
 accessible = false
 \end{macrodef}
-Using the \macro{accessible} option with no value or the value \macro{basic}, a replacement text to the relevant icon can be added which can be copied to the clipboard. The value \macro{full} additionally places an \macro{\Alt} mark in the PDF which means that the shape of the relevant icon is read by screen readers. For this to work, is necessary to call \macro{\DocumentMetadata{}} before loading a \macro{\documentclass}, preferably with tagging enabled to make use of the \macro{accessible} option. The value \macro{full} can be used to disable the function explicitly. Note that depending on the compiler and PDF viewer, there might be line breaks or no spaces before and after the replacement text. 
+Using the \macro{accessible} option with no value or the value \macro{basic}, a replacement text to the relevant icon can be added which can be copied to the clipboard. The value \macro{full} additionally places an \macro{\Alt} mark in the PDF which means that the shape of the relevant icon is read by screen readers. For this to work, is necessary to call \macro{\DocumentMetadata{}} before loading a \macro{\documentclass}, preferably with tagging enabled to make use of the \macro{accessible} option. The value \macro{false} can be used to disable the function explicitly. Note that depending on the compiler and PDF viewer, there might be line breaks or no spaces before and after the replacement text. 
 
 \begin{macrodef}
 every die
@@ -773,7 +773,7 @@ Having created a boxed icon, it is safe to use it, for example, inside a Ti\emph
 
 \subsection{Icons as pics}\label{sec:pics}
 
-If the PGF variant of the package is loaded with the option \macro{pics}, every icon is also available as Ti\emph{k}Z pic. The names of the pic always start with \macro{rpg icons} followed by a space and the name of the relevant icon (see the lists above). For abilities, savings, spellschools and damages, additional pics exists where the name has the suffixes \macro{ability}, \macro{saving}, \macro{spellschool}, and \macro{damage} respectively.
+If the PGF variant of the package is loaded with the option \macro{pics}, every icon is also available as Ti\emph{k}Z pic. The names of the pic always start with \macro{rpg icons} followed by a space and the name of the relevant icon (see the lists above). For abilities, savings, spellschools and damages, additional pics exist where the name has the suffixes \macro{ability}, \macro{saving}, \macro{spellschool}, and \macro{damage} respectively.
 
 The icon is embedded as a node in the pic which has the name \macro{-node}. Thus, it is possible to name the pic and refer to the node inside. Due to the fact that the icon is a node, the option `transform shape` has to be used if transformations on the pic are to affect the node as well. It is easily possible to apply styles to the node using the Ti\emph{k}Z option \macro{every node} as shown in the following example.
 

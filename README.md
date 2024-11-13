@@ -1,4 +1,4 @@
-![Version 1.8.4](https://img.shields.io/badge/version-1.8.4-blue)
+![Version 1.8.5](https://img.shields.io/badge/version-1.8.5-blue)
 
 <img width="200" alt="rpgicons-example" src="https://github.com/jasperhabicht/rpgicons/assets/6378801/81a1d0aa-7a4f-4f83-bbdc-3bc3332023b2" /> 
 
@@ -7,10 +7,8 @@
 This package provides a set of high-quality icons for use in notes for tabletop role-playing games. 
 The icons are meant to be used in the body text, but they can also be used in other contexts such 
 as graphics or diagrams. The package comes in two variants, one based on the `l3draw` package and one
-based on PGF/Ti*k*Z.
-
-As of version 1.4.0, an `l3draw` variant of the `rpgicons` package exists which is loaded by default.
-The `l3draw` package does not provide the same variety of styles as Ti*k*Z does. 
+based on PGF/Ti*k*Z. The `l3draw` variant is loaded by default. The `l3draw` variant does not provide 
+the same variety of styles as Ti*k*Z does. 
 
 The PGF veriant of the `rpgicons` package provides the icons as Ti*k*Z shapes. Since the commands to 
 typeset the icons use `tikzpicture` environments, these commands should not be used inside another 

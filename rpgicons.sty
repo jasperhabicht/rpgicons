@@ -1,28 +1,28 @@
-% File: rpgicons.sty 
+% File: rpgicons.sty
 % Copyright 2024 Jasper Habicht (mail(at)jasperhabicht.de).
-% 
+%
 % This work may be distributed and/or modified under the
 % conditions of the LaTeX Project Public License version 1.3c,
 % available at http://www.latex-project.org/lppl/.
-% 
+%
 % This file is part of the `rpgicons'  package (The Work in LPPL)
 % and all files in that bundle must be distributed together.
-% 
+%
 % This work has the LPPL maintenance status `maintained'.
-% 
-\ProvidesExplPackage {rpgicons} {2024-11-13} {1.8.5} 
+%
+\ProvidesExplPackage {rpgicons} {2024-11-13} {1.8.5}
     {RPG Icons Package}
 
 \bool_new:N \l__rpgicons_use_legacy_variant_bool
 \clist_new:N \l__rpgicons_forwarded_options_clist
-\keys_define:nn { rpgicons / select ~ variant } { 
+\keys_define:nn { rpgicons / select ~ variant } {
     l3        .bool_set:N = \l__rpgicons_use_legacy_variant_bool ,
     l3        .default:n  = { false } ,
     pgf       .bool_set:N = \l__rpgicons_use_legacy_variant_bool ,
     pgf       .default:n  = { true } ,
     pics      .code:n     = { \clist_put_right:Nn \l__rpgicons_forwarded_options_clist { pics } } ,
     compat    .code:n     = { \clist_put_right:Nn \l__rpgicons_forwarded_options_clist { compat } } ,
-    opacity   .code:n     = { \clist_put_right:Nn \l__rpgicons_forwarded_options_clist { opacity } } 
+    opacity   .code:n     = { \clist_put_right:Nn \l__rpgicons_forwarded_options_clist { opacity } }
 }
 \ProcessKeyOptions [ rpgicons / select ~ variant ]
 

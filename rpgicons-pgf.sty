@@ -1,15 +1,15 @@
-% File: rpgicons-pgf.sty 
+% File: rpgicons-pgf.sty
 % Copyright 2024 Jasper Habicht (mail(at)jasperhabicht.de).
-% 
+%
 % This work may be distributed and/or modified under the
 % conditions of the LaTeX Project Public License version 1.3c,
 % available at http://www.latex-project.org/lppl/.
-% 
+%
 % This file is part of the `rpgicons'  package (The Work in LPPL)
 % and all files in that bundle must be distributed together.
-% 
+%
 % This work has the LPPL maintenance status `maintained'.
-% 
+%
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{rpgicons-pgf}[2024-11-13 RPG Icons Package (PGF Variant) (1.8.5)]
 
@@ -25,14 +25,14 @@
 
 \def\rpgicons@allshapes{%
   twoside, fourside, sixside, eightside, tenside, twelveside, twentyside, hundredside,
-  fudge, sixside one, sixside two, sixside three, sixside four, sixside five, 
+  fudge, sixside one, sixside two, sixside three, sixside four, sixside five,
   sixside six, sixside seven, sixside eight, sixside nine, fudge plus, fudge minus,
-  strength, dexterity, dexterity alt, constitution, intelligence, wisdom, charisma, 
+  strength, dexterity, dexterity alt, constitution, intelligence, wisdom, charisma,
   resilience, sanity, perception, luck, armor, proficiency,
   linear, conic, quadratic, cubic, spheric, cylindric, verbal, somatic, material, focus,
   abjuration, conjuration, divination, enchantment, evocation, illusion, necromancy, transmutation,
   acid, bludgeoning, cold, fire, force, lightning, necrotic, piercing, poison, psychic,
-  radiant, slashing, thunder, healing, 
+  radiant, slashing, thunder, healing,
   melee, ranged, magic, singlehanded, doublehanded,
   buff, blinded, charmed, deafened, exhausted, frightened, grappled, incapacitated, invisible,
   paralyzed, petrified, poisoned, prone, restrained, stunned, unconscious, hearing, seeing%
@@ -62,7 +62,7 @@
         line join=round
       }
     },
-    % 
+    %
     rpg icons/every die/.style={},
     rpg icons/every ability/.style={},
     rpg icons/every saving/.style={},
@@ -166,7 +166,7 @@
   \anchor{text} % this is used to center the text in the node
     {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
-  \foregroundpath{ 
+  \foregroundpath{
     \pgfpathmoveto{\pgfpoint{0cm}{.5cm}}
     \pgfpathlineto{\pgfpoint{.475cm}{.1cm}}
     \pgfpathlineto{\pgfpoint{.475cm}{-.1cm}}
@@ -231,7 +231,7 @@
   \anchor{text} % this is used to center the text in the node
     {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
-  \foregroundpath{ 
+  \foregroundpath{
     \pgfpathmoveto{\pgfpoint{0cm}{.5cm}}
     \pgfpathlineto{\pgfpoint{.454cm}{.262cm}}
     \pgfpathlineto{\pgfpoint{.454cm}{-.262cm}}
@@ -264,7 +264,7 @@
   \anchor{text} % this is used to center the text in the node
     {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
-  \foregroundpath{ 
+  \foregroundpath{
     \pgfpathcircle{\pgfpointorigin}{.425cm}
     \pgfpathmoveto{\pgfpoint{.425cm}{0cm}}
     \pgfpatharc{180}{50}{-.425cm and -.2cm}
@@ -286,7 +286,7 @@
     \foreach \x/\y in {
         0cm/0cm
     } {
-        \pgfpathcircle{\pgfpoint{\x}{\y}}{2pt} 
+        \pgfpathcircle{\pgfpoint{\x}{\y}}{2pt}
     }
     \pgfusepath{fill}
   }
@@ -302,9 +302,9 @@
     \pgfpathrectanglecorners{\pgfpoint{.4cm}{.4cm}}{\pgfpoint{-.4cm}{-.4cm}}
     \pgfusepath{draw} % draw rectangle
     \foreach \x/\y in {
-        .2cm/-.2cm, -.2cm/.2cm 
+        .2cm/-.2cm, -.2cm/.2cm
     } {
-        \pgfpathcircle{\pgfpoint{\x}{\y}}{2pt} 
+        \pgfpathcircle{\pgfpoint{\x}{\y}}{2pt}
     }
     \pgfusepath{fill}
   }
@@ -320,9 +320,9 @@
     \pgfpathrectanglecorners{\pgfpoint{.4cm}{.4cm}}{\pgfpoint{-.4cm}{-.4cm}}
     \pgfusepath{draw} % draw rectangle
     \foreach \x/\y in {
-        .2cm/-.2cm, 0cm/0cm, -.2cm/.2cm 
+        .2cm/-.2cm, 0cm/0cm, -.2cm/.2cm
     } {
-        \pgfpathcircle{\pgfpoint{\x}{\y}}{2pt} 
+        \pgfpathcircle{\pgfpoint{\x}{\y}}{2pt}
     }
     \pgfusepath{fill}
   }
@@ -341,7 +341,7 @@
         -.2cm/.2cm, .2cm/.2cm,
         -.2cm/-.2cm, .2cm/-.2cm
     } {
-        \pgfpathcircle{\pgfpoint{\x}{\y}}{2pt} 
+        \pgfpathcircle{\pgfpoint{\x}{\y}}{2pt}
     }
     \pgfusepath{fill}
   }
@@ -361,7 +361,7 @@
         0cm/0cm,
         -.2cm/-.2cm, .2cm/-.2cm
     } {
-        \pgfpathcircle{\pgfpoint{\x}{\y}}{2pt} 
+        \pgfpathcircle{\pgfpoint{\x}{\y}}{2pt}
     }
     \pgfusepath{fill}
   }
@@ -381,7 +381,7 @@
         -.2cm/0cm, .2cm/0cm,
         -.2cm/-.2cm, .2cm/-.2cm
     } {
-        \pgfpathcircle{\pgfpoint{\x}{\y}}{2pt} 
+        \pgfpathcircle{\pgfpoint{\x}{\y}}{2pt}
     }
     \pgfusepath{fill}
   }
@@ -401,7 +401,7 @@
         -.2cm/0cm, 0cm/0cm, .2cm/0cm,
         -.2cm/-.2cm, .2cm/-.2cm
     } {
-        \pgfpathcircle{\pgfpoint{\x}{\y}}{2pt} 
+        \pgfpathcircle{\pgfpoint{\x}{\y}}{2pt}
     }
     \pgfusepath{fill}
   }
@@ -421,7 +421,7 @@
         -.2cm/0cm, .2cm/0cm,
         -.2cm/-.2cm, 0cm/-.2cm, .2cm/-.2cm
     } {
-        \pgfpathcircle{\pgfpoint{\x}{\y}}{2pt} 
+        \pgfpathcircle{\pgfpoint{\x}{\y}}{2pt}
     }
     \pgfusepath{fill}
   }
@@ -441,7 +441,7 @@
         -.2cm/0cm, 0cm/0cm, .2cm/0cm,
         -.2cm/-.2cm, 0cm/-.2cm, .2cm/-.2cm
     } {
-        \pgfpathcircle{\pgfpoint{\x}{\y}}{2pt} 
+        \pgfpathcircle{\pgfpoint{\x}{\y}}{2pt}
     }
     \pgfusepath{fill}
   }
@@ -462,7 +462,7 @@
     \pgfpathlineto{\pgfpoint{0cm}{-.05cm}}
     \pgfpathmoveto{\pgfpoint{-.15cm}{-.2cm}}
     \pgfpathlineto{\pgfpoint{.15cm}{-.2cm}}
-    \pgfusepath{draw} 
+    \pgfusepath{draw}
   }
 }
 
@@ -479,7 +479,7 @@
     \pgfpathlineto{\pgfpoint{0cm}{-.15cm}}
     \pgfpathmoveto{\pgfpoint{-.15cm}{0cm}}
     \pgfpathlineto{\pgfpoint{.15cm}{0cm}}
-    \pgfusepath{draw} 
+    \pgfusepath{draw}
   }
 }
 
@@ -494,7 +494,7 @@
     \pgfusepath{draw} % draw rectangle
     \pgfpathmoveto{\pgfpoint{-.15cm}{0cm}}
     \pgfpathlineto{\pgfpoint{.15cm}{0cm}}
-    \pgfusepath{draw} 
+    \pgfusepath{draw}
   }
 }
 
@@ -514,7 +514,7 @@
   \hspace{\rpgicons@beforesep}%
   \tikz[rpg icons, rpg icons/every die, rpg icons/every #2,
     baseline=\rpgicons@baseline, fgnrm/.style={scale=.333}, fglrg/.style={scale=.675}, #3] {
-    \node[#2, \rpgicons@diceiconfg, font={\footnotesize}] (0cm,0cm) 
+    \node[#2, \rpgicons@diceiconfg, font={\footnotesize}] (0cm,0cm)
       {\ifx\rpgicons@diceiconnrmlrg\rpgicons@diceiconlrg\textbf{#4}\fi};
     \path[draw=none, \rpgicons@diceiconfg] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
   }%
@@ -530,7 +530,7 @@
   \anchor{text} % this is used to center the text in the node
     {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
-  \foregroundpath{ 
+  \foregroundpath{
     \pgfpathmoveto{\pgfpointadd{\pgfpoint{0cm}{-.075cm}}{\pgfpointpolar{90}{.425cm}}}
     \pgfpatharc{90}{60}{.425cm}
     \pgfpatharc{200}{-40}{.1cm}
@@ -563,7 +563,7 @@
   \anchor{text} % this is used to center the text in the node
     {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
-  \foregroundpath{ 
+  \foregroundpath{
     \pgfpathmoveto{\pgfpointadd{\pgfpoint{0cm}{-.075cm}}{\pgfpointpolar{90}{.425cm}}}
     \pgfpatharc{90}{65}{.425cm}
     \pgfpatharc{200}{90}{.1cm and .075cm}
@@ -577,7 +577,7 @@
     \pgfpatharc{90}{220}{.1cm and .075cm}
     \pgfpathmoveto{\pgfpointadd{\pgfpoint{0cm}{-.075cm}}{\pgfpointpolar{135}{.425cm}}}
     \pgfpatharc{135}{200}{.425cm and .35cm}
-    \pgfpatharc{70}{20}{.175cm}    
+    \pgfpatharc{70}{20}{.175cm}
     \pgfpathmoveto{\pgfpoint{-.075cm}{-.175cm}}
     \pgfpatharc{180}{360}{.075cm and .05cm}
     \pgfpathmoveto{\pgfpoint{0cm}{-.225cm}}
@@ -606,7 +606,7 @@
   \anchor{text} % this is used to center the text in the node
     {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
-  \foregroundpath{ 
+  \foregroundpath{
     \pgfpathmoveto{\pgfpointadd{\pgfpoint{0cm}{-.15cm}}{\pgfpointpolar{90}{.425cm}}}
     \pgfpatharc{90}{75}{.425cm}
     \pgfpathmoveto{\pgfpointadd{\pgfpoint{0cm}{-.15cm}}{\pgfpointpolar{90}{.425cm}}}
@@ -622,9 +622,9 @@
     \pgfpathlineto{\pgfpointadd{\pgfpoint{0cm}{-.1cm}}{\pgfpointpolar{150}{.425cm}}}
     \pgfpatharc{150}{225}{.425cm and .35cm}
     \pgfpathmoveto{\pgfpoint{.075cm}{-.075cm}}
-    \pgfpatharc{170}{90}{.15cm and .05cm}  
+    \pgfpatharc{170}{90}{.15cm and .05cm}
     \pgfpathmoveto{\pgfpoint{-.075cm}{-.075cm}}
-    \pgfpatharc{10}{90}{.15cm and .05cm} 
+    \pgfpatharc{10}{90}{.15cm and .05cm}
     \pgfpathmoveto{\pgfpoint{0cm}{-.275cm}}
     \pgfpatharc{0}{90}{.075cm and .05cm}
     \pgfpathmoveto{\pgfpoint{0cm}{-.275cm}}
@@ -647,7 +647,7 @@
   \anchor{text} % this is used to center the text in the node
     {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
-  \foregroundpath{ 
+  \foregroundpath{
     \pgfpathmoveto{\pgfpoint{0cm}{.25cm}}
     \pgfpathlineto{\pgfpoint{.125cm}{.25cm}}
     \pgfpatharc{-90}{-30}{.325cm}
@@ -688,7 +688,7 @@
   \anchor{text} % this is used to center the text in the node
     {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
-  \foregroundpath{ 
+  \foregroundpath{
     \pgfpathmoveto{\pgfpointadd{\pgfpoint{0cm}{-.2cm}}{\pgfpointpolar{90}{.425cm}}}
     \pgfpatharc{90}{60}{.25cm}
     \pgfpathlineto{\pgfpointadd{\pgfpoint{0cm}{-.1cm}}{\pgfpointpolar{60}{.6cm}}}
@@ -719,7 +719,7 @@
   \anchor{text} % this is used to center the text in the node
     {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
-  \foregroundpath{ 
+  \foregroundpath{
     \pgfpathmoveto{\pgfpoint{0cm}{.175cm}}
     \pgfpatharc{60}{90}{.425cm}
     \pgfpatharc{270}{240}{.425cm}
@@ -745,7 +745,7 @@
   \anchor{text} % this is used to center the text in the node
     {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
-  \foregroundpath{ 
+  \foregroundpath{
     \pgfpathmoveto{\pgfpoint{0cm}{.15cm}}
     \pgfpatharc{270}{190}{.15cm and .1cm}
     \pgfpatharc{10}{90}{.175cm and .225cm}
@@ -862,7 +862,7 @@
   \anchor{text} % this is used to center the text in the node
     {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
-  \foregroundpath{ 
+  \foregroundpath{
     \pgfpathmoveto{\pgfpointadd{\pgfpoint{0cm}{.35cm}}{\pgfpointpolar{150}{.125cm}}}
     \pgfpatharc{150}{390}{.125cm}
     \pgfpathmoveto{\pgfpoint{-.3cm}{.425cm}}
@@ -901,7 +901,7 @@
   \anchor{text} % this is used to center the text in the node
     {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
-  \foregroundpath{      
+  \foregroundpath{
     \pgfpathmoveto{\pgfpoint{.1cm}{.15cm}}
     \pgfpathlineto{\pgfpoint{.1cm}{-.05cm}}
     \pgfpatharc{-75}{-15}{.425cm}
@@ -930,7 +930,7 @@
   \anchor{text} % this is used to center the text in the node
     {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
-  \foregroundpath{ 
+  \foregroundpath{
     \pgfpathmoveto{\pgfpoint{-.25cm}{-.425cm}}
     \pgfpathlineto{\pgfpoint{.25cm}{-.425cm}}
     \pgfpathlineto{\pgfpoint{.2cm}{-.225cm}}
@@ -965,7 +965,7 @@
   \anchor{text} % this is used to center the text in the node
     {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
-  \foregroundpath{ 
+  \foregroundpath{
     \pgfpathmoveto{\pgfpointpolar{90}{.35cm}}
     \pgfpathlineto{\pgfpointpolar{126}{.15cm}}
     \pgfpathlineto{\pgfpointpolar{162}{.35cm}}
@@ -1021,7 +1021,7 @@
   \hspace{\rpgicons@beforesep}%
   \tikz[rpg icons, rpg icons/every saving, \rpgicons@savingstyle,
     baseline=\rpgicons@baseline, #3] {
-    \path[draw, scale=.333] (-.45cm,.45cm) -- (.45cm,.45cm) -- (.45cm,-.05cm) 
+    \path[draw, scale=.333] (-.45cm,.45cm) -- (.45cm,.45cm) -- (.45cm,-.05cm)
       arc[start angle=360, end angle=180, radius=.45cm] -- cycle;
     \ifx\rpgicons@abilityiconnrmemp\rpgicons@abilityiconemp\else%
       \node[#2, draw,scale=.225] (0cm,0cm) {};
@@ -1040,7 +1040,7 @@
   \anchor{text} % this is used to center the text in the node
     {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
-  \foregroundpath{ 
+  \foregroundpath{
     \pgfpathmoveto{\pgfpoint{-.4cm}{0cm}}
     \pgfpathlineto{\pgfpoint{.4cm}{0cm}}
     \pgfusepath{draw} % draw shape
@@ -1067,7 +1067,7 @@
     \pgfmathparse{\rx*cos(\angle)}
     \let\coordyb\pgfmathresult
     \pgfmathparse{\z-\ry*sin(\angle)}
-    \let\coordx\pgfmathresult    
+    \let\coordx\pgfmathresult
     \pgfpathmoveto{\pgfpoint{\coordx-.425cm}{\coordya}}
     \pgfpathlineto{\pgfpoint{-.425cm}{0cm}}
     \pgfpathlineto{\pgfpoint{\coordx-.425cm}{\coordyb}}
@@ -1121,7 +1121,7 @@
   \anchor{text} % this is used to center the text in the node
     {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
-  \foregroundpath{ 
+  \foregroundpath{
     \pgfpathcircle{\pgfpointorigin}{.425cm}
     \pgfpathmoveto{\pgfpoint{.425cm}{0cm}}
     \pgfpatharc{180}{50}{-.425cm and -.2cm}
@@ -1157,7 +1157,7 @@
   \anchor{text} % this is used to center the text in the node
     {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
-  \foregroundpath{ 
+  \foregroundpath{
     \pgfpathmoveto{\pgfpoint{-.35cm}{0cm}}
     \pgfpatharc{180}{-115}{.35cm}
     \pgfpathlineto{\pgfpoint{-.4cm}{-.4cm}}
@@ -1172,7 +1172,7 @@
   \anchor{text} % this is used to center the text in the node
     {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
-  \foregroundpath{ 
+  \foregroundpath{
     \pgfpathmoveto{\pgfpoint{-.425cm}{0cm}}
     \pgfpatharc{0}{270}{-.425cm and -.2cm}
     \pgfpathmoveto{\pgfpoint{0cm}{-.425cm}}
@@ -1187,7 +1187,7 @@
   \anchor{text} % this is used to center the text in the node
     {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
-  \foregroundpath{ 
+  \foregroundpath{
     \pgfpathmoveto{\pgfpoint{-.4cm}{.2cm}}
     \pgfpathlineto{\pgfpoint{-.4cm}{-.2cm}}
     \pgfpathlineto{\pgfpoint{0cm}{-.4cm}}
@@ -1227,7 +1227,7 @@
   \hspace{\rpgicons@beforesep}%
   \tikz[rpg icons, rpg icons/every spell, rpg icons/every #1,
     baseline=\rpgicons@baseline, #2] {
-    \node[#1, draw,scale=.333] (0cm,0cm) {}; 
+    \node[#1, draw,scale=.333] (0cm,0cm) {};
     \path[draw=none, scale=.333] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
   }%
   \hspace{\rpgicons@aftersep}%
@@ -1418,9 +1418,9 @@
   \tikz[rpg icons, rpg icons/every spellschool, rpg icons/every #2,
     baseline=\rpgicons@baseline, fgpos/.style={draw=rpgicons@bg, line width=.6pt}, fgneg/.style={draw},
     bgpos/.style={fill}, bgneg/.style={draw}, #3] {
-    \path[scale=.333, \rpgicons@spellschooliconbg] (-.475cm,.35cm) 
+    \path[scale=.333, \rpgicons@spellschooliconbg] (-.475cm,.35cm)
       -- (-.35cm,.475cm) -- (.35cm,.475cm) -- (.475cm,.35cm) -- (.425cm,-.375cm) -- (0cm,-.475cm) -- (-.425cm,-.375cm) -- cycle;
-    \node[#2, scale=.225, \rpgicons@spellschooliconfg] (0cm,0cm) {}; 
+    \node[#2, scale=.225, \rpgicons@spellschooliconfg] (0cm,0cm) {};
     \path[draw=none, scale=.333] ([yshift=-1pt].425,.425) rectangle ([yshift=1pt]-.425cm,-.425cm);
   }%
   \hspace{\rpgicons@aftersep}%
@@ -1450,7 +1450,7 @@
   }
 }
 
-% bludgeoning 
+% bludgeoning
 \pgfdeclareshape{bludgeoning}{
   \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
   \anchor{text} % this is used to center the text in the node
@@ -1518,7 +1518,7 @@
     \pgfpatharc{-60}{0}{.45cm and .375cm}
     \pgfpathcurveto{\pgfpoint{.375cm}{.15cm}}{\pgfpoint{.15cm}{.375cm}}{\pgfpoint{-.05cm}{.425cm}}
     \pgfpathmoveto{\pgfpoint{-.15cm}{-.425cm}}
-    \pgfpatharc{240}{135}{.45cm and .35cm} 
+    \pgfpatharc{240}{135}{.45cm and .35cm}
     \pgfpathcurveto{\pgfpoint{-.15cm}{.2cm}}{\pgfpoint{0cm}{.25cm}}{\pgfpoint{-.05cm}{.425cm}}
     \pgfpathmoveto{\pgfpoint{.075cm}{-.3cm}}
     \pgfpathcurveto{\pgfpoint{.2cm}{-.2cm}}{\pgfpoint{.2cm}{-.05cm}}{\pgfpoint{.05cm}{.1cm}}
@@ -1540,7 +1540,7 @@
     \pgfpathlineto{\pgfpointpolar{120}{.15cm}}
     \pgfpathlineto{\pgfpointpolar{150}{.425cm}}
     \pgfpathlineto{\pgfpointpolar{180}{.15cm}}
-    \pgfpathlineto{\pgfpointpolar{210}{.425cm}} 
+    \pgfpathlineto{\pgfpointpolar{210}{.425cm}}
     \pgfpathlineto{\pgfpointpolar{240}{.15cm}}
     \pgfpathlineto{\pgfpointpolar{270}{.425cm}}
     \pgfpathlineto{\pgfpointpolar{300}{.15cm}}
@@ -1677,7 +1677,7 @@
   }
 }
 
-% slashing 
+% slashing
 \pgfdeclareshape{slashing}{
   \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
   \anchor{text} % this is used to center the text in the node
@@ -1741,9 +1741,9 @@
   \anchor{text} % this is used to center the text in the node
     {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
-  \foregroundpath{ 
+  \foregroundpath{
     \pgfpathmoveto{\pgfpoint{0cm}{.125cm}}
-    \pgfpatharc{0}{225}{.2cm}  
+    \pgfpatharc{0}{225}{.2cm}
     \pgfpathlineto{\pgfpoint{0cm}{-.375cm}}
     \pgfpathmoveto{\pgfpoint{0cm}{.125cm}}
     \pgfpatharc{180}{-45}{.2cm}
@@ -1757,7 +1757,7 @@
   \tikz[rpg icons, rpg icons/every damage, rpg icons/every #1,
     baseline=\rpgicons@baseline, #2] {
     \path[draw, scale=.333] (0cm,0cm) circle[radius=.5cm];
-    \node[#1, draw, scale=.225] (0cm,0cm) {}; 
+    \node[#1, draw, scale=.225] (0cm,0cm) {};
     \path[draw=none, scale=.333] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
   }%
   \hspace{\rpgicons@aftersep}%
@@ -1766,7 +1766,7 @@
 
 % ATTACKS
 
-% melee 
+% melee
 \pgfdeclareshape{melee}{
   \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
   \anchor{text} % this is used to center the text in the node
@@ -1794,7 +1794,7 @@
   }
 }
 
-% ranged 
+% ranged
 \pgfdeclareshape{ranged}{
   \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
   \anchor{text} % this is used to center the text in the node
@@ -1827,7 +1827,7 @@
   \anchor{text} % this is used to center the text in the node
     {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
-  \foregroundpath{ 
+  \foregroundpath{
     \pgfpathmoveto{\pgfpoint{-.225cm}{-.425cm}}
     \pgflineto{\pgfpoint{-.425cm}{-.225cm}}
     \pgflineto{\pgfpoint{-.3cm}{-.1cm}}
@@ -1853,7 +1853,7 @@
   }
 }
 
-% single-handed 
+% single-handed
 \pgfdeclareshape{singlehanded}{
   \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
   \anchor{text} % this is used to center the text in the node
@@ -1876,7 +1876,7 @@
   }
 }
 
-% double-handed 
+% double-handed
 \pgfdeclareshape{doublehanded}{
   \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
   \anchor{text} % this is used to center the text in the node
@@ -1915,7 +1915,7 @@
   \hspace{\rpgicons@beforesep}%
   \tikz[rpg icons, rpg icons/every attack, rpg icons/every #1,
     baseline=\rpgicons@baseline, #2] {
-    \node[#1, draw, scale=.333] (0cm,0cm) {}; 
+    \node[#1, draw, scale=.333] (0cm,0cm) {};
     \path[draw=none, scale=.333] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
   }%
   \hspace{\rpgicons@aftersep}%
@@ -1924,7 +1924,7 @@
 
 % CONDITIONS
 
-% buff 
+% buff
 \pgfdeclareshape{buff}{
   \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
   \anchor{text} % this is used to center the text in the node
@@ -1977,7 +1977,7 @@
   }
 }
 
-% charmed 
+% charmed
 \pgfdeclareshape{charmed}{
   \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
   \anchor{text} % this is used to center the text in the node
@@ -1989,13 +1989,13 @@
     \pgfpatharc{180}{360}{.175cm}
     \pgfpathclose
     \pgfpathmoveto{\pgfpoint{-.175cm}{.15cm}}
-    \pgfpatharc{0}{225}{.0625cm}  
+    \pgfpatharc{0}{225}{.0625cm}
     \pgfpathlineto{\pgfpoint{-.175cm}{0cm}}
     \pgfpathmoveto{\pgfpoint{-.175cm}{.15cm}}
     \pgfpatharc{180}{-45}{.0625cm}
     \pgfpathlineto{\pgfpoint{-.175cm}{0cm}}
     \pgfpathmoveto{\pgfpoint{.175cm}{.15cm}}
-    \pgfpatharc{0}{225}{.0625cm}  
+    \pgfpatharc{0}{225}{.0625cm}
     \pgfpathlineto{\pgfpoint{.175cm}{0cm}}
     \pgfpathmoveto{\pgfpoint{.175cm}{.15cm}}
     \pgfpatharc{180}{-45}{.0625cm}
@@ -2029,7 +2029,7 @@
   }
 }
 
-% exhausted 
+% exhausted
 \pgfdeclareshape{exhausted}{
   \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
   \anchor{text} % this is used to center the text in the node
@@ -2048,7 +2048,7 @@
   }
 }
 
-% frightened 
+% frightened
 \pgfdeclareshape{frightened}{
   \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
   \anchor{text} % this is used to center the text in the node
@@ -2065,7 +2065,7 @@
   }
 }
 
-% grappled 
+% grappled
 \pgfdeclareshape{grappled}{
   \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
   \anchor{text} % this is used to center the text in the node
@@ -2110,7 +2110,7 @@
   }
 }
 
-% incapacitated 
+% incapacitated
 \pgfdeclareshape{incapacitated}{
   \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
   \anchor{text} % this is used to center the text in the node
@@ -2140,7 +2140,7 @@
   }
 }
 
-% invisible 
+% invisible
 \pgfdeclareshape{invisible}{
   \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
   \anchor{text} % this is used to center the text in the node
@@ -2167,7 +2167,7 @@
   }
 }
 
-% paralyzed 
+% paralyzed
 \pgfdeclareshape{paralyzed}{
   \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
   \anchor{text} % this is used to center the text in the node
@@ -2190,7 +2190,7 @@
   }
 }
 
-% petrified 
+% petrified
 \pgfdeclareshape{petrified}{
   \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
   \anchor{text} % this is used to center the text in the node
@@ -2228,7 +2228,7 @@
   }
 }
 
-% poisoned 
+% poisoned
 \pgfdeclareshape{poisoned}{
   \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
   \anchor{text} % this is used to center the text in the node
@@ -2250,8 +2250,8 @@
     \pgfusepath{draw} % draw shape
   }
 }
-    
-% prone 
+
+% prone
 \pgfdeclareshape{prone}{
   \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
   \anchor{text} % this is used to center the text in the node
@@ -2263,7 +2263,7 @@
     \pgfpathlineto{\pgfpoint{-.15cm}{0cm}}
     \pgfpatharc{90}{-90}{.125cm}
     \pgfpathlineto{\pgfpoint{-.425cm}{-.25cm}}
-    
+
     \pgfpathmoveto{\pgfpoint{.225cm}{.15cm}}
     \pgfpatharc{270}{360}{.1cm}
     \pgfpatharc{180}{270}{.1cm}
@@ -2278,7 +2278,7 @@
   }
 }
 
-% restrained 
+% restrained
 \pgfdeclareshape{restrained}{
   \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
   \anchor{text} % this is used to center the text in the node
@@ -2319,7 +2319,7 @@
   }
 }
 
-% stunned 
+% stunned
 \pgfdeclareshape{stunned}{
   \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
   \anchor{text} % this is used to center the text in the node
@@ -2354,7 +2354,7 @@
   }
 }
 
-% unconscious 
+% unconscious
 \pgfdeclareshape{unconscious}{
   \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
   \anchor{text} % this is used to center the text in the node
@@ -2379,7 +2379,7 @@
   }
 }
 
-% hearing 
+% hearing
 \pgfdeclareshape{hearing}{
   \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
   \anchor{text} % this is used to center the text in the node
@@ -2400,7 +2400,7 @@
   }
 }
 
-% seeing 
+% seeing
 \pgfdeclareshape{seeing}{
   \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
   \anchor{text} % this is used to center the text in the node
@@ -2421,7 +2421,7 @@
   \hspace{\rpgicons@beforesep}%
   \tikz[rpg icons, rpg icons/every condition, rpg icons/every #1,
     baseline=\rpgicons@baseline, #2] {
-    \node[#1, draw, scale=.333] (0cm,0cm) {}; 
+    \node[#1, draw, scale=.333] (0cm,0cm) {};
     \path[draw=none, scale=.333] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
   }%
   \hspace{\rpgicons@aftersep}%
@@ -2436,7 +2436,7 @@
     \tikzset{
       rpg icons #1/.pic={
         \begin{scope}[every node/.append style={#1}, rpg icons/every #1]
-          \node[draw, scale=.333] (0cm,0cm) (-node) {}; 
+          \node[draw, scale=.333] (0cm,0cm) (-node) {};
           \path[draw=none, scale=.333] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
         \end{scope}
       },
@@ -2447,7 +2447,7 @@
       rpg icons #1 ability/.pic={
         \begin{scope}[every node/.append style={#1}, rpg icons/every ability, rpg icons/every #1]
           \path[scale=.333, pic actions] (0cm,0cm) circle[radius=.45cm];
-          \node[draw, scale=.225] (0cm,0cm) (-node) {}; 
+          \node[draw, scale=.225] (0cm,0cm) (-node) {};
           \path[draw=none, scale=.333] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
         \end{scope}
       }
@@ -2457,9 +2457,9 @@
     \tikzset{
       rpg icons #1 saving/.pic={
         \begin{scope}[every node/.append style={#1}, rpg icons/every saving, rpg icons/every #1]
-          \path[draw, scale=.333, pic actions] (-.45cm,.45cm) -- (.45cm,.45cm) -- (.45cm,-.05cm) 
+          \path[draw, scale=.333, pic actions] (-.45cm,.45cm) -- (.45cm,.45cm) -- (.45cm,-.05cm)
             arc[start angle=360, end angle=180, radius=.45cm] -- cycle;
-          \node[#1, draw, scale=.225] (0cm,0cm) (-node) {}; 
+          \node[#1, draw, scale=.225] (0cm,0cm) (-node) {};
           \path[draw=none, scale=.333] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
         \end{scope}
       }
@@ -2469,9 +2469,9 @@
     \tikzset{
       rpg icons #1 spellschool/.pic={
         \begin{scope}[every node/.append style={#1}, rpg icons/every spellschool, rpg icons/every #1]
-          \path[draw, scale=.333, pic actions] (-.475cm,.35cm) 
+          \path[draw, scale=.333, pic actions] (-.475cm,.35cm)
             -- (-.35cm,.475cm) -- (.35cm,.475cm) -- (.475cm,.35cm) -- (.425cm,-.375cm) -- (0cm,-.475cm) -- (-.425cm,-.375cm) -- cycle;
-          \node[#1, draw, scale=.225] (0cm,0cm) (-node) {}; 
+          \node[#1, draw, scale=.225] (0cm,0cm) (-node) {};
           \path[draw=none, scale=.333] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
         \end{scope}
       }
@@ -2482,7 +2482,7 @@
       rpg icons #1 damage/.pic={
         \begin{scope}[every node/.append style={#1}, rpg icons/every damage, rpg icons/every #1]
           \path[draw, scale=.333, pic actions] (0cm,0cm) circle[radius=.5cm];
-          \node[#1, draw, scale=.225] (0cm,0cm) (-node) {}; 
+          \node[#1, draw, scale=.225] (0cm,0cm) (-node) {};
           \path[draw=none, scale=.333] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
         \end{scope}
       }
@@ -2492,11 +2492,11 @@
     \rpgicons@allshapes%
   },
   rpg icons/create pic from ability shape/.list={%
-    strength, dexterity, dexterity alt, constitution, intelligence, wisdom, charisma, 
+    strength, dexterity, dexterity alt, constitution, intelligence, wisdom, charisma,
     resilience, sanity, perception, luck, armor, proficiency%
   },
   rpg icons/create pic from saving shape/.list={%
-    strength, dexterity, dexterity alt, constitution, intelligence, wisdom, charisma, 
+    strength, dexterity, dexterity alt, constitution, intelligence, wisdom, charisma,
     resilience, sanity, perception, luck, armor, proficiency%
   },
   rpg icons/create pic from spellschool shape/.list={%
@@ -2541,15 +2541,15 @@
           { 20 } { twentyside }
           { 100 } { hundredside }
           { F } { fudge }
-      } 
+      }
       {#1}
   }
 
   \seq_new:N \l__rpgicons_roll_syntax_seq
   \tl_new:N \l__rpgicons_roll_syntax_part_tl
-  \regex_new:N \l__rpgicons_roll_syntax_split_regex 
-  \regex_new:N \l__rpgicons_roll_syntax_plusminus_regex 
-  \regex_new:N \l__rpgicons_roll_syntax_times_regex 
+  \regex_new:N \l__rpgicons_roll_syntax_split_regex
+  \regex_new:N \l__rpgicons_roll_syntax_plusminus_regex
+  \regex_new:N \l__rpgicons_roll_syntax_times_regex
   \bool_if:NTF \l__rpgicons_unicode_mode_bool {
       \regex_set:Nn \l__rpgicons_roll_syntax_split_regex { \s*([\+\-\x{2212}x\*\x{00D7}])\s* }
       \regex_set:Nn \l__rpgicons_roll_syntax_plusminus_regex { \A([\+\-\x{2212}])\Z }
@@ -2559,19 +2559,19 @@
       \regex_set:Nn \l__rpgicons_roll_syntax_plusminus_regex { \A([\+\-])\Z }
       \regex_set:Nn \l__rpgicons_roll_syntax_times_regex { \A([x\*\x{00D7}])\Z }
   }
-  \regex_new:N \l__rpgicons_roll_syntax_dice_regex 
+  \regex_new:N \l__rpgicons_roll_syntax_dice_regex
   \cs_new:Npn \rpgicons_roll_syntax_parse:n #1 {
       \regex_set:Nn \l__rpgicons_roll_syntax_dice_regex { \A(\d*)\ur{l__rpgicons_roll_syntax_die_regex}([F\d]+)\Z }
       \regex_split:NnN \l__rpgicons_roll_syntax_split_regex {#1} \l__rpgicons_roll_syntax_seq
-      \seq_map_inline:Nn \l__rpgicons_roll_syntax_seq { 
+      \seq_map_inline:Nn \l__rpgicons_roll_syntax_seq {
           \tl_set:Ne \l__rpgicons_roll_syntax_part_tl {##1}
           \regex_replace_case_once:nNTF {
               { \l__rpgicons_roll_syntax_plusminus_regex } { \c{,} $\1$ \c{,} }
               { \l__rpgicons_roll_syntax_times_regex } { \c{,} $\c{times}$ \c{,} }
-              { \l__rpgicons_roll_syntax_dice_regex } 
+              { \l__rpgicons_roll_syntax_dice_regex }
                   { \c{ rpgiconsdie } { \c{ rpgicons_roll_syntax_convert:n } { \2 } } { \1 } }
-          } \l__rpgicons_roll_syntax_part_tl 
-          { \tl_use:N \l__rpgicons_roll_syntax_part_tl } 
+          } \l__rpgicons_roll_syntax_part_tl
+          { \tl_use:N \l__rpgicons_roll_syntax_part_tl }
           { \tl_use:N \l__rpgicons_roll_syntax_part_tl }
       }
   }
@@ -2586,7 +2586,7 @@
 }
 
 \NewDocumentCommand{\rpgiconsroll}{ m }{
-    \rpgicons_roll_syntax_parse:n {#1}   
+    \rpgicons_roll_syntax_parse:n {#1}
 }
 
 \ExplSyntaxOff

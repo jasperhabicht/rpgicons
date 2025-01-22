@@ -2526,7 +2526,7 @@
 
   \regex_new:N \l__rpgicons_roll_syntax_die_regex
   \cs_generate_variant:Nn \regex_set:Nn { Ne }
-  \cs_new:Npn \rpgicons_roll_syntax_die_set:n #1 {
+  \cs_new_protected:Npn \rpgicons_roll_syntax_die_set:n #1 {
       \regex_set:Ne \l__rpgicons_roll_syntax_die_regex { [ \clist_use:nn {#1} { } ] }
   }
 
@@ -2560,7 +2560,7 @@
       \regex_set:Nn \l__rpgicons_roll_syntax_times_regex { \A([x\*\x{00D7}])\Z }
   }
   \regex_new:N \l__rpgicons_roll_syntax_dice_regex
-  \cs_new:Npn \rpgicons_roll_syntax_parse:n #1 {
+  \cs_new_protected:Npn \rpgicons_roll_syntax_parse:n #1 {
       \regex_set:Nn \l__rpgicons_roll_syntax_dice_regex { \A(\d*)\ur{l__rpgicons_roll_syntax_die_regex}([F\d]+)\Z }
       \regex_split:NnN \l__rpgicons_roll_syntax_split_regex {#1} \l__rpgicons_roll_syntax_seq
       \seq_map_inline:Nn \l__rpgicons_roll_syntax_seq {

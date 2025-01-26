@@ -1,4 +1,4 @@
-![Version 1.8.5](https://img.shields.io/badge/version-1.8.5-blue)
+![Version 1.8.6](https://img.shields.io/badge/version-1.8.6-blue)
 
 <img width="200" alt="rpgicons-example" src="https://github.com/jasperhabicht/rpgicons/assets/6378801/81a1d0aa-7a4f-4f83-bbdc-3bc3332023b2" />
 
@@ -25,4 +25,4 @@ loaded per default. The PGF or `l3draw` variants can be loaded directly via
 `\usepackage{rpgicons-pgf}` or`\usepackage{rpgicons-l3}`.
 
 This package including all files is subject to the LPPL 1.3c license.
-Copyright 2024 Jasper Habicht (mail(at)jasperhabicht.de).
+Copyright 2024&ndash;2025 Jasper Habicht (mail(at)jasperhabicht.de).

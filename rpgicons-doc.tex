@@ -263,7 +263,7 @@
 \changes{v1.8.2}{2024/04/28}{Roll dice syntax for PGF variant.}
 \changes{v1.8.3}{2024/05/15}{Minor compatibility fix. Example of how to use pics added to ducumentation.}
 \changes{v1.8.4}{2024/08/08}{Bug fix in evocation spellschool shape. Unification of frames in PGF and L3 variants.}
-%\changes{v1.8.5}{2024/11/13}{Minor fix in documentation.}
+\changes{v1.8.6}{2024/11/13}{Fixes in the documentation.}
 
 \begin{document}
 
@@ -284,7 +284,9 @@ The package comes in two variants, a L3 variant based on the \macro{l3draw} pack
 
 \section{Loading the package}
 
-To install the package, copy the relevant package files \macro{rpgicons.sty}, \macro{rpgicons-l3.sty} and \macro{rpgicons-pgf.sty} into the working directory or into the \macro{texmf} directory. After the package has been installed, the \macro{rpgicons} package is loaded by calling \macro{\usepackage{rpgicons}} in the preamble of the document.
+To install the package, copy the relevant package files \macro{rpgicons.sty}, \macro{rpgicons-l3.sty} and \macro{rpgicons-pgf.sty} into the working directory or into the \macro{texmf} directory. You may want to use a TeX package manager for this. After the package has been installed, the \macro{rpgicons} package is loaded by calling \macro{\usepackage{rpgicons}} in the preamble of the document.
+
+The package can be loaded with one of the following options.
 
 \begin{macrodef}l3\end{macrodef}
 The L3 variant of the package is loaded by default. To load it explicitly, the package can be loaded using the option \macro{l3}. Alternatively, \macro{\usepackage{rpgicons-l3}} can be called instead.
@@ -296,28 +298,28 @@ To load the PGF variant of the package the package needs to be loaded with the o
 
 The L3 variant of the package loads the \macro{l3draw} package. If the package is loaded with the \macro{opacity} option to enable transparency, the \macro{l3opacity} package is also loaded.
 
-The PGF variant of the package loads the \macro{tikz} package which in turn loads the \macro{xcolor} package. To make use of specific options these packages provide, you need to load the packages with the relevant options beforehand or use, such as \macro{\PassOptionsToPackage{svgnames}{xcolor}}.
+The PGF variant of the package loads the \macro{tikz} package which in turn loads the \macro{xcolor} package. To make use of specific options these packages provide, you need to load the packages with the relevant options beforehand or explicitly pass the relevant options to the package using a command such as \macro{\PassOptionsToPackage{svgnames}{xcolor}}.
 
 \section{Main user commands}
 
 Regardless of the variant of the package, a set of user commands is always available. These are described in the following. Depending on the use of the L3 or the PGF variant, certain specific commands or options are available that are explained in the following sections in further detail.
 
-Because of the way the package defines the icons, every of the below described user commands can actually be used together with every shape. However, the combinations of shapes and commands as described in the following subsections are preferable.
+Because of the way the package defines the icons, each of the user commands below described can actually be used together with every shape. However, the combinations of shapes and commands as described in the following subsections are preferable.
 
 \subsection[Command \textbackslash die]{Command \titlemacro*{die}}
 
 \begin{macrodef}
 |\die|[<style>]{<shape>}[<options>]{<integer>}
 \end{macrodef}
-The command \macro{\die} prints an icon to depict a die with a certain number of sides. Two special icons exist for a two-sided die (which would be equivalent to a coin) and for a hundred-sided die (which typically comes in the shape of a sphere). There is also a special icon for a fudge die.
+The command \macro{\die} typesets an icon to depict a die with a certain number of sides. Additionally, icons exist for a two-sided die (which would be equivalent to a coin) and for a hundred-sided die (which typically comes in the shape of a sphere). There is also a special icon for a fudge die.
 
-For the six-sided die, nine additional shapes exists representing the values one to nine as pips. Also, additional shapes exist representing the plus or minus side of a fudge die.
+For the six-sided die, nine additional shapes exist representing the values one to nine as pips. Also, additional shapes exist representing the plus or minus side of a fudge die.
 
-The command takes two mandatory commands, the first of which describes the shape (see the lists below) and the second can take an integer that is placed in front of the shape. For example, \macro{\die{eightside}{2}} results in \die{eightside}{2} (meaning two eight-sided dice are rolled).
+The command takes two mandatory arguments, the first of which describes the shape (see the lists below) and the second taking an integer that is placed in front of the shape. For example, \macro{\die{eightside}{2}} results in \die{eightside}{2} (meaning two eight-sided dice are rolled).
 
-The command also takes two optional arguments, the second of which can take additional options to style the icon. The options affect the shape, not the integer when it is printed before the icon. These options differ depending on the package variant. See the relevant sections below.
+The command also takes two optional arguments, the second of which can take additional options to style the icon. The options affect the shape, but not the integer when it is typeset before the icon. The usable options differ depending on the package variant. See the relevant sections below.
 
-The first optional argument can take the value \macro{normal} or \macro{large}, \macro{normal} being the default value. With \macro{large} given as argument, the icon is drawn larger and the additional integer is printed inside of the shape instead of before it. As an example, \macro{\die[large]{eightside}{2}} results in \die[large]{eightside}{2}. Note that the integer will always be printed on top of the shape, even if the shape does not have an open center as in the case of the \macro{fudge} shapes or the shapes featuring pips.
+The first optional argument can take the value \macro{normal} or \macro{large}, \macro{normal} being the default value. With \macro{large} given as argument, the icon is drawn larger and the integer is typeset inside the shape. As an example, \macro{\die[large]{eightside}{2}} results in \die[large]{eightside}{2}. Note that the integer will always be placed on top of the shape, even if the shape does not have an open center which is the case with the \macro{fudge} shapes or the shapes featuring pips.
 
 \begin{rpgiconsiconlist}
 \macro{\die}
@@ -348,16 +350,16 @@ The first optional argument can take the value \macro{normal} or \macro{large}, 
 \begin{macrodef}
 |\ability|[<style>]{<shape>}[<options>]
 \end{macrodef}
-The command \macro{\ability} prints icons depicting an ability of a character. The abilities are represented by animal-like shapes. The relevant shape should be given as mandatory argument to the command. The second optional argument can take additional options to style the icon.
+The command \macro{\ability} typesets an icon depicting an ability of a character. The abilities are represented by animal-like shapes. The relevant shape should be given as mandatory argument to the command. The second optional argument can take additional options to style the icon.
 
 The first optional argument can take the value \macro{positive} or \macro{negative}, \macro{positive} being the default value. With \macro{negative} given as argument, the icon is drawn negative inside a circle. As an example, \macro{\ability[negative]{charisma}} results in \ability[negative]{charisma}.
 
 \begin{macrodef}
 |\saving|[<style>]{<shape>}[<options>]
 \end{macrodef}
-The command \macro{\saving} prints the icons that can be typeset using the \macro{\ability} command inside a small shield. It can take the same values for the mandatory argument as the \macro{\ability} command. The optional argument can take additional options to style the icon.
+The command \macro{\saving} typesets an icon with the relevant \macro{\ability} icon inside a small shield. It can take the same values for the mandatory argument as the \macro{\ability} command. The optional argument can take additional options to style the icon.
 
-The first optional argument can take the value \macro{normal} or \macro{empty}, \macro{normal} being the default value. With \macro{empty} given as argument, the icon inside the shield is not printed. In this case, the mandatory argument can be left empty. As an example, \macro{\saving[empty]{}} results in \saving[empty]{}.
+The first optional argument can take the value \macro{normal} or \macro{empty}, \macro{normal} being the default value. With \macro{empty} given as argument, the icon inside the shield is not typeset. In this case, the mandatory argument can be left empty. As an example, \macro{\saving[empty]{}} results in \saving[empty]{}.
 
 \begin{rpgiconsiconlist}
 \macro{\ability}
@@ -396,7 +398,7 @@ The first optional argument can take the value \macro{normal} or \macro{empty}, 
 \begin{macrodef}
 |\spell|{<shape>}[<options>]
 \end{macrodef}
-The command \macro{\spell} prints icons depicting the effect of a spell or how it is to be effected. The optional argument can take additional options to style the icon.
+The command \macro{\spell} typesets an icon depicting the effect of a spell or how it is to be effected. The optional argument can take additional options to style the icon.
 
 \begin{rpgiconsiconlist}
 \macro{\spell}
@@ -417,7 +419,7 @@ The command \macro{\spell} prints icons depicting the effect of a spell or how i
 \begin{macrodef}
 |\spellschool|[<style>]{<shape>}[<options>]
 \end{macrodef}
-The command \macro{\spellschool} prints icons that represent the school a spell belongs to. The second optional argument can take additional options to style the icon.
+The command \macro{\spellschool} typesets an icon that represents the school a spell belongs to. The second optional argument can take additional options to style the icon.
 
 The first optional argument can take the value \macro{negative} or \macro{positive}, \macro{negative} being the default value. Per default the icon is drawn in white inside a filled escutcheon. With \macro{positive} given as argument, the icon as well as the escutcheon are drawn in the currently selected color. As an example, \macro{\spellschool[positive]{evocation}} results in \spellschool[positive]{evocation}.
 
@@ -438,17 +440,17 @@ The first optional argument can take the value \macro{negative} or \macro{positi
 \begin{macrodef}
 |\damage|{<shape>}[<options>]
 \end{macrodef}
-The command \macro{\damage} prints icons depicting the damage of an attack. The icon is printed inside a circle. The optional argument can take additional options to style the icon.
+The command \macro{\damage} typesets an icon depicting the damage of an attack. The icon is printed inside a circle. The optional argument can take additional options to style the icon.
 
 \begin{macrodef}
 |\attack|{<shape>}[<options>]
 \end{macrodef}
-The command \macro{\attack} prints icons depicting the kind of an attack. The optional argument can take additional options to style the icon.
+The command \macro{\attack} typesets an icon depicting the kind of an attack. The optional argument can take additional options to style the icon.
 
 \begin{macrodef}
 |\condition|{<shape>}[<options>]
 \end{macrodef}
-The command \macro{\condition} prints icons depicting a condition of a character. The optional argument can take additional options to style the icon.
+The command \macro{\condition} typesets an icon depicting a condition of a character. The optional argument can take additional options to style the icon.
 
 \begin{rpgiconsiconlist}
 \macro{\damage}
@@ -499,9 +501,9 @@ The command \macro{\condition} prints icons depicting a condition of a character
 
 \section{Specifics of the L3 package variant}
 
-The L3 variant of the package that uses the \macro{l3draw} package is loaded by default or explicitly by either calling \macro{\usepackage[l3]{rpgicons}} or \macro{\usepackage{rpgicons-l3}} in the preamble of the document after having installed the files \macro{rpgicons.sty} and \macro{rpgicons-l3.sty}. The \macro{l3draw} package is an experimental package that provides only basic drawing functionality. The L3 variant thus only supports a certain set of option for styling the icons.
+The L3 variant of the package which uses the \macro{l3draw} package is loaded by default or explicitly by either calling \macro{\usepackage[l3]{rpgicons}} or \macro{\usepackage{rpgicons-l3}} in the preamble of the document after having installed the files \macro{rpgicons.sty} and \macro{rpgicons-l3.sty}. The \macro{l3draw} package is an experimental package that provides only basic drawing functionality. The L3 variant thus only supports a certain set of option for styling the icons.
 
-The L3 variant of the package does not load the \macro{xcolor} package, but makes use of the \macro{l3color} module which uses a similar syntax like the \macro{xcolor} package, but color definitions made using the \macro{l3color} module are not directly usable via commands provided by the \macro{xcolor} package. Therefore, setting a color using the \macro{\color} macro provided by the \macro{xcolor} package won't affect the color of the icons.
+The L3 variant of the package does not load the \macro{xcolor} package but makes use of the \macro{l3color} module which uses a similar syntax like the \macro{xcolor} package. Color definitions made using the \macro{l3color} module are not directly usable via commands provided by the \macro{xcolor} package. Therefore, setting a color using the \macro{\color} macro provided by the \macro{xcolor} package won't affect the color of the icons.
 
 \begin{macrodef}compat\end{macrodef}
 The \macro{l3draw} package is experimental and subject to ongoing updates. Loading the L3 variant of the package with the option \macro{compat} will use macro definitions that have been available since the last major TeX Live release as replacement for certain functions that only became available in the most recent versions of the \macro{l3draw} and related packages.
@@ -561,7 +563,7 @@ With the \macro{frame} option, one of four different frames can be selected that
 
 Some icons can be used with a negative color scheme where the icon is drawn negatively inside a filled shape. Per default, the icons are drawn in white in such cases, but it might be desirable that the icons are in the same color as the background. To this end, the \macro{background} option sets the color of the shape when it is printed over a filled frame which can be achieved by setting the \macro{negative} option for the \macro{\ability} or the \macro{\spellschool} command or using the starred version of the \macro{\RPGIconsUseIcon} command.
 
-The \macro{color} option sets the color of strokes, fills and text in general while the \macro{stroke} option, the \macro{fill} option and the \macro{text} option set the color only for strokes, fills or text respectively. Similarly, the \macro{opacity} macro sets the opacity generally, while the options \macro{stroke opacity}, \macro{fill opacity} and \macro{text opacity} allow for setting the opacity of strokes, fill and text separately. The opacity styles are only available when loading the package with the \macro{opacity} option (see the \hyperref{macro:opacity}{description above}). The \macro{line width} sets the line width for strokes. Using the \macro{scale} and \macro{rotate} options, the shape can be scaled and rotated.
+The \macro{color} option sets the color of strokes, fills and text in general while the \macro{stroke} option, the \macro{fill} option and the \macro{text} option set the color only for strokes, fills or text respectively. Similarly, the \macro{opacity} macro sets the opacity generally, while the options \macro{stroke opacity}, \macro{fill opacity} and \macro{text opacity} allow for setting the opacity of strokes, fill and text separately. The opacity styles are only available when loading the package with the \macro{opacity} option (see the description \hyperref[macro:opacity]{above}). The option \macro{line width} sets the line width for strokes. Using the \macro{scale} and \macro{rotate} options, the shape can be scaled and rotated.
 
 The \macro{scale inner} option can be used to change the scaling of the icon when placed inside a frame when using the \macro{\ability}, \macro{\saving}, \macro{\spellschool} and \macro{\damage} macros. The default value is 0.675.
 
@@ -571,7 +573,7 @@ accessible = basic
 accessible = full
 accessible = false
 \end{macrodef}
-Using the \macro{accessible} option with no value or the value \macro{basic}, a replacement text to the relevant icon can be added which can be copied to the clipboard. The value \macro{full} additionally places an \macro{\Alt} mark in the PDF which means that the shape of the relevant icon is read by screen readers. For this to work, is necessary to call \macro{\DocumentMetadata{}} before loading a \macro{\documentclass}, preferably with tagging enabled to make use of the \macro{accessible} option. The value \macro{false} can be used to disable the function explicitly. Note that depending on the compiler and PDF viewer, there might be line breaks or no spaces before and after the replacement text.
+Using the \macro{accessible} option with no value or the value \macro{basic}, a replacement text to the relevant icon can be added which can be copied to the clipboard. The value \macro{full} additionally places an \macro{\Alt} mark in the PDF which means that the shape of the relevant icon is read by screen readers. For this to work, is necessary to call \macro{\DocumentMetadata{}} before loading a \macro{\documentclass}, preferably with tagging enabled to make use of the \macro{accessible} option. The value \macro{false} can be used to disable the function explicitly. Note that depending on the compiler and PDF viewer, line breaks or no spaces might appear before and after the replacement text.
 
 \begin{macrodef}
 every die
@@ -584,14 +586,18 @@ every attack
 every condition
 every <shape>
 \end{macrodef}
-Styles following the pattern \macro{rpg icons/every} followed by a space and the name of the command or the shape can be used to apply styles to every instance of this command or shape. For example, \macro{\rpgiconsset{every die={color={red}}}} can be used to draw in red all icons created using the \macro{\die} command. Calling \macro{\rpgiconsset{every charisma={color={red}}}} will draw every instance of the \macro{charisma} shape in red.
+Styles following the pattern \macro{every} followed by a space and the name of the command or the shape can be used to apply styles to every instance of this command or shape. 
+
+For example, \macro{\rpgiconsset{every die={color={red}}}} can be used to draw in red all icons created using the \macro{\die} command. 
+
+Calling \macro{\rpgiconsset{every charisma={color={red}}}} will draw every instance of the \macro{charisma} shape in red.
 
 \subsection{Setting options globally}
 
 \begin{macrodef}
 |\rpgiconsset|
 \end{macrodef}
-Apart from setting the options to the commands directly, it is also possible to set them globally using the \macro{\rpgiconsset} command. Globally set options are overridden by options that are selected directly.
+Apart from setting the options to the commands directly, it is also possible to set them globally using the \macro{\rpgiconsset} command. Globally set options are overridden by options that are set directly.
 
 \begin{codeexample}
 \rpgiconsset{
@@ -608,7 +614,7 @@ before sep
 after sep
 baseline
 \end{macrodef}
-The spacing before and after the icons can be set using the options \macro{before sep} and \macro{after sep}. The option \macro{baseline} can be used to adjust the baseline of the icons. These options can also be applied to the icon commands directly.
+The spacing before and after the icons can be set using the options \macro{before sep} and \macro{after sep}. The option \macro{baseline} can be used to adjust the baseline of the icons. These options can also be applied to the icon commands directly. The default value of \macro{before sep} and \macro{after sep} is 0.05\,em. The default value of \macro{baseline} is \textminus 3.5\,pt.
 
 \begin{codeexample}
 Roll\die{eightside}{}a die!
@@ -687,12 +693,12 @@ Using the PGF variant of the package, all icons can by styled using arbitrary Ti
 !rpg icons/!every condition
 !rpg icons/!every <shape>
 \end{macrodef}
-Using Ti\emph{k}Z styles, all instances of a certain command or a certain shape can be styled at once. These styles all follow the pattern \macro{rpg icons/every} followed by a space and the name of the command or the shape. For example, \macro{\tikzset{rpg icons/every die/.append style={red}}} can be used to draw in red all icons created using the \macro{\die} command. To draw every instace of the \macro{charisma} shape in red, \macro{\tikzset{rpg icons/every charisma/.append style={red}}} can be used.
+Using Ti\emph{k}Z styles, all instances of a certain command or a certain shape can be styled at once. These styles all follow the pattern \macro{rpg icons/every} followed by a space and the name of the command or the shape. For example, \macro{\tikzset{rpg icons/every die/.append style={red}}} can be used to draw in red all icons created using the \macro{\die} command. To draw every instance of the \macro{charisma} shape in red, \macro{\tikzset{rpg icons/every charisma/.append style={red}}} can be used.
 
 \subsection{Setting styles lobally}
 
 \begin{macrodef}rpg icons\end{macrodef}
-All icons share the Ti\emph{k}Z style \macro{rpg icons} that has no options per default but can be used to style all icons at once. For example, if \macro{\tikzset{rpg icons/.append style={draw=red}}} is placed at the beginning of the document, all icons will be drawn in red. Per default, the icons are drawn in the color of the surrounding text.
+All icons share the Ti\emph{k}Z style \macro{rpg icons} that is empty per default but can be used to style all icons at once. For example, if \macro{\tikzset{rpg icons/.append style={draw=red}}} is placed at the beginning of the document, all icons will be drawn in red. Per default, the icons are drawn in the color of the surrounding text.
 
 Note that it may be necessary to add the Ti\emph{k}Z option \macro{transform shape} when applying transformations to the icons, because the icons are realised as Ti\emph{k}Z nodes which are not affected by some transformations per default.
 
@@ -735,7 +741,7 @@ The option \macro{baseline} can be used to adjust the baseline of the icons. A l
 
 \subsection{Direct use of shapes}
 
-Because the icons are defined as Ti\emph{k}Z shapes, they can directly be applied to Ti\emph{k}Z nodes. However, the shapes don't have a shape border and no anchors except for the \macro{center} anchor that sits exactly in the center of the shape. Therefore, if nodes with these shapes are connected using edges, the \macro{center} anchor will be used to connect the nodes. If nodes with these shapes are being positioned, only the \macro{center} anchor is available. Text content of these nodes is simply printed on top of the center of the node. Compare the following example.
+Because the icons are defined as Ti\emph{k}Z shapes, they can directly be applied to Ti\emph{k}Z nodes. However, the shapes don't have a shape border and no anchors defined, except for the \macro{center} anchor that sits exactly in the center of the shape. Therefore, if nodes with these shapes are connected using edges, the \macro{center} anchor will be used to connect the nodes. If nodes with these shapes are being positioned, only the \macro{center} anchor is available. Text content of these nodes is simply printed on top of the center of the node. Compare the following example.
 
 \begin{codeexample}
 \begin{tikzpicture}
@@ -748,7 +754,7 @@ Because the icons are defined as Ti\emph{k}Z shapes, they can directly be applie
 
 \subsection{Boxing of icons}
 
-Because the icons cannot simply be used inside \macro{tikzpicture} environments, the PGF variant of the package provides a workaround to place icons inside of boxes for later use. Icons that are boxed this way can safely used inside \macro{tikzpicture} environments. This might be necessary, if an icon should be used in inline text that sits inside a node.
+Because the icons cannot simply be used inside \macro{tikzpicture} environments, the PGF variant of the package provides a workaround to place icons inside boxes for later use. Icons that are boxed this way can safely used inside \macro{tikzpicture} environments. This might be necessary, if an icon should be used in inline text that sits inside a node.
 
 \begin{macrodef}|\provideprotectedrpgicon|{<command>}[<style>]{<shape>}[<options>]{<box name>}\end{macrodef}
 The command \macro{\provideprotectedrpgicon} creates a box containing the icon that would be created using one of the regular commands this package provides.
@@ -771,12 +777,11 @@ Having created a boxed icon, it is safe to use it, for example, inside a Ti\emph
 \end{tikzpicture}
 \end{codeexample}
 
-
 \subsection{Icons as pics}\label{sec:pics}
 
-If the PGF variant of the package is loaded with the option \macro{pics}, every icon is also available as Ti\emph{k}Z pic. The names of the pic always start with \macro{rpg icons} followed by a space and the name of the relevant icon (see the lists above). For abilities, savings, spellschools and damages, additional pics exist where the name has the suffixes \macro{ability}, \macro{saving}, \macro{spellschool}, and \macro{damage} respectively.
+If the PGF variant of the package is loaded with the option \macro{pics}, every icon is also available as Ti\emph{k}Z pic. The names of the pics always start with \macro{rpg icons} followed by a space and the name of the relevant icon (see the lists above). For abilities, savings, spellschools and damages, additional pics exist where the name has the suffixes \macro{ability}, \macro{saving}, \macro{spellschool}, and \macro{damage} respectively.
 
-The icon is embedded as a node in the pic which has the name \macro{-node}. Thus, it is possible to name the pic and refer to the node inside. Due to the fact that the icon is a node, the option `transform shape` has to be used if transformations on the pic are to affect the node as well. It is easily possible to apply styles to the node using the Ti\emph{k}Z option \macro{every node} as shown in the following example.
+The icon is embedded as a node in the pic which has the name \macro{-node}. Thus, it is possible to name the pic and refer to the node inside. Due to the fact that the icon is a node, the option \macro{transform shape} has to be used if transformations on the pic should affect the node as well. It is possible to apply styles to the node using the Ti\emph{k}Z option \macro{every node} as shown in the following example.
 
 \begin{codeexample}
 \begin{tikzpicture}
@@ -846,20 +851,16 @@ The following example shows how to create the drawing on the first page of this 
 |\roll|{<roll syntax>}
 |\rpgiconsroll|{<roll syntax>}
 \end{macrodef}
-The \macro{\roll} macro can be used to quickly typeset dice rolls with the relevant icons using the established dice rolling syntax. This syntax consists of a sequence of dice and numbers concatenated by mathematical operators (plus, minus or times). Typically, the letter \macro{d} is used to denote a die with a certain number of sides. For example \macro{d6} denotes a six-sided die. A number can be added to specify the number of such dice that are rolled together. The letter to denote the die can be changed using the Ti\emph{k}Z style \macro{rpg icons/roll syntax}.
+Please refer to section \ref{sec:roll-dice-syntax} about how to use the \macro{\roll} macro in general. Differences to the L3 variant of the package are described in the following.
 
-For example, \macro{2d6 + 3d4 - 1} means ``roll two six-sided dice and three four-sided dice and subtract one from the result''. The command \macro{\roll{2d6 + 3d4 - 1}} results in \roll{2d6 + 3d4 - 1}.
-
-The die notations \macro{d2}, \macro{d4}, \macro{d6}, \macro{d8}, \macro{d10}, \macro{d12}, \macro{d20} and \macro{d100} are defined. To denote a fudge die, \macro{dF} can be used. To denote that the lowest or highest die should be removed from the result, the letters \macro{L} and \macro{H} can be used. The syntax \macro{2d6 x 2} or \macro{2d6 * 2} can be used to denote several rolls with the same set of dice.
+The letter to denote the die can be changed using the Ti\emph{k}Z style \macro{rpg icons/roll syntax}.
 
 If the \macro{rpgicons} package is to be loaded together with some other package that defines the command \macro{\roll}, the command \macro{\rpgiconsroll} can be used. This alternative command is an exact copy of the \macro{\roll} command.
 
 \begin{macrodef}
 !rpg icons/!roll syntax
 \end{macrodef}
-The Ti\emph{k}Z style \macro{rpg icons/roll syntax} can be used to change the character that denotes a die in the dice rolling syntax. Multiple characters can be given using a comma separated list. The default setting is \macro{d,D} which allows notations such as \macro{2d6} or \macro{2D6}.
-
-With \macro{\tikzset{rpg icons/roll syntax={w,W}}}, for example, notations such as \macro{2w6} or \macro{2W6} could be used.
+The Ti\emph{k}Z style \macro{rpg icons/roll syntax} can be used to change the character that denotes a die in the dice rolling syntax. Multiple characters can be given using a comma separated list. The default setting is \macro{d,D}.
 
 % =====
 

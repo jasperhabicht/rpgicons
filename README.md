@@ -16,7 +16,8 @@ typeset the icons use `tikzpicture` environments, these commands should not be u
 use the icons in `tikzpicture` environments directly. Apart from that, as of version 1.1.0, the
 package provides a way to define custom commands to typeset the icons as boxed material which is
 safe to use in a tikzpicture context. As of version 1.3.1, the package provides an additional way
-to use the icons as Ti*k*Z pics.
+to use the icons as Ti*k*Z pics. As of version 1.7.0, a command for easy typesetting of dice rolls
+such as `\roll{2d6 + 3d4 - 1}` is provided by the package.
 
 The `rpgicons` package is installed by copying the relevant `.sty` file into the working or `texmf`
 directory. The package is loaded by calling `\usepackage{rpgicons}` in the preamble of the document.

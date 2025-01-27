@@ -25,5 +25,7 @@ To load the PGF variant, the package can be loaded with the option `pgf`. The `l
 loaded per default. The PGF or `l3draw` variants can be loaded directly via
 `\usepackage{rpgicons-pgf}` or`\usepackage{rpgicons-l3}`.
 
+---
+
 This package including all files is subject to the LPPL 1.3c license.
 Copyright 2024&ndash;2025 Jasper Habicht (mail(at)jasperhabicht.de).

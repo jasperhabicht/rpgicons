@@ -10,7 +10,7 @@
 %
 % This work has the LPPL maintenance status `maintained'.
 %
-\ProvidesExplPackage {rpgicons-l3} {2025-01-22} {1.8.6}
+\ProvidesExplPackage {rpgicons-l3} {2025-05-30} {1.8.7}
     {RPG Icons Package (l3 Variant)}
 
 \bool_new:N \l__rpgicons_unicode_mode_bool
@@ -1755,8 +1755,8 @@
                 }
             }
         }
-        \color_stroke:V { \l_rpgicons_icon_color_stroke_tl }
-        \color_fill:V { \l_rpgicons_icon_color_fill_tl }
+        \color_stroke:V \l_rpgicons_icon_color_stroke_tl
+        \color_fill:V \l_rpgicons_icon_color_fill_tl
         \bool_if:NT \l__rpgicons_use_opacity_bool {
             \opacity_stroke:n { \l_rpgicons_icon_opacity_stroke_fp }
             \opacity_fill:n { \l_rpgicons_icon_opacity_fill_fp }
@@ -1812,7 +1812,7 @@
                 \use:c { rpgicons_draw_frame_ \l_rpgicons_icon_frame_tl : }
                 \IfBooleanTF {#1} {
                     \draw_path_use_clear:n { fill }
-                    \color_select:V { \l_rpgicons_icon_color_background_tl }
+                    \color_select:V \l_rpgicons_icon_color_background_tl
                     \bool_if:NT \l__rpgicons_use_opacity_bool {
                         \opacity_select:n { \l_rpgicons_icon_opacity_background_fp }
                     }
@@ -1834,7 +1834,7 @@
             \draw_path_use_clear:n { stroke }
             \IfValueT {#3} {
                 \draw_scope_begin:
-                    \color_select:V { \l_rpgicons_icon_color_text_tl }
+                    \color_select:V \l_rpgicons_icon_color_text_tl
                     \bool_if:NT \l__rpgicons_use_opacity_bool {
                         \opacity_select:n { \l_rpgicons_icon_opacity_text_fp }
                     }

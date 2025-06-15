@@ -10,7 +10,7 @@
 %
 % This work has the LPPL maintenance status `maintained'.
 %
-\ProvidesExplPackage {rpgicons-l3} {2025-05-30} {1.8.7}
+\ProvidesExplPackage {rpgicons-l3} {2025-06-15} {1.8.8}
     {RPG Icons Package (l3 Variant)}
 
 \bool_new:N \l__rpgicons_unicode_mode_bool
@@ -63,6 +63,22 @@
     \bool_if:NF \l__rpgicons_compat_mode_bool {
         \msg_warning:nn { rpgicons } { l3draw-old }
     }
+}
+
+\cs_if_exist:NF \draw_set_linewidth:n {
+    \cs_set_eq:NN \draw_set_linewidth:n \draw_linewidth:n
+}
+
+\cs_if_exist:NF \draw_set_baseline:n {
+    \cs_set_eq:NN \draw_set_baseline:n \draw_baseline:n
+}
+
+\cs_if_exist:NF \draw_set_cap_round: {
+    \cs_set_eq:NN \draw_set_cap_round: \draw_cap_round:
+}
+
+\cs_if_exist:NF \draw_set_join_round: {
+    \cs_set_eq:NN \draw_set_join_round: \draw_join_round:
 }
 
 % DICE
@@ -1738,8 +1754,8 @@
         \pdf_bdc:nn { Span } { /Alt ~ ( #4 ) }
     }
     \draw_begin:
-        \draw_cap_round:
-        \draw_join_round:
+        \draw_set_cap_round:
+        \draw_set_join_round:
         \bool_if:NTF \l__rpgicons_compat_mode_bool {
             % l3keys cs name fix
             \keys_set:ne { rpgicons / local ~ options } {#2}
@@ -1761,10 +1777,10 @@
             \opacity_stroke:n { \l_rpgicons_icon_opacity_stroke_fp }
             \opacity_fill:n { \l_rpgicons_icon_opacity_fill_fp }
         }
-        \draw_linewidth:n { \l_rpgicons_icon_linewidth_dim }
+        \draw_set_linewidth:n { \l_rpgicons_icon_linewidth_dim }
         \draw_transform_scale:n { \l_rpgicons_icon_transform_scale_fp }
         \draw_transform_rotate:n { \l_rpgicons_icon_transform_rotate_fp }
-        \draw_baseline:n { \l_rpgicons_icon_baseline_dim }
+        \draw_set_baseline:n { \l_rpgicons_icon_baseline_dim }
         \bool_if:NT \l_rpgicons_icon_accessible_basic_bool {
             \draw_scope_begin:
                 \bool_if:NTF \l__rpgicons_compat_mode_bool {

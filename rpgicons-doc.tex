@@ -11,8 +11,8 @@
 % This work has the LPPL maintenance status `maintained'.
 %
 \documentclass[a4paper]{article}
-\def\rpgiconsfileversion{1.8.8}
-\def\rpgiconsfiledate{15 June 2025}
+\def\rpgiconsfileversion{1.8.9}
+\def\rpgiconsfiledate{23 June 2025}
 
 \usepackage[T1]{fontenc}
 \usepackage{Alegreya}
@@ -272,6 +272,7 @@
 \changes{v1.8.4}{2024/08/08}{Bug fix in evocation spellschool shape. Unification of frames in PGF and L3 variants.}
 \changes{v1.8.6}{2024/11/13}{Fixes in the documentation.}
 \changes{v1.8.8}{2025/06/15}{Adjustments to support next release of \titlemacro{l3draw} package.}
+\changes{v1.8.9}{2025/06/23}{Improve check for PDF management, remove compatibility mode.}
 
 \begin{document}
 
@@ -512,9 +513,6 @@ The command \macro{\condition} typesets an icon depicting a condition of a chara
 The L3 variant of the package which uses the \macro{l3draw} package is loaded by default or explicitly by either calling \macro{\usepackage[l3]{rpgicons}} or \macro{\usepackage{rpgicons-l3}} in the preamble of the document after having installed the files \macro{rpgicons.sty} and \macro{rpgicons-l3.sty}. The \macro{l3draw} package is an experimental package that provides only basic drawing functionality. The L3 variant thus only supports a certain set of options for styling the icons.
 
 The L3 variant of the package does not load the \macro{xcolor} package but makes use of the \macro{l3color} module which uses a similar syntax like the \macro{xcolor} package. Color definitions made using the \macro{l3color} module are not directly usable via commands provided by the \macro{xcolor} package. Therefore, setting a color using the \macro{\color} macro provided by the \macro{xcolor} package won't affect the color of the icons.
-
-\begin{macrodef}compat\end{macrodef}
-The \macro{l3draw} package is experimental and subject to ongoing updates. Loading the L3 variant of the package with the option \macro{compat} will use macro definitions that have been available since the last major TeX Live release as replacement for certain functions that only became available in the most recent versions of the \macro{l3draw} and related packages.
 
 \label{macro:opacity}
 \begin{macrodef}opacity\end{macrodef}

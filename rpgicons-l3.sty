@@ -10,7 +10,7 @@
 %
 % This work has the LPPL maintenance status `maintained'.
 %
-\ProvidesExplPackage {rpgicons-l3} {2025-06-15} {1.8.8}
+\ProvidesExplPackage {rpgicons-l3} {2025-06-23} {1.8.9}
     {RPG Icons Package (l3 Variant)}
 
 \bool_new:N \l__rpgicons_unicode_mode_bool
@@ -21,13 +21,10 @@
     \bool_set_true:N \l__rpgicons_unicode_mode_bool
 }
 
-\bool_new:N \l__rpgicons_compat_mode_bool
 \bool_new:N \l__rpgicons_use_opacity_bool
 \keys_define:nn { rpgicons / package ~ options } {
-    compat      .bool_set:N = \l__rpgicons_compat_mode_bool ,
-    compat      .default:n  = { true } ,
     opacity     .bool_set:N = \l__rpgicons_use_opacity_bool ,
-    opacity     .default:n  = { true } ,
+    opacity     .default:n  = { true }
 }
 \ProcessKeyOptions [ rpgicons / package ~ options ]
 
@@ -39,44 +36,24 @@
     \msg_warning_text:n { dnicons } \iow_newline:
     In ~ order ~ to ~ use ~ opacity, ~ the ~ package ~ must ~ be ~ loaded ~ with ~ the ~ `opacity' ~ option.
 }
-\msg_new:nnn { rpgicons } { l3draw-old } {
-    \msg_warning_text:n { dnicons } \iow_newline:
-    The ~ version ~ of ~ the ~ `l3draw' ~  package ~ is ~ older ~ than ~ 2024-03-14. ~
-    Consider ~ using ~ the ~ `compat' ~ option.
-}
 
 \bool_if:NT \l__rpgicons_use_opacity_bool {
-    \IfDocumentMetadataTF { } {
+    \IfPDFManagementActiveTF { } {
         \msg_error:nn { rpgicons } { documentmetadata-missing }
-    }
-    \RequirePackage { l3opacity }
-    \bool_if:NT \l__rpgicons_compat_mode_bool {
-        % l3opacity fix
-        \tl_set:Nn \l__opacity_backend_fill_tl { 1 }
-        \tl_set:Nn \l__opacity_backend_stroke_tl { 1 }
     }
 }
 
 \RequirePackage { l3draw }
 
-\IfPackageAtLeastTF { l3draw } { 2024/03/14 } { } {
-    \bool_if:NF \l__rpgicons_compat_mode_bool {
-        \msg_warning:nn { rpgicons } { l3draw-old }
-    }
-}
-
 \cs_if_exist:NF \draw_set_linewidth:n {
     \cs_set_eq:NN \draw_set_linewidth:n \draw_linewidth:n
 }
-
 \cs_if_exist:NF \draw_set_baseline:n {
     \cs_set_eq:NN \draw_set_baseline:n \draw_baseline:n
 }
-
 \cs_if_exist:NF \draw_set_cap_round: {
     \cs_set_eq:NN \draw_set_cap_round: \draw_cap_round:
 }
-
 \cs_if_exist:NF \draw_set_join_round: {
     \cs_set_eq:NN \draw_set_join_round: \draw_join_round:
 }
@@ -95,16 +72,7 @@
 }
 
 \cs_new_protected:Npn \rpgicons_draw_shape_sixside: {
-    \bool_if:NTF \l__rpgicons_compat_mode_bool {
-        % l3draw rectangle fix
-        \draw_path_moveto:n { -.4cm , -.4cm }
-        \draw_path_lineto:n { -.4cm , .4cm }
-        \draw_path_lineto:n { .4cm , .4cm }
-        \draw_path_lineto:n { .4cm , -.4cm }
-        \draw_path_close:
-    } {
-        \draw_path_rectangle_corners:nn { -.4cm , -.4cm } { .4cm , .4cm }
-    }
+    \draw_path_rectangle_corners:nn { -.4cm , -.4cm } { .4cm , .4cm }
 }
 
 \cs_new_protected:Npn \rpgicons_draw_shape_eightside: {
@@ -665,16 +633,7 @@
 \cs_new_protected:Npn \rpgicons_draw_shape_quadratic: {
     \draw_path_circle:nn { 0cm , 0cm } { 2pt }
     \draw_path_use_clear:n { fill }
-    \bool_if:NTF \l__rpgicons_compat_mode_bool {
-        % l3draw rectangle fix
-        \draw_path_moveto:n { -.4cm , -.4cm }
-        \draw_path_lineto:n { -.4cm , .4cm }
-        \draw_path_lineto:n { .4cm , .4cm }
-        \draw_path_lineto:n { .4cm , -.4cm }
-        \draw_path_close:
-    } {
-        \draw_path_rectangle_corners:nn { -.4cm , -.4cm } { .4cm , .4cm }
-    }
+    \draw_path_rectangle_corners:nn { -.4cm , -.4cm } { .4cm , .4cm }
 }
 
 \cs_new_protected:Npn \rpgicons_draw_shape_cubic: {
@@ -1613,7 +1572,7 @@
     }
 }
 \cs_new_protected:Npn \__rpgicons_accessible_check: {
-    \IfDocumentMetadataTF { } {
+    \IfPDFManagementActiveTF { } {
         \msg_error:nn { rpgicons } { documentmetadata-missing }
     }
 }
@@ -1738,12 +1697,6 @@
 \seq_new:N \l__rpgicons_icon_shape_name_parts_seq
 \coffin_new:N \l__rpgicons_icon_accessible_coffin
 \coffin_new:N \l__rpgicons_icon_label_coffin
-\bool_if:NT \l__rpgicons_compat_mode_bool {
-    % l3keys cs name fix
-    \cs_generate_variant:Nn \keys_set:nn { ne }
-    \cs_generate_variant:Nn \str_set:Nn { Ne }
-    \cs_generate_variant:Nn \seq_set_split:Nnn { Nee }
-}
 \prg_generate_conditional_variant:Nnn \clist_if_in:nn { ne } { T , TF }
 \cs_generate_variant:Nn \hcoffin_set:Nn { Ne }
 \cs_generate_variant:Nn \keys_set_groups:nnn { nne }
@@ -1756,12 +1709,7 @@
     \draw_begin:
         \draw_set_cap_round:
         \draw_set_join_round:
-        \bool_if:NTF \l__rpgicons_compat_mode_bool {
-            % l3keys cs name fix
-            \keys_set:ne { rpgicons / local ~ options } {#2}
-        } {
-            \keys_set_exclude_groups:nne { rpgicons / local ~ options } { extra } {#2}
-        }
+        \keys_set_exclude_groups:nne { rpgicons / local ~ options } { extra } {#2}
         \str_set:Ne \l__rpgicons_icon_shape_name_str {#4}
         \str_replace_all:Nnn \l__rpgicons_icon_shape_name_str { ~ } { _ }
         \str_if_empty:NF \l__rpgicons_icon_shape_name_str {
@@ -1783,21 +1731,10 @@
         \draw_set_baseline:n { \l_rpgicons_icon_baseline_dim }
         \bool_if:NT \l_rpgicons_icon_accessible_basic_bool {
             \draw_scope_begin:
-                \bool_if:NTF \l__rpgicons_compat_mode_bool {
-                    % l3draw rectangle fix
-                    % l3draw bounding box workaround
-                    \draw_path_moveto:n { -.5cm , .5cm }
-                    \draw_path_lineto:n { -.5cm , .5cm }
-                    \draw_path_lineto:n { .5cm , .5cm }
-                    \draw_path_lineto:n { .5cm , .5cm }
-                    \draw_path_close:
-                    \draw_path_use_clear:n { clip }
-                } {
-                    \draw_path_rectangle_corners:nn
-                        { -.5cm , .5cm }
-                        { .5cm , .5cm }
-                    \draw_path_use_clear:n { clip }
-                }
+                \draw_path_rectangle_corners:nn
+                    { -.5cm , .5cm }
+                    { .5cm , .5cm }
+                \draw_path_use_clear:n { clip }
                 \bool_if:NTF \l_rpgicons_icon_accessible_full_bool {
                     \hcoffin_set:Nn \l__rpgicons_icon_accessible_coffin { \pdffakespace #4 \pdffakespace }
                 } {
@@ -1807,22 +1744,11 @@
                 \draw_coffin_use:Nnnn \l__rpgicons_icon_accessible_coffin { hc } { vc } { 0cm , 0cm }
             \draw_scope_end:
         }
-        \bool_if:NTF \l__rpgicons_compat_mode_bool {
-            % l3draw rectangle fix
-            % l3draw bounding box workaround
-            \draw_path_moveto:n { -.5cm , -.5cm - \l_rpgicons_icon_linewidth_dim / 2 }
-            \draw_path_lineto:n { -.5cm , .5cm + \l_rpgicons_icon_linewidth_dim / 2 }
-            \draw_path_lineto:n { .5cm , .5cm + \l_rpgicons_icon_linewidth_dim / 2 }
-            \draw_path_lineto:n { .5cm , -.5cm - \l_rpgicons_icon_linewidth_dim / 2 }
-            \draw_path_close:
-            \draw_path_use_clear:n { clip }
-        } {
-            \draw_path_rectangle_corners:nn
-                { -.5cm , -.5cm - \l_rpgicons_icon_linewidth_dim / 2 }
-                { .5cm , .5cm + \l_rpgicons_icon_linewidth_dim / 2 }
-            \draw_path_replace_bb:
-            \bool_set_false:N \l_draw_bb_update_bool
-        }
+        \draw_path_rectangle_corners:nn
+            { -.5cm , -.5cm - \l_rpgicons_icon_linewidth_dim / 2 }
+            { .5cm , .5cm + \l_rpgicons_icon_linewidth_dim / 2 }
+        \draw_path_replace_bb:
+        \bool_set_false:N \l_draw_bb_update_bool
         \draw_scope_begin:
             \clist_if_in:neT { ability , saving , spellschool , damage } { \l_rpgicons_icon_frame_tl } {
                 \use:c { rpgicons_draw_frame_ \l_rpgicons_icon_frame_tl : }

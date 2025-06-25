@@ -1562,12 +1562,10 @@
 \cs_generate_variant:Nn \color_stroke:n { V }
 \cs_generate_variant:Nn \color_fill:n { V }
 
-\bool_new:N \l__rpgicons_use_opacity_bool
 \cs_new_protected:Npn \__rpgicons_opacity_check: {
     \IfPDFManagementActiveTF { } {
         \msg_warning:nn { rpgicons } { documentmetadata-missing-opacity }
     }
-    \bool_set_true:N \l__rpgicons_use_opacity_bool
 }
 \cs_new_protected:Npn \__rpgicons_accessible_check: {
     \IfPDFManagementActiveTF { } {
@@ -1722,10 +1720,8 @@
             }
             \color_stroke:V \l_rpgicons_icon_color_stroke_tl
             \color_fill:V \l_rpgicons_icon_color_fill_tl
-            \bool_if:NT \l__rpgicons_use_opacity_bool {
-                \opacity_stroke:n { \l_rpgicons_icon_opacity_stroke_fp }
-                \opacity_fill:n { \l_rpgicons_icon_opacity_fill_fp }
-            }
+            \opacity_stroke:n { \l_rpgicons_icon_opacity_stroke_fp }
+            \opacity_fill:n { \l_rpgicons_icon_opacity_fill_fp }
             \draw_set_linewidth:n { \l_rpgicons_icon_linewidth_dim }
             \draw_transform_scale:n { \l_rpgicons_icon_transform_scale_fp }
             \draw_transform_rotate:n { \l_rpgicons_icon_transform_rotate_fp }
@@ -1752,9 +1748,7 @@
                     \IfBooleanTF {#1} {
                         \draw_path_use_clear:n { fill }
                         \color_select:V \l_rpgicons_icon_color_background_tl
-                        \bool_if:NT \l__rpgicons_use_opacity_bool {
-                            \opacity_select:n { \l_rpgicons_icon_opacity_background_fp }
-                        }
+                        \opacity_select:n { \l_rpgicons_icon_opacity_background_fp }
                     } {
                         \draw_path_use_clear:n { stroke }
                     }
@@ -1774,9 +1768,7 @@
                 \IfValueT {#3} {
                     \draw_scope_begin:
                         \color_select:V \l_rpgicons_icon_color_text_tl
-                        \bool_if:NT \l__rpgicons_use_opacity_bool {
-                            \opacity_select:n { \l_rpgicons_icon_opacity_text_fp }
-                        }
+                        \opacity_select:n { \l_rpgicons_icon_opacity_text_fp }
                         \hcoffin_set:Ne \l__rpgicons_icon_label_coffin {#3}
                         \draw_coffin_use:Nnn \l__rpgicons_icon_label_coffin { hc } { vc }
                     \draw_scope_end:

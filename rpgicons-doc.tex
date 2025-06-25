@@ -272,7 +272,7 @@
 \changes{v1.8.4}{2024/08/08}{Bug fix in evocation spellschool shape. Unification of frames in PGF and L3 variants.}
 \changes{v1.8.6}{2024/11/13}{Fixes in the documentation.}
 \changes{v1.8.8}{2025/06/15}{Adjustments to support next release of \titlemacro{l3draw} package.}
-\changes{v1.8.9}{2025/06/23}{Improve check for PDF management, remove compatibility mode.}
+\changes{v1.8.9}{2025/06/23}{Improve check for PDF management, remove compatibility mode, improve accessibililty support.}
 
 \begin{document}
 
@@ -305,7 +305,7 @@ To load the PGF variant of the package the package needs to be loaded with the o
 
 \subsection{Dependencies}
 
-The L3 variant of the package loads the \macro{l3draw} package. If the package is loaded with the \macro{opacity} option to enable transparency, the \macro{l3opacity} package is also loaded.
+The L3 variant of the package loads the \macro{l3draw} package.
 
 The PGF variant of the package loads the \macro{tikz} package which in turn loads the \macro{xcolor} package. To make use of specific options these packages provide, you need to load the packages with the relevant options beforehand or explicitly pass the relevant options to the package using a command such as \macro{\PassOptionsToPackage{svgnames}{xcolor}}.
 
@@ -514,9 +514,7 @@ The L3 variant of the package which uses the \macro{l3draw} package is loaded by
 
 The L3 variant of the package does not load the \macro{xcolor} package but makes use of the \macro{l3color} module which uses a similar syntax like the \macro{xcolor} package. Color definitions made using the \macro{l3color} module are not directly usable via commands provided by the \macro{xcolor} package. Therefore, setting a color using the \macro{\color} macro provided by the \macro{xcolor} package won't affect the color of the icons.
 
-\label{macro:opacity}
-\begin{macrodef}opacity\end{macrodef}
-With the \macro{opacity} option, the L3 variant of the package supports transparency using the functionality of the \macro{l3opacity} package. Since transparency requires the management of certain PDF settings, it is necessary to call \macro{\DocumentMetadata{}} before loading a \macro{\documentclass}. The \macro{l3opacity} package is experimental.
+Since transparency requires the management of certain PDF settings, it is necessary to call \macro{\DocumentMetadata{}} before loading a \macro{\documentclass} when using the L3 variant of the package.
 
 \subsection{Icon commands}
 
@@ -569,7 +567,7 @@ With the \macro{frame} option, one of four different frames can be selected that
 
 Some icons can be used with a negative color scheme where the icon is drawn negatively inside a filled shape. Per default, the icons are drawn in white in such cases, but it might be desirable that the icons are in the same color as the background. To this end, the \macro{background} option sets the color of the shape when it is printed over a filled frame which can be achieved by setting the \macro{negative} option for the \macro{\ability} or the \macro{\spellschool} command or using the starred version of the \macro{\RPGIconsUseIcon} command.
 
-The \macro{color} option sets the color of strokes, fills and text in general while the \macro{stroke} option, the \macro{fill} option and the \macro{text} option set the color only for strokes, fills or text respectively. Similarly, the \macro{opacity} macro sets the opacity generally, while the options \macro{stroke opacity}, \macro{fill opacity} and \macro{text opacity} allow for setting the opacity of strokes, fill and text separately. The opacity styles are only available when loading the package with the \macro{opacity} option (see the description \hyperref[macro:opacity]{above}). The option \macro{line width} sets the line width for strokes. Using the \macro{scale} and \macro{rotate} options, the shape can be scaled and rotated.
+The \macro{color} option sets the color of strokes, fills and text in general while the \macro{stroke} option, the \macro{fill} option and the \macro{text} option set the color only for strokes, fills or text respectively. Similarly, the \macro{opacity} macro sets the opacity generally, while the options \macro{stroke opacity}, \macro{fill opacity} and \macro{text opacity} allow for setting the opacity of strokes, fill and text separately. The option \macro{line width} sets the line width for strokes. Using the \macro{scale} and \macro{rotate} options, the shape can be scaled and rotated.
 
 The \macro{scale inner} option can be used to change the scaling of the icon when placed inside a frame when using the \macro{\ability}, \macro{\saving}, \macro{\spellschool} and \macro{\damage} macros. The default value is 0.675.
 

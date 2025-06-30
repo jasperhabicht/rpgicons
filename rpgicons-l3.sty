@@ -10,7 +10,7 @@
 %
 % This work has the LPPL maintenance status `maintained'.
 %
-\ProvidesExplPackage {rpgicons-l3} {2025-06-23} {1.8.9}
+\ProvidesExplPackage {rpgicons-l3} {2025-06-30} {1.9.0}
     {RPG Icons Package (l3 Variant)}
 
 \bool_new:N \l__rpgicons_unicode_mode_bool
@@ -22,9 +22,13 @@
 }
 
 \msg_new:nnn { rpgicons } { old-kernel } {
-  LaTeX ~ kernel ~ too ~ old. \iow_newline:
-  The ~ rpgicons ~ package ~ does ~ not ~ support ~ this ~ LaTeX ~ version. \iow_newline:
-  Please ~ update ~ to ~ a ~ newer ~ version.
+    LaTeX ~ kernel ~ too ~ old. \iow_newline:
+    The ~ rpgicons ~ package ~ does ~ not ~ support ~ this ~ LaTeX ~ version. \iow_newline:
+    Please ~ update ~ to ~ a ~ newer ~ version.
+}
+\msg_new:nnn { rpgicons } { deprecated-option } {
+    \msg_warning_text:n { rpgicons } \iow_newline:
+    The ~ option ~ `#1` ~ has ~ been ~ deprecated ~ and ~ will ~ be ~ ignored. 
 }
 \msg_new:nnn { rpgicons } { documentmetadata-missing-opacity } {
     \msg_warning_text:n { rpgicons } \iow_newline:
@@ -37,16 +41,27 @@
     \token_to_str:N \DocumentMetadata \c_space_tl must ~ be ~ set.
 }
 
+\keys_define:nn { rpgicons / global } {
+    compat   .code:n = {
+        \msg_warning:nnn { rpgicons } { deprecated-option } { compat }
+    } ,
+    opacity  .code:n  = {
+        \msg_warning:nnn { rpgicons } { deprecated-option } { opacity }
+    }
+}
+\ProcessKeyOptions [ rpgicons / global ]
+
 \RequirePackage { l3draw }
 
 \cs_if_exist:NF \IfExplAtLeastTF {
-  \msg_critical:nn { rpgicons } { old-kernel }
+    \msg_critical:nn { rpgicons } { old-kernel }
 }
 
 \IfExplAtLeastTF { 2025-04-14 } { } {
-  \RequirePackage { l3opacity }
+    \RequirePackage { l3opacity }
 }
 
+% backward compatibility
 \cs_if_exist:NF \draw_set_linewidth:n {
     \cs_set_eq:NN \draw_set_linewidth:n \draw_linewidth:n
 }
@@ -59,6 +74,7 @@
 \cs_if_exist:NF \draw_set_join_round: {
     \cs_set_eq:NN \draw_set_join_round: \draw_join_round:
 }
+% ===
 
 % DICE
 

@@ -1963,9 +1963,10 @@
         { \tl_use:N \l__rpgicons_roll_syntax_part_tl }
     }
 }
+\cs_generate_variant:Nn \rpgicons_roll_syntax_parse:n { e }
 
 \NewDocumentCommand{\RPGIconsRoll}{ m }{
-    \rpgicons_roll_syntax_parse:n {#1}
+    \rpgicons_roll_syntax_parse:e {#1}
 }
 \cs_if_exist:NF \roll { \cs_new_eq:NN \roll \RPGIconsRoll }
 

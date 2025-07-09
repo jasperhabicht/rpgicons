@@ -2576,17 +2576,19 @@
       }
   }
 
+  \cs_generate_variant:Nn \rpgicons_roll_syntax_parse:n { e }
+
 }
 
 \tikzset{
-    rpg ~ icons/roll ~ syntax/.code={
-        \rpgicons_roll_syntax_die_set:n {#1}
-    },
-    rpg ~ icons/roll ~ syntax={d,D}
+  rpg ~ icons/roll ~ syntax/.code={
+    \rpgicons_roll_syntax_die_set:n {#1}
+  },
+  rpg ~ icons/roll ~ syntax={d,D}
 }
 
 \NewDocumentCommand{\rpgiconsroll}{ m }{
-    \rpgicons_roll_syntax_parse:n {#1}
+  \rpgicons_roll_syntax_parse:e {#1}
 }
 
 \ExplSyntaxOff

@@ -39,63 +39,63 @@
 }
 
 \tikzset{
-    rpg icons/background color/.code={
-        \colorlet{rpgicons@bg}{#1}
-    },
-    rpg icons/background color={white},
-    rpg icons/before sep/.code={
-        \setlength{\rpgicons@beforesep}{#1}
-    },
-    rpg icons/before sep={.05em},
-    rpg icons/after sep/.code={
-        \setlength{\rpgicons@aftersep}{#1}
-    },
-    rpg icons/after sep={.05em},
-    rpg icons/baseline/.code={
-        \setlength{\rpgicons@baseline}{#1}
-    },
-    rpg icons/baseline={-3.5pt},
-    rpg icons/.style={},
-    rpg icons/.append style={
-      every node/.style={
-        line cap=round,
-        line join=round
-      }
-    },
-    %
-    rpg icons/every die/.style={},
-    rpg icons/every ability/.style={},
-    rpg icons/every saving/.style={},
-    rpg icons/every spell/.style={},
-    rpg icons/every spellschool/.style={},
-    rpg icons/every damage/.style={},
-    rpg icons/every attack/.style={},
-    rpg icons/every condition/.style={},
-    %
-    rpg icons/create every style/.code={
-      \tikzset{
-        rpg icons/every #1/.style={}
-      }
-    },
-    rpg icons/create every style/.list/.expanded={%
-      \rpgicons@allshapes%
+  rpg icons/background color/.code={
+    \colorlet{rpgicons@bg}{#1}
+  },
+  rpg icons/background color={white},
+  rpg icons/before sep/.code={
+    \setlength{\rpgicons@beforesep}{#1}
+  },
+  rpg icons/before sep={.05em},
+  rpg icons/after sep/.code={
+    \setlength{\rpgicons@aftersep}{#1}
+  },
+  rpg icons/after sep={.05em},
+  rpg icons/baseline/.code={
+    \setlength{\rpgicons@baseline}{#1}
+  },
+  rpg icons/baseline={-3.5pt},
+  rpg icons/.style={},
+  rpg icons/.append style={
+    every node/.style={
+      line cap=round,
+      line join=round
     }
+  },
+  %
+  rpg icons/every die/.style={},
+  rpg icons/every ability/.style={},
+  rpg icons/every saving/.style={},
+  rpg icons/every spell/.style={},
+  rpg icons/every spellschool/.style={},
+  rpg icons/every damage/.style={},
+  rpg icons/every attack/.style={},
+  rpg icons/every condition/.style={},
+  %
+  rpg icons/create every style/.code={
+    \tikzset{
+      rpg icons/every #1/.style={}
+    }
+  },
+  rpg icons/create every style/.list/.expanded={%
+    \rpgicons@allshapes%
+  }
 }
 
 % make tikz icons usable inside tikz environments
 \NewDocumentCommand{\provideprotectedrpgicon}{ m o m O{} m }{%
-    \expandafter\newsavebox\csname rpgicons@protectbox@#5\endcsname%
-    \expandafter\savebox\csname rpgicons@protectbox@#5\endcsname{%
-        \IfValueTF{#2}{%
-            \csname #1\endcsname[#2]{#3}[#4]{}%
-        }{%
-            \csname #1\endcsname{#3}[#4]{}%
-        }%
+  \expandafter\newsavebox\csname rpgicons@protectbox@#5\endcsname%
+  \expandafter\savebox\csname rpgicons@protectbox@#5\endcsname{%
+    \IfValueTF{#2}{%
+      \csname #1\endcsname[#2]{#3}[#4]{}%
+    }{%
+      \csname #1\endcsname{#3}[#4]{}%
     }%
+  }%
 }
 
 \NewDocumentCommand{\useprotectedrpgicon}{ m }{%
-    \expandafter\usebox\csname rpgicons@protectbox@#1\endcsname%
+  \expandafter\usebox\csname rpgicons@protectbox@#1\endcsname%
 }
 
 % DICE

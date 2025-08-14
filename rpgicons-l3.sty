@@ -1804,14 +1804,14 @@
         \keys_set_groups:nne { rpgicons / local ~ options } { extra } {#3}
         \keys_set:ne { rpgicons / local ~ options } { \clist_use:Nn \l_rpgicons_types_every_die_style_clist { , } }
         \str_set:Ne \l__rpgicons_icon_integer_str {#4}
-        \hspace { \l_rpgicons_icon_before_sep_dim }
+        \skip_horizontal:n { \l_rpgicons_icon_before_sep_dim }
         \str_if_eq:neTF { large } {#1} {
             \RPGIconsUseIcon[scale=.675, #3][#4]{#2}
         } {
             \str_if_empty:NF \l__rpgicons_icon_integer_str { \str_use:N \l__rpgicons_icon_integer_str \, }
             \RPGIconsUseIcon[scale=.333, #3]{#2}
         }
-        \hspace { \l_rpgicons_icon_after_sep_dim }
+        \skip_horizontal:n { \l_rpgicons_icon_after_sep_dim }
     \group_end:
 }
 \cs_if_exist:NF \die { \cs_new_eq:NN \die \RPGIconsDie }
@@ -1820,13 +1820,13 @@
     \group_begin:
         \keys_set_groups:nne { rpgicons / local ~ options } { extra } {#3}
         \keys_set:ne { rpgicons / local ~ options } { \clist_use:Nn \l_rpgicons_types_every_ability_style_clist { , } }
-        \hspace { \l_rpgicons_icon_before_sep_dim }
+        \skip_horizontal:n { \l_rpgicons_icon_before_sep_dim }
         \str_if_eq:neTF { negative } {#1} {
             \RPGIconsUseIcon*[frame=ability, scale=.333, #3]{#2}
         } {
             \RPGIconsUseIcon[scale=.333, #3]{#2}
         }
-        \hspace { \l_rpgicons_icon_after_sep_dim }
+        \skip_horizontal:n { \l_rpgicons_icon_after_sep_dim }
     \group_end:
 }
 \cs_if_exist:NF \ability { \cs_new_eq:NN \ability \RPGIconsAbility }
@@ -1835,13 +1835,13 @@
     \group_begin:
         \keys_set_groups:nne { rpgicons / local ~ options } { extra } {#3}
         \keys_set:ne { rpgicons / local ~ options } { \clist_use:Nn \l_rpgicons_types_every_saving_style_clist { , } }
-        \hspace { \l_rpgicons_icon_before_sep_dim }
+        \skip_horizontal:n { \l_rpgicons_icon_before_sep_dim }
         \str_if_eq:neTF { empty } {#1} {
             \RPGIconsUseIcon[frame=saving, scale=.333, #3]{}
         } {
             \RPGIconsUseIcon[frame=saving, scale=.333, #3]{#2}
         }
-        \hspace { \l_rpgicons_icon_after_sep_dim }
+        \skip_horizontal:n { \l_rpgicons_icon_after_sep_dim }
     \group_end:
 }
 \cs_if_exist:NF \saving { \cs_new_eq:NN \saving \RPGIconsSaving }
@@ -1850,9 +1850,9 @@
     \group_begin:
         \keys_set_groups:nne { rpgicons / local ~ options } { extra } {#2}
         \keys_set:ne { rpgicons / local ~ options } { \clist_use:Nn \l_rpgicons_types_every_spell_style_clist { , } }
-        \hspace { \l_rpgicons_icon_before_sep_dim }
+        \skip_horizontal:n { \l_rpgicons_icon_before_sep_dim }
         \RPGIconsUseIcon[scale=.333, #2]{#1}
-        \hspace { \l_rpgicons_icon_after_sep_dim }
+        \skip_horizontal:n { \l_rpgicons_icon_after_sep_dim }
     \group_end:
 }
 \cs_if_exist:NF \spell { \cs_new_eq:NN \spell \RPGIconsSpell }
@@ -1861,13 +1861,13 @@
     \group_begin:
         \keys_set_groups:nne { rpgicons / local ~ options } { extra } {#3}
         \keys_set:ne { rpgicons / local ~ options } { \clist_use:Nn \l_rpgicons_types_every_spellschool_style_clist { , } }
-        \hspace { \l_rpgicons_icon_before_sep_dim }
+        \skip_horizontal:n { \l_rpgicons_icon_before_sep_dim }
         \str_if_eq:neTF { negative } {#1} {
             \RPGIconsUseIcon*[frame=spellschool, scale=.333, #3]{#2}
         } {
             \RPGIconsUseIcon[frame=spellschool, scale=.333, #3]{#2}
         }
-        \hspace { \l_rpgicons_icon_after_sep_dim }
+        \skip_horizontal:n { \l_rpgicons_icon_after_sep_dim }
     \group_end:
 }
 \cs_if_exist:NF \spellschool { \cs_new_eq:NN \spellschool \RPGIconsSpellschool }
@@ -1876,9 +1876,9 @@
     \group_begin:
         \keys_set_groups:nne { rpgicons / local ~ options } { extra } {#2}
         \keys_set:ne { rpgicons / local ~ options } { \clist_use:Nn \l_rpgicons_types_every_damage_style_clist { , } }
-        \hspace { \l_rpgicons_icon_before_sep_dim }
+        \skip_horizontal:n { \l_rpgicons_icon_before_sep_dim }
         \RPGIconsUseIcon[frame=damage, scale=.333, #2]{#1}
-        \hspace { \l_rpgicons_icon_after_sep_dim }
+        \skip_horizontal:n { \l_rpgicons_icon_after_sep_dim }
     \group_end:
 }
 \cs_if_exist:NF \damage { \cs_new_eq:NN \damage \RPGIconsDamage }
@@ -1887,9 +1887,9 @@
     \group_begin:
         \keys_set_groups:nne { rpgicons / local ~ options } { extra } {#2}
         \keys_set:ne { rpgicons / local ~ options } { \clist_use:Nn \l_rpgicons_types_every_attack_style_clist { , } }
-        \hspace { \l_rpgicons_icon_before_sep_dim }
+        \skip_horizontal:n { \l_rpgicons_icon_before_sep_dim }
         \RPGIconsUseIcon[scale=.333, #2]{#1}
-        \hspace { \l_rpgicons_icon_after_sep_dim }
+        \skip_horizontal:n { \l_rpgicons_icon_after_sep_dim }
     \group_end:
 }
 \cs_if_exist:NF \attack { \cs_new_eq:NN \attack \RPGIconsAttack }
@@ -1898,9 +1898,9 @@
     \group_begin:
         \keys_set_groups:nne { rpgicons / local ~ options } { extra } {#2}
         \keys_set:ne { rpgicons / local ~ options } { \clist_use:Nn \l_rpgicons_types_every_condition_style_clist { , } }
-        \hspace { \l_rpgicons_icon_before_sep_dim }
+        \skip_horizontal:n { \l_rpgicons_icon_before_sep_dim }
         \RPGIconsUseIcon[scale=.333, #2]{#1}
-        \hspace { \l_rpgicons_icon_after_sep_dim }
+        \skip_horizontal:n { \l_rpgicons_icon_after_sep_dim }
     \group_end:
 }
 \cs_if_exist:NF \condition { \cs_new_eq:NN \condition \RPGIconsCondition }

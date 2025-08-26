@@ -37,6 +37,12 @@
     In ~ order ~ to ~ provide ~ full ~ accessibility, ~
     \token_to_str:N \DocumentMetadata \c_space_tl must ~ be ~ set.
 }
+\msg_new:nnn { rpgicons } { shape-undefined } {
+    The ~ shape ~ `#1` ~ is ~ undefined.
+}
+\msg_new:nnn { rpgicons } { frame-undefined } {
+    The ~ frame ~ `#1` ~ is ~ undefined.
+}
 
 \keys_define:nn { rpgicons / global } {
     compat   .code:n = {
@@ -1757,7 +1763,9 @@
             \bool_set_false:N \l_draw_bb_update_bool
             \draw_scope_begin:
                 \clist_if_in:neT { ability , saving , spellschool , damage } { \l_rpgicons_icon_frame_tl } {
-                    \use:c { rpgicons_draw_frame_ \l_rpgicons_icon_frame_tl : }
+                    \cs_if_exist_use:cF { rpgicons_draw_frame_ \l_rpgicons_icon_frame_tl : } {
+                        \msg_warning:nnV { rpgicons } { frame-undefined } \l_rpgicons_icon_frame_tl
+                    }
                     \IfBooleanTF {#1} {
                         \draw_path_use_clear:n { fill }
                         \color_select:V \l_rpgicons_icon_color_background_tl
@@ -1775,7 +1783,9 @@
                         \seq_item:Nn \l__rpgicons_icon_shape_name_parts_seq { 2 }
                     }
                 } {
-                    \use:c { rpgicons_draw_shape_ \l__rpgicons_icon_shape_name_str : }
+                    \cs_if_exist_use:cF { rpgicons_draw_shape_ \l__rpgicons_icon_shape_name_str : } {
+                        \msg_warning:nnV { rpgicons } { shape-undefined } \l__rpgicons_icon_shape_name_str
+                    }
                 }
                 \draw_path_use_clear:n { stroke }
                 \IfValueT {#3} {

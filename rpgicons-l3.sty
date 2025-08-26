@@ -1784,7 +1784,9 @@
                     }
                 } {
                     \cs_if_exist_use:cF { rpgicons_draw_shape_ \l__rpgicons_icon_shape_name_str : } {
-                        \msg_warning:nnV { rpgicons } { shape-undefined } \l__rpgicons_icon_shape_name_str
+                        \tl_if_blank:NF \l__rpgicons_icon_shape_name_str {
+                            \msg_warning:nnV { rpgicons } { shape-undefined } \l__rpgicons_icon_shape_name_str
+                        }
                     }
                 }
                 \draw_path_use_clear:n { stroke }

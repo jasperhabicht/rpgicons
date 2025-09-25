@@ -33,6 +33,9 @@
     In ~ order ~ to ~ use ~ opacity, ~
     \token_to_str:N \DocumentMetadata \c_space_tl must ~ be ~ set.
 }
+\msg_new:nnn { rpgicons } { tagging-unsupported } {
+    This ~ LaTeX ~ version ~ does ~ not ~ support ~ tagging.
+}
 \msg_new:nnn { rpgicons } { shape-undefined } {
     The ~ shape ~ `#1` ~ is ~ undefined.
 }
@@ -1686,21 +1689,27 @@
     }
 }
 
-\NewTaggingSocket { rpgicons/icon/before } { 1 } 
-\NewTaggingSocketPlug { rpgicons/icon/before } { actualtext } {
-    \tag_mc_end_push:
-    \tag_struct_begin:n { tag = Span , actualtext = { ~ #1 ~ } }
-    \tag_mc_begin:n { }
-}
-\AssignTaggingSocketPlug { rpgicons/icon/before } { actualtext }
+\cs_if_exist:NTF \tag_socket_use:n {
+    \NewTaggingSocket { rpgicons/icon/before } { 1 } 
+    \NewTaggingSocketPlug { rpgicons/icon/before } { actualtext } {
+        \tag_mc_end_push:
+        \tag_struct_begin:n { tag = Span , actualtext = { ~ #1 ~ } }
+        \tag_mc_begin:n { }
+    }
+    \AssignTaggingSocketPlug { rpgicons/icon/before } { actualtext }
 
-\NewTaggingSocket { rpgicons/icon/after } { 0 } 
-\NewTaggingSocketPlug { rpgicons/icon/after } { actualtext } {
-    \tag_mc_end:
-    \tag_struct_end:
-    \tag_mc_begin_pop:n { }
+    \NewTaggingSocket { rpgicons/icon/after } { 0 } 
+    \NewTaggingSocketPlug { rpgicons/icon/after } { actualtext } {
+        \tag_mc_end:
+        \tag_struct_end:
+        \tag_mc_begin_pop:n { }
+    }
+    \AssignTaggingSocketPlug { rpgicons/icon/after } { actualtext }
+} {
+    \cs_new:Npn \tag_socket_use:n #1 { }
+    \cs_new:Npn \tag_socket_use:nn #1#2 { }
+    \msg_warning:nn { rpgicons } { tagging-unsupported }
 }
-\AssignTaggingSocketPlug { rpgicons/icon/after } { actualtext }
 
 \seq_new:N \l__rpgicons_icon_shape_name_parts_seq
 \coffin_new:N \l__rpgicons_icon_accessible_coffin
@@ -1779,7 +1788,7 @@
             \draw_scope_end:
         \draw_end:
     \group_end:
-    \tag_socket_use:nn { rpgicons/icon/after } {#4}
+    \tag_socket_use:n { rpgicons/icon/after }
 }
 
 \str_new:N \l__rpgicons_icon_integer_str

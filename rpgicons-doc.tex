@@ -11,8 +11,8 @@
 % This work has the LPPL maintenance status `maintained'.
 %
 \documentclass[a4paper]{article}
-\def\rpgiconsfileversion{1.9.2}
-\def\rpgiconsfiledate{27 August 2025}
+\def\rpgiconsfileversion{2.0.0}
+\def\rpgiconsfiledate{25 September 2025}
 
 \usepackage[T1]{fontenc}
 \usepackage{Alegreya}
@@ -273,6 +273,7 @@
 \changes{v1.8.6}{2024/11/13}{Fixes in the documentation.}
 \changes{v1.8.8}{2025/06/15}{Adjustments to support next release of \titlemacro{l3draw} package.}
 \changes{v1.9.0}{2025/06/30}{Improve check for PDF management, deprecate compatibility mode, improve accessibililty support.}
+\changes{v2.0.0}{2025/09/25}{Change accessibility support to automatic tagging support.}
 
 \begin{document}
 
@@ -528,6 +529,8 @@ The \macro{\RPGIconsUseIcon} command has a starred version and two optional argu
 
 The starred version of the command is used to fill a frame with color instead of drawing its outline. Frames can be put around the shape via the relevant \macro{frame} option.
 
+The command supports PDF tagging. If tagging is activated via \macro{\DocumentMetadata{tagging=on}}, a replacement text to the relevant icon is automatically added which can be copied to the clipboard and can be read by screen readers. Note that tagging support depends on the used PDF reader.
+
 \begin{macrodef}
 |\RPGIconsDie|[<style>]{<shape>}[<options>]{<integer>}
 |\RPGIconsAbiliy|[<style>]{<shape>}[<options>]
@@ -570,14 +573,6 @@ Some icons can be used with a negative color scheme where the icon is drawn nega
 The \macro{color} option sets the color of strokes, fills and text in general while the \macro{stroke} option, the \macro{fill} option and the \macro{text} option set the color only for strokes, fills or text respectively. Similarly, the \macro{opacity} macro sets the opacity generally, while the options \macro{stroke opacity}, \macro{fill opacity} and \macro{text opacity} allow for setting the opacity of strokes, fill and text separately. The option \macro{line width} sets the line width for strokes. Using the \macro{scale} and \macro{rotate} options, the shape can be scaled and rotated.
 
 The \macro{scale inner} option can be used to change the scaling of the icon when placed inside a frame when using the \macro{\ability}, \macro{\saving}, \macro{\spellschool} and \macro{\damage} macros. The default value is 0.675.
-
-\begin{macrodef}
-accessible
-accessible = basic
-accessible = full
-accessible = false
-\end{macrodef}
-Using the \macro{accessible} option with no value or the value \macro{basic}, a replacement text to the relevant icon can be added which can be copied to the clipboard. The value \macro{full} additionally places an \macro{\Alt} mark in the PDF which means that the shape of the relevant icon is read by screen readers. For this to work, is necessary to call \macro{\DocumentMetadata{}} before loading a \macro{\documentclass}, preferably with tagging enabled to make use of the \macro{accessible} option. The value \macro{false} can be used to disable the function explicitly. Note that depending on the compiler and PDF viewer, line breaks or no spaces might appear before and after the replacement text.
 
 \begin{macrodef}
 every die

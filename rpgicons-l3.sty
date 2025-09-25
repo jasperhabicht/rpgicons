@@ -1635,6 +1635,9 @@
     scale ~ inner        .initial:n  = { 0.675 } ,
     rotate               .fp_set:N   = \l_rpgicons_icon_transform_rotate_fp ,
     rotate               .initial:n  = { 0.0 } ,
+    accessible           .code:n = {
+        \msg_warning:nnn { rpgicons } { deprecated-option } { accessible }
+    }
 }
 
 \clist_const:Nn \c__rpgicons_types_clist {

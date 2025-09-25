@@ -1689,7 +1689,7 @@
     }
 }
 
-\cs_if_exist:NTF \tag_socket_use:n {
+\cs_if_exist:NTF \NewTaggingSocket {
     \NewTaggingSocket { rpgicons/icon/before } { 1 } 
     \NewTaggingSocketPlug { rpgicons/icon/before } { actualtext } {
         \tag_mc_end_push:
@@ -1706,9 +1706,13 @@
     }
     \AssignTaggingSocketPlug { rpgicons/icon/after } { actualtext }
 } {
-    \cs_new:Npn \tag_socket_use:n #1 { }
-    \cs_new:Npn \tag_socket_use:nn #1#2 { }
     \msg_warning:nn { rpgicons } { tagging-unsupported }
+    \cs_if_exist:NF \tag_socket_use:n {
+        \cs_new:Npn \tag_socket_use:n #1 { }
+    }
+    \cs_if_exist:NF \tag_socket_use:nn {
+        \cs_new:Npn \tag_socket_use:nn #1#2 { }
+    }
 }
 
 \seq_new:N \l__rpgicons_icon_shape_name_parts_seq

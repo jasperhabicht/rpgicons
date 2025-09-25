@@ -10,7 +10,7 @@
 %
 % This work has the LPPL maintenance status `maintained'.
 %
-\ProvidesExplPackage {rpgicons-l3} {2025-08-27} {1.9.2}
+\ProvidesExplPackage {rpgicons-l3} {2025-09-25} {2.0.0}
     {RPG Icons Package (l3 Variant)}
 
 \bool_new:N \l__rpgicons_unicode_mode_bool
@@ -31,10 +31,6 @@
 }
 \msg_new:nnn { rpgicons } { documentmetadata-missing-opacity } {
     In ~ order ~ to ~ use ~ opacity, ~
-    \token_to_str:N \DocumentMetadata \c_space_tl must ~ be ~ set.
-}
-\msg_new:nnn { rpgicons } { documentmetadata-missing-accessible } {
-    In ~ order ~ to ~ provide ~ full ~ accessibility, ~
     \token_to_str:N \DocumentMetadata \c_space_tl must ~ be ~ set.
 }
 \msg_new:nnn { rpgicons } { shape-undefined } {
@@ -1574,9 +1570,6 @@
 \fp_new:N \l_rpgicons_icon_transform_scale_inner_fp
 \fp_new:N \l_rpgicons_icon_transform_rotate_fp
 
-\bool_new:N \l_rpgicons_icon_accessible_basic_bool
-\bool_new:N \l_rpgicons_icon_accessible_full_bool
-
 \cs_generate_variant:Nn \color_select:n { V }
 \cs_generate_variant:Nn \color_stroke:n { V }
 \cs_generate_variant:Nn \color_fill:n { V }
@@ -1584,11 +1577,6 @@
 \cs_new_protected:Npn \__rpgicons_opacity_check: {
     \IfPDFManagementActiveTF { } {
         \msg_warning:nn { rpgicons } { documentmetadata-missing-opacity }
-    }
-}
-\cs_new_protected:Npn \__rpgicons_accessible_check: {
-    \IfPDFManagementActiveTF { } {
-        \msg_error:nn { rpgicons } { documentmetadata-missing-accessible }
     }
 }
 
@@ -1600,22 +1588,6 @@
     after ~ sep          .groups:n   = { extra } ,
     after ~ sep          .dim_set:N  = \l_rpgicons_icon_after_sep_dim ,
     after ~ sep          .initial:n  = { 0.05em } ,
-    accessible           .code:n     = {
-        \keys_set:nn { rpgicons / local ~ options / accessible } {#1}
-    } ,
-    accessible / false   .code:n     = {
-        \bool_set_false:N \l_rpgicons_icon_accessible_basic_bool
-        \bool_set_false:N \l_rpgicons_icon_accessible_full_bool
-    } ,
-    accessible / basic   .code:n     = {
-        \bool_set_true:N \l_rpgicons_icon_accessible_basic_bool
-        \bool_set_false:N \l_rpgicons_icon_accessible_full_bool
-    } ,
-    accessible / full    .code:n     = {
-        \bool_set_true:N \l_rpgicons_icon_accessible_basic_bool
-        \bool_set_true:N \l_rpgicons_icon_accessible_full_bool
-    } ,
-    accessible           .default:n  = { basic } ,
     baseline             .dim_set:N  = \l_rpgicons_icon_baseline_dim ,
     baseline             .initial:n  = { -3.5pt } ,
     frame                .tl_set:N   = \l_rpgicons_icon_frame_tl ,
@@ -1711,6 +1683,22 @@
     }
 }
 
+\socket_new:nn { tagsupport/rpgicons/icon/before } { 1 } 
+\socket_new_plug:nnn { tagsupport/rpgicons/icon/before } { actualtext } {
+    \tag_mc_end_push:
+    \tag_struct_begin:n { tag = Span , actualtext = { ~ #1 ~ } }
+    \tag_mc_begin:n { }
+}
+\socket_assign_plug:nn { tagsupport/rpgicons/icon/before } { actualtext }
+
+\socket_new:nn { tagsupport/rpgicons/icon/after } { 0 } 
+\socket_new_plug:nnn { tagsupport/rpgicons/icon/after } { actualtext } {
+    \tag_mc_end:
+    \tag_struct_end:
+    \tag_mc_begin_pop:n { }
+}
+\socket_assign_plug:nn { tagsupport/rpgicons/icon/after } { actualtext }
+
 \seq_new:N \l__rpgicons_icon_shape_name_parts_seq
 \coffin_new:N \l__rpgicons_icon_accessible_coffin
 \coffin_new:N \l__rpgicons_icon_label_coffin
@@ -1719,12 +1707,10 @@
 \cs_generate_variant:Nn \keys_set_groups:nnn { nne }
 \cs_generate_variant:Nn \keys_set_exclude_groups:nnn { nne }
 \NewDocumentCommand \RPGIconsUseIcon { s O{} o m } {
+    \mode_leave_vertical:
+    \tag_socket_use:nn { rpgicons/icon/before } {#4}
     \group_begin:
         \keys_set_exclude_groups:nne { rpgicons / local ~ options } { extra } {#2}
-        \bool_if:NT \l_rpgicons_icon_accessible_full_bool {
-            \__rpgicons_accessible_check:
-            \pdf_bdc:nn { Span } { /Alt ~ ( #4 ) }
-        }
         \draw_begin:
             \draw_set_cap_round:
             \draw_set_join_round:
@@ -1745,17 +1731,6 @@
             \draw_transform_scale:n { \l_rpgicons_icon_transform_scale_fp }
             \draw_transform_rotate:n { \l_rpgicons_icon_transform_rotate_fp }
             \draw_set_baseline:n { \l_rpgicons_icon_baseline_dim }
-            \bool_if:NT \l_rpgicons_icon_accessible_basic_bool {
-                \draw_scope_begin:
-                    \draw_path_rectangle_corners:nn
-                        { -.5cm , .5cm }
-                        { .5cm , .5cm }
-                    \draw_path_use_clear:n { clip }
-                    \hcoffin_set:Nn \l__rpgicons_icon_accessible_coffin { \c_space_tl #4 \c_space_tl }
-                    \coffin_resize:Nnn \l__rpgicons_icon_accessible_coffin { 1cm } { 1cm }
-                    \draw_coffin_use:Nnnn \l__rpgicons_icon_accessible_coffin { hc } { vc } { 0cm , 0cm }
-                \draw_scope_end:
-            }
             \draw_path_rectangle_corners:nn
                 { -.5cm , -.5cm - \l_rpgicons_icon_linewidth_dim / 2 }
                 { .5cm , .5cm + \l_rpgicons_icon_linewidth_dim / 2 }
@@ -1800,10 +1775,8 @@
                 }
             \draw_scope_end:
         \draw_end:
-        \bool_if:NT \l_rpgicons_icon_accessible_full_bool {
-            \pdf_emc:
-        }
     \group_end:
+    \tag_socket_use:nn { rpgicons/icon/after } {#4}
 }
 
 \str_new:N \l__rpgicons_icon_integer_str

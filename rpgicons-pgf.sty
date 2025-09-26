@@ -82,6 +82,12 @@
   }
 }
 
+% temporary fix to allow for tagging
+\tikzset{
+  actualtext/.append code={},
+  alt/.append code={}
+}
+
 % make tikz icons usable inside tikz environments
 \NewDocumentCommand{\provideprotectedrpgicon}{ m o m O{} m }{%
   \expandafter\newsavebox\csname rpgicons@protectbox@#5\endcsname%

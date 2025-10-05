@@ -520,7 +520,7 @@
   \hspace{\rpgicons@beforesep}%
   \tikz[rpg icons, rpg icons/every die, rpg icons/every #2,
     baseline=\rpgicons@baseline, fgnrm/.style={scale=.333}, fglrg/.style={scale=.675}, #3] {
-    \node[#2, \rpgicons@diceiconfg, font={\footnotesize}] (0cm,0cm)
+    \node[#2, \rpgicons@diceiconfg, font={\footnotesize}] at (0cm,0cm)
       {\ifx\rpgicons@diceiconnrmlrg\rpgicons@diceiconlrg\textbf{#4}\fi};
     \path[draw=none, \rpgicons@diceiconfg] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
   }%
@@ -1008,9 +1008,9 @@
     baseline=\rpgicons@baseline, fgpos/.style={draw}, fgneg/.style={draw=rpgicons@bg, line width=.6pt}, #3] {
     \ifx\rpgicons@abilityiconposneg\rpgicons@abilityiconneg%
       \path[scale=.333, fill] (0cm,0cm) circle[radius=.45cm];
-      \node[#2, \rpgicons@abilityiconfg, scale=.225] (0cm,0cm) {};
+      \node[#2, \rpgicons@abilityiconfg, scale=.225] at (0cm,0cm) {};
     \else
-      \node[#2, \rpgicons@abilityiconfg, scale=.333] (0cm,0cm) {};
+      \node[#2, \rpgicons@abilityiconfg, scale=.333] at (0cm,0cm) {};
     \fi%
     \path[draw=none, scale=.333] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
   }%
@@ -1030,7 +1030,7 @@
     \path[draw, scale=.333] (-.45cm,.45cm) -- (.45cm,.45cm) -- (.45cm,-.05cm)
       arc[start angle=360, end angle=180, radius=.45cm] -- cycle;
     \ifx\rpgicons@abilityiconnrmemp\rpgicons@abilityiconemp\else%
-      \node[#2, draw,scale=.225] (0cm,0cm) {};
+      \node[#2, draw,scale=.225] at (0cm,0cm) {};
     \fi%
     \path[draw=none, scale=.333] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
   }%
@@ -1233,7 +1233,7 @@
   \hspace{\rpgicons@beforesep}%
   \tikz[rpg icons, rpg icons/every spell, rpg icons/every #1,
     baseline=\rpgicons@baseline, #2] {
-    \node[#1, draw,scale=.333] (0cm,0cm) {};
+    \node[#1, draw,scale=.333] at (0cm,0cm) {};
     \path[draw=none, scale=.333] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
   }%
   \hspace{\rpgicons@aftersep}%
@@ -1426,7 +1426,7 @@
     bgpos/.style={fill}, bgneg/.style={draw}, #3] {
     \path[scale=.333, \rpgicons@spellschooliconbg] (-.475cm,.35cm)
       -- (-.35cm,.475cm) -- (.35cm,.475cm) -- (.475cm,.35cm) -- (.425cm,-.375cm) -- (0cm,-.475cm) -- (-.425cm,-.375cm) -- cycle;
-    \node[#2, scale=.225, \rpgicons@spellschooliconfg] (0cm,0cm) {};
+    \node[#2, scale=.225, \rpgicons@spellschooliconfg] at (0cm,0cm) {};
     \path[draw=none, scale=.333] ([yshift=-1pt].425,.425) rectangle ([yshift=1pt]-.425cm,-.425cm);
   }%
   \hspace{\rpgicons@aftersep}%
@@ -1921,7 +1921,7 @@
   \hspace{\rpgicons@beforesep}%
   \tikz[rpg icons, rpg icons/every attack, rpg icons/every #1,
     baseline=\rpgicons@baseline, #2] {
-    \node[#1, draw, scale=.333] (0cm,0cm) {};
+    \node[#1, draw, scale=.333] at (0cm,0cm) {};
     \path[draw=none, scale=.333] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
   }%
   \hspace{\rpgicons@aftersep}%
@@ -2427,7 +2427,7 @@
   \hspace{\rpgicons@beforesep}%
   \tikz[rpg icons, rpg icons/every condition, rpg icons/every #1,
     baseline=\rpgicons@baseline, #2] {
-    \node[#1, draw, scale=.333] (0cm,0cm) {};
+    \node[#1, draw, scale=.333] at (0cm,0cm) {};
     \path[draw=none, scale=.333] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
   }%
   \hspace{\rpgicons@aftersep}%
@@ -2442,7 +2442,7 @@
     \tikzset{
       rpg icons #1/.pic={
         \begin{scope}[every node/.append style={#1}, rpg icons/every #1]
-          \node[draw, scale=.333] (0cm,0cm) (-node) {};
+          \node[draw, scale=.333] at (0cm,0cm) (-node) {};
           \path[draw=none, scale=.333] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
         \end{scope}
       },
@@ -2453,7 +2453,7 @@
       rpg icons #1 ability/.pic={
         \begin{scope}[every node/.append style={#1}, rpg icons/every ability, rpg icons/every #1]
           \path[scale=.333, pic actions] (0cm,0cm) circle[radius=.45cm];
-          \node[draw, scale=.225] (0cm,0cm) (-node) {};
+          \node[draw, scale=.225] at (0cm,0cm) (-node) {};
           \path[draw=none, scale=.333] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
         \end{scope}
       }
@@ -2465,7 +2465,7 @@
         \begin{scope}[every node/.append style={#1}, rpg icons/every saving, rpg icons/every #1]
           \path[draw, scale=.333, pic actions] (-.45cm,.45cm) -- (.45cm,.45cm) -- (.45cm,-.05cm)
             arc[start angle=360, end angle=180, radius=.45cm] -- cycle;
-          \node[#1, draw, scale=.225] (0cm,0cm) (-node) {};
+          \node[#1, draw, scale=.225] at (0cm,0cm) (-node) {};
           \path[draw=none, scale=.333] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
         \end{scope}
       }
@@ -2477,7 +2477,7 @@
         \begin{scope}[every node/.append style={#1}, rpg icons/every spellschool, rpg icons/every #1]
           \path[draw, scale=.333, pic actions] (-.475cm,.35cm)
             -- (-.35cm,.475cm) -- (.35cm,.475cm) -- (.475cm,.35cm) -- (.425cm,-.375cm) -- (0cm,-.475cm) -- (-.425cm,-.375cm) -- cycle;
-          \node[#1, draw, scale=.225] (0cm,0cm) (-node) {};
+          \node[#1, draw, scale=.225] at (0cm,0cm) (-node) {};
           \path[draw=none, scale=.333] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
         \end{scope}
       }
@@ -2488,7 +2488,7 @@
       rpg icons #1 damage/.pic={
         \begin{scope}[every node/.append style={#1}, rpg icons/every damage, rpg icons/every #1]
           \path[draw, scale=.333, pic actions] (0cm,0cm) circle[radius=.5cm];
-          \node[#1, draw, scale=.225] (0cm,0cm) (-node) {};
+          \node[#1, draw, scale=.225] at (0cm,0cm) (-node) {};
           \path[draw=none, scale=.333] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
         \end{scope}
       }

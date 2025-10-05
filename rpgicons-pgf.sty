@@ -1030,7 +1030,7 @@
     \path[draw, scale=.333] (-.45cm,.45cm) -- (.45cm,.45cm) -- (.45cm,-.05cm)
       arc[start angle=360, end angle=180, radius=.45cm] -- cycle;
     \ifx\rpgicons@abilityiconnrmemp\rpgicons@abilityiconemp\else%
-      \node[#2, draw,scale=.225] at (0cm,0cm) {};
+      \node[#2, draw, scale=.225] at (0cm,0cm) {};
     \fi%
     \path[draw=none, scale=.333] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
   }%
@@ -1233,7 +1233,7 @@
   \hspace{\rpgicons@beforesep}%
   \tikz[rpg icons, rpg icons/every spell, rpg icons/every #1,
     baseline=\rpgicons@baseline, #2] {
-    \node[#1, draw,scale=.333] at (0cm,0cm) {};
+    \node[#1, draw, scale=.333] at (0cm,0cm) {};
     \path[draw=none, scale=.333] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
   }%
   \hspace{\rpgicons@aftersep}%
@@ -1763,7 +1763,7 @@
   \tikz[rpg icons, rpg icons/every damage, rpg icons/every #1,
     baseline=\rpgicons@baseline, #2] {
     \path[draw, scale=.333] (0cm,0cm) circle[radius=.5cm];
-    \node[#1, draw, scale=.225] (0cm,0cm) {};
+    \node[#1, draw, scale=.225] at (0cm,0cm) {};
     \path[draw=none, scale=.333] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
   }%
   \hspace{\rpgicons@aftersep}%

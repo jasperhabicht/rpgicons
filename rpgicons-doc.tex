@@ -11,8 +11,8 @@
 % This work has the LPPL maintenance status `maintained'.
 %
 \documentclass[a4paper]{article}
-\def\rpgiconsfileversion{2.0.0}
-\def\rpgiconsfiledate{25 September 2025}
+\def\rpgiconsfileversion{2.0.1}
+\def\rpgiconsfiledate{5 October 2025}
 
 \usepackage[T1]{fontenc}
 \usepackage{Alegreya}
@@ -256,7 +256,7 @@
 \changes{v1.4.1}{2024/02/21}{Corrections in L3 variant.}
 \changes{v1.4.2}{2024/02/21}{Alternative set of commands in L3 variant defined.}
 \changes{v1.4.3}{2024/02/22}{Added option to L3 variant to enable upward compatibility.}
-\changes{v1.4.4}{2024/02/24}{Added styles for every instance of command or shape, correction of recent \titlemacro{l3draw} code.}
+\changes{v1.4.4}{2024/02/24}{Added styles for every instance of command or shape, correction of recent changes to \titlemacro{l3draw} code.}
 \changes{v1.5.0}{2024/02/25}{Alternative set of commands defined, added support of styles in pics.}
 \changes{v1.5.1}{2024/02/28}{Addition of opacity to L3 variant.}
 \changes{v1.5.2}{2024/02/29}{Unification of scaling, minor corrections.}
@@ -515,7 +515,7 @@ The L3 variant of the package which uses the \macro{l3draw} package is loaded by
 
 The L3 variant of the package does not load the \macro{xcolor} package but makes use of the \macro{l3color} module which uses a similar syntax like the \macro{xcolor} package. Color definitions made using the \macro{l3color} module are not directly usable via commands provided by the \macro{xcolor} package. Therefore, setting a color using the \macro{\color} macro provided by the \macro{xcolor} package won't affect the color of the icons.
 
-Since transparency requires the management of certain PDF settings, it is necessary to call \macro{\DocumentMetadata{}} before loading a \macro{\documentclass} when using the L3 variant of the package.
+Transparency requires the management of certain PDF settings. Therefore, it is necessary to call \macro{\DocumentMetadata{}} before loading a \macro{\documentclass} when using the L3 variant of the package.
 
 \subsection{Icon commands}
 
@@ -529,7 +529,7 @@ The \macro{\RPGIconsUseIcon} command has a starred version and two optional argu
 
 The starred version of the command is used to fill a frame with color instead of drawing its outline. Frames can be put around the shape via the relevant \macro{frame} option.
 
-The command supports PDF tagging. If tagging is activated, a replacement text to the relevant icon is automatically added which can be copied to the clipboard and can be read by screen readers. Note that support of tagged PDFs depends on the used PDF reader.
+The \macro{\RPGIconsUseIcon} command supports PDF tagging. If tagging is activated by using \macro{\DocumentMetadata{tagging=on}}, a replacement text is automatically added to the relevant icon which can be copied to the clipboard and can be read by screen readers. Note that tagging support depends on the used PDF reader.
 
 \begin{macrodef}
 |\RPGIconsDie|[<style>]{<shape>}[<options>]{<integer>}
@@ -623,6 +623,11 @@ Roll\die{eightside}{}a die!
 }
 Roll\die{eightside}{}a die!
 \end{codeexample}
+
+\begin{macrodef}
+actual text
+\end{macrodef}
+The option \macro{actual text} can be used to change the default replacement text that is used for example by screen readers in a tagged PDF. It expects as value a key-value list where the key is the name of the icon shape and the value is the relevant replacement text. For example, with setting \macro{actual text={sixside={d6}}}, a screen reader would read ,,d six`` for icons using the \macro{sixside} shape.
 
 \subsection{Roll dice syntax}\label{sec:roll-dice-syntax}
 

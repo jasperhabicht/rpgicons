@@ -10,7 +10,7 @@
 %
 % This work has the LPPL maintenance status `maintained'.
 %
-\ProvidesExplPackage {rpgicons-l3} {2025-09-25} {2.0.0}
+\ProvidesExplPackage {rpgicons-l3} {2025-10-05} {2.0.1}
     {RPG Icons Package (l3 Variant)}
 
 \bool_new:N \l__rpgicons_unicode_mode_bool
@@ -1689,11 +1689,26 @@
     }
 }
 
+\tl_new:N \l__rpgicons_icon_actualtext_tl
+\prop_new:N \g__rpgicons_icon_actualtext_prop
+\cs_new_protected:Npn \rpgicons_icon_actualtext_set:n #1 {
+    \prop_gset_from_keyval:Nn \g__rpgicons_icon_actualtext_prop {#1}
+}
+
+\keys_define:nn { rpgicons / local ~ options } {
+    actual ~ text        .code:n     = { \rpgicons_icon_actualtext_set:n {#1} }
+}
+
 \cs_if_exist:NTF \NewTaggingSocket {
+    \cs_generate_variant:Nn \tag_socket_use:nn { nV }
+
     \NewTaggingSocket { rpgicons/icon/before } { 1 } 
     \NewTaggingSocketPlug { rpgicons/icon/before } { actualtext } {
         \tag_mc_end_push:
-        \tag_struct_begin:n { tag = Span , actualtext = { ~ #1 ~ } }
+        \tag_struct_begin:n {
+            tag = Span ,
+            actualtext = { ~ #1 ~ }
+        }
         \tag_mc_begin:n { }
     }
     \AssignTaggingSocketPlug { rpgicons/icon/before } { actualtext }
@@ -1712,6 +1727,7 @@
     }
     \cs_if_exist:NF \tag_socket_use:nn {
         \cs_new:Npn \tag_socket_use:nn #1#2 { }
+        \cs_new:Npn \tag_socket_use:nV #1#2 { }
     }
 }
 
@@ -1724,7 +1740,11 @@
 \cs_generate_variant:Nn \keys_set_exclude_groups:nnn { nne }
 \NewDocumentCommand \RPGIconsUseIcon { s O{} o m } {
     \mode_leave_vertical:
-    \tag_socket_use:nn { rpgicons/icon/before } {#4}
+    \prop_get:NnNF \g__rpgicons_icon_actualtext_prop {#4}
+    \l__rpgicons_icon_actualtext_tl {
+        \tl_set:Nn \l__rpgicons_icon_actualtext_tl {#4}
+    }
+    \tag_socket_use:nV { rpgicons/icon/before } \l__rpgicons_icon_actualtext_tl
     \group_begin:
         \keys_set_exclude_groups:nne { rpgicons / local ~ options } { extra } {#2}
         \draw_begin:
@@ -1913,7 +1933,7 @@
 
 \keys_define:nn { rpgicons / local ~ options } {
     roll ~ syntax        .code:n     = { \rpgicons_roll_syntax_die_set:n {#1} } ,
-    roll ~ syntax        .initial:n  = { d , D } ,
+    roll ~ syntax        .initial:n  = { d , D }
 }
 
 \cs_new:Npn \rpgicons_roll_syntax_convert:n #1 {

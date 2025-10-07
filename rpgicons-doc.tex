@@ -11,8 +11,8 @@
 % This work has the LPPL maintenance status `maintained'.
 %
 \documentclass[a4paper]{article}
-\def\rpgiconsfileversion{2.0.1}
-\def\rpgiconsfiledate{5 October 2025}
+\def\rpgiconsfileversion{2.0.2}
+\def\rpgiconsfiledate{10 October 2025}
 
 \usepackage[T1]{fontenc}
 \usepackage{Alegreya}
@@ -275,6 +275,7 @@
 \changes{v1.9.0}{2025/06/30}{Improve check for PDF management, deprecate compatibility mode, improve accessibility support.}
 \changes{v2.0.0}{2025/09/25}{Change accessibility support to automatic tagging support.}
 %\changes{v2.0.1}{2025/10/05}{Fixes of bugs related to tagging support in PGF variant, added key to customize replacement text in L3 variant.}
+%\changes{v2.0.2}{2025/10/10}{Improvements and fixes of PGF shapes.}
 
 \begin{document}
 
@@ -686,6 +687,8 @@ The PGF variant of the package defines a set of commands on which the user comma
 \subsection{Icon styles}
 
 Using the PGF variant of the package, all icons can by styled using arbitrary Ti\emph{k}Z styles in general. As an example, \macro{\die{eightside}[blue, thick]{2}} results in \die{eightside}[blue, thick]{2}.
+
+If PDF tagging is activated by using \macro{\DocumentMetadata{tagging=on}}, it is possible to add a replacement text to an icon using the \macro{actualtext} key.
 
 \begin{macrodef}
 !rpg icons/!every die

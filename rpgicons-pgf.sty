@@ -83,8 +83,8 @@
 }
 
 % temporary fix to allow for tagging
-\pgfkeysifdefined{/tikz/actualtext/.@cmd}{}{
-  \pgfkeys{/pgf/actualtext/.code={}}
+\pgfkeysifassignable{/tikz/actualtext}{}{
+  \pgfkeysdef{/tikz/actualtext}{}
 }
 
 % make tikz icons usable inside tikz environments

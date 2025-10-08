@@ -2593,6 +2593,45 @@
 
 \ExplSyntaxOn
 
+\msg_new:nnn { rpgicons } { tagging-unsupported } {
+  This ~ LaTeX ~ version ~ does ~ not ~ support ~ tagging.
+}
+
+\cs_if_exist:NTF \NewTaggingSocket {
+  \NewTaggingSocket { rpgicons/roll/before } { 1 } 
+  \NewTaggingSocketPlug { rpgicons/roll/before } { actualtext } {
+    \tag_mc_end_push:
+    \tag_struct_begin:n {
+      tag = Span ,
+      actualtext = { ~ #1 ~ }
+    }
+    \tag_mc_begin:n { }
+  }
+  \AssignTaggingSocketPlug { rpgicons/roll/before } { actualtext }
+
+  \NewTaggingSocket { rpgicons/roll/after } { 0 } 
+  \NewTaggingSocketPlug { rpgicons/roll/after } { actualtext } {
+    \tag_mc_end:
+    \tag_struct_end:
+    \tag_mc_begin_pop:n { }
+  }
+  \AssignTaggingSocketPlug { rpgicons/roll/after } { actualtext }
+} {
+  \msg_warning:nn { rpgicons } { tagging-unsupported }
+  \cs_if_exist:NF \tag_socket_use:n {
+    \cs_new:Npn \tag_socket_use:n #1 { }
+  }
+  \cs_if_exist:NF \tag_socket_use:nn {
+    \cs_new:Npn \tag_socket_use:nn #1#2 { }
+  }
+  \cs_if_exist:NF \tag_suspend:n {
+    \cs_new:Npn \tag_suspend:n #1 { }
+  }
+  \cs_if_exist:NF \tag_resume:n {
+    \cs_new:Npn \tag_resume:n #1 { }
+  }
+}
+
 \cs_if_exist:NF \rpgicons_roll_syntax_parse:n {
 
   \bool_new:N \l__rpgicons_unicode_mode_bool
@@ -2667,7 +2706,11 @@
 }
 
 \NewDocumentCommand{\rpgiconsroll}{ m }{
+  \tag_socket_use:nn { rpgicons/roll/before } {#1}
+  \tag_suspend:n { \RPGIconsRoll }
   \rpgicons_roll_syntax_parse:e {#1}
+  \tag_resume:n { \RPGIconsRoll }
+  \tag_socket_use:n { rpgicons/roll/after }
 }
 
 \ExplSyntaxOff

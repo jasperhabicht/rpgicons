@@ -532,7 +532,7 @@
   \hspace{\rpgicons@beforesep}%
   \tikz[rpg icons, rpg icons/every die, rpg icons/every #2,
     baseline=\rpgicons@baseline, fgnrm/.style={scale=.333}, fglrg/.style={scale=.675}, #3] {
-    \node[#2, \rpgicons@diceiconfg, font={\footnotesize}] at (0cm,0cm)
+    \node[#2, draw, \rpgicons@diceiconfg, font={\footnotesize}] at (0cm,0cm)
       {\ifx\rpgicons@diceiconnrmlrg\rpgicons@diceiconlrg\textbf{#4}\fi};
     \path[draw=none, \rpgicons@diceiconfg] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
   }%
@@ -1477,7 +1477,7 @@
     bgpos/.style={fill}, bgneg/.style={draw}, #3] {
     \path[scale=.333, \rpgicons@spellschooliconbg] (-.475cm,.35cm)
       -- (-.35cm,.475cm) -- (.35cm,.475cm) -- (.475cm,.35cm) -- (.425cm,-.375cm) -- (0cm,-.475cm) -- (-.425cm,-.375cm) -- cycle;
-    \node[#2, scale=.225, \rpgicons@spellschooliconfg] at (0cm,0cm) {};
+    \node[#2, \rpgicons@spellschooliconfg, scale=.225] at (0cm,0cm) {};
     \path[draw=none, scale=.333] ([yshift=-1pt].425,.425) rectangle ([yshift=1pt]-.425cm,-.425cm);
   }%
   \hspace{\rpgicons@aftersep}%

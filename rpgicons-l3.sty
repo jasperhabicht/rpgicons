@@ -1756,6 +1756,7 @@
     }
 }
 
+\tl_const:Nn \c__rpgicons_icon_frame_saving_tl { saving }
 \seq_new:N \l__rpgicons_icon_shape_name_parts_seq
 \coffin_new:N \l__rpgicons_icon_label_coffin
 \prg_generate_conditional_variant:Nnn \clist_if_in:nn { ne } { T , TF }
@@ -1764,15 +1765,27 @@
 \cs_generate_variant:Nn \keys_set_exclude_groups:nnn { nne }
 \NewDocumentCommand \RPGIconsUseIcon { s O{} o m } {
     \mode_leave_vertical:
-    \prop_get:NnNF \g__rpgicons_icon_actualtext_prop {#4} \l__rpgicons_icon_actualtext_tl {
-        \tl_set:Nn \l__rpgicons_icon_actualtext_tl {#4}
+    \group_begin:
+        \keys_set_exclude_groups:nne { rpgicons / local ~ options } { extra } {#2}
+        \prop_get:NnNF \g__rpgicons_icon_actualtext_prop {
+            \bool_lazy_and:nnTF {
+                \tl_if_blank_p:n {#4}
+            } {
+                \tl_if_eq_p:NN \l_rpgicons_icon_frame_tl \c__rpgicons_icon_frame_saving_tl
+            } { saving } {#4}
+        } \l__rpgicons_icon_actualtext_tl {
+            \tl_set:Ne \l__rpgicons_icon_actualtext_tl {
+                \bool_lazy_and:nnTF {
+                    \tl_if_blank_p:n {#4}
+                } {
+                    \tl_if_eq_p:NN \l_rpgicons_icon_frame_tl \c__rpgicons_icon_frame_saving_tl
+                } { saving } {#4}
+            }
+        }
         \tl_if_novalue:nF {#3} {
             \tl_put_left:Nn \l__rpgicons_icon_actualtext_tl { #3 ~ }        
         }
-    }
-    \tag_socket_use:nV { rpgicons/icon/before } \l__rpgicons_icon_actualtext_tl
-    \group_begin:
-        \keys_set_exclude_groups:nne { rpgicons / local ~ options } { extra } {#2}
+        \tag_socket_use:nV { rpgicons / icon / before } \l__rpgicons_icon_actualtext_tl
         \draw_begin:
             \draw_set_cap_round:
             \draw_set_join_round:
@@ -1799,11 +1812,11 @@
             \draw_path_replace_bb:
             \bool_set_false:N \l_draw_bb_update_bool
             \draw_scope_begin:
-                \clist_if_in:neT { ability , saving , spellschool , damage } { \l_rpgicons_icon_frame_tl } {
+                \clist_if_in:nVT { ability , saving , spellschool , damage } \l_rpgicons_icon_frame_tl {
                     \cs_if_exist_use:cF { rpgicons_draw_frame_ \l_rpgicons_icon_frame_tl : } {
                         \msg_warning:nnV { rpgicons } { frame-undefined } \l_rpgicons_icon_frame_tl
                     }
-                    \IfBooleanTF {#1} {
+                    \bool_if:nTF {#1} {
                         \draw_path_use_clear:n { fill }
                         \color_select:V \l_rpgicons_icon_color_background_tl
                         \opacity_select:n { \l_rpgicons_icon_opacity_background_fp }
@@ -1814,8 +1827,8 @@
                 }
                 \clist_if_in:neTF { sixside ~ one , sixside ~ two , sixside ~ three , sixside ~ four ,
                     sixside ~ five , sixside ~ six , sixside ~ seven , sixside ~ eight , sixside ~ nine } {#4} {
-                    \seq_set_split:Nee \l__rpgicons_icon_shape_name_parts_seq
-                        { \c_underscore_str } { \l__rpgicons_icon_shape_name_str }
+                    \seq_set_split:NVV \l__rpgicons_icon_shape_name_parts_seq
+                        \c_underscore_str \l__rpgicons_icon_shape_name_str
                     \exp_args:Ne \rpgicons_draw_shape_sixside_pips:n {
                         \seq_item:Nn \l__rpgicons_icon_shape_name_parts_seq { 2 }
                     }
@@ -1827,18 +1840,18 @@
                     }
                 }
                 \draw_path_use_clear:n { stroke }
-                \IfValueT {#3} {
+                \tl_if_novalue:nF {#3} {
                     \draw_scope_begin:
                         \color_select:V \l_rpgicons_icon_color_text_tl
                         \opacity_select:n { \l_rpgicons_icon_opacity_text_fp }
-                        \hcoffin_set:Ne \l__rpgicons_icon_label_coffin {#3}
+                        \hcoffin_set:Nn \l__rpgicons_icon_label_coffin {#3}
                         \draw_coffin_use:Nnn \l__rpgicons_icon_label_coffin { hc } { vc }
                     \draw_scope_end:
                 }
             \draw_scope_end:
         \draw_end:
+        \tag_socket_use:n { rpgicons / icon / after }
     \group_end:
-    \tag_socket_use:n { rpgicons/icon/after }
 }
 
 \str_new:N \l__rpgicons_icon_integer_str

@@ -1834,14 +1834,15 @@
                             \seq_item:Nn \l__rpgicons_icon_shape_name_parts_seq { 2 }
                         }
                     }
+                    \draw_path_use_clear:n { stroke }
                 } {
                     \cs_if_exist_use:cF { rpgicons_draw_shape_ \l__rpgicons_icon_shape_name_str : } {
                         \tl_if_blank:oF { \l__rpgicons_icon_shape_name_str } {
                             \msg_warning:nnV { rpgicons } { shape-undefined } \l__rpgicons_icon_shape_name_str
                         }
                     }
+                    \draw_path_use_clear:n { stroke }
                 }
-                \draw_path_use_clear:n { stroke }
                 \tl_if_novalue:nF {#3} {
                     \draw_scope_begin:
                         \color_select:V \l_rpgicons_icon_color_text_tl

@@ -2600,7 +2600,7 @@
 }
 
 \cs_if_exist:NTF \NewTaggingSocket {
-  \IfSocketExistsF { rpgicons/roll/before } {
+  \IfSocketExistsF { tagsupport/rpgicons/roll/before } {
     \NewTaggingSocket { rpgicons/roll/before } { 1 } 
     \NewTaggingSocketPlug { rpgicons/roll/before } { actualtext } {
       \tag_mc_end_push:
@@ -2613,7 +2613,7 @@
     \AssignTaggingSocketPlug { rpgicons/roll/before } { actualtext }
   }
 
-  \IfSocketExistsF { rpgicons/roll/after } {
+  \IfSocketExistsF { tagsupport/rpgicons/roll/after } {
     \NewTaggingSocket { rpgicons/roll/after } { 0 } 
     \NewTaggingSocketPlug { rpgicons/roll/after } { actualtext } {
       \tag_mc_end:

@@ -2706,6 +2706,7 @@
 }
 
 \NewDocumentCommand{\rpgiconsroll}{ m }{
+  \mode_leave_vertical:
   \tag_socket_use:nn { rpgicons/roll/before } {#1}
   \tag_suspend:n { \rpgiconsroll }
   \rpgicons_roll_syntax_parse:e {#1}

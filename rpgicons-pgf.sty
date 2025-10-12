@@ -2593,8 +2593,10 @@
 
 \ExplSyntaxOn
 
-\msg_new:nnn { rpgicons } { tagging-unsupported } {
-  This ~ LaTeX ~ version ~ does ~ not ~ support ~ tagging.
+\msg_if_exist:nnF { rpgicons } { tagging-unsupported } {
+  \msg_new:nnn { rpgicons } { tagging-unsupported } {
+    This ~ LaTeX ~ version ~ does ~ not ~ support ~ tagging.
+  }
 }
 
 \cs_if_exist:NTF \NewTaggingSocket {

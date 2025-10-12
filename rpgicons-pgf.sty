@@ -291,7 +291,7 @@
     } {
         \pgfpathcircle{\pgfpoint{\x}{\y}}{2pt}
     }
-    \pgfusepath{fill} 
+    \pgfusepath{fill}
   }
   \backgroundpath{
     \pgfpathrectanglecorners{\pgfpoint{.4cm}{.4cm}}{\pgfpoint{-.4cm}{-.4cm}}
@@ -1072,7 +1072,7 @@
 
   \behindbackgroundpath{
     \pgfpathcircle{\pgfpoint{-.4cm}{0cm}}{2pt}
-    \pgfusepath{fill} % draw origin  
+    \pgfusepath{fill} % draw origin
   }
   \backgroundpath{
     \pgfpathmoveto{\pgfpoint{-.4cm}{0cm}}
@@ -2601,7 +2601,7 @@
 
 \cs_if_exist:NTF \NewTaggingSocket {
   \IfSocketExistsF { tagsupport/rpgicons/roll/before } {
-    \NewTaggingSocket { rpgicons/roll/before } { 1 } 
+    \NewTaggingSocket { rpgicons/roll/before } { 1 }
     \NewTaggingSocketPlug { rpgicons/roll/before } { actualtext } {
       \tag_mc_end_push:
       \tag_struct_begin:n {
@@ -2614,7 +2614,7 @@
   }
 
   \IfSocketExistsF { tagsupport/rpgicons/roll/after } {
-    \NewTaggingSocket { rpgicons/roll/after } { 0 } 
+    \NewTaggingSocket { rpgicons/roll/after } { 0 }
     \NewTaggingSocketPlug { rpgicons/roll/after } { actualtext } {
       \tag_mc_end:
       \tag_struct_end:

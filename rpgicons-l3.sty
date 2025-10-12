@@ -1764,9 +1764,11 @@
 \cs_generate_variant:Nn \keys_set_exclude_groups:nnn { nne }
 \NewDocumentCommand \RPGIconsUseIcon { s O{} o m } {
     \mode_leave_vertical:
-    \prop_get:NnNF \g__rpgicons_icon_actualtext_prop {#4}
-    \l__rpgicons_icon_actualtext_tl {
+    \prop_get:NnNF \g__rpgicons_icon_actualtext_prop {#4} \l__rpgicons_icon_actualtext_tl {
         \tl_set:Nn \l__rpgicons_icon_actualtext_tl {#4}
+        \tl_if_novalue:nF {#3} {
+            \tl_put_left:Nn \l__rpgicons_icon_actualtext_tl { #3 ~ }        
+        }
     }
     \tag_socket_use:nV { rpgicons/icon/before } \l__rpgicons_icon_actualtext_tl
     \group_begin:

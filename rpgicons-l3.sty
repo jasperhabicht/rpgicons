@@ -1704,8 +1704,8 @@
 \cs_if_exist:NTF \NewTaggingSocket {
     \cs_generate_variant:Nn \tag_socket_use:nn { nV }
 
-    \NewTaggingSocket { rpgicons/icon/before } { 1 } 
-    \NewTaggingSocketPlug { rpgicons/icon/before } { actualtext } {
+    \NewTaggingSocket { rpgicons / icon / before } { 1 }
+    \NewTaggingSocketPlug { rpgicons / icon / before } { actualtext } {
         \tag_mc_end_push:
         \tag_struct_begin:n {
             tag = Span ,
@@ -1713,19 +1713,19 @@
         }
         \tag_mc_begin:n { }
     }
-    \AssignTaggingSocketPlug { rpgicons/icon/before } { actualtext }
+    \AssignTaggingSocketPlug { rpgicons / icon / before } { actualtext }
 
-    \NewTaggingSocket { rpgicons/icon/after } { 0 } 
-    \NewTaggingSocketPlug { rpgicons/icon/after } { actualtext } {
+    \NewTaggingSocket { rpgicons / icon / after } { 0 }
+    \NewTaggingSocketPlug { rpgicons / icon / after } { actualtext } {
         \tag_mc_end:
         \tag_struct_end:
         \tag_mc_begin_pop:n { }
     }
-    \AssignTaggingSocketPlug { rpgicons/icon/after } { actualtext }
+    \AssignTaggingSocketPlug { rpgicons / icon / after } { actualtext }
 
-    \IfSocketExistsF { rpgicons/roll/before } {
-        \NewTaggingSocket { rpgicons/roll/before } { 1 } 
-        \NewTaggingSocketPlug { rpgicons/roll/before } { actualtext } {
+    \IfSocketExistsF { tagsupport / rpgicons / roll / before } {
+        \NewTaggingSocket { rpgicons / roll / before } { 1 }
+        \NewTaggingSocketPlug { rpgicons / roll / before } { actualtext } {
             \tag_mc_end_push:
             \tag_struct_begin:n {
                 tag = Span ,
@@ -1733,17 +1733,17 @@
             }
             \tag_mc_begin:n { }
         }
-        \AssignTaggingSocketPlug { rpgicons/roll/before } { actualtext }
+        \AssignTaggingSocketPlug { rpgicons / roll / before } { actualtext }
     }
 
-    \IfSocketExistsF { rpgicons/roll/after } {
-        \NewTaggingSocket { rpgicons/roll/after } { 0 } 
-        \NewTaggingSocketPlug { rpgicons/roll/after } { actualtext } {
+    \IfSocketExistsF { tagsupport / rpgicons / roll / after } {
+        \NewTaggingSocket { rpgicons / roll / after } { 0 }
+        \NewTaggingSocketPlug { rpgicons / roll / after } { actualtext } {
             \tag_mc_end:
             \tag_struct_end:
             \tag_mc_begin_pop:n { }
         }
-        \AssignTaggingSocketPlug { rpgicons/roll/after } { actualtext }
+        \AssignTaggingSocketPlug { rpgicons / roll / after } { actualtext }
     }
 } {
     \msg_warning:nn { rpgicons } { tagging-unsupported }
@@ -1789,7 +1789,7 @@
             }
         }
         \tl_if_novalue:nF {#3} {
-            \tl_put_left:Nn \l__rpgicons_icon_actualtext_tl { #3 ~ }        
+            \tl_put_left:Nn \l__rpgicons_icon_actualtext_tl { #3 ~ }
         }
         \tag_socket_use:nV { rpgicons / icon / before } \l__rpgicons_icon_actualtext_tl
         \draw_begin:
@@ -2041,4 +2041,4 @@
 }
 \cs_if_exist:NF \roll { \cs_new_eq:NN \roll \RPGIconsRoll }
 
-% EOF 
+% EOF

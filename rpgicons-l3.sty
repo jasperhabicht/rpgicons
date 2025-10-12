@@ -1827,12 +1827,10 @@
                 }
                 \clist_if_in:neTF { sixside ~ one , sixside ~ two , sixside ~ three , sixside ~ four ,
                     sixside ~ five , sixside ~ six , sixside ~ seven , sixside ~ eight , sixside ~ nine } {#4} {
-                    \str_if_empty:NF \l__rpgicons_icon_shape_name_str {
-                        \seq_set_split:NVV \l__rpgicons_icon_shape_name_parts_seq
-                            \c_underscore_str \l__rpgicons_icon_shape_name_str
-                        \exp_args:Ne \rpgicons_draw_shape_sixside_pips:n {
-                            \seq_item:Nn \l__rpgicons_icon_shape_name_parts_seq { 2 }
-                        }
+                    \seq_set_split:NVV \l__rpgicons_icon_shape_name_parts_seq
+                        \c_underscore_str \l__rpgicons_icon_shape_name_str
+                    \exp_args:Ne \rpgicons_draw_shape_sixside_pips:n {
+                        \seq_item:Nn \l__rpgicons_icon_shape_name_parts_seq { 2 }
                     }
                     \draw_path_use_clear:n { stroke }
                 } {

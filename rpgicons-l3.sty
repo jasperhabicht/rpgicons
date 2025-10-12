@@ -1767,7 +1767,7 @@
     \mode_leave_vertical:
     \group_begin:
         \keys_set_exclude_groups:nne { rpgicons / local ~ options } { extra } {#2}
-        \prop_get:NnNF \g__rpgicons_icon_actualtext_prop {
+        \prop_get:NeNF \g__rpgicons_icon_actualtext_prop {
             \bool_lazy_and:nnTF {
                 \tl_if_blank_p:n {#4}
             } {

@@ -33,14 +33,16 @@
     In ~ order ~ to ~ use ~ opacity, ~
     \token_to_str:N \DocumentMetadata \c_space_tl must ~ be ~ set.
 }
-\msg_new:nnn { rpgicons } { tagging-unsupported } {
-    This ~ LaTeX ~ version ~ does ~ not ~ support ~ tagging.
-}
 \msg_new:nnn { rpgicons } { shape-undefined } {
     The ~ shape ~ `#1` ~ is ~ undefined.
 }
 \msg_new:nnn { rpgicons } { frame-undefined } {
     The ~ frame ~ `#1` ~ is ~ undefined.
+}
+\msg_if_exist:nnF { rpgicons } { tagging-unsupported } {
+    \msg_new:nnn { rpgicons } { tagging-unsupported } {
+        This ~ LaTeX ~ version ~ does ~ not ~ support ~ tagging.
+    }
 }
 
 \keys_define:nn { rpgicons / global } {

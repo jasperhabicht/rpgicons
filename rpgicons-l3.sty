@@ -2031,13 +2031,25 @@
 }
 \cs_generate_variant:Nn \rpgicons_roll_syntax_parse:n { e }
 
-\NewDocumentCommand{\RPGIconsRoll}{ m }{
+\tl_if_exist:NF \l__rpgicons_roll_actualtext_tl {
+    \tl_new:N \l__rpgicons_roll_actualtext_tl
+}
+\cs_if_exist:NF \rpgicons_roll_prepare_actualtext:Nn {
+    \cs_new_protected:Npn \rpgicons_roll_prepare_actualtext:Nn #1#2 {
+        \tl_set:Nn #1 {#2}
+        \tl_replace_all:Nne #1 { - } { \codepoint_generate:nn { "2212 } { 12 } }
+        \tl_replace_all:Nne #1 { * } { \codepoint_generate:nn { "00D7 } { 12 } }
+    }
+}
+
+\NewDocumentCommand { \RPGIconsRoll } { m } {
     \mode_leave_vertical:
-    \tag_socket_use:nn { rpgicons/roll/before } {#1}
+    \rpgicons_roll_prepare_actualtext:Nn \l__rpgicons_roll_actualtext_tl {#1}
+    \tag_socket_use:nV { rpgicons / roll / before } \l__rpgicons_roll_actualtext_tl
     \tag_suspend:n { \RPGIconsRoll }
     \rpgicons_roll_syntax_parse:e {#1}
     \tag_resume:n { \RPGIconsRoll }
-    \tag_socket_use:n { rpgicons/roll/after }
+    \tag_socket_use:n { rpgicons / roll / after }
 }
 \cs_if_exist:NF \roll { \cs_new_eq:NN \roll \RPGIconsRoll }
 

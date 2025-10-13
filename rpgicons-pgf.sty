@@ -2600,6 +2600,8 @@
 }
 
 \cs_if_exist:NTF \NewTaggingSocket {
+  \cs_generate_variant:Nn \tag_socket_use:nn { nV }
+
   \IfSocketExistsF { tagsupport/rpgicons/roll/before } {
     \NewTaggingSocket { rpgicons/roll/before } { 1 }
     \NewTaggingSocketPlug { rpgicons/roll/before } { actualtext } {

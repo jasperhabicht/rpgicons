@@ -2642,31 +2642,31 @@
 
   \bool_new:N \l__rpgicons_unicode_mode_bool
   \sys_if_engine_luatex:T {
-      \bool_set_true:N \l__rpgicons_unicode_mode_bool
+    \bool_set_true:N \l__rpgicons_unicode_mode_bool
   }
   \sys_if_engine_xetex:T {
-      \bool_set_true:N \l__rpgicons_unicode_mode_bool
+    \bool_set_true:N \l__rpgicons_unicode_mode_bool
   }
 
   \regex_new:N \l__rpgicons_roll_syntax_die_regex
   \cs_generate_variant:Nn \regex_set:Nn { Ne }
   \cs_new_protected:Npn \rpgicons_roll_syntax_die_set:n #1 {
-      \regex_set:Ne \l__rpgicons_roll_syntax_die_regex { [ \clist_use:nn {#1} { } ] }
+    \regex_set:Ne \l__rpgicons_roll_syntax_die_regex { [ \clist_use:nn {#1} { } ] }
   }
 
   \cs_new:Npn \rpgicons_roll_syntax_convert:n #1 {
-      \str_case:nnF {#1} {
-          { 2 } { twoside }
-          { 4 } { fourside }
-          { 6 } { sixside }
-          { 8 } { eightside }
-          { 10 } { tenside }
-          { 12 } { twelveside }
-          { 20 } { twentyside }
-          { 100 } { hundredside }
-          { F } { fudge }
-      }
-      {#1}
+    \str_case:nnF {#1} {
+      { 2 } { twoside }
+      { 4 } { fourside }
+      { 6 } { sixside }
+      { 8 } { eightside }
+      { 10 } { tenside }
+      { 12 } { twelveside }
+      { 20 } { twentyside }
+      { 100 } { hundredside }
+      { F } { fudge }
+    }
+    {#1}
   }
 
   \seq_new:N \l__rpgicons_roll_syntax_seq
@@ -2675,33 +2675,44 @@
   \regex_new:N \l__rpgicons_roll_syntax_plusminus_regex
   \regex_new:N \l__rpgicons_roll_syntax_times_regex
   \bool_if:NTF \l__rpgicons_unicode_mode_bool {
-      \regex_set:Nn \l__rpgicons_roll_syntax_split_regex { \s*([\+\-\x{2212}x\*\x{00D7}])\s* }
-      \regex_set:Nn \l__rpgicons_roll_syntax_plusminus_regex { \A([\+\-\x{2212}])\Z }
-      \regex_set:Nn \l__rpgicons_roll_syntax_times_regex { \A([x\*\x{00D7}])\Z }
+    \regex_set:Nn \l__rpgicons_roll_syntax_split_regex { \s*([\+\-\x{2212}x\*\x{00D7}])\s* }
+    \regex_set:Nn \l__rpgicons_roll_syntax_plusminus_regex { \A([\+\-\x{2212}])\Z }
+    \regex_set:Nn \l__rpgicons_roll_syntax_times_regex { \A([x\*\x{00D7}])\Z }
   } {
-      \regex_set:Nn \l__rpgicons_roll_syntax_split_regex { \s*([\+\-x\*\x{00D7}])\s* }
-      \regex_set:Nn \l__rpgicons_roll_syntax_plusminus_regex { \A([\+\-])\Z }
-      \regex_set:Nn \l__rpgicons_roll_syntax_times_regex { \A([x\*\x{00D7}])\Z }
+    \regex_set:Nn \l__rpgicons_roll_syntax_split_regex { \s*([\+\-x\*\x{00D7}])\s* }
+    \regex_set:Nn \l__rpgicons_roll_syntax_plusminus_regex { \A([\+\-])\Z }
+    \regex_set:Nn \l__rpgicons_roll_syntax_times_regex { \A([x\*\x{00D7}])\Z }
   }
   \regex_new:N \l__rpgicons_roll_syntax_dice_regex
   \cs_new_protected:Npn \rpgicons_roll_syntax_parse:n #1 {
-      \regex_set:Nn \l__rpgicons_roll_syntax_dice_regex { \A(\d*)\ur{l__rpgicons_roll_syntax_die_regex}([F\d]+)\Z }
-      \regex_split:NnN \l__rpgicons_roll_syntax_split_regex {#1} \l__rpgicons_roll_syntax_seq
-      \seq_map_inline:Nn \l__rpgicons_roll_syntax_seq {
-          \tl_set:Ne \l__rpgicons_roll_syntax_part_tl {##1}
-          \regex_replace_case_once:nNTF {
-              { \l__rpgicons_roll_syntax_plusminus_regex } { \c{,} $\1$ \c{,} }
-              { \l__rpgicons_roll_syntax_times_regex } { \c{,} $\c{times}$ \c{,} }
-              { \l__rpgicons_roll_syntax_dice_regex }
-                  { \c{ rpgiconsdie } { \c{ rpgicons_roll_syntax_convert:n } { \2 } } { \1 } }
-          } \l__rpgicons_roll_syntax_part_tl
-          { \tl_use:N \l__rpgicons_roll_syntax_part_tl }
-          { \tl_use:N \l__rpgicons_roll_syntax_part_tl }
-      }
+    \regex_set:Nn \l__rpgicons_roll_syntax_dice_regex { \A(\d*)\ur{l__rpgicons_roll_syntax_die_regex}([F\d]+)\Z }
+    \regex_split:NnN \l__rpgicons_roll_syntax_split_regex {#1} \l__rpgicons_roll_syntax_seq
+    \seq_map_inline:Nn \l__rpgicons_roll_syntax_seq {
+      \tl_set:Ne \l__rpgicons_roll_syntax_part_tl {##1}
+      \regex_replace_case_once:nNTF {
+        { \l__rpgicons_roll_syntax_plusminus_regex } { \c{,} $\1$ \c{,} }
+        { \l__rpgicons_roll_syntax_times_regex } { \c{,} $\c{times}$ \c{,} }
+        { \l__rpgicons_roll_syntax_dice_regex }
+          { \c{ rpgiconsdie } { \c{ rpgicons_roll_syntax_convert:n } { \2 } } { \1 } }
+      } \l__rpgicons_roll_syntax_part_tl
+      { \tl_use:N \l__rpgicons_roll_syntax_part_tl }
+      { \tl_use:N \l__rpgicons_roll_syntax_part_tl }
+    }
   }
 
   \cs_generate_variant:Nn \rpgicons_roll_syntax_parse:n { e }
 
+}
+
+\tl_if_exist:NF \l__rpgicons_roll_actualtext_tl {
+  \tl_new:N \l__rpgicons_roll_actualtext_tl
+}
+\cs_if_exist:NF \rpgicons_roll_prepare_actualtext:Nn {
+  \cs_new_protected:Npn \rpgicons_roll_prepare_actualtext:Nn #1#2 {
+    \tl_set:Nn #1 {#2}
+    \tl_replace_all:Nne #1 { - } { \codepoint_generate:nn { "2212 } { 12 } }
+    \tl_replace_all:Nne #1 { * } { \codepoint_generate:nn { "00D7 } { 12 } }
+  }
 }
 
 \tikzset{
@@ -2713,7 +2724,8 @@
 
 \NewDocumentCommand{\rpgiconsroll}{ m }{
   \mode_leave_vertical:
-  \tag_socket_use:nn { rpgicons/roll/before } {#1}
+  \rpgicons_roll_prepare_actualtext:Nn \l__rpgicons_roll_actualtext_tl {#1}
+  \tag_socket_use:nV { rpgicons/roll/before } \l__rpgicons_roll_actualtext_tl
   \tag_suspend:n { \rpgiconsroll }
   \rpgicons_roll_syntax_parse:e {#1}
   \tag_resume:n { \rpgiconsroll }

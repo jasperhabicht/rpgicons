@@ -10,7 +10,7 @@
 %
 % This work has the LPPL maintenance status `maintained'.
 %
-\ProvidesExplPackage {rpgicons-l3} {2025-10-13} {2.0.3}
+\ProvidesExplPackage {rpgicons-l3} {2025-10-21} {2.0.4}
     {RPG Icons Package (l3 Variant)}
 
 \bool_new:N \l__rpgicons_unicode_mode_bool
@@ -1649,15 +1649,20 @@
     die , ability , saving , spell , spellschool , damage , attack , condition
 }
 
-\str_new:N \l__rpgicons_icon_shape_name_str
+\str_new:N \l__rpgicons_icon_type_name_str
 \clist_map_inline:Nn \c__rpgicons_types_clist {
-    \str_set:Nn \l__rpgicons_icon_shape_name_str {#1}
-    \str_replace_all:Nnn \l__rpgicons_icon_shape_name_str { ~ } { _ }
-    \clist_new:c { l_rpgicons_types_every_ \l__rpgicons_icon_shape_name_str _style_clist }
-    \keys_define:nn { rpgicons / local ~ options } {
-        every ~ #1 .code:n = {
-            \clist_set:cn {
-                l_rpgicons_types_every_ \l__rpgicons_icon_shape_name_str _style_clist
+    \str_set:Nn \l__rpgicons_icon_type_name_str {#1}
+    \str_replace_all:Nnn \l__rpgicons_icon_type_name_str { ~ } { _ }
+    \clist_new:c { l_rpgicons_types_every_ \l__rpgicons_icon_type_name_str _style_clist }
+    \keys_define:ne { rpgicons / local ~ options } {
+        every ~ #1       .code:n = {
+            \exp_not:N \clist_set:cn {
+                l_rpgicons_types_every_ \l__rpgicons_icon_type_name_str _style_clist
+            } {##1}
+        } ,
+        every ~ #1 ~ add .code:n = {
+            \exp_not:N \clist_put_right:cn {
+                l_rpgicons_types_every_ \l__rpgicons_icon_type_name_str _style_clist
             } {##1}
         }
     }
@@ -1678,13 +1683,19 @@
     paralyzed , petrified , poisoned , prone , restrained , stunned , unconscious , hearing , seeing
 }
 
+\str_new:N \l__rpgicons_icon_shape_name_str
 \clist_map_inline:Nn \c__rpgicons_shapes_clist {
     \str_set:Nn \l__rpgicons_icon_shape_name_str {#1}
     \str_replace_all:Nnn \l__rpgicons_icon_shape_name_str { ~ } { _ }
     \clist_new:c { l_rpgicons_shapes_every_ \l__rpgicons_icon_shape_name_str _style_clist }
-    \keys_define:nn { rpgicons / local ~ options } {
-        every ~ #1 .code:n = {
-            \clist_set:cn {
+    \keys_define:ne { rpgicons / local ~ options } {
+        every ~ #1       .code:n = {
+            \exp_not:N \clist_set:cn {
+                l_rpgicons_shapes_every_ \l__rpgicons_icon_shape_name_str _style_clist
+            } {##1}
+        } , 
+        every ~ #1 ~ add .code:n = {
+            \exp_not:N \clist_put_right:cn {
                 l_rpgicons_shapes_every_ \l__rpgicons_icon_shape_name_str _style_clist
             } {##1}
         }

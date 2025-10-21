@@ -11,8 +11,8 @@
 % This work has the LPPL maintenance status `maintained'.
 %
 \documentclass[a4paper]{article}
-\def\rpgiconsfileversion{2.0.3}
-\def\rpgiconsfiledate{13 October 2025}
+\def\rpgiconsfileversion{2.0.4}
+\def\rpgiconsfiledate{21 October 2025}
 
 \usepackage[T1]{fontenc}
 \usepackage{Alegreya}
@@ -277,6 +277,7 @@
 %\changes{v2.0.1}{2025/10/05}{Fixes of bugs related to tagging support in PGF variant, added key to customize replacement text in L3 variant.}
 %\changes{v2.0.2}{2025/10/10}{Improvements and fixes of PGF shapes.}
 %\changes{v2.0.3}{2025/10/13}{Fixes of bugs related to tagging support in L3 variant.}
+\changes{v2.0.4}{2025/10/21}{Added key to append styles for every shape or type.}
 
 \begin{document}
 
@@ -594,6 +595,19 @@ For example, \macro{\rpgiconsset{every die={color={red}}}} can be used to draw i
 
 Calling \macro{\rpgiconsset{every charisma={color={red}}}} will draw every instance of the \macro{charisma} shape in red.
 
+\begin{macrodef}
+every die add
+every ability add
+every saving add
+every spell add
+every spellschool add
+every damage add
+every attack add
+every condition add
+every <shape> add
+\end{macrodef}
+Styles following the pattern \macro{every} followed by a space and the name of the command or the shape followed by another space and \macro{add} work in the same way as the styles described above, but insteaf of overwriting existing styles, they append the relevant styles.
+
 \subsection{Setting options globally}
 
 \begin{macrodef}
@@ -631,6 +645,8 @@ Roll\die{eightside}{}a die!
 actualtext
 \end{macrodef}
 The option \macro{actualtext} can be used to change the default replacement text that is used for example by screen readers in a tagged PDF. It expects as value a key-value list where the key is the name of the icon shape and the value is the relevant replacement text. For example, with setting \macro{actualtext={sixside={d6}}}, a screen reader would read ,,d six`` for icons using the \macro{sixside} shape.
+
+It is possible to change the replacement texts for specific icon types. For example, setting the key \macro{every saving={actualtext={charisma={charisma saving}}}} will set the replacement text for every instance of \macro{\saving{charisma}} to \macro{charisma saving}.
 
 \subsection{Roll dice syntax}\label{sec:roll-dice-syntax}
 

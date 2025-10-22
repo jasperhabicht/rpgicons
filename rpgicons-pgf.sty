@@ -35,7 +35,8 @@
   radiant, slashing, thunder, healing,
   melee, ranged, magic, singlehanded, doublehanded,
   buff, blinded, charmed, deafened, exhausted, frightened, grappled, incapacitated, invisible,
-  paralyzed, petrified, poisoned, prone, restrained, stunned, unconscious, hearing, seeing%
+  paralyzed, petrified, poisoned, prone, restrained, stunned, unconscious, hearing, seeing,
+copper, silver, gold, electrum, platinum%
 }
 
 \tikzset{
@@ -71,6 +72,7 @@
   rpg icons/every damage/.style={},
   rpg icons/every attack/.style={},
   rpg icons/every condition/.style={},
+  rpg icons/every currency/.style={},
   %
   rpg icons/create every style/.code={
     \tikzset{
@@ -2506,6 +2508,108 @@
   \hspace{\rpgicons@aftersep}%
 }
 \@ifundefined{condition}{\NewCommandCopy\condition\rpgiconscondition}{}
+
+% CURRENCY
+
+% copper
+\pgfdeclareshape{copper}{
+  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
+  \anchor{text} % this is used to center the text in the node
+    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+
+  \backgroundpath{
+    \pgfpathmoveto{\pgfpoint{-.375cm}{-.25cm}}
+    \pgfpathlineto{\pgfpoint{-.375cm}{.2cm}}
+    \pgfpathlineto{\pgfpoint{-.225cm}{.35cm}}
+    \pgfpathlineto{\pgfpoint{.225cm}{.35cm}}
+    \pgfpathlineto{\pgfpoint{.375cm}{.2cm}}
+    \pgfpathlineto{\pgfpoint{.375cm}{-.25cm}}
+    \pgfpathlineto{\pgfpoint{.225cm}{-.4cm}}
+    \pgfpathlineto{\pgfpoint{-.225cm}{-.4cm}}
+    \pgfpathclose
+    \pgfpathcircle{\pgfpoint{0cm}{-.05cm}}{.075cm}
+  }
+}
+
+% silver
+\pgfdeclareshape{silver}{
+  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
+  \anchor{text} % this is used to center the text in the node
+    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+
+  \backgroundpath{
+    \pgfpathmoveto{\pgfpoint{0cm}{.35cm}}
+    \pgfpathlineto{\pgfpoint{.433cm}{-.4cm}}
+    \pgfpathlineto{\pgfpoint{-.433cm}{-.4cm}}
+    \pgfpathclose
+    \pgfpathcircle{\pgfpoint{0cm}{-.15cm}}{.075cm}
+  }
+}
+
+% gold
+\pgfdeclareshape{gold}{
+  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
+  \anchor{text} % this is used to center the text in the node
+    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+
+  \backgroundpath{
+    \pgfpathmoveto{\pgfpoint{-.375cm}{-.4cm}}
+    \pgfpathlineto{\pgfpoint{-.375cm}{-.35cm}}
+    \pgfpatharc{-60}{60}{.325cm}
+    \pgfpathlineto{\pgfpoint{-.375cm}{.35cm}}
+    \pgfpathlineto{\pgfpoint{.375cm}{.35cm}}
+    \pgfpathlineto{\pgfpoint{.375cm}{.25cm}}
+    \pgfpatharc{120}{240}{.325cm}
+    \pgfpathlineto{\pgfpoint{.375cm}{-.4cm}}
+    \pgfpathclose
+  }
+}
+
+% electrum
+\pgfdeclareshape{electrum}{
+  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
+  \anchor{text} % this is used to center the text in the node
+    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+
+  \backgroundpath{
+    \pgfpathmoveto{\pgfpoint{-.225cm}{-.35cm}}
+    \pgfpatharc{240}{120}{.375cm}
+    \pgfpathlineto{\pgfpoint{.225cm}{.3cm}}
+    \pgfpatharc{60}{-60}{.375cm}
+    \pgfpathclose
+    \pgfpathcircle{\pgfpoint{0cm}{-.15cm}}{.075cm}
+  }
+}
+
+% platinum
+\pgfdeclareshape{platinum}{
+  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
+  \anchor{text} % this is used to center the text in the node
+    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+
+  \backgroundpath{
+    \pgfpathmoveto{\pgfpoint{.075cm}{.4cm}}
+    \pgfpathlineto{\pgfpoint{.35cm}{.075cm}}
+    \pgfpathlineto{\pgfpoint{.35cm}{-.075cm}}
+    \pgfpathlineto{\pgfpoint{.075cm}{-.4cm}}
+    \pgfpathlineto{\pgfpoint{-.075cm}{-.4cm}}
+    \pgfpathlineto{\pgfpoint{-.35cm}{-.075cm}}
+    \pgfpathlineto{\pgfpoint{-.35cm}{.075cm}}
+    \pgfpathlineto{\pgfpoint{-.075cm}{.4cm}}
+    \pgfpathclose
+  }
+}
+
+\NewDocumentCommand{\rpgiconscurrency}{ m O{} }{%
+  \hspace{\rpgicons@beforesep}%
+  \tikz[rpg icons, rpg icons/every currency, rpg icons/every #1,
+    baseline=\rpgicons@baseline, #2] {
+    \node[#1, draw, scale=.333] at (0cm,0cm) {};
+    \path[draw=none, scale=.333] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
+  }%
+  \hspace{\rpgicons@aftersep}%
+}
+\@ifundefined{currency}{\NewCommandCopy\currency\rpgiconscurrency}{}
 
 % make tikz icons available as pics
 \ifrpgicons@pics

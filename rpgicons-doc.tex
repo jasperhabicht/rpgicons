@@ -11,8 +11,8 @@
 % This work has the LPPL maintenance status `maintained'.
 %
 \documentclass[a4paper]{article}
-\def\rpgiconsfileversion{2.0.4}
-\def\rpgiconsfiledate{21 October 2025}
+\def\rpgiconsfileversion{2.0.5}
+\def\rpgiconsfiledate{23 October 2025}
 
 \usepackage[T1]{fontenc}
 \usepackage{Alegreya}
@@ -278,6 +278,7 @@
 %\changes{v2.0.2}{2025/10/10}{Improvements and fixes of PGF shapes.}
 %\changes{v2.0.3}{2025/10/13}{Fixes of bugs related to tagging support in L3 variant.}
 \changes{v2.0.4}{2025/10/21}{Added key to append styles for every shape or type.}
+%\changes{v2.0.5}{2025/10/23}{Fixes in tagging support of roll syntax.}
 
 \begin{document}
 
@@ -606,7 +607,7 @@ every attack add
 every condition add
 every <shape> add
 \end{macrodef}
-Styles following the pattern \macro{every} followed by a space and the name of the command or the shape followed by another space and \macro{add} work in the same way as the styles described above, but insteaf of overwriting existing styles, they append the relevant styles.
+Styles following the pattern \macro{every} followed by a space and the name of the command or the shape followed by another space and \macro{add} work in the same way as the styles described above, but instead of overwriting existing styles, they append the relevant styles.
 
 \subsection{Setting options globally}
 

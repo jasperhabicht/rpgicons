@@ -256,7 +256,7 @@
 \changes{v1.4.1}{2024/02/21}{Corrections in L3 variant.}
 \changes{v1.4.2}{2024/02/21}{Alternative set of commands in L3 variant defined.}
 \changes{v1.4.3}{2024/02/22}{Added option to L3 variant to enable upward compatibility.}
-\changes{v1.4.4}{2024/02/24}{Added styles for every instance of command or shape, correction of recent changes to \titlemacro{l3draw} code.}
+\changes{v1.4.4}{2024/02/24}{Added styles for every instance of command or shape, implementation of recent changes to \titlemacro{l3draw} code.}
 \changes{v1.5.0}{2024/02/25}{Alternative set of commands defined, added support of styles in pics.}
 \changes{v1.5.1}{2024/02/28}{Addition of opacity to L3 variant.}
 \changes{v1.5.2}{2024/02/29}{Unification of scaling, minor corrections.}
@@ -559,7 +559,7 @@ The \macro{\RPGIconsUseIcon} command supports PDF tagging. If tagging is activat
 |\RPGIconsCondition|{<shape>}[<options>]
 |\RPGIconsCurrency|{<shape>}[<options>]
 \end{macrodef}
-The L3 variant of the package defines a set of commands on which the user commands \macro{\die}, \macro{\ability}, \macro{\saving}, \macro{\spell}, \macro{\spellschool}, \macro{\damage}, \macro{\attack}, \macro{\condition} and \macro{\currency} are based. This set of commands can be used in cases where another package defines one of these user commands. These user commands are exact copies of this set of commands.
+The L3 variant of the package defines a set of commands on which the user commands \macro{\die}, \macro{\ability}, \macro{\saving}, \macro{\spell}, \macro{\spellschool}, \macro{\damage}, \macro{\attack}, \macro{\condition} as well as \macro{\currency} are based. This set of commands can be used in cases where another package defines one of these user commands. These user commands are exact copies of this set of commands.
 
 \subsection{Icon options}
 
@@ -580,7 +580,7 @@ scale
 scale inner
 rotate
 \end{macrodef}
-The \macro{\RPGIconsUseIcon} command and the commands \macro{\die}, \macro{\ability}, \macro{\saving}, \macro{\spell}, \macro{\spellschool}, \macro{\damage}, \macro{\attack}, \macro{\condition} and \macro{\currency} can be used with certain options that each consist of a key-value pair and can be combined. When used with the \macro{\RPGIconsUseIcon} command or the other commands based on this command, these options should be used directly without wrapping them inside the \macro{style} option.
+The \macro{\RPGIconsUseIcon} command and the commands \macro{\die}, \macro{\ability}, \macro{\saving}, \macro{\spell}, \macro{\spellschool}, \macro{\damage}, \macro{\attack}, \macro{\condition} and \macro{\currency} can be used with certain options that each consist of a key-value pair and can be combined. These options should be used directly without wrapping them inside the \macro{style} option, when used with the \macro{\RPGIconsUseIcon} command or the other commands based on this command.
 
 For example, \macro{\die{eightside}[color=blue, line width=0.8pt]{2}} would result in \die{eightside}[color=blue, line width=0.8pt]{2}.
 
@@ -716,7 +716,7 @@ The PGF variant of the package provides the option \macro{pics}. If the package 
 |\rpgiconscondition|{<shape>}[<options>]
 |\rpgiconscurrency|{<shape>}[<options>]
 \end{macrodef}
-The PGF variant of the package defines a set of commands on which the user commands \macro{\die}, \macro{\ability}, \macro{\saving}, \macro{\spell}, \macro{\spellschool}, \macro{\damage}, \macro{\attack}, \macro{\condition} and \macro{\currency} are based. This set of commands can be used in cases where another package defines one of these user commands. These user commands are exact copies of this set of commands.
+The PGF variant of the package defines a set of commands on which the user commands \macro{\die}, \macro{\ability}, \macro{\saving}, \macro{\spell}, \macro{\spellschool}, \macro{\damage}, \macro{\attack}, \macro{\condition} as well as \macro{\currency} are based. This set of commands can be used in cases where another package defines one of these user commands. These user commands are exact copies of this set of commands.
 
 \subsection{Icon styles}
 

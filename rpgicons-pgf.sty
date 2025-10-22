@@ -2714,6 +2714,7 @@
     \tl_set:Nn #1 {#2}
     \tl_replace_all:Nne #1 { - } { \codepoint_generate:nn { "2212 } { 12 } }
     \tl_replace_all:Nne #1 { * } { \codepoint_generate:nn { "00D7 } { 12 } }
+    \tl_replace_all:Nne #1 { x } { \codepoint_generate:nn { "00D7 } { 12 } }
   }
 }
 

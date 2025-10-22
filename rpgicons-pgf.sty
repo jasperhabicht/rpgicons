@@ -2527,7 +2527,7 @@ copper, silver, gold, electrum, platinum%
     \pgfpathlineto{\pgfpoint{.225cm}{-.4cm}}
     \pgfpathlineto{\pgfpoint{-.225cm}{-.4cm}}
     \pgfpathclose
-    \pgfpathcircle{\pgfpoint{0cm}{-.05cm}}{.075cm}
+    \pgfpathcircle{\pgfpoint{0cm}{-.025cm}}{.075cm}
   }
 }
 
@@ -2554,11 +2554,11 @@ copper, silver, gold, electrum, platinum%
 
   \backgroundpath{
     \pgfpathmoveto{\pgfpoint{-.375cm}{-.4cm}}
-    \pgfpathlineto{\pgfpoint{-.375cm}{-.35cm}}
+    \pgfpathlineto{\pgfpointadd{\pgfpoint{-.5375cm}{-.025cm}}{\pgfpointpolar{-60}{.325cm}}}
     \pgfpatharc{-60}{60}{.325cm}
     \pgfpathlineto{\pgfpoint{-.375cm}{.35cm}}
     \pgfpathlineto{\pgfpoint{.375cm}{.35cm}}
-    \pgfpathlineto{\pgfpoint{.375cm}{.25cm}}
+    \pgfpathlineto{\pgfpointadd{\pgfpoint{.5375cm}{-.025cm}}{\pgfpointpolar{120}{.325cm}}}
     \pgfpatharc{120}{240}{.325cm}
     \pgfpathlineto{\pgfpoint{.375cm}{-.4cm}}
     \pgfpathclose

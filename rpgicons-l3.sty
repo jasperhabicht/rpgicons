@@ -1516,6 +1516,62 @@
     \draw_path_circle:nn { 0cm , 0cm } { .15cm }
 }
 
+% CURRENCY
+
+\cs_new_protected:Npn \rpgicons_draw_shape_copper: {
+    \draw_path_moveto:n { -.375cm , -.25cm }
+    \draw_path_lineto:n { -.375cm , .2cm }
+    \draw_path_lineto:n { -.225cm , .35cm }
+    \draw_path_lineto:n { .225cm , .35cm }
+    \draw_path_lineto:n { .375cm , .2cm }
+    \draw_path_lineto:n { .375cm , -.25cm }
+    \draw_path_lineto:n { .225cm , -.4cm }
+    \draw_path_lineto:n { -.225cm , -.4cm }
+    \draw_path_close:
+    \draw_path_circle:nn { 0cm , -.025cm } { .075cm }
+}
+
+\cs_new_protected:Npn \rpgicons_draw_shape_silver: {
+    \draw_path_moveto:n { 0cm , .35cm }
+    \draw_path_lineto:n { .433cm , -.4cm }
+    \draw_path_lineto:n { -.433cm , -.4cm }
+    \draw_path_close:
+    \draw_path_circle:nn { 0cm , -.15cm } { .075cm }
+}
+
+\cs_new_protected:Npn \rpgicons_draw_shape_gold: {
+    \draw_path_moveto:n { -.375cm , -.4cm }
+    \draw_path_lineto:n { ( -.5375cm , -.025cm ) + ( \draw_point_polar:nn { .325cm } { -60 } ) }
+    \draw_path_arc:nnn { -60 } { 60 } { .325cm }
+    \draw_path_lineto:n { -.375cm , .35cm }
+    \draw_path_lineto:n { .375cm , .35cm }
+    \draw_path_lineto:n { ( .5375cm , -.025cm ) + ( \draw_point_polar:nn { .325cm } { 120 } ) }
+    \draw_path_arc:nnn { 120 } { 240 } { .325cm }
+    \draw_path_lineto:n { .375cm , -.4cm }
+    \draw_path_close:
+}
+
+\cs_new_protected:Npn \rpgicons_draw_shape_electrum: {
+    \draw_path_moveto:n { -.225cm , -.35cm }
+    \draw_path_arc:nnn { 240 } { 120 } { .375cm }
+    \draw_path_lineto:n { .225cm , .3cm }
+    \draw_path_arc:nnn { 60 } { -60 } { .375cm }
+    \draw_path_close:
+    \draw_path_circle:nn { 0cm , -.15cm } { .075cm }
+}
+
+\cs_new_protected:Npn \rpgicons_draw_shape_platinum: {
+    \draw_path_moveto:n { .075cm , .4cm }
+    \draw_path_lineto:n { .35cm , .075cm }
+    \draw_path_lineto:n { .35cm , -.075cm }
+    \draw_path_lineto:n { .075cm , -.4cm }
+    \draw_path_lineto:n { -.075cm , -.4cm }
+    \draw_path_lineto:n { -.35cm , -.075cm }
+    \draw_path_lineto:n { -.35cm , .075cm }
+    \draw_path_lineto:n { -.075cm , .4cm }
+    \draw_path_close:
+}
+
 % FRAMES
 
 \cs_new_protected:Npn \rpgicons_draw_frame_ability: {
@@ -1646,7 +1702,7 @@
 }
 
 \clist_const:Nn \c__rpgicons_types_clist {
-    die , ability , saving , spell , spellschool , damage , attack , condition
+    die , ability , saving , spell , spellschool , damage , attack , condition , currency
 }
 
 \str_new:N \l__rpgicons_icon_type_name_str
@@ -1680,7 +1736,8 @@
     radiant , slashing , thunder , healing ,
     melee , ranged , magic , singlehanded , doublehanded ,
     buff , blinded , charmed , deafened , exhausted , frightened , grappled , incapacitated , invisible ,
-    paralyzed , petrified , poisoned , prone , restrained , stunned , unconscious , hearing , seeing
+    paralyzed , petrified , poisoned , prone , restrained , stunned , unconscious , hearing , seeing ,
+    copper , silver , gold , electrum , platinum
 }
 
 \str_new:N \l__rpgicons_icon_shape_name_str
@@ -1981,6 +2038,17 @@
     \group_end:
 }
 \cs_if_exist:NF \condition { \cs_new_eq:NN \condition \RPGIconsCondition }
+
+\NewDocumentCommand { \RPGIconsCurrency } { m O{} } {
+    \group_begin:
+        \keys_set_groups:nne { rpgicons / local ~ options } { extra } {#2}
+        \keys_set:ne { rpgicons / local ~ options } { \clist_use:Nn \l_rpgicons_types_every_currency_style_clist { , } }
+        \skip_horizontal:n { \l_rpgicons_icon_before_sep_dim }
+        \RPGIconsUseIcon[scale=.333, #2]{#1}
+        \skip_horizontal:n { \l_rpgicons_icon_after_sep_dim }
+    \group_end:
+}
+\cs_if_exist:NF \currency { \cs_new_eq:NN \currency \RPGIconsCurrency }
 
 % ROLL SYNTAX
 

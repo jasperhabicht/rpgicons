@@ -36,7 +36,8 @@
   melee, ranged, magic, singlehanded, doublehanded,
   buff, blinded, charmed, deafened, exhausted, frightened, grappled, incapacitated, invisible,
   paralyzed, petrified, poisoned, prone, restrained, stunned, unconscious, hearing, seeing,
-copper, silver, gold, electrum, platinum%
+  lawfulgood, neutralgood, chaoticgood, lawfulneutral, trueneutral, chaoticneutral, lawfulevil, neutralevil, chaoticevil,
+  copper, silver, gold, electrum, platinum%
 }
 
 \tikzset{
@@ -72,6 +73,7 @@ copper, silver, gold, electrum, platinum%
   rpg icons/every damage/.style={},
   rpg icons/every attack/.style={},
   rpg icons/every condition/.style={},
+  rpg icons/every alignment/.style={},
   rpg icons/every currency/.style={},
   %
   rpg icons/create every style/.code={
@@ -2508,6 +2510,172 @@ copper, silver, gold, electrum, platinum%
   \hspace{\rpgicons@aftersep}%
 }
 \@ifundefined{condition}{\NewCommandCopy\condition\rpgiconscondition}{}
+
+% ALIGNMENT
+
+% lawfulgood
+\pgfdeclareshape{lawfulgood}{
+  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
+  \anchor{text} % this is used to center the text in the node
+    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+
+  \behindbackgroundpath{
+  }
+
+  \backgroundpath{
+    \pgfpathmoveto{\pgfpoint{.35cm}{-.1cm}}
+    \pgfpathlineto{\pgfpoint{-.35cm}{-.1cm}}
+    \pgfpathmoveto{\pgfpoint{.325cm}{.1cm}}
+    \pgfpathlineto{\pgfpoint{0cm}{.35cm}}
+    \pgfpathlineto{\pgfpoint{-.325cm}{.1cm}}
+  }
+}
+
+% neutralgood
+\pgfdeclareshape{neutralgood}{
+  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
+  \anchor{text} % this is used to center the text in the node
+    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+
+  \behindbackgroundpath{
+  }
+
+  \backgroundpath{
+    \pgfpathcircle{\pgfpoint{0cm}{-.1cm}}{.2cm}
+    \pgfpathmoveto{\pgfpoint{.325cm}{.1cm}}
+    \pgfpathlineto{\pgfpoint{0cm}{.35cm}}
+    \pgfpathlineto{\pgfpoint{-.325cm}{.1cm}}
+  }
+}
+
+% chaoticgood
+\pgfdeclareshape{chaoticgood}{
+  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
+  \anchor{text} % this is used to center the text in the node
+    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+
+  \behindbackgroundpath{
+  }
+
+  \backgroundpath{
+    \pgfpathmoveto{\pgfpoint{0cm}{.35cm}}
+    \pgfpathlineto{\pgfpoint{0cm}{-.35cm}}
+    \pgfpathmoveto{\pgfpoint{.325cm}{.1cm}}
+    \pgfpathlineto{\pgfpoint{0cm}{.35cm}}
+    \pgfpathlineto{\pgfpoint{-.325cm}{.1cm}}
+  }
+}
+
+% lawfulneutral
+\pgfdeclareshape{lawfulneutral}{
+  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
+  \anchor{text} % this is used to center the text in the node
+    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+
+  \behindbackgroundpath{
+  }
+
+  \backgroundpath{
+    \pgfpathcircle{\pgfpoint{0cm}{0cm}}{.2cm}
+    \pgfpathmoveto{\pgfpoint{.35cm}{0cm}}
+    \pgfpathlineto{\pgfpoint{-.35cm}{0cm}}
+  }
+}
+
+% trueneutral
+\pgfdeclareshape{trueneutral}{
+  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
+  \anchor{text} % this is used to center the text in the node
+    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+
+  \behindbackgroundpath{
+  }
+
+  \backgroundpath{
+    \pgfpathcircle{\pgfpoint{0cm}{0cm}}{.2cm}
+  }
+}
+
+% chaoticneutral
+\pgfdeclareshape{chaoticneutral}{
+  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
+  \anchor{text} % this is used to center the text in the node
+    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+
+  \behindbackgroundpath{
+  }
+
+  \backgroundpath{
+    \pgfpathcircle{\pgfpoint{0cm}{0cm}}{.2cm}
+    \pgfpathmoveto{\pgfpoint{0cm}{.35cm}}
+    \pgfpathlineto{\pgfpoint{0cm}{-.35cm}}
+  }
+}
+
+% lawfulevil
+\pgfdeclareshape{lawfulevil}{
+  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
+  \anchor{text} % this is used to center the text in the node
+    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+
+  \behindbackgroundpath{
+  }
+
+  \backgroundpath{
+    \pgfpathmoveto{\pgfpoint{.35cm}{.1cm}}
+    \pgfpathlineto{\pgfpoint{-.35cm}{.1cm}}
+    \pgfpathmoveto{\pgfpoint{.325cm}{-.1cm}}
+    \pgfpathlineto{\pgfpoint{0cm}{-.35cm}}
+    \pgfpathlineto{\pgfpoint{-.325cm}{-.1cm}}
+  }
+}
+
+% neutralevil
+\pgfdeclareshape{neutralevil}{
+  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
+  \anchor{text} % this is used to center the text in the node
+    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+
+  \behindbackgroundpath{
+  }
+
+  \backgroundpath{
+    \pgfpathcircle{\pgfpoint{0cm}{.1cm}}{.2cm}
+    \pgfpathmoveto{\pgfpoint{.325cm}{-.1cm}}
+    \pgfpathlineto{\pgfpoint{0cm}{-.35cm}}
+    \pgfpathlineto{\pgfpoint{-.325cm}{-.1cm}}
+  }
+}
+
+% chaoticevil
+\pgfdeclareshape{chaoticevil}{
+  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
+  \anchor{text} % this is used to center the text in the node
+    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+
+  \behindbackgroundpath{
+  }
+
+  \backgroundpath{
+    \pgfpathmoveto{\pgfpoint{0cm}{.35cm}}
+    \pgfpathlineto{\pgfpoint{0cm}{-.35cm}}
+    \pgfpathmoveto{\pgfpoint{.325cm}{-.1cm}}
+    \pgfpathlineto{\pgfpoint{0cm}{-.35cm}}
+    \pgfpathlineto{\pgfpoint{-.325cm}{-.1cm}}
+  }
+}
+
+\NewDocumentCommand{\rpgiconsalignment}{ m O{} }{%
+  \hspace{\rpgicons@beforesep}%
+  \tikz[rpg icons, rpg icons/every alignment, rpg icons/every #1,
+    baseline=\rpgicons@baseline, #2] {
+    \path[draw, scale=.333] (30:.425cm) -- (90:.425cm) -- (150:.425cm) -- (210:.425cm) -- (270:.425cm) -- (330:.425cm) -- cycle;
+    \node[#1, draw, scale=.225] at (0cm,0cm) {};
+    \path[draw=none, scale=.333] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
+  }%
+  \hspace{\rpgicons@aftersep}%
+}
+\@ifundefined{alignment}{\NewCommandCopy\alignment\rpgiconsalignment}{}
 
 % CURRENCY
 

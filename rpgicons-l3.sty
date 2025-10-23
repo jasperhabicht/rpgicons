@@ -1516,6 +1516,70 @@
     \draw_path_circle:nn { 0cm , 0cm } { .15cm }
 }
 
+% ALIGNMENT
+
+\cs_new_protected:Npn \rpgicons_draw_shape_lawfulgood: {
+    \draw_path_moveto:n { .35cm , -.1cm }
+    \draw_path_lineto:n { -.35cm , -.1cm }
+    \draw_path_moveto:n { .325cm , .1cm }
+    \draw_path_lineto:n { 0cm , .35cm }
+    \draw_path_lineto:n { -.325cm , .1cm }
+}
+
+\cs_new_protected:Npn \rpgicons_draw_shape_neutralgood: {
+    \draw_path_circle:nn { 0cm , -.1cm } { .2cm }
+    \draw_path_moveto:n { .325cm , .1cm }
+    \draw_path_lineto:n { 0cm , .35cm }
+    \draw_path_lineto:n { -.325cm , .1cm }
+}
+
+\cs_new_protected:Npn \rpgicons_draw_shape_chaoticgood: {
+    \draw_path_moveto:n { 0cm , .35cm }
+    \draw_path_lineto:n { 0cm , -.35cm }
+    \draw_path_moveto:n { .325cm , .1cm }
+    \draw_path_lineto:n { 0cm , .35cm }
+    \draw_path_lineto:n { -.325cm , .1cm }
+}
+
+\cs_new_protected:Npn \rpgicons_draw_shape_lawfulneutral: {
+    \draw_path_circle:nn { 0cm , 0cm } { .2cm }
+    \draw_path_moveto:n { .35cm , 0cm }
+    \draw_path_lineto:n { -.35cm , 0cm }
+}
+
+\cs_new_protected:Npn \rpgicons_draw_shape_trueneutral: {
+    \draw_path_circle:nn { 0cm , 0cm } { .2cm }
+}
+
+\cs_new_protected:Npn \rpgicons_draw_shape_chaoticneutral: {
+    \draw_path_circle:nn { 0cm , 0cm } { .2cm }
+    \draw_path_moveto:n { 0cm , .35cm }
+    \draw_path_lineto:n { 0cm , -.35cm }
+}
+
+\cs_new_protected:Npn \rpgicons_draw_shape_lawfulevil: {
+    \draw_path_moveto:n { .35cm , .1cm }
+    \draw_path_lineto:n { -.35cm , .1cm }
+    \draw_path_moveto:n { .325cm , -.1cm }
+    \draw_path_lineto:n { 0cm , -.35cm }
+    \draw_path_lineto:n { -.325cm , -.1cm }
+}
+
+\cs_new_protected:Npn \rpgicons_draw_shape_neutralevil: {
+    \draw_path_circle:nn { 0cm , .1cm } { .2cm }
+    \draw_path_moveto:n { .325cm , -.1cm }
+    \draw_path_lineto:n { 0cm , -.35cm }
+    \draw_path_lineto:n { -.325cm , -.1cm }
+}
+
+\cs_new_protected:Npn \rpgicons_draw_shape_chaoticevil: {
+    \draw_path_moveto:n { 0cm , .35cm }
+    \draw_path_lineto:n { 0cm , -.35cm }
+    \draw_path_moveto:n { .325cm , -.1cm }
+    \draw_path_lineto:n { 0cm , -.35cm }
+    \draw_path_lineto:n { -.325cm , -.1cm }
+}
+
 % CURRENCY
 
 \cs_new_protected:Npn \rpgicons_draw_shape_copper: {
@@ -1599,6 +1663,16 @@
 
 \cs_new_protected:Npn \rpgicons_draw_frame_damage: {
     \draw_path_circle:nn { 0cm , 0cm } { .5cm }
+}
+
+\cs_new_protected:Npn \rpgicons_draw_frame_alignment: {
+    \draw_path_moveto:n { \draw_point_polar:nn { .425cm } { 30 } }
+    \draw_path_lineto:n { \draw_point_polar:nn { .425cm } { 90 } }
+    \draw_path_lineto:n { \draw_point_polar:nn { .425cm } { 150 } }
+    \draw_path_lineto:n { \draw_point_polar:nn { .425cm } { 210 } }
+    \draw_path_lineto:n { \draw_point_polar:nn { .425cm } { 270 } }
+    \draw_path_lineto:n { \draw_point_polar:nn { .425cm } { 330 } }
+    \draw_path_close:
 }
 
 % USER COMMANDS
@@ -1702,7 +1776,7 @@
 }
 
 \clist_const:Nn \c__rpgicons_types_clist {
-    die , ability , saving , spell , spellschool , damage , attack , condition , currency
+    die , ability , saving , spell , spellschool , damage , attack , condition , alignment , currency
 }
 
 \str_new:N \l__rpgicons_icon_type_name_str
@@ -1737,6 +1811,7 @@
     melee , ranged , magic , singlehanded , doublehanded ,
     buff , blinded , charmed , deafened , exhausted , frightened , grappled , incapacitated , invisible ,
     paralyzed , petrified , poisoned , prone , restrained , stunned , unconscious , hearing , seeing ,
+    lawfulgood , neutralgood , chaoticgood , lawfulneutral , trueneutral , chaoticneutral , lawfulevil , neutralevil , chaoticevil ,
     copper , silver , gold , electrum , platinum
 }
 
@@ -1886,7 +1961,7 @@
             \draw_path_replace_bb:
             \bool_set_false:N \l_draw_bb_update_bool
             \draw_scope_begin:
-                \clist_if_in:nVT { ability , saving , spellschool , damage } \l_rpgicons_icon_frame_tl {
+                \clist_if_in:nVT { ability , saving , spellschool , damage , alignment } \l_rpgicons_icon_frame_tl {
                     \cs_if_exist_use:cF { rpgicons_draw_frame_ \l_rpgicons_icon_frame_tl : } {
                         \msg_warning:nnV { rpgicons } { frame-undefined } \l_rpgicons_icon_frame_tl
                     }
@@ -2038,6 +2113,17 @@
     \group_end:
 }
 \cs_if_exist:NF \condition { \cs_new_eq:NN \condition \RPGIconsCondition }
+
+\NewDocumentCommand { \RPGIconsAlignment } { m O{} } {
+    \group_begin:
+        \keys_set_groups:nne { rpgicons / local ~ options } { extra } {#2}
+        \keys_set:ne { rpgicons / local ~ options } { \clist_use:Nn \l_rpgicons_types_every_alignment_style_clist { , } }
+        \skip_horizontal:n { \l_rpgicons_icon_before_sep_dim }
+        \RPGIconsUseIcon[frame=alignment, scale=.333, #2]{#1}
+        \skip_horizontal:n { \l_rpgicons_icon_after_sep_dim }
+    \group_end:
+}
+\cs_if_exist:NF \alignment { \cs_new_eq:NN \alignment \RPGIconsAlignment }
 
 \NewDocumentCommand { \RPGIconsCurrency } { m O{} } {
     \group_begin:

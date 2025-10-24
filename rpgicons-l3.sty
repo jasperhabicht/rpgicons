@@ -1583,16 +1583,16 @@
 % CURRENCY
 
 \cs_new_protected:Npn \rpgicons_draw_shape_copper: {
-    \draw_path_moveto:n { -.375cm , -.25cm }
-    \draw_path_lineto:n { -.375cm , .2cm }
-    \draw_path_lineto:n { -.225cm , .35cm }
-    \draw_path_lineto:n { .225cm , .35cm }
-    \draw_path_lineto:n { .375cm , .2cm }
-    \draw_path_lineto:n { .375cm , -.25cm }
-    \draw_path_lineto:n { .225cm , -.4cm }
-    \draw_path_lineto:n { -.225cm , -.4cm }
+    \draw_path_moveto:n { -.375cm , -.225cm }
+    \draw_path_lineto:n { -.375cm , .225cm }
+    \draw_path_lineto:n { -.225cm , .375cm }
+    \draw_path_lineto:n { .225cm , .375cm }
+    \draw_path_lineto:n { .375cm , .225cm }
+    \draw_path_lineto:n { .375cm , -.225cm }
+    \draw_path_lineto:n { .225cm , -.375cm }
+    \draw_path_lineto:n { -.225cm , -.375cm }
     \draw_path_close:
-    \draw_path_circle:nn { 0cm , -.025cm } { .075cm }
+    \draw_path_circle:nn { 0cm , 0cm } { .075cm }
 }
 
 \cs_new_protected:Npn \rpgicons_draw_shape_silver: {
@@ -1604,24 +1604,24 @@
 }
 
 \cs_new_protected:Npn \rpgicons_draw_shape_gold: {
-    \draw_path_moveto:n { -.375cm , -.4cm }
-    \draw_path_lineto:n { ( -.5375cm , -.025cm ) + ( \draw_point_polar:nn { .325cm } { -60 } ) }
+    \draw_path_moveto:n { -.375cm , -.375cm }
+    \draw_path_lineto:n { ( -.5375cm , 0cm ) + ( \draw_point_polar:nn { .325cm } { -60 } ) }
     \draw_path_arc:nnn { -60 } { 60 } { .325cm }
-    \draw_path_lineto:n { -.375cm , .35cm }
-    \draw_path_lineto:n { .375cm , .35cm }
-    \draw_path_lineto:n { ( .5375cm , -.025cm ) + ( \draw_point_polar:nn { .325cm } { 120 } ) }
+    \draw_path_lineto:n { -.375cm , .375cm }
+    \draw_path_lineto:n { .375cm , .375cm }
+    \draw_path_lineto:n { ( .5375cm , 0cm ) + ( \draw_point_polar:nn { .325cm } { 120 } ) }
     \draw_path_arc:nnn { 120 } { 240 } { .325cm }
-    \draw_path_lineto:n { .375cm , -.4cm }
+    \draw_path_lineto:n { .375cm , -.375cm }
     \draw_path_close:
 }
 
 \cs_new_protected:Npn \rpgicons_draw_shape_electrum: {
-    \draw_path_moveto:n { -.225cm , -.35cm }
+    \draw_path_moveto:n { -.225cm , -.325cm }
     \draw_path_arc:nnn { 240 } { 120 } { .375cm }
-    \draw_path_lineto:n { .225cm , .3cm }
+    \draw_path_lineto:n { .225cm , .325cm }
     \draw_path_arc:nnn { 60 } { -60 } { .375cm }
     \draw_path_close:
-    \draw_path_circle:nn { 0cm , -.15cm } { .075cm }
+    \draw_path_circle:nn { 0cm , -.125cm } { .075cm }
 }
 
 \cs_new_protected:Npn \rpgicons_draw_shape_platinum: {

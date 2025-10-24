@@ -1518,7 +1518,7 @@
 
 % ALIGNMENT
 
-\cs_new_protected:Npn \rpgicons_draw_shape_lawfulgood: {
+\cs_new_protected:Npn \rpgicons_draw_shape_lawful_good: {
     \draw_path_moveto:n { .35cm , -.1cm }
     \draw_path_lineto:n { -.35cm , -.1cm }
     \draw_path_moveto:n { .325cm , .1cm }
@@ -1526,14 +1526,14 @@
     \draw_path_lineto:n { -.325cm , .1cm }
 }
 
-\cs_new_protected:Npn \rpgicons_draw_shape_neutralgood: {
+\cs_new_protected:Npn \rpgicons_draw_shape_neutral_good: {
     \draw_path_circle:nn { 0cm , -.1cm } { .2cm }
     \draw_path_moveto:n { .325cm , .1cm }
     \draw_path_lineto:n { 0cm , .35cm }
     \draw_path_lineto:n { -.325cm , .1cm }
 }
 
-\cs_new_protected:Npn \rpgicons_draw_shape_chaoticgood: {
+\cs_new_protected:Npn \rpgicons_draw_shape_chaotic_good: {
     \draw_path_moveto:n { 0cm , .35cm }
     \draw_path_lineto:n { 0cm , -.35cm }
     \draw_path_moveto:n { .325cm , .1cm }
@@ -1541,23 +1541,23 @@
     \draw_path_lineto:n { -.325cm , .1cm }
 }
 
-\cs_new_protected:Npn \rpgicons_draw_shape_lawfulneutral: {
+\cs_new_protected:Npn \rpgicons_draw_shape_lawful_neutral: {
     \draw_path_circle:nn { 0cm , 0cm } { .2cm }
     \draw_path_moveto:n { .35cm , 0cm }
     \draw_path_lineto:n { -.35cm , 0cm }
 }
 
-\cs_new_protected:Npn \rpgicons_draw_shape_trueneutral: {
+\cs_new_protected:Npn \rpgicons_draw_shape_true_neutral: {
     \draw_path_circle:nn { 0cm , 0cm } { .2cm }
 }
 
-\cs_new_protected:Npn \rpgicons_draw_shape_chaoticneutral: {
+\cs_new_protected:Npn \rpgicons_draw_shape_chaotic_neutral: {
     \draw_path_circle:nn { 0cm , 0cm } { .2cm }
     \draw_path_moveto:n { 0cm , .35cm }
     \draw_path_lineto:n { 0cm , -.35cm }
 }
 
-\cs_new_protected:Npn \rpgicons_draw_shape_lawfulevil: {
+\cs_new_protected:Npn \rpgicons_draw_shape_lawful_evil: {
     \draw_path_moveto:n { .35cm , .1cm }
     \draw_path_lineto:n { -.35cm , .1cm }
     \draw_path_moveto:n { .325cm , -.1cm }
@@ -1565,14 +1565,14 @@
     \draw_path_lineto:n { -.325cm , -.1cm }
 }
 
-\cs_new_protected:Npn \rpgicons_draw_shape_neutralevil: {
+\cs_new_protected:Npn \rpgicons_draw_shape_neutral_evil: {
     \draw_path_circle:nn { 0cm , .1cm } { .2cm }
     \draw_path_moveto:n { .325cm , -.1cm }
     \draw_path_lineto:n { 0cm , -.35cm }
     \draw_path_lineto:n { -.325cm , -.1cm }
 }
 
-\cs_new_protected:Npn \rpgicons_draw_shape_chaoticevil: {
+\cs_new_protected:Npn \rpgicons_draw_shape_chaotic_evil: {
     \draw_path_moveto:n { 0cm , .35cm }
     \draw_path_lineto:n { 0cm , -.35cm }
     \draw_path_moveto:n { .325cm , -.1cm }
@@ -1811,7 +1811,7 @@
     melee , ranged , magic , singlehanded , doublehanded ,
     buff , blinded , charmed , deafened , exhausted , frightened , grappled , incapacitated , invisible ,
     paralyzed , petrified , poisoned , prone , restrained , stunned , unconscious , hearing , seeing ,
-    lawfulgood , neutralgood , chaoticgood , lawfulneutral , trueneutral , chaoticneutral , lawfulevil , neutralevil , chaoticevil ,
+    lawful ~ good , neutral ~ good , chaotic ~ good , lawful ~ neutral , true ~ neutral , chaotic ~ neutral , lawful ~ evil , neutral ~ evil , chaotic ~ evil ,
     copper , silver , gold , electrum , platinum
 }
 

@@ -2114,12 +2114,16 @@
 }
 \cs_if_exist:NF \condition { \cs_new_eq:NN \condition \RPGIconsCondition }
 
-\NewDocumentCommand { \RPGIconsAlignment } { m O{} } {
+\NewDocumentCommand { \RPGIconsAlignment } { O{positive} m O{} } {
     \group_begin:
         \keys_set_groups:nne { rpgicons / local ~ options } { extra } {#2}
         \keys_set:ne { rpgicons / local ~ options } { \clist_use:Nn \l_rpgicons_types_every_alignment_style_clist { , } }
         \skip_horizontal:n { \l_rpgicons_icon_before_sep_dim }
-        \RPGIconsUseIcon[frame=alignment, scale=.333, #2]{#1}
+        \str_if_eq:neTF { negative } {#1} {
+            \RPGIconsUseIcon*[frame=alignment, scale=.333, #3]{#2}
+        } {
+            \RPGIconsUseIcon[frame=alignment, scale=.333, #3]{#2}
+        }
         \skip_horizontal:n { \l_rpgicons_icon_after_sep_dim }
     \group_end:
 }

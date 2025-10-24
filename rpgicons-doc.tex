@@ -450,7 +450,7 @@ The first optional argument can take the value \macro{negative} or \macro{positi
     & \spellschool{transmutation} & \macro{transmutation} \\
 \end{rpgiconsiconlist}
 
-\subsection[Commands \textbackslash damage, \textbackslash attack, \textbackslash condition, \textbackslash alignment and \textbackslash currency]{Commands \titlemacro*{damage}, \titlemacro*{attack}, \titlemacro*{condition}, \titlemacro*{alignment} and \titlemacro*{currency}}
+\subsection[Commands \textbackslash damage, \textbackslash attack and \textbackslash condition]{Commands \titlemacro*{damage}, \titlemacro*{attack} and \titlemacro*{condition}}
 
 \begin{macrodef}
 |\damage|{<shape>}[<options>]
@@ -466,16 +466,6 @@ The command \macro{\attack} typesets an icon depicting the kind of an attack. Th
 |\condition|{<shape>}[<options>]
 \end{macrodef}
 The command \macro{\condition} typesets an icon depicting a condition of a character. The optional argument can take additional options to style the icon.
-
-\begin{macrodef}
-|\alignment|{<shape>}[<options>]
-\end{macrodef}
-The command \macro{\alignment} typesets an icon depicting an alignment of a character. The optional argument can take additional options to style the icon.
-
-\begin{macrodef}
-|\currency|{<shape>}[<options>]
-\end{macrodef}
-The command \macro{\currency} typesets an icon depicting a value of a coin. The optional argument can take additional options to style the icon.
 
 \begin{rpgiconsiconlist}
 \macro{\damage}
@@ -520,7 +510,18 @@ The command \macro{\currency} typesets an icon depicting a value of a coin. The 
     & \condition{unconscious} & \macro{unconscious} \\
     & \condition{hearing} & \macro{hearing} \\
     & \condition{seeing} & \macro{seeing} \\
-\midrule
+\end{rpgiconsiconlist}
+
+\subsection[Command \textbackslash alignment]{Command \titlemacro*{alignment}}
+
+\begin{macrodef}
+|\alignment|[<style>]{<shape>}[<options>]
+\end{macrodef}
+The command \macro{\alignment} typesets an icon depicting an alignment of a character. The optional argument can take additional options to style the icon.
+
+The first optional argument can take the value \macro{negative} or \macro{positive}, \macro{positive} being the default value. With \macro{positive} given as argument, the icon is drawn in white inside a filled frame.
+
+\begin{rpgiconsiconlist}
 \macro{\alignment}
     & \alignment{lawfulgood} & \macro{lawfulgood} \\
     & \alignment{neutralgood} & \macro{neutralgood} \\
@@ -531,7 +532,16 @@ The command \macro{\currency} typesets an icon depicting a value of a coin. The 
     & \alignment{lawfulevil} & \macro{lawfulevil} \\
     & \alignment{neutralevil} & \macro{neutralevil} \\
     & \alignment{chaoticevil} & \macro{chaoticevil} \\
-\midrule
+\end{rpgiconsiconlist}
+
+\subsection[Command \textbackslash currency]{Command \titlemacro*{currency}}
+
+\begin{macrodef}
+|\currency|{<shape>}[<options>]
+\end{macrodef}
+The command \macro{\currency} typesets an icon depicting a value of a coin. The optional argument can take additional options to style the icon.
+
+\begin{rpgiconsiconlist}
 \macro{\currency}
     & \currency{copper} & \macro{copper} \\
     & \currency{silver} & \macro{silver} \\

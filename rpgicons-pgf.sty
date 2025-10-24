@@ -2665,12 +2665,22 @@
   }
 }
 
-\NewDocumentCommand{\rpgiconsalignment}{ m O{} }{%
+\NewDocumentCommand{\rpgiconsalignment}{ O{positive} m O{} }{%
+  \edef\rpgicons@spellschooliconposneg{#1}%
+  \edef\rpgicons@spellschooliconpos{positive}%
+  \ifx\rpgicons@spellschooliconposneg\rpgicons@spellschooliconpos%
+    \def\rpgicons@spellschooliconfg{fgneg}\else%
+    \def\rpgicons@spellschooliconfg{fgpos}\fi%
+  \ifx\rpgicons@spellschooliconposneg\rpgicons@spellschooliconpos%
+    \def\rpgicons@spellschooliconbg{bgneg}\else%
+    \def\rpgicons@spellschooliconbg{bgpos}\fi%
   \hspace{\rpgicons@beforesep}%
-  \tikz[rpg icons, rpg icons/every alignment, rpg icons/every #1,
-    baseline=\rpgicons@baseline, #2] {
-    \path[draw, scale=.333] (30:.425cm) -- (90:.425cm) -- (150:.425cm) -- (210:.425cm) -- (270:.425cm) -- (330:.425cm) -- cycle;
-    \node[#1, draw, scale=.225] at (0cm,0cm) {};
+  \tikz[rpg icons, rpg icons/every alignment, rpg icons/every #2,
+    baseline=\rpgicons@baseline, fgpos/.style={draw=rpgicons@bg, line width=.6pt}, fgneg/.style={draw},
+    bgpos/.style={fill}, bgneg/.style={draw}, #3] {
+    \path[scale=.333, \rpgicons@spellschooliconbg] (30:.425cm)
+      -- (90:.425cm) -- (150:.425cm) -- (210:.425cm) -- (270:.425cm) -- (330:.425cm) -- cycle;
+    \node[#2, \rpgicons@spellschooliconfg, scale=.225] at (0cm,0cm) {};
     \path[draw=none, scale=.333] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
   }%
   \hspace{\rpgicons@aftersep}%

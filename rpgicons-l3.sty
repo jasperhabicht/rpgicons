@@ -2129,11 +2129,13 @@
 }
 \cs_if_exist:NF \alignment { \cs_new_eq:NN \alignment \RPGIconsAlignment }
 
-\NewDocumentCommand { \RPGIconsCurrency } { m O{} } {
+\NewDocumentCommand { \RPGIconsCurrency } { m O{} m } {
     \group_begin:
         \keys_set_groups:nne { rpgicons / local ~ options } { extra } {#2}
         \keys_set:ne { rpgicons / local ~ options } { \clist_use:Nn \l_rpgicons_types_every_currency_style_clist { , } }
+        \str_set:Ne \l__rpgicons_icon_integer_str {#3}
         \skip_horizontal:n { \l_rpgicons_icon_before_sep_dim }
+        \str_if_empty:NF \l__rpgicons_icon_integer_str { \str_use:N \l__rpgicons_icon_integer_str \, }
         \RPGIconsUseIcon[scale=.333, #2]{#1}
         \skip_horizontal:n { \l_rpgicons_icon_after_sep_dim }
     \group_end:

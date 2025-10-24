@@ -2778,7 +2778,8 @@
   }
 }
 
-\NewDocumentCommand{\rpgiconscurrency}{ m O{} }{%
+\NewDocumentCommand{\rpgiconscurrency}{ m O{} m }{%
+  \rpgicons@ifEmptyF{#3}{#3\,}%
   \hspace{\rpgicons@beforesep}%
   \tikz[rpg icons, rpg icons/every currency, rpg icons/every #1,
     baseline=\rpgicons@baseline, #2] {

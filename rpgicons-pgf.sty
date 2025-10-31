@@ -29,7 +29,7 @@
   sixside six, sixside seven, sixside eight, sixside nine, fudge plus, fudge minus,
   strength, dexterity, dexterity alt, constitution, intelligence, wisdom, charisma,
   resilience, sanity, perception, luck, armor, proficiency,
-  linear, conic, quadratic, cubic, spheric, cylindric, verbal, somatic, material, focus,
+  linear, conic, quadratic, cubic, spheric, cylindric, verbal, somatic, material, ritual, focus,
   abjuration, conjuration, divination, enchantment, evocation, illusion, necromancy, transmutation,
   acid, bludgeoning, cold, fire, force, lightning, necrotic, piercing, poison, psychic,
   radiant, slashing, thunder, healing,
@@ -1252,6 +1252,27 @@
     \pgfpathlineto{\pgfpoint{.4cm}{.2cm}}
     \pgfpathmoveto{\pgfpoint{0cm}{0cm}}
     \pgfpathlineto{\pgfpoint{0cm}{-.4cm}}
+    \pgfsetarrowsstart{}
+    \pgfsetarrowsend{}
+  }
+}
+
+% ritual
+\pgfdeclareshape{ritual}{
+  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
+  \anchor{text} % this is used to center the text in the node
+    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+
+  \backgroundpath{
+    \pgfpathmoveto{\pgfpointpolar{90}{.425cm}}
+    \pgfpatharc{90}{-198}{.425cm}
+    \pgfpathlineto{\pgfpointpolar{306}{.425cm}}
+    \pgfpathlineto{\pgfpointpolar{90}{.425cm}}
+    \pgfpathclose
+    \pgfpathmoveto{\pgfpointadd{\pgfpointpolar{90}{.425cm}}{\pgfpointpolar{72}{-.225cm}}}
+    \pgfpathlineto{\pgfpointpolar{234}{.425cm}}
+    \pgfpathlineto{\pgfpointpolar{378}{.425cm}}
+    \pgfpathlineto{\pgfpointadd{\pgfpointpolar{162}{.425cm}}{\pgfpointpolar{180}{-.225cm}}}
     \pgfsetarrowsstart{}
     \pgfsetarrowsend{}
   }
@@ -2529,6 +2550,8 @@
     \pgfpathmoveto{\pgfpoint{.325cm}{.1cm}}
     \pgfpathlineto{\pgfpoint{0cm}{.35cm}}
     \pgfpathlineto{\pgfpoint{-.325cm}{.1cm}}
+    \pgfsetarrowsstart{}
+    \pgfsetarrowsend{}
   }
 }
 
@@ -2546,6 +2569,8 @@
     \pgfpathmoveto{\pgfpoint{.325cm}{.1cm}}
     \pgfpathlineto{\pgfpoint{0cm}{.35cm}}
     \pgfpathlineto{\pgfpoint{-.325cm}{.1cm}}
+    \pgfsetarrowsstart{}
+    \pgfsetarrowsend{}
   }
 }
 
@@ -2564,6 +2589,8 @@
     \pgfpathmoveto{\pgfpoint{.325cm}{.1cm}}
     \pgfpathlineto{\pgfpoint{0cm}{.35cm}}
     \pgfpathlineto{\pgfpoint{-.325cm}{.1cm}}
+    \pgfsetarrowsstart{}
+    \pgfsetarrowsend{}
   }
 }
 
@@ -2580,6 +2607,8 @@
     \pgfpathcircle{\pgfpoint{0cm}{0cm}}{.2cm}
     \pgfpathmoveto{\pgfpoint{.35cm}{0cm}}
     \pgfpathlineto{\pgfpoint{-.35cm}{0cm}}
+    \pgfsetarrowsstart{}
+    \pgfsetarrowsend{}
   }
 }
 
@@ -2610,6 +2639,8 @@
     \pgfpathcircle{\pgfpoint{0cm}{0cm}}{.2cm}
     \pgfpathmoveto{\pgfpoint{0cm}{.35cm}}
     \pgfpathlineto{\pgfpoint{0cm}{-.35cm}}
+    \pgfsetarrowsstart{}
+    \pgfsetarrowsend{}
   }
 }
 
@@ -2628,6 +2659,8 @@
     \pgfpathmoveto{\pgfpoint{.325cm}{-.1cm}}
     \pgfpathlineto{\pgfpoint{0cm}{-.35cm}}
     \pgfpathlineto{\pgfpoint{-.325cm}{-.1cm}}
+    \pgfsetarrowsstart{}
+    \pgfsetarrowsend{}
   }
 }
 
@@ -2645,6 +2678,8 @@
     \pgfpathmoveto{\pgfpoint{.325cm}{-.1cm}}
     \pgfpathlineto{\pgfpoint{0cm}{-.35cm}}
     \pgfpathlineto{\pgfpoint{-.325cm}{-.1cm}}
+    \pgfsetarrowsstart{}
+    \pgfsetarrowsend{}
   }
 }
 
@@ -2663,6 +2698,8 @@
     \pgfpathmoveto{\pgfpoint{.325cm}{-.1cm}}
     \pgfpathlineto{\pgfpoint{0cm}{-.35cm}}
     \pgfpathlineto{\pgfpoint{-.325cm}{-.1cm}}
+    \pgfsetarrowsstart{}
+    \pgfsetarrowsend{}
   }
 }
 
@@ -2809,7 +2846,7 @@
     \tikzset{
       rpg icons #1 ability/.pic={
         \begin{scope}[every node/.append style={#1}, rpg icons/every ability, rpg icons/every #1]
-          \path[scale=.333, pic actions] (0cm,0cm) circle[radius=.45cm];
+          \path[draw, scale=.333, pic actions] (0cm,0cm) circle[radius=.45cm];
           \node[draw, scale=.225] at (0cm,0cm) (-node) {};
           \path[draw=none, scale=.333] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
         \end{scope}
@@ -2822,7 +2859,7 @@
         \begin{scope}[every node/.append style={#1}, rpg icons/every saving, rpg icons/every #1]
           \path[draw, scale=.333, pic actions] (-.45cm,.45cm) -- (.45cm,.45cm) -- (.45cm,-.05cm)
             arc[start angle=360, end angle=180, radius=.45cm] -- cycle;
-          \node[#1, draw, scale=.225] at (0cm,0cm) (-node) {};
+          \node[draw, scale=.225] at (0cm,0cm) (-node) {};
           \path[draw=none, scale=.333] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
         \end{scope}
       }
@@ -2834,7 +2871,7 @@
         \begin{scope}[every node/.append style={#1}, rpg icons/every spellschool, rpg icons/every #1]
           \path[draw, scale=.333, pic actions] (-.475cm,.35cm)
             -- (-.35cm,.475cm) -- (.35cm,.475cm) -- (.475cm,.35cm) -- (.425cm,-.375cm) -- (0cm,-.475cm) -- (-.425cm,-.375cm) -- cycle;
-          \node[#1, draw, scale=.225] at (0cm,0cm) (-node) {};
+          \node[draw, scale=.225] at (0cm,0cm) (-node) {};
           \path[draw=none, scale=.333] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
         \end{scope}
       }
@@ -2845,7 +2882,19 @@
       rpg icons #1 damage/.pic={
         \begin{scope}[every node/.append style={#1}, rpg icons/every damage, rpg icons/every #1]
           \path[draw, scale=.333, pic actions] (0cm,0cm) circle[radius=.5cm];
-          \node[#1, draw, scale=.225] at (0cm,0cm) (-node) {};
+          \node[draw, scale=.225] at (0cm,0cm) (-node) {};
+          \path[draw=none, scale=.333] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
+        \end{scope}
+      }
+    }
+  },
+  rpg icons/create pic from alignment shape/.code={
+    \tikzset{
+      rpg icons #1 damage/.pic={
+        \begin{scope}[every node/.append style={#1}, rpg icons/every damage, rpg icons/every #1]
+          \path[draw, scale=.333, pic actions] (30:.425cm)
+            -- (90:.425cm) -- (150:.425cm) -- (210:.425cm) -- (270:.425cm) -- (330:.425cm) -- cycle;
+          \node[draw, scale=.225] at (0cm,0cm) (-node) {};
           \path[draw=none, scale=.333] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
         \end{scope}
       }
@@ -2868,6 +2917,10 @@
   rpg icons/create pic from damage shape/.list={%
     acid, bludgeoning, cold, fire, force, lightning, necrotic, piercing, poison, psychic,
     radiant, slashing, thunder, healing%
+  },
+  rpg icons/create pic from alignment shape/.list={%
+    lawful good, neutral good, chaotic good, lawful neutral, true neutral,
+    chaotic neutral, lawful evil, neutral evil, chaotic evil%
   }
 }
 

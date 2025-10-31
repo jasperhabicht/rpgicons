@@ -722,6 +722,18 @@
     \draw_path_lineto:n { 0cm , -.4cm }
 }
 
+\cs_new_protected:Npn \rpgicons_draw_shape_ritual: {
+    \draw_path_moveto:n { \draw_point_polar:nn { .425cm } { 90 } }
+    \draw_path_arc:nnn { 90 } { -198 } { .425cm }
+    \draw_path_lineto:n { \draw_point_polar:nn { .425cm } { 306 } }
+    \draw_path_lineto:n { \draw_point_polar:nn { .425cm } { 90 } }
+    \draw_path_close:
+    \draw_path_moveto:n { ( \draw_point_polar:nn { .425cm } { 90 } ) + ( \draw_point_polar:nn { -.225cm } { 72 } ) }
+    \draw_path_lineto:n { \draw_point_polar:nn { .425cm } { 234 } }
+    \draw_path_lineto:n { \draw_point_polar:nn { .425cm } { 378 } }
+    \draw_path_lineto:n { ( \draw_point_polar:nn { .425cm } { 162 } ) + ( \draw_point_polar:nn { -.225cm } { 180 } ) }
+}
+
 \cs_new_protected:Npn \rpgicons_draw_shape_focus: {
     \draw_path_circle:nn { 0cm , 0cm } { .35cm }
     \draw_path_moveto:n { -.15cm , 0 }
@@ -1804,7 +1816,7 @@
     sixside ~ six , sixside ~ seven, sixside ~ eight, sixside ~ nine, fudge ~ plus, fudge ~ minus ,
     strength , dexterity , dexterity ~ alt , constitution , intelligence , wisdom , charisma ,
     resilience , sanity , perception , luck , armor , proficiency ,
-    linear , conic , quadratic , cubic , spheric , cylindric , verbal , somatic , material , focus ,
+    linear , conic , quadratic , cubic , spheric , cylindric , verbal , somatic , material , ritual , focus ,
     abjuration , conjuration , divination , enchantment , evocation , illusion , necromancy , transmutation ,
     acid , bludgeoning , cold , fire , force , lightning , necrotic , piercing , poison , psychic ,
     radiant , slashing , thunder , healing ,

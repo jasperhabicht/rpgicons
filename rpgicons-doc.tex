@@ -279,6 +279,7 @@
 %\changes{v2.0.3}{2025/10/13}{Fixes of bugs related to tagging support in L3 variant.}
 \changes{v2.0.4}{2025/10/21}{Added key to append styles for every shape or type.}
 \changes{v2.1.0}{2025/10/27}{Added alignment and currency shapes.}
+\changes{v2.1.1}{2025/11/01}{Added shape for ritual spell, fixes of alignment shapes.}
 
 \begin{document}
 
@@ -426,6 +427,7 @@ The command \macro{\spell} typesets an icon depicting the effect of a spell or h
     & \spell{verbal} & \macro{verbal} \\
     & \spell{somatic} & \macro{somatic} \\
     & \spell{material} & \macro{material} \\
+    & \spell{ritual} & \macro{ritual} \\
     & \spell{focus} & \macro{focus} \\
 \end{rpgiconsiconlist}
 
@@ -880,6 +882,7 @@ The icon is embedded as a node in the pic which has the name \macro{-node}. Thus
 !rpg icons/!create pic from saving shape
 !rpg icons/!create pic from spellschool shape
 !rpg icons/!create pic from damage shape
+!rpg icons/!create pic from alignment shape
 !rpg icons/!create every style
 \end{macrodef}
 The PGF variant of the package defines five Ti\emph{k}Z keys that are used to create pics using the relevant node shapes. Another key is defined to create keys that can be used to style all instances of a command or shape. In normal circumstances, it is not necessary to use these keys. They are mentioned here only for reference.
@@ -913,8 +916,11 @@ The following example shows how to create the drawing on the first page of this 
         proficiency/e76f51
     } {
         \definecolor{color}{HTML}{\c}
-        \pic[fill=color, transform shape]
-            at ({60*\i+10}:{0.33cm})
+        \pic[
+            fill=color,
+            draw=none,
+            transform shape
+        ] at ({60*\i+10}:{0.33cm})
             {rpg icons \x\space ability};
     }
 \end{tikzpicture}

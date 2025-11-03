@@ -36,9 +36,10 @@
   melee, ranged, magic, singlehanded, doublehanded,
   buff, blinded, charmed, deafened, exhausted, frightened, grappled, incapacitated, invisible,
   paralyzed, petrified, poisoned, prone, restrained, stunned, unconscious, hearing, seeing,
+  artificer, barbarian, bard, druid, fighter, monk, paladin, ranger, rogue, sorcerer, warlock, wizard,
   lawful good, neutral good, chaotic good, lawful neutral, true neutral,
   chaotic neutral, lawful evil, neutral evil, chaotic evil,
-  copper, silver, gold, electrum, platinum%
+  copper, silver, gold, electrum, platinum, gem, jewelry%
 }
 
 \tikzset{
@@ -74,6 +75,7 @@
   rpg icons/every damage/.style={},
   rpg icons/every attack/.style={},
   rpg icons/every condition/.style={},
+  rpg icons/every class/.style={},
   rpg icons/every alignment/.style={},
   rpg icons/every currency/.style={},
   %
@@ -1948,7 +1950,7 @@
   }
 }
 
-% single-handed
+% singlehanded
 \pgfdeclareshape{singlehanded}{
   \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
   \anchor{text} % this is used to center the text in the node
@@ -1972,7 +1974,7 @@
   }
 }
 
-% double-handed
+% doublehanded
 \pgfdeclareshape{doublehanded}{
   \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
   \anchor{text} % this is used to center the text in the node
@@ -2368,7 +2370,6 @@
     \pgfpathlineto{\pgfpoint{-.15cm}{0cm}}
     \pgfpatharc{90}{-90}{.125cm}
     \pgfpathlineto{\pgfpoint{-.425cm}{-.25cm}}
-
     \pgfpathmoveto{\pgfpoint{.225cm}{.15cm}}
     \pgfpatharc{270}{360}{.1cm}
     \pgfpatharc{180}{270}{.1cm}
@@ -2533,6 +2534,406 @@
 }
 \@ifundefined{condition}{\NewCommandCopy\condition\rpgiconscondition}{}
 
+% CLASSES
+
+% artificer
+\pgfdeclareshape{artificer}{
+  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
+  \anchor{text} % this is used to center the text in the node
+    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+
+  \backgroundpath{
+    \pgfpathmoveto{\pgfpoint{-.05cm}{.3cm}}
+    \pgfpathlineto{\pgfpoint{-.1cm}{.425cm}}
+    \pgfpathlineto{\pgfpoint{.1cm}{.425cm}}
+    \pgfpathlineto{\pgfpoint{.05cm}{.3cm}}
+    \pgfpathmoveto{\pgfpoint{-.15cm}{.3cm}}
+    \pgfpathlineto{\pgfpoint{.15cm}{.3cm}}
+    \pgfpathmoveto{\pgfpoint{-.1cm}{.3cm}}
+    \pgfpathlineto{\pgfpoint{-.1cm}{.15cm}}
+    \pgfsetcornersarced{\pgfpoint{.05cm}{.05cm}}
+    \pgfpathlineto{\pgfpoint{-.425cm}{-.425cm}}
+    \pgfpathlineto{\pgfpoint{.425cm}{-.425cm}}
+    \pgfsetcornersarced{\pgfpointorigin}
+    \pgfpathlineto{\pgfpoint{.1cm}{.15cm}}
+    \pgfpathlineto{\pgfpoint{.1cm}{.3cm}}
+    \pgfpathmoveto{\pgfpoint{-.125cm}{-.1cm}}
+    \pgfpathlineto{\pgfpoint{.125cm}{-.1cm}}
+    \pgfpathlineto{\pgfpoint{.1cm}{-.25cm}}
+    \pgfpathlineto{\pgfpoint{-.1cm}{-.25cm}}
+    \pgfpathclose
+  }
+}
+
+% barbarian
+\pgfdeclareshape{barbarian}{
+  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
+  \anchor{text} % this is used to center the text in the node
+    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+
+  \backgroundpath{
+    \pgfpathmoveto{\pgfpoint{.05cm}{-.375cm}}
+    \pgfpatharc{360}{180}{.05cm}
+    \pgfpathlineto{\pgfpoint{-.05cm}{.375cm}}
+    \pgfpatharc{180}{0}{.05cm}
+    \pgfpathclose
+    \pgfpathmoveto{\pgfpoint{-.05cm}{.25cm}}
+    \pgfpathlineto{\pgfpoint{.05cm}{.15cm}}
+    \pgfpathmoveto{\pgfpoint{-.05cm}{.1cm}}
+    \pgfpathlineto{\pgfpoint{.05cm}{0cm}}
+    \pgfpathmoveto{\pgfpoint{.05cm}{.2cm}}
+    \pgfpatharc{270}{360}{.15cm}
+    \pgfpatharc{90}{-90}{.225cm}
+    \pgfpatharc{0}{90}{.15cm}
+    \pgfpathmoveto{\pgfpoint{-.05cm}{.2cm}}
+    \pgfpatharc{270}{180}{.15cm}
+    \pgfpatharc{90}{270}{.225cm}
+    \pgfpatharc{180}{90}{.15cm}
+    \pgfsetarrowsstart{}
+    \pgfsetarrowsend{}
+  }
+}
+
+% bard
+\pgfdeclareshape{bard}{
+  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
+  \anchor{text} % this is used to center the text in the node
+    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+
+  \backgroundpath{
+    \pgfpathcircle{\pgfpoint{-.35cm}{.35cm}}{.075cm}
+    \pgfpathmoveto{\pgfpoint{-.275cm}{.35cm}}
+    \pgfpatharc{0}{-45}{sin(45)*.3cm and sin(45)*.45cm}
+    \pgfpatharc{135}{180}{sin(45)*.3cm and sin(45)*.45cm}
+    \pgfpathlineto{\pgfpoint{-.4cm}{-.2cm}}
+    \pgfpatharc{180}{360}{.4cm and .225cm}
+    \pgfpathlineto{\pgfpoint{.4cm}{-.1cm}}
+    \pgfpatharc{0}{45}{sin(45)*.3cm and sin(45)*.45cm}
+    \pgfpatharc{225}{180}{sin(45)*.3cm and sin(45)*.45cm}
+    \pgfpathcircle{\pgfpoint{.35cm}{.35cm}}{.075cm}
+    \pgfpathmoveto{\pgfpoint{-.275cm}{.3cm}}
+    \pgfpathlineto{\pgfpoint{-.275cm}{-.15cm}}
+    \pgfpatharc{180}{360}{.275cm and .1cm}
+    \pgfpathlineto{\pgfpoint{.275cm}{.3cm}}
+    \pgfpathmoveto{\pgfpoint{-.275cm}{.2cm}}
+    \pgfpathlineto{\pgfpoint{.275cm}{.2cm}}
+    \pgfpathmoveto{\pgfpoint{-.125cm}{.3cm}}
+    \pgfpathlineto{\pgfpoint{-.125cm}{-.225cm}}
+    \pgfpathmoveto{\pgfpoint{0cm}{.3cm}}
+    \pgfpathlineto{\pgfpoint{0cm}{-.225cm}}
+    \pgfpathmoveto{\pgfpoint{.125cm}{.3cm}}
+    \pgfpathlineto{\pgfpoint{.125cm}{-.225cm}}
+    \pgfsetarrowsstart{}
+    \pgfsetarrowsend{}
+  }
+}
+
+% cleric
+\pgfdeclareshape{cleric}{
+  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
+  \anchor{text} % this is used to center the text in the node
+    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+
+  \backgroundpath{
+    \pgfpathmoveto{\pgfpoint{-.075cm}{-.425cm}}
+    \pgfpathlineto{\pgfpoint{-.05cm}{-.1cm}}
+    \pgfpathlineto{\pgfpoint{-.35cm}{-.15cm}}
+    \pgfpathlineto{\pgfpoint{-.35cm}{0cm}}
+    \pgfpathlineto{\pgfpoint{-.1cm}{0cm}}
+    \pgfarc{240}{-60}{.2cm and .225cm}
+    \pgfpathlineto{\pgfpoint{.35cm}{0cm}}
+    \pgfpathlineto{\pgfpoint{.35cm}{-.15cm}}
+    \pgfpathlineto{\pgfpoint{.05cm}{-.1cm}}
+    \pgfpathlineto{\pgfpoint{.075cm}{-.425cm}}
+    \pgfpathclose
+    \pgfpathellipse{\pgfpoint{0cm}{.2cm}}{\pgfpoint{-.075cm}{0cm}}{\pgfpoint{0cm}{-.125cm}}
+  }
+}
+
+% druid
+\pgfdeclareshape{druid}{
+  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
+  \anchor{text} % this is used to center the text in the node
+    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+
+  \backgroundpath{
+    \pgfpathmoveto{\pgfpointadd{\pgfpoint{.1cm}{-.1cm}}{\pgfpointpolar{45}{.05cm}}}
+    \pgfpathlineto{\pgfpointadd{\pgfpoint{.35cm}{-.35cm}}{\pgfpointpolar{45}{.05cm}}}
+    \pgfpatharc{45}{-135}{.05cm}
+    \pgfpathlineto{\pgfpointadd{\pgfpoint{.1cm}{-.1cm}}{\pgfpointpolar{-135}{.05cm}}}
+    \pgfpathmoveto{\pgfpointadd{\pgfpoint{.125cm}{-.075cm}}{\pgfpointpolar{-135}{.05cm}}}
+    \pgfpatharc{315}{80}{.3cm}
+    \pgfpathlineto{\pgfpointadd{\pgfpointadd{\pgfpoint{-.075cm}{.125cm}}{\pgfpointpolar{45}{.05cm}}}
+        {\pgfpointpolar{90}{.2cm}}}
+    \pgfpatharc{90}{315}{.2cm}
+    \pgfpathlineto{\pgfpointadd{\pgfpoint{.125cm}{-.075cm}}{\pgfpointpolar{45}{.05cm}}}
+    \pgfpathclose
+  }
+}
+
+% fighter
+\pgfdeclareshape{fighter}{
+  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
+  \anchor{text} % this is used to center the text in the node
+    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+
+  \backgroundpath{
+    \pgfpathmoveto{\pgfpoint{-.05cm}{.425cm}}
+    \pgfpathlineto{\pgfpoint{.05cm}{.425cm}}
+    \pgfpathlineto{\pgfpoint{.05cm}{.2cm}}
+    \pgfpathlineto{\pgfpoint{-.05cm}{.2cm}}
+    \pgfpathclose
+    \pgfpathmoveto{\pgfpoint{.05cm}{.375cm}}
+    \pgfpatharc{90}{0}{.275cm}
+    \pgfpathlineto{\pgfpoint{.325cm}{-.25cm}}
+    \pgfpathlineto{\pgfpoint{.15cm}{-.425cm}}
+    \pgfpathlineto{\pgfpoint{.15cm}{-.15cm}}
+    \pgfpatharc{180}{145}{.35cm}
+    \pgfpathlineto{\pgfpoint{.2cm}{.1cm}}
+    \pgfpathlineto{\pgfpoint{.05cm}{.05cm}}
+    \pgfpathlineto{\pgfpoint{.025cm}{-.2cm}}
+    \pgfpathlineto{\pgfpoint{-.025cm}{-.2cm}}
+    \pgfpathlineto{\pgfpoint{-.05cm}{.05cm}}
+    \pgfpathlineto{\pgfpoint{-.2cm}{.1cm}}
+    \pgfpathlineto{\pgfpointadd{\pgfpoint{-.5cm}{-.15cm}}{\pgfpointpolar{35}{.35cm}}}
+    \pgfpatharc{35}{0}{.35cm}
+    \pgfpathlineto{\pgfpoint{-.15cm}{-.425cm}}
+    \pgfpathlineto{\pgfpoint{-.325cm}{-.25cm}}
+    \pgfpathlineto{\pgfpoint{-.325cm}{.1cm}}
+    \pgfpatharc{180}{90}{.275cm}
+    \pgfsetarrowsstart{}
+    \pgfsetarrowsend{}
+  }
+}
+
+% monk
+\pgfdeclareshape{monk}{
+  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
+  \anchor{text} % this is used to center the text in the node
+    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+
+  \backgroundpath{
+    \pgfpathmoveto{\pgfpoint{-.425cm}{-.15cm}}
+    \pgfpathlineto{\pgfpoint{-.425cm}{.125cm}}
+    \pgfpathlineto{\pgfpoint{-.125cm}{.425cm}}
+    \pgfpatharc{45}{-45}{.1cm}
+    \pgfpathlineto{\pgfpoint{-.275cm}{.1cm}}
+    \pgfpathlineto{\pgfpoint{-.275cm}{-.05cm}}
+    \pgfpatharc{180}{360}{.05cm}
+    \pgfpathlineto{\pgfpoint{-.175cm}{0cm}}
+    \pgfpatharc{180}{90}{.1cm}
+    \pgfpathlineto{\pgfpoint{-.075cm}{-.1cm}}
+    \pgfpatharc{0}{-45}{.125cm}
+    \pgfpathlineto{\pgfpoint{-.35cm}{-.425cm}}
+    \pgfpathmoveto{\pgfpoint{.425cm}{-.15cm}}
+    \pgfpathlineto{\pgfpoint{.425cm}{.125cm}}
+    \pgfpathlineto{\pgfpoint{.125cm}{.425cm}}
+    \pgfpatharc{135}{215}{.1cm}
+    \pgfpathlineto{\pgfpoint{.275cm}{.1cm}}
+    \pgfpathlineto{\pgfpoint{.275cm}{-.05cm}}
+    \pgfpatharc{360}{180}{.05cm}
+    \pgfpathlineto{\pgfpoint{.175cm}{0cm}}
+    \pgfpatharc{0}{90}{.1cm}
+    \pgfpathlineto{\pgfpoint{.075cm}{-.1cm}}
+    \pgfpatharc{180}{215}{.125cm}
+    \pgfpathlineto{\pgfpoint{.35cm}{-.425cm}}
+    \pgfsetarrowsstart{}
+    \pgfsetarrowsend{}
+  }
+}
+
+% paladin
+\pgfdeclareshape{paladin}{
+  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
+  \anchor{text} % this is used to center the text in the node
+    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+
+  \backgroundpath{
+    \pgfpathcircle{\pgfpoint{0cm}{-.15cm}}{.275cm}
+    \pgfpathmoveto{\pgfpointadd{\pgfpoint{0cm}{-.15cm}}{\pgfpointpolar{60}{.275cm}}}
+    \pgfpathlineto{\pgfpoint{.05cm}{0cm}}
+    \pgfpathlineto{\pgfpoint{.05cm}{-.1cm}}
+    \pgfpathlineto{\pgfpoint{.15cm}{-.1cm}}
+    \pgfpathlineto{\pgfpointadd{\pgfpoint{0cm}{-.15cm}}{\pgfpointpolar{30}{.275cm}}}
+    \pgfpathmoveto{\pgfpointadd{\pgfpoint{0cm}{-.15cm}}{\pgfpointpolar{-30}{.275cm}}}
+    \pgfpathlineto{\pgfpoint{.15cm}{-.2cm}}
+    \pgfpathlineto{\pgfpoint{.05cm}{-.2cm}}
+    \pgfpathlineto{\pgfpoint{.05cm}{-.3cm}}
+    \pgfpathlineto{\pgfpointadd{\pgfpoint{0cm}{-.15cm}}{\pgfpointpolar{-60}{.275cm}}}
+    \pgfpathmoveto{\pgfpointadd{\pgfpoint{0cm}{-.15cm}}{\pgfpointpolar{120}{.275cm}}}
+    \pgfpathlineto{\pgfpoint{-.05cm}{0cm}}
+    \pgfpathlineto{\pgfpoint{-.05cm}{-.1cm}}
+    \pgfpathlineto{\pgfpoint{-.15cm}{-.1cm}}
+    \pgfpathlineto{\pgfpointadd{\pgfpoint{0cm}{-.15cm}}{\pgfpointpolar{150}{.275cm}}}
+    \pgfpathmoveto{\pgfpointadd{\pgfpoint{0cm}{-.15cm}}{\pgfpointpolar{210}{.275cm}}}
+    \pgfpathlineto{\pgfpoint{-.15cm}{-.2cm}}
+    \pgfpathlineto{\pgfpoint{-.05cm}{-.2cm}}
+    \pgfpathlineto{\pgfpoint{-.05cm}{-.3cm}}
+    \pgfpathlineto{\pgfpointadd{\pgfpoint{0cm}{-.15cm}}{\pgfpointpolar{240}{.275cm}}}
+    \pgfpathcircle{\pgfpoint{0cm}{.2cm}}{.075cm}
+    \pgfpathmoveto{\pgfpointintersectionofcircles{\pgfpoint{0cm}{.2cm}}{\pgfpoint{0cm}{.7cm}}
+        {.075cm}{.5cm}{1}}
+    \pgfpatharc{280}{325}{.5cm}
+    \pgfpathmoveto{\pgfpointintersectionofcircles{\pgfpoint{0cm}{.2cm}}{\pgfpoint{0cm}{.7cm}}
+        {.075cm}{.5cm}{2}}
+    \pgfpatharc{260}{215}{.5cm}
+    \pgfsetarrowsstart{}
+    \pgfsetarrowsend{}
+  }
+}
+
+% ranger
+\pgfdeclareshape{ranger}{
+  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
+  \anchor{text} % this is used to center the text in the node
+    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+
+  \backgroundpath{
+    \pgfpathcircle{\pgfpoint{0cm}{0cm}}{.425cm}
+    \pgfpathcircle{\pgfpoint{0cm}{0cm}}{.325cm}
+    \foreach \a in {0,90,180,270} {
+      \pgfpathmoveto{\pgfpointpolar{\a}{.325cm}}
+      \pgfpathlineto{\pgfpointpolar{\a}{.225cm}}
+    }
+    \pgfpathmoveto{\pgfpointpolar{45}{.225cm}}
+    \pgfpathlineto{\pgfpointpolar{135}{.1cm}}
+    \pgfpathlineto{\pgfpointpolar{225}{.225cm}}
+    \pgfpathlineto{\pgfpointpolar{315}{.1cm}}
+    \pgfpathclose
+    \pgfpathmoveto{\pgfpointpolar{135}{.1cm}}
+    \pgfpathlineto{\pgfpointpolar{315}{.1cm}}
+    \pgfsetarrowsstart{}
+    \pgfsetarrowsend{}
+  }
+}
+
+% rogue
+\pgfdeclareshape{rogue}{
+  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
+  \anchor{text} % this is used to center the text in the node
+    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+
+  \backgroundpath{
+    \pgfpathmoveto{\pgfpointadd{\pgfpoint{.15cm}{.15cm}}{\pgfpointpolar{-45}{.05cm}}}
+    \pgfpatharc{135}{405}{.125cm}
+    \pgfpatharc{-45}{135}{.175cm}
+    \pgfpatharc{45}{315}{.125cm}
+    \pgfpathmoveto{\pgfpointadd{\pgfpoint{-.275cm}{-.275cm}}{\pgfpointpolar{315}{.05cm}}}
+    \pgfpathlineto{\pgfpointadd{\pgfpoint{-.175cm}{-.375cm}}{\pgfpointpolar{315}{.05cm}}}
+    \pgfpathlineto{\pgfpointadd{\pgfpoint{0cm}{-.2cm}}{\pgfpointpolar{315}{.05cm}}}
+    \pgfpathlineto{\pgfpointadd{\pgfpoint{-.1cm}{-.1cm}}{\pgfpointpolar{315}{.05cm}}}
+    \pgfpathmoveto{\pgfpointadd{\pgfpoint{.2cm}{.2cm}}{\pgfpointpolar{135}{.05cm}}}
+    \pgfpathlineto{\pgfpointadd{\pgfpoint{-.325cm}{-.325cm}}{\pgfpointpolar{135}{.05cm}}}
+    \pgfpatharc{135}{315}{.05cm}
+    \pgfpathlineto{\pgfpointadd{\pgfpoint{.2cm}{.2cm}}{\pgfpointpolar{315}{.05cm}}}
+    \pgfsetarrowsstart{}
+    \pgfsetarrowsend{}
+  }
+}
+
+% sorcerer
+\pgfdeclareshape{sorcerer}{
+  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
+  \anchor{text} % this is used to center the text in the node
+    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+
+  \backgroundpath{
+    \pgfpathmoveto{\pgfpoint{-.25cm}{-.425cm}}
+    \pgfpathlineto{\pgfpoint{.025cm}{-.425cm}}
+    \pgfpathlineto{\pgfpoint{.325cm}{-.125cm}}
+    \pgfpatharc{45}{135}{.1cm}
+    \pgfpathlineto{\pgfpoint{0cm}{-.275cm}}
+    \pgfpathlineto{\pgfpoint{-.15cm}{-.275cm}}
+    \pgfpatharc{270}{90}{.05cm}
+    \pgfpathlineto{\pgfpoint{-.1cm}{-.175cm}}
+    \pgfpatharc{270}{360}{.1cm}
+    \pgfpathlineto{\pgfpoint{-.2cm}{-.075cm}}
+    \pgfpatharc{90}{135}{.125cm}
+    \pgfpathlineto{\pgfpoint{-.425cm}{-.25cm}}
+    \pgfpathmoveto{\pgfpoint{-.125cm}{.175cm}}
+    \pgfpatharc{180}{360}{.125cm}
+    \pgfpatharc{0}{45}{.125cm}
+    \pgfpatharc{225}{180}{.225cm}
+    \pgfsetarrowsstart{}
+    \pgfsetarrowsend{}
+  }
+}
+
+% warlock
+\pgfdeclareshape{warlock}{
+  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
+  \anchor{text} % this is used to center the text in the node
+    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+
+  \backgroundpath{
+    \pgfpathmoveto{\pgfpointpolar{150}{.4cm}}
+    \pgfpatharc{150}{30}{.4cm}
+    \pgfpatharc{-30}{-150}{.4cm}
+    \pgfpathclose
+    \pgfpathcircle{\pgfpoint{0cm}{.2cm}}{.1cm}
+    \pgfpathmoveto{\pgfpoint{-.425cm}{-.425cm}}
+    \pgfpatharc{180}{150}{.75cm}
+    \pgfpathmoveto{\pgfpoint{.425cm}{-.425cm}}
+    \pgfpatharc{0}{30}{.75cm}
+    \pgfpathcircle{\pgfpoint{0cm}{-.175cm}}{.075cm}
+    \pgfpathmoveto{\pgfpoint{-.15cm}{-.425cm}}
+    \pgfpatharc{180}{90}{.075cm}
+    \pgfpathlineto{\pgfpoint{.075cm}{-.35cm}}
+    \pgfpatharc{90}{0}{.075cm}
+    \pgfsetarrowsstart{}
+    \pgfsetarrowsend{}
+  }
+}
+
+% wizard
+\pgfdeclareshape{wizard}{
+  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
+  \anchor{text} % this is used to center the text in the node
+    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+
+  \backgroundpath{
+    \pgfpathmoveto{\pgfpoint{.4cm}{-.425cm}}
+    \pgfpathlineto{\pgfpoint{-.3cm}{-.425cm}}
+    \pgfpatharc{270}{90}{.1cm}
+    \pgfpathlineto{\pgfpoint{.4cm}{-.225cm}}
+    \pgfpathlineto{\pgfpoint{.4cm}{.425cm}}
+    \pgfpathlineto{\pgfpoint{-.3cm}{.425cm}}
+    \pgfpatharc{90}{180}{.1cm}
+    \pgfpathlineto{\pgfpoint{-.4cm}{-.325cm}}
+    \pgfpathmoveto{\pgfpoint{-.25cm}{-.325cm}}
+    \pgfpathlineto{\pgfpoint{.35cm}{-.325cm}}
+    \pgfpathmoveto{\pgfpoint{-.2cm}{.325cm}}
+    \pgfpathlineto{\pgfpoint{-.2cm}{-.125cm}}
+    \pgfpathmoveto{\pgfpoint{.2cm}{.425cm}}
+    \pgfpathlineto{\pgfpoint{.4cm}{.225cm}}
+    \pgfpathmoveto{\pgfpoint{.2cm}{-.225cm}}
+    \pgfpathlineto{\pgfpoint{.4cm}{-.025cm}}
+    \pgfsetarrowsstart{}
+    \pgfsetarrowsend{}
+  }
+}
+
+\NewDocumentCommand{\rpgiconsclass}{ O{positive} m O{} }{%
+  \edef\rpgicons@classiconposneg{#1}%
+  \edef\rpgicons@classiconpos{positive}%
+  \ifx\rpgicons@spellschooliconposneg\rpgicons@classiconpos%
+    \def\rpgicons@classiconfg{fgneg}\else%
+    \def\rpgicons@classiconfg{fgpos}\fi%
+  \ifx\rpgicons@classiconposneg\rpgicons@classiconpos%
+    \def\rpgicons@classiconbg{bgneg}\else%
+    \def\rpgicons@classiconbg{bgpos}\fi%
+  \hspace{\rpgicons@beforesep}%
+  \tikz[rpg icons, rpg icons/every class, rpg icons/every #2,
+    baseline=\rpgicons@baseline, fgpos/.style={draw=rpgicons@bg, line width=.6pt}, fgneg/.style={draw},
+    bgpos/.style={fill}, bgneg/.style={draw}, #3] {
+    \path[scale=.333, \rpgicons@classiconbg] (-.425cm,-.425cm) rectangle (.425cm,.425cm);
+    \node[#2, \rpgicons@classiconfg, scale=.225] at (0cm,0cm) {};
+    \path[draw=none, scale=.333] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
+  }%
+  \hspace{\rpgicons@aftersep}%
+}
+\@ifundefined{class}{\NewCommandCopy\class\rpgiconsclass}{}
+
 % ALIGNMENT
 
 % lawful good
@@ -2540,9 +2941,6 @@
   \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
   \anchor{text} % this is used to center the text in the node
     {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
-
-  \behindbackgroundpath{
-  }
 
   \backgroundpath{
     \pgfpathmoveto{\pgfpoint{.35cm}{-.1cm}}
@@ -2561,9 +2959,6 @@
   \anchor{text} % this is used to center the text in the node
     {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
-  \behindbackgroundpath{
-  }
-
   \backgroundpath{
     \pgfpathcircle{\pgfpoint{0cm}{-.1cm}}{.2cm}
     \pgfpathmoveto{\pgfpoint{.325cm}{.1cm}}
@@ -2579,9 +2974,6 @@
   \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
   \anchor{text} % this is used to center the text in the node
     {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
-
-  \behindbackgroundpath{
-  }
 
   \backgroundpath{
     \pgfpathmoveto{\pgfpoint{0cm}{.35cm}}
@@ -2600,9 +2992,6 @@
   \anchor{text} % this is used to center the text in the node
     {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
-  \behindbackgroundpath{
-  }
-
   \backgroundpath{
     \pgfpathcircle{\pgfpoint{0cm}{0cm}}{.2cm}
     \pgfpathmoveto{\pgfpoint{.35cm}{0cm}}
@@ -2618,9 +3007,6 @@
   \anchor{text} % this is used to center the text in the node
     {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
-  \behindbackgroundpath{
-  }
-
   \backgroundpath{
     \pgfpathcircle{\pgfpoint{0cm}{0cm}}{.2cm}
   }
@@ -2631,9 +3017,6 @@
   \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
   \anchor{text} % this is used to center the text in the node
     {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
-
-  \behindbackgroundpath{
-  }
 
   \backgroundpath{
     \pgfpathcircle{\pgfpoint{0cm}{0cm}}{.2cm}
@@ -2649,9 +3032,6 @@
   \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
   \anchor{text} % this is used to center the text in the node
     {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
-
-  \behindbackgroundpath{
-  }
 
   \backgroundpath{
     \pgfpathmoveto{\pgfpoint{.35cm}{.1cm}}
@@ -2670,9 +3050,6 @@
   \anchor{text} % this is used to center the text in the node
     {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
-  \behindbackgroundpath{
-  }
-
   \backgroundpath{
     \pgfpathcircle{\pgfpoint{0cm}{.1cm}}{.2cm}
     \pgfpathmoveto{\pgfpoint{.325cm}{-.1cm}}
@@ -2689,9 +3066,6 @@
   \anchor{text} % this is used to center the text in the node
     {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
-  \behindbackgroundpath{
-  }
-
   \backgroundpath{
     \pgfpathmoveto{\pgfpoint{0cm}{.35cm}}
     \pgfpathlineto{\pgfpoint{0cm}{-.35cm}}
@@ -2704,21 +3078,21 @@
 }
 
 \NewDocumentCommand{\rpgiconsalignment}{ O{positive} m O{} }{%
-  \edef\rpgicons@spellschooliconposneg{#1}%
-  \edef\rpgicons@spellschooliconpos{positive}%
-  \ifx\rpgicons@spellschooliconposneg\rpgicons@spellschooliconpos%
-    \def\rpgicons@spellschooliconfg{fgneg}\else%
-    \def\rpgicons@spellschooliconfg{fgpos}\fi%
-  \ifx\rpgicons@spellschooliconposneg\rpgicons@spellschooliconpos%
-    \def\rpgicons@spellschooliconbg{bgneg}\else%
-    \def\rpgicons@spellschooliconbg{bgpos}\fi%
+  \edef\rpgicons@alignmenticonposneg{#1}%
+  \edef\rpgicons@alignmenticonpos{positive}%
+  \ifx\rpgicons@alignmenticonposneg\rpgicons@alignmenticonpos%
+    \def\rpgicons@alignmenticonfg{fgneg}\else%
+    \def\rpgicons@alignmenticonfg{fgpos}\fi%
+  \ifx\rpgicons@alignmenticonposneg\rpgicons@alignmenticonpos%
+    \def\rpgicons@alignmenticonbg{bgneg}\else%
+    \def\rpgicons@alignmenticonbg{bgpos}\fi%
   \hspace{\rpgicons@beforesep}%
   \tikz[rpg icons, rpg icons/every alignment, rpg icons/every #2,
     baseline=\rpgicons@baseline, fgpos/.style={draw=rpgicons@bg, line width=.6pt}, fgneg/.style={draw},
     bgpos/.style={fill}, bgneg/.style={draw}, #3] {
-    \path[scale=.333, \rpgicons@spellschooliconbg] (30:.425cm)
+    \path[scale=.333, \rpgicons@alignmenticonbg] (30:.425cm)
       -- (90:.425cm) -- (150:.425cm) -- (210:.425cm) -- (270:.425cm) -- (330:.425cm) -- cycle;
-    \node[#2, \rpgicons@spellschooliconfg, scale=.225] at (0cm,0cm) {};
+    \node[#2, \rpgicons@alignmenticonfg, scale=.225] at (0cm,0cm) {};
     \path[draw=none, scale=.333] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
   }%
   \hspace{\rpgicons@aftersep}%
@@ -2816,6 +3190,57 @@
   }
 }
 
+% gem
+\pgfdeclareshape{gem}{
+  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
+  \anchor{text} % this is used to center the text in the node
+    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+
+  \backgroundpath{
+    \pgfpathmoveto{\pgfpoint{-.25cm}{.425cm}}
+    \pgfpathlineto{\pgfpoint{.25cm}{.425cm}}
+    \pgfpathlineto{\pgfpoint{.425cm}{.15cm}}
+    \pgfpathlineto{\pgfpoint{0cm}{-.425cm}}
+    \pgfpathlineto{\pgfpoint{-.425cm}{.15cm}}
+    \pgfpathclose
+    \pgfpathmoveto{\pgfpoint{-.425cm}{.15cm}}
+    \pgfpathlineto{\pgfpoint{.425cm}{.15cm}}
+    \pgfpathmoveto{\pgfpoint{-.25cm}{.425cm}}
+    \pgfpathlineto{\pgfpoint{-.2cm}{.15cm}}
+    \pgfpathlineto{\pgfpoint{0cm}{.425cm}}
+    \pgfpathlineto{\pgfpoint{.2cm}{.15cm}}
+    \pgfpathlineto{\pgfpoint{.25cm}{.425cm}}
+    \pgfpathmoveto{\pgfpoint{-.2cm}{.15cm}}
+    \pgfpathlineto{\pgfpoint{0cm}{-.425cm}}
+    \pgfpathlineto{\pgfpoint{.2cm}{.15cm}}
+    \pgfsetarrowsstart{}
+    \pgfsetarrowsend{}
+  }
+}
+
+% jewelry
+\pgfdeclareshape{jewelry}{
+  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
+  \anchor{text} % this is used to center the text in the node
+    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+
+  \backgroundpath{
+    \pgfpathellipse{\pgfpoint{0cm}{-.15cm}}{\pgfpoint{.175cm}{0cm}}{\pgfpoint{0cm}{.275cm}}
+    \pgfpathmoveto{\pgfpointadd{\pgfpoint{0cm}{-.15cm}}{\pgfpointpolar{0}{.075cm and .175cm}}}
+    \pgfpatharc{0}{-60}{.075cm and .175cm}
+
+    \pgfpathcircle{\pgfpoint{0cm}{.2cm}}{.075cm}
+    \pgfpathmoveto{\pgfpointintersectionofcircles{\pgfpoint{0cm}{.2cm}}{\pgfpoint{0cm}{.7cm}}
+        {.075cm}{.5cm}{1}}
+    \pgfpatharc{280}{325}{.5cm}
+    \pgfpathmoveto{\pgfpointintersectionofcircles{\pgfpoint{0cm}{.2cm}}{\pgfpoint{0cm}{.7cm}}
+        {.075cm}{.5cm}{2}}
+    \pgfpatharc{260}{215}{.5cm}
+    \pgfsetarrowsstart{}
+    \pgfsetarrowsend{}
+  }
+}
+
 \NewDocumentCommand{\rpgiconscurrency}{ m O{} m }{%
   \rpgicons@ifEmptyF{#3}{#3\,}%
   \hspace{\rpgicons@beforesep}%
@@ -2888,10 +3313,21 @@
       }
     }
   },
+  rpg icons/create pic from class shape/.code={
+    \tikzset{
+      rpg icons #1 class/.pic={
+        \begin{scope}[every node/.append style={#1}, rpg icons/every class, rpg icons/every #1]
+          \path[draw, scale=.333, pic actions] (-.425cm,-.425cm) rectangle (.425cm,.425cm);
+          \node[draw, scale=.225] at (0cm,0cm) (-node) {};
+          \path[draw=none, scale=.333] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
+        \end{scope}
+      }
+    }
+  },
   rpg icons/create pic from alignment shape/.code={
     \tikzset{
-      rpg icons #1 damage/.pic={
-        \begin{scope}[every node/.append style={#1}, rpg icons/every damage, rpg icons/every #1]
+      rpg icons #1 alignment/.pic={
+        \begin{scope}[every node/.append style={#1}, rpg icons/every alignment, rpg icons/every #1]
           \path[draw, scale=.333, pic actions] (30:.425cm)
             -- (90:.425cm) -- (150:.425cm) -- (210:.425cm) -- (270:.425cm) -- (330:.425cm) -- cycle;
           \node[draw, scale=.225] at (0cm,0cm) (-node) {};
@@ -2917,6 +3353,9 @@
   rpg icons/create pic from damage shape/.list={%
     acid, bludgeoning, cold, fire, force, lightning, necrotic, piercing, poison, psychic,
     radiant, slashing, thunder, healing%
+  },
+  rpg icons/create pic from class shape/.list={%
+    artificer, barbarian, bard, cleric, druid, fighter, monk, paladin, sorcerer, warlock, wizard%
   },
   rpg icons/create pic from alignment shape/.list={%
     lawful good, neutral good, chaotic good, lawful neutral, true neutral,

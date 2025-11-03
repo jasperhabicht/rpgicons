@@ -279,7 +279,7 @@
 %\changes{v2.0.3}{2025/10/13}{Fixes of bugs related to tagging support in L3 variant.}
 \changes{v2.0.4}{2025/10/21}{Added key to append styles for every shape or type.}
 \changes{v2.1.0}{2025/10/27}{Added alignment and currency shapes.}
-\changes{v2.1.1}{2025/11/01}{Added shape for ritual spell, fixes of alignment shapes.}
+\changes{v2.1.1}{2025/11/01}{Added shapes for ritual spell, gems and jewelry as well as for classes. Fixes in alignment shapes and in pic definitions.}
 
 \begin{document}
 
@@ -514,16 +514,37 @@ The command \macro{\condition} typesets an icon depicting a condition of a chara
     & \condition{seeing} & \macro{seeing} \\
 \end{rpgiconsiconlist}
 
-\subsection[Command \textbackslash alignment]{Command \titlemacro*{alignment}}
+\subsection[Commands \textbackslash class and \textbackslash alignment]{Commands \titlemacro*{class} and \titlemacro*{alignment}}
+
+\begin{macrodef}
+|\class|[<style>]{<shape>}[<options>]
+\end{macrodef}
+The command \macro{\class} typesets an icon depicting a class of a character. The optional argument of the command can take additional options to style the icon.
+
+The first optional argument can take the value \macro{negative} or \macro{positive}, \macro{positive} being the default value. With \macro{positive} given as argument, the icon is drawn in white inside a filled frame. As an example, \macro{\class[negative]{barbarian}} results in \class[negative]{barbarian}.
 
 \begin{macrodef}
 |\alignment|[<style>]{<shape>}[<options>]
 \end{macrodef}
-The command \macro{\alignment} typesets an icon depicting an alignment of a character. The optional argument can take additional options to style the icon.
+The command \macro{\alignment} typesets an icon depicting an alignment of a character. The optional argument of the command can take additional options to style the icon.
 
 The first optional argument can take the value \macro{negative} or \macro{positive}, \macro{positive} being the default value. With \macro{positive} given as argument, the icon is drawn in white inside a filled frame. As an example, \macro{\alignment[negative]{lawful good}} results in \alignment[negative]{lawful good}.
 
 \begin{rpgiconsiconlist}
+\macro{\class}
+    & \class{artificer} & \macro{artificer} \\
+    & \class{barbarian} & \macro{barbarian} \\
+    & \class{bard} & \macro{bard} \\
+    & \class{cleric} & \macro{cleric} \\
+    & \class{druid} & \macro{druid} \\
+    & \class{fighter} & \macro{fighter} \\
+    & \class{monk} & \macro{monk} \\
+    & \class{paladin} & \macro{paladin} \\
+    & \class{ranger} & \macro{ranger} \\
+    & \class{rogue} & \macro{rogue} \\
+    & \class{sorcerer} & \macro{sorcerer} \\
+    & \class{warlock} & \macro{warlock} \\
+    & \class{wizard} & \macro{wizard} \\
 \macro{\alignment}
     & \alignment{lawful good} & \macro{lawful good} \\
     & \alignment{neutral good} & \macro{neutral good} \\
@@ -552,6 +573,8 @@ The command provides a second mandatory argument that accepts an integer that is
     & \currency{gold}{} & \macro{gold} \\
     & \currency{electrum}{} & \macro{electrum} \\
     & \currency{platinum}{} & \macro{platinum} \\
+    & \currency{gem}{} & \macro{gem} \\
+    & \currency{jewelry}{} & \macro{jewelry} \\
 \end{rpgiconsiconlist}
 
 % l3 variant

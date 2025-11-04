@@ -966,6 +966,18 @@
     \draw_path_lineto:n { .15cm , .1cm }
 }
 
+\cs_new_protected:Npn \rpgicons_draw_shape_necrotic_alt: {
+    \draw_path_moveto:n { -.35cm , -.425cm }
+    \draw_path_lineto:n { -.35cm , .075cm }
+    \draw_path_arc:nnn { 180 } { 0 } { .35cm }
+    \draw_path_lineto:n { .35cm , -.425cm }
+    \draw_path_close:
+    \draw_path_moveto:n { -.1cm , -.075cm }
+    \draw_path_lineto:n { .1cm , -.075cm }
+    \draw_path_moveto:n { -.15cm , .125cm }
+    \draw_path_lineto:n { .15cm , .125cm }
+}
+
 \cs_new_protected:Npn \rpgicons_draw_shape_piercing: {
     \draw_path_moveto:n { -.425cm , .075cm }
     \draw_path_lineto:n { .3cm , .075cm }
@@ -2188,7 +2200,7 @@
     resilience , sanity , perception , luck , armor , proficiency ,
     linear , conic , quadratic , cubic , spheric , cylindric , verbal , somatic , material , ritual , focus ,
     abjuration , conjuration , divination , enchantment , evocation , illusion , necromancy , transmutation ,
-    acid , bludgeoning , cold , fire , force , lightning , necrotic , piercing , poison , psychic ,
+    acid , bludgeoning , cold , fire , force , lightning , necrotic , necrotic ~ alt , piercing , poison , psychic ,
     radiant , slashing , thunder , healing ,
     melee , ranged , magic , singlehanded , doublehanded ,
     buff , blinded , charmed , deafened , exhausted , frightened , grappled , incapacitated , invisible ,

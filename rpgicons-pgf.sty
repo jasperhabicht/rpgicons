@@ -31,7 +31,7 @@
   resilience, sanity, perception, luck, armor, proficiency,
   linear, conic, quadratic, cubic, spheric, cylindric, verbal, somatic, material, ritual, focus,
   abjuration, conjuration, divination, enchantment, evocation, illusion, necromancy, transmutation,
-  acid, bludgeoning, cold, fire, force, lightning, necrotic, piercing, poison, psychic,
+  acid, bludgeoning, cold, fire, force, lightning, necrotic, necrotic alt, piercing, poison, psychic,
   radiant, slashing, thunder, healing,
   melee, ranged, magic, singlehanded, doublehanded,
   buff, blinded, charmed, deafened, exhausted, frightened, grappled, incapacitated, invisible,
@@ -1673,6 +1673,27 @@
     \pgfpathlineto{\pgfpoint{0cm}{.25cm}}
     \pgfpathmoveto{\pgfpoint{-.15cm}{.1cm}}
     \pgfpathlineto{\pgfpoint{.15cm}{.1cm}}
+    \pgfsetarrowsstart{}
+    \pgfsetarrowsend{}
+  }
+}
+
+% necrotic alt
+\pgfdeclareshape{necrotic alt}{
+  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
+  \anchor{text} % this is used to center the text in the node
+    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+
+  \backgroundpath{
+    \pgfpathmoveto{\pgfpoint{-.35cm}{-.425cm}}
+    \pgfpathlineto{\pgfpoint{-.35cm}{.075cm}}
+    \pgfpatharc{180}{0}{.35cm}
+    \pgfpathlineto{\pgfpoint{.35cm}{-.425cm}}
+    \pgfpathclose
+    \pgfpathmoveto{\pgfpoint{-.1cm}{-.075cm}}
+    \pgfpathlineto{\pgfpoint{.1cm}{-.075cm}}
+    \pgfpathmoveto{\pgfpoint{-.15cm}{.125cm}}
+    \pgfpathlineto{\pgfpoint{.15cm}{.125cm}}
     \pgfsetarrowsstart{}
     \pgfsetarrowsend{}
   }
@@ -3422,7 +3443,7 @@
     abjuration, conjuration, divination, enchantment, evocation, illusion, necromancy, transmutation%
   },
   rpg icons/create pic from damage shape/.list={%
-    acid, bludgeoning, cold, fire, force, lightning, necrotic, piercing, poison, psychic,
+    acid, bludgeoning, cold, fire, force, lightning, necrotic, necrotic alt, piercing, poison, psychic,
     radiant, slashing, thunder, healing%
   },
   rpg icons/create pic from class shape/.list={%

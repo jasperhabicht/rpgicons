@@ -37,7 +37,7 @@
   buff, blinded, charmed, deafened, exhausted, frightened, grappled, incapacitated, invisible,
   paralyzed, petrified, poisoned, prone, restrained, stunned, unconscious, hearing, seeing,
   artificer, barbarian, bard, cleric, cleric alt, druid, druid alt, fighter, monk, paladin,
-  ranger, rogue, sorcerer, warlock, wizard,
+  ranger, rogue, sorcerer, sorcerer alt, warlock, wizard,
   lawful good, neutral good, chaotic good, lawful neutral, true neutral,
   chaotic neutral, lawful evil, neutral evil, chaotic evil,
   copper, silver, gold, electrum, platinum, gem, jewellery, jewelry%
@@ -2943,6 +2943,42 @@
   }
 }
 
+% sorcerer alt
+\pgfdeclareshape{sorcerer alt}{
+  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
+  \anchor{text} % this is used to center the text in the node
+    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+
+  \backgroundpath{
+    \pgfpathmoveto{\pgfpoint{-.325cm}{.4cm}}
+    \pgfpathlineto{\pgfpoint{-.375cm}{.4cm}}
+    \pgfpatharc{90}{270}{.05cm}
+    \pgfpathlineto{\pgfpoint{-.325cm}{.3cm}}
+    \pgfpathmoveto{\pgfpoint{.3cm}{.4cm}}
+    \pgfpathlineto{\pgfpoint{.35cm}{.4cm}}
+    \pgfpatharc{90}{-90}{.05cm}
+    \pgfpathlineto{\pgfpoint{.3cm}{.3cm}}
+    \pgfpathrectanglecorners{\pgfpoint{-.325cm}{.425cm}}{\pgfpoint{.3cm}{.275cm}}
+    \pgfpathmoveto{\pgfpoint{.275cm}{.275cm}}
+    \pgfpathlineto{\pgfpoint{.275cm}{-.325cm}}
+    \pgfpathlineto{\pgfpoint{-.1cm}{-.325cm}}
+    \pgfpatharc{360}{180}{.1cm}
+    \pgfpathlineto{\pgfpoint{-.3cm}{.275cm}}
+    \pgfpathmoveto{\pgfpoint{-.2cm}{-.425cm}}
+    \pgfpathlineto{\pgfpoint{.325cm}{-.425cm}}
+    \pgfpatharc{270}{360}{.1cm}
+    \pgfpathlineto{\pgfpoint{.275cm}{-.325cm}}
+    \pgfpathmoveto{\pgfpoint{-.15cm}{.125cm}}
+    \pgfpathlineto{\pgfpoint{.125cm}{.125cm}}
+    \pgfpathmoveto{\pgfpoint{-.15cm}{0cm}}
+    \pgfpathlineto{\pgfpoint{0cm}{0cm}}
+    \pgfpathmoveto{\pgfpoint{-.15cm}{-.125cm}}
+    \pgfpathlineto{\pgfpoint{.125cm}{-.125cm}}
+    \pgfsetarrowsstart{}
+    \pgfsetarrowsend{}
+  }
+}
+
 % warlock
 \pgfdeclareshape{warlock}{
   \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
@@ -3010,7 +3046,7 @@
   \tikz[rpg icons, rpg icons/every class, rpg icons/every #2,
     baseline=\rpgicons@baseline, fgpos/.style={draw=rpgicons@bg, line width=.6pt}, fgneg/.style={draw},
     bgpos/.style={fill}, bgneg/.style={draw}, #3] {
-    \path[scale=.333, \rpgicons@classiconbg] (-.425cm,-.425cm) rectangle (.425cm,.425cm);
+    \path[scale=.333, \rpgicons@classiconbg] (-.45cm,-.45cm) rectangle (.45cm,.45cm);
     \node[#2, \rpgicons@classiconfg, scale=.225] at (0cm,0cm) {};
     \path[draw=none, scale=.333] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
   }%
@@ -3174,8 +3210,8 @@
   \tikz[rpg icons, rpg icons/every alignment, rpg icons/every #2,
     baseline=\rpgicons@baseline, fgpos/.style={draw=rpgicons@bg, line width=.6pt}, fgneg/.style={draw},
     bgpos/.style={fill}, bgneg/.style={draw}, #3] {
-    \path[scale=.333, \rpgicons@alignmenticonbg] (30:.425cm)
-      -- (90:.425cm) -- (150:.425cm) -- (210:.425cm) -- (270:.425cm) -- (330:.425cm) -- cycle;
+    \path[scale=.333, \rpgicons@alignmenticonbg] (30:.45cm)
+      -- (90:.45cm) -- (150:.45cm) -- (210:.45cm) -- (270:.45cm) -- (330:.45cm) -- cycle;
     \node[#2, \rpgicons@alignmenticonfg, scale=.225] at (0cm,0cm) {};
     \path[draw=none, scale=.333] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
   }%
@@ -3409,7 +3445,7 @@
     \tikzset{
       rpg icons #1 class/.pic={
         \begin{scope}[every node/.append style={#1}, rpg icons/every class, rpg icons/every #1]
-          \path[draw, scale=.333, pic actions] (-.425cm,-.425cm) rectangle (.425cm,.425cm);
+          \path[draw, scale=.333, pic actions] (-.45cm,-.45cm) rectangle (.45cm,.45cm);
           \node[draw, scale=.225] at (0cm,0cm) (-node) {};
           \path[draw=none, scale=.333] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
         \end{scope}
@@ -3420,8 +3456,8 @@
     \tikzset{
       rpg icons #1 alignment/.pic={
         \begin{scope}[every node/.append style={#1}, rpg icons/every alignment, rpg icons/every #1]
-          \path[draw, scale=.333, pic actions] (30:.425cm)
-            -- (90:.425cm) -- (150:.425cm) -- (210:.425cm) -- (270:.425cm) -- (330:.425cm) -- cycle;
+          \path[draw, scale=.333, pic actions] (30:.45cm)
+            -- (90:.45cm) -- (150:.45cm) -- (210:.45cm) -- (270:.45cm) -- (330:.45cm) -- cycle;
           \node[draw, scale=.225] at (0cm,0cm) (-node) {};
           \path[draw=none, scale=.333] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
         \end{scope}
@@ -3448,7 +3484,7 @@
   },
   rpg icons/create pic from class shape/.list={%
     artificer, barbarian, bard, cleric, cleric alt, druid, druid alt, fighter, monk, paladin,
-    ranger, rogue, sorcerer, warlock, wizard%
+    ranger, rogue, sorcerer, sorcerer alt, warlock, wizard%
   },
   rpg icons/create pic from alignment shape/.list={%
     lawful good, neutral good, chaotic good, lawful neutral, true neutral,

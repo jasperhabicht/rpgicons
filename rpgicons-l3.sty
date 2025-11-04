@@ -1819,6 +1819,33 @@
     \draw_path_arc:nnn { 225 } { 180 } { .225cm }
 }
 
+\cs_new_protected:Npn \rpgicons_draw_shape_sorcerer_alt: {
+    \draw_path_moveto:n { -.325cm , .4cm }
+    \draw_path_lineto:n { -.375cm , .4cm }
+    \draw_path_arc:nnn { 90 } { 270 } { .05cm }
+    \draw_path_lineto:n { -.325cm , .3cm }
+    \draw_path_moveto:n { .3cm , .4cm }
+    \draw_path_lineto:n { .35cm , .4cm }
+    \draw_path_arc:nnn { 90 } { -90 } { .05cm }
+    \draw_path_lineto:n { .3cm , .3cm }
+    \draw_path_rectangle_corners:nn { -.325cm , .425cm } { .3cm , .275cm }
+    \draw_path_moveto:n { .275cm , .275cm }
+    \draw_path_lineto:n { .275cm , -.325cm }
+    \draw_path_lineto:n { -.1cm , -.325cm }
+    \draw_path_arc:nnn { 360 } { 180 } { .1cm }
+    \draw_path_lineto:n { -.3cm , .275cm }
+    \draw_path_moveto:n { -.2cm , -.425cm }
+    \draw_path_lineto:n { .325cm , -.425cm }
+    \draw_path_arc:nnn { 270 } { 360 } { .1cm }
+    \draw_path_lineto:n { .275cm , -.325cm }
+    \draw_path_moveto:n { -.15cm , .125cm }
+    \draw_path_lineto:n { .125cm , .125cm }
+    \draw_path_moveto:n { -.15cm , 0cm }
+    \draw_path_lineto:n { 0cm , 0cm }
+    \draw_path_moveto:n { -.15cm , -.125cm }
+    \draw_path_lineto:n { .125cm , -.125cm }
+}
+
 \cs_new_protected:Npn \rpgicons_draw_shape_warlock: {
     \draw_path_moveto:n { \draw_point_polar:nn { .4cm } { 150 } }
     \draw_path_arc:nnn { 150 } { 30 } { .4cm }
@@ -2041,16 +2068,16 @@
 }
 
 \cs_new_protected:Npn \rpgicons_draw_frame_class: {
-    \draw_path_rectangle_corners:nn { -.425cm , -.425cm } { .425cm , .425cm }
+    \draw_path_rectangle_corners:nn { -.45cm , -.45cm } { .45cm , .45cm }
 }
 
 \cs_new_protected:Npn \rpgicons_draw_frame_alignment: {
-    \draw_path_moveto:n { \draw_point_polar:nn { .425cm } { 30 } }
-    \draw_path_lineto:n { \draw_point_polar:nn { .425cm } { 90 } }
-    \draw_path_lineto:n { \draw_point_polar:nn { .425cm } { 150 } }
-    \draw_path_lineto:n { \draw_point_polar:nn { .425cm } { 210 } }
-    \draw_path_lineto:n { \draw_point_polar:nn { .425cm } { 270 } }
-    \draw_path_lineto:n { \draw_point_polar:nn { .425cm } { 330 } }
+    \draw_path_moveto:n { \draw_point_polar:nn { .45cm } { 30 } }
+    \draw_path_lineto:n { \draw_point_polar:nn { .45cm } { 90 } }
+    \draw_path_lineto:n { \draw_point_polar:nn { .45cm } { 150 } }
+    \draw_path_lineto:n { \draw_point_polar:nn { .45cm } { 210 } }
+    \draw_path_lineto:n { \draw_point_polar:nn { .45cm } { 270 } }
+    \draw_path_lineto:n { \draw_point_polar:nn { .45cm } { 330 } }
     \draw_path_close:
 }
 
@@ -2206,7 +2233,7 @@
     buff , blinded , charmed , deafened , exhausted , frightened , grappled , incapacitated , invisible ,
     paralyzed , petrified , poisoned , prone , restrained , stunned , unconscious , hearing , seeing ,
     artificer , barbarian , bard , cleric , cleric ~ alt , druid , druid ~ alt , monk , paladin ,
-    ranger , rogue, sorcerer , warlock , wizard ,
+    ranger , rogue, sorcerer , sorcerer ~ alt , warlock , wizard ,
     lawful ~ good , neutral ~ good , chaotic ~ good , lawful ~ neutral , true ~ neutral ,
     chaotic ~ neutral , lawful ~ evil , neutral ~ evil , chaotic ~ evil ,
     copper , silver , gold , electrum , platinum

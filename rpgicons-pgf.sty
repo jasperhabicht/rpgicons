@@ -40,7 +40,7 @@
   ranger, rogue, sorcerer, warlock, wizard,
   lawful good, neutral good, chaotic good, lawful neutral, true neutral,
   chaotic neutral, lawful evil, neutral evil, chaotic evil,
-  copper, silver, gold, electrum, platinum, gem, jewelry%
+  copper, silver, gold, electrum, platinum, gem, jewelry, jewellery%
 }
 
 \tikzset{
@@ -3294,14 +3294,22 @@
 
     \pgfpathcircle{\pgfpoint{0cm}{.2cm}}{.075cm}
     \pgfpathmoveto{\pgfpointintersectionofcircles{\pgfpoint{0cm}{.2cm}}{\pgfpoint{0cm}{.7cm}}
-        {.075cm}{.5cm}{1}}
+      {.075cm}{.5cm}{1}}
     \pgfpatharc{280}{325}{.5cm}
     \pgfpathmoveto{\pgfpointintersectionofcircles{\pgfpoint{0cm}{.2cm}}{\pgfpoint{0cm}{.7cm}}
-        {.075cm}{.5cm}{2}}
+      {.075cm}{.5cm}{2}}
     \pgfpatharc{260}{215}{.5cm}
     \pgfsetarrowsstart{}
     \pgfsetarrowsend{}
   }
+}
+
+\pgfdeclareshape{jewellery}{
+  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
+  \anchor{text} % this is used to center the text in the node
+    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+
+  \inheritbackgroundpath[from={jewelry}]
 }
 
 \NewDocumentCommand{\rpgiconscurrency}{ m O{} m }{%

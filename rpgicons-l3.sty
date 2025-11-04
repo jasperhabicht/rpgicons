@@ -10,7 +10,7 @@
 %
 % This work has the LPPL maintenance status `maintained'.
 %
-\ProvidesExplPackage {rpgicons-l3} {2025-11-05} {2.2.0}
+\ProvidesExplPackage {rpgicons-l3} {2025-11-06} {2.2.1}
     {RPG Icons Package (l3 Variant)}
 
 \bool_new:N \l__rpgicons_unicode_mode_bool
@@ -2020,8 +2020,11 @@
 \fp_new:N \l_rpgicons_icon_opacity_background_fp
 \fp_set:Nn \l_rpgicons_icon_opacity_background_fp { 1.0 }
 
+\fp_new:N \l_rpgicons_icon_transform_temp_fp
 \fp_new:N \l_rpgicons_icon_transform_scale_fp
+\fp_set:Nn \l_rpgicons_icon_transform_scale_fp { 1.0 }
 \fp_new:N \l_rpgicons_icon_transform_scale_inner_fp
+\fp_set:Nn \l_rpgicons_icon_transform_scale_inner_fp { 1.0 }
 \fp_new:N \l_rpgicons_icon_transform_rotate_fp
 
 \cs_generate_variant:Nn \color_select:n { V }
@@ -2083,11 +2086,23 @@
     } ,
     line ~ width         .dim_set:N  = \l_rpgicons_icon_linewidth_dim ,
     line ~ width         .initial:n  = { \l_draw_default_linewidth_dim } ,
-    scale                .fp_set:N   = \l_rpgicons_icon_transform_scale_fp ,
+    scale                .code:n     = {
+        \fp_set_eq:NN \l_rpgicons_icon_transform_temp_fp \l_rpgicons_icon_transform_scale_fp
+        \fp_set:Nn \l_rpgicons_icon_transform_scale_fp {
+            \l_rpgicons_icon_transform_temp_fp * #1
+        }
+    } ,
     scale                .initial:n  = { 1.0 } ,
-    scale ~ inner        .fp_set:N   = \l_rpgicons_icon_transform_scale_inner_fp ,
+    scale ~ inner        .code:n     = {
+        \fp_set_eq:NN \l_rpgicons_icon_transform_temp_fp \l_rpgicons_icon_transform_scale_inner_fp
+        \fp_set:Nn \l_rpgicons_icon_transform_scale_inner_fp {
+            \l_rpgicons_icon_transform_temp_fp * #1
+        }
+    } ,
     scale ~ inner        .initial:n  = { 0.675 } ,
-    rotate               .fp_set:N   = \l_rpgicons_icon_transform_rotate_fp ,
+    rotate               .code:n     = {
+        \fp_add:Nn \l_rpgicons_icon_transform_rotate_fp {#1}
+    } ,
     rotate               .initial:n  = { 0.0 } ,
     accessible           .code:n = {
         \msg_warning:nnn { rpgicons } { deprecated-option } { accessible }

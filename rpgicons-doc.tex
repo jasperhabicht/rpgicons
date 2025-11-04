@@ -11,8 +11,8 @@
 % This work has the LPPL maintenance status `maintained'.
 %
 \documentclass[a4paper]{article}
-\def\rpgiconsfileversion{2.2.0}
-\def\rpgiconsfiledate{5 November 2025}
+\def\rpgiconsfileversion{2.2.1}
+\def\rpgiconsfiledate{6 November 2025}
 
 \usepackage[T1]{fontenc}
 \usepackage{Alegreya}
@@ -280,6 +280,7 @@
 \changes{v2.0.4}{2025/10/21}{Added key to append styles for every shape or type.}
 \changes{v2.1.0}{2025/10/27}{Added alignment and currency shapes.}
 \changes{v2.2.0}{2025/11/05}{Added shapes for ritual spell, gems and jewelry as well as for classes. Fixes in alignment shapes and in pic definitions.}
+\changes{v2.2.1}{2025/11/06}{Fixes in tranformation keys in L3 variant.}
 
 \begin{document}
 
@@ -593,7 +594,7 @@ Transparency requires the management of certain PDF settings. Therefore, it is n
 |\RPGIconsUseIcon|[<options>][<integer>]{<shape>}
 |\RPGIconsUseIcon*|[<options>][<integer>]{<shape>}
 \end{macrodef}
-\macro{\RPGIconsUseIcon} is the primary command to typeset icons using the L3 variant of the package. The commands \macro{\die}, \macro{\ability}, \macro{\saving}, \macro{\spell}, \macro{\spellschool}, \macro{\damage}, \macro{\attack}, \macro{\condition}, \macro{\alignment} and \macro{\currency} are based on this command.
+\macro{\RPGIconsUseIcon} is the primary command to typeset icons using the L3 variant of the package. The commands \macro{\die}, \macro{\ability}, \macro{\saving}, \macro{\spell}, \macro{\spellschool}, \macro{\damage}, \macro{\attack}, \macro{\condition}, \macro{\class}, \macro{\alignment} and \macro{\currency} are based on this command.
 
 The \macro{\RPGIconsUseIcon} command has a starred version and two optional arguments as well as one mandatory argument. The mandatory argument holds the shape of the icon. The second optional argument can be used to add an integer when used with shapes for dice.
 
@@ -603,17 +604,18 @@ The \macro{\RPGIconsUseIcon} command supports PDF tagging. If tagging is activat
 
 \begin{macrodef}
 |\RPGIconsDie|[<style>]{<shape>}[<options>]{<integer>}
-|\RPGIconsAbiliy|[<style>]{<shape>}[<options>]
+|\RPGIconsAbility|[<style>]{<shape>}[<options>]
 |\RPGIconsSaving|[<style>]{<shape>}[<options>]
 |\RPGIconsSpell|{<shape>}[<options>]
 |\RPGIconsSpellschool|[<style>]{<shape>}[<options>]
 |\RPGIconsDamage|{<shape>}[<options>]
 |\RPGIconsAttack|{<shape>}[<options>]
 |\RPGIconsCondition|{<shape>}[<options>]
-|\RPGIconsAlignment|{<shape>}[<options>]
+|\RPGIconsClass|[<style>]{<shape>}[<options>]
+|\RPGIconsAlignment|[<style>]{<shape>}[<options>]
 |\RPGIconsCurrency|{<shape>}[<options>]
 \end{macrodef}
-The L3 variant of the package defines a set of commands on which the user commands \macro{\die}, \macro{\ability}, \macro{\saving}, \macro{\spell}, \macro{\spellschool}, \macro{\damage}, \macro{\attack}, \macro{\condition}, \macro{\alignment} as well as \macro{\currency} are based. This set of commands can be used in cases where another package defines one of these user commands. These user commands are exact copies of this set of commands.
+The L3 variant of the package defines a set of commands on which the user commands \macro{\die}, \macro{\ability}, \macro{\saving}, \macro{\spell}, \macro{\spellschool}, \macro{\damage}, \macro{\attack}, \macro{\condition}, \macro{\class}, \macro{\alignment} as well as \macro{\currency} are based. This set of commands can be used in cases where another package defines one of these user commands. These user commands are exact copies of this set of commands.
 
 \subsection{Icon options}
 
@@ -634,7 +636,7 @@ scale
 scale inner
 rotate
 \end{macrodef}
-The \macro{\RPGIconsUseIcon} command and the commands \macro{\die}, \macro{\ability}, \macro{\saving}, \macro{\spell}, \macro{\spellschool}, \macro{\damage}, \macro{\attack}, \macro{\condition}, \macro{\alignment} and \macro{\currency} can be used with certain options that each consist of a key-value pair and can be combined. These options should be used directly without wrapping them inside the \macro{style} option, when used with the \macro{\RPGIconsUseIcon} command or the other commands based on this command.
+The \macro{\RPGIconsUseIcon} command and the commands \macro{\die}, \macro{\ability}, \macro{\saving}, \macro{\spell}, \macro{\spellschool}, \macro{\damage}, \macro{\attack}, \macro{\condition}, \macro{\class}, \macro{\alignment} and \macro{\currency} can be used with certain options that each consist of a key-value pair and can be combined. These options should be used directly without wrapping them inside the \macro{style} option, when used with the \macro{\RPGIconsUseIcon} command or the other commands based on this command.
 
 For example, \macro{\die{eightside}[color=blue, line width=0.8pt]{2}} would result in \die{eightside}[color=blue, line width=0.8pt]{2}.
 
@@ -646,6 +648,8 @@ The \macro{color} option sets the color of strokes, fills and text in general wh
 
 The \macro{scale inner} option can be used to change the scaling of the icon when placed inside a frame when using the \macro{\ability}, \macro{\saving}, \macro{\spellschool} and \macro{\damage} macros. The default value is 0.675.
 
+Note that the keys related to transformation, that is \macro{scale}, \macro{scale inner} and \macro{rotate}, add to the current value and do not replace it. For example, \macro{scale=0.5, scale=0.5} results in a scale factor of 0.25 and \macro{rotate=10, rotate=10} results in a rotation of 20~degrees.
+
 \begin{macrodef}
 every die
 every ability
@@ -655,6 +659,7 @@ every spellschool
 every damage
 every attack
 every condition
+every class
 every alignment
 every currency
 every <shape>
@@ -674,6 +679,7 @@ every spellschool add
 every damage add
 every attack add
 every condition add
+every class add
 every alignment add
 every currency add
 every <shape> add
@@ -770,9 +776,11 @@ The PGF variant of the package provides the option \macro{pics}. If the package 
 |\rpgiconsdamage|{<shape>}[<options>]
 |\rpgiconsattack|{<shape>}[<options>]
 |\rpgiconscondition|{<shape>}[<options>]
+|\rpgiconsclass|[<style>]{<shape>}[<options>]
+|\rpgiconsalignment|[<style>]{<shape>}[<options>]
 |\rpgiconscurrency|{<shape>}[<options>]
 \end{macrodef}
-The PGF variant of the package defines a set of commands on which the user commands \macro{\die}, \macro{\ability}, \macro{\saving}, \macro{\spell}, \macro{\spellschool}, \macro{\damage}, \macro{\attack}, \macro{\condition}, \macro{\alignment} as well as \macro{\currency} are based. This set of commands can be used in cases where another package defines one of these user commands. These user commands are exact copies of this set of commands.
+The PGF variant of the package defines a set of commands on which the user commands \macro{\die}, \macro{\ability}, \macro{\saving}, \macro{\spell}, \macro{\spellschool}, \macro{\damage}, \macro{\attack}, \macro{\condition}, \macro{\class}, \macro{\alignment} as well as \macro{\currency} are based. This set of commands can be used in cases where another package defines one of these user commands. These user commands are exact copies of this set of commands.
 
 \subsection{Icon styles}
 
@@ -789,6 +797,7 @@ If PDF tagging is activated by using \macro{\DocumentMetadata{tagging=on}}, it i
 !rpg icons/!every damage
 !rpg icons/!every attack
 !rpg icons/!every condition
+!rpg icons/!every class
 !rpg icons/!every alignment
 !rpg icons/!every currency
 !rpg icons/!every <shape>
@@ -905,6 +914,7 @@ The icon is embedded as a node in the pic which has the name \macro{-node}. Thus
 !rpg icons/!create pic from saving shape
 !rpg icons/!create pic from spellschool shape
 !rpg icons/!create pic from damage shape
+!rpg icons/!create pic from class shape
 !rpg icons/!create pic from alignment shape
 !rpg icons/!create every style
 \end{macrodef}

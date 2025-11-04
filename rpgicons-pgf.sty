@@ -36,7 +36,8 @@
   melee, ranged, magic, singlehanded, doublehanded,
   buff, blinded, charmed, deafened, exhausted, frightened, grappled, incapacitated, invisible,
   paralyzed, petrified, poisoned, prone, restrained, stunned, unconscious, hearing, seeing,
-  artificer, barbarian, bard, cleric, druid, fighter, monk, paladin, ranger, rogue, sorcerer, warlock, wizard,
+  artificer, barbarian, bard, cleric, cleric alt, druid, druid alt, fighter, monk, paladin,
+  ranger, rogue, sorcerer, warlock, wizard,
   lawful good, neutral good, chaotic good, lawful neutral, true neutral,
   chaotic neutral, lawful evil, neutral evil, chaotic evil,
   copper, silver, gold, electrum, platinum, gem, jewelry%
@@ -2650,6 +2651,39 @@
   }
 }
 
+% cleric alt
+\pgfdeclareshape{cleric alt}{
+  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
+  \anchor{text} % this is used to center the text in the node
+    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+
+  \backgroundpath{
+    \foreach \x in {-.325cm,0cm,.325cm} {
+      \pgfpathmoveto{\pgfpoint{\x-.05cm}{-.05cm}}
+      \pgfpathlineto{\pgfpoint{\x-.05cm}{.175cm}}
+      \pgfpathlineto{\pgfpoint{\x+.05cm}{.175cm}}
+      \pgfpathlineto{\pgfpoint{\x+.05cm}{-.05cm}}
+      \pgfpathmoveto{\pgfpoint{\x-.05cm}{.3cm}}
+      \pgfpatharc{180}{405}{.05cm}
+      \pgfpatharc{215}{180}{.15cm}
+      \pgfpathmoveto{\pgfpoint{\x-.1cm}{-.05cm}}
+      \pgfpathlineto{\pgfpoint{\x+.1cm}{-.05cm}}
+      \pgfpatharc{360}{180}{.1cm}
+    }
+    \pgfpathmoveto{\pgfpoint{-.325cm}{-.15cm}}
+    \pgfpatharc{180}{360}{.15cm and .1cm}
+    \pgfpathmoveto{\pgfpoint{.325cm}{-.15cm}}
+    \pgfpatharc{360}{180}{.15cm and .1cm}
+    \pgfpathmoveto{\pgfpoint{0cm}{-.15cm}}
+    \pgfpatharc{0}{-90}{.225cm}
+    \pgfpathlineto{\pgfpoint{-.225cm}{-.425cm}}
+    \pgfpathlineto{\pgfpoint{.225cm}{-.425cm}}
+    \pgfpathlineto{\pgfpoint{.225cm}{-.375cm}}
+    \pgfpatharc{270}{180}{.225cm}
+    \pgfpathclose
+  }
+}
+
 % druid
 \pgfdeclareshape{druid}{
   \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
@@ -2668,6 +2702,35 @@
     \pgfpatharc{90}{315}{.2cm}
     \pgfpathlineto{\pgfpointadd{\pgfpoint{.125cm}{-.075cm}}{\pgfpointpolar{45}{.05cm}}}
     \pgfpathclose
+  }
+}
+
+% druid alt
+\pgfdeclareshape{druid alt}{
+  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
+  \anchor{text} % this is used to center the text in the node
+    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+
+  \backgroundpath{
+    \pgfpathmoveto{\pgfpoint{-.375cm}{0cm}}
+    \pgfpathlineto{\pgfpoint{-.375cm}{-.1cm}}
+    \pgfpatharc{180}{270}{.225cm}
+    \pgfpathlineto{\pgfpoint{-.175cm}{-.425cm}}
+    \pgfpathlineto{\pgfpoint{.175cm}{-.425cm}}
+    \pgfpathlineto{\pgfpoint{.15cm}{-.325cm}}
+    \pgfpatharc{270}{360}{.225cm}
+    \pgfpathlineto{\pgfpoint{.375cm}{0cm}}
+    \pgfpathmoveto{\pgfpoint{.375cm}{.1cm}}
+    \pgfpatharc{90}{-90}{.05cm}
+    \pgfpathlineto{\pgfpoint{-.375cm}{0cm}}
+    \pgfpatharc{270}{90}{.05cm}
+    \pgfpathclose
+    \pgfpathmoveto{\pgfpoint{.225cm}{.1cm}}
+    \pgfpathlineto{\pgfpoint{.425cm}{.325cm}}
+    \pgfpathlineto{\pgfpoint{.325cm}{.425cm}}
+    \pgfpathlineto{\pgfpoint{-.025cm}{.1cm}}
+    \pgfsetarrowsstart{}
+    \pgfsetarrowsend{}
   }
 }
 
@@ -3355,7 +3418,8 @@
     radiant, slashing, thunder, healing%
   },
   rpg icons/create pic from class shape/.list={%
-    artificer, barbarian, bard, cleric, druid, fighter, monk, paladin, sorcerer, warlock, wizard%
+    artificer, barbarian, bard, cleric, cleric alt, druid, druid alt, fighter, monk, paladin,
+    ranger, rogue, sorcerer, warlock, wizard%
   },
   rpg icons/create pic from alignment shape/.list={%
     lawful good, neutral good, chaotic good, lawful neutral, true neutral,

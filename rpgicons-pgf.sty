@@ -36,7 +36,7 @@
   melee, ranged, magic, singlehanded, doublehanded,
   buff, blinded, charmed, deafened, exhausted, frightened, grappled, incapacitated, invisible,
   paralyzed, petrified, poisoned, prone, restrained, stunned, unconscious, hearing, seeing,
-  artificer, barbarian, bard, druid, fighter, monk, paladin, ranger, rogue, sorcerer, warlock, wizard,
+  artificer, barbarian, bard, cleric, druid, fighter, monk, paladin, ranger, rogue, sorcerer, warlock, wizard,
   lawful good, neutral good, chaotic good, lawful neutral, true neutral,
   chaotic neutral, lawful evil, neutral evil, chaotic evil,
   copper, silver, gold, electrum, platinum, gem, jewelry%
@@ -2916,7 +2916,7 @@
 \NewDocumentCommand{\rpgiconsclass}{ O{positive} m O{} }{%
   \edef\rpgicons@classiconposneg{#1}%
   \edef\rpgicons@classiconpos{positive}%
-  \ifx\rpgicons@spellschooliconposneg\rpgicons@classiconpos%
+  \ifx\rpgicons@classiconposneg\rpgicons@classiconpos%
     \def\rpgicons@classiconfg{fgneg}\else%
     \def\rpgicons@classiconfg{fgpos}\fi%
   \ifx\rpgicons@classiconposneg\rpgicons@classiconpos%

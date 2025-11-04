@@ -1982,7 +1982,7 @@
     \draw_path_lineto:n { .2cm , .15cm }
 }
 
-\cs_new_protected:Npn \rpgicons_draw_shape_jewelry: {
+\cs_new_protected:Npn \rpgicons_draw_shape_jewellery: {
     \draw_path_ellipse:nnn { 0cm , -.15cm } { .175cm , 0cm } { 0cm , .275cm }
     \draw_path_moveto:n { ( 0cm , -.15cm ) + ( \draw_point_polar:nnn { .075cm } { .175cm } { 0 } ) }
     \draw_path_arc:nnnn { 0 } { -60 } { .075cm } { .175cm }
@@ -1997,7 +1997,7 @@
     \draw_path_arc:nnn { 260 } { 215 } { .5cm }
 }
 
-\cs_set_eq:NN \rpgicons_draw_shape_jewellery: \rpgicons_draw_shape_jewelry:
+\cs_set_eq:NN \rpgicons_draw_shape_jewelry: \rpgicons_draw_shape_jewellery:
 
 % FRAMES
 

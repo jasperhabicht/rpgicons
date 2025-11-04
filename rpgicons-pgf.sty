@@ -40,7 +40,7 @@
   ranger, rogue, sorcerer, warlock, wizard,
   lawful good, neutral good, chaotic good, lawful neutral, true neutral,
   chaotic neutral, lawful evil, neutral evil, chaotic evil,
-  copper, silver, gold, electrum, platinum, gem, jewelry, jewellery%
+  copper, silver, gold, electrum, platinum, gem, jewellery, jewelry%
 }
 
 \tikzset{
@@ -3281,8 +3281,8 @@
   }
 }
 
-% jewelry
-\pgfdeclareshape{jewelry}{
+% jewellery
+\pgfdeclareshape{jewellery}{
   \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
   \anchor{text} % this is used to center the text in the node
     {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
@@ -3304,12 +3304,12 @@
   }
 }
 
-\pgfdeclareshape{jewellery}{
+\pgfdeclareshape{jewelry}{
   \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
   \anchor{text} % this is used to center the text in the node
     {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
-  \inheritbackgroundpath[from={jewelry}]
+  \inheritbackgroundpath[from={jewellery}]
 }
 
 \NewDocumentCommand{\rpgiconscurrency}{ m O{} m }{%

@@ -2020,7 +2020,7 @@
 \fp_new:N \l_rpgicons_icon_opacity_background_fp
 \fp_set:Nn \l_rpgicons_icon_opacity_background_fp { 1.0 }
 
-\fp_new:N \l_rpgicons_icon_transform_temp_fp
+\fp_new:N \l__rpgicons_icon_transform_temp_fp
 \fp_new:N \l_rpgicons_icon_transform_scale_fp
 \fp_set:Nn \l_rpgicons_icon_transform_scale_fp { 1.0 }
 \fp_new:N \l_rpgicons_icon_transform_scale_inner_fp
@@ -2087,16 +2087,16 @@
     line ~ width         .dim_set:N  = \l_rpgicons_icon_linewidth_dim ,
     line ~ width         .initial:n  = { \l_draw_default_linewidth_dim } ,
     scale                .code:n     = {
-        \fp_set_eq:NN \l_rpgicons_icon_transform_temp_fp \l_rpgicons_icon_transform_scale_fp
+        \fp_set_eq:NN \l__rpgicons_icon_transform_temp_fp \l_rpgicons_icon_transform_scale_fp
         \fp_set:Nn \l_rpgicons_icon_transform_scale_fp {
-            \l_rpgicons_icon_transform_temp_fp * #1
+            \l__rpgicons_icon_transform_temp_fp * #1
         }
     } ,
     scale                .initial:n  = { 1.0 } ,
     scale ~ inner        .code:n     = {
-        \fp_set_eq:NN \l_rpgicons_icon_transform_temp_fp \l_rpgicons_icon_transform_scale_inner_fp
+        \fp_set_eq:NN \l__rpgicons_icon_transform_temp_fp \l_rpgicons_icon_transform_scale_inner_fp
         \fp_set:Nn \l_rpgicons_icon_transform_scale_inner_fp {
-            \l_rpgicons_icon_transform_temp_fp * #1
+            \l__rpgicons_icon_transform_temp_fp * #1
         }
     } ,
     scale ~ inner        .initial:n  = { 0.675 } ,

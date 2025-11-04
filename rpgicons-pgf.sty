@@ -3210,8 +3210,8 @@
   \tikz[rpg icons, rpg icons/every alignment, rpg icons/every #2,
     baseline=\rpgicons@baseline, fgpos/.style={draw=rpgicons@bg, line width=.6pt}, fgneg/.style={draw},
     bgpos/.style={fill}, bgneg/.style={draw}, #3] {
-    \path[scale=.333, \rpgicons@alignmenticonbg] (30:.45cm)
-      -- (90:.45cm) -- (150:.45cm) -- (210:.45cm) -- (270:.45cm) -- (330:.45cm) -- cycle;
+    \path[scale=.333, \rpgicons@alignmenticonbg] (30:.475cm)
+      -- (90:.475cm) -- (150:.475cm) -- (210:.475cm) -- (270:.475cm) -- (330:.475cm) -- cycle;
     \node[#2, \rpgicons@alignmenticonfg, scale=.225] at (0cm,0cm) {};
     \path[draw=none, scale=.333] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
   }%
@@ -3456,8 +3456,8 @@
     \tikzset{
       rpg icons #1 alignment/.pic={
         \begin{scope}[every node/.append style={#1}, rpg icons/every alignment, rpg icons/every #1]
-          \path[draw, scale=.333, pic actions] (30:.45cm)
-            -- (90:.45cm) -- (150:.45cm) -- (210:.45cm) -- (270:.45cm) -- (330:.45cm) -- cycle;
+          \path[draw, scale=.333, pic actions] (30:.475cm)
+            -- (90:.475cm) -- (150:.475cm) -- (210:.475cm) -- (270:.475cm) -- (330:.475cm) -- cycle;
           \node[draw, scale=.225] at (0cm,0cm) (-node) {};
           \path[draw=none, scale=.333] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
         \end{scope}

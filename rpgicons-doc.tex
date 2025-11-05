@@ -190,8 +190,8 @@
     264653 , 287271 , 2a9d8f , e9c46a , f4a261 , e76f51
 }
 \int_step_inline:nn { \clist_count:N \l_rpgicons_doc_logo_colors_clist } {
-    \color_set:nne { rpgiconslogo \int_to_roman:n { #1 } } { HTML } {
-        \clist_item:Nn \l_rpgicons_doc_logo_colors_clist { #1 }
+    \color_set:nne { rpgiconslogo \int_to_roman:n {#1} } { HTML } {
+        \clist_item:Nn \l_rpgicons_doc_logo_colors_clist {#1}
     }
 }
 \clist_set:Nn \l_rpgicons_doc_logo_icons_clist {
@@ -200,13 +200,13 @@
 
 \NewDocumentCommand{\rpgiconslogo}{ O{1} }{
     \draw_begin:
-        \draw_transform_scale:n { #1 }
+        \draw_transform_scale:n {#1}
         \int_step_inline:nn { \clist_count:N \l_rpgicons_doc_logo_icons_clist } {
             \hcoffin_set:Nn \l_tmpa_coffin {
                 \draw_suspend_begin:
                     \RPGIconsAbility[negative]{
-                        \clist_item:Nn \l_rpgicons_doc_logo_icons_clist { ##1 }
-                    }[color=rpgiconslogo \int_to_roman:n { ##1 } ]
+                        \clist_item:Nn \l_rpgicons_doc_logo_icons_clist {##1}
+                    }[color=rpgiconslogo \int_to_roman:n {##1} ]
                 \draw_suspend_end:
             }
             \draw_scope_begin:
@@ -332,7 +332,7 @@ The command \macro{\die} typesets an icon to depict a die with a certain number 
 
 For the six-sided die, nine additional shapes exist representing the values one to nine as pips. Also, additional shapes exist representing the plus or minus side of a fudge die.
 
-The command takes two mandatory arguments, the first of which describes the shape (see the lists below) and the second taking an integer that is placed in front of the shape. For example, \macro{\die{eightside}{2}} results in \die{eightside}{2} (meaning two eight-sided dice are rolled).
+The command takes two mandatory arguments, the first of which describes the shape (see the lists below) and the second taking an integer that is placed in front of the shape. For example, \macro{\die{eightside}{2}} results in \die{eightside}{2} (meaning two eight-sided dice are rolled). If tagging is enabled, the default replacement text of this command is ``2 eightside''.
 
 The command also takes two optional arguments, the second of which can take additional options to style the icon. The options affect the shape, but not the integer when it is typeset before the icon. The usable options differ depending on the package variant. See the relevant sections below.
 
@@ -569,7 +569,7 @@ The first optional argument can take the value \macro{negative} or \macro{positi
 \end{macrodef}
 The command \macro{\currency} typesets an icon depicting a value of a coin. The optional argument can take additional options to style the icon.
 
-The command provides a second mandatory argument that accepts an integer that is placed in front of the shape. For example, \macro{\currency{gold}{7}} results in \currency{gold}{7}.
+The command provides a second mandatory argument that accepts an integer that is placed in front of the shape. For example, \macro{\currency{gold}{7}} results in \currency{gold}{7}. If tagging is enabled, the default replacement text of this command is ``7 gold''.
 
 \begin{rpgiconsiconlist}
 \macro{\currency}

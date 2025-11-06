@@ -710,8 +710,11 @@ Apart from setting the options to the commands directly, it is also possible to 
 
 \begin{macrodef}
 style set
+style append
 \end{macrodef}
-In order to simplify styling, custom keys can be defined via the key \macro{style set}. The key \macro{style set} accepts as value a key-value list consisting of one or multiple custom keys whose relevant value consists of another key-value list describing the relevant style. It is possible to use \macro{#1} as placeholder for one argument. It is also possible to reference to an already define custom key in the definition of another custom key. Note that there are no checks whether a custom key already exists and its definition will be overwritten without a warning.
+In order to simplify styling, custom keys can be defined via the keys \macro{style set} and \macro{style append}. Both keys accept as value a key-value list consisting of one or multiple custom keys whose relevant value consists of another key-value list describing the relevant style. It is possible to use \macro{#1} as placeholder for one argument. It is also possible to reference to an already define custom key in the definition of another custom key.
+
+The key \macro{style set} defines custom keys and sets their values. The key \macro{style append} appends the relevant key-value list to the existing custom key as defined by \macro{style set}. Note that it is not checked whether a custom key already exists and its definition will be overwritten without a warning.
 
 \begin{codeexample}
 \rpgiconsset{

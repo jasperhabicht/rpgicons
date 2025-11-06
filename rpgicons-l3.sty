@@ -39,6 +39,12 @@
 \msg_new:nnn { rpgicons } { frame-undefined } {
     The ~ frame ~ `#1` ~ is ~ undefined.
 }
+\msg_new:nnn { rpgicons } { style-defined } {
+    The ~ style ~ `#1` ~ has ~ already ~ been ~ defined.
+}
+\msg_new:nnn { rpgicons } { style-undefined } {
+    The ~ style ~ `#1` ~ is ~ undefined.
+}
 \msg_if_exist:nnF { rpgicons } { tagging-unsupported } {
     \msg_new:nnn { rpgicons } { tagging-unsupported } {
         This ~ LaTeX ~ version ~ does ~ not ~ support ~ tagging.
@@ -2197,13 +2203,32 @@
 }
 
 \cs_new:Npn \rpgicons_style_set:nn #1#2 {
+    \tl_if_exist:cF { l__rpgicons_style_ #1 _value_tl } {
+        \tl_new:c { l__rpgicons_style_ #1 _value_tl }
+    }
+    \tl_set:cn { l__rpgicons_style_ #1 _value_tl } {#2}
     \keys_define:nn { rpgicons / local ~ options } {
         #1               .meta:n = {#2}
+    }
+}
+\cs_new:Npn \rpgicons_style_put_right:nn #1#2 {
+    \tl_if_exist:cTF { l__rpgicons_style_ #1 _value_tl } {
+        \keys_define:ne { rpgicons / local ~ options } {
+            #1           .meta:n = {
+                \tl_use:c { l__rpgicons_style_ #1 _value_tl } ,
+                #2
+            }
+        }
+    } {
+        \msg_error:nnn { rpgicons } { style-undefined } {#1}
     }
 }
 \keys_define:nn { rpgicons / local ~ options } {
     style ~ set          .code:n = {
         \keyval_parse:NNn \use:n \rpgicons_style_set:nn {#1}
+    },
+    style ~ append       .code:n = {
+        \keyval_parse:NNn \use:n \rpgicons_style_put_right:nn {#1}
     }
 }
 

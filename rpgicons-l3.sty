@@ -10,7 +10,7 @@
 %
 % This work has the LPPL maintenance status `maintained'.
 %
-\ProvidesExplPackage {rpgicons-l3} {2025-11-06} {2.2.1}
+\ProvidesExplPackage {rpgicons-l3} {2025-11-10} {2.2.2}
     {RPG Icons Package (l3 Variant)}
 
 \bool_new:N \l__rpgicons_unicode_mode_bool
@@ -2193,6 +2193,17 @@
     rotate               .initial:n  = { 0.0 } ,
     accessible           .code:n = {
         \msg_warning:nnn { rpgicons } { deprecated-option } { accessible }
+    }
+}
+
+\cs_new:Npn \rpgicons_style_set:nn #1#2 {
+    \keys_define:nn { rpgicons / local ~ options } {
+        #1               .meta:n = {#2}
+    }
+}
+\keys_define:nn { rpgicons / local ~ options } {
+    style ~ set          .code:n = {
+        \keyval_parse:NNn \use:n \rpgicons_style_set:nn {#1}
     }
 }
 

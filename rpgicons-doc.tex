@@ -11,8 +11,8 @@
 % This work has the LPPL maintenance status `maintained'.
 %
 \documentclass[a4paper]{article}
-\def\rpgiconsfileversion{2.2.1}
-\def\rpgiconsfiledate{6 November 2025}
+\def\rpgiconsfileversion{2.2.2}
+\def\rpgiconsfiledate{10 November 2025}
 
 \usepackage[T1]{fontenc}
 \usepackage{Alegreya}
@@ -281,6 +281,7 @@
 \changes{v2.1.0}{2025/10/27}{Added alignment and currency shapes.}
 \changes{v2.2.0}{2025/11/05}{Added shapes for ritual spell, gems and jewellery as well as for classes. Fixes in alignment shapes and in pic definitions.}
 \changes{v2.2.1}{2025/11/06}{Added alternative shapes for cleric, druid, sorcerer and necrotic. Update of class and alignment frames. Fixes in transformation keys in L3 variant.}
+\changes{v2.2.2}{2025/11/10}{Added key to define custom keys in L3 variant.}
 
 \begin{document}
 
@@ -705,6 +706,23 @@ Apart from setting the options to the commands directly, it is also possible to 
 \ability{charisma}
 \ability{charisma}[color=red]
 \ability{charisma}
+\end{codeexample}
+
+\begin{macrodef}
+style set
+\end{macrodef}
+In order to simplify styling, custom keys can be defined via the key \macro{style set}. The key \macro{style set} accepts as value a key-value list consisting of one or multiple custom keys whose relevant value consists of another key-value list describing the relevant style. It is possible to use \macro{#1} as placeholder for one argument. It is also possible to reference to an already define custom key in the definition of another custom key. Note that there are no checks whether a custom key already exists and its definition will be overwritten without a warning.
+
+\begin{codeexample}
+\rpgiconsset{
+    style set={
+        foo={rotate=45, fill=blue},
+        bar={foo, fill=red, scale=#1}
+    }
+}
+
+\ability[negative]{charisma}[foo]
+\class[negative]{warlock}[bar=2]
 \end{codeexample}
 
 \begin{macrodef}

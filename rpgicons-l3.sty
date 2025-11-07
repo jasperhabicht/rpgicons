@@ -2213,10 +2213,10 @@
 }
 \cs_new:Npn \rpgicons_style_put_right:nn #1#2 {
     \tl_if_exist:cTF { l__rpgicons_style_ #1 _value_tl } {
+        \tl_put_right:cn { l__rpgicons_style_ #1 _value_tl } { , #2 }
         \keys_define:ne { rpgicons / local ~ options } {
-            #1           .meta:n = {
-                \tl_use:c { l__rpgicons_style_ #1 _value_tl } ,
-                #2
+            #1               .meta:n = {
+                \tl_use:c { l__rpgicons_style_ #1 _value_tl }
             }
         }
     } {

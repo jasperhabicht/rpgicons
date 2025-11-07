@@ -2202,20 +2202,20 @@
     }
 }
 
-\cs_new:Npn \rpgicons_style_set:nn #1#2 {
+\cs_new:Npn \__rpgicons_style_set:nn #1#2 {
     \tl_if_exist:cF { l__rpgicons_style_ #1 _value_tl } {
         \tl_new:c { l__rpgicons_style_ #1 _value_tl }
     }
     \tl_set:cn { l__rpgicons_style_ #1 _value_tl } {#2}
     \keys_define:nn { rpgicons / local ~ options } {
-        #1               .meta:n = {#2}
+        #1               .meta:n     = {#2}
     }
 }
-\cs_new:Npn \rpgicons_style_put_right:nn #1#2 {
+\cs_new:Npn \__rpgicons_style_put_right:nn #1#2 {
     \tl_if_exist:cTF { l__rpgicons_style_ #1 _value_tl } {
         \tl_put_right:cn { l__rpgicons_style_ #1 _value_tl } { , #2 }
         \keys_define:ne { rpgicons / local ~ options } {
-            #1               .meta:n = {
+            #1           .meta:n     = {
                 \tl_use:c { l__rpgicons_style_ #1 _value_tl }
             }
         }
@@ -2224,11 +2224,11 @@
     }
 }
 \keys_define:nn { rpgicons / local ~ options } {
-    style ~ set          .code:n = {
-        \keyval_parse:NNn \use:n \rpgicons_style_set:nn {#1}
+    style ~ set          .code:n     = {
+        \keyval_parse:NNn \use:n \__rpgicons_style_set:nn {#1}
     },
-    style ~ append       .code:n = {
-        \keyval_parse:NNn \use:n \rpgicons_style_put_right:nn {#1}
+    style ~ append       .code:n     = {
+        \keyval_parse:NNn \use:n \__rpgicons_style_put_right:nn {#1}
     }
 }
 
@@ -2242,12 +2242,12 @@
     \str_replace_all:Nnn \l__rpgicons_icon_type_name_str { ~ } { _ }
     \clist_new:c { l_rpgicons_types_every_ \l__rpgicons_icon_type_name_str _style_clist }
     \keys_define:ne { rpgicons / local ~ options } {
-        every ~ #1       .code:n = {
+        every ~ #1       .code:n     = {
             \exp_not:N \clist_set:cn {
                 l_rpgicons_types_every_ \l__rpgicons_icon_type_name_str _style_clist
             } {##1}
         } ,
-        every ~ #1 ~ add .code:n = {
+        every ~ #1 ~ add .code:n     = {
             \exp_not:N \clist_put_right:cn {
                 l_rpgicons_types_every_ \l__rpgicons_icon_type_name_str _style_clist
             } {##1}
@@ -2281,12 +2281,12 @@
     \str_replace_all:Nnn \l__rpgicons_icon_shape_name_str { ~ } { _ }
     \clist_new:c { l_rpgicons_shapes_every_ \l__rpgicons_icon_shape_name_str _style_clist }
     \keys_define:ne { rpgicons / local ~ options } {
-        every ~ #1       .code:n = {
+        every ~ #1       .code:n     = {
             \exp_not:N \clist_set:cn {
                 l_rpgicons_shapes_every_ \l__rpgicons_icon_shape_name_str _style_clist
             } {##1}
         } ,
-        every ~ #1 ~ add .code:n = {
+        every ~ #1 ~ add .code:n     = {
             \exp_not:N \clist_put_right:cn {
                 l_rpgicons_shapes_every_ \l__rpgicons_icon_shape_name_str _style_clist
             } {##1}
@@ -2296,12 +2296,12 @@
 
 \tl_new:N \l__rpgicons_icon_actualtext_tl
 \prop_new:N \g__rpgicons_icon_actualtext_prop
-\cs_new_protected:Npn \rpgicons_icon_actualtext_set:n #1 {
+\cs_new_protected:Npn \__rpgicons_icon_actualtext_set:n #1 {
     \prop_gset_from_keyval:Nn \g__rpgicons_icon_actualtext_prop {#1}
 }
 
 \keys_define:nn { rpgicons / local ~ options } {
-    actualtext           .code:n     = { \rpgicons_icon_actualtext_set:n {#1} }
+    actualtext           .code:n     = { \__rpgicons_icon_actualtext_set:n {#1} }
 }
 
 \cs_if_exist:NTF \NewTaggingSocket {
@@ -2621,16 +2621,16 @@
 
 \regex_new:N \l__rpgicons_roll_syntax_die_regex
 \cs_generate_variant:Nn \regex_set:Nn { Ne }
-\cs_new_protected:Npn \rpgicons_roll_syntax_die_set:n #1 {
+\cs_new_protected:Npn \__rpgicons_roll_syntax_die_set:n #1 {
     \regex_set:Ne \l__rpgicons_roll_syntax_die_regex { [ \clist_use:nn {#1} { } ] }
 }
 
 \keys_define:nn { rpgicons / local ~ options } {
-    roll ~ syntax        .code:n     = { \rpgicons_roll_syntax_die_set:n {#1} } ,
+    roll ~ syntax        .code:n     = { \__rpgicons_roll_syntax_die_set:n {#1} } ,
     roll ~ syntax        .initial:n  = { d , D }
 }
 
-\cs_new:Npn \rpgicons_roll_syntax_convert:n #1 {
+\cs_new:Npn \__rpgicons_roll_syntax_convert:n #1 {
     \str_case:nnF {#1} {
         { 2 } { twoside }
         { 4 } { fourside }
@@ -2660,7 +2660,7 @@
     \regex_set:Nn \l__rpgicons_roll_syntax_times_regex { \A([x\*\x{00D7}])\Z }
 }
 \regex_new:N \l__rpgicons_roll_syntax_dice_regex
-\cs_new_protected:Npn \rpgicons_roll_syntax_parse:n #1 {
+\cs_new_protected:Npn \__rpgicons_roll_syntax_parse:n #1 {
     \regex_set:Nn \l__rpgicons_roll_syntax_dice_regex { \A(\d*)\ur{l__rpgicons_roll_syntax_die_regex}([F\d]+)\Z }
     \regex_split:NnN \l__rpgicons_roll_syntax_split_regex {#1} \l__rpgicons_roll_syntax_seq
     \seq_map_inline:Nn \l__rpgicons_roll_syntax_seq {
@@ -2675,13 +2675,13 @@
         { \tl_use:N \l__rpgicons_roll_syntax_part_tl }
     }
 }
-\cs_generate_variant:Nn \rpgicons_roll_syntax_parse:n { e }
+\cs_generate_variant:Nn \__rpgicons_roll_syntax_parse:n { e }
 
 \tl_if_exist:NF \l__rpgicons_roll_actualtext_tl {
     \tl_new:N \l__rpgicons_roll_actualtext_tl
 }
-\cs_if_exist:NF \rpgicons_roll_prepare_actualtext:Nn {
-    \cs_new_protected:Npn \rpgicons_roll_prepare_actualtext:Nn #1#2 {
+\cs_if_exist:NF \__rpgicons_roll_prepare_actualtext:Nn {
+    \cs_new_protected:Npn \__rpgicons_roll_prepare_actualtext:Nn #1#2 {
         \tl_set:Nn #1 {#2}
         \tl_replace_all:Nne #1 { - } { \codepoint_generate:nn { "2212 } { 12 } }
         \tl_replace_all:Nne #1 { * } { \codepoint_generate:nn { "00D7 } { 12 } }
@@ -2691,10 +2691,10 @@
 
 \NewDocumentCommand { \RPGIconsRoll } { m } {
     \mode_leave_vertical:
-    \rpgicons_roll_prepare_actualtext:Nn \l__rpgicons_roll_actualtext_tl {#1}
+    \__rpgicons_roll_prepare_actualtext:Nn \l__rpgicons_roll_actualtext_tl {#1}
     \tag_socket_use:nV { rpgicons / roll / before } \l__rpgicons_roll_actualtext_tl
     \tag_suspend:n { \RPGIconsRoll }
-    \rpgicons_roll_syntax_parse:e {#1}
+    \__rpgicons_roll_syntax_parse:e {#1}
     \tag_resume:n { \RPGIconsRoll }
     \tag_socket_use:n { rpgicons / roll / after }
 }

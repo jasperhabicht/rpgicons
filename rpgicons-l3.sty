@@ -2208,13 +2208,13 @@
     }
     \clist_put_right:cn { l__rpgicons_style_ #1 _value_clist } {#2}
     \keys_define:ne { rpgicons / local } {
-        #1           .meta:n     = {
+        #1               .meta:n     = {
             \clist_use:c { l__rpgicons_style_ #1 _value_clist }
         }
     }
 }
 \cs_new:Npn \__rpgicons_style_put_right:nn #1#2 {
-    \tl_if_exist:cTF { l__rpgicons_style_ #1 _value_tl } {
+    \clist_if_exist:cTF { l__rpgicons_style_ #1 _value_clist } {
         \clist_put_right:cn { l__rpgicons_style_ #1 _value_clist } {#2}
         \keys_define:ne { rpgicons / local } {
             #1           .meta:n     = {
@@ -2228,7 +2228,7 @@
 \keys_define:nn { rpgicons / local } {
     style ~ set          .code:n     = {
         \keyval_parse:NNn \use:n \__rpgicons_style_set:nn {#1}
-    },
+    } ,
     style ~ append       .code:n     = {
         \keyval_parse:NNn \use:n \__rpgicons_style_put_right:nn {#1}
     }

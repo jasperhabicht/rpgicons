@@ -2207,7 +2207,7 @@
         \clist_new:c { l__rpgicons_style_ #1 _value_clist }
     }
     \clist_put_right:cn { l__rpgicons_style_ #1 _value_clist } {#2}
-    \keys_define:nn { rpgicons / local } {
+    \keys_define:ne { rpgicons / local } {
         #1           .meta:n     = {
             \clist_use:c { l__rpgicons_style_ #1 _value_tl }
         }

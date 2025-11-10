@@ -14,7 +14,7 @@
 
 \bool_new:N \l__rpgicons_use_pgf_variant_bool
 \clist_new:N \l__rpgicons_forwarded_options_clist
-\keys_define:nn { rpgicons / select ~ variant } {
+\keys_define:nn { rpgicons / variant } {
   l3        .bool_set:N = \l__rpgicons_use_pgf_variant_bool ,
   l3        .default:n  = { false } ,
   pgf       .bool_set:N = \l__rpgicons_use_pgf_variant_bool ,
@@ -29,7 +29,7 @@
     \clist_put_right:Nn \l__rpgicons_forwarded_options_clist { opacity }
   }
 }
-\ProcessKeyOptions [ rpgicons / select ~ variant ]
+\ProcessKeyOptions [ rpgicons / variant ]
 
 \bool_if:NTF \l__rpgicons_use_pgf_variant_bool {
   \RequirePackage [ \l__rpgicons_forwarded_options_clist ] { rpgicons-pgf }

@@ -21,15 +21,15 @@
     \bool_set_true:N \l__rpgicons_unicode_mode_bool
 }
 
-\msg_new:nnn { rpgicons } { old-kernel } {
+\msg_new:nnn { rpgicons } { kernel-old } {
     LaTeX ~ kernel ~ too ~ old. \iow_newline:
     The ~ rpgicons ~ package ~ does ~ not ~ support ~ this ~ LaTeX ~ version. \iow_newline:
     Please ~ update ~ to ~ a ~ newer ~ version.
 }
-\msg_new:nnn { rpgicons } { deprecated-option } {
+\msg_new:nnn { rpgicons } { option-deprecated } {
     The ~ option ~ `#1` ~ has ~ been ~ deprecated ~ and ~ will ~ be ~ ignored.
 }
-\msg_new:nnn { rpgicons } { documentmetadata-missing-opacity } {
+\msg_new:nnn { rpgicons } { documentmetadata-missing } {
     In ~ order ~ to ~ use ~ opacity, ~
     \token_to_str:N \DocumentMetadata \c_space_tl must ~ be ~ set.
 }
@@ -53,10 +53,10 @@
 
 \keys_define:nn { rpgicons / global } {
     compat   .code:n = {
-        \msg_warning:nnn { rpgicons } { deprecated-option } { compat }
+        \msg_warning:nnn { rpgicons } { option-deprecated } { compat }
     } ,
     opacity  .code:n  = {
-        \msg_warning:nnn { rpgicons } { deprecated-option } { opacity }
+        \msg_warning:nnn { rpgicons } { option-deprecated } { opacity }
     }
 }
 \ProcessKeyOptions [ rpgicons / global ]
@@ -64,7 +64,7 @@
 \RequirePackage { l3draw }
 
 \cs_if_exist:NF \IfExplAtLeastTF {
-    \msg_critical:nn { rpgicons } { old-kernel }
+    \msg_critical:nn { rpgicons } { kernel-old }
 }
 
 \IfExplAtLeastTF { 2025-04-14 } { } {
@@ -2090,7 +2090,7 @@
 % USER COMMANDS
 
 \NewDocumentCommand { \rpgiconsset } { m } {
-    \keys_set:nn { rpgicons / local ~ options } {#1}
+    \keys_set:nn { rpgicons / local } {#1}
 }
 
 \dim_new:N \l_rpgicons_icon_before_sep_dim
@@ -2126,12 +2126,12 @@
 
 \cs_new_protected:Npn \__rpgicons_opacity_check: {
     \IfPDFManagementActiveTF { } {
-        \msg_warning:nn { rpgicons } { documentmetadata-missing-opacity }
+        \msg_warning:nn { rpgicons } { documentmetadata-missing }
     }
 }
 
 \cs_generate_variant:Nn \bool_set:Nn { Ne }
-\keys_define:nn { rpgicons / local ~ options } {
+\keys_define:nn { rpgicons / local } {
     before ~ sep         .groups:n   = { extra } ,
     before ~ sep         .dim_set:N  = \l_rpgicons_icon_before_sep_dim ,
     before ~ sep         .initial:n  = { 0.05em } ,
@@ -2197,33 +2197,35 @@
         \fp_add:Nn \l_rpgicons_icon_transform_rotate_fp {#1}
     } ,
     rotate               .initial:n  = { 0.0 } ,
-    accessible           .code:n = {
-        \msg_warning:nnn { rpgicons } { deprecated-option } { accessible }
+    accessible           .code:n     = {
+        \msg_warning:nnn { rpgicons } { option-deprecated } { accessible }
     }
 }
 
 \cs_new:Npn \__rpgicons_style_set:nn #1#2 {
-    \tl_if_exist:cF { l__rpgicons_style_ #1 _value_tl } {
-        \tl_new:c { l__rpgicons_style_ #1 _value_tl }
+    \clist_if_exist:cF { l__rpgicons_style_ #1 _value_clist } {
+        \clist_new:c { l__rpgicons_style_ #1 _value_clist }
     }
-    \tl_set:cn { l__rpgicons_style_ #1 _value_tl } {#2}
-    \keys_define:nn { rpgicons / local ~ options } {
-        #1               .meta:n     = {#2}
+    \clist_put_right:cn { l__rpgicons_style_ #1 _value_clist } {#2}
+    \keys_define:nn { rpgicons / local } {
+        #1           .meta:n     = {
+            \clist_use:c { l__rpgicons_style_ #1 _value_tl }
+        }
     }
 }
 \cs_new:Npn \__rpgicons_style_put_right:nn #1#2 {
     \tl_if_exist:cTF { l__rpgicons_style_ #1 _value_tl } {
-        \tl_put_right:cn { l__rpgicons_style_ #1 _value_tl } { , #2 }
-        \keys_define:ne { rpgicons / local ~ options } {
+        \clist_put_right:cn { l__rpgicons_style_ #1 _value_clist } {#2}
+        \keys_define:ne { rpgicons / local } {
             #1           .meta:n     = {
-                \tl_use:c { l__rpgicons_style_ #1 _value_tl }
+                \clist_use:c { l__rpgicons_style_ #1 _value_tl }
             }
         }
     } {
         \msg_error:nnn { rpgicons } { style-undefined } {#1}
     }
 }
-\keys_define:nn { rpgicons / local ~ options } {
+\keys_define:nn { rpgicons / local } {
     style ~ set          .code:n     = {
         \keyval_parse:NNn \use:n \__rpgicons_style_set:nn {#1}
     },
@@ -2241,7 +2243,7 @@
     \str_set:Nn \l__rpgicons_icon_type_name_str {#1}
     \str_replace_all:Nnn \l__rpgicons_icon_type_name_str { ~ } { _ }
     \clist_new:c { l_rpgicons_types_every_ \l__rpgicons_icon_type_name_str _style_clist }
-    \keys_define:ne { rpgicons / local ~ options } {
+    \keys_define:ne { rpgicons / local } {
         every ~ #1       .code:n     = {
             \exp_not:N \clist_set:cn {
                 l_rpgicons_types_every_ \l__rpgicons_icon_type_name_str _style_clist
@@ -2280,7 +2282,7 @@
     \str_set:Nn \l__rpgicons_icon_shape_name_str {#1}
     \str_replace_all:Nnn \l__rpgicons_icon_shape_name_str { ~ } { _ }
     \clist_new:c { l_rpgicons_shapes_every_ \l__rpgicons_icon_shape_name_str _style_clist }
-    \keys_define:ne { rpgicons / local ~ options } {
+    \keys_define:ne { rpgicons / local } {
         every ~ #1       .code:n     = {
             \exp_not:N \clist_set:cn {
                 l_rpgicons_shapes_every_ \l__rpgicons_icon_shape_name_str _style_clist
@@ -2300,7 +2302,7 @@
     \prop_gset_from_keyval:Nn \g__rpgicons_icon_actualtext_prop {#1}
 }
 
-\keys_define:nn { rpgicons / local ~ options } {
+\keys_define:nn { rpgicons / local } {
     actualtext           .code:n     = { \__rpgicons_icon_actualtext_set:n {#1} }
 }
 
@@ -2375,7 +2377,7 @@
 \NewDocumentCommand \RPGIconsUseIcon { s O{} o m } {
     \mode_leave_vertical:
     \group_begin:
-        \keys_set_exclude_groups:nne { rpgicons / local ~ options } { extra } {#2}
+        \keys_set_exclude_groups:nne { rpgicons / local } { extra } {#2}
         \prop_get:NeNF \g__rpgicons_icon_actualtext_prop {
             \bool_lazy_and:nnTF {
                 \tl_if_blank_p:n {#4}
@@ -2402,7 +2404,7 @@
             \str_replace_all:Nnn \l__rpgicons_icon_shape_name_str { ~ } { _ }
             \str_if_empty:NF \l__rpgicons_icon_shape_name_str {
                 \clist_if_exist:cT { l_rpgicons_shapes_every_ \l__rpgicons_icon_shape_name_str _style_clist } {
-                    \keys_set:ne { rpgicons / local ~ options } {
+                    \keys_set:ne { rpgicons / local } {
                         \clist_use:cn { l_rpgicons_shapes_every_ \l__rpgicons_icon_shape_name_str _style_clist } { , }
                     }
                 }
@@ -2470,8 +2472,8 @@
 \cs_generate_variant:Nn \str_if_eq:nnTF { ne }
 \NewDocumentCommand { \RPGIconsDie } { O{normal} m O{} m } {
     \group_begin:
-        \keys_set_groups:nne { rpgicons / local ~ options } { extra } {#3}
-        \keys_set:ne { rpgicons / local ~ options } { \clist_use:Nn \l_rpgicons_types_every_die_style_clist { , } }
+        \keys_set_groups:nne { rpgicons / local } { extra } {#3}
+        \keys_set:ne { rpgicons / local } { \clist_use:Nn \l_rpgicons_types_every_die_style_clist { , } }
         \str_set:Ne \l__rpgicons_icon_integer_str {#4}
         \skip_horizontal:n { \l_rpgicons_icon_before_sep_dim }
         \str_if_eq:neTF { large } {#1} {
@@ -2487,8 +2489,8 @@
 
 \NewDocumentCommand { \RPGIconsAbility } { O{positive} m O{} } {
     \group_begin:
-        \keys_set_groups:nne { rpgicons / local ~ options } { extra } {#3}
-        \keys_set:ne { rpgicons / local ~ options } { \clist_use:Nn \l_rpgicons_types_every_ability_style_clist { , } }
+        \keys_set_groups:nne { rpgicons / local } { extra } {#3}
+        \keys_set:ne { rpgicons / local } { \clist_use:Nn \l_rpgicons_types_every_ability_style_clist { , } }
         \skip_horizontal:n { \l_rpgicons_icon_before_sep_dim }
         \str_if_eq:neTF { negative } {#1} {
             \RPGIconsUseIcon*[frame=ability, scale=.333, #3]{#2}
@@ -2502,8 +2504,8 @@
 
 \NewDocumentCommand { \RPGIconsSaving } { O{} m O{} } {
     \group_begin:
-        \keys_set_groups:nne { rpgicons / local ~ options } { extra } {#3}
-        \keys_set:ne { rpgicons / local ~ options } { \clist_use:Nn \l_rpgicons_types_every_saving_style_clist { , } }
+        \keys_set_groups:nne { rpgicons / local } { extra } {#3}
+        \keys_set:ne { rpgicons / local } { \clist_use:Nn \l_rpgicons_types_every_saving_style_clist { , } }
         \skip_horizontal:n { \l_rpgicons_icon_before_sep_dim }
         \str_if_eq:neTF { empty } {#1} {
             \RPGIconsUseIcon[frame=saving, scale=.333, #3]{}
@@ -2517,8 +2519,8 @@
 
 \NewDocumentCommand { \RPGIconsSpell } { m O{} } {
     \group_begin:
-        \keys_set_groups:nne { rpgicons / local ~ options } { extra } {#2}
-        \keys_set:ne { rpgicons / local ~ options } { \clist_use:Nn \l_rpgicons_types_every_spell_style_clist { , } }
+        \keys_set_groups:nne { rpgicons / local } { extra } {#2}
+        \keys_set:ne { rpgicons / local } { \clist_use:Nn \l_rpgicons_types_every_spell_style_clist { , } }
         \skip_horizontal:n { \l_rpgicons_icon_before_sep_dim }
         \RPGIconsUseIcon[scale=.333, #2]{#1}
         \skip_horizontal:n { \l_rpgicons_icon_after_sep_dim }
@@ -2528,8 +2530,8 @@
 
 \NewDocumentCommand { \RPGIconsSpellschool } { O{negative} m O{} } {
     \group_begin:
-        \keys_set_groups:nne { rpgicons / local ~ options } { extra } {#3}
-        \keys_set:ne { rpgicons / local ~ options } { \clist_use:Nn \l_rpgicons_types_every_spellschool_style_clist { , } }
+        \keys_set_groups:nne { rpgicons / local } { extra } {#3}
+        \keys_set:ne { rpgicons / local } { \clist_use:Nn \l_rpgicons_types_every_spellschool_style_clist { , } }
         \skip_horizontal:n { \l_rpgicons_icon_before_sep_dim }
         \str_if_eq:neTF { negative } {#1} {
             \RPGIconsUseIcon*[frame=spellschool, scale=.333, #3]{#2}
@@ -2543,8 +2545,8 @@
 
 \NewDocumentCommand { \RPGIconsDamage } { m O{} } {
     \group_begin:
-        \keys_set_groups:nne { rpgicons / local ~ options } { extra } {#2}
-        \keys_set:ne { rpgicons / local ~ options } { \clist_use:Nn \l_rpgicons_types_every_damage_style_clist { , } }
+        \keys_set_groups:nne { rpgicons / local } { extra } {#2}
+        \keys_set:ne { rpgicons / local } { \clist_use:Nn \l_rpgicons_types_every_damage_style_clist { , } }
         \skip_horizontal:n { \l_rpgicons_icon_before_sep_dim }
         \RPGIconsUseIcon[frame=damage, scale=.333, #2]{#1}
         \skip_horizontal:n { \l_rpgicons_icon_after_sep_dim }
@@ -2554,8 +2556,8 @@
 
 \NewDocumentCommand { \RPGIconsAttack } { m O{} } {
     \group_begin:
-        \keys_set_groups:nne { rpgicons / local ~ options } { extra } {#2}
-        \keys_set:ne { rpgicons / local ~ options } { \clist_use:Nn \l_rpgicons_types_every_attack_style_clist { , } }
+        \keys_set_groups:nne { rpgicons / local } { extra } {#2}
+        \keys_set:ne { rpgicons / local } { \clist_use:Nn \l_rpgicons_types_every_attack_style_clist { , } }
         \skip_horizontal:n { \l_rpgicons_icon_before_sep_dim }
         \RPGIconsUseIcon[scale=.333, #2]{#1}
         \skip_horizontal:n { \l_rpgicons_icon_after_sep_dim }
@@ -2565,8 +2567,8 @@
 
 \NewDocumentCommand { \RPGIconsCondition } { m O{} } {
     \group_begin:
-        \keys_set_groups:nne { rpgicons / local ~ options } { extra } {#2}
-        \keys_set:ne { rpgicons / local ~ options } { \clist_use:Nn \l_rpgicons_types_every_condition_style_clist { , } }
+        \keys_set_groups:nne { rpgicons / local } { extra } {#2}
+        \keys_set:ne { rpgicons / local } { \clist_use:Nn \l_rpgicons_types_every_condition_style_clist { , } }
         \skip_horizontal:n { \l_rpgicons_icon_before_sep_dim }
         \RPGIconsUseIcon[scale=.333, #2]{#1}
         \skip_horizontal:n { \l_rpgicons_icon_after_sep_dim }
@@ -2576,8 +2578,8 @@
 
 \NewDocumentCommand { \RPGIconsClass } { O{positive} m O{} } {
     \group_begin:
-        \keys_set_groups:nne { rpgicons / local ~ options } { extra } {#2}
-        \keys_set:ne { rpgicons / local ~ options } { \clist_use:Nn \l_rpgicons_types_every_class_style_clist { , } }
+        \keys_set_groups:nne { rpgicons / local } { extra } {#2}
+        \keys_set:ne { rpgicons / local } { \clist_use:Nn \l_rpgicons_types_every_class_style_clist { , } }
         \skip_horizontal:n { \l_rpgicons_icon_before_sep_dim }
         \str_if_eq:neTF { negative } {#1} {
             \RPGIconsUseIcon*[frame=class, scale=.333, #3]{#2}
@@ -2591,8 +2593,8 @@
 
 \NewDocumentCommand { \RPGIconsAlignment } { O{positive} m O{} } {
     \group_begin:
-        \keys_set_groups:nne { rpgicons / local ~ options } { extra } {#2}
-        \keys_set:ne { rpgicons / local ~ options } { \clist_use:Nn \l_rpgicons_types_every_alignment_style_clist { , } }
+        \keys_set_groups:nne { rpgicons / local } { extra } {#2}
+        \keys_set:ne { rpgicons / local } { \clist_use:Nn \l_rpgicons_types_every_alignment_style_clist { , } }
         \skip_horizontal:n { \l_rpgicons_icon_before_sep_dim }
         \str_if_eq:neTF { negative } {#1} {
             \RPGIconsUseIcon*[frame=alignment, scale=.333, #3]{#2}
@@ -2606,8 +2608,8 @@
 
 \NewDocumentCommand { \RPGIconsCurrency } { m O{} m } {
     \group_begin:
-        \keys_set_groups:nne { rpgicons / local ~ options } { extra } {#2}
-        \keys_set:ne { rpgicons / local ~ options } { \clist_use:Nn \l_rpgicons_types_every_currency_style_clist { , } }
+        \keys_set_groups:nne { rpgicons / local } { extra } {#2}
+        \keys_set:ne { rpgicons / local } { \clist_use:Nn \l_rpgicons_types_every_currency_style_clist { , } }
         \str_set:Ne \l__rpgicons_icon_integer_str {#3}
         \skip_horizontal:n { \l_rpgicons_icon_before_sep_dim }
         \str_if_empty:NF \l__rpgicons_icon_integer_str { \str_use:N \l__rpgicons_icon_integer_str \, }
@@ -2625,7 +2627,7 @@
     \regex_set:Ne \l__rpgicons_roll_syntax_die_regex { [ \clist_use:nn {#1} { } ] }
 }
 
-\keys_define:nn { rpgicons / local ~ options } {
+\keys_define:nn { rpgicons / local } {
     roll ~ syntax        .code:n     = { \__rpgicons_roll_syntax_die_set:n {#1} } ,
     roll ~ syntax        .initial:n  = { d , D }
 }

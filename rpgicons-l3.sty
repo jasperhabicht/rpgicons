@@ -2209,7 +2209,7 @@
     \clist_put_right:cn { l__rpgicons_style_ #1 _value_clist } {#2}
     \keys_define:ne { rpgicons / local } {
         #1           .meta:n     = {
-            \clist_use:c { l__rpgicons_style_ #1 _value_tl }
+            \clist_use:c { l__rpgicons_style_ #1 _value_clist }
         }
     }
 }
@@ -2218,7 +2218,7 @@
         \clist_put_right:cn { l__rpgicons_style_ #1 _value_clist } {#2}
         \keys_define:ne { rpgicons / local } {
             #1           .meta:n     = {
-                \clist_use:c { l__rpgicons_style_ #1 _value_tl }
+                \clist_use:c { l__rpgicons_style_ #1 _value_clist }
             }
         }
     } {
@@ -2671,7 +2671,7 @@
             { \l__rpgicons_roll_syntax_plusminus_regex } { \c{,} $\1$ \c{,} }
             { \l__rpgicons_roll_syntax_times_regex } { \c{,} $\c{times}$ \c{,} }
             { \l__rpgicons_roll_syntax_dice_regex }
-                { \c{ RPGIconsDie } { \c{ rpgicons_roll_syntax_convert:n } { \2 } } { \1 } }
+                { \c{ RPGIconsDie } { \c{ __rpgicons_roll_syntax_convert:n } { \2 } } { \1 } }
         } \l__rpgicons_roll_syntax_part_tl
         { \tl_use:N \l__rpgicons_roll_syntax_part_tl }
         { \tl_use:N \l__rpgicons_roll_syntax_part_tl }

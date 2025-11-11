@@ -11,8 +11,8 @@
 % This work has the LPPL maintenance status `maintained'.
 %
 \documentclass[a4paper]{article}
-\def\rpgiconsfileversion{2.2.2}
-\def\rpgiconsfiledate{10 November 2025}
+\def\rpgiconsfileversion{2.3.0}
+\def\rpgiconsfiledate{11 November 2025}
 
 \usepackage[T1]{fontenc}
 \usepackage{Alegreya}
@@ -139,6 +139,12 @@
 }
 
 \NewTCBListing{codeexample}{ }{
+  listing only,
+  listing style={rpgiconsdoccodeexample},
+  after={\par\smallskip\noindent}
+}
+
+\NewTCBListing{codeexamplecolumns}{ }{
     text side listing,
     lefthand width=4.5cm,
     listing style={rpgiconsdoccodeexample},
@@ -253,14 +259,14 @@
 %\changes{v1.3.2}{2024/02/19}{Reformatting of the manual.}
 %\changes{v1.3.4}{2024/02/20}{Minor corrections of some shapes.}
 \changes{v1.4.0}{2024/02/21}{L3 variant added.}
-\changes{v1.4.1}{2024/02/21}{Corrections in L3 variant.}
+%\changes{v1.4.1}{2024/02/21}{Corrections in L3 variant.}
 \changes{v1.4.2}{2024/02/21}{Alternative set of commands in L3 variant defined.}
-\changes{v1.4.3}{2024/02/22}{Added option to L3 variant to enable upward compatibility.}
+%\changes{v1.4.3}{2024/02/22}{Added option to L3 variant to enable upward compatibility.}
 \changes{v1.4.4}{2024/02/24}{Added styles for every instance of command or shape, implementation of recent changes to \titlemacro{l3draw} code.}
 \changes{v1.5.0}{2024/02/25}{Alternative set of commands defined, added support of styles in pics.}
 \changes{v1.5.1}{2024/02/28}{Addition of opacity to L3 variant.}
-\changes{v1.5.2}{2024/02/29}{Unification of scaling, minor corrections.}
-\changes{v1.5.3}{2024/03/03}{Optimisation of code in L3 variant.}
+%\changes{v1.5.2}{2024/02/29}{Unification of scaling, minor corrections.}
+%\changes{v1.5.3}{2024/03/03}{Optimisation of code in L3 variant.}
 \changes{v1.5.4}{2024/03/06}{Correction of baseline settings in L3 variant, added accessibililty support for L3 variant.}
 %\changes{v1.5.5}{2024/03/07}{Optimsation of accessibililty support for L3 variant.}
 \changes{v1.6.0}{2024/03/15}{Four attribute icons added, minor correction of styles.}
@@ -268,9 +274,9 @@
 \changes{v1.7.0}{2024/03/16}{Macro for easy typesetting using roll dice syntax added in L3 variant, compatibility mode updated.}
 \changes{v1.8.0}{2024/03/24}{Unified wrapper to load either package variant.}
 \changes{v1.8.2}{2024/04/28}{Roll dice syntax for PGF variant.}
-\changes{v1.8.3}{2024/05/15}{Minor compatibility fix. Example of how to use pics added to documentation.}
+%\changes{v1.8.3}{2024/05/15}{Minor compatibility fix. Example of how to use pics added to documentation.}
 \changes{v1.8.4}{2024/08/08}{Bug fix in evocation spellschool shape. Unification of frames in PGF and L3 variants.}
-\changes{v1.8.6}{2024/11/13}{Fixes in the documentation.}
+%\changes{v1.8.6}{2024/11/13}{Fixes in the documentation.}
 \changes{v1.8.8}{2025/06/15}{Adjustments to support next release of \titlemacro{l3draw} package.}
 \changes{v1.9.0}{2025/06/30}{Improve check for PDF management, deprecate compatibility mode, improve accessibility support.}
 \changes{v2.0.0}{2025/09/25}{Change accessibility support to automatic tagging support.}
@@ -281,7 +287,7 @@
 \changes{v2.1.0}{2025/10/27}{Added alignment and currency shapes.}
 \changes{v2.2.0}{2025/11/05}{Added shapes for ritual spell, gems and jewellery as well as for classes. Fixes in alignment shapes and in pic definitions.}
 \changes{v2.2.1}{2025/11/06}{Added alternative shapes for cleric, druid, sorcerer and necrotic. Update of class and alignment frames. Fixes in transformation keys in L3 variant.}
-\changes{v2.2.2}{2025/11/10}{Added key to define custom keys in L3 variant.}
+\changes{v2.3.0}{2025/11/11}{Added key to define custom keys in L3 variant.}
 
 \begin{document}
 
@@ -317,6 +323,25 @@ To load the PGF variant of the package the package needs to be loaded with the o
 The L3 variant of the package loads the \macro{l3draw} package.
 
 The PGF variant of the package loads the \macro{tikz} package which in turn loads the \macro{xcolor} package. To make use of specific options these packages provide, you need to load the packages with the relevant options beforehand or explicitly pass the relevant options to the package using a command such as \macro{\PassOptionsToPackage{svgnames}{xcolor}}.
+
+\subsection{Generating SVG icons}
+
+To generate an SVG from the LaTeX source, use \macro{\documentclass[dvisvgm]{standalone}} and compile with \macro{latex} and then run \macro{dvisvgm -b papersize} on the compiled DVI file.
+
+The below code example can be compiled with \macro{latex} and \macro{dvisvgm -b papersize -p 1-} applied to the resulting DVI file to generate one SVG file for each graphic inside the \macro{icon} environment:
+
+\begin{codeexample}
+\documentclass[dvisvgm, multi=icon]{standalone}
+\usepackage{rpgicons}
+\begin{document}
+\begin{icon}%
+\ability{charisma}%
+\end{icon}
+\begin{icon}%
+\class{barbarian}%
+\end{icon}
+\end{document}
+\end{codeexample}
 
 \section{Main user commands}
 
@@ -698,7 +723,7 @@ Styles following the pattern \macro{every} followed by a space and the name of t
 \end{macrodef}
 Apart from setting the options to the commands directly, it is also possible to set them globally using the \macro{\rpgiconsset} command. Globally set options are overridden by options that are set directly.
 
-\begin{codeexample}
+\begin{codeexamplecolumns}
 \rpgiconsset{
     color=blue
 }
@@ -706,17 +731,17 @@ Apart from setting the options to the commands directly, it is also possible to 
 \ability{charisma}
 \ability{charisma}[color=red]
 \ability{charisma}
-\end{codeexample}
+\end{codeexamplecolumns}
 
 \begin{macrodef}
 style set
 style append
 \end{macrodef}
-In order to simplify styling, custom keys can be defined via the keys \macro{style set} and \macro{style append}. Both keys accept as value a key-value list consisting of one or multiple custom keys whose relevant value consists of another key-value list describing the relevant style. It is possible to use \macro{#1} as placeholder for one argument. It is also possible to reference to an already define custom key in the definition of another custom key.
+To simplify styling, custom keys can be defined via the keys \macro{style set} and \macro{style append}. Both keys accept as value a key-value list consisting of one or multiple custom keys whose relevant value consists of another key-value list describing the relevant style. It is possible to use \macro{#1} as placeholder for one argument. It is also possible to reference to an already define custom key in the definition of another custom key.
 
 The key \macro{style set} defines custom keys and sets their values. The key \macro{style append} appends the relevant key-value list to the existing custom key as defined by \macro{style set}. Note that it is not checked whether a custom key already exists and its definition will be overwritten without a warning.
 
-\begin{codeexample}
+\begin{codeexamplecolumns}
 \rpgiconsset{
     style set={
         foo={rotate=45, fill=blue},
@@ -726,7 +751,7 @@ The key \macro{style set} defines custom keys and sets their values. The key \ma
 
 \ability[negative]{charisma}[foo]
 \class[negative]{warlock}[bar=2]
-\end{codeexample}
+\end{codeexamplecolumns}
 
 \begin{macrodef}
 before sep
@@ -735,14 +760,14 @@ baseline
 \end{macrodef}
 The spacing before and after the icons can be set using the options \macro{before sep} and \macro{after sep}. The option \macro{baseline} can be used to adjust the baseline of the icons. These options can also be applied to the icon commands directly. The default value of \macro{before sep} and \macro{after sep} is 0.05\,em. The default value of \macro{baseline} is \textminus 3.5\,pt.
 
-\begin{codeexample}
+\begin{codeexamplecolumns}
 Roll\die{eightside}{}a die!
 
 \rpgiconsset{
     before sep={1cm}
 }
 Roll\die{eightside}{}a die!
-\end{codeexample}
+\end{codeexamplecolumns}
 
 \begin{macrodef}
 actualtext
@@ -839,7 +864,7 @@ Note that it may be necessary to add the Ti\emph{k}Z option \macro{transform sha
 \begin{macrodef}!rpg icons/!background color\end{macrodef}
 Some icons can be used with a negative color scheme where the icon is drawn negatively inside a filled shape. Per default, the icons are drawn in white in such cases, but it might be desirable that the icons are in the same color as the background. To this end, the color can be changed using the Ti\emph{k}Z option \macro{rpg icons/background color} in the following way:
 
-\begin{codeexample}
+\begin{codeexamplecolumns}
 \colorbox{blue!50}{%
     \ability[negative]{charisma}
         [scale=2, transform shape]%
@@ -852,7 +877,7 @@ Some icons can be used with a negative color scheme where the icon is drawn nega
     \ability[negative]{charisma}
         [scale=2, transform shape]%
 }
-\end{codeexample}
+\end{codeexamplecolumns}
 This feature can, of course, also be used to change the color of the icon independently from the color of the background.
 
 \begin{macrodef}
@@ -862,14 +887,14 @@ This feature can, of course, also be used to change the color of the icon indepe
 \end{macrodef}
 The Ti\emph{k}Z options \macro{rpg icons/before sep} and \macro{rpg icons/after sep} are used to define the width of the space that is added before and after the icons respectively. The default value of both lengths is 0.05\,em. For example, setting the space before icons to 1\,cm can be achieved as follows:
 
-\begin{codeexample}
+\begin{codeexamplecolumns}
 Roll\die{eightside}{}a die!
 
 \tikzset{
     rpg icons/before sep={1cm}
 }
 Roll\die{eightside}{}a die!
-\end{codeexample}
+\end{codeexamplecolumns}
 
 The option \macro{baseline} can be used to adjust the baseline of the icons. A larger value for the baseline will shift the icon downwards relative to the baseline of the surrounding text. The default value of the baseline is \textminus 3.5\,pt.
 
@@ -877,14 +902,14 @@ The option \macro{baseline} can be used to adjust the baseline of the icons. A l
 
 Because the icons are defined as Ti\emph{k}Z shapes, they can directly be applied to Ti\emph{k}Z nodes. However, the shapes don't have a shape border and no anchors defined, except for the \macro{center} anchor that sits exactly in the center of the shape. Therefore, if nodes with these shapes are connected using edges, the \macro{center} anchor will be used to connect the nodes. If nodes with these shapes are being positioned, only the \macro{center} anchor is available. Text content of these nodes is simply printed on top of the center of the node. Compare the following example.
 
-\begin{codeexample}
+\begin{codeexamplecolumns}
 \begin{tikzpicture}
     \node[eightside, draw, blue, thick]
         at (0,0) (A) {A};
     \node[charisma, draw] at (2,0) (B) {B};
     \draw[red] (A) -- (B);
 \end{tikzpicture}
-\end{codeexample}
+\end{codeexamplecolumns}
 
 \subsection{Boxing of icons}
 
@@ -902,14 +927,14 @@ Using the command \macro{\useprotectedrpgicon}, the previously defined box can b
 
 Having created a boxed icon, it is safe to use it, for example, inside a Ti\emph{k}Z node:
 
-\begin{codeexample}
+\begin{codeexamplecolumns}
 \begin{tikzpicture}
     \node[circle, draw, align=center] {
         \useprotectedrpgicon{mybox} \\
         Roll a die!
     };
 \end{tikzpicture}
-\end{codeexample}
+\end{codeexamplecolumns}
 
 \subsection{Icons as pics}\label{sec:pics}
 
@@ -917,7 +942,7 @@ If the PGF variant of the package is loaded with the option \macro{pics}, every 
 
 The icon is embedded as a node in the pic which has the name \macro{-node}. Thus, it is possible to name the pic and refer to the node inside. Due to the fact that the icon is a node, the option \macro{transform shape} has to be used if transformations on the pic should affect the node as well. It is possible to apply styles to the node using the Ti\emph{k}Z option \macro{every node} as shown in the following example.
 
-\begin{codeexample}
+\begin{codeexamplecolumns}
 \begin{tikzpicture}
     \pic[
         transform shape,
@@ -931,7 +956,7 @@ The icon is embedded as a node in the pic which has the name \macro{-node}. Thus
     ] (p) {rpg icons charisma ability};
     \draw[red] (p-node) -- +(2,0);
 \end{tikzpicture}
-\end{codeexample}
+\end{codeexamplecolumns}
 
 \begin{macrodef}
 !rpg icons/!create pic from shape
@@ -947,7 +972,7 @@ The PGF variant of the package defines five Ti\emph{k}Z keys that are used to cr
 
 The following example shows how to create the drawing on the first page of this documentation using Ti\emph{k}Z pics. We need to call \macro{rpg icons/create pic from ability shape} for the shapes \macro{twentyside}, \macro{buff} and \macro{ranged}, because per default no pics are defined for these shapes in combination with ability. Note the use of \macro{\space} to ensure correct use of spaces in the pic name as spaces are gobbled after commands in TeX.
 
-\begin{codeexample}
+\begin{codeexamplecolumns}
 \tikzset{
     rpg icons/%
     create pic from ability shape/%
@@ -982,7 +1007,7 @@ The following example shows how to create the drawing on the first page of this 
             {rpg icons \x\space ability};
     }
 \end{tikzpicture}
-\end{codeexample}
+\end{codeexamplecolumns}
 
 \subsection{Roll dice syntax}
 

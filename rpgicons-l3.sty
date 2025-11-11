@@ -10,7 +10,7 @@
 %
 % This work has the LPPL maintenance status `maintained'.
 %
-\ProvidesExplPackage {rpgicons-l3} {2025-11-10} {2.2.2}
+\ProvidesExplPackage {rpgicons-l3} {2025-11-11} {2.3.0}
     {RPG Icons Package (l3 Variant)}
 
 \bool_new:N \l__rpgicons_unicode_mode_bool
@@ -21,7 +21,7 @@
     \bool_set_true:N \l__rpgicons_unicode_mode_bool
 }
 
-\msg_new:nnn { rpgicons } { kernel-old } {
+\msg_new:nnn { rpgicons } { old-kernel } {
     LaTeX ~ kernel ~ too ~ old. \iow_newline:
     The ~ rpgicons ~ package ~ does ~ not ~ support ~ this ~ LaTeX ~ version. \iow_newline:
     Please ~ update ~ to ~ a ~ newer ~ version.
@@ -52,7 +52,7 @@
 }
 
 \keys_define:nn { rpgicons / global } {
-    compat   .code:n = {
+    compat   .code:n  = {
         \msg_warning:nnn { rpgicons } { option-deprecated } { compat }
     } ,
     opacity  .code:n  = {
@@ -64,7 +64,7 @@
 \RequirePackage { l3draw }
 
 \cs_if_exist:NF \IfExplAtLeastTF {
-    \msg_critical:nn { rpgicons } { kernel-old }
+    \msg_critical:nn { rpgicons } { old-kernel }
 }
 
 \IfExplAtLeastTF { 2025-04-14 } { } {

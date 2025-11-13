@@ -29,7 +29,8 @@
   sixside six, sixside seven, sixside eight, sixside nine, fudge plus, fudge minus,
   strength, dexterity, dexterity alt, constitution, intelligence, wisdom, charisma,
   resilience, sanity, perception, luck, armor, proficiency,
-  linear, conic, quadratic, cubic, spheric, cylindric, verbal, somatic, material, ritual, focus,
+  linear, conic, quadratic, cubic, spheric, cylindric, emanation,
+  verbal, somatic, material, ritual, focus,
   abjuration, conjuration, divination, enchantment, evocation, illusion, necromancy, transmutation,
   acid, bludgeoning, cold, fire, force, lightning, necrotic, necrotic alt, piercing, poison, psychic,
   radiant, slashing, thunder, healing,
@@ -1072,7 +1073,7 @@
 
 % SPELLS
 
-% line
+% linear
 \pgfdeclareshape{linear}{
   \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
   \anchor{text} % this is used to center the text in the node
@@ -1090,7 +1091,7 @@
   }
 }
 
-% cone
+% conic
 \pgfdeclareshape{conic}{
   \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
   \anchor{text} % this is used to center the text in the node
@@ -1121,7 +1122,7 @@
   }
 }
 
-% square
+% quadratic
 \pgfdeclareshape{quadratic}{
   \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
   \anchor{text} % this is used to center the text in the node
@@ -1136,7 +1137,7 @@
   }
 }
 
-% cube
+% cubic
 \pgfdeclareshape{cubic}{
   \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
   \anchor{text} % this is used to center the text in the node
@@ -1163,7 +1164,7 @@
   }
 }
 
-% sphere
+% spheric
 \pgfdeclareshape{spheric}{
   \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
   \anchor{text} % this is used to center the text in the node
@@ -1184,7 +1185,7 @@
   }
 }
 
-% cylinder
+% cylindric
 \pgfdeclareshape{cylindric}{
   \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
   \anchor{text} % this is used to center the text in the node
@@ -1200,6 +1201,28 @@
     \pgfpathlineto{\pgfpoint{-.425cm}{-.2125cm}}
     \pgfpatharc{0}{180}{-.425cm and -.2cm}
     \pgfpathlineto{\pgfpoint{.425cm}{.2125cm}}
+    \pgfsetarrowsstart{}
+    \pgfsetarrowsend{}
+  }
+}
+
+% emanation
+\pgfdeclareshape{emanation}{
+  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
+  \anchor{text} % this is used to center the text in the node
+    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+
+  \backgroundpath{
+    \pgfpathcircle{\pgfpoint{0cm}{.1cm}}{.075cm}
+    \pgfpathmoveto{\pgfpoint{-.15cm}{-.15cm}}
+    \pgfpatharc{180}{90}{.075cm}
+    \pgfpathlineto{\pgfpoint{.075cm}{-.075cm}}
+    \pgfpatharc{90}{0}{.075cm}
+    \pgfpathcircle{\pgfpoint{0cm}{0cm}}{.325cm}
+    \foreach \a in {0,45,...,325} {
+      \pgfpathmoveto{\pgfpointpolar{\a-10}{.425cm}}
+      \pgfpatharc{\a-10}{\a+10}{.425cm}
+    }
     \pgfsetarrowsstart{}
     \pgfsetarrowsend{}
   }

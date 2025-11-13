@@ -700,6 +700,19 @@
     \draw_path_lineto:n { .425cm , .2125cm }
 }
 
+\cs_new_protected:Npn \rpgicons_draw_shape_emanation: {
+    \draw_path_circle:nn { 0cm , .1cm } { .075cm }
+    \draw_path_moveto:n { -.15cm , -.15cm }
+    \draw_path_arc:nnn { 180 } { 90 } { .075cm }
+    \draw_path_lineto:n { .075cm , -.075cm }
+    \draw_path_arc:nnn { 90 } { 0 } { .075cm }
+    \draw_path_circle:nn { 0cm , 0cm } { .325cm }
+    \int_step_inline:nnnn { 0 } { 45 } { 325 } {
+        \draw_path_moveto:n { \draw_point_polar:nn { .425cm } { ##1 - 10 } }
+        \draw_path_arc:nnn { ##1 - 10 } { ##1 + 10 } { .425cm }
+    } 
+}
+
 \cs_new_protected:Npn \rpgicons_draw_shape_verbal: {
     \draw_path_moveto:n { -.35cm , 0cm }
     \draw_path_arc:nnn { 180 } { -115 } { .35cm }
@@ -2263,7 +2276,8 @@
     sixside ~ six , sixside ~ seven, sixside ~ eight, sixside ~ nine, fudge ~ plus, fudge ~ minus ,
     strength , dexterity , dexterity ~ alt , constitution , intelligence , wisdom , charisma ,
     resilience , sanity , perception , luck , armor , proficiency ,
-    linear , conic , quadratic , cubic , spheric , cylindric , verbal , somatic , material , ritual , focus ,
+    linear , conic , quadratic , cubic , spheric , cylindric , emanation ,
+    verbal , somatic , material , ritual , focus ,
     abjuration , conjuration , divination , enchantment , evocation , illusion , necromancy , transmutation ,
     acid , bludgeoning , cold , fire , force , lightning , necrotic , necrotic ~ alt , piercing , poison , psychic ,
     radiant , slashing , thunder , healing ,

@@ -11,7 +11,7 @@
 % This work has the LPPL maintenance status `maintained'.
 %
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{rpgicons-pgf}[2025-11-16 RPG Icons Package (PGF Variant) (2.3.0)]
+\ProvidesPackage{rpgicons-pgf}[2025-11-25 RPG Icons Package (PGF Variant) (2.3.1)]
 
 % provide pics option
 \newif\ifrpgicons@pics\rpgicons@picsfalse
@@ -3227,8 +3227,8 @@
   \tikz[rpg icons, rpg icons/every alignment, rpg icons/every #2,
     baseline=\rpgicons@baseline, fgpos/.style={draw=rpgicons@bg, line width=.6pt}, fgneg/.style={draw},
     bgpos/.style={fill}, bgneg/.style={draw}, #3] {
-    \path[scale=.333, \rpgicons@alignmenticonbg] (30:.475cm)
-      -- (90:.475cm) -- (150:.475cm) -- (210:.475cm) -- (270:.475cm) -- (330:.475cm) -- cycle;
+    \path[scale=.333, \rpgicons@alignmenticonbg] (30:.525cm)
+      -- (90:.525cm) -- (150:.525cm) -- (210:.525cm) -- (270:.525cm) -- (330:.525cm) -- cycle;
     \node[#2, \rpgicons@alignmenticonfg, scale=.225] at (0cm,0cm) {};
     \path[draw=none, scale=.333] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
   }%

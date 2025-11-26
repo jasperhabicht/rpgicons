@@ -1640,16 +1640,16 @@
 }
 
 \cs_new_protected:Npn \rpgicons_draw_shape_cleric_alt: {
-    \clist_map_inline:nn { -.325cm , 0cm , .325cm } {
-        \draw_path_moveto:n { ##1 - .05cm , -.05cm }
-        \draw_path_lineto:n { ##1 - .05cm , .175cm }
-        \draw_path_lineto:n { ##1 + .05cm , .175cm }
-        \draw_path_lineto:n { ##1 + .05cm , -.05cm }
-        \draw_path_moveto:n { ##1 - .05cm , .3cm }
+    \int_step_inline:nnnn { -1 } { 1 } { 1 } {
+        \draw_path_moveto:n { ##1 * .325cm - .05cm , -.05cm }
+        \draw_path_lineto:n { ##1 * .325cm - .05cm , .175cm }
+        \draw_path_lineto:n { ##1 * .325cm + .05cm , .175cm }
+        \draw_path_lineto:n { ##1 * .325cm + .05cm , -.05cm }
+        \draw_path_moveto:n { ##1 * .325cm - .05cm , .3cm }
         \draw_path_arc:nnn { 180 } { 405 } { .05cm }
         \draw_path_arc:nnn { 215 } { 180 } { .15cm }
-        \draw_path_moveto:n { ##1 - .1cm , -.05cm }
-        \draw_path_lineto:n { ##1 + .1cm , -.05cm }
+        \draw_path_moveto:n { ##1 * .325cm - .1cm , -.05cm }
+        \draw_path_lineto:n { ##1 * .325cm + .1cm , -.05cm }
         \draw_path_arc:nnn { 360 } { 180 } { .1cm }
     }
     \draw_path_moveto:n { -.325cm , -.15cm }
@@ -1787,10 +1787,14 @@
 \cs_new_protected:Npn \rpgicons_draw_shape_ranger: {
     \draw_path_circle:nn { 0cm , 0cm } { .425cm }
     \draw_path_circle:nn { 0cm , 0cm } { .325cm }
-    \clist_map_inline:nn { 0 , 90 , 180 , 270 } {
-        \draw_path_moveto:n { \draw_point_polar:nn { .325cm } { ##1 } }
-        \draw_path_lineto:n { \draw_point_polar:nn { .225cm } { ##1 } }
-    }
+    \draw_path_moveto:n { \draw_point_polar:nn { .325cm } { 0 } }
+    \draw_path_lineto:n { \draw_point_polar:nn { .225cm } { 0 } }
+    \draw_path_moveto:n { \draw_point_polar:nn { .325cm } { 90 } }
+    \draw_path_lineto:n { \draw_point_polar:nn { .225cm } { 90 } }
+    \draw_path_moveto:n { \draw_point_polar:nn { .325cm } { 180 } }
+    \draw_path_lineto:n { \draw_point_polar:nn { .225cm } { 180 } }
+    \draw_path_moveto:n { \draw_point_polar:nn { .325cm } { 270 } }
+    \draw_path_lineto:n { \draw_point_polar:nn { .225cm } { 270 } }
     \draw_path_moveto:n { \draw_point_polar:nn { .225cm } { 45 } }
     \draw_path_lineto:n { \draw_point_polar:nn { .1cm } { 135 } }
     \draw_path_lineto:n { \draw_point_polar:nn { .225cm } { 225 } }

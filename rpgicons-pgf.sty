@@ -2696,16 +2696,16 @@
     {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
-    \foreach \x in {-.325cm,0cm,.325cm} {
-      \pgfpathmoveto{\pgfpoint{\x-.05cm}{-.05cm}}
-      \pgfpathlineto{\pgfpoint{\x-.05cm}{.175cm}}
-      \pgfpathlineto{\pgfpoint{\x+.05cm}{.175cm}}
-      \pgfpathlineto{\pgfpoint{\x+.05cm}{-.05cm}}
-      \pgfpathmoveto{\pgfpoint{\x-.05cm}{.3cm}}
+    \foreach \x in {-1,0,1} {
+      \pgfpathmoveto{\pgfpoint{\x*.325cm-.05cm}{-.05cm}}
+      \pgfpathlineto{\pgfpoint{\x*.325cm-.05cm}{.175cm}}
+      \pgfpathlineto{\pgfpoint{\x*.325cm+.05cm}{.175cm}}
+      \pgfpathlineto{\pgfpoint{\x*.325cm+.05cm}{-.05cm}}
+      \pgfpathmoveto{\pgfpoint{\x*.325cm-.05cm}{.3cm}}
       \pgfpatharc{180}{405}{.05cm}
       \pgfpatharc{215}{180}{.15cm}
-      \pgfpathmoveto{\pgfpoint{\x-.1cm}{-.05cm}}
-      \pgfpathlineto{\pgfpoint{\x+.1cm}{-.05cm}}
+      \pgfpathmoveto{\pgfpoint{\x*.325cm-.1cm}{-.05cm}}
+      \pgfpathlineto{\pgfpoint{\x*.325cm+.1cm}{-.05cm}}
       \pgfpatharc{360}{180}{.1cm}
     }
     \pgfpathmoveto{\pgfpoint{-.325cm}{-.15cm}}
@@ -2892,10 +2892,14 @@
   \backgroundpath{
     \pgfpathcircle{\pgfpoint{0cm}{0cm}}{.425cm}
     \pgfpathcircle{\pgfpoint{0cm}{0cm}}{.325cm}
-    \foreach \a in {0,90,180,270} {
-      \pgfpathmoveto{\pgfpointpolar{\a}{.325cm}}
-      \pgfpathlineto{\pgfpointpolar{\a}{.225cm}}
-    }
+    \pgfpathmoveto{\pgfpointpolar{0}{.325cm}}
+    \pgfpathlineto{\pgfpointpolar{0}{.225cm}}
+    \pgfpathmoveto{\pgfpointpolar{90}{.325cm}}
+    \pgfpathlineto{\pgfpointpolar{90}{.225cm}}
+    \pgfpathmoveto{\pgfpointpolar{180}{.325cm}}
+    \pgfpathlineto{\pgfpointpolar{180}{.225cm}}
+    \pgfpathmoveto{\pgfpointpolar{270}{.325cm}}
+    \pgfpathlineto{\pgfpointpolar{270}{.225cm}}
     \pgfpathmoveto{\pgfpointpolar{45}{.225cm}}
     \pgfpathlineto{\pgfpointpolar{135}{.1cm}}
     \pgfpathlineto{\pgfpointpolar{225}{.225cm}}

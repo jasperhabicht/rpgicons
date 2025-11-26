@@ -1640,7 +1640,7 @@
 }
 
 \cs_new_protected:Npn \rpgicons_draw_shape_cleric_alt: {
-    \int_step_inline:nnnn { -1 } { 1 } { 1 } {
+    \int_step_inline:nnn { -1 } { 1 } {
         \draw_path_moveto:n { ##1 * .325cm - .05cm , -.05cm }
         \draw_path_lineto:n { ##1 * .325cm - .05cm , .175cm }
         \draw_path_lineto:n { ##1 * .325cm + .05cm , .175cm }

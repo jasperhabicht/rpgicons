@@ -627,7 +627,7 @@ Transparency requires the management of certain PDF settings. Therefore, it is n
 |\RPGIconsUseIcon|[<options>][<integer>]{<shape>}
 |\RPGIconsUseIcon*|[<options>][<integer>]{<shape>}
 \end{macrodef}
-\macro{\RPGIconsUseIcon} is the primary command to typeset icons using the L3 variant of the package. The commands \macro{\die}, \macro{\ability}, \macro{\saving}, \macro{\spell}, \macro{\spellschool}, \macro{\damage}, \macro{\attack}, \macro{\condition}, \macro{\class}, \macro{\alignment} and \macro{\currency} are based on this command.
+\macro{\RPGIconsUseIcon} is the primary command to typeset icons using the L3 variant of the package. The commands \macro{\die}, \macro{\ability}, \macro{\saving}, \macro{\spell}, \macro{\spellschool}, \macro{\damage}, \macro{\attack}, \macro{\condition}, \macro{\class}, \macro{\alignment} and \macro{\currency} are based on this command. This command allows to combine all shapes with all frames and with either a positive or a negative color scheme.
 
 For example, \macro{\RPGIconsUseIcon[scale=.675, stroke=blue][2]{tenside}} is equivalent to and thus results in the same output as \macro{\die[large]{tenside}[stroke=blue]{2}} and \macro{\RPGIconsUseIcon*[frame=ability, scale=.333, fill=red]{charisma}} results in the same output as \macro{\ability[negative]{charisma}[fill=red]}.
 

@@ -629,7 +629,9 @@ Transparency requires the management of certain PDF settings. Therefore, it is n
 \end{macrodef}
 \macro{\RPGIconsUseIcon} is the primary command to typeset icons using the L3 variant of the package. The commands \macro{\die}, \macro{\ability}, \macro{\saving}, \macro{\spell}, \macro{\spellschool}, \macro{\damage}, \macro{\attack}, \macro{\condition}, \macro{\class}, \macro{\alignment} and \macro{\currency} are based on this command.
 
-The \macro{\RPGIconsUseIcon} command has a starred version and two optional arguments as well as one mandatory argument. The mandatory argument holds the shape of the icon. The second optional argument can be used to add an integer when used with shapes for dice.
+For example, \macro{\RPGIconsUseIcon[scale=.675, stroke=blue][2]{tenside}} is equivalent to and thus results in the same output as \macro{\die[large]{tenside}[stroke=blue]{2}} and \macro{\RPGIconsUseIcon*[frame=ability, scale=.333, fill=red]{charisma}} results in the same output as \macro{\ability[negative]{charisma}[fill=red]}.
+
+The \macro{\RPGIconsUseIcon} command has a starred version and two optional arguments as well as one mandatory argument. The mandatory argument holds the shape of the icon. The second optional argument can be used to add an integer (or any text) that is placed on top of the icon, for example when used with shapes for dice.
 
 The starred version of the command is used to fill a frame with color instead of drawing its outline. Frames can be put around the shape via the relevant \macro{frame} option.
 
@@ -673,13 +675,15 @@ The \macro{\RPGIconsUseIcon} command and the commands \macro{\die}, \macro{\abil
 
 For example, \macro{\die{eightside}[color=blue, line width=0.8pt]{2}} would result in \die{eightside}[color=blue, line width=0.8pt]{2}.
 
-With the \macro{frame} option, one of four different frames can be selected that are drawn around the shape of the icon. The values \macro{ability} and \macro{damage} draw a circle around the shape. The value \macro{saving} draws a rounded shield and the value \macro{spellschool} draws an angular shield around the shape. The commands \macro{\ability}, \macro{\saving}, \macro{\spellschool} and \macro{\damage} make use of the relevant frame.
+With the \macro{frame} option, one of six different frames can be selected that are drawn around the shape of the icon. The values \macro{ability} and \macro{damage} draw a circle around the shape. The value \macro{saving} draws a rounded shield and the value \macro{spellschool} draws an angular shield around the shape. The value \macro{class} dtaws a square and the value \macro{alignment} a hexagon around the shape. The commands \macro{\ability}, \macro{\saving}, \macro{\spellschool}, \macro{\damage}, \macro{\class}, \macro{\alignment} and \macro{\currency} make use of the relevant frame. Because the regular commands already implicitly select the relevant frame (or no frame), using the \macro{frame} option is only recommended together with the \macro{\RPGIconsUseIcon} command.
 
-Some icons can be used with a negative color scheme where the icon is drawn negatively inside a filled shape. Per default, the icons are drawn in white in such cases, but it might be desirable that the icons are in the same color as the background. To this end, the \macro{background} option sets the color of the shape when it is printed over a filled frame which can be achieved by setting the \macro{negative} option for the \macro{\ability} or the \macro{\spellschool} command or using the starred version of the \macro{\RPGIconsUseIcon} command.
+For example, \macro{\RPGIconsUseIcon[frame=class, scale=0.333]{charisma}} would result in \RPGIconsUseIcon[frame=class, scale=0.333]{charisma}.
+
+Some icons can be used with a negative color scheme where the icon is drawn negatively inside a filled shape. Per default, the icons are drawn in white in such cases, but it might be desirable that the icons are in the same color as the background. To this end, the \macro{background} option sets the color of the shape when it is printed over a filled frame which can be achieved by setting the \macro{negative} option for the \macro{\ability}, \macro{\spellschool}, \macro{\class} or the \macro{\alignment} command or using the starred version of the \macro{\RPGIconsUseIcon} command.
 
 The \macro{color} option sets the color of strokes, fills and text in general while the \macro{stroke} option, the \macro{fill} option and the \macro{text} option set the color only for strokes, fills or text respectively. Similarly, the \macro{opacity} macro sets the opacity generally, while the options \macro{stroke opacity}, \macro{fill opacity} and \macro{text opacity} allow for setting the opacity of strokes, fill and text separately. The option \macro{line width} sets the line width for strokes. Using the \macro{scale} and \macro{rotate} options, the shape can be scaled and rotated.
 
-The \macro{scale inner} option can be used to change the scaling of the icon when placed inside a frame when using the \macro{\ability}, \macro{\saving}, \macro{\spellschool} and \macro{\damage} macros. The default value is 0.675.
+The \macro{scale inner} option can be used to change the scaling of the icon when placed inside a frame when using the \macro{\ability}, \macro{\saving}, \macro{\spellschool}, \macro{\damage}, \macro{\class}, \macro{\alignment} and \macro{\currency} macros. The default value is 0.675.
 
 Note that the keys related to transformation, that is \macro{scale}, \macro{scale inner} and \macro{rotate}, add to the current value and do not replace it. For example, \macro{scale=0.5, scale=0.5} results in a scale factor of 0.25 and \macro{rotate=10, rotate=10} results in a rotation of 20~degrees.
 

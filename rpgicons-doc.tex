@@ -619,7 +619,11 @@ The L3 variant of the package which uses the \macro{l3draw} package is loaded by
 
 The L3 variant of the package does not load the \macro{xcolor} package but makes use of the \macro{l3color} module which uses a similar syntax like the \macro{xcolor} package. Color definitions made using the \macro{l3color} module are not directly usable via commands provided by the \macro{xcolor} package. Therefore, setting a color using the \macro{\color} macro provided by the \macro{xcolor} package won't affect the color of the icons.
 
-Transparency requires the management of certain PDF settings. Therefore, it is necessary to call \macro{\DocumentMetadata{}} before loading a \macro{\documentclass} when using the L3 variant of the package.
+It is possible, however, to call \macro{\DocumentMetadata{}} before \macro{\documentclass} and then use \macro{\definecolor} provided by the \macro{xcolor} package to define a color which can then be used by the L3 variant of the package.
+
+Transparency requires the management of certain PDF settings. Therefore, it is necessary to call \macro{\DocumentMetadata{}} before \macro{\documentclass} when using the L3 variant of the package.
+
+Instead of \macro{\DocumentMetadata{}}, \macro{\RequirePackage{pdfmanagement}} can be called before \macro{\documentclass} to enable the above described color and transparency management.
 
 \subsection{Icon commands}
 

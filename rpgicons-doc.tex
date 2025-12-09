@@ -623,7 +623,7 @@ It is possible, however, to call \macro{\DocumentMetadata{}} before \macro{\docu
 
 Transparency requires the management of certain PDF settings. Therefore, it is necessary to call \macro{\DocumentMetadata{}} before \macro{\documentclass} when using the L3 variant of the package.
 
-Instead of \macro{\DocumentMetadata{}}, \macro{\RequirePackage{pdfmanagement}} can be called before \macro{\documentclass} to enable the above described color and transparency management.
+It is also possible to call \macro{\RequirePackage{pdfmanagement}} before \macro{\documentclass} instead of \macro{\DocumentMetadata{}} to enable the above described color and transparency management.
 
 \subsection{Icon commands}
 
@@ -633,7 +633,7 @@ Instead of \macro{\DocumentMetadata{}}, \macro{\RequirePackage{pdfmanagement}} c
 \end{macrodef}
 \macro{\RPGIconsUseIcon} is the primary command to typeset icons using the L3 variant of the package. The commands \macro{\die}, \macro{\ability}, \macro{\saving}, \macro{\spell}, \macro{\spellschool}, \macro{\damage}, \macro{\attack}, \macro{\condition}, \macro{\class}, \macro{\alignment} and \macro{\currency} are based on this command. This command allows to combine all shapes with all frames and with either a positive or a negative color scheme.
 
-For example, \macro{\RPGIconsUseIcon[scale=.675, stroke=blue][2]{tenside}} is equivalent to and thus results in the same output as \macro{\die[large]{tenside}[stroke=blue]{2}} and \macro{\RPGIconsUseIcon*[frame=ability, scale=.333, fill=red]{charisma}} results in the same output as \macro{\ability[negative]{charisma}[fill=red]}.
+For example, \macro{\RPGIconsUseIcon[scale=.675, stroke=blue][2]{tenside}} is equivalent to and thus results in the same output as \macro{\die[large]{tenside}[stroke=blue]{2}} and \macro{\RPGIconsUseIcon*[frame=ability, scale=.333, fill=red]{charisma}} results in the same output as \macro{\ability[negative]{charisma}[fill=red]}. On the other hand, it is also possible to create icons that can't be typeset using the above standard commands, such as \macro{\RPGIconsUseIcon*[frame=saving, scale=.333, fill=blue]{barbarian}} which will result in \RPGIconsUseIcon*[frame=saving, scale=.333, fill=blue]{barbarian}.
 
 The \macro{\RPGIconsUseIcon} command has a starred version and two optional arguments as well as one mandatory argument. The mandatory argument holds the shape of the icon. The second optional argument can be used to add an integer (or any text) that is placed on top of the icon, for example when used with shapes for dice.
 
@@ -687,7 +687,7 @@ Some icons can be used with a negative color scheme where the icon is drawn nega
 
 The \macro{color} option sets the color of strokes, fills and text in general while the \macro{stroke} option, the \macro{fill} option and the \macro{text} option set the color only for strokes, fills or text respectively. Similarly, the \macro{opacity} macro sets the opacity generally, while the options \macro{stroke opacity}, \macro{fill opacity} and \macro{text opacity} allow for setting the opacity of strokes, fill and text separately. The option \macro{line width} sets the line width for strokes. Using the \macro{scale} and \macro{rotate} options, the shape can be scaled and rotated.
 
-The \macro{scale inner} option can be used to change the scaling of the icon when placed inside a frame when using the \macro{\ability}, \macro{\saving}, \macro{\spellschool}, \macro{\damage}, \macro{\class}, \macro{\alignment} and \macro{\currency} macros. The default value is 0.675.
+The \macro{scale inner} option can be used to change the scaling of the icon placed inside a frame when using the \macro{\ability}, \macro{\saving}, \macro{\spellschool}, \macro{\damage}, \macro{\class}, \macro{\alignment} and \macro{\currency} macros. The default value is 0.675.
 
 Note that the keys related to transformation, that is \macro{scale}, \macro{scale inner} and \macro{rotate}, add to the current value and do not replace it. For example, \macro{scale=0.5, scale=0.5} results in a scale factor of 0.25 and \macro{rotate=10, rotate=10} results in a rotation of 20~degrees.
 

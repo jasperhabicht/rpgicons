@@ -11,7 +11,7 @@
 % This work has the LPPL maintenance status `maintained'.
 %
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{rpgicons-pgf}[2025-12-10 RPG Icons Package (PGF Variant) (2.3.2)]
+\ProvidesPackage{rpgicons-pgf}[2025-12-15 RPG Icons Package (PGF Variant) (2.3.3)]
 
 % provide pics option
 \newif\ifrpgicons@pics\rpgicons@picsfalse
@@ -27,7 +27,7 @@
   twoside, fourside, sixside, eightside, tenside, twelveside, twentyside, hundredside,
   fudge, sixside one, sixside two, sixside three, sixside four, sixside five,
   sixside six, sixside seven, sixside eight, sixside nine, fudge plus, fudge minus,
-  strength, dexterity, dexterity alt, constitution, intelligence, wisdom, charisma,
+  strength, dexterity, dexterity alt, constitution, intelligence, wisdom, wisdom alt, charisma,
   resilience, sanity, perception, luck, armor, proficiency,
   linear, conic, quadratic, cubic, spheric, cylindric, emanation,
   verbal, somatic, material, ritual, focus,
@@ -636,9 +636,9 @@
 
   \backgroundpath{
     \pgfpathmoveto{\pgfpointadd{\pgfpoint{0cm}{-.15cm}}{\pgfpointpolar{90}{.425cm}}}
-    \pgfpatharc{90}{75}{.425cm}
+    \pgfpatharc{90}{80}{.425cm}
     \pgfpathmoveto{\pgfpointadd{\pgfpoint{0cm}{-.15cm}}{\pgfpointpolar{90}{.425cm}}}
-    \pgfpatharc{90}{105}{.425cm}
+    \pgfpatharc{90}{100}{.425cm}
     \pgfpathmoveto{\pgfpoint{.125cm}{.175cm}}
     \pgfpathlineto{\pgfpoint{.375cm}{.425cm}}
     \pgfpatharc{30}{-20}{.25cm}
@@ -766,6 +766,42 @@
     \pgfpatharc{150}{270}{.25cm}
     \pgfpathmoveto{\pgfpoint{.375cm}{.125cm}}
     \pgfpatharc{30}{-90}{.25cm}
+    \pgfsetarrowsstart{}
+    \pgfsetarrowsend{}
+  }
+}
+
+% wisdom alt
+\pgfdeclareshape{wisdom alt}{
+  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
+  \anchor{text} % this is used to center the text in the node
+    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+
+  \backgroundpath{
+    \pgfpathmoveto{\pgfpointadd{\pgfpoint{0cm}{-.125cm}}{\pgfpointpolar{110}{.55cm}}}
+    \pgfpatharc{110}{70}{.55cm}
+    \pgfpathmoveto{\pgfpoint{-.425cm}{.125cm}}
+    \pgfpatharc{180}{270}{.1cm and .175cm}
+    \pgfpatharc{330}{420}{.1cm and .2cm}
+    \pgfpathmoveto{\pgfpoint{.425cm}{.125cm}}
+    \pgfpatharc{360}{270}{.1cm and .175cm}
+    \pgfpatharc{210}{120}{.1cm and .2cm}
+    \pgfpathmoveto{\pgfpoint{-.3cm}{.3cm}}
+    \pgfpatharc{110}{30}{.1cm and .25cm}
+    \pgfpathmoveto{\pgfpoint{.3cm}{.3cm}}
+    \pgfpatharc{70}{150}{.1cm and .25cm}
+    \pgfpathmoveto{\pgfpoint{-.075cm}{.05cm}}
+    \pgfpathlineto{\pgfpoint{-.1cm}{-.05cm}}
+    \pgfpathmoveto{\pgfpoint{.075cm}{.05cm}}
+    \pgfpathlineto{\pgfpoint{.1cm}{-.05cm}}
+    \pgfpathmoveto{\pgfpoint{0cm}{-.3cm}}
+    \pgfpatharc{60}{120}{.3cm and .5cm}
+    \pgfpatharc{240}{180}{.1cm and .175cm}
+    \pgfpathmoveto{\pgfpoint{0cm}{-.3cm}}
+    \pgfpatharc{120}{60}{.3cm and .5cm}
+    \pgfpatharc{300}{360}{.1cm and .175cm}
+    \pgfpathmoveto{\pgfpointadd{\pgfpoint{0cm}{.125cm}}{\pgfpointpolar{245}{.55cm}}}
+    \pgfpatharc{245}{295}{.55cm}
     \pgfsetarrowsstart{}
     \pgfsetarrowsend{}
   }
@@ -3489,11 +3525,11 @@
     \rpgicons@allshapes%
   },
   rpg icons/create pic from ability shape/.list={%
-    strength, dexterity, dexterity alt, constitution, intelligence, wisdom, charisma,
+    strength, dexterity, dexterity alt, constitution, intelligence, wisdom, wisdom alt, charisma,
     resilience, sanity, perception, luck, armor, proficiency%
   },
   rpg icons/create pic from saving shape/.list={%
-    strength, dexterity, dexterity alt, constitution, intelligence, wisdom, charisma,
+    strength, dexterity, dexterity alt, constitution, intelligence, wisdom, wisdom alt, charisma,
     resilience, sanity, perception, luck, armor, proficiency%
   },
   rpg icons/create pic from spellschool shape/.list={%

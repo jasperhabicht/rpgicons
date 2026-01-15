@@ -10,7 +10,7 @@
 %
 % This work has the LPPL maintenance status `maintained'.
 %
-\ProvidesExplPackage {rpgicons-l3} {2026-01-15} {2.3.4}
+\ProvidesExplPackage {rpgicons-l3} {2026-01-15} {2.4.0}
     {RPG Icons Package (l3 Variant)}
 
 \bool_new:N \l__rpgicons_unicode_mode_bool
@@ -334,7 +334,7 @@
     \draw_path_lineto:n { .1cm , -.325cm }
 }
 
-\cs_new_protected:Npn \rpgicons_draw_shape_dexterity_alt: {
+\cs_new_protected:Npn \rpgicons_draw_shape_dexterity_i: {
     \draw_path_moveto:n { ( 0cm , -.15cm ) + ( \draw_point_polar:nn { .425cm } { 90 } ) }
     \draw_path_arc:nnn { 90 } { 80 } { .425cm }
     \draw_path_moveto:n { ( 0cm , -.15cm ) + ( \draw_point_polar:nn { .425cm } { 90 } ) }
@@ -441,7 +441,7 @@
     \draw_path_arc:nnn { 30 } { -90 } { .25cm }
 }
 
-\cs_new_protected:Npn \rpgicons_draw_shape_wisdom_alt: {
+\cs_new_protected:Npn \rpgicons_draw_shape_wisdom_i: {
     \draw_path_moveto:n { ( 0cm , -.125cm ) + ( \draw_point_polar:nn { .55cm } { 110 } ) }
     \draw_path_arc:nnn { 110 } { 70 } { .55cm }
     \draw_path_moveto:n { -.425cm , .125cm }
@@ -1005,7 +1005,7 @@
     \draw_path_lineto:n { .15cm , .1cm }
 }
 
-\cs_new_protected:Npn \rpgicons_draw_shape_necrotic_alt: {
+\cs_new_protected:Npn \rpgicons_draw_shape_necrotic_i: {
     \draw_path_moveto:n { -.35cm , -.425cm }
     \draw_path_lineto:n { -.35cm , .075cm }
     \draw_path_arc:nnn { 180 } { 0 } { .35cm }
@@ -1663,7 +1663,7 @@
     \draw_path_ellipse:nnn { 0cm , .2cm } { -.075cm , 0cm } { 0cm , -.125cm }
 }
 
-\cs_new_protected:Npn \rpgicons_draw_shape_cleric_alt: {
+\cs_new_protected:Npn \rpgicons_draw_shape_cleric_i: {
     \int_step_inline:nnn { -1 } { 1 } {
         \draw_path_moveto:n { ##1 * .325cm - .05cm , -.05cm }
         \draw_path_lineto:n { ##1 * .325cm - .05cm , .175cm }
@@ -1689,7 +1689,7 @@
     \draw_path_close:
 }
 
-\cs_new_protected:Npn \rpgicons_draw_shape_cleric_alt_i: {
+\cs_new_protected:Npn \rpgicons_draw_shape_cleric_ii: {
     \draw_path_moveto:n { -.15cm , -.325cm }
     \draw_path_lineto:n { -.15cm , .075cm }
     \draw_path_lineto:n { 0cm , .075cm }
@@ -1718,7 +1718,7 @@
     \draw_path_close:
 }
 
-\cs_new_protected:Npn \rpgicons_draw_shape_druid_alt: {
+\cs_new_protected:Npn \rpgicons_draw_shape_druid_i: {
     \draw_path_moveto:n { -.375cm , 0cm }
     \draw_path_lineto:n { -.375cm , -.1cm }
     \draw_path_arc:nnn { 180 } { 270 } { .225cm }
@@ -1738,7 +1738,7 @@
     \draw_path_lineto:n { -.025cm , .1cm }
 }
 
-\cs_new_protected:Npn \rpgicons_draw_shape_druid_alt_i: {
+\cs_new_protected:Npn \rpgicons_draw_shape_druid_ii: {
     \draw_path_moveto:n { -.425cm , -.425cm }
     \draw_path_arc:nnnn { 180 } { 120 } { 1cm } { 0.75cm }
     \draw_path_moveto:n { .425cm , .425cm }
@@ -1853,7 +1853,7 @@
     \draw_path_lineto:n { \draw_point_polar:nn { .1cm } { 315 } }
 }
 
-\cs_new_protected:Npn \rpgicons_draw_shape_ranger_alt: {
+\cs_new_protected:Npn \rpgicons_draw_shape_ranger_i: {
     \draw_path_moveto:n { -.425cm , .325cm }
     \draw_path_lineto:n { -.275cm , .425cm }
     \draw_path_lineto:n { .15cm , .425cm }
@@ -1915,7 +1915,7 @@
     \draw_path_arc:nnn { 225 } { 180 } { .225cm }
 }
 
-\cs_new_protected:Npn \rpgicons_draw_shape_sorcerer_alt: {
+\cs_new_protected:Npn \rpgicons_draw_shape_sorcerer_i: {
     \draw_path_moveto:n { -.325cm , .4cm }
     \draw_path_lineto:n { -.375cm , .4cm }
     \draw_path_arc:nnn { 90 } { 270 } { .05cm }
@@ -2219,6 +2219,8 @@
 \tl_new:N \l_rpgicons_icon_color_text_tl
 \tl_new:N \l_rpgicons_icon_color_background_tl
 
+\int_new:N \l_rpgicons_icon_variant_int
+
 \fp_new:N \l_rpgicons_icon_opacity_stroke_fp
 \fp_set:Nn \l_rpgicons_icon_opacity_stroke_fp { 1.0 }
 \fp_new:N \l_rpgicons_icon_opacity_fill_fp
@@ -2257,6 +2259,8 @@
     baseline             .initial:n  = { -3.5pt } ,
     frame                .tl_set:N   = \l_rpgicons_icon_frame_tl ,
     frame                .initial:n  = { } ,
+    variant              .int_set:N   = \l_rpgicons_icon_variant_int ,
+    variant              .initial:n  = { 0 } ,
     stroke               .tl_set:N   = \l_rpgicons_icon_color_stroke_tl ,
     stroke               .initial:n  = { . } ,
     fill                 .tl_set:N   = \l_rpgicons_icon_color_fill_tl ,
@@ -2376,18 +2380,18 @@
     twoside , fourside , sixside , eightside , tenside , twelveside , twentyside , hundredside ,
     fudge , sixside ~ one , sixside ~ two , sixside ~ three, sixside ~ four, sixside ~ five ,
     sixside ~ six , sixside ~ seven, sixside ~ eight, sixside ~ nine, fudge ~ plus, fudge ~ minus ,
-    strength , dexterity , dexterity ~ alt , constitution , intelligence , wisdom , wisdom ~ alt , charisma ,
+    strength , dexterity , dexterity ~ i , constitution , intelligence , wisdom , wisdom ~ i , charisma ,
     resilience , sanity , perception , luck , armor , proficiency ,
     linear , conic , quadratic , cubic , spheric , cylindric , emanation ,
     verbal , somatic , material , ritual , focus ,
     abjuration , conjuration , divination , enchantment , evocation , illusion , necromancy , transmutation ,
-    acid , bludgeoning , cold , fire , force , lightning , necrotic , necrotic ~ alt , piercing , poison , psychic ,
+    acid , bludgeoning , cold , fire , force , lightning , necrotic , necrotic ~ i , piercing , poison , psychic ,
     radiant , slashing , thunder , healing ,
     melee , ranged , magic , singlehanded , doublehanded ,
     buff , blinded , charmed , deafened , exhausted , frightened , grappled , incapacitated , invisible ,
     paralyzed , petrified , poisoned , prone , restrained , stunned , unconscious , hearing , seeing ,
-    artificer , barbarian , bard , cleric , cleric ~ alt , cleric ~ alt ~ i , druid , druid ~ alt , druid ~ alt ~ i ,
-    monk , paladin , ranger , ranger alt , rogue , sorcerer , sorcerer ~ alt , warlock , wizard , gunslinger ,
+    artificer , barbarian , bard , cleric , cleric ~ i , cleric ~ ii , druid , druid ~ i , druid ~ ii ,
+    monk , paladin , ranger , ranger alt , rogue , sorcerer , sorcerer ~ i , warlock , wizard , gunslinger ,
     lawful ~ good , neutral ~ good , chaotic ~ good , lawful ~ neutral , true ~ neutral ,
     chaotic ~ neutral , lawful ~ evil , neutral ~ evil , chaotic ~ evil ,
     copper , silver , gold , electrum , platinum
@@ -2562,8 +2566,21 @@
                     \draw_path_use_clear:n { stroke }
                 } {
                     \str_if_empty:NF \l__rpgicons_icon_shape_name_str {
-                        \cs_if_exist_use:cF { rpgicons_draw_shape_ \l__rpgicons_icon_shape_name_str : } {
-                            \tl_if_blank:oF { \l__rpgicons_icon_shape_name_str } {
+                        \cs_if_exist:cTF {
+                            rpgicons_draw_shape_ \l__rpgicons_icon_shape_name_str _ \int_to_roman:n {
+                                \l_rpgicons_icon_variant_int
+                            } :
+                        } {
+                            \str_set:Ne \l__rpgicons_icon_shape_name_variant_str {
+                                \l__rpgicons_icon_shape_name_str _ \int_to_roman:n {
+                                    \l_rpgicons_icon_variant_int
+                                }
+                            }
+                        } {
+                            \str_set_eq:NN \l__rpgicons_icon_shape_name_variant_str \l__rpgicons_icon_shape_name_str
+                        }
+                        \cs_if_exist_use:cF { rpgicons_draw_shape_ \l__rpgicons_icon_shape_name_variant_str : } {
+                            \tl_if_blank:VF \l__rpgicons_icon_shape_name_str {
                                 \msg_warning:nnV { rpgicons } { shape-undefined } \l__rpgicons_icon_shape_name_str
                             }
                         }

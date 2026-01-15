@@ -11,7 +11,7 @@
 % This work has the LPPL maintenance status `maintained'.
 %
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{rpgicons-pgf}[2026-01-15 RPG Icons Package (PGF Variant) (2.3.4)]
+\ProvidesPackage{rpgicons-pgf}[2026-01-15 RPG Icons Package (PGF Variant) (2.4.0)]
 
 % provide pics option
 \newif\ifrpgicons@pics\rpgicons@picsfalse
@@ -27,18 +27,18 @@
   twoside, fourside, sixside, eightside, tenside, twelveside, twentyside, hundredside,
   fudge, sixside one, sixside two, sixside three, sixside four, sixside five,
   sixside six, sixside seven, sixside eight, sixside nine, fudge plus, fudge minus,
-  strength, dexterity, dexterity alt, constitution, intelligence, wisdom, wisdom alt, charisma,
+  strength, dexterity, dexterity i, constitution, intelligence, wisdom, wisdom i, charisma,
   resilience, sanity, perception, luck, armor, proficiency,
   linear, conic, quadratic, cubic, spheric, cylindric, emanation,
   verbal, somatic, material, ritual, focus,
   abjuration, conjuration, divination, enchantment, evocation, illusion, necromancy, transmutation,
-  acid, bludgeoning, cold, fire, force, lightning, necrotic, necrotic alt, piercing, poison, psychic,
+  acid, bludgeoning, cold, fire, force, lightning, necrotic, necrotic i, piercing, poison, psychic,
   radiant, slashing, thunder, healing,
   melee, ranged, magic, singlehanded, doublehanded,
   buff, blinded, charmed, deafened, exhausted, frightened, grappled, incapacitated, invisible,
   paralyzed, petrified, poisoned, prone, restrained, stunned, unconscious, hearing, seeing,
-  artificer, barbarian, bard, cleric, cleric alt, cleric alt i, druid, druid alt, druid alt i, fighter,
-  monk, paladin, ranger, ranger alt, rogue, sorcerer, sorcerer alt, warlock, wizard, gunslinger,
+  artificer, barbarian, bard, cleric, cleric i, cleric ii, druid, druid i, druid ii, fighter,
+  monk, paladin, ranger, ranger i, rogue, sorcerer, sorcerer i, warlock, wizard, gunslinger,
   lawful good, neutral good, chaotic good, lawful neutral, true neutral,
   chaotic neutral, lawful evil, neutral evil, chaotic evil,
   copper, silver, gold, electrum, platinum, gem, jewellery, jewelry%
@@ -61,6 +61,10 @@
     \setlength{\rpgicons@baseline}{#1}
   },
   rpg icons/baseline={-3.5pt},
+  rpg icons/variant/.code={
+    \pgfmathtruncatemacro{\rpgicons@variant}{#1}
+  },
+  rpg icons/variant={0},
   rpg icons/.style={},
   rpg icons/.append style={
     every node/.style={
@@ -89,6 +93,14 @@
   rpg icons/create every style/.list/.expanded={%
     \rpgicons@allshapes%
   }
+}
+
+\def\rpgicons@shape@variant#1{%
+  \pgfutil@ifundefined{pgf@sh@s@#1 \romannumeral\rpgicons@variant}{%
+    #1%
+  }{%
+    #1 \romannumeral\rpgicons@variant%
+  }%
 }
 
 % temporary fix to allow for tagging
@@ -540,7 +552,7 @@
   \hspace{\rpgicons@beforesep}%
   \tikz[rpg icons, rpg icons/every die, rpg icons/every #2,
     baseline=\rpgicons@baseline, fgnrm/.style={scale=.333}, fglrg/.style={scale=.675}, #3] {
-    \node[#2, draw, \rpgicons@diceiconfg, font={\footnotesize}] at (0cm,0cm)
+    \node[\rpgicons@shape@variant{#2}, draw, \rpgicons@diceiconfg, font={\footnotesize}] at (0cm,0cm)
       {\ifx\rpgicons@diceiconnrmlrg\rpgicons@diceiconlrg\textbf{#4}\fi};
     \path[draw=none, \rpgicons@diceiconfg] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
   }%
@@ -628,8 +640,8 @@
   }
 }
 
-% dexterity alt
-\pgfdeclareshape{dexterity alt}{
+% dexterity i
+\pgfdeclareshape{dexterity i}{
   \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
   \anchor{text} % this is used to center the text in the node
     {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
@@ -771,8 +783,8 @@
   }
 }
 
-% wisdom alt
-\pgfdeclareshape{wisdom alt}{
+% wisdom i
+\pgfdeclareshape{wisdom i}{
   \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
   \anchor{text} % this is used to center the text in the node
     {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
@@ -1077,9 +1089,9 @@
     baseline=\rpgicons@baseline, fgpos/.style={draw}, fgneg/.style={draw=rpgicons@bg, line width=.6pt}, #3] {
     \ifx\rpgicons@abilityiconposneg\rpgicons@abilityiconneg%
       \path[scale=.333, fill] (0cm,0cm) circle[radius=.45cm];
-      \node[#2, \rpgicons@abilityiconfg, scale=.225] at (0cm,0cm) {};
+      \node[\rpgicons@shape@variant{#2}, \rpgicons@abilityiconfg, scale=.225] at (0cm,0cm) {};
     \else
-      \node[#2, \rpgicons@abilityiconfg, scale=.333] at (0cm,0cm) {};
+      \node[\rpgicons@shape@variant{#2}, \rpgicons@abilityiconfg, scale=.333] at (0cm,0cm) {};
     \fi%
     \path[draw=none, scale=.333] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
   }%
@@ -1099,7 +1111,7 @@
     \path[draw, scale=.333] (-.45cm,.45cm) -- (.45cm,.45cm) -- (.45cm,-.05cm)
       arc[start angle=360, end angle=180, radius=.45cm] -- cycle;
     \ifx\rpgicons@abilityiconnrmemp\rpgicons@abilityiconemp\else%
-      \node[#2, draw, scale=.225] at (0cm,0cm) {};
+      \node[\rpgicons@shape@variant{#2}, draw, scale=.225] at (0cm,0cm) {};
     \fi%
     \path[draw=none, scale=.333] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
   }%
@@ -1359,7 +1371,7 @@
   \hspace{\rpgicons@beforesep}%
   \tikz[rpg icons, rpg icons/every spell, rpg icons/every #1,
     baseline=\rpgicons@baseline, #2] {
-    \node[#1, draw, scale=.333] at (0cm,0cm) {};
+    \node[\rpgicons@shape@variant{#1}, draw, scale=.333] at (0cm,0cm) {};
     \path[draw=none, scale=.333] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
   }%
   \hspace{\rpgicons@aftersep}%
@@ -1558,7 +1570,7 @@
     bgpos/.style={fill}, bgneg/.style={draw}, #3] {
     \path[scale=.333, \rpgicons@spellschooliconbg] (-.475cm,.35cm)
       -- (-.35cm,.475cm) -- (.35cm,.475cm) -- (.475cm,.35cm) -- (.425cm,-.375cm) -- (0cm,-.475cm) -- (-.425cm,-.375cm) -- cycle;
-    \node[#2, \rpgicons@spellschooliconfg, scale=.225] at (0cm,0cm) {};
+    \node[\rpgicons@shape@variant{#2}, \rpgicons@spellschooliconfg, scale=.225] at (0cm,0cm) {};
     \path[draw=none, scale=.333] ([yshift=-1pt].425,.425) rectangle ([yshift=1pt]-.425cm,-.425cm);
   }%
   \hspace{\rpgicons@aftersep}%
@@ -1731,8 +1743,8 @@
   }
 }
 
-% necrotic alt
-\pgfdeclareshape{necrotic alt}{
+% necrotic i
+\pgfdeclareshape{necrotic i}{
   \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
   \anchor{text} % this is used to center the text in the node
     {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
@@ -1928,7 +1940,7 @@
   \tikz[rpg icons, rpg icons/every damage, rpg icons/every #1,
     baseline=\rpgicons@baseline, #2] {
     \path[draw, scale=.333] (0cm,0cm) circle[radius=.5cm];
-    \node[#1, draw, scale=.225] at (0cm,0cm) {};
+    \node[\rpgicons@shape@variant{#1}, draw, scale=.225] at (0cm,0cm) {};
     \path[draw=none, scale=.333] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
   }%
   \hspace{\rpgicons@aftersep}%
@@ -2089,7 +2101,7 @@
   \hspace{\rpgicons@beforesep}%
   \tikz[rpg icons, rpg icons/every attack, rpg icons/every #1,
     baseline=\rpgicons@baseline, #2] {
-    \node[#1, draw, scale=.333] at (0cm,0cm) {};
+    \node[\rpgicons@shape@variant{#1}, draw, scale=.333] at (0cm,0cm) {};
     \path[draw=none, scale=.333] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
   }%
   \hspace{\rpgicons@aftersep}%
@@ -2602,7 +2614,7 @@
   \hspace{\rpgicons@beforesep}%
   \tikz[rpg icons, rpg icons/every condition, rpg icons/every #1,
     baseline=\rpgicons@baseline, #2] {
-    \node[#1, draw, scale=.333] at (0cm,0cm) {};
+    \node[\rpgicons@shape@variant{#1}, draw, scale=.333] at (0cm,0cm) {};
     \path[draw=none, scale=.333] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
   }%
   \hspace{\rpgicons@aftersep}%
@@ -2725,8 +2737,8 @@
   }
 }
 
-% cleric alt
-\pgfdeclareshape{cleric alt}{
+% cleric i
+\pgfdeclareshape{cleric i}{
   \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
   \anchor{text} % this is used to center the text in the node
     {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
@@ -2758,8 +2770,8 @@
   }
 }
 
-% cleric alt i
-\pgfdeclareshape{cleric alt i}{
+% cleric ii
+\pgfdeclareshape{cleric ii}{
   \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
   \anchor{text} % this is used to center the text in the node
     {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
@@ -2804,8 +2816,8 @@
   }
 }
 
-% druid alt
-\pgfdeclareshape{druid alt}{
+% druid i
+\pgfdeclareshape{druid i}{
   \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
   \anchor{text} % this is used to center the text in the node
     {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
@@ -2833,8 +2845,8 @@
   }
 }
 
-% druid alt i
-\pgfdeclareshape{druid alt i}{
+% druid ii
+\pgfdeclareshape{druid ii}{
   \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
   \anchor{text} % this is used to center the text in the node
     {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
@@ -2989,8 +3001,8 @@
   }
 }
 
-% ranger alt
-\pgfdeclareshape{ranger alt}{
+% ranger i
+\pgfdeclareshape{ranger i}{
   \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
   \anchor{text} % this is used to center the text in the node
     {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
@@ -3078,8 +3090,8 @@
   }
 }
 
-% sorcerer alt
-\pgfdeclareshape{sorcerer alt}{
+% sorcerer i
+\pgfdeclareshape{sorcerer i}{
   \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
   \anchor{text} % this is used to center the text in the node
     {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
@@ -3216,7 +3228,7 @@
     baseline=\rpgicons@baseline, fgpos/.style={draw=rpgicons@bg, line width=.6pt}, fgneg/.style={draw},
     bgpos/.style={fill}, bgneg/.style={draw}, #3] {
     \path[scale=.333, \rpgicons@classiconbg] (-.45cm,-.45cm) rectangle (.45cm,.45cm);
-    \node[#2, \rpgicons@classiconfg, scale=.225] at (0cm,0cm) {};
+    \node[\rpgicons@shape@variant{#2}, \rpgicons@classiconfg, scale=.225] at (0cm,0cm) {};
     \path[draw=none, scale=.333] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
   }%
   \hspace{\rpgicons@aftersep}%
@@ -3381,7 +3393,7 @@
     bgpos/.style={fill}, bgneg/.style={draw}, #3] {
     \path[scale=.333, \rpgicons@alignmenticonbg] (30:.525cm)
       -- (90:.525cm) -- (150:.525cm) -- (210:.525cm) -- (270:.525cm) -- (330:.525cm) -- cycle;
-    \node[#2, \rpgicons@alignmenticonfg, scale=.225] at (0cm,0cm) {};
+    \node[\rpgicons@shape@variant{#2}, \rpgicons@alignmenticonfg, scale=.225] at (0cm,0cm) {};
     \path[draw=none, scale=.333] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
   }%
   \hspace{\rpgicons@aftersep}%
@@ -3543,7 +3555,7 @@
   \hspace{\rpgicons@beforesep}%
   \tikz[rpg icons, rpg icons/every currency, rpg icons/every #1,
     baseline=\rpgicons@baseline, #2] {
-    \node[#1, draw, scale=.333] at (0cm,0cm) {};
+    \node[\rpgicons@shape@variant{#1}, draw, scale=.333] at (0cm,0cm) {};
     \path[draw=none, scale=.333] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
   }%
   \hspace{\rpgicons@aftersep}%
@@ -3637,23 +3649,23 @@
     \rpgicons@allshapes%
   },
   rpg icons/create pic from ability shape/.list={%
-    strength, dexterity, dexterity alt, constitution, intelligence, wisdom, wisdom alt, charisma,
+    strength, dexterity, dexterity i, constitution, intelligence, wisdom, wisdom i, charisma,
     resilience, sanity, perception, luck, armor, proficiency%
   },
   rpg icons/create pic from saving shape/.list={%
-    strength, dexterity, dexterity alt, constitution, intelligence, wisdom, wisdom alt, charisma,
+    strength, dexterity, dexterity i, constitution, intelligence, wisdom, wisdom i, charisma,
     resilience, sanity, perception, luck, armor, proficiency%
   },
   rpg icons/create pic from spellschool shape/.list={%
     abjuration, conjuration, divination, enchantment, evocation, illusion, necromancy, transmutation%
   },
   rpg icons/create pic from damage shape/.list={%
-    acid, bludgeoning, cold, fire, force, lightning, necrotic, necrotic alt, piercing, poison, psychic,
+    acid, bludgeoning, cold, fire, force, lightning, necrotic, necrotic i, piercing, poison, psychic,
     radiant, slashing, thunder, healing%
   },
   rpg icons/create pic from class shape/.list={%
-    artificer, barbarian, bard, cleric, cleric alt, druid, druid alt, fighter, monk, paladin,
-    ranger, rogue, sorcerer, sorcerer alt, warlock, wizard%
+    artificer, barbarian, bard, cleric, cleric i, cleric ii, druid, druid i, druid ii, fighter, monk, paladin,
+    ranger, rogue, sorcerer, sorcerer i, warlock, wizard%
   },
   rpg icons/create pic from alignment shape/.list={%
     lawful good, neutral good, chaotic good, lawful neutral, true neutral,

@@ -11,7 +11,7 @@
 % This work has the LPPL maintenance status `maintained'.
 %
 \documentclass[a4paper]{article}
-\def\rpgiconsfileversion{2.3.4}
+\def\rpgiconsfileversion{2.4.0}
 \def\rpgiconsfiledate{15 January 2026}
 
 \usepackage[T1]{fontenc}
@@ -232,9 +232,9 @@
 \ExplSyntaxOff
 
 \NewDocumentEnvironment{rpgiconsiconlist}{ }{
-    \begin{longtable}{ @{} p{20em} p{5em} p{\dimexpr\linewidth-25em-4\tabcolsep} @{} }
+    \begin{longtable}{ @{} p{20em} p{2.5em} p{\dimexpr\linewidth-27.5em-6\tabcolsep} p{5em} @{} }
     \toprule
-    \textbf{Command} & \textbf{Icon} & \textbf{Shape} \\
+    \textbf{Command} & \textbf{Icon} & \textbf{Shape} & \textbf{Variant} \\
     \midrule\endhead
 }{
     \bottomrule
@@ -291,7 +291,7 @@
 %\changes{v2.3.1}{2025/11/25}{Updated shapes and frame for alignment.}
 %\changes{v2.3.2}{2025/12/10}{Added explanation about how to combine frames and shapes.}
 \changes{v2.3.3}{2025/12/15}{Added variant for wisdom shape.}
-\changes{v2.3.4}{2026/01/15}{Added variants for class shapes.}
+\changes{v2.4.0}{2026/01/15}{Added key to access variants for class shapes.}
 
 \begin{document}
 
@@ -316,10 +316,14 @@ To install the package, copy the relevant package files \macro{rpgicons.sty}, \m
 
 The package can be loaded with one of the following options.
 
-\begin{macrodef}l3\end{macrodef}
+\begin{macrodef}
+l3
+\end{macrodef}
 The L3 variant of the package is loaded by default. To load it explicitly, the package can be loaded using the option \macro{l3}. Alternatively, \macro{\usepackage{rpgicons-l3}} can be called instead.
 
-\begin{macrodef}pgf\end{macrodef}
+\begin{macrodef}
+pgf
+\end{macrodef}
 To load the PGF variant of the package the package needs to be loaded with the option \macro{pgf}. Alternatively, \macro{\usepackage{rpgicons-pgf}} can be called instead.
 
 \subsection{Dependencies}
@@ -364,7 +368,7 @@ For the six-sided die, nine additional shapes exist representing the values one 
 
 The command takes two mandatory arguments, the first of which describes the shape (see the lists below) and the second taking an integer that is placed in front of the shape. For example, \macro{\die{eightside}{2}} results in \die{eightside}{2} (meaning two eight-sided dice are rolled). If tagging is enabled, the default replacement text of this command is ``2 eightside''.
 
-The command also takes two optional arguments, the second of which can take additional options to style the icon. The options affect the shape, but not the integer when it is typeset before the icon. The usable options differ depending on the package variant. See the relevant sections below.
+The command also takes two optional arguments, the second of which can take additional options to style the icon or to select different variants of the icon shape. The options affect the shape, but not the integer when it is typeset before the icon. The usable options differ depending on the package variant. See the relevant sections below.
 
 The first optional argument can take the value \macro{normal} or \macro{large}, \macro{normal} being the default value. With \macro{large} given as argument, the icon is drawn larger and the integer is typeset inside the shape. As an example, \macro{\die[large]{eightside}{2}} results in \die[large]{eightside}{2}. Note that the integer will always be placed on top of the shape, even if the shape does not have an open center which is the case with the \macro{fudge} shapes or the shapes featuring pips.
 
@@ -412,11 +416,11 @@ The first optional argument can take the value \macro{normal} or \macro{empty}, 
 \macro{\ability}
     & \ability{strength} & \macro{strength} \\
     & \ability{dexterity} & \macro{dexterity} \\
-    & \ability{dexterity alt} & \macro{dexterity alt} \\
+    & \ability{dexterity}[variant=1] & \macro{dexterity} & 1 \\
     & \ability{constitution} & \macro{constitution} \\
     & \ability{intelligence} & \macro{intelligence} \\
     & \ability{wisdom} & \macro{wisdom} \\
-    & \ability{wisdom alt} & \macro{wisdom alt} \\
+    & \ability{wisdom}[variant=1] & \macro{wisdom} & 1 \\
     & \ability{charisma} & \macro{charisma} \\
     & \ability{resilience} & \macro{resilience} \\
     & \ability{sanity} & \macro{sanity} \\
@@ -428,11 +432,11 @@ The first optional argument can take the value \macro{normal} or \macro{empty}, 
 \macro{\saving}
     & \saving{strength} & \macro{strength} \\
     & \saving{dexterity} & \macro{dexterity} \\
-    & \saving{dexterity alt} & \macro{dexterity alt} \\
+    & \saving{dexterity}[variant=1] & \macro{dexterity} & 1 \\
     & \saving{constitution} & \macro{constitution} \\
     & \saving{intelligence} & \macro{intelligence} \\
     & \saving{wisdom} & \macro{wisdom} \\
-    & \saving{wisdom alt} & \macro{wisdom alt} \\
+    & \saving{wisdom}[variant=1] & \macro{wisdom} & 1 \\
     & \saving{charisma} & \macro{charisma} \\
     & \saving{resilience} & \macro{resilience} \\
     & \saving{sanity} & \macro{sanity} \\
@@ -512,7 +516,7 @@ The command \macro{\condition} typesets an icon depicting a condition of a chara
     & \damage{force} & \macro{force} \\
     & \damage{lightning} & \macro{lightning} \\
     & \damage{necrotic} & \macro{necrotic} \\
-    & \damage{necrotic alt} & \macro{necrotic alt} \\
+    & \damage{necrotic}[variant=1] & \macro{necrotic} & 1 \\
     & \damage{piercing} & \macro{piercing} \\
     & \damage{poison} & \macro{poison} \\
     & \damage{psychic} & \macro{psychic} \\
@@ -571,19 +575,19 @@ The first optional argument can take the value \macro{negative} or \macro{positi
     & \class{barbarian} & \macro{barbarian} \\
     & \class{bard} & \macro{bard} \\
     & \class{cleric} & \macro{cleric} \\
-    & \class{cleric alt} & \macro{cleric alt} \\
-    & \class{cleric alt i} & \macro{cleric alt i} \\
+    & \class{cleric}[variant=1] & \macro{cleric} & 1\\
+    & \class{cleric}[variant=2] & \macro{cleric} & 2 \\
     & \class{druid} & \macro{druid} \\
-    & \class{druid alt} & \macro{druid alt} \\
-    & \class{druid alt i} & \macro{druid alt i} \\
+    & \class{druid}[variant=1] & \macro{druid} & 1 \\
+    & \class{druid}[variant=2] & \macro{druid} & 2 \\
     & \class{fighter} & \macro{fighter} \\
     & \class{monk} & \macro{monk} \\
     & \class{paladin} & \macro{paladin} \\
     & \class{ranger} & \macro{ranger} \\
-    & \class{ranger alt} & \macro{ranger alt} \\
+    & \class{ranger}[variant=1] & \macro{ranger} & 1 \\
     & \class{rogue} & \macro{rogue} \\
     & \class{sorcerer} & \macro{sorcerer} \\
-    & \class{sorcerer alt} & \macro{sorcerer alt} \\
+    & \class{sorcerer}[variant=1] & \macro{sorcerer} & 1 \\
     & \class{warlock} & \macro{warlock} \\
     & \class{wizard} & \macro{wizard} \\
     & \class{gunslinger} & \macro{gunslinger} \\
@@ -635,6 +639,11 @@ Transparency requires the management of certain PDF settings. Therefore, it is n
 It is also possible to call \macro{\RequirePackage{pdfmanagement}} before \macro{\documentclass} instead of \macro{\DocumentMetadata{}} to enable the above described color and transparency management.
 
 \subsection{Icon commands}
+
+\begin{macrodef}
+variant
+\end{macrodef}
+The main user commands (as well as the underlying commands on which these commands are based as described below) accept as option the key \macro{variant} which accepts an integer as value to select variants for the relevant shape. See the icon lists above for the respective variants. For example, the command \macro{\ability{dexterity}[variant=1]} results in \ability{dexterity}[variant=1].
 
 \begin{macrodef}
 |\RPGIconsUseIcon|[<options>][<integer>]{<shape>}
@@ -832,10 +841,17 @@ Apart from that, the PGF variant of the package provides a way to define custom 
 
 Once loaded, the PGF variant of the package defines a set of node shapes that can be used inside a \macro{tikzpicture} environment.
 
-\begin{macrodef}pics\end{macrodef}
+\begin{macrodef}
+pics
+\end{macrodef}
 The PGF variant of the package provides the option \macro{pics}. If the package is loaded with this option, every icon is also available as Ti\emph{k}Z pic. On the use of pics, see section \ref{sec:pics} below.
 
 \subsection{Icon commands}
+
+\begin{macrodef}
+!rpg icons/!variant
+\end{macrodef}
+The main user commands (as well as the underlying commands on which these commands are based as described below) accept as option the key \macro{variant} which accepts an integer as value to select variants for the relevant shape. See the icon lists above for the respective variants. For example, the command \macro{\ability{dexterity}[rpg icons/variant=1]} results in \ability{dexterity}[rpg icons/variant=1].
 
 \begin{macrodef}
 |\rpgiconsdie|[<style>]{<shape>}[<options>]{<integer>}
@@ -876,12 +892,16 @@ Using Ti\emph{k}Z styles, all instances of a certain command or a certain shape 
 
 \subsection{Setting styles globally}
 
-\begin{macrodef}rpg icons\end{macrodef}
+\begin{macrodef}
+rpg icons
+\end{macrodef}
 All icons share the Ti\emph{k}Z style \macro{rpg icons} that is empty per default but can be used to style all icons at once. For example, if \macro{\tikzset{rpg icons/.append style={draw=red}}} is placed at the beginning of the document, all icons will be drawn in red. Per default, the icons are drawn in the color of the surrounding text.
 
 Note that it may be necessary to add the Ti\emph{k}Z option \macro{transform shape} when applying transformations to the icons, because the icons are constructed as Ti\emph{k}Z nodes which are not affected by some transformations per default.
 
-\begin{macrodef}!rpg icons/!background color\end{macrodef}
+\begin{macrodef}
+!rpg icons/!background color
+\end{macrodef}
 Some icons can be used with a negative color scheme where the icon is drawn negatively inside a filled shape. Per default, the icons are drawn in white in such cases, but it might be desirable that the icons are in the same color as the background. To this end, the color can be changed using the Ti\emph{k}Z option \macro{rpg icons/background color} in the following way:
 
 \begin{codeexamplecolumns}
@@ -931,18 +951,24 @@ Because the icons are defined as Ti\emph{k}Z shapes, they can directly be applie
 \end{tikzpicture}
 \end{codeexamplecolumns}
 
+The variant shapes are accessible by adding the variant number as small roman numeral to the shape name. For example, to access the second variant of the \macro{druid} shape, use \macro{druid ii}. This is also possible for boxed icons and icons as pics as described below.
+
 \subsection{Boxing of icons}
 
 Because the icons cannot simply be used inside \macro{tikzpicture} environments, the PGF variant of the package provides a workaround to place icons inside boxes for later use. Icons that are boxed this way can safely used inside \macro{tikzpicture} environments. This might be necessary, if an icon should be used in inline text that sits inside a node.
 
-\begin{macrodef}|\provideprotectedrpgicon|{<command>}[<style>]{<shape>}[<options>]{<box name>}\end{macrodef}
+\begin{macrodef}
+|\provideprotectedrpgicon|{<command>}[<style>]{<shape>}[<options>]{<box name>}
+\end{macrodef}
 The command \macro{\provideprotectedrpgicon} creates a box containing the icon that would be created using one of the regular commands this package provides.
 
 \macro{\provideprotectedrpgicon{die}[large]{eightside}[blue, thick]{mybox}}, for example, stores the icon of an eight-sided die with the relevant style and Ti\emph{k}Z options in a new box named \macro{mybox}. Note that no integer can be added to the \macro{die} command in this context.
 
 \provideprotectedrpgicon{die}[large]{eightside}[blue, thick]{mybox}
 
-\begin{macrodef}|\useprotectedrpgicon|{<box name>}\end{macrodef}
+\begin{macrodef}
+|\useprotectedrpgicon|{<box name>}
+\end{macrodef}
 Using the command \macro{\useprotectedrpgicon}, the previously defined box can be used to place the relevant icon. With the above definition, \macro{\useprotectedrpgicon{mybox}} would result in \useprotectedrpgicon{mybox}.
 
 Having created a boxed icon, it is safe to use it, for example, inside a Ti\emph{k}Z node:
@@ -958,7 +984,7 @@ Having created a boxed icon, it is safe to use it, for example, inside a Ti\emph
 
 \subsection{Icons as pics}\label{sec:pics}
 
-If the PGF variant of the package is loaded with the option \macro{pics}, every icon is also available as Ti\emph{k}Z pic. The names of the pics always start with \macro{rpg icons} followed by a space and the name of the relevant icon (see the lists above). For abilities, savings, spellschools and damages, additional pics exist where the name has the suffixes \macro{ability}, \macro{saving}, \macro{spellschool}, and \macro{damage} respectively.
+If the PGF variant of the package is loaded with the option \macro{pics}, every icon is also available as Ti\emph{k}Z pic. The names of the pics always start with \macro{rpg icons} followed by a space and the name of the relevant icon (see the lists above). For abilities, savings, spellschools, damages, classes and alignments, additional pics containing the relevant frame exist where the name has the suffixes \macro{ability}, \macro{saving}, \macro{spellschool}, \macro{damage}, \macro{class}, and \macro{alignment} respectively.
 
 The icon is embedded as a node in the pic which has the name \macro{-node}. Thus, it is possible to name the pic and refer to the node inside. Due to the fact that the icon is a node, the option \macro{transform shape} has to be used if transformations on the pic should affect the node as well. It is possible to apply styles to the node using the Ti\emph{k}Z option \macro{every node} as shown in the following example.
 

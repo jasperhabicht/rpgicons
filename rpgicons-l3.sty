@@ -1615,6 +1615,24 @@
     \draw_path_close:
 }
 
+\cs_new_protected:Npn \rpgicons_draw_shape_artificer_i: {
+    \draw_path_moveto:n { ( -.075cm , .15cm ) + ( \draw_point_polar:nn { .275cm } { 350 } ) }
+    \draw_path_arc:nnn { 350 } { 55 } { .275cm }
+    \draw_path_lineto:n { .425cm , .125cm }
+    \draw_path_lineto:n { .375cm , .05cm }
+    \draw_path_close:
+    \draw_path_moveto:n { -.075cm , -.125cm }
+    \draw_path_lineto:n { -.075cm , -.425cm }
+    \draw_path_moveto:n { .275cm , -.425cm }
+    \draw_path_lineto:n { ( -.075cm , .15cm ) + ( \draw_point_polar:nn { .275cm } { 330 } ) }
+    \draw_path_lineto:n { ( -.075cm , .15cm ) + ( \draw_point_polar:nn { .275cm } { 210 } ) }
+    \draw_path_lineto:n { -.425cm , -.425cm }
+}
+
+% === backward compatibility
+\cs_set_eq:NN \rpgicons_draw_shape_artificer_alt: \rpgicons_draw_shape_artificer_i:
+% ===
+
 \cs_new_protected:Npn \rpgicons_draw_shape_barbarian: {
     \draw_path_moveto:n { .05cm , -.375cm }
     \draw_path_arc:nnn { 360 } { 180 } { .05cm }
@@ -1904,6 +1922,27 @@
 % === backward compatibility
 \cs_set_eq:NN \rpgicons_draw_shape_ranger_alt: \rpgicons_draw_shape_ranger_i:
 % ===
+
+\cs_new_protected:Npn \rpgicons_draw_shape_ranger_ii: {
+    \draw_path_moveto:n { .225cm , .425cm }
+    \draw_path_lineto:n { .425cm , .025cm }
+    \draw_path_lineto:n { .325cm , -.025cm }
+    \draw_path_lineto:n { .125cm , .375cm }
+    \draw_path_close:
+    \draw_path_moveto:n { .3cm , .025cm }
+    \draw_path_lineto:n { -.05cm , -.15cm }
+    \draw_path_lineto:n { -.2cm , .15cm }
+    \draw_path_lineto:n { .15cm , .325cm }
+    \draw_path_moveto:n { -.075cm , -.1cm }
+    \draw_path_lineto:n { -.325cm , -.225cm }
+    \draw_path_lineto:n { -.425cm , -.025cm }
+    \draw_path_lineto:n { -.175cm , .1cm }
+    \draw_path_moveto:n { 0cm , -.125cm }
+    \draw_path_lineto:n { 0cm , -.425cm }
+    \draw_path_moveto:n { -.225cm , -.425cm }
+    \draw_path_lineto:n { 0cm , -.25cm }
+    \draw_path_lineto:n { .225cm , -.425cm }
+}
 
 \cs_new_protected:Npn \rpgicons_draw_shape_rogue: {
     \draw_path_moveto:n { ( .15cm , .15cm ) + ( \draw_point_polar:nn { .05cm } { -45 } ) }
@@ -2418,13 +2457,13 @@
     melee , ranged , magic , singlehanded , doublehanded ,
     buff , blinded , charmed , deafened , exhausted , frightened , grappled , incapacitated , invisible ,
     paralyzed , petrified , poisoned , prone , restrained , stunned , unconscious , hearing , seeing ,
-    artificer , barbarian , bard , cleric , cleric ~ i , cleric ~ ii , druid , druid ~ i , druid ~ ii ,
-    monk , paladin , ranger , ranger ~ i , rogue , sorcerer , sorcerer ~ i , warlock , wizard , gunslinger ,
+    artificer , artificer ~ i , barbarian , bard , cleric , cleric ~ i , cleric ~ ii , druid , druid ~ i , druid ~ ii ,
+    monk , paladin , ranger , ranger ~ i , ranger ~ ii , rogue , sorcerer , sorcerer ~ i , warlock , wizard , gunslinger ,
     lawful ~ good , neutral ~ good , chaotic ~ good , lawful ~ neutral , true ~ neutral ,
     chaotic ~ neutral , lawful ~ evil , neutral ~ evil , chaotic ~ evil ,
     copper , silver , gold , electrum , platinum ,
     % === backward compatibility
-    dexterity ~ alt , wisdom ~ alt , necrotic ~ alt , cleric ~ alt , druid ~ alt , ranger ~ alt , sorcerer ~ alt
+    dexterity ~ alt , wisdom ~ alt , necrotic ~ alt , artificer ~ alt , cleric ~ alt , druid ~ alt , ranger ~ alt , sorcerer ~ alt
     % ===
 }
 

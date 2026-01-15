@@ -581,6 +581,7 @@ The first optional argument can take the value \macro{negative} or \macro{positi
 \begin{rpgiconsiconlist}
 \macro{\class}
     & \class{artificer} & \macro{artificer} \\
+    & \class{artificer}[variant=1] & \macro{artificer} & 1 \\
     & \class{barbarian} & \macro{barbarian} \\
     & \class{bard} & \macro{bard} \\
     & \class{cleric} & \macro{cleric} \\
@@ -594,6 +595,7 @@ The first optional argument can take the value \macro{negative} or \macro{positi
     & \class{paladin} & \macro{paladin} \\
     & \class{ranger} & \macro{ranger} \\
     & \class{ranger}[variant=1] & \macro{ranger} & 1 \\
+    & \class{ranger}[variant=2] & \macro{ranger} & 2 \\
     & \class{rogue} & \macro{rogue} \\
     & \class{sorcerer} & \macro{sorcerer} \\
     & \class{sorcerer}[variant=1] & \macro{sorcerer} & 1 \\
@@ -653,6 +655,16 @@ It is also possible to call \macro{\RequirePackage{pdfmanagement}} before \macro
 variant
 \end{macrodef}
 The main user commands (as well as the underlying commands on which these commands are based as described below) accept as option the key \macro{variant} which accepts an integer as value to select variants for the relevant shape. See the icon lists above for the respective variants. For example, the command \macro{\ability{dexterity}[variant=1]} results in \ability{dexterity}[variant=1].
+
+With the following setting, all occurences of the \macro{necrotic} shape are set to the relevant variant.
+
+\begin{codeexample}
+\rpgiconsset{
+    every necrotic={
+        variant=1
+    }
+}
+\end{codeexample}
 
 \begin{macrodef}
 |\RPGIconsUseIcon|[<options>][<integer>]{<shape>}
@@ -861,6 +873,16 @@ The PGF variant of the package provides the option \macro{pics}. If the package 
 !rpg icons/!variant
 \end{macrodef}
 The main user commands (as well as the underlying commands on which these commands are based as described below) accept as option the key \macro{variant} which accepts an integer as value to select variants for the relevant shape. See the icon lists above for the respective variants. For example, the command \macro{\ability{dexterity}[rpg icons/variant=1]} results in \ability{dexterity}[rpg icons/variant=1].
+
+With the following setting, all occurences of the \macro{necrotic} shape are set to the relevant variant.
+
+\begin{codeexample}
+\tikzset{
+    rpg icons/every necrotic/.append style={
+        rpg icons/variant=1
+    }
+}
+\end{codeexample}
 
 \begin{macrodef}
 |\rpgiconsdie|[<style>]{<shape>}[<options>]{<integer>}

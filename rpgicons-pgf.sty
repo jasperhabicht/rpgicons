@@ -41,7 +41,10 @@
   monk, paladin, ranger, ranger i, rogue, sorcerer, sorcerer i, warlock, wizard, gunslinger,
   lawful good, neutral good, chaotic good, lawful neutral, true neutral,
   chaotic neutral, lawful evil, neutral evil, chaotic evil,
-  copper, silver, gold, electrum, platinum, gem, jewellery, jewelry%
+  copper, silver, gold, electrum, platinum, gem, jewellery, jewelry,
+  % === backward compatibility
+  dexterity alt, wisdom alt, necrotic alt, cleric alt, druid alt, ranger alt, sorcerer alt%
+  % ===
 }
 
 \tikzset{
@@ -94,6 +97,18 @@
     \rpgicons@allshapes%
   }
 }
+
+% === backward compatiliy
+\tikzset{
+  dexterity alt/.style={dexterity i},
+  wisdom alt/.style={wisdom i},
+  necrotic alt/.style={necrotic i},
+  cleric alt/.style={cleric i},
+  druid alt/.style={druid i},
+  ranger alt/.style={ranger i},
+  sorcerer alt/.style={sorcerer i}
+}
+% ===
 
 \def\rpgicons@shape@variant#1{%
   \pgfutil@ifundefined{pgf@sh@s@#1 \romannumeral\rpgicons@variant}{%
@@ -3650,22 +3665,34 @@
   },
   rpg icons/create pic from ability shape/.list={%
     strength, dexterity, dexterity i, constitution, intelligence, wisdom, wisdom i, charisma,
-    resilience, sanity, perception, luck, armor, proficiency%
+    resilience, sanity, perception, luck, armor, proficiency,
+    % === backward compatibility
+    dexterity alt, wisdom alt%
+    % ===
   },
   rpg icons/create pic from saving shape/.list={%
     strength, dexterity, dexterity i, constitution, intelligence, wisdom, wisdom i, charisma,
-    resilience, sanity, perception, luck, armor, proficiency%
+    resilience, sanity, perception, luck, armor, proficiency,
+    % === backward compatibility
+    dexterity alt, wisdom alt%
+    % ===
   },
   rpg icons/create pic from spellschool shape/.list={%
     abjuration, conjuration, divination, enchantment, evocation, illusion, necromancy, transmutation%
   },
   rpg icons/create pic from damage shape/.list={%
     acid, bludgeoning, cold, fire, force, lightning, necrotic, necrotic i, piercing, poison, psychic,
-    radiant, slashing, thunder, healing%
+    radiant, slashing, thunder, healing,
+    % === backward compatibility
+    necrotic alt%
+    % ===
   },
   rpg icons/create pic from class shape/.list={%
     artificer, barbarian, bard, cleric, cleric i, cleric ii, druid, druid i, druid ii, fighter, monk, paladin,
-    ranger, rogue, sorcerer, sorcerer i, warlock, wizard%
+    ranger, ranger i, rogue, sorcerer, sorcerer i, warlock, wizard,
+    % === backward compatibility
+    cleric alt, druid alt, ranger alt, sorcerer alt%
+    % ===
   },
   rpg icons/create pic from alignment shape/.list={%
     lawful good, neutral good, chaotic good, lawful neutral, true neutral,

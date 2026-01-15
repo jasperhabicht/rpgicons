@@ -367,6 +367,10 @@
     \draw_path_lineto:n { .1cm , -.35cm }
 }
 
+% === backward compatibility
+\cs_set_eq:NN \rpgicons_draw_shape_dexterity_alt: \rpgicons_draw_shape_dexterity_i:
+% ===
+
 \cs_new_protected:Npn \rpgicons_draw_shape_constitution: {
     \draw_path_moveto:n { 0cm , .25cm }
     \draw_path_lineto:n { .125cm , .25cm }
@@ -467,6 +471,10 @@
     \draw_path_moveto:n { ( 0cm , .125cm ) + ( \draw_point_polar:nn { .55cm } { 245 } ) }
     \draw_path_arc:nnn { 245 } { 295 } { .55cm }
 }
+
+% === backward compatibility
+\cs_set_eq:NN \rpgicons_draw_shape_wisdom_alt: \rpgicons_draw_shape_wisdom_i:
+% ===
 
 \cs_new_protected:Npn \rpgicons_draw_shape_charisma: {
     \draw_path_moveto:n { 0cm , .15cm }
@@ -1016,6 +1024,10 @@
     \draw_path_moveto:n { -.15cm , .125cm }
     \draw_path_lineto:n { .15cm , .125cm }
 }
+
+% === backward compatibility
+\cs_set_eq:NN \rpgicons_draw_shape_necrotic_alt: \rpgicons_draw_shape_necrotic_i:
+% ===
 
 \cs_new_protected:Npn \rpgicons_draw_shape_piercing: {
     \draw_path_moveto:n { -.425cm , .075cm }
@@ -1689,6 +1701,10 @@
     \draw_path_close:
 }
 
+% === backward compatibility
+\cs_set_eq:NN \rpgicons_draw_shape_cleric_alt: \rpgicons_draw_shape_cleric_i:
+% ===
+
 \cs_new_protected:Npn \rpgicons_draw_shape_cleric_ii: {
     \draw_path_moveto:n { -.15cm , -.325cm }
     \draw_path_lineto:n { -.15cm , .075cm }
@@ -1737,6 +1753,10 @@
     \draw_path_lineto:n { .325cm , .425cm }
     \draw_path_lineto:n { -.025cm , .1cm }
 }
+
+% === backward compatibility
+\cs_set_eq:NN \rpgicons_draw_shape_druid_alt: \rpgicons_draw_shape_druid_i:
+% ===
 
 \cs_new_protected:Npn \rpgicons_draw_shape_druid_ii: {
     \draw_path_moveto:n { -.425cm , -.425cm }
@@ -1881,6 +1901,10 @@
     \draw_path_lineto:n { .25cm , .1cm }
 }
 
+% === backward compatibility
+\cs_set_eq:NN \rpgicons_draw_shape_ranger_alt: \rpgicons_draw_shape_ranger_i:
+% ===
+
 \cs_new_protected:Npn \rpgicons_draw_shape_rogue: {
     \draw_path_moveto:n { ( .15cm , .15cm ) + ( \draw_point_polar:nn { .05cm } { -45 } ) }
     \draw_path_arc:nnn { 135 } { 405 } { .125cm }
@@ -1941,6 +1965,10 @@
     \draw_path_moveto:n { -.15cm , -.125cm }
     \draw_path_lineto:n { .125cm , -.125cm }
 }
+
+% === backward compatibility
+\cs_set_eq:NN \rpgicons_draw_shape_sorcerer_alt: \rpgicons_draw_shape_sorcerer_i:
+% ===
 
 \cs_new_protected:Npn \rpgicons_draw_shape_warlock: {
     \draw_path_moveto:n { \draw_point_polar:nn { .4cm } { 150 } }
@@ -2391,10 +2419,13 @@
     buff , blinded , charmed , deafened , exhausted , frightened , grappled , incapacitated , invisible ,
     paralyzed , petrified , poisoned , prone , restrained , stunned , unconscious , hearing , seeing ,
     artificer , barbarian , bard , cleric , cleric ~ i , cleric ~ ii , druid , druid ~ i , druid ~ ii ,
-    monk , paladin , ranger , ranger alt , rogue , sorcerer , sorcerer ~ i , warlock , wizard , gunslinger ,
+    monk , paladin , ranger , ranger ~ i , rogue , sorcerer , sorcerer ~ i , warlock , wizard , gunslinger ,
     lawful ~ good , neutral ~ good , chaotic ~ good , lawful ~ neutral , true ~ neutral ,
     chaotic ~ neutral , lawful ~ evil , neutral ~ evil , chaotic ~ evil ,
-    copper , silver , gold , electrum , platinum
+    copper , silver , gold , electrum , platinum ,
+    % === backward compatibility
+    dexterity ~ alt , wisdom ~ alt , necrotic ~ alt , cleric ~ alt , druid ~ alt , ranger ~ alt , sorcerer ~ alt
+    % ===
 }
 
 \str_new:N \l__rpgicons_icon_shape_name_str

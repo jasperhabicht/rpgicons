@@ -19,7 +19,7 @@
 \usepackage{AlegreyaSans}
 \usepackage{FiraMono}
 
-\usepackage{geometry, longtable, booktabs, tcolorbox, hyperref}
+\usepackage{geometry, array, longtable, booktabs, tcolorbox, hyperref}
 \geometry{margin=25mm, left=45mm}
 \urlstyle{same}
 
@@ -232,7 +232,14 @@
 \ExplSyntaxOff
 
 \NewDocumentEnvironment{rpgiconsiconlist}{ }{
-    \begin{longtable}{ @{} p{20em} p{2.5em} p{\dimexpr\linewidth-27.5em-6\tabcolsep} p{5em} @{} }
+    \begin{longtable}{
+        @{}
+        p{20em}
+        p{2.5em}
+        >{\raggedright\arraybackslash}p{\dimexpr\linewidth-27.5em-6\tabcolsep}
+        p{5em}
+        @{}
+    }
     \toprule
     \textbf{Command} & \textbf{Icon} & \textbf{Shape} & \textbf{Variant} \\
     \midrule\endhead
@@ -356,6 +363,8 @@ The below code example can be compiled with \macro{latex} and \macro{dvisvgm -b 
 Regardless of the variant of the package, a set of user commands is always available. These are described in the following. Depending on the use of the L3 or the PGF variant, certain specific commands or options are available that are explained in the following sections in further detail.
 
 Because of the way the package defines the icons, each of the user commands below described can actually be used together with every shape. However, the combinations of shapes and commands as described in the following subsections are preferable.
+
+Note that shape names ending with \macro{alt} are deprecated. Instead, use the \macro{variant} key to select variants of icon shapes as described below.
 
 \subsection[Command \textbackslash die]{Command \titlemacro*{die}}
 

@@ -1,5 +1,5 @@
 % File: rpgicons-pgf.sty
-% Copyright 2024-2025 Jasper Habicht (mail(at)jasperhabicht.de).
+% Copyright 2024-2026 Jasper Habicht (mail(at)jasperhabicht.de).
 %
 % This work may be distributed and/or modified under the
 % conditions of the LaTeX Project Public License version 1.3c,
@@ -11,7 +11,7 @@
 % This work has the LPPL maintenance status `maintained'.
 %
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{rpgicons-pgf}[2025-12-15 RPG Icons Package (PGF Variant) (2.3.3)]
+\ProvidesPackage{rpgicons-pgf}[2026-01-15 RPG Icons Package (PGF Variant) (2.3.4)]
 
 % provide pics option
 \newif\ifrpgicons@pics\rpgicons@picsfalse
@@ -37,8 +37,8 @@
   melee, ranged, magic, singlehanded, doublehanded,
   buff, blinded, charmed, deafened, exhausted, frightened, grappled, incapacitated, invisible,
   paralyzed, petrified, poisoned, prone, restrained, stunned, unconscious, hearing, seeing,
-  artificer, barbarian, bard, cleric, cleric alt, druid, druid alt, fighter, monk, paladin,
-  ranger, rogue, sorcerer, sorcerer alt, warlock, wizard,
+  artificer, barbarian, bard, cleric, cleric alt, cleric alt i, druid, druid alt, druid alt i, fighter,
+  monk, paladin, ranger, ranger alt, rogue, sorcerer, sorcerer alt, warlock, wizard, gunslinger,
   lawful good, neutral good, chaotic good, lawful neutral, true neutral,
   chaotic neutral, lawful evil, neutral evil, chaotic evil,
   copper, silver, gold, electrum, platinum, gem, jewellery, jewelry%
@@ -2758,6 +2758,31 @@
   }
 }
 
+% cleric alt i
+\pgfdeclareshape{cleric alt i}{
+  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
+  \anchor{text} % this is used to center the text in the node
+    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+
+  \backgroundpath{
+    \pgfpathmoveto{\pgfpoint{-.15cm}{-.325cm}}
+    \pgfpathlineto{\pgfpoint{-.15cm}{.075cm}}
+    \pgfpathlineto{\pgfpoint{0cm}{.075cm}}
+    \pgfpathlineto{\pgfpoint{0cm}{-.325cm}}
+    \pgfpathmoveto{\pgfpoint{-.15cm}{.25cm}}
+    \pgfpatharc{180}{405}{.075cm}
+    \pgfpatharc{215}{180}{.225cm}
+    \pgfpathmoveto{\pgfpoint{.225cm}{-.325cm}}
+    \pgfpathlineto{\pgfpoint{-.375cm}{-.325cm}}
+    \pgfpatharc{180}{270}{.1cm}
+    \pgfpathlineto{\pgfpoint{.125cm}{-.425cm}}
+    \pgfpatharc{270}{360}{.1cm}
+    \pgfpatharc{180}{-90}{.1cm}
+    \pgfsetarrowsstart{}
+    \pgfsetarrowsend{}
+  }
+}
+
 % druid
 \pgfdeclareshape{druid}{
   \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
@@ -2805,6 +2830,22 @@
     \pgfpathlineto{\pgfpoint{-.025cm}{.1cm}}
     \pgfsetarrowsstart{}
     \pgfsetarrowsend{}
+  }
+}
+
+% druid alt i
+\pgfdeclareshape{druid alt i}{
+  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
+  \anchor{text} % this is used to center the text in the node
+    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+
+  \backgroundpath{
+    \pgfpathmoveto{\pgfpoint{-.425cm}{-.425cm}}
+    \pgfpatharc{180}{120}{1cm and 0.75cm}
+    \pgfpathmoveto{\pgfpoint{.425cm}{.425cm}}
+    \pgfpathlineto{\pgfpoint{-.075cm}{.425cm}}
+    \pgfpatharc{90}{330}{.5cm * tan(30)}
+    \pgfpathclose
   }
 }
 
@@ -2948,6 +2989,43 @@
   }
 }
 
+% ranger alt
+\pgfdeclareshape{ranger alt}{
+  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
+  \anchor{text} % this is used to center the text in the node
+    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+
+  \backgroundpath{
+    \pgfpathmoveto{\pgfpoint{-.425cm}{.325cm}}
+    \pgfpathlineto{\pgfpoint{-.275cm}{.425cm}}
+    \pgfpathlineto{\pgfpoint{.15cm}{.425cm}}
+    \pgfpathlineto{\pgfpoint{.2cm}{.3cm}}
+    \pgfpathlineto{\pgfpoint{.25cm}{.425cm}}
+    \pgfpathlineto{\pgfpoint{.425cm}{.425cm}}
+    \pgfpathlineto{\pgfpoint{.425cm}{-.425cm}}
+    \pgfpathlineto{\pgfpoint{0cm}{-.425cm}}
+    \pgfpathlineto{\pgfpoint{-.05cm}{-.175cm}}
+    \pgfpathlineto{\pgfpoint{-.1cm}{-.425cm}}
+    \pgfpathlineto{\pgfpoint{-.425cm}{-.425cm}}
+    \pgfpathclose
+    \pgfpathmoveto{\pgfpoint{.2cm}{-.2cm}}
+    \pgfpathlineto{\pgfpoint{.3cm}{-.3cm}}
+    \pgfpathmoveto{\pgfpoint{.2cm}{-.3cm}}
+    \pgfpathlineto{\pgfpoint{.3cm}{-.2cm}}
+    \pgfpathmoveto{\pgfpoint{.125cm}{-.125cm}}
+    \pgfpatharc{45}{90}{.325cm}
+    \pgfpatharc{270}{150}{.2cm}
+    \pgfpathmoveto{\pgfpoint{-.1cm}{.15cm}}
+    \pgfpathlineto{\pgfpoint{0cm}{.25cm}}
+    \pgfpathlineto{\pgfpoint{.1cm}{.15cm}}
+    \pgfpathmoveto{\pgfpoint{.05cm}{.1cm}}
+    \pgfpathlineto{\pgfpoint{.15cm}{.2cm}}
+    \pgfpathlineto{\pgfpoint{.25cm}{.1cm}}
+    \pgfsetarrowsstart{}
+    \pgfsetarrowsend{}
+  }
+}
+
 % rogue
 \pgfdeclareshape{rogue}{
   \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
@@ -3085,6 +3163,40 @@
     \pgfpathlineto{\pgfpoint{.4cm}{.225cm}}
     \pgfpathmoveto{\pgfpoint{.2cm}{-.225cm}}
     \pgfpathlineto{\pgfpoint{.4cm}{-.025cm}}
+    \pgfsetarrowsstart{}
+    \pgfsetarrowsend{}
+  }
+}
+
+% gunslinger
+\pgfdeclareshape{gunslinger}{
+  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
+  \anchor{text} % this is used to center the text in the node
+    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+
+  \backgroundpath{
+    \pgfpathmoveto{\pgfpoint{-.125cm}{-.125cm}}
+    \pgfpatharc{90}{180}{.075cm}
+    \pgfpathlineto{\pgfpoint{-.2cm}{-.325cm}}
+    \pgfpathlineto{\pgfpoint{-.425cm}{-.325cm}}
+    \pgfpathlineto{\pgfpoint{-.425cm}{-.225cm}}
+    \pgfpatharc{180}{90}{.3cm}
+    \pgfpathlineto{\pgfpoint{-.125cm}{.075cm}}
+    \pgfpathmoveto{\pgfpoint{-.125cm}{.225cm}}
+    \pgfpathlineto{\pgfpoint{.125cm}{.225cm}}
+    \pgfpathlineto{\pgfpoint{.125cm}{-.025cm}}
+    \pgfpatharc{360}{270}{.125cm}
+    \pgfpathlineto{\pgfpoint{-.125cm}{-.15cm}}
+    \pgfpathclose
+    \pgfpathmoveto{\pgfpoint{-.125cm}{.175cm}}
+    \pgfpathlineto{\pgfpoint{-.175cm}{.175cm}}
+    \pgfpatharc{270}{180}{.075cm}
+    \pgfpathmoveto{\pgfpoint{.125cm}{.175cm}}
+    \pgfpathlineto{\pgfpoint{.425cm}{.175cm}}
+    \pgfpathlineto{\pgfpoint{.425cm}{.05cm}}
+    \pgfpathlineto{\pgfpoint{.125cm}{.05cm}}
+    \pgfpathmoveto{\pgfpoint{.425cm}{.175cm}}
+    \pgfpathlineto{\pgfpoint{.425cm}{.25cm}}
     \pgfsetarrowsstart{}
     \pgfsetarrowsend{}
   }

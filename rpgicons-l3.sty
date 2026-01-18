@@ -1811,6 +1811,31 @@
     \draw_path_arc:nnn { 180 } { 90 } { .275cm }
 }
 
+\cs_new_protected:Npn \rpgicons_draw_shape_gunslinger: {
+    \draw_path_moveto:n { -.125cm , -.125cm }
+    \draw_path_arc:nnn { 90 } { 180 } { .075cm }
+    \draw_path_lineto:n { -.2cm , -.325cm }
+    \draw_path_lineto:n { -.425cm , -.325cm }
+    \draw_path_lineto:n { -.425cm , -.225cm }
+    \draw_path_arc:nnn { 180 } { 90 } { .3cm }
+    \draw_path_lineto:n { -.125cm , .075cm }
+    \draw_path_moveto:n { -.125cm , .225cm }
+    \draw_path_lineto:n { .125cm , .225cm }
+    \draw_path_lineto:n { .125cm , -.025cm }
+    \draw_path_arc:nnn { 360 } { 270 } { .125cm }
+    \draw_path_lineto:n { -.125cm , -.15cm }
+    \draw_path_close:
+    \draw_path_moveto:n { -.125cm , .175cm }
+    \draw_path_lineto:n { -.175cm , .175cm }
+    \draw_path_arc:nnn { 270 } { 180 } { .075cm }
+    \draw_path_moveto:n { .125cm , .175cm }
+    \draw_path_lineto:n { .425cm , .175cm }
+    \draw_path_lineto:n { .425cm , .05cm }
+    \draw_path_lineto:n { .125cm , .05cm }
+    \draw_path_moveto:n { .425cm , .175cm }
+    \draw_path_lineto:n { .425cm , .25cm }
+}
+
 \cs_new_protected:Npn \rpgicons_draw_shape_monk: {
     \draw_path_moveto:n { -.425cm , -.15cm }
     \draw_path_lineto:n { -.425cm , .125cm }
@@ -1869,6 +1894,18 @@
         { 0cm , .2cm } { .075cm } { 0cm , .7cm } { .5cm } { 2 }
     }
     \draw_path_arc:nnn { 260 } { 215 } { .5cm }
+}
+
+\cs_new_protected:Npn \rpgicons_draw_shape_psion: {
+    \draw_path_moveto:n { -.425cm , -.425cm }
+    \draw_path_arc:nnn { 180 } { 90 } { .15cm }
+    \draw_path_lineto:n { .275cm , -.275cm }
+    \draw_path_arc:nnn { 90 } { 0 } { .15cm }
+    \draw_path_close:
+    \draw_path_moveto:n { ( 0cm , .025cm ) + ( \draw_point_polar:nn { .4cm } { 270 - acosd ( .3cm / .4cm ) }) }
+    \draw_path_arc:nnn { 270 - acosd ( .3cm / .4cm ) } { acosd ( .3cm / .4cm ) - 90 } { .4cm }
+    \draw_path_moveto:n { ( 0cm , .025cm ) + ( \draw_point_polar:nn { .25cm } { 95 }) }
+    \draw_path_arc:nnn { 95 } { 175 } { .25cm }
 }
 
 \cs_new_protected:Npn \rpgicons_draw_shape_ranger: {
@@ -2043,31 +2080,6 @@
     \draw_path_lineto:n { .4cm , .225cm }
     \draw_path_moveto:n { .2cm , -.225cm }
     \draw_path_lineto:n { .4cm , -.025cm }
-}
-
-\cs_new_protected:Npn \rpgicons_draw_shape_gunslinger: {
-    \draw_path_moveto:n { -.125cm , -.125cm }
-    \draw_path_arc:nnn { 90 } { 180 } { .075cm }
-    \draw_path_lineto:n { -.2cm , -.325cm }
-    \draw_path_lineto:n { -.425cm , -.325cm }
-    \draw_path_lineto:n { -.425cm , -.225cm }
-    \draw_path_arc:nnn { 180 } { 90 } { .3cm }
-    \draw_path_lineto:n { -.125cm , .075cm }
-    \draw_path_moveto:n { -.125cm , .225cm }
-    \draw_path_lineto:n { .125cm , .225cm }
-    \draw_path_lineto:n { .125cm , -.025cm }
-    \draw_path_arc:nnn { 360 } { 270 } { .125cm }
-    \draw_path_lineto:n { -.125cm , -.15cm }
-    \draw_path_close:
-    \draw_path_moveto:n { -.125cm , .175cm }
-    \draw_path_lineto:n { -.175cm , .175cm }
-    \draw_path_arc:nnn { 270 } { 180 } { .075cm }
-    \draw_path_moveto:n { .125cm , .175cm }
-    \draw_path_lineto:n { .425cm , .175cm }
-    \draw_path_lineto:n { .425cm , .05cm }
-    \draw_path_lineto:n { .125cm , .05cm }
-    \draw_path_moveto:n { .425cm , .175cm }
-    \draw_path_lineto:n { .425cm , .25cm }
 }
 
 % ALIGNMENT
@@ -2458,7 +2470,7 @@
     buff , blinded , charmed , deafened , exhausted , frightened , grappled , incapacitated , invisible ,
     paralyzed , petrified , poisoned , prone , restrained , stunned , unconscious , hearing , seeing ,
     artificer , artificer ~ i , barbarian , bard , cleric , cleric ~ i , cleric ~ ii , druid , druid ~ i , druid ~ ii ,
-    monk , paladin , ranger , ranger ~ i , ranger ~ ii , rogue , sorcerer , sorcerer ~ i , warlock , wizard , gunslinger ,
+    gunslinger , monk , paladin , psion , ranger , ranger ~ i , ranger ~ ii , rogue , sorcerer , sorcerer ~ i , warlock , wizard ,
     lawful ~ good , neutral ~ good , chaotic ~ good , lawful ~ neutral , true ~ neutral ,
     chaotic ~ neutral , lawful ~ evil , neutral ~ evil , chaotic ~ evil ,
     copper , silver , gold , electrum , platinum ,

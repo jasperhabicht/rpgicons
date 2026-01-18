@@ -1617,8 +1617,8 @@
 
 \cs_new_protected:Npn \rpgicons_draw_shape_artificer_i: {
     \draw_path_moveto:n { ( -.075cm , .15cm ) + ( \draw_point_polar:nn { .275cm } { 350 } ) }
-    \draw_path_arc:nnn { 350 } { 55 } { .275cm }
-    \draw_path_lineto:n { .425cm , .125cm }
+    \draw_path_arc:nnn { 350 } { acosd ( .275cm / .5cm ) } { .275cm }
+    \draw_path_lineto:n { .425cm , .15cm }
     \draw_path_lineto:n { .375cm , .05cm }
     \draw_path_close:
     \draw_path_moveto:n { -.075cm , -.125cm }

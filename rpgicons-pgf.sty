@@ -2676,8 +2676,8 @@
 
   \backgroundpath{
     \pgfpathmoveto{\pgfpointadd{\pgfpoint{-.075cm}{.15cm}}{\pgfpointpolar{350}{.275cm}}}
-    \pgfpatharc{350}{55}{.275cm}
-    \pgfpathlineto{\pgfpoint{.425cm}{.125cm}}
+    \pgfpatharc{350}{acos(.275cm/.5cm)}{.275cm}
+    \pgfpathlineto{\pgfpoint{.425cm}{.15cm}}
     \pgfpathlineto{\pgfpoint{.375cm}{.05cm}}
     \pgfpathclose
     \pgfpathmoveto{\pgfpoint{-.075cm}{-.125cm}}

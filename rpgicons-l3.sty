@@ -1905,6 +1905,30 @@
     \draw_path_arc:nnn { 95 } { 175 } { .25cm }
 }
 
+\cs_new_protected:Npn \rpgicons_draw_shape_psion_i: {
+    \draw_path_moveto:n { 0cm , .025cm }
+    \draw_path_arc:nnn { 90 } { 30 } { .45cm }
+    \draw_path_arc:nnn { 330 } { 210 } { .45cm }
+    \draw_path_arc:nnn { 150 } { 90 } { .45cm }
+    \draw_path_moveto:n { -.15cm , -.175cm }
+    \draw_path_arc:nnn { 180 } { 270 } { .15cm }
+    \draw_path_arc:nnn { 270 } { 360 } { .125cm }
+    \draw_path_arc:nnn { 0 } { 90 } { .1cm }
+    \draw_path_arc:nnn { 90 } { 180 } { .075cm }
+    \draw_path_arc:nnn { 180 } { 270 } { .05cm }
+    \draw_path_arc:nnn { 270 } { 360 } { .025cm }
+    \draw_path_moveto:n { 0cm , .175cm }
+    \draw_path_lineto:n { 0cm , .425cm }
+    \draw_path_moveto:n { .275cm , .125cm }
+    \draw_path_lineto:n { .425cm , .325cm }
+    \draw_path_moveto:n { -.275cm , .125cm }
+    \draw_path_lineto:n { -.425cm , .325cm }
+}
+
+% === backward compatibility
+\cs_set_eq:NN \rpgicons_draw_shape_psion_alt: \rpgicons_draw_shape_psion_i:
+% ===
+
 \cs_new_protected:Npn \rpgicons_draw_shape_ranger: {
     \draw_path_circle:nn { 0cm , 0cm } { .425cm }
     \draw_path_circle:nn { 0cm , 0cm } { .325cm }
@@ -2467,12 +2491,14 @@
     buff , blinded , charmed , deafened , exhausted , frightened , grappled , incapacitated , invisible ,
     paralyzed , petrified , poisoned , prone , restrained , stunned , unconscious , hearing , seeing ,
     artificer , artificer ~ i , barbarian , bard , cleric , cleric ~ i , cleric ~ ii , druid , druid ~ i , druid ~ ii ,
-    gunslinger , monk , paladin , psion , ranger , ranger ~ i , ranger ~ ii , rogue , sorcerer , sorcerer ~ i , warlock , wizard ,
+    fighter , gunslinger , monk , paladin , psion , psion ~ i , ranger , ranger ~ i , ranger ~ ii , rogue ,
+    sorcerer , sorcerer ~ i , warlock , wizard ,
     lawful ~ good , neutral ~ good , chaotic ~ good , lawful ~ neutral , true ~ neutral ,
     chaotic ~ neutral , lawful ~ evil , neutral ~ evil , chaotic ~ evil ,
     copper , silver , gold , electrum , platinum ,
     % === backward compatibility
-    dexterity ~ alt , wisdom ~ alt , necrotic ~ alt , artificer ~ alt , cleric ~ alt , druid ~ alt , ranger ~ alt , sorcerer ~ alt
+    dexterity ~ alt , wisdom ~ alt , necrotic ~ alt , artificer ~ alt , cleric ~ alt , druid ~ alt ,
+    psion ~ alt , ranger ~ alt , sorcerer ~ alt
     % ===
 }
 

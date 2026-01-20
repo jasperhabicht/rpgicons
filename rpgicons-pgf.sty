@@ -37,13 +37,15 @@
   melee, ranged, magic, singlehanded, doublehanded,
   buff, blinded, charmed, deafened, exhausted, frightened, grappled, incapacitated, invisible,
   paralyzed, petrified, poisoned, prone, restrained, stunned, unconscious, hearing, seeing,
-  artificer, artificer i, barbarian, bard, cleric, cleric i, cleric ii, druid, druid i, druid ii, fighter,
-  gunslinger, monk, paladin, psion, ranger, ranger i, ranger ii, rogue, sorcerer, sorcerer i, warlock, wizard,
+  artificer, artificer i, barbarian, bard, cleric, cleric i, cleric ii, druid, druid i, druid ii,
+  fighter, gunslinger, monk, paladin, psion, psion i, ranger, ranger i, ranger ii, rogue, 
+  sorcerer, sorcerer i, warlock, wizard,
   lawful good, neutral good, chaotic good, lawful neutral, true neutral,
   chaotic neutral, lawful evil, neutral evil, chaotic evil,
   copper, silver, gold, electrum, platinum, gem, jewellery, jewelry,
   % === backward compatibility
-  dexterity alt, wisdom alt, necrotic alt, artificer alt, cleric alt, druid alt, ranger alt, sorcerer alt%
+  dexterity alt, wisdom alt, necrotic alt, artificer alt, cleric alt, druid alt, psion alt,
+  ranger alt, sorcerer alt%
   % ===
 }
 
@@ -106,6 +108,7 @@
   artificer alt/.style={artificer i},
   cleric alt/.style={cleric i},
   druid alt/.style={druid i},
+  psion alt/.style={psion i},
   ranger alt/.style={ranger i},
   sorcerer alt/.style={sorcerer i}
 }
@@ -2684,7 +2687,7 @@
     \pgfpathlineto{\pgfpointadd{\pgfpoint{-.075cm}{.15cm}}{\pgfpointpolar{210}{.275cm}}}
     \pgfpathlineto{\pgfpoint{-.425cm}{-.425cm}}
     \pgfsetarrowsstart{}
-    \pgfsetarrowsend{}   
+    \pgfsetarrowsend{}
   }
 }
 
@@ -3058,6 +3061,35 @@
     \pgfpatharc{270-acos(.3cm/.4cm)}{acos(.3cm/.4cm)-90}{.4cm}
     \pgfpathmoveto{\pgfpointadd{\pgfpoint{0cm}{.025cm}}{\pgfpointpolar{95}{.25cm}}}
     \pgfpatharc{95}{175}{.25cm}
+    \pgfsetarrowsstart{}
+    \pgfsetarrowsend{}
+  }
+}
+
+% psion i
+\pgfdeclareshape{psion i}{
+  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
+  \anchor{text} % this is used to center the text in the node
+    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+
+  \backgroundpath{
+    \pgfpathmoveto{\pgfpoint{0cm}{.025cm}}
+    \pgfpatharc{90}{30}{.45cm}
+    \pgfpatharc{330}{210}{.45cm}
+    \pgfpatharc{150}{90}{.45cm}
+    \pgfpathmoveto{\pgfpoint{-.15cm}{-.175cm}}
+    \pgfpatharc{180}{270}{.15cm}
+    \pgfpatharc{270}{360}{.125cm}
+    \pgfpatharc{0}{90}{.1cm}
+    \pgfpatharc{90}{180}{.075cm}
+    \pgfpatharc{180}{270}{.05cm}
+    \pgfpatharc{270}{360}{.025cm}
+    \pgfpathmoveto{\pgfpoint{0cm}{.175cm}}
+    \pgfpathlineto{\pgfpoint{0cm}{.425cm}}
+    \pgfpathmoveto{\pgfpoint{.275cm}{.125cm}}
+    \pgfpathlineto{\pgfpoint{.425cm}{.325cm}}
+    \pgfpathmoveto{\pgfpoint{-.275cm}{.125cm}}
+    \pgfpathlineto{\pgfpoint{-.425cm}{.325cm}}
     \pgfsetarrowsstart{}
     \pgfsetarrowsend{}
   }

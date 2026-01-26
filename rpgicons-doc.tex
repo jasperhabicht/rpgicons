@@ -300,7 +300,7 @@
 \changes{v2.3.3}{2025/12/15}{Added variant for wisdom shape.}
 \changes{v2.4.0}{2026/01/15}{Added key to access variants for class shapes.}
 \changes{v2.4.1}{2026/01/21}{Added variant for psion shape.}
-\changes{v2.5.0}{2026/01/27}{Added variants for paladin and monk shapes.}
+\changes{v2.5.0}{2026/01/27}{Added variants for paladin and monk shapes. Standardization of key names.}
 
 \begin{document}
 
@@ -366,7 +366,7 @@ Regardless of the variant of the package, a set of user commands is always avail
 
 Because of the way the package defines the icons, each of the user commands below described can actually be used together with every shape. However, the combinations of shapes and commands as described in the following subsections are preferable.
 
-Note that shape names ending with \macro{alt} are deprecated. Instead, use the \macro{variant} key to select variants of icon shapes as described below.
+Note that shape names ending with \macro{alt} have been deprecated. Instead, use the \macro{variant} key to select variants of icon shapes as described below.
 
 \subsection[Command \textbackslash die]{Command \titlemacro*{die}}
 
@@ -791,11 +791,11 @@ Apart from setting the options to the commands directly, it is also possible to 
 
 \begin{macrodef}
 style set
-style append
+style add
 \end{macrodef}
-To simplify styling, custom keys can be defined via the keys \macro{style set} and \macro{style append}. Both keys accept as value a key-value list consisting of one or multiple custom keys whose relevant value consists of another key-value list describing the relevant style. It is possible to use \macro{#1} as placeholder for one argument. It is also possible to reference to an already define custom key in the definition of another custom key.
+To simplify styling, custom keys can be defined via the keys \macro{style set} and \macro{style add}. Both keys accept as value a key-value list consisting of one or multiple custom keys whose relevant value consists of another key-value list describing the relevant style. It is possible to use \macro{#1} as placeholder for one argument. It is also possible to reference to an already define custom key in the definition of another custom key.
 
-The key \macro{style set} defines custom keys and sets their values. The key \macro{style append} appends the relevant key-value list to the existing custom key as defined by \macro{style set}. Note that it is not checked whether a custom key already exists and its definition will be overwritten without a warning.
+The key \macro{style set} defines custom keys and sets their values. The key \macro{style add} appends the relevant key-value list to the existing custom key as defined by \macro{style set}. Note that it is not checked whether a custom key already exists and its definition will be overwritten without a warning.
 
 \begin{codeexamplecolumns}
 \rpgiconsset{
@@ -804,6 +804,8 @@ The key \macro{style set} defines custom keys and sets their values. The key \ma
         bar={foo, fill=red, scale=#1}
     }
 }
+
+Note that the key \macro{style appemd} has been deprecated and the key \macro{style add} key should be used instead.
 
 \ability[negative]{charisma}[foo]
 \class[negative]{warlock}[bar=2]
@@ -937,9 +939,9 @@ All icons share the Ti\emph{k}Z style \macro{rpg icons} that is empty per defaul
 Note that it may be necessary to add the Ti\emph{k}Z option \macro{transform shape} when applying transformations to the icons, because the icons are constructed as Ti\emph{k}Z nodes which are not affected by some transformations per default.
 
 \begin{macrodef}
-!rpg icons/!background color
+!rpg icons/!background
 \end{macrodef}
-Some icons can be used with a negative color scheme where the icon is drawn negatively inside a filled shape. Per default, the icons are drawn in white in such cases, but it might be desirable that the icons are in the same color as the background. To this end, the color can be changed using the Ti\emph{k}Z option \macro{rpg icons/background color} in the following way:
+Some icons can be used with a negative color scheme where the icon is drawn negatively inside a filled shape. Per default, the icons are drawn in white in such cases, but it might be desirable that the icons are in the same color as the background. To this end, the color can be changed using the Ti\emph{k}Z option \macro{rpg icons/background} in the following way:
 
 \begin{codeexamplecolumns}
 \colorbox{blue!50}{%
@@ -948,7 +950,7 @@ Some icons can be used with a negative color scheme where the icon is drawn nega
 }
 
 \tikzset{
-    rpg icons/background color={blue!50}
+    rpg icons/background={blue!50}
 }
 \colorbox{blue!50}{%
     \ability[negative]{charisma}
@@ -956,6 +958,8 @@ Some icons can be used with a negative color scheme where the icon is drawn nega
 }
 \end{codeexamplecolumns}
 This feature can, of course, also be used to change the color of the icon independently from the color of the background.
+
+Note that the key \macro{!rpg icons/!background color} has been deprecated and the key \macro{!rpg icons/!background} key should be used instead.
 
 \begin{macrodef}
 !rpg icons/!before sep

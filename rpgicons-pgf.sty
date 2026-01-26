@@ -50,10 +50,10 @@
 }
 
 \tikzset{
-  rpg icons/background color/.code={
+  rpg icons/background/.code={
     \colorlet{rpgicons@bg}{#1}
   },
-  rpg icons/background color={white},
+  rpg icons/background={white},
   rpg icons/before sep/.code={
     \setlength{\rpgicons@beforesep}{#1}
   },
@@ -113,7 +113,8 @@
   psion alt/.style={psion i},
   ranger alt/.style={ranger i},
   rogue alt/.style={rogue i},
-  sorcerer alt/.style={sorcerer i}
+  sorcerer alt/.style={sorcerer i},
+  rpg icons/background color/.forward to={/tikz/rpg icons/background}
 }
 % ===
 

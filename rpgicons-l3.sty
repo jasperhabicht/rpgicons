@@ -2509,10 +2509,16 @@
     style ~ set          .code:n     = {
         \keyval_parse:NNn \use:n \__rpgicons_style_set:nn {#1}
     } ,
-    style ~ append       .code:n     = {
+    style ~ add          .code:n     = {
         \keyval_parse:NNn \use:n \__rpgicons_style_put_right:nn {#1}
     }
 }
+
+% === backward compatibility
+\keys_define:nn { rpgicons / local } {
+    style ~ append       .meta:n     = { style ~ add = {#1} }
+}
+% ===
 
 \clist_const:Nn \c__rpgicons_types_clist {
     die , ability , saving , spell , spellschool , damage , attack , condition , class , alignment , currency

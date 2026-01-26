@@ -11,7 +11,7 @@
 % This work has the LPPL maintenance status `maintained'.
 %
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{rpgicons-pgf}[2026-01-21 RPG Icons Package (PGF Variant) (2.4.1)]
+\ProvidesPackage{rpgicons-pgf}[2026-01-27 RPG Icons Package (PGF Variant) (2.5.0)]
 
 % provide pics option
 \newif\ifrpgicons@pics\rpgicons@picsfalse
@@ -38,14 +38,14 @@
   buff, blinded, charmed, deafened, exhausted, frightened, grappled, incapacitated, invisible,
   paralyzed, petrified, poisoned, prone, restrained, stunned, unconscious, hearing, seeing,
   artificer, artificer i, barbarian, bard, cleric, cleric i, cleric ii, druid, druid i, druid ii,
-  fighter, gunslinger, monk, paladin, psion, psion i, ranger, ranger i, ranger ii, rogue, 
+  fighter, gunslinger, monk, monk i, paladin, paladin i, psion, psion i, ranger, ranger i, rogue, rogue i, 
   sorcerer, sorcerer i, warlock, wizard,
   lawful good, neutral good, chaotic good, lawful neutral, true neutral,
   chaotic neutral, lawful evil, neutral evil, chaotic evil,
   copper, silver, gold, electrum, platinum, gem, jewellery, jewelry,
   % === backward compatibility
-  dexterity alt, wisdom alt, necrotic alt, artificer alt, cleric alt, druid alt, psion alt,
-  ranger alt, sorcerer alt%
+  dexterity alt, wisdom alt, necrotic alt, artificer alt, cleric alt, druid alt,
+  monk alt, paladin alt, psion alt, ranger alt, rogue alt, sorcerer alt%
   % ===
 }
 
@@ -108,8 +108,11 @@
   artificer alt/.style={artificer i},
   cleric alt/.style={cleric i},
   druid alt/.style={druid i},
+  monk alt/.style={monk i},
+  paladin alt/.style={paladin i},
   psion alt/.style={psion i},
   ranger alt/.style={ranger i},
+  rogue alt/.style={rogue i},
   sorcerer alt/.style={sorcerer i}
 }
 % ===
@@ -3005,6 +3008,45 @@
   }
 }
 
+% monk i
+\pgfdeclareshape{monk i}{
+  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
+  \anchor{text} % this is used to center the text in the node
+    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+
+  \backgroundpath{
+    \pgfpathcircle{\pgfpoint{0cm}{0cm}}{.35cm}
+    \pgftransformrotate{45}
+    \pgfpathmoveto{
+      \pgfpointpolar{
+        180-acos(
+          sqrt(
+            .330625*(.0225/.1225-1)/
+            (.0225-.330625)
+          )
+        )
+      }{.35cm}
+    }
+    \pgfpatharc{
+      180-acos(
+        sqrt(
+          .330625*(.0225/.1225-1)/
+          (.0225-.330625)
+        )*.35cm/.575cm
+      )
+    }{
+      360+acos(
+        sqrt(
+          .330625*(.0225/.1225-1)/
+          (.0225-.330625)
+        )*.35cm/.575cm
+      )
+    }{.575cm and .15cm}
+    \pgfsetarrowsstart{}
+    \pgfsetarrowsend{}   
+  }
+}
+
 % paladin
 \pgfdeclareshape{paladin}{
   \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
@@ -3042,6 +3084,32 @@
     \pgfpatharc{260}{215}{.5cm}
     \pgfsetarrowsstart{}
     \pgfsetarrowsend{}
+  }
+}
+
+% paladin i
+\pgfdeclareshape{paladin i}{
+  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
+  \anchor{text} % this is used to center the text in the node
+    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+
+  \backgroundpath{
+    \pgfpathmoveto{\pgfpoint{-.25cm}{.425cm}}
+    \pgfpathlineto{\pgfpoint{-.25cm}{.2cm}}
+    \pgfpatharc{180}{360}{.25cm}
+    \pgfpathlineto{\pgfpoint{.25cm}{.425cm}}
+    \pgfpathclose
+    \pgfpathmoveto{\pgfpoint{-.25cm}{.325cm}}
+    \pgfpathlineto{\pgfpoint{.25cm}{.325cm}}
+    \pgfpathmoveto{\pgfpoint{-.05cm}{-.05cm}}
+    \pgfpathlineto{\pgfpoint{-.05cm}{-.325cm}}
+    \pgfpathmoveto{\pgfpoint{.05cm}{-.05cm}}
+    \pgfpathlineto{\pgfpoint{.05cm}{-.325cm}}
+    \pgfpathmoveto{\pgfpoint{-.2cm}{-.425cm}}
+    \pgfpatharc{180}{90}{.1cm}
+    \pgfpathlineto{\pgfpoint{.125cm}{-.325cm}}
+    \pgfpatharc{90}{0}{.1cm}
+    \pgfpathclose
   }
 }
 
@@ -3161,8 +3229,32 @@
   }
 }
 
-% ranger ii
-\pgfdeclareshape{ranger ii}{
+% rogue
+\pgfdeclareshape{rogue}{
+  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
+  \anchor{text} % this is used to center the text in the node
+    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+
+  \backgroundpath{
+    \pgfpathmoveto{\pgfpointadd{\pgfpoint{.15cm}{.15cm}}{\pgfpointpolar{-45}{.05cm}}}
+    \pgfpatharc{135}{405}{.125cm}
+    \pgfpatharc{-45}{135}{.175cm}
+    \pgfpatharc{45}{315}{.125cm}
+    \pgfpathmoveto{\pgfpointadd{\pgfpoint{-.275cm}{-.275cm}}{\pgfpointpolar{315}{.05cm}}}
+    \pgfpathlineto{\pgfpointadd{\pgfpoint{-.175cm}{-.375cm}}{\pgfpointpolar{315}{.05cm}}}
+    \pgfpathlineto{\pgfpointadd{\pgfpoint{0cm}{-.2cm}}{\pgfpointpolar{315}{.05cm}}}
+    \pgfpathlineto{\pgfpointadd{\pgfpoint{-.1cm}{-.1cm}}{\pgfpointpolar{315}{.05cm}}}
+    \pgfpathmoveto{\pgfpointadd{\pgfpoint{.2cm}{.2cm}}{\pgfpointpolar{135}{.05cm}}}
+    \pgfpathlineto{\pgfpointadd{\pgfpoint{-.325cm}{-.325cm}}{\pgfpointpolar{135}{.05cm}}}
+    \pgfpatharc{135}{315}{.05cm}
+    \pgfpathlineto{\pgfpointadd{\pgfpoint{.2cm}{.2cm}}{\pgfpointpolar{315}{.05cm}}}
+    \pgfsetarrowsstart{}
+    \pgfsetarrowsend{}
+  }
+}
+
+% rogue i
+\pgfdeclareshape{rogue i}{
   \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
   \anchor{text} % this is used to center the text in the node
     {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
@@ -3186,30 +3278,6 @@
     \pgfpathmoveto{\pgfpoint{-.225cm}{-.425cm}}
     \pgfpathlineto{\pgfpoint{0cm}{-.25cm}}
     \pgfpathlineto{\pgfpoint{.225cm}{-.425cm}}
-    \pgfsetarrowsstart{}
-    \pgfsetarrowsend{}
-  }
-}
-
-% rogue
-\pgfdeclareshape{rogue}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
-
-  \backgroundpath{
-    \pgfpathmoveto{\pgfpointadd{\pgfpoint{.15cm}{.15cm}}{\pgfpointpolar{-45}{.05cm}}}
-    \pgfpatharc{135}{405}{.125cm}
-    \pgfpatharc{-45}{135}{.175cm}
-    \pgfpatharc{45}{315}{.125cm}
-    \pgfpathmoveto{\pgfpointadd{\pgfpoint{-.275cm}{-.275cm}}{\pgfpointpolar{315}{.05cm}}}
-    \pgfpathlineto{\pgfpointadd{\pgfpoint{-.175cm}{-.375cm}}{\pgfpointpolar{315}{.05cm}}}
-    \pgfpathlineto{\pgfpointadd{\pgfpoint{0cm}{-.2cm}}{\pgfpointpolar{315}{.05cm}}}
-    \pgfpathlineto{\pgfpointadd{\pgfpoint{-.1cm}{-.1cm}}{\pgfpointpolar{315}{.05cm}}}
-    \pgfpathmoveto{\pgfpointadd{\pgfpoint{.2cm}{.2cm}}{\pgfpointpolar{135}{.05cm}}}
-    \pgfpathlineto{\pgfpointadd{\pgfpoint{-.325cm}{-.325cm}}{\pgfpointpolar{135}{.05cm}}}
-    \pgfpatharc{135}{315}{.05cm}
-    \pgfpathlineto{\pgfpointadd{\pgfpoint{.2cm}{.2cm}}{\pgfpointpolar{315}{.05cm}}}
     \pgfsetarrowsstart{}
     \pgfsetarrowsend{}
   }

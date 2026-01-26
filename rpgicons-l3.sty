@@ -10,7 +10,7 @@
 %
 % This work has the LPPL maintenance status `maintained'.
 %
-\ProvidesExplPackage {rpgicons-l3} {2026-01-21} {2.4.1}
+\ProvidesExplPackage {rpgicons-l3} {2026-01-27} {2.5.0}
     {RPG Icons Package (l3 Variant)}
 
 \bool_new:N \l__rpgicons_unicode_mode_bool
@@ -1860,6 +1860,40 @@
     \draw_path_lineto:n { .35cm , -.425cm }
 }
 
+\cs_new_protected:Npn \rpgicons_draw_shape_monk_i: {
+    \draw_path_circle:nn { 0cm , 0cm } { .35cm }
+    \draw_transform_rotate:n { 45 }
+    \draw_path_moveto:n {
+        \draw_point_polar:nn { .35cm } { 
+            180 - acosd (
+                sqrt (
+                    .330625 * ( .0225 / .1225 - 1 ) /
+                    ( .0225 - .330625 )
+                )
+            )
+        }
+    }
+    \draw_path_arc:nnnn {
+        180 - acosd (
+            sqrt (
+                .330625 * ( .0225 / .1225 - 1 ) /
+                ( .0225 - .330625 )
+            ) * .35cm / .575cm
+        )
+    } {
+        360 + acosd (
+            sqrt (
+                .330625 * ( .0225 / .1225 - 1 ) /
+                ( .0225 - .330625 )
+            ) * .35cm / .575cm
+        )
+    } { .575cm } { .15cm }
+}
+
+% === backward compatibility
+\cs_set_eq:NN \rpgicons_draw_shape_monk_alt: \rpgicons_draw_shape_monk_i:
+% ===
+
 \cs_new_protected:Npn \rpgicons_draw_shape_paladin: {
     \draw_path_circle:nn { 0cm , -.15cm } { .275cm }
     \draw_path_moveto:n { ( 0cm , -.15cm ) + ( \draw_point_polar:nn { .275cm } { 60 }) }
@@ -1892,6 +1926,29 @@
     }
     \draw_path_arc:nnn { 260 } { 215 } { .5cm }
 }
+
+\cs_new_protected:Npn \rpgicons_draw_shape_paladin_i: {
+    \draw_path_moveto:n { -.25cm , .425cm }
+    \draw_path_lineto:n { -.25cm , .2cm }
+    \draw_path_arc:nnn { 180 } { 360 } { .25cm }
+    \draw_path_lineto:n { .25cm , .425cm }
+    \draw_path_close:
+    \draw_path_moveto:n { -.25cm , .325cm }
+    \draw_path_lineto:n { .25cm , .325cm }
+    \draw_path_moveto:n { -.05cm , -.05cm }
+    \draw_path_lineto:n { -.05cm , -.325cm }
+    \draw_path_moveto:n { .05cm , -.05cm }
+    \draw_path_lineto:n{ .05cm , -.325cm }
+    \draw_path_moveto:n { -.2cm , -.425cm }
+    \draw_path_arc:nnn { 180 } { 90 } { .1cm }
+    \draw_path_lineto:n { .125cm , -.325cm }
+    \draw_path_arc:nnn { 90 } { 0 } { .1cm }
+    \draw_path_close:
+}    
+
+% === backward compatibility
+\cs_set_eq:NN \rpgicons_draw_shape_paladin_alt: \rpgicons_draw_shape_paladin_i:
+% ===
 
 \cs_new_protected:Npn \rpgicons_draw_shape_psion: {
     \draw_path_moveto:n { -.425cm , -.425cm }
@@ -1981,7 +2038,22 @@
 \cs_set_eq:NN \rpgicons_draw_shape_ranger_alt: \rpgicons_draw_shape_ranger_i:
 % ===
 
-\cs_new_protected:Npn \rpgicons_draw_shape_ranger_ii: {
+\cs_new_protected:Npn \rpgicons_draw_shape_rogue: {
+    \draw_path_moveto:n { ( .15cm , .15cm ) + ( \draw_point_polar:nn { .05cm } { -45 } ) }
+    \draw_path_arc:nnn { 135 } { 405 } { .125cm }
+    \draw_path_arc:nnn { -45 } { 135 } { .175cm }
+    \draw_path_arc:nnn { 45 } { 315 } { .125cm }
+    \draw_path_moveto:n { ( -.275cm , -.275cm ) + ( \draw_point_polar:nn { .05cm } { 315 } ) }
+    \draw_path_lineto:n { ( -.175cm , -.375cm ) + ( \draw_point_polar:nn { .05cm } { 315 } ) }
+    \draw_path_lineto:n { ( 0cm , -.2cm ) + ( \draw_point_polar:nn { .05cm } { 315 } ) }
+    \draw_path_lineto:n { ( -.1cm , -.1cm ) + ( \draw_point_polar:nn { .05cm } { 315 } ) }
+    \draw_path_moveto:n { ( .2cm , .2cm ) + ( \draw_point_polar:nn { .05cm } { 135 } ) }
+    \draw_path_lineto:n { ( -.325cm , -.325cm ) + ( \draw_point_polar:nn { .05cm } { 135 } ) }
+    \draw_path_arc:nnn { 135 } { 315 } { .05cm }
+    \draw_path_lineto:n { ( .2cm , .2cm ) + ( \draw_point_polar:nn { .05cm } { 315 } ) }
+}
+
+\cs_new_protected:Npn \rpgicons_draw_shape_rogue_i: {
     \draw_path_moveto:n { .225cm , .425cm }
     \draw_path_lineto:n { .425cm , .025cm }
     \draw_path_lineto:n { .325cm , -.025cm }
@@ -2002,20 +2074,9 @@
     \draw_path_lineto:n { .225cm , -.425cm }
 }
 
-\cs_new_protected:Npn \rpgicons_draw_shape_rogue: {
-    \draw_path_moveto:n { ( .15cm , .15cm ) + ( \draw_point_polar:nn { .05cm } { -45 } ) }
-    \draw_path_arc:nnn { 135 } { 405 } { .125cm }
-    \draw_path_arc:nnn { -45 } { 135 } { .175cm }
-    \draw_path_arc:nnn { 45 } { 315 } { .125cm }
-    \draw_path_moveto:n { ( -.275cm , -.275cm ) + ( \draw_point_polar:nn { .05cm } { 315 } ) }
-    \draw_path_lineto:n { ( -.175cm , -.375cm ) + ( \draw_point_polar:nn { .05cm } { 315 } ) }
-    \draw_path_lineto:n { ( 0cm , -.2cm ) + ( \draw_point_polar:nn { .05cm } { 315 } ) }
-    \draw_path_lineto:n { ( -.1cm , -.1cm ) + ( \draw_point_polar:nn { .05cm } { 315 } ) }
-    \draw_path_moveto:n { ( .2cm , .2cm ) + ( \draw_point_polar:nn { .05cm } { 135 } ) }
-    \draw_path_lineto:n { ( -.325cm , -.325cm ) + ( \draw_point_polar:nn { .05cm } { 135 } ) }
-    \draw_path_arc:nnn { 135 } { 315 } { .05cm }
-    \draw_path_lineto:n { ( .2cm , .2cm ) + ( \draw_point_polar:nn { .05cm } { 315 } ) }
-}
+% === backward compatibility
+\cs_set_eq:NN \rpgicons_draw_shape_rogue_alt: \rpgicons_draw_shape_rogue_i:
+% ===
 
 \cs_new_protected:Npn \rpgicons_draw_shape_sorcerer: {
     \draw_path_moveto:n { -.25cm , -.425cm }
@@ -2491,14 +2552,14 @@
     buff , blinded , charmed , deafened , exhausted , frightened , grappled , incapacitated , invisible ,
     paralyzed , petrified , poisoned , prone , restrained , stunned , unconscious , hearing , seeing ,
     artificer , artificer ~ i , barbarian , bard , cleric , cleric ~ i , cleric ~ ii , druid , druid ~ i , druid ~ ii ,
-    fighter , gunslinger , monk , paladin , psion , psion ~ i , ranger , ranger ~ i , ranger ~ ii , rogue ,
+    fighter , gunslinger , monk , monk ~ i , paladin , paladin ~ i , psion , psion ~ i , ranger , ranger ~ i , rogue , rogue ~ i ,
     sorcerer , sorcerer ~ i , warlock , wizard ,
     lawful ~ good , neutral ~ good , chaotic ~ good , lawful ~ neutral , true ~ neutral ,
     chaotic ~ neutral , lawful ~ evil , neutral ~ evil , chaotic ~ evil ,
     copper , silver , gold , electrum , platinum ,
     % === backward compatibility
     dexterity ~ alt , wisdom ~ alt , necrotic ~ alt , artificer ~ alt , cleric ~ alt , druid ~ alt ,
-    psion ~ alt , ranger ~ alt , sorcerer ~ alt
+    monk ~ alt , paladin ~ alt , psion ~ alt , ranger ~ alt , rogue ~ alt , sorcerer ~ alt
     % ===
 }
 

@@ -11,8 +11,8 @@
 % This work has the LPPL maintenance status `maintained'.
 %
 \documentclass[a4paper]{article}
-\def\rpgiconsfileversion{2.4.1}
-\def\rpgiconsfiledate{21 January 2026}
+\def\rpgiconsfileversion{2.5.0}
+\def\rpgiconsfiledate{27 January 2026}
 
 \usepackage[T1]{fontenc}
 \usepackage{Alegreya}
@@ -300,6 +300,7 @@
 \changes{v2.3.3}{2025/12/15}{Added variant for wisdom shape.}
 \changes{v2.4.0}{2026/01/15}{Added key to access variants for class shapes.}
 \changes{v2.4.1}{2026/01/21}{Added variant for psion shape.}
+\changes{v2.5.0}{2026/01/27}{Added variants for paladin and monk shapes.}
 
 \begin{document}
 
@@ -594,13 +595,15 @@ The first optional argument can take the value \macro{negative} or \macro{positi
     & \class{fighter} & \macro{fighter} \\
     & \class{gunslinger} & \macro{gunslinger} \\
     & \class{monk} & \macro{monk} \\
+    & \class{monk}[variant=1] & \macro{monk} & 1 \\
     & \class{paladin} & \macro{paladin} \\
+    & \class{paladin}[variant=1] & \macro{paladin} & 1 \\
     & \class{psion} & \macro{psion} \\
     & \class{psion}[variant=1] & \macro{psion} & 1 \\
     & \class{ranger} & \macro{ranger} \\
     & \class{ranger}[variant=1] & \macro{ranger} & 1 \\
-    & \class{ranger}[variant=2] & \macro{ranger} & 2 \\
     & \class{rogue} & \macro{rogue} \\
+    & \class{rogue}[variant=1] & \macro{rogue} & 1 \\
     & \class{sorcerer} & \macro{sorcerer} \\
     & \class{sorcerer}[variant=1] & \macro{sorcerer} & 1 \\
     & \class{warlock} & \macro{warlock} \\

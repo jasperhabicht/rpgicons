@@ -662,6 +662,8 @@ variant
 \end{macrodef}
 The main user commands (as well as the underlying commands on which these commands are based as described below) accept as option the key \macro{variant} which accepts an integer as value to select variants for the relevant shape. See the icon lists above for the respective variants. For example, the command \macro{\ability{dexterity}[variant=1]} results in \ability{dexterity}[variant=1].
 
+Setting the key \macro{variant} without value is equivalent to setting its value to \macro{1}. Selecting a non-existent variant selects the default shape.
+
 With the following setting, all occurences of the \macro{necrotic} shape are set to the relevant variant.
 
 \begin{codeexample}
@@ -805,11 +807,11 @@ The key \macro{style set} defines custom keys and sets their values. The key \ma
     }
 }
 
-Note that the key \macro{style appemd} has been deprecated and the key \macro{style add} key should be used instead.
-
 \ability[negative]{charisma}[foo]
 \class[negative]{warlock}[bar=2]
 \end{codeexamplecolumns}
+
+Note that the key \macro{style appemd} has been deprecated and the key \macro{style add} key should be used instead.
 
 \begin{macrodef}
 before sep
@@ -880,7 +882,9 @@ The PGF variant of the package provides the option \macro{pics}. If the package 
 \begin{macrodef}
 !rpg icons/!variant
 \end{macrodef}
-The main user commands (as well as the underlying commands on which these commands are based as described below) accept as option the key \macro{variant} which accepts an integer as value to select variants for the relevant shape. See the icon lists above for the respective variants. For example, the command \macro{\ability{dexterity}[rpg icons/variant=1]} results in \ability{dexterity}[rpg icons/variant=1].
+The main user commands (as well as the underlying commands on which these commands are based as described below) accept as option the key \macro{rpg icons/variant} which accepts an integer as value to select variants for the relevant shape. See the icon lists above for the respective variants. For example, the command \macro{\ability{dexterity}[rpg icons/variant=1]} results in \ability{dexterity}[rpg icons/variant=1].
+
+Setting the key \macro{rpg icons/variant} without value is equivalent to setting its value to \macro{1}. Selecting a non-existent variant selects the default shape.
 
 With the following setting, all occurences of the \macro{necrotic} shape are set to the relevant variant.
 

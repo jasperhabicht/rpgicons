@@ -2164,6 +2164,29 @@
     \draw_path_lineto:n { .4cm , -.025cm }
 }
 
+\cs_new_protected:Npn \rpgicons_draw_shape_wizard_i: {
+    \draw_path_moveto:n { -.425cm , -.375cm }
+    \draw_path_lineto:n { -.375cm , -.425cm }
+    \draw_path_lineto:n {
+        ( .125cm , .125cm ) +
+        ( \draw_point_polar:nn { .1cm } { - atand ( sqrt ( .25cm + .3025cm ) , .1cm ) } )
+    }
+    \draw_path_arc:nnn {
+        - atand ( sqrt ( .25cm + .3025cm ) , .1cm )
+    } {
+        90 + atand ( sqrt ( .3025cm + .25cm ) , .1cm )
+    } { .1cm }
+    \draw_path_close:
+    \int_step_inline:nnnn { -65 } { 45 } { 180 } {
+      \draw_path_moveto:n { ( .125cm , .125cm ) + ( \draw_point_polar:nn { .225cm } {##1} ) }
+      \draw_path_lineto:n { ( .125cm , .125cm ) + ( \draw_point_polar:nn { .3cm } {##1} ) }
+    }
+}
+
+% === backward compatibility
+\cs_set_eq:NN \rpgicons_draw_shape_wizard_alt: \rpgicons_draw_shape_wizard_i:
+% ===
+
 % ALIGNMENT
 
 \cs_new_protected:Npn \rpgicons_draw_shape_lawful_good: {
@@ -2560,13 +2583,13 @@
     paralyzed , petrified , poisoned , prone , restrained , stunned , unconscious , hearing , seeing ,
     artificer , artificer ~ i , barbarian , bard , cleric , cleric ~ i , cleric ~ ii , druid , druid ~ i , druid ~ ii ,
     fighter , gunslinger , monk , monk ~ i , paladin , paladin ~ i , psion , psion ~ i , ranger , ranger ~ i ,
-    rogue , rogue ~ i , sorcerer , sorcerer ~ i , warlock , wizard ,
+    rogue , rogue ~ i , sorcerer , sorcerer ~ i , warlock , wizard , wizard ~ i ,
     lawful ~ good , neutral ~ good , chaotic ~ good , lawful ~ neutral , true ~ neutral ,
     chaotic ~ neutral , lawful ~ evil , neutral ~ evil , chaotic ~ evil ,
     copper , silver , gold , electrum , platinum ,
     % === backward compatibility
     dexterity ~ alt , wisdom ~ alt , necrotic ~ alt , artificer ~ alt , cleric ~ alt , druid ~ alt ,
-    monk ~ alt , paladin ~ alt , psion ~ alt , ranger ~ alt , rogue ~ alt , sorcerer ~ alt
+    monk ~ alt , paladin ~ alt , psion ~ alt , ranger ~ alt , rogue ~ alt , sorcerer ~ alt , wizard ~ alt
     % ===
 }
 

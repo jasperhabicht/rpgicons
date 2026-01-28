@@ -39,13 +39,13 @@
   paralyzed, petrified, poisoned, prone, restrained, stunned, unconscious, hearing, seeing,
   artificer, artificer i, barbarian, bard, cleric, cleric i, cleric ii, druid, druid i, druid ii,
   fighter, gunslinger, monk, monk i, paladin, paladin i, psion, psion i, ranger, ranger i,
-  rogue, rogue i, sorcerer, sorcerer i, warlock, wizard,
+  rogue, rogue i, sorcerer, sorcerer i, warlock, wizard, wizard i,
   lawful good, neutral good, chaotic good, lawful neutral, true neutral,
   chaotic neutral, lawful evil, neutral evil, chaotic evil,
   copper, silver, gold, electrum, platinum, gem, jewellery, jewelry,
   % === backward compatibility
   dexterity alt, wisdom alt, necrotic alt, artificer alt, cleric alt, druid alt,
-  monk alt, paladin alt, psion alt, ranger alt, rogue alt, sorcerer alt%
+  monk alt, paladin alt, psion alt, ranger alt, rogue alt, sorcerer alt, wizard alt%
   % ===
 }
 
@@ -115,6 +115,7 @@
   ranger alt/.style={ranger i},
   rogue alt/.style={rogue i},
   sorcerer alt/.style={sorcerer i},
+  wizard alt/.style={wizard i},
   rpg icons/background color/.forward to={/tikz/rpg icons/background}
 }
 % ===
@@ -3398,6 +3399,37 @@
     \pgfpathlineto{\pgfpoint{.4cm}{.225cm}}
     \pgfpathmoveto{\pgfpoint{.2cm}{-.225cm}}
     \pgfpathlineto{\pgfpoint{.4cm}{-.025cm}}
+    \pgfsetarrowsstart{}
+    \pgfsetarrowsend{}
+  }
+}
+
+% wizard i
+\pgfdeclareshape{wizard i}{
+  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
+  \anchor{text} % this is used to center the text in the node
+    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+
+  \backgroundpath{
+    \pgfpathmoveto{\pgfpoint{-.425cm}{-.375cm}}
+    \pgfpathlineto{\pgfpoint{-.375cm}{-.425cm}}
+    \pgfpathlineto{
+      \pgfpointadd{
+        \pgfpoint{.125cm}{.125cm}
+      }{
+        \pgfpointpolar{-atan2(sqrt(.25cm+.3025cm),.1cm)}{.1cm}
+      }
+    }
+    \pgfpatharc{-atan2(sqrt(.25cm+.3025cm),.1cm)}{90+atan2(sqrt(.3025cm+.25cm),.1cm)}{.1cm}
+    \pgfpathclose
+    \foreach \a in {-65,-10,...,180}{
+      \pgfpathmoveto{
+        \pgfpointadd{\pgfpoint{.125cm}{.125cm}}{\pgfpointpolar{\a}{.225cm}}
+      }
+      \pgfpathlineto{
+        \pgfpointadd{\pgfpoint{.125cm}{.125cm}}{\pgfpointpolar{\a}{.3cm}}
+      }
+    }
     \pgfsetarrowsstart{}
     \pgfsetarrowsend{}
   }

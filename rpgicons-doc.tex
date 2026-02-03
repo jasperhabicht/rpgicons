@@ -11,8 +11,8 @@
 % This work has the LPPL maintenance status `maintained'.
 %
 \documentclass[a4paper]{article}
-\def\rpgiconsfileversion{2.5.0}
-\def\rpgiconsfiledate{27 January 2026}
+\def\rpgiconsfileversion{2.5.1}
+\def\rpgiconsfiledate{3 February 2026}
 
 \usepackage[T1]{fontenc}
 \usepackage{Alegreya}
@@ -201,7 +201,7 @@
     }
 }
 \clist_set:Nn \l_rpgicons_doc_logo_icons_clist {
-    twentyside , charisma , armor , buff , ranged , proficiency
+    twentyside , charisma , armour , buff , ranged , proficiency
 }
 
 \NewDocumentCommand{\rpgiconslogo}{ O{1} }{
@@ -301,6 +301,7 @@
 \changes{v2.4.0}{2026/01/15}{Added key to access variants for class shapes.}
 \changes{v2.4.1}{2026/01/21}{Added variant for psion shape.}
 \changes{v2.5.0}{2026/01/27}{Added variants for paladin, monk and wizard shapes. Standardization of key names.}
+\changes{v2.5.1}{2026/02/03}{Added key to generate alias for shapes in L3 variant.}
 
 \begin{document}
 
@@ -437,7 +438,7 @@ The first optional argument can take the value \macro{normal} or \macro{empty}, 
     & \ability{sanity} & \macro{sanity} \\
     & \ability{perception} & \macro{perception} \\
     & \ability{luck} & \macro{luck} \\
-    & \ability{armor} & \macro{armor} \\
+    & \ability{armour} & \macro{armour} or \macro{armor} \\
     & \ability{proficiency} & \macro{proficiency} \\
 \midrule
 \macro{\saving}
@@ -453,7 +454,7 @@ The first optional argument can take the value \macro{normal} or \macro{empty}, 
     & \saving{sanity} & \macro{sanity} \\
     & \saving{perception} & \macro{perception} \\
     & \saving{luck} & \macro{luck} \\
-    & \saving{armor} & \macro{armor} \\
+    & \saving{armour} & \macro{armour} or \macro{armor} \\
     & \saving{proficiency} & \macro{proficiency} \\
 \end{rpgiconsiconlist}
 
@@ -815,6 +816,11 @@ The key \macro{style set} defines custom keys and sets their values. The key \ma
 Note that the key \macro{style appemd} has been deprecated and the key \macro{style add} should be used instead.
 
 \begin{macrodef}
+alias
+\end{macrodef}
+The key \macro{alias} accepts exactly two (braced) arguments that represent names of shapes. A shape with the name given in the first argument is created as an exact copy of the shape with the name given in the second argument. If a shape with the name given in the first argument already exists, it will become a copy of the other shape without warning.
+
+\begin{macrodef}
 before sep
 after sep
 baseline
@@ -964,7 +970,7 @@ Some icons can be used with a negative color scheme where the icon is drawn nega
 \end{codeexamplecolumns}
 This feature can, of course, also be used to change the color of the icon independently from the color of the background.
 
-Note that the key \macro{!rpg icons/!background color} has been deprecated and the key \macro{!rpg icons/!background} should be used instead.
+Note that the key \macro{rpg icons/background color} has been deprecated and the key \newline \macro{rpg icons/background} should be used instead.
 
 \begin{macrodef}
 !rpg icons/!before sep
@@ -1085,7 +1091,7 @@ The following example shows how to create the drawing on the first page of this 
     \foreach \x/\c [count=\i] in {
         twentyside/264653,
         charisma/287271,
-        armor/2a9d8f,
+        armour/2a9d8f,
         buff/e9c46a,
         ranged/f4a261,
         proficiency/e76f51

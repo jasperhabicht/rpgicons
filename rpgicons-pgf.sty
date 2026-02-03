@@ -11,7 +11,7 @@
 % This work has the LPPL maintenance status `maintained'.
 %
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{rpgicons-pgf}[2026-01-27 RPG Icons Package (PGF Variant) (2.5.0)]
+\ProvidesPackage{rpgicons-pgf}[2026-02-03 RPG Icons Package (PGF Variant) (2.5.1)]
 
 % provide pics option
 \newif\ifrpgicons@pics\rpgicons@picsfalse
@@ -28,7 +28,7 @@
   fudge, sixside one, sixside two, sixside three, sixside four, sixside five,
   sixside six, sixside seven, sixside eight, sixside nine, fudge plus, fudge minus,
   strength, dexterity, dexterity i, constitution, intelligence, wisdom, wisdom i, charisma,
-  resilience, sanity, perception, luck, armor, proficiency,
+  resilience, sanity, perception, luck, armour, armor, proficiency,
   linear, conic, quadratic, cubic, spheric, cylindric, emanation,
   verbal, somatic, material, ritual, focus,
   abjuration, conjuration, divination, enchantment, evocation, illusion, necromancy, transmutation,
@@ -1034,8 +1034,8 @@
   }
 }
 
-% armor
-\pgfdeclareshape{armor}{
+% armour
+\pgfdeclareshape{armour}{
   \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
   \anchor{text} % this is used to center the text in the node
     {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
@@ -1068,6 +1068,14 @@
     \pgfsetarrowsstart{}
     \pgfsetarrowsend{}
   }
+}
+
+\pgfdeclareshape{armor}{
+  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
+  \anchor{text} % this is used to center the text in the node
+    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+
+  \inheritbackgroundpath[from={armour}]
 }
 
 % proficiency
@@ -3870,14 +3878,14 @@
   },
   rpg icons/create pic from ability shape/.list={%
     strength, dexterity, dexterity i, constitution, intelligence, wisdom, wisdom i, charisma,
-    resilience, sanity, perception, luck, armor, proficiency,
+    resilience, sanity, perception, luck, armour, armor, proficiency,
     % === backward compatibility
     dexterity alt, wisdom alt%
     % ===
   },
   rpg icons/create pic from saving shape/.list={%
     strength, dexterity, dexterity i, constitution, intelligence, wisdom, wisdom i, charisma,
-    resilience, sanity, perception, luck, armor, proficiency,
+    resilience, sanity, perception, luck, armour, armor, proficiency,
     % === backward compatibility
     dexterity alt, wisdom alt%
     % ===
@@ -3893,10 +3901,10 @@
     % ===
   },
   rpg icons/create pic from class shape/.list={%
-    artificer, artificer i, barbarian, bard, cleric, cleric i, cleric ii, druid, druid i, druid ii, fighter, monk, paladin,
-    ranger, ranger i, ranger ii, rogue, sorcerer, sorcerer i, warlock, wizard,
+    artificer, artificer i, barbarian, bard, cleric, cleric i, cleric ii, druid, druid i, druid ii, fighter, gunslinger,
+    monk, monk i, paladin, paladin i, psion, psion i, ranger, ranger i, rogue, rogue i, sorcerer, sorcerer i, warlock, wizard, wizard i,
     % === backward compatibility
-    artificer i, cleric alt, druid alt, ranger alt, sorcerer alt%
+    artificer alt, cleric alt, druid alt, monk alt, paladin alt, psion alt, ranger alt, rogue alt, sorcerer alt, wizard alt%
     % ===
   },
   rpg icons/create pic from alignment shape/.list={%

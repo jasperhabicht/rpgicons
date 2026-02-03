@@ -10,7 +10,7 @@
 %
 % This work has the LPPL maintenance status `maintained'.
 %
-\ProvidesExplPackage {rpgicons-l3} {2026-01-27} {2.5.0}
+\ProvidesExplPackage {rpgicons-l3} {2026-02-03} {2.5.1}
     {RPG Icons Package (l3 Variant)}
 
 \bool_new:N \l__rpgicons_unicode_mode_bool
@@ -41,6 +41,9 @@
 }
 \msg_new:nnn { rpgicons } { style-undefined } {
     The ~ style ~ `#1` ~ is ~ undefined.
+}
+\msg_new:nnn { rpgicons } { argument-count-wrong } {
+    The ~ key ~ `#1` ~ expects ~ exactly ~ #2 ~ arguments.
 }
 \msg_if_exist:nnF { rpgicons } { tagging-unsupported } {
     \msg_new:nnn { rpgicons } { tagging-unsupported } {
@@ -621,7 +624,7 @@
     \draw_path_lineto:n { .05cm , -.325cm }
 }
 
-\cs_new_protected:Npn \rpgicons_draw_shape_armor: {
+\cs_new_protected:Npn \rpgicons_draw_shape_armour: {
     \draw_path_moveto:n { -.25cm , -.425cm }
     \draw_path_lineto:n { .25cm , -.425cm }
     \draw_path_lineto:n { .2cm , -.225cm }
@@ -647,6 +650,8 @@
     \draw_path_lineto:n { 0cm , -.275cm }
     \draw_path_lineto:n { .2cm , -.225cm }
 }
+
+\cs_set_eq:NN \rpgicons_draw_shape_armor: \rpgicons_draw_shape_armour:
 
 \cs_new_protected:Npn \rpgicons_draw_shape_proficiency: {
     \draw_path_moveto:n { \draw_point_polar:nn { .35cm} { 90 } }
@@ -1653,13 +1658,13 @@
 \cs_new_protected:Npn \rpgicons_draw_shape_bard: {
     \draw_path_circle:nn { -.35cm , .35cm } { .075cm }
     \draw_path_moveto:n { -.275cm , .35cm }
-    \draw_path_arc:nnnn { 0 } { -45 } { sind(45)*.3cm } { sind(45)*.45cm }
-    \draw_path_arc:nnnn { 135 } { 180 } { sind(45)*.3cm } { sind(45)*.45cm }
+    \draw_path_arc:nnnn { 0 } { -45 } { sind(45) * .3cm } { sind(45) * .45cm }
+    \draw_path_arc:nnnn { 135 } { 180 } { sind(45) * .3cm } { sind(45) * .45cm }
     \draw_path_lineto:n { -.4cm , -.2cm }
     \draw_path_arc:nnnn { 180 } { 360 } { .4cm } { .225cm }
     \draw_path_lineto:n { .4cm , -.1cm }
-    \draw_path_arc:nnnn { 0 } { 45 } { sind(45)*.3cm } { sind(45)*.45cm }
-    \draw_path_arc:nnnn { 225 } { 180 } { sind(45)*.3cm } { sind(45)*.45cm }
+    \draw_path_arc:nnnn { 0 } { 45 } { sind(45) * .3cm } { sind(45) * .45cm }
+    \draw_path_arc:nnnn { 225 } { 180 } { sind(45) * .3cm } { sind(45) * .45cm }
     \draw_path_circle:nn { .35cm , .35cm } { .075cm }
     \draw_path_moveto:n { -.275cm , .3cm }
     \draw_path_lineto:n { -.275cm , -.15cm }
@@ -2431,6 +2436,20 @@
     }
 }
 
+\tl_new:N \l__rpgicons_shape_name_tmpa_tl
+\tl_new:N \l__rpgicons_shape_name_tmpb_tl
+\cs_new_protected:Npn \rpgicons_shape_set_eq:nn #1#2 {
+    \tl_set:Nn \l__rpgicons_shape_name_tmpa_tl {#1}
+    \tl_set:Nn \l__rpgicons_shape_name_tmpb_tl {#2}
+    \tl_replace_all:Nnn \l__rpgicons_shape_name_tmpa_tl { ~ } { _ }
+    \tl_replace_all:Nnn \l__rpgicons_shape_name_tmpb_tl { ~ } { _ }
+    \cs_set_eq:cc { 
+        rpgicons_draw_shape_ \l__rpgicons_shape_name_tmpa_tl :
+    } {
+        rpgicons_draw_shape_ \l__rpgicons_shape_name_tmpb_tl :
+    }
+}
+
 \cs_generate_variant:Nn \bool_set:Nn { Ne }
 \keys_define:nn { rpgicons / local } {
     before ~ sep         .groups:n   = { extra } ,
@@ -2501,6 +2520,13 @@
         \fp_add:Nn \l_rpgicons_icon_transform_rotate_fp {#1}
     } ,
     rotate               .initial:n  = { 0.0 } ,
+    alias                .code:n     = {
+        \int_compare:nNnTF { \tl_count:n {#1} } = {2} {
+            \rpgicons_shape_set_eq:nn #1
+        } {
+            \msg_warning:nnnn { rpgicons } { argument-count-wrong } { alias } { 2 }
+        }
+    } ,
     accessible           .code:n     = {
         \msg_warning:nnn { rpgicons } { option-deprecated } { accessible }
     }
@@ -2569,10 +2595,10 @@
 
 \clist_const:Nn \c__rpgicons_shapes_clist {
     twoside , fourside , sixside , eightside , tenside , twelveside , twentyside , hundredside ,
-    fudge , sixside ~ one , sixside ~ two , sixside ~ three, sixside ~ four, sixside ~ five ,
-    sixside ~ six , sixside ~ seven, sixside ~ eight, sixside ~ nine, fudge ~ plus, fudge ~ minus ,
+    fudge , sixside ~ one , sixside ~ two , sixside ~ three , sixside ~ four , sixside ~ five ,
+    sixside ~ six , sixside ~ seven , sixside ~ eight , sixside ~ nine , fudge ~ plus , fudge ~ minus ,
     strength , dexterity , dexterity ~ i , constitution , intelligence , wisdom , wisdom ~ i , charisma ,
-    resilience , sanity , perception , luck , armor , proficiency ,
+    resilience , sanity , perception , luck , armour , armor , proficiency ,
     linear , conic , quadratic , cubic , spheric , cylindric , emanation ,
     verbal , somatic , material , ritual , focus ,
     abjuration , conjuration , divination , enchantment , evocation , illusion , necromancy , transmutation ,
@@ -2586,7 +2612,7 @@
     rogue , rogue ~ i , sorcerer , sorcerer ~ i , warlock , wizard , wizard ~ i ,
     lawful ~ good , neutral ~ good , chaotic ~ good , lawful ~ neutral , true ~ neutral ,
     chaotic ~ neutral , lawful ~ evil , neutral ~ evil , chaotic ~ evil ,
-    copper , silver , gold , electrum , platinum ,
+    copper , silver , gold , electrum , platinum , gem , jewellery , jewelry ,
     % === backward compatibility
     dexterity ~ alt , wisdom ~ alt , necrotic ~ alt , artificer ~ alt , cleric ~ alt , druid ~ alt ,
     monk ~ alt , paladin ~ alt , psion ~ alt , ranger ~ alt , rogue ~ alt , sorcerer ~ alt , wizard ~ alt

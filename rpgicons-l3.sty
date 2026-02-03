@@ -2449,6 +2449,9 @@
         rpgicons_draw_shape_ \l__rpgicons_shape_name_tmpb_tl :
     }
 }
+\cs_new_protected:Npn \__rpgicons_shape_set_eq:w #1#2 \q_stop: {
+    \rpgicons_shape_set_eq:nn {#1} {#2}
+}
 
 \cs_generate_variant:Nn \bool_set:Nn { Ne }
 \keys_define:nn { rpgicons / local } {
@@ -2522,7 +2525,7 @@
     rotate               .initial:n  = { 0.0 } ,
     alias                .code:n     = {
         \int_compare:nNnTF { \tl_count:n {#1} } = { 2 } {
-            \rpgicons_shape_set_eq:nn #1
+            \__rpgicons_shape_set_eq:w #1 \q_stop:
         } {
             \msg_warning:nnnn { rpgicons } { argument-count-wrong } { alias } { 2 }
         }

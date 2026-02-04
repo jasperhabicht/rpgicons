@@ -2527,7 +2527,7 @@
         \int_compare:nNnTF { \tl_count:n {#1} } = { 2 } {
             \__rpgicons_shape_set_eq:w #1 \q_stop:
         } {
-            \msg_warning:nnnn { rpgicons } { argument-count-wrong } { alias } { 2 }
+            \msg_error:nnnn { rpgicons } { argument-count-wrong } { alias } { 2 }
         }
     } ,
     accessible           .code:n     = {

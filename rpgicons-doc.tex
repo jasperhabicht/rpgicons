@@ -41,8 +41,10 @@
 \tcbuselibrary{listings}
 \lstdefinestyle{rpgiconsdocmacro}{
     basicstyle=\small\ttfamily,
-    literate=*{<}{{{\color{black!50}\guilsinglleft}}}1
-        {>}{{{\color{black!50}\guilsinglright}}}1,
+    literate=*{<}{{{\color{black!50}\guilsinglleft}}}{1}
+        {>}{{{\color{black!50}\guilsinglright}}}{1},
+    literate={<<}{{{\bfseries\color{black!50}\guilsinglleft}}}{1}
+        {>>}{{{\bfseries\color{black!50}\guilsinglright}}}{1},
     keywords={},
     moredelim=[is][\bfseries]{|}{|},
     moredelim=[is][\color{black!50}]{!}{!},
@@ -327,12 +329,12 @@ To install the package, copy the relevant package files \macro{rpgicons.sty}, \m
 The package can be loaded with one of the following options.
 
 \begin{macrodef}
-l3
+|l3|
 \end{macrodef}
 The L3 variant of the package is loaded by default. To load it explicitly, the package can be loaded using the option \macro{l3}. Alternatively, \macro{\usepackage{rpgicons-l3}} can be called instead.
 
 \begin{macrodef}
-pgf
+|pgf|
 \end{macrodef}
 To load the PGF variant of the package the package needs to be loaded with the option \macro{pgf}. Alternatively, \macro{\usepackage{rpgicons-pgf}} can be called instead.
 
@@ -660,7 +662,8 @@ It is also possible to call \macro{\RequirePackage{pdfmanagement}} before \macro
 \subsection{Icon commands}
 
 \begin{macrodef}
-variant
+|variant|
+|variant|={<integer>}
 \end{macrodef}
 The main user commands (as well as the underlying commands on which these commands are based as described below) accept as option the key \macro{variant} which accepts an integer as value to select variants for the relevant shape. See the icon lists above for the respective variants. For example, the command \macro{\ability{dexterity}[variant=1]} results in \ability{dexterity}[variant=1].
 
@@ -708,21 +711,21 @@ The L3 variant of the package defines a set of commands on which the user comman
 \subsection{Icon options}
 
 \begin{macrodef}
-frame
-stroke
-fill
-text
-color
-background
-stroke opacity
-fill opacity
-text opacity
-opacity
-background opacity
-line width
-scale
-scale inner
-rotate
+|frame|={<string>}
+|stroke|={<color>}
+|fill|={<color>}
+|text|={<color>}
+|color|={<color>}
+|background|={<color>}
+|stroke opacity|={<float>}
+|fill opacity|={<float>}
+|text opacity|={<float>}
+|opacity|={<float>}
+|background opacity|={<float>}
+|line width|={<dimension>}
+|scale|={<float>}
+|scale inner|={<float>}
+|rotate|={<float>}
 \end{macrodef}
 The \macro{\RPGIconsUseIcon} command and the commands \macro{\die}, \macro{\ability}, \macro{\saving}, \macro{\spell}, \macro{\spellschool}, \macro{\damage}, \macro{\attack}, \macro{\condition}, \macro{\class}, \macro{\alignment} and \macro{\currency} can be used with certain options that each consist of a key-value pair and can be combined. These options should be used directly without wrapping them inside the \macro{style} option, when used with the \macro{\RPGIconsUseIcon} command or the other commands based on this command.
 
@@ -734,25 +737,25 @@ For example, \macro{\RPGIconsUseIcon[frame=class, scale=0.333]{charisma}} would 
 
 Some icons can be used with a negative color scheme where the icon is drawn negatively inside a filled shape. Per default, the icons are drawn in white in such cases, but it might be desirable that the icons are in the same color as the background. To this end, the \macro{background} option sets the color of the shape when it is printed over a filled frame which can be achieved by setting the \macro{negative} option for the \macro{\ability}, \macro{\spellschool}, \macro{\class} or the \macro{\alignment} command or using the starred version of the \macro{\RPGIconsUseIcon} command.
 
-The \macro{color} option sets the color of strokes, fills and text in general while the \macro{stroke} option, the \macro{fill} option and the \macro{text} option set the color only for strokes, fills or text respectively. Similarly, the \macro{opacity} macro sets the opacity generally, while the options \macro{stroke opacity}, \macro{fill opacity} and \macro{text opacity} allow for setting the opacity of strokes, fill and text separately. The option \macro{line width} sets the line width for strokes. Using the \macro{scale} and \macro{rotate} options, the shape can be scaled and rotated.
+The \macro{color} option sets the color of strokes, fills and text in general while the \macro{stroke} option, the \macro{fill} option and the \macro{text} option set the color only for strokes, fills or text respectively. Similarly, the \macro{opacity} macro sets the opacity generally, while the options \macro{stroke opacity}, \macro{fill opacity} and \macro{text opacity} allow for setting the opacity of strokes, fill and text separately. The option \macro{line width} sets the line width for strokes. Using the \macro{scale} and \macro{rotate} options, the shape can be scaled and rotated (in degrees).
 
 The \macro{scale inner} option can be used to change the scaling of the icon placed inside a frame when using the \macro{\ability}, \macro{\saving}, \macro{\spellschool}, \macro{\damage}, \macro{\class}, \macro{\alignment} and \macro{\currency} macros. The default value is 0.675.
 
 Note that the keys related to transformation, that is \macro{scale}, \macro{scale inner} and \macro{rotate}, add to the current value and do not replace it. For example, \macro{scale=0.5, scale=0.5} results in a scale factor of 0.25 and \macro{rotate=10, rotate=10} results in a rotation of 20~degrees.
 
 \begin{macrodef}
-every die
-every ability
-every saving
-every spell
-every spellschool
-every damage
-every attack
-every condition
-every class
-every alignment
-every currency
-every <shape>
+|every die|={<options>}
+|every ability|={<options>}
+|every saving|={<options>}
+|every spell|={<options>}
+|every spellschool|={<options>}
+|every damage|={<options>}
+|every attack|={<options>}
+|every condition|={<options>}
+|every class|={<options>}
+|every alignment|={<options>}
+|every currency|={<options>}
+|every <<shape>>|={<options>}
 \end{macrodef}
 Styles following the pattern \macro{every} followed by a space and the name of the command or the shape can be used to apply styles to every instance of this command or shape.
 
@@ -761,18 +764,18 @@ For example, \macro{\rpgiconsset{every die={color={red}}}} can be used to draw i
 Calling \macro{\rpgiconsset{every charisma={color={red}}}} will draw every instance of the \macro{charisma} shape in red.
 
 \begin{macrodef}
-every die add
-every ability add
-every saving add
-every spell add
-every spellschool add
-every damage add
-every attack add
-every condition add
-every class add
-every alignment add
-every currency add
-every <shape> add
+|every die add|={<options>}
+|every ability add|={<options>}
+|every saving add|={<options>}
+|every spell add|={<options>}
+|every spellschool add|={<options>}
+|every damage add|={<options>}
+|every attack add|={<options>}
+|every condition add|={<options>}
+|every class add|={<options>}
+|every alignment add|={<options>}
+|every currency add|={<options>}
+|every <<shape>> add|={<options>}
 \end{macrodef}
 Styles following the pattern \macro{every} followed by a space and the name of the command or the shape followed by another space and \macro{add} work in the same way as the styles described above, but instead of overwriting existing styles, they append the relevant styles.
 
@@ -794,8 +797,8 @@ Apart from setting the options to the commands directly, it is also possible to 
 \end{codeexamplecolumns}
 
 \begin{macrodef}
-style set
-style add
+|style set|={<options>}
+|style add|={<options>}
 \end{macrodef}
 To simplify styling, custom keys can be defined via the keys \macro{style set} and \macro{style add}. Both keys accept as value a key-value list consisting of one or multiple custom keys whose relevant value consists of another key-value list describing the relevant style. It is possible to use \macro{#1} as placeholder for one argument. It is also possible to reference to an already define custom key in the definition of another custom key.
 
@@ -816,14 +819,14 @@ The key \macro{style set} defines custom keys and sets their values. The key \ma
 Note that the key \macro{style appemd} has been deprecated and the key \macro{style add} should be used instead.
 
 \begin{macrodef}
-alias
+|alias|={<string>}{<string>}
 \end{macrodef}
 The key \macro{alias} accepts exactly two (braced) arguments that represent names of shapes. A shape with the name given in the first argument is created as an exact copy of the shape with the name given in the second argument. If a shape with the name given in the first argument already exists, it will become a copy of the other shape without warning.
 
 \begin{macrodef}
-before sep
-after sep
-baseline
+|before sep|={<dimension>}
+|after sep|={<dimension>}
+|baseline|={<dimension>}
 \end{macrodef}
 The spacing before and after the icons can be set using the options \macro{before sep} and \macro{after sep}. The option \macro{baseline} can be used to adjust the baseline of the icons. These options can also be applied to the icon commands directly. The default value of \macro{before sep} and \macro{after sep} is 0.05\,em. The default value of \macro{baseline} is \textminus 3.5\,pt.
 
@@ -837,7 +840,7 @@ Roll\die{eightside}{}a die!
 \end{codeexamplecolumns}
 
 \begin{macrodef}
-actualtext
+|actualtext|={<string>}
 \end{macrodef}
 The option \macro{actualtext} can be used to change the default replacement text that is used for example by screen readers in a tagged PDF. It expects as value a key-value list where the key is the name of the icon shape and the value is the relevant replacement text. For example, with setting \macro{actualtext={sixside={d6}}}, a screen reader would read ``d six'' for icons using the \macro{sixside} shape.
 
@@ -858,7 +861,7 @@ The die notations \macro{d2}, \macro{d4}, \macro{d6}, \macro{d8}, \macro{d10}, \
 If the \macro{rpgicons} package is to be loaded together with some other package that defines the command \macro{\roll}, the command \macro{\RPGIconsRoll} can be used. This alternative command is an exact copy of the \macro{\roll} command.
 
 \begin{macrodef}
-roll syntax
+|roll syntax|={<comma-separated list>}
 \end{macrodef}
 The option \macro{roll syntax} can be used to change the character that denotes a die in the dice rolling syntax. Multiple characters can be given using a comma separated list. The default setting is \macro{d,D} which allows notations such as \macro{2d6} or \macro{2D6}.
 
@@ -880,14 +883,15 @@ Apart from that, the PGF variant of the package provides a way to define custom 
 Once loaded, the PGF variant of the package defines a set of node shapes that can be used inside a \macro{tikzpicture} environment.
 
 \begin{macrodef}
-pics
+|pics|
 \end{macrodef}
 The PGF variant of the package provides the option \macro{pics}. If the package is loaded with this option, every icon is also available as Ti\emph{k}Z pic. On the use of pics, see section \ref{sec:pics} below.
 
 \subsection{Icon commands}
 
 \begin{macrodef}
-!rpg icons/!variant
+!rpg icons/!|variant|
+!rpg icons/!|variant|={<integer>}
 \end{macrodef}
 The main user commands (as well as the underlying commands on which these commands are based as described below) accept as option the key \macro{rpg icons/variant} which accepts an integer as value to select variants for the relevant shape. See the icon lists above for the respective variants. For example, the command \macro{\ability{dexterity}[rpg icons/variant=1]} results in \ability{dexterity}[rpg icons/variant=1].
 
@@ -925,32 +929,32 @@ Using the PGF variant of the package, all icons can by styled using arbitrary Ti
 If PDF tagging is activated by using \macro{\DocumentMetadata{tagging=on}}, it is possible to add a replacement text to an icon using the \macro{actualtext} key.
 
 \begin{macrodef}
-!rpg icons/!every die
-!rpg icons/!every ability
-!rpg icons/!every saving
-!rpg icons/!every spell
-!rpg icons/!every spellschool
-!rpg icons/!every damage
-!rpg icons/!every attack
-!rpg icons/!every condition
-!rpg icons/!every class
-!rpg icons/!every alignment
-!rpg icons/!every currency
-!rpg icons/!every <shape>
+!rpg icons/!|every die|/.style={<options>}
+!rpg icons/!|every ability|/.style={<options>}
+!rpg icons/!|every saving|/.style={<options>}
+!rpg icons/!|every spell|/.style={<options>}
+!rpg icons/!|every spellschool|/.style={<options>}
+!rpg icons/!|every damage|/.style={<options>}
+!rpg icons/!|every attack|/.style={<options>}
+!rpg icons/!|every condition|/.style={<options>}
+!rpg icons/!|every class|/.style={<options>}
+!rpg icons/!|every alignment|/.style={<options>}
+!rpg icons/!|every currency|/.style={<options>}
+!rpg icons/!|every <<shape>>|/.style={<options>}
 \end{macrodef}
 Using Ti\emph{k}Z styles, all instances of a certain command or a certain shape can be styled at once. These styles all follow the pattern \macro{rpg icons/every} followed by a space and the name of the command or the shape. For example, \macro{\tikzset{rpg icons/every die/.append style={red}}} can be used to draw in red all icons created using the \macro{\die} command. To draw every instance of the \macro{charisma} shape in red, \macro{\tikzset{rpg icons/every charisma/.append style={red}}} can be used.
 
 \subsection{Setting styles globally}
 
 \begin{macrodef}
-rpg icons
+|rpg icons|/.style={<options>}
 \end{macrodef}
 All icons share the Ti\emph{k}Z style \macro{rpg icons} that is empty per default but can be used to style all icons at once. For example, if \macro{\tikzset{rpg icons/.append style={draw=red}}} is placed at the beginning of the document, all icons will be drawn in red. Per default, the icons are drawn in the color of the surrounding text.
 
 Note that it may be necessary to add the Ti\emph{k}Z option \macro{transform shape} when applying transformations to the icons, because the icons are constructed as Ti\emph{k}Z nodes which are not affected by some transformations per default.
 
 \begin{macrodef}
-!rpg icons/!background
+!rpg icons/!|background|={<color>}
 \end{macrodef}
 Some icons can be used with a negative color scheme where the icon is drawn negatively inside a filled shape. Per default, the icons are drawn in white in such cases, but it might be desirable that the icons are in the same color as the background. To this end, the color can be changed using the Ti\emph{k}Z option \macro{rpg icons/background} in the following way:
 
@@ -973,9 +977,9 @@ This feature can, of course, also be used to change the color of the icon indepe
 Note that the key \macro{rpg icons/background color} has been deprecated and the key \newline \macro{rpg icons/background} should be used instead.
 
 \begin{macrodef}
-!rpg icons/!before sep
-!rpg icons/!after sep
-!rpg icons/!baseline
+!rpg icons/!|before sep|={<dimension>}
+!rpg icons/!|after sep|={<dimension>}
+!rpg icons/!|baseline|={<dimension>}
 \end{macrodef}
 The Ti\emph{k}Z options \macro{rpg icons/before sep} and \macro{rpg icons/after sep} are used to define the width of the space that is added before and after the icons respectively. The default value of both lengths is 0.05\,em. For example, setting the space before icons to 1\,cm can be achieved as follows:
 
@@ -1057,16 +1061,16 @@ The icon is embedded as a node in the pic which has the name \macro{-node}. Thus
 \end{codeexamplecolumns}
 
 \begin{macrodef}
-!rpg icons/!create pic from shape
-!rpg icons/!create pic from ability shape
-!rpg icons/!create pic from saving shape
-!rpg icons/!create pic from spellschool shape
-!rpg icons/!create pic from damage shape
-!rpg icons/!create pic from class shape
-!rpg icons/!create pic from alignment shape
-!rpg icons/!create every style
+!rpg icons/!|create pic from shape|={<string>}
+!rpg icons/!|create pic from ability shape|={<string>}
+!rpg icons/!|create pic from saving shape|={<string>}
+!rpg icons/!|create pic from spellschool shape|={<string>}
+!rpg icons/!|create pic from damage shape|={<string>}
+!rpg icons/!|create pic from class shape|={<string>}
+!rpg icons/!|create pic from alignment shape|={<string>}
+!rpg icons/!|create every style|={<string>}
 \end{macrodef}
-The PGF variant of the package defines five Ti\emph{k}Z keys that are used to create pics using the relevant node shapes. Another key is defined to create keys that can be used to style all instances of a command or shape. In normal circumstances, it is not necessary to use these keys. They are mentioned here only for reference.
+The PGF variant of the package defines five Ti\emph{k}Z keys that are used to create pics using the relevant node shapes. Another key is defined to create keys that can be used to style all instances of a command or shape. In normal circumstances, it is not necessary to use these keys. They are mentioned here only for reference. These keys expect as value a string representing the relevnat shape name. It is possible to use the \macro{/.list} handler provided by PGF to apply the key to multiple values at once.
 
 The following example shows how to create the drawing on the first page of this documentation using Ti\emph{k}Z pics. We need to call \macro{rpg icons/create pic from ability shape} for the shapes \macro{twentyside}, \macro{buff} and \macro{ranged}, because per default no pics are defined for these shapes in combination with ability. Note the use of \macro{\space} to ensure correct use of spaces in the pic name as spaces are gobbled after commands in TeX.
 
@@ -1120,7 +1124,7 @@ The letter to denote the die can be changed using the Ti\emph{k}Z style \macro{r
 If the \macro{rpgicons} package is to be loaded together with some other package that defines the command \macro{\roll}, the command \macro{\rpgiconsroll} can be used. This alternative command is an exact copy of the \macro{\roll} command.
 
 \begin{macrodef}
-!rpg icons/!roll syntax
+!rpg icons/!|roll syntax|={<comma-separated list>!}
 \end{macrodef}
 The Ti\emph{k}Z style \macro{rpg icons/roll syntax} can be used to change the character that denotes a die in the dice rolling syntax. Multiple characters can be given using a comma separated list. The default setting is \macro{d,D}.
 

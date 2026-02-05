@@ -1619,7 +1619,7 @@
 
 \cs_new_protected:Npn \rpgicons_draw_shape_artificer_i: {
     \draw_path_moveto:n { ( -.075cm , .15cm ) + ( \draw_point_polar:nn { .275cm } { 350 } ) }
-    \draw_path_arc:nnn { 350 } { acosd ( .275cm / .5cm ) } { .275cm }
+    \draw_path_arc:nnn { 350 } { acosd( .275cm / .5cm ) } { .275cm }
     \draw_path_lineto:n { .425cm , .15cm }
     \draw_path_lineto:n { .375cm , .05cm }
     \draw_path_close:
@@ -1870,8 +1870,8 @@
     \draw_transform_rotate:n { 45 }
     \draw_path_moveto:n {
         \draw_point_polar:nn { .35cm } {
-            180 - acosd (
-                sqrt (
+            180 - acosd(
+                sqrt(
                     .330625 * ( .0225 / .1225 - 1 ) /
                     ( .0225 - .330625 )
                 )
@@ -1879,15 +1879,15 @@
         }
     }
     \draw_path_arc:nnnn {
-        180 - acosd (
-            sqrt (
+        180 - acosd(
+            sqrt(
                 .330625 * ( .0225 / .1225 - 1 ) /
                 ( .0225 - .330625 )
             ) * .35cm / .575cm
         )
     } {
-        360 + acosd (
-            sqrt (
+        360 + acosd(
+            sqrt(
                 .330625 * ( .0225 / .1225 - 1 ) /
                 ( .0225 - .330625 )
             ) * .35cm / .575cm
@@ -1961,8 +1961,8 @@
     \draw_path_lineto:n { .275cm , -.275cm }
     \draw_path_arc:nnn { 90 } { 0 } { .15cm }
     \draw_path_close:
-    \draw_path_moveto:n { ( 0cm , .025cm ) + ( \draw_point_polar:nn { .4cm } { 270 - acosd ( .3cm / .4cm ) }) }
-    \draw_path_arc:nnn { 270 - acosd ( .3cm / .4cm ) } { acosd ( .3cm / .4cm ) - 90 } { .4cm }
+    \draw_path_moveto:n { ( 0cm , .025cm ) + ( \draw_point_polar:nn { .4cm } { 270 - acosd( .3cm / .4cm ) }) }
+    \draw_path_arc:nnn { 270 - acosd( .3cm / .4cm ) } { acosd( .3cm / .4cm ) - 90 } { .4cm }
     \draw_path_moveto:n { ( 0cm , .025cm ) + ( \draw_point_polar:nn { .25cm } { 95 }) }
     \draw_path_arc:nnn { 95 } { 175 } { .25cm }
 }
@@ -2174,12 +2174,12 @@
     \draw_path_lineto:n { -.375cm , -.425cm }
     \draw_path_lineto:n {
         ( .125cm , .125cm ) +
-        ( \draw_point_polar:nn { .1cm } { - atand ( sqrt ( .25cm + .3025cm ) , .1cm ) } )
+        ( \draw_point_polar:nn { .1cm } { - atand( sqrt( .25cm + .3025cm ) , .1cm ) } )
     }
     \draw_path_arc:nnn {
-        - atand ( sqrt ( .25cm + .3025cm ) , .1cm )
+        - atand( sqrt( .25cm + .3025cm ) , .1cm )
     } {
-        90 + atand ( sqrt ( .3025cm + .25cm ) , .1cm )
+        90 + atand( sqrt( .3025cm + .25cm ) , .1cm )
     } { .1cm }
     \draw_path_close:
     \int_step_inline:nnnn { -65 } { 45 } { 180 } {

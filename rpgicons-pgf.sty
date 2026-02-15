@@ -4003,23 +4003,23 @@
   \regex_new:N \l__rpgicons_roll_syntax_plusminus_regex
   \regex_new:N \l__rpgicons_roll_syntax_times_regex
   \bool_if:NTF \l__rpgicons_unicode_mode_bool {
-    \regex_set:Nn \l__rpgicons_roll_syntax_split_regex { \s*([\+\-\x{2212}x\*\x{00D7}])\s* }
-    \regex_set:Nn \l__rpgicons_roll_syntax_plusminus_regex { \A([\+\-\x{2212}])\Z }
-    \regex_set:Nn \l__rpgicons_roll_syntax_times_regex { \A([x\*\x{00D7}])\Z }
+    \regex_set:Nn \l__rpgicons_roll_syntax_split_regex { \s* ([ \+ \- \x{2212} x \* \x{00D7} ]) \s* }
+    \regex_set:Nn \l__rpgicons_roll_syntax_plusminus_regex { \A ([ \+ \- \x{2212} ]) \Z }
+    \regex_set:Nn \l__rpgicons_roll_syntax_times_regex { \A ([ x \* \x{00D7} ]) \Z }
   } {
-    \regex_set:Nn \l__rpgicons_roll_syntax_split_regex { \s*([\+\-x\*\x{00D7}])\s* }
-    \regex_set:Nn \l__rpgicons_roll_syntax_plusminus_regex { \A([\+\-])\Z }
-    \regex_set:Nn \l__rpgicons_roll_syntax_times_regex { \A([x\*\x{00D7}])\Z }
+    \regex_set:Nn \l__rpgicons_roll_syntax_split_regex { \s* ([ \+ \- x \* \x{00D7} ]) \s* }
+    \regex_set:Nn \l__rpgicons_roll_syntax_plusminus_regex { \A ([ \+ \- ]) \Z }
+    \regex_set:Nn \l__rpgicons_roll_syntax_times_regex { \A ([ x \* \x{00D7} ]) \Z }
   }
   \regex_new:N \l__rpgicons_roll_syntax_dice_regex
   \cs_new_protected:Npn \__rpgicons_roll_syntax_parse:n #1 {
-    \regex_set:Nn \l__rpgicons_roll_syntax_dice_regex { \A(\d*)\ur{l__rpgicons_roll_syntax_die_regex}([F\d]+)\Z }
+    \regex_set:Nn \l__rpgicons_roll_syntax_dice_regex { \A (\d*) \ur{l__rpgicons_roll_syntax_die_regex} ([ F \d ]+) \Z }
     \regex_split:NnN \l__rpgicons_roll_syntax_split_regex {#1} \l__rpgicons_roll_syntax_seq
     \seq_map_inline:Nn \l__rpgicons_roll_syntax_seq {
       \tl_set:Ne \l__rpgicons_roll_syntax_part_tl {##1}
       \regex_replace_case_once:nNTF {
-        { \l__rpgicons_roll_syntax_plusminus_regex } { \c{,} $\1$ \c{,} }
-        { \l__rpgicons_roll_syntax_times_regex } { \c{,} $\c{times}$ \c{,} }
+        { \l__rpgicons_roll_syntax_plusminus_regex } { \c{,} $ \1 $ \c{,} }
+        { \l__rpgicons_roll_syntax_times_regex } { \c{,} $ \c{times} $ \c{,} }
         { \l__rpgicons_roll_syntax_dice_regex }
           { \c{ rpgiconsdie } { \c{ __rpgicons_roll_syntax_convert:n } { \2 } } { \1 } }
       } \l__rpgicons_roll_syntax_part_tl

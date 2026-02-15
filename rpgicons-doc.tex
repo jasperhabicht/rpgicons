@@ -11,15 +11,15 @@
 % This work has the LPPL maintenance status `maintained'.
 %
 \documentclass[a4paper]{article}
-\def\rpgiconsfileversion{2.5.1}
-\def\rpgiconsfiledate{6 February 2026}
+\def\rpgiconsfileversion{2.5.2}
+\def\rpgiconsfiledate{15 February 2026}
 
 \usepackage[T1]{fontenc}
 \usepackage{Alegreya}
 \usepackage{AlegreyaSans}
 \usepackage{FiraMono}
 
-\usepackage{geometry, array, longtable, booktabs, tcolorbox, hyperref}
+\usepackage{geometry, collcell, longtable, booktabs, tcolorbox, hyperref}
 \geometry{margin=25mm, left=45mm}
 \urlstyle{same}
 
@@ -233,17 +233,55 @@
 }
 \ExplSyntaxOff
 
+\ExplSyntaxOn
+\cs_generate_variant:Nn \property_record:nn { e }
+\cs_generate_variant:Nn \property_ref:nn { e }
+
+\int_new:N \g_rpgicons_doc_iconlist_rowc_int
+\tl_new:N \l_rpgicons_doc_iconlist_this_tl
+\tl_new:N \g_rpgicons_doc_iconlist_last_tl
+\NewDocumentCommand { \FirstRowOnly } { O{} m } {
+    \mode_leave_vertical:
+    \int_gincr:N \g_rpgicons_doc_iconlist_rowc_int
+    \tl_analysis_log:N \g_rpgicons_doc_iconlist_last_tl
+    \tl_set:Nn \l_rpgicons_doc_iconlist_this_tl {#2}
+    \tl_if_head_eq_meaning:VNT \l_rpgicons_doc_iconlist_this_tl \relax {
+        \tl_remove_once:Nn \l_rpgicons_doc_iconlist_this_tl { \relax }
+    }
+    \tl_if_head_eq_meaning:VNF \l_rpgicons_doc_iconlist_this_tl \FirstRowOnlySkip {
+        \property_record:en { rpgicons.iconlist.row. \int_use:N \g_rpgicons_doc_iconlist_rowc_int } { page }
+    }
+    \bool_lazy_or:nnTF {
+        \tl_if_blank_p:V \l_rpgicons_doc_iconlist_this_tl
+    } {
+        \tl_if_eq_p:NN \g_rpgicons_doc_iconlist_last_tl \l_rpgicons_doc_iconlist_this_tl
+    } {
+        \int_compare:nNnF {
+            \property_ref:en { rpgicons.iconlist.row. \int_use:N \g_rpgicons_doc_iconlist_rowc_int } { page }
+        } = {
+            \property_ref:en { rpgicons.iconlist.row. \int_eval:n { \g_rpgicons_doc_iconlist_rowc_int - 1 } } { page }
+        } { \tl_use:N \g_rpgicons_doc_iconlist_last_tl #1 }
+    } {
+        #2
+    }
+    \tl_if_blank:VF \l_rpgicons_doc_iconlist_this_tl {
+        \tl_gset:Nn \g_rpgicons_doc_iconlist_last_tl {#2}
+    }
+}
+\NewDocumentCommand { \FirstRowOnlySkip } { } { }
+\ExplSyntaxOff
+
 \NewDocumentEnvironment{rpgiconsiconlist}{ }{
     \begin{longtable}{
         @{}
-        p{20em}
+        >{\collectcell{\FirstRowOnly[ (cont.)]}} p{20em} <{\endcollectcell}
         p{2.5em}
-        >{\raggedright\arraybackslash}p{\dimexpr\linewidth-27.5em-6\tabcolsep}
+        >{\raggedright\arraybackslash} p{\dimexpr\linewidth-27.5em-6\tabcolsep}
         p{5em}
         @{}
     }
     \toprule
-    \textbf{Command} & \textbf{Icon} & \textbf{Shape} & \textbf{Variant} \\
+    \FirstRowOnlySkip\textbf{Command} & \textbf{Icon} & \textbf{Shape} & \textbf{Variant} \\
     \midrule\endhead
 }{
     \bottomrule
@@ -304,6 +342,7 @@
 \changes{v2.4.1}{2026/01/21}{Added variant for psion shape.}
 \changes{v2.5.0}{2026/01/27}{Added variants for paladin, monk and wizard shapes. Standardization of key names.}
 \changes{v2.5.1}{2026/02/06}{Added key to generate alias for shapes in L3 variant. Update documentation.}
+%\changes{v2.5.2}{2026/02/15}{Minor update of documentation.}
 
 \begin{document}
 
@@ -387,7 +426,7 @@ The command also takes two optional arguments, the second of which can take addi
 The first optional argument can take the value \macro{normal} or \macro{large}, \macro{normal} being the default value. With \macro{large} given as argument, the icon is drawn larger and the integer is typeset inside the shape. As an example, \macro{\die[large]{eightside}{2}} results in \die[large]{eightside}{2}. Note that the integer will always be placed on top of the shape, even if the shape does not have an open center which is the case with the \macro{fudge} shapes or the shapes featuring pips.
 
 \begin{rpgiconsiconlist}
-\macro{\die}
+\titlemacro*{die}
     & \die{twoside}{} & \macro{twoside} \\
     & \die{fourside}{} & \macro{fourside} \\
     & \die{sixside}{} & \macro{sixside} \\
@@ -427,7 +466,7 @@ The command \macro{\saving} typesets an icon with the relevant \macro{\ability} 
 The first optional argument can take the value \macro{normal} or \macro{empty}, \macro{normal} being the default value. With \macro{empty} given as argument, the icon inside the shield is not typeset. In this case, the mandatory argument can be left empty. As an example, \macro{\saving[empty]{}} results in \saving[empty]{}.
 
 \begin{rpgiconsiconlist}
-\macro{\ability}
+\titlemacro*{ability}
     & \ability{strength} & \macro{strength} \\
     & \ability{dexterity} & \macro{dexterity} \\
     & \ability{dexterity}[variant=1] & \macro{dexterity} & 1 \\
@@ -443,7 +482,7 @@ The first optional argument can take the value \macro{normal} or \macro{empty}, 
     & \ability{armour} & \macro{armour} or \macro{armor} \\
     & \ability{proficiency} & \macro{proficiency} \\
 \midrule
-\macro{\saving}
+\titlemacro*{saving}
     & \saving{strength} & \macro{strength} \\
     & \saving{dexterity} & \macro{dexterity} \\
     & \saving{dexterity}[variant=1] & \macro{dexterity} & 1 \\
@@ -468,7 +507,7 @@ The first optional argument can take the value \macro{normal} or \macro{empty}, 
 The command \macro{\spell} typesets an icon depicting the effect of a spell or how it is to be effected. The optional argument can take additional options to style the icon.
 
 \begin{rpgiconsiconlist}
-\macro{\spell}
+\titlemacro*{spell}
     & \spell{linear} & \macro{linear} \\
     & \spell{conic} & \macro{conic} \\
     & \spell{quadratic} & \macro{quadratic} \\
@@ -493,7 +532,7 @@ The command \macro{\spellschool} typesets an icon that represents the school a s
 The first optional argument can take the value \macro{negative} or \macro{positive}, \macro{negative} being the default value. Per default the icon is drawn in white inside a filled escutcheon. With \macro{positive} given as argument, the icon as well as the escutcheon are drawn in the currently selected color. As an example, \macro{\spellschool[positive]{evocation}} results in \spellschool[positive]{evocation}.
 
 \begin{rpgiconsiconlist}
-\macro{\spellschool}
+\titlemacro*{spellschool}
     & \spellschool{abjuration} & \macro{abjuration} \\
     & \spellschool{conjuration} & \macro{conjuration} \\
     & \spellschool{divination} & \macro{divination} \\
@@ -522,7 +561,7 @@ The command \macro{\attack} typesets an icon depicting the kind of an attack. Th
 The command \macro{\condition} typesets an icon depicting a condition of a character. The optional argument can take additional options to style the icon.
 
 \begin{rpgiconsiconlist}
-\macro{\damage}
+\titlemacro*{damage}
     & \damage{acid} & \macro{acid} \\
     & \damage{bludgeoning} & \macro{bludgeoning} \\
     & \damage{cold} & \macro{cold} \\
@@ -539,14 +578,14 @@ The command \macro{\condition} typesets an icon depicting a condition of a chara
     & \damage{thunder} & \macro{thunder} \\
     & \damage{healing} & \macro{healing} \\
 \midrule
-\macro{\attack}
+\titlemacro*{attack}
     & \attack{melee} & \macro{melee} \\
     & \attack{ranged} & \macro{ranged} \\
     & \attack{magic} & \macro{magic} \\
     & \attack{singlehanded} & \macro{singlehanded} \\
     & \attack{doublehanded} & \macro{doublehanded} \\
 \midrule
-\macro{\condition}
+\titlemacro*{condition}
     & \condition{buff} & \macro{buff} \\
     & \condition{blinded} & \macro{blinded} \\
     & \condition{charmed} & \macro{charmed} \\
@@ -584,7 +623,7 @@ The command \macro{\alignment} typesets an icon depicting an alignment of a char
 The first optional argument can take the value \macro{negative} or \macro{positive}, \macro{positive} being the default value. With \macro{positive} given as argument, the icon is drawn in white inside a filled frame. As an example, \macro{\alignment[negative]{lawful good}} results in \alignment[negative]{lawful good}.
 
 \begin{rpgiconsiconlist}
-\macro{\class}
+\titlemacro*{class}
     & \class{artificer} & \macro{artificer} \\
     & \class{artificer}[variant=1] & \macro{artificer} & 1 \\
     & \class{barbarian} & \macro{barbarian} \\
@@ -613,7 +652,7 @@ The first optional argument can take the value \macro{negative} or \macro{positi
     & \class{wizard} & \macro{wizard} \\
     & \class{wizard}[variant=1] & \macro{wizard} & 1 \\
 \midrule
-\macro{\alignment}
+\titlemacro*{alignment}
     & \alignment{lawful good} & \macro{lawful good} \\
     & \alignment{neutral good} & \macro{neutral good} \\
     & \alignment{chaotic good} & \macro{chaotic good} \\
@@ -635,7 +674,7 @@ The command \macro{\currency} typesets an icon depicting a value of a coin. The 
 The command provides a second mandatory argument that accepts an integer that is placed in front of the shape. For example, \macro{\currency{gold}{7}} results in \currency{gold}{7}. If tagging is enabled, the default replacement text of this command is ``7 gold''.
 
 \begin{rpgiconsiconlist}
-\macro{\currency}
+\titlemacro*{currency}
     & \currency{copper}{} & \macro{copper} \\
     & \currency{silver}{} & \macro{silver} \\
     & \currency{gold}{} & \macro{gold} \\

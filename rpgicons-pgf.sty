@@ -37,15 +37,17 @@
   melee, melee i, ranged, magic, singlehanded, doublehanded,
   buff, blinded, charmed, deafened, exhausted, frightened, grappled, incapacitated, invisible,
   paralyzed, petrified, poisoned, prone, restrained, stunned, unconscious, hearing, seeing,
-  artificer, artificer i, barbarian, bard, cleric, cleric i, cleric ii, druid, druid i, druid ii,
-  fighter, gunslinger, monk, monk i, paladin, paladin i, psion, psion i, ranger, ranger i,
-  rogue, rogue i, sorcerer, sorcerer i, warlock, wizard, wizard i,
+  artificer, artificer i, barbarian, bard, bard i, cleric, cleric i, cleric ii,
+  druid, druid i, druid ii, fighter, gunslinger, monk, monk i, paladin, paladin i,
+  psion, psion i, ranger, ranger i, rogue, rogue i, sorcerer, sorcerer i, warlock,
+  wizard, wizard i,
   lawful good, neutral good, chaotic good, lawful neutral, true neutral,
   chaotic neutral, lawful evil, neutral evil, chaotic evil,
   copper, silver, gold, electrum, platinum, gem, jewellery, jewelry,
   % === backward compatibility
-  dexterity alt, wisdom alt, necrotic alt, melee alt, artificer alt, cleric alt, druid alt,
-  monk alt, paladin alt, psion alt, ranger alt, rogue alt, sorcerer alt, wizard alt%
+  dexterity alt, wisdom alt, necrotic alt, melee alt, artificer alt, bard alt, cleric alt,
+  druid alt, monk alt, paladin alt, psion alt, ranger alt, rogue alt, sorcerer alt,
+  wizard alt%
   % ===
 }
 
@@ -108,6 +110,7 @@
   necrotic alt/.style={necrotic i},
   melee alt/.style={melee i},
   artificer alt/.style={artificer i},
+  bard alt/.style={bard i},
   cleric alt/.style={cleric i},
   druid alt/.style={druid i},
   monk alt/.style={monk i},
@@ -2010,6 +2013,7 @@
   }
 }
 
+% melee i
 \pgfdeclareshape{melee i}{
   \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
   \anchor{text} % this is used to center the text in the node
@@ -2789,6 +2793,23 @@
     \pgfpathlineto{\pgfpoint{.125cm}{-.225cm}}
     \pgfsetarrowsstart{}
     \pgfsetarrowsend{}
+  }
+}
+
+% bard i
+\pgfdeclareshape{bard i}{
+  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
+  \anchor{text} % this is used to center the text in the node
+    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+
+  \backgroundpath{
+    \pgfpathmoveto{\pgfpoint{-.425cm}{-.425cm}}
+    \pgfpatharc{180}{90}{.85cm}
+    \pgfpatharc{360}{270}{.45cm}
+    \pgfpatharc{240}{270}{.35cm}
+    \pgfpatharc{310}{280}{.85cm}
+    \pgfsetarrowsstart{}
+    \pgfsetarrowsend{}   
   }
 }
 

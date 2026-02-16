@@ -343,7 +343,7 @@
 \changes{v2.4.1}{2026/01/21}{Added variant for psion shape.}
 \changes{v2.5.0}{2026/01/27}{Added variants for paladin, monk and wizard shapes. Standardization of key names.}
 \changes{v2.5.1}{2026/02/06}{Added key to generate alias for shapes in L3 variant. Update documentation.}
-%\changes{v2.5.2}{2026/02/15}{Minor update of documentation.}
+\changes{v2.5.2}{2026/02/15}{Added variant for melee and bard shape. Update documentation.}
 
 \begin{document}
 
@@ -631,6 +631,7 @@ The first optional argument can take the value \macro{negative} or \macro{positi
     & \class{artificer}[variant=1] & \macro{artificer} & 1 \\
     & \class{barbarian} & \macro{barbarian} \\
     & \class{bard} & \macro{bard} \\
+    & \class{bard}[variant=1] & \macro{bard} & 1 \\
     & \class{cleric} & \macro{cleric} \\
     & \class{cleric}[variant=1] & \macro{cleric} & 1\\
     & \class{cleric}[variant=2] & \macro{cleric} & 2 \\
@@ -764,17 +765,17 @@ With the \macro{frame} option, one of six different frames can be selected that 
 For example, \macro{\RPGIconsUseIcon[frame=class, scale=0.333]{charisma}} would result in \RPGIconsUseIcon[frame=class, scale=0.333]{charisma}.
 
 \begin{macrodef}
+|color|={<color>}
 |stroke|={<color>}
 |fill|={<color>}
 |text|={<color>}
-|color|={<color>}
 |background|={<color>}
 \end{macrodef}
 \begin{macrodef}
+|opacity|={<float>}
 |stroke opacity|={<float>}
 |fill opacity|={<float>}
 |text opacity|={<float>}
-|opacity|={<float>}
 |background opacity|={<float>}
 \end{macrodef}
 The \macro{color} option sets the color of strokes, fills and text in general while the \macro{stroke} option, the \macro{fill} option and the \macro{text} option set the color only for strokes, fills or text respectively.

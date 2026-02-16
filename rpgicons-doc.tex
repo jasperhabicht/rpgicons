@@ -393,13 +393,14 @@ The below code example can be compiled with \macro{latex} and \macro{dvisvgm -b 
 \begin{codeexample}
 \documentclass[dvisvgm, multi=icon]{standalone}
 \usepackage{rpgicons}
+
 \begin{document}
-\begin{icon}%
-\ability{charisma}%
-\end{icon}
-\begin{icon}%
-\class{barbarian}%
-\end{icon}
+    \begin{icon}%
+        \ability{charisma}%
+    \end{icon}
+    \begin{icon}%
+        \class{barbarian}%
+    \end{icon}
 \end{document}
 \end{codeexample}
 
@@ -1043,7 +1044,8 @@ Because the icons are defined as Ti\emph{k}Z shapes, they can directly be applie
 \begin{tikzpicture}
     \node[eightside, draw, blue, thick]
         at (0,0) (A) {A};
-    \node[charisma, draw] at (2,0) (B) {B};
+    \node[charisma, draw]
+        at (2,0) (B) {B};
     \draw[red] (A) -- (B);
 \end{tikzpicture}
 \end{codeexamplecolumns}
@@ -1117,9 +1119,9 @@ The following example shows how to create the drawing on the first page of this 
 
 \begin{codeexamplecolumns}
 \tikzset{
-    rpg icons/%
-    create pic from ability shape/%
-    .list={
+    rpg icons%
+    /create pic from ability shape%
+    /.list={
         twentyside,
         buff,
         ranged

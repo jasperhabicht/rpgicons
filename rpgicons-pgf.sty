@@ -43,11 +43,11 @@
   wizard, wizard i,
   lawful good, neutral good, chaotic good, lawful neutral, true neutral,
   chaotic neutral, lawful evil, neutral evil, chaotic evil,
-  copper, silver, gold, electrum, platinum, gem, jewellery, jewelry,
+  copper, silver, gold, electrum, platinum, gem, jewellery, jewelry, jewellery i, jewelry i,
   % === backward compatibility
   dexterity alt, wisdom alt, necrotic alt, melee alt, artificer alt, bard alt, cleric alt,
   druid alt, monk alt, paladin alt, psion alt, ranger alt, rogue alt, sorcerer alt,
-  wizard alt%
+  wizard alt, jewellery alt, jewelry alt%
   % ===
 }
 
@@ -120,6 +120,8 @@
   rogue alt/.style={rogue i},
   sorcerer alt/.style={sorcerer i},
   wizard alt/.style={wizard i},
+  jewellery alt/.style={jewellery i},
+  jewelry alt/.style={jewelry i},
   rpg icons/background color/.forward to={/tikz/rpg icons/background}
 }
 % ===
@@ -3821,6 +3823,33 @@
     {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \inheritbackgroundpath[from={jewellery}]
+}
+
+% jewellery i
+\pgfdeclareshape{jewellery i}{
+  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
+  \anchor{text} % this is used to center the text in the node
+    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+
+  \backgroundpath{
+    \pgfpathcircle{\pgfpoint{0cm}{-.075cm}}{.225cm}
+    \pgfpathmoveto{\pgfpointadd{\pgfpoint{0cm}{-.075cm}}{\pgfpointpolar{120}{.35cm}}}
+    \pgfpatharc{120}{420}{.35cm}
+    \pgfpathmoveto{\pgfpoint{0cm}{.225cm}}
+    \pgfpathlineto{\pgfpoint{.2cm}{.35cm}}
+    \pgfpathlineto{\pgfpoint{.15cm}{.425cm}}
+    \pgfpathlineto{\pgfpoint{-.15cm}{.425cm}}
+    \pgfpathlineto{\pgfpoint{-.2cm}{.35cm}}
+    \pgfpathclose
+  }
+}
+
+\pgfdeclareshape{jewelry i}{
+  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
+  \anchor{text} % this is used to center the text in the node
+    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+
+  \inheritbackgroundpath[from={jewellery i}]
 }
 
 \NewDocumentCommand{\rpgiconscurrency}{ m O{} m }{%

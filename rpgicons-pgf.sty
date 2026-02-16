@@ -562,7 +562,7 @@
 }
 
 \ExplSyntaxOn
-\NewDocumentCommand{\rpgicons@ifEmptyF}{ m m }{
+\NewDocumentCommand { \rpgicons@ifEmptyF } { m m } {
     \tl_if_empty:nF { #1 } { #2 }
 }
 \ExplSyntaxOff
@@ -4044,14 +4044,14 @@
   }
 }
 
-\tikzset{
-  rpg ~ icons/roll ~ syntax/.code={
+\tikzset {
+  rpg ~ icons / roll ~ syntax / .code = {
     \__rpgicons_roll_syntax_die_set:n {#1}
-  },
-  rpg ~ icons/roll ~ syntax={d,D}
+  } ,
+  rpg ~ icons / roll ~ syntax         = { d , D }
 }
 
-\NewDocumentCommand{\rpgiconsroll}{ m }{
+\NewDocumentCommand { \rpgiconsroll } { m } {
   \mode_leave_vertical:
   \__rpgicons_roll_prepare_actualtext:Nn \l__rpgicons_roll_actualtext_tl {#1}
   \tag_socket_use:nV { rpgicons/roll/before } \l__rpgicons_roll_actualtext_tl

@@ -1144,7 +1144,6 @@
     \draw_path_moveto:n { -.15cm , -.225cm }
     \draw_path_lineto:n { -.275cm , -.35cm }
     \draw_path_arc:nnn { 360 } { 90 } { .075cm }
-    \draw_path_lineto:n { -.35cm , -.275cm }
     \draw_path_lineto:n { -.225cm , -.15cm }
     \draw_path_lineto:n { -.425cm , .05cm }
     \draw_path_lineto:n { -.35cm , .125cm }
@@ -1159,6 +1158,26 @@
     \draw_path_moveto:n { .325cm , .325cm }
     \draw_path_lineto:n { 0cm , 0cm }
 }
+
+\cs_new_protected:Npn \rpgicons_draw_shape_melee_i: {
+    \draw_path_moveto:n { .15cm , .2cm }
+    \draw_path_lineto:n { .275cm , .325cm }
+    \draw_path_arc:nnn { 180 } { -90 } { .075cm }
+    \draw_path_lineto:n { .225cm , .125cm }
+    \draw_path_lineto:n { .325cm , .025cm }
+    \draw_path_lineto:n { .25cm , -.05cm }
+    \draw_path_lineto:n { -.025cm , .225cm }
+    \draw_path_lineto:n { .05cm , .3cm }
+    \draw_path_close:
+    \draw_path_moveto:n { .175cm , .025cm }
+    \draw_path_lineto:n { -.175cm , -.325cm }
+    \draw_path_arc:nnn { 315 } { 225 } { .175cm }
+    \draw_path_lineto:n { .05cm , .15cm }
+}
+
+% === backward compatibility
+\cs_set_eq:NN \rpgicons_draw_shape_melee_alt: \rpgicons_draw_shape_melee_i:
+% ===
 
 \cs_new_protected:Npn \rpgicons_draw_shape_ranged: {
     \draw_path_moveto:n { 0cm , 0cm }
@@ -2607,7 +2626,7 @@
     abjuration , conjuration , divination , enchantment , evocation , illusion , necromancy , transmutation ,
     acid , bludgeoning , cold , fire , force , lightning , necrotic , necrotic ~ i , piercing , poison , psychic ,
     radiant , slashing , thunder , healing ,
-    melee , ranged , magic , singlehanded , doublehanded ,
+    melee , melee ~ i , ranged , magic , singlehanded , doublehanded ,
     buff , blinded , charmed , deafened , exhausted , frightened , grappled , incapacitated , invisible ,
     paralyzed , petrified , poisoned , prone , restrained , stunned , unconscious , hearing , seeing ,
     artificer , artificer ~ i , barbarian , bard , cleric , cleric ~ i , cleric ~ ii , druid , druid ~ i , druid ~ ii ,
@@ -2617,7 +2636,7 @@
     chaotic ~ neutral , lawful ~ evil , neutral ~ evil , chaotic ~ evil ,
     copper , silver , gold , electrum , platinum , gem , jewellery , jewelry ,
     % === backward compatibility
-    dexterity ~ alt , wisdom ~ alt , necrotic ~ alt , artificer ~ alt , cleric ~ alt , druid ~ alt ,
+    dexterity ~ alt , wisdom ~ alt , necrotic ~ alt , melee ~ alt , artificer ~ alt , cleric ~ alt , druid ~ alt ,
     monk ~ alt , paladin ~ alt , psion ~ alt , ranger ~ alt , rogue ~ alt , sorcerer ~ alt , wizard ~ alt
     % ===
 }

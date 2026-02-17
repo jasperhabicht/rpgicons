@@ -785,6 +785,18 @@ Similarly, the \macro{opacity} macro sets the opacity generally, while the optio
 
 Some icons can be used with a negative color scheme where the icon is drawn negatively inside a filled shape. Per default, the icons are drawn in white in such cases, but it might be desirable that the icons are in the same color as the background. To this end, the \macro{background} option sets the color of the shape when it is printed over a filled frame which can be achieved by setting the \macro{negative} option for the \macro{\ability}, \macro{\spellschool}, \macro{\class} or the \macro{\alignment} command or using the starred version of the \macro{\RPGIconsUseIcon} command.
 
+\begin{codeexamplecolumns}
+\colorbox{blue!50}{%
+    \ability[negative]{charisma}
+        [scale=2]%
+}
+
+\colorbox{blue!50}{%
+    \ability[negative]{charisma}
+        [scale=2, background=blue!50]%
+}
+\end{codeexamplecolumns}
+
 \begin{macrodef}
 |line width|={<dimension>}
 \end{macrodef}
@@ -798,6 +810,14 @@ The option \macro{line width} sets the line width for strokes.
 Using the \macro{scale} and \macro{rotate} options, the shape can be scaled and rotated (in degrees). 
 
 The \macro{scale inner} option can be used to change the scaling of the icon placed inside a frame when using the \macro{\ability}, \macro{\saving}, \macro{\spellschool}, \macro{\damage}, \macro{\class}, \macro{\alignment} and \macro{\currency} macros. The default value is 0.675.
+
+\begin{codeexamplecolumns}
+\damage{petrified}
+    [scale=2]
+
+\damage{petrified}
+    [scale=2, scale inner=0.5]
+\end{codeexamplecolumns}
 
 Note that the keys related to transformation, that is \macro{scale}, \macro{scale inner} and \macro{rotate}, add to the current value and do not replace it. For example, \macro{scale=0.5, scale=0.5} results in a scale factor of 0.25 and \macro{rotate=10, rotate=10} results in a rotation of 20~degrees.
 

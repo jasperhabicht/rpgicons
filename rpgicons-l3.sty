@@ -937,8 +937,10 @@
     \draw_path_lineto:n { -.35cm , -.425cm }
     \draw_path_lineto:n { -.425cm , -.35cm }
     \draw_path_lineto:n { -.025cm , .05cm }
-    \draw_path_moveto:n { .2375cm , .1875cm }
-    \draw_path_arc:nnn { 135 } { 315 } { -.05cm }
+    \draw_path_moveto:n{ .175cm , .25cm }
+    \draw_path_lineto:n { .2cm , .275cm }
+    \draw_path_arc:nnn { 315 } { 135 } { sqrt(2) * -.0375cm }
+    \draw_path_lineto:n { .25cm , .175cm }
 }
 
 \cs_new_protected:Npn \rpgicons_draw_shape_cold: {

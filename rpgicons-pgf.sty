@@ -794,10 +794,9 @@
     {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
-    \pgfpathmoveto{\pgfpoint{0cm}{.175cm}}
-    \pgfpatharc{60}{90}{.425cm}
-    \pgfpatharc{270}{240}{.425cm}
-    \pgfpathmoveto{\pgfpoint{0cm}{.175cm}}
+    \pgfpathmoveto{\pgfpointadd{\pgfpoint{0cm}{.175cm+.425cm+.425cm}}{\pgfpointpolar{240}{.425cm+.425cm}}}
+    \pgfpatharc{240}{270}{.425cm}
+    \pgfpatharc{90}{60}{.425cm}
     \pgfpatharc{120}{90}{.425cm}
     \pgfpatharc{270}{300}{.425cm}
     \pgfpathcircle{\pgfpoint{-.175cm}{0cm}}{.075cm}
@@ -837,10 +836,9 @@
     \pgfpathlineto{\pgfpoint{-.1cm}{-.05cm}}
     \pgfpathmoveto{\pgfpoint{.075cm}{.05cm}}
     \pgfpathlineto{\pgfpoint{.1cm}{-.05cm}}
-    \pgfpathmoveto{\pgfpoint{0cm}{-.3cm}}
-    \pgfpatharc{60}{120}{.3cm and .5cm}
-    \pgfpatharc{240}{180}{.1cm and .175cm}
-    \pgfpathmoveto{\pgfpoint{0cm}{-.3cm}}
+    \pgfpathmoveto{\pgfpointadd{\pgfpoint{2*sin(30)*-.3cm}{-.3cm}}{\pgfpointpolar{120}{.1cm and .175cm}}}
+    \pgfpatharc{180}{240}{.1cm and .175cm}
+    \pgfpatharc{120}{60}{.3cm and .5cm}
     \pgfpatharc{120}{60}{.3cm and .5cm}
     \pgfpatharc{300}{360}{.1cm and .175cm}
     \pgfpathmoveto{\pgfpointadd{\pgfpoint{0cm}{.125cm}}{\pgfpointpolar{245}{.55cm}}}
@@ -871,12 +869,11 @@
     \pgfpathlineto{\pgfpoint{-.25cm}{-.05cm}}
     \pgfpatharc{40}{0}{.45cm}
     \pgfpathlineto{\pgfpoint{0cm}{-.425cm}}
-    \pgfpathmoveto{\pgfpoint{.2cm}{.125cm}}
-    \pgfpatharc{180}{90}{.175cm and .1cm}
-    \pgfpatharc{0}{-90}{.15cm and .2cm}
-    \pgfpathlineto{\pgfpoint{.25cm}{-.05cm}}
-    \pgfpatharc{140}{180}{.45cm}
-    \pgfpathlineto{\pgfpoint{0cm}{-.425cm}}
+    \pgfpathlineto{\pgfpointadd{\pgfpoint{.25cm-.45cm}{-.05cm}}{\pgfpointpolar{-40}{.45cm}}}
+    \pgfpatharc{180}{140}{.45cm}
+    \pgfpathlineto{\pgfpoint{.2cm+.175cm-.15cm}{.125cm+.1cm-.2cm}}
+    \pgfpatharc{-90}{0}{.15cm and .2cm}
+    \pgfpatharc{90}{180}{.175cm and .1cm}
     \pgfpathmoveto{\pgfpoint{-.05cm}{-.275cm}}
     \pgfpatharc{-30}{60}{.05cm}
     \pgfpathmoveto{\pgfpoint{.05cm}{-.275cm}}
@@ -1962,14 +1959,11 @@
     {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
-    \pgfpathmoveto{\pgfpoint{0cm}{.125cm}}
+    \pgfpathmoveto{\pgfpoint{0cm}{-.375cm}}
+    \pgfpathlineto{\pgfpointadd{\pgfpoint{.2cm}{.125cm}}{\pgfpointpolar{-45}{.2cm}}}
+    \pgfpatharc{-45}{180}{.2cm}
     \pgfpatharc{0}{225}{.2cm}
-    \pgfpathlineto{\pgfpoint{0cm}{-.375cm}}
-    \pgfpathmoveto{\pgfpoint{0cm}{.125cm}}
-    \pgfpatharc{180}{-45}{.2cm}
-    \pgfpathlineto{\pgfpoint{0cm}{-.375cm}}
-    \pgfsetarrowsstart{}
-    \pgfsetarrowsend{}
+    \pgfpathclose
   }
 }
 
@@ -2235,20 +2229,16 @@
     \pgfpathmoveto{\pgfpoint{-.175cm}{-.1cm}}
     \pgfpatharc{180}{360}{.175cm}
     \pgfpathclose
-    \pgfpathmoveto{\pgfpoint{-.175cm}{.15cm}}
+    \pgfpathmoveto{\pgfpoint{-.175cm}{0cm}}
+    \pgfpathlineto{\pgfpointadd{\pgfpoint{-.175cm+.0625cm}{.15cm}}{\pgfpointpolar{-45}{.0635cm}}}
+    \pgfpatharc{-45}{180}{.0625cm}
     \pgfpatharc{0}{225}{.0625cm}
-    \pgfpathlineto{\pgfpoint{-.175cm}{0cm}}
-    \pgfpathmoveto{\pgfpoint{-.175cm}{.15cm}}
-    \pgfpatharc{180}{-45}{.0625cm}
-    \pgfpathlineto{\pgfpoint{-.175cm}{0cm}}
-    \pgfpathmoveto{\pgfpoint{.175cm}{.15cm}}
+    \pgfpathclose
+    \pgfpathmoveto{\pgfpoint{.175cm}{0cm}}
+    \pgfpathlineto{\pgfpointadd{\pgfpoint{.175cm+.0625cm}{.15cm}}{\pgfpointpolar{-45}{.0635cm}}}
+    \pgfpatharc{-45}{180}{.0625cm}
     \pgfpatharc{0}{225}{.0625cm}
-    \pgfpathlineto{\pgfpoint{.175cm}{0cm}}
-    \pgfpathmoveto{\pgfpoint{.175cm}{.15cm}}
-    \pgfpatharc{180}{-45}{.0625cm}
-    \pgfpathlineto{\pgfpoint{.175cm}{0cm}}
-    \pgfsetarrowsstart{}
-    \pgfsetarrowsend{}
+    \pgfpathclose
   }
 }
 
@@ -2781,18 +2771,18 @@
     \pgfpatharc{0}{45}{sin(45)*.3cm and sin(45)*.45cm}
     \pgfpatharc{225}{180}{sin(45)*.3cm and sin(45)*.45cm}
     \pgfpathcircle{\pgfpoint{.35cm}{.35cm}}{.075cm}
-    \pgfpathmoveto{\pgfpoint{-.275cm}{.3cm}}
+    \pgfpathmoveto{\pgfpoint{-.275cm}{.35cm}}
     \pgfpathlineto{\pgfpoint{-.275cm}{-.15cm}}
     \pgfpatharc{180}{360}{.275cm and .1cm}
-    \pgfpathlineto{\pgfpoint{.275cm}{.3cm}}
+    \pgfpathlineto{\pgfpoint{.275cm}{.35cm}}
     \pgfpathmoveto{\pgfpoint{-.275cm}{.2cm}}
     \pgfpathlineto{\pgfpoint{.275cm}{.2cm}}
     \pgfpathmoveto{\pgfpoint{-.125cm}{.3cm}}
-    \pgfpathlineto{\pgfpoint{-.125cm}{-.225cm}}
+    \pgfpathlineto{\pgfpoint{-.125cm}{sqrt(1-(-.125cm/.275cm)^2)*-.1cm-.15cm}}
     \pgfpathmoveto{\pgfpoint{0cm}{.3cm}}
-    \pgfpathlineto{\pgfpoint{0cm}{-.225cm}}
+    \pgfpathlineto{\pgfpoint{0cm}{-.25cm}}
     \pgfpathmoveto{\pgfpoint{.125cm}{.3cm}}
-    \pgfpathlineto{\pgfpoint{.125cm}{-.225cm}}
+    \pgfpathlineto{\pgfpoint{.125cm}{sqrt(1-(.125cm/.275cm)^2)*-.1cm-.15cm}}
     \pgfsetarrowsstart{}
     \pgfsetarrowsend{}
   }

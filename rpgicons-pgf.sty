@@ -1707,17 +1707,16 @@
     {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
-    \pgfpathmoveto{\pgfpoint{.15cm}{-.425cm}}
-    \pgfpatharc{-60}{0}{.45cm and .375cm}
-    \pgfpathcurveto{\pgfpoint{.375cm}{.15cm}}{\pgfpoint{.15cm}{.375cm}}{\pgfpoint{-.05cm}{.425cm}}
     \pgfpathmoveto{\pgfpoint{-.15cm}{-.425cm}}
     \pgfpatharc{240}{135}{.45cm and .35cm}
     \pgfpathcurveto{\pgfpoint{-.15cm}{.2cm}}{\pgfpoint{0cm}{.25cm}}{\pgfpoint{-.05cm}{.425cm}}
-    \pgfpathmoveto{\pgfpoint{.075cm}{-.3cm}}
-    \pgfpathcurveto{\pgfpoint{.2cm}{-.2cm}}{\pgfpoint{.2cm}{-.05cm}}{\pgfpoint{.05cm}{.1cm}}
+    \pgfpathcurveto{\pgfpoint{.15cm}{.375cm}}{\pgfpoint{.375cm}{.15cm}}
+      {\pgfpointadd{\pgfpoint{.15cm}{-.425cm}}{\pgfpointpolar{60}{.45cm and .375cm}}}
+    \pgfpatharc{0}{-60}{.45cm and .375cm}
     \pgfpathmoveto{\pgfpoint{-.075cm}{-.3cm}}
     \pgfpatharc{220}{150}{.35cm and .2cm}
-    \pgfpathcurveto{\pgfpoint{0cm}{-.2cm}}{\pgfpoint{.05cm}{-.1cm}}{\pgfpoint{.05cm}{.1cm}}
+    \pgfpatharc{225}{360}{.1cm and .25cm}
+    \pgfpathcurveto{\pgfpoint{.2cm}{-.05cm}}{\pgfpoint{.2cm}{-.2cm}}{\pgfpoint{.075cm}{-.3cm}}
     \pgfsetarrowsstart{}
     \pgfsetarrowsend{}
   }

@@ -971,17 +971,17 @@
 }
 
 \cs_new_protected:Npn \rpgicons_draw_shape_fire: {
-    \draw_path_moveto:n { .15cm , -.425cm }
-    \draw_path_arc:nnnn { -60 } { 0 } { .45cm } { .375cm }
-    \draw_path_curveto:nnn { .375cm , .15cm } { .15cm , .375cm } { -.05cm , .425cm }
     \draw_path_moveto:n { -.15cm , -.425cm }
     \draw_path_arc:nnnn { 240 } { 135 } { .45cm } { .35cm }
     \draw_path_curveto:nnn { -.15cm , .2cm } { 0cm , .25cm } { -.05cm , .425cm }
-    \draw_path_moveto:n { .075cm , -.3cm }
-    \draw_path_curveto:nnn { .2cm , -.2cm } { .2cm , -.05cm } { .05cm , .1cm }
+    \draw_path_curveto:nnn { .15cm , .375cm } { .375cm , .15cm } { 
+        ( .15cm , -.425cm ) + ( \draw_point_polar:nnn { .45cm } { .375cm } { 60 } )
+    }
+    \draw_path_arc:nnnn { 0 } { -60 } { .45cm } { .375cm }
     \draw_path_moveto:n { -.075cm , -.3cm }
     \draw_path_arc:nnnn { 220 } { 150 } { .35cm } { .2cm }
-    \draw_path_curveto:nnn { 0cm , -.2cm } { .05cm , -.1cm } { .05cm , .1cm }
+    \draw_path_arc:nnnn { 225 } { 360 } { .1cm } { .25cm }
+    \draw_path_curveto:nnn { .2cm , -.05cm } { .2cm , -.2cm } { .075cm , -.3cm }
 }
 
 \cs_new_protected:Npn \rpgicons_draw_shape_force: {

@@ -32,11 +32,12 @@
   linear, conic, quadratic, cubic, spheric, cylindric, emanation,
   verbal, somatic, material, ritual, focus,
   abjuration, conjuration, divination, enchantment, evocation, illusion, necromancy, transmutation,
-  acid, bludgeoning, cold, fire, force, lightning, necrotic, necrotic i, piercing, poison, psychic,
-  radiant, slashing, thunder, healing,
+  acid, bludgeoning, cold, fire, force, lightning, necrotic, necrotic i, piercing, poison,
+  psychic, radiant, slashing, thunder, healing,
   melee, melee i, ranged, magic, singlehanded, doublehanded,
   buff, blinded, charmed, deafened, exhausted, frightened, grappled, incapacitated, invisible,
-  paralyzed, petrified, poisoned, prone, restrained, stunned, unconscious, hearing, seeing,
+  paralyzed, petrified, poisoned, prone, restrained, restrained i, stunned, unconscious,
+  hearing, seeing,
   artificer, artificer i, barbarian, bard, bard i, cleric, cleric i, cleric ii,
   druid, druid i, druid ii, fighter, gunslinger, monk, monk i, paladin, paladin i,
   psion, psion i, ranger, ranger i, rogue, rogue i, sorcerer, sorcerer i, warlock,
@@ -45,9 +46,10 @@
   chaotic neutral, lawful evil, neutral evil, chaotic evil,
   copper, silver, gold, electrum, platinum, gem, jewellery, jewelry, jewellery i, jewelry i,
   % === backward compatibility
-  dexterity alt, wisdom alt, necrotic alt, melee alt, artificer alt, bard alt, cleric alt,
-  druid alt, monk alt, paladin alt, psion alt, ranger alt, rogue alt, sorcerer alt,
-  wizard alt, jewellery alt, jewelry alt%
+  dexterity alt, wisdom alt, necrotic alt, melee alt, restrained alt,
+  artificer alt, bard alt, cleric alt, druid alt, monk alt, paladin alt,
+  psion alt, ranger alt, rogue alt, sorcerer alt, wizard alt,
+  jewellery alt, jewelry alt%
   % ===
 }
 
@@ -109,6 +111,7 @@
   wisdom alt/.style={wisdom i},
   necrotic alt/.style={necrotic i},
   melee alt/.style={melee i},
+  restrained alt/.style={restrained i},
   artificer alt/.style={artificer i},
   bard alt/.style={bard i},
   cleric alt/.style={cleric i},
@@ -2560,6 +2563,36 @@
     \pgfpathlineto{\pgfpoint{-.35cm}{-.425cm}}
     \pgfpatharc{270}{90}{.05cm}
     \pgfpathclose
+  }
+}
+
+% restrained i
+\pgfdeclareshape{restrained i}{
+  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
+  \anchor{text} % this is used to center the text in the node
+    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+
+  \backgroundpath{
+    \pgfpathmoveto{\pgfpoint{.35cm}{-.425cm}}
+    \pgfpathlineto{\pgfpoint{.35cm}{.1cm}}
+    \pgfpathlineto{\pgfpoint{-.35cm}{.1cm}}
+    \pgfpathlineto{\pgfpoint{-.35cm}{-.425cm}}
+    \pgfpathclose
+    \pgfpathmoveto{\pgfpoint{.075cm}{-.325cm}}
+    \pgfpathlineto{\pgfpointadd{\pgfpoint{0cm}{-.1cm}}{\pgfpointpolar{-60}{.075cm}}}
+    \pgfpatharc{-60}{240}{.075cm}
+    \pgfpathlineto{\pgfpoint{-.075cm}{-.325cm}}
+    \pgfpathclose
+    \pgfpathmoveto{\pgfpoint{.225cm}{.1cm}}
+    \pgfpathlineto{\pgfpoint{.225cm}{.2cm}}
+    \pgfpatharc{0}{180}{.225cm}
+    \pgfpathlineto{\pgfpoint{-.225cm}{.1cm}}    
+    \pgfpathmoveto{\pgfpoint{.125cm}{.1cm}}
+    \pgfpathlineto{\pgfpoint{.125cm}{.2cm}}
+    \pgfpatharc{0}{180}{.125cm}
+    \pgfpathlineto{\pgfpoint{-.125cm}{.1cm}}
+    \pgfsetarrowsstart{}
+    \pgfsetarrowsend{}
   }
 }
 

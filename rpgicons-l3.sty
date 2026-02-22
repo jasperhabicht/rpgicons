@@ -45,9 +45,6 @@
 \msg_new:nnn { rpgicons } { argument-count-wrong } {
     The ~ key ~ `#1` ~ expects ~ exactly ~ #2 ~ arguments.
 }
-\msg_new:nnn { rpgicons } { individual-option-ignored } {
-    The ~ option ~ `#1` ~ cannot ~ be ~ set ~ globally ~ and ~ will ~ be ~ ignored.
-}
 \msg_new:nnn { rpgicons } { shell-escape-disabled } {
     Please ~ run ~ LaTeX ~ with ~ enabled ~ shell ~ escape.
 }
@@ -2469,16 +2466,8 @@
 
 % USER COMMANDS
 
-\clist_new:N \l__rpgicons_ignored_options_clist
 \NewDocumentCommand { \rpgiconsset } { m } {
-    \clist_clear:N \l__rpgicons_ignored_options_clist
-    \keys_set_exclude_groups:nnnN { rpgicons / local } { individual} {#1}
-        \l__rpgicons_ignored_options_clist
-    \clist_if_empty:NF \l__rpgicons_ignored_options_clist {
-        \clist_map_inline:Nn \l__rpgicons_ignored_options_clist {
-            \msg_warning:nnn { rpgicons } { individual-option-ignored } {##1}
-        }
-    }
+    \keys_set:nn { rpgicons / local } {#1}
 }
 
 \dim_new:N \l_rpgicons_icon_before_sep_dim
@@ -2510,6 +2499,7 @@
 \fp_set:Nn \l_rpgicons_icon_transform_scale_inner_fp { 1.0 }
 \fp_new:N \l_rpgicons_icon_transform_rotate_fp
 
+\str_new:N \l_rpgicons_icon_actualtext_str
 \str_new:N \l_rpgicons_icon_precompose_ref_str
 \bool_new:N \l__rpgicons_icon_precompose_bool
 
@@ -2625,7 +2615,7 @@
         \bool_set_true:N \l__rpgicons_icon_precompose_bool
         \str_set:Nn \l_rpgicons_icon_precompose_ref_str {#1}
     } ,
-    precompose           .groups:n   = { individual } ,
+    actualtext           .str_set:N  = \l_rpgicons_icon_actualtext_str ,
     accessible           .code:n     = {
         \msg_warning:nnn { rpgicons } { option-deprecated } { accessible }
     }
@@ -2739,17 +2729,6 @@
             } {##1}
         }
     }
-}
-
-\tl_new:N \l__rpgicons_icon_actualtext_tl
-\prop_new:N \g__rpgicons_icon_actualtext_prop
-\cs_new_protected:Npn \__rpgicons_icon_actualtext_set:n #1 {
-    \prop_gset_from_keyval:Nn \g__rpgicons_icon_actualtext_prop {#1}
-}
-
-\keys_define:nn { rpgicons / local } {
-    actualtext           .code:n     = { \__rpgicons_icon_actualtext_set:n {#1} } ,
-    actualtext           .groups:n   = { individual }
 }
 
 \cs_if_exist:NTF \NewTaggingSocket {
@@ -2923,14 +2902,8 @@
     \mode_leave_vertical:
     \group_begin:
         \keys_set_exclude_groups:nne { rpgicons / local } { extra } {#2}
-        \prop_get:NeNF \g__rpgicons_icon_actualtext_prop {
-            \bool_lazy_and:nnTF {
-                \tl_if_blank_p:n {#4}
-            } {
-                \tl_if_eq_p:NN \l_rpgicons_icon_frame_tl \c__rpgicons_icon_frame_saving_tl
-            } { saving } {#4}
-        } \l__rpgicons_icon_actualtext_tl {
-            \tl_set:Ne \l__rpgicons_icon_actualtext_tl {
+        \str_if_empty:NT \l_rpgicons_icon_actualtext_str {
+            \str_set:Ne \l_rpgicons_icon_actualtext_str {
                 \bool_lazy_and:nnTF {
                     \tl_if_blank_p:n {#4}
                 } {
@@ -2939,9 +2912,9 @@
             }
         }
         \tl_if_novalue:nF {#3} {
-            \tl_put_left:Nn \l__rpgicons_icon_actualtext_tl { #3 ~ }
+            \str_put_left:Nn \l_rpgicons_icon_actualtext_str { #3 ~ }
         }
-        \tag_socket_use:nV { rpgicons / icon / before } \l__rpgicons_icon_actualtext_tl
+        \tag_socket_use:nV { rpgicons / icon / before } \l_rpgicons_icon_actualtext_str
         \bool_if:NTF \l__rpgicons_icon_precompose_bool {
             \__rpgicons_pdfximage:ee {
                 \str_if_empty:NTF \l_rpgicons_icon_precompose_ref_str {

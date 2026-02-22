@@ -921,9 +921,9 @@ Roll\die{eightside}{}a die!
 \begin{macrodef}
 |actualtext|={<string>}
 \end{macrodef}
-The option \macro{actualtext} can be used to change the default replacement text that is used for example by screen readers in a tagged PDF. It expects as value a key-value list where the key is the name of the icon shape and the value is the relevant replacement text. For example, with setting \macro{actualtext={sixside={d6}}}, a screen reader would read ``d six'' for icons using the \macro{sixside} shape.
+The option \macro{actualtext} can be used to change the default replacement text that is used for example by screen readers in a tagged PDF. It expects as string that represents the relevant replacement text. 
 
-It is possible to change the replacement texts for specific icon types. For example, setting the key \macro{every saving={actualtext={charisma={charisma saving}}}} will set the replacement text for every instance of \macro{\saving{charisma}} to \macro{charisma saving}.
+It is possible to change the replacement texts for specific icon types. For example, setting the key \macro{every saving={every charisma={actualtext={charisma saving}}}} will set the replacement text for every instance of \macro{\saving{charisma}} to \macro{charisma saving}.
 
 \subsection{Roll dice syntax}\label{sec:roll-dice-syntax}
 

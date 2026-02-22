@@ -2510,10 +2510,10 @@
 \fp_set:Nn \l_rpgicons_icon_transform_scale_inner_fp { 1.0 }
 \fp_new:N \l_rpgicons_icon_transform_rotate_fp
 
-\str_new:N \l_rpgicons_icon_precompose_str
+\str_new:N \l_rpgicons_icon_precompose_ref_str
 \bool_new:N \l__rpgicons_icon_precompose_bool
 
-\str_new:N \l_rpgicons_precompose_file_str
+\str_new:N \l_rpgicons_precompose_output_str
 
 \cs_generate_variant:Nn \color_select:n { V }
 \cs_generate_variant:Nn \color_stroke:n { V }
@@ -2619,11 +2619,11 @@
             \msg_error:nnnn { rpgicons } { argument-count-wrong } { alias } { 2 }
         }
     } ,
-    precompose ~ file    .str_set:N  = \l_rpgicons_precompose_file_str ,
-    precompose ~ file    .initial:e  = { \c_sys_jobname_str _icons.tex } ,
+    precompose ~ output  .str_set:N  = \l_rpgicons_precompose_output_str ,
+    precompose ~ output  .initial:e  = { \c_sys_jobname_str _rpgicons } ,
     precompose           .code:n     = {
         \bool_set_true:N \l__rpgicons_icon_precompose_bool
-        \str_set:Nn \l_rpgicons_icon_precompose_str {#1}
+        \str_set:Nn \l_rpgicons_icon_precompose_ref_str {#1}
     } ,
     precompose           .groups:n   = { individual } ,
     accessible           .code:n     = {
@@ -2814,66 +2814,103 @@
 }
 
 % === precompose icons
+\iow_new:N \l__rpgicons_precompose_document_iow
 \clist_new:N \g__rpgicons_precompose_clist
+\str_new:N \l__rpgicons_precompose_hash_base_str
+\str_new:N \l__rpgicons_precompose_hash_str
+\cs_generate_variant:Nn \iow_open:Nn { Ne }
+\cs_generate_variant:Nn \prop_to_keyval:N { c }
+\cs_generate_variant:Nn \str_if_eq_p:nn { Ve }
+\cs_generate_variant:Nn \str_mdfive_hash:n { V }
 
-\str_new:N \l__rpgicons_precompose_name_str
+\cs_new_protected:Npn \__rpgicons_precompose_register:nnnn #1#2#3#4 {
+    \clist_put_right:Nn \g__rpgicons_precompose_clist {#1}
+    \prop_new:c { g__rpgicons_precompose_ #1 _prop }
+    \prop_put:cne { g__rpgicons_precompose_ #1 _prop }
+        { negative } { \bool_if:nT {#2} { * } }
+    \prop_put:cnn { g__rpgicons_precompose_ #1 _prop }
+        { style } {#3}
+    \prop_put:cnn { g__rpgicons_precompose_ #1 _prop }
+        { shape } {#4}
+    \str_put_right:Ne \l__rpgicons_precompose_hash_base_str {
+        | #1 | \prop_to_keyval:c { g__rpgicons_precompose_ #1 _prop } |
+    }
+}
 
 \NewDocumentCommand \RPGIconsPrecomposeIcon { s O { } o m } {
     \tl_if_novalue:nTF {#3} {
-        \str_set:Nn \l__rpgicons_precompose_name_str {#4}
+        \__rpgicons_precompose_register:nnnn {#4} {#1} {#2} {#4}
     } {
-        \str_set:Nn \l__rpgicons_precompose_name_str {#3}
+        \__rpgicons_precompose_register:nnnn {#3} {#1} {#2} {#4}
     }
-    \clist_put_right:NV \g__rpgicons_precompose_clist \l__rpgicons_precompose_name_str
-    \prop_new:c { g__rpgicons_precompose_ \l__rpgicons_precompose_name_str _prop }
-    \prop_put:cnn { g__rpgicons_precompose_ \l__rpgicons_precompose_name_str _prop }
-        { negative } {#1}
-    \prop_put:cnn { g__rpgicons_precompose_ \l__rpgicons_precompose_name_str _prop }
-        { style } {#2}
-    \prop_put:cnn { g__rpgicons_precompose_ \l__rpgicons_precompose_name_str _prop }
-        { shape } {#4}
 }
 
 \NewDocumentCommand \RPGIconsPDFDestination { m } {
     \pdf_destination:nn { rpgicons. #1 } { fit }
 }
 
-\iow_new:N \l__rpgicons_precompose_document_iow
+\NewDocumentCommand \RPGIconsPDFHash { m } {
+    \str_set:Nn \l__rpgicons_precompose_hash_str {#1}
+}
+
 \hook_gput_code:nnn { begindocument } { . } {
+    \bool_lazy_and:nnF {
+        \clist_if_empty_p:N \g__rpgicons_precompose_clist
+    } {
+        \str_if_eq_p:Ve \l__rpgicons_precompose_hash_str {
+            \str_mdfive_hash:V \l__rpgicons_precompose_hash_base_str
+        }
+    }
     \clist_if_empty:NF \g__rpgicons_precompose_clist {
         \sys_if_shell:TF {
-            \iow_open:NV \l__rpgicons_precompose_document_iow \l_rpgicons_precompose_file_str
+            \iow_open:Ne \l__rpgicons_precompose_document_iow { \str_use:N \l_rpgicons_precompose_output_str .tex }
             \iow_now:Nn \l__rpgicons_precompose_document_iow { \documentclass[multi=rpgiconsuse]{standalone} }
             \iow_now:Nn \l__rpgicons_precompose_document_iow { \usepackage{rpgicons} }
             \iow_now:Nn \l__rpgicons_precompose_document_iow { \begin{document} }
             \clist_map_inline:Nn \g__rpgicons_precompose_clist {
                 \iow_now:Ne \l__rpgicons_precompose_document_iow {
                     \tl_to_str:n { \begin{rpgiconsuse} }
-                    \c_percent_str
+                    \str_use:N \c_percent_str
                 }
                 \iow_now:Nn \l__rpgicons_precompose_document_iow { \RPGIconsUseIcon }
                 \iow_now:Ne \l__rpgicons_precompose_document_iow {
-                    \bool_if:nT { \prop_item:cn { g__rpgicons_precompose_ #1 _prop } { negative } } { * }
-                    [ \prop_item:cn { g__rpgicons_precompose_ #1 _prop } { style } ]
-                    \c_left_brace_str \prop_item:cn { g__rpgicons_precompose_ #1 _prop } { shape } \c_right_brace_str
-                    \c_percent_str
+                    \prop_item:cn { g__rpgicons_precompose_ #1 _prop } { negative }
+                    [ 
+                        \prop_item:cn { g__rpgicons_precompose_ #1 _prop } { style }
+                    ]
+                    \str_use:N \c_left_brace_str 
+                        \prop_item:cn { g__rpgicons_precompose_ #1 _prop } { shape } 
+                    \str_use:N \c_right_brace_str
+                    \str_use:N \c_percent_str
                 }
                 \iow_now:Nn \l__rpgicons_precompose_document_iow { \RPGIconsPDFDestination }
                 \iow_now:Ne \l__rpgicons_precompose_document_iow {
-                    \c_left_brace_str #1 \c_right_brace_str
-                    \c_percent_str
+                    \str_use:N \c_left_brace_str #1 \str_use:N \c_right_brace_str
+                    \str_use:N \c_percent_str
                 }
                 \iow_now:Nn \l__rpgicons_precompose_document_iow { \end{rpgiconsuse} }
             }
             \iow_now:Nn \l__rpgicons_precompose_document_iow { \end{document} }
             \iow_close:N \l__rpgicons_precompose_document_iow
-            \sys_shell_now:e { pdflatex ~ \str_use:N \l_rpgicons_precompose_file_str }
+            \sys_shell_now:e { pdflatex ~ \str_use:N \l_rpgicons_precompose_output_str .tex }
+            \iow_now:ce { @auxout } {
+                \tl_to_str:n { \RPGIconsPDFHash }
+                \str_use:N \c_left_brace_str
+                \str_mdfive_hash:V \l__rpgicons_precompose_hash_base_str
+                \str_use:N \c_right_brace_str
+            }
         } {
             \msg_error:nn { rpgicons } { shell-escape-disabled }
         }
     }
 }
 % ===
+
+\cs_new_protected:Npn \__rpgicons_pdfximage:nn #1#2 {
+    \pdfximage named {#1} {#2}
+    \pdfrefximage \pdflastximage \scan_stop:
+}
+\cs_generate_variant:Nn \__rpgicons_pdfximage:nn { ee }
 
 \tl_const:Nn \c__rpgicons_icon_frame_saving_tl { saving }
 \seq_new:N \l__rpgicons_icon_shape_name_parts_seq
@@ -2905,86 +2942,98 @@
             \tl_put_left:Nn \l__rpgicons_icon_actualtext_tl { #3 ~ }
         }
         \tag_socket_use:nV { rpgicons / icon / before } \l__rpgicons_icon_actualtext_tl
-        \draw_begin:
-            \draw_set_cap_round:
-            \draw_set_join_round:
-            \str_set:Ne \l__rpgicons_icon_shape_name_str {#4}
-            \str_replace_all:Nnn \l__rpgicons_icon_shape_name_str { ~ } { _ }
-            \str_if_empty:NF \l__rpgicons_icon_shape_name_str {
-                \clist_if_exist:cT { l_rpgicons_shapes_every_ \l__rpgicons_icon_shape_name_str _style_clist } {
-                    \keys_set:ne { rpgicons / local } {
-                        \clist_use:cn { l_rpgicons_shapes_every_ \l__rpgicons_icon_shape_name_str _style_clist } { , }
-                    }
-                }
-            }
-            \color_stroke:V \l_rpgicons_icon_color_stroke_tl
-            \color_fill:V \l_rpgicons_icon_color_fill_tl
-            \opacity_stroke:n { \l_rpgicons_icon_opacity_stroke_fp }
-            \opacity_fill:n { \l_rpgicons_icon_opacity_fill_fp }
-            \draw_set_linewidth:n { \l_rpgicons_icon_linewidth_dim }
-            \draw_transform_scale:n { \l_rpgicons_icon_transform_scale_fp }
-            \draw_transform_rotate:n { \l_rpgicons_icon_transform_rotate_fp }
-            \draw_set_baseline:n { \l_rpgicons_icon_baseline_dim }
-            \draw_path_rectangle_corners:nn
-                { -.5cm , -.5cm - \l_rpgicons_icon_linewidth_dim / 2 }
-                { .5cm , .5cm + \l_rpgicons_icon_linewidth_dim / 2 }
-            \draw_path_replace_bb:
-            \bool_set_false:N \l_draw_bb_update_bool
-            \draw_scope_begin:
-                \clist_if_in:nVT { ability , saving , spellschool , damage , class , alignment } \l_rpgicons_icon_frame_tl {
-                    \cs_if_exist_use:cF { rpgicons_draw_frame_ \l_rpgicons_icon_frame_tl : } {
-                        \msg_warning:nnV { rpgicons } { frame-undefined } \l_rpgicons_icon_frame_tl
-                    }
-                    \bool_if:nTF {#1} {
-                        \draw_path_use_clear:n { fill }
-                        \color_select:V \l_rpgicons_icon_color_background_tl
-                        \opacity_select:n { \l_rpgicons_icon_opacity_background_fp }
-                    } {
-                        \draw_path_use_clear:n { stroke }
-                    }
-                    \draw_transform_scale:n { \l_rpgicons_icon_transform_scale_inner_fp }
-                }
-                \clist_if_in:neTF { sixside ~ one , sixside ~ two , sixside ~ three , sixside ~ four ,
-                    sixside ~ five , sixside ~ six , sixside ~ seven , sixside ~ eight , sixside ~ nine } {#4} {
-                    \seq_set_split:NVV \l__rpgicons_icon_shape_name_parts_seq
-                        \c_underscore_str \l__rpgicons_icon_shape_name_str
-                    \exp_args:Ne \rpgicons_draw_shape_sixside_pips:n {
-                        \seq_item:Nn \l__rpgicons_icon_shape_name_parts_seq { 2 }
-                    }
-                    \draw_path_use_clear:n { stroke }
+        \bool_if:NTF \l__rpgicons_icon_precompose_bool {
+            \__rpgicons_pdfximage:ee {
+                \str_if_empty:NTF \l_rpgicons_icon_precompose_ref_str {
+                    rpgicons. #4
                 } {
-                    \str_if_empty:NF \l__rpgicons_icon_shape_name_str {
-                        \cs_if_exist:cTF {
-                            rpgicons_draw_shape_ \l__rpgicons_icon_shape_name_str _ \int_to_roman:n {
-                                \l_rpgicons_icon_variant_int
-                            } :
+                    rpgicons. \str_use:N \l_rpgicons_icon_precompose_ref_str
+                }
+            } {
+                \str_use:N \l_rpgicons_precompose_output_str .pdf
+            }
+        } {
+            \draw_begin:
+                \draw_set_cap_round:
+                \draw_set_join_round:
+                \str_set:Ne \l__rpgicons_icon_shape_name_str {#4}
+                \str_replace_all:Nnn \l__rpgicons_icon_shape_name_str { ~ } { _ }
+                \str_if_empty:NF \l__rpgicons_icon_shape_name_str {
+                    \clist_if_exist:cT { l_rpgicons_shapes_every_ \l__rpgicons_icon_shape_name_str _style_clist } {
+                        \keys_set:ne { rpgicons / local } {
+                            \clist_use:cn { l_rpgicons_shapes_every_ \l__rpgicons_icon_shape_name_str _style_clist } { , }
+                        }
+                    }
+                }
+                \color_stroke:V \l_rpgicons_icon_color_stroke_tl
+                \color_fill:V \l_rpgicons_icon_color_fill_tl
+                \opacity_stroke:n { \l_rpgicons_icon_opacity_stroke_fp }
+                \opacity_fill:n { \l_rpgicons_icon_opacity_fill_fp }
+                \draw_set_linewidth:n { \l_rpgicons_icon_linewidth_dim }
+                \draw_transform_scale:n { \l_rpgicons_icon_transform_scale_fp }
+                \draw_transform_rotate:n { \l_rpgicons_icon_transform_rotate_fp }
+                \draw_set_baseline:n { \l_rpgicons_icon_baseline_dim }
+                \draw_path_rectangle_corners:nn
+                    { -.5cm , -.5cm - \l_rpgicons_icon_linewidth_dim / 2 }
+                    { .5cm , .5cm + \l_rpgicons_icon_linewidth_dim / 2 }
+                \draw_path_replace_bb:
+                \bool_set_false:N \l_draw_bb_update_bool
+                \draw_scope_begin:
+                    \clist_if_in:nVT { ability , saving , spellschool , damage , class , alignment } \l_rpgicons_icon_frame_tl {
+                        \cs_if_exist_use:cF { rpgicons_draw_frame_ \l_rpgicons_icon_frame_tl : } {
+                            \msg_warning:nnV { rpgicons } { frame-undefined } \l_rpgicons_icon_frame_tl
+                        }
+                        \bool_if:nTF {#1} {
+                            \draw_path_use_clear:n { fill }
+                            \color_select:V \l_rpgicons_icon_color_background_tl
+                            \opacity_select:n { \l_rpgicons_icon_opacity_background_fp }
                         } {
-                            \str_set:Ne \l__rpgicons_icon_shape_name_variant_str {
-                                \l__rpgicons_icon_shape_name_str _ \int_to_roman:n {
+                            \draw_path_use_clear:n { stroke }
+                        }
+                        \draw_transform_scale:n { \l_rpgicons_icon_transform_scale_inner_fp }
+                    }
+                    \clist_if_in:neTF { sixside ~ one , sixside ~ two , sixside ~ three , sixside ~ four ,
+                        sixside ~ five , sixside ~ six , sixside ~ seven , sixside ~ eight , sixside ~ nine } {#4} {
+                        \seq_set_split:NVV \l__rpgicons_icon_shape_name_parts_seq
+                            \c_underscore_str \l__rpgicons_icon_shape_name_str
+                        \exp_args:Ne \rpgicons_draw_shape_sixside_pips:n {
+                            \seq_item:Nn \l__rpgicons_icon_shape_name_parts_seq { 2 }
+                        }
+                        \draw_path_use_clear:n { stroke }
+                    } {
+                        \str_if_empty:NF \l__rpgicons_icon_shape_name_str {
+                            \cs_if_exist:cTF {
+                                rpgicons_draw_shape_ \l__rpgicons_icon_shape_name_str _ \int_to_roman:n {
                                     \l_rpgicons_icon_variant_int
+                                } :
+                            } {
+                                \str_set:Ne \l__rpgicons_icon_shape_name_variant_str {
+                                    \l__rpgicons_icon_shape_name_str _ \int_to_roman:n {
+                                        \l_rpgicons_icon_variant_int
+                                    }
+                                }
+                            } {
+                                \str_set_eq:NN \l__rpgicons_icon_shape_name_variant_str \l__rpgicons_icon_shape_name_str
+                            }
+                            \cs_if_exist_use:cF { rpgicons_draw_shape_ \l__rpgicons_icon_shape_name_variant_str : } {
+                                \tl_if_blank:VF \l__rpgicons_icon_shape_name_str {
+                                    \msg_warning:nnV { rpgicons } { shape-undefined } \l__rpgicons_icon_shape_name_str
                                 }
                             }
-                        } {
-                            \str_set_eq:NN \l__rpgicons_icon_shape_name_variant_str \l__rpgicons_icon_shape_name_str
+                            \draw_path_use_clear:n { stroke }
                         }
-                        \cs_if_exist_use:cF { rpgicons_draw_shape_ \l__rpgicons_icon_shape_name_variant_str : } {
-                            \tl_if_blank:VF \l__rpgicons_icon_shape_name_str {
-                                \msg_warning:nnV { rpgicons } { shape-undefined } \l__rpgicons_icon_shape_name_str
-                            }
-                        }
-                        \draw_path_use_clear:n { stroke }
                     }
-                }
-                \tl_if_novalue:nF {#3} {
-                    \draw_scope_begin:
-                        \color_select:V \l_rpgicons_icon_color_text_tl
-                        \opacity_select:n { \l_rpgicons_icon_opacity_text_fp }
-                        \hcoffin_set:Nn \l__rpgicons_icon_label_coffin {#3}
-                        \draw_coffin_use:Nnn \l__rpgicons_icon_label_coffin { hc } { vc }
-                    \draw_scope_end:
-                }
-            \draw_scope_end:
-        \draw_end:
+                    \tl_if_novalue:nF {#3} {
+                        \draw_scope_begin:
+                            \color_select:V \l_rpgicons_icon_color_text_tl
+                            \opacity_select:n { \l_rpgicons_icon_opacity_text_fp }
+                            \hcoffin_set:Nn \l__rpgicons_icon_label_coffin {#3}
+                            \draw_coffin_use:Nnn \l__rpgicons_icon_label_coffin { hc } { vc }
+                        \draw_scope_end:
+                    }
+                \draw_scope_end:
+            \draw_end:
+        }
         \tag_socket_use:n { rpgicons / icon / after }
     \group_end:
 }

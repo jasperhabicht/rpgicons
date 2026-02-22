@@ -2886,7 +2886,7 @@
 % ===
 
 \cs_new_protected:Npn \__rpgicons_pdfximage:nn #1#2 {
-    \pdfximage named {#1} {#2}
+    \pdfximage ~ named {#1} {#2}
     \pdfrefximage \pdflastximage \scan_stop:
 }
 \cs_generate_variant:Nn \__rpgicons_pdfximage:nn { ee }
@@ -2901,6 +2901,15 @@
 \NewDocumentCommand \RPGIconsUseIcon { s O { } o m } {
     \mode_leave_vertical:
     \group_begin:
+        \str_set:Ne \l__rpgicons_icon_shape_name_str {#4}
+        \str_replace_all:Nnn \l__rpgicons_icon_shape_name_str { ~ } { _ }
+        \str_if_empty:NF \l__rpgicons_icon_shape_name_str {
+            \clist_if_exist:cT { l_rpgicons_shapes_every_ \l__rpgicons_icon_shape_name_str _style_clist } {
+                \keys_set:ne { rpgicons / local } {
+                    \clist_use:cn { l_rpgicons_shapes_every_ \l__rpgicons_icon_shape_name_str _style_clist } { , }
+                }
+            }
+        }
         \keys_set_exclude_groups:nne { rpgicons / local } { extra } {#2}
         \str_if_empty:NT \l_rpgicons_icon_actualtext_str {
             \str_set:Ne \l_rpgicons_icon_actualtext_str {
@@ -2929,15 +2938,6 @@
             \draw_begin:
                 \draw_set_cap_round:
                 \draw_set_join_round:
-                \str_set:Ne \l__rpgicons_icon_shape_name_str {#4}
-                \str_replace_all:Nnn \l__rpgicons_icon_shape_name_str { ~ } { _ }
-                \str_if_empty:NF \l__rpgicons_icon_shape_name_str {
-                    \clist_if_exist:cT { l_rpgicons_shapes_every_ \l__rpgicons_icon_shape_name_str _style_clist } {
-                        \keys_set:ne { rpgicons / local } {
-                            \clist_use:cn { l_rpgicons_shapes_every_ \l__rpgicons_icon_shape_name_str _style_clist } { , }
-                        }
-                    }
-                }
                 \color_stroke:V \l_rpgicons_icon_color_stroke_tl
                 \color_fill:V \l_rpgicons_icon_color_fill_tl
                 \opacity_stroke:n { \l_rpgicons_icon_opacity_stroke_fp }

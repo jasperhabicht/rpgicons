@@ -45,6 +45,12 @@
 \msg_new:nnn { rpgicons } { argument-count-wrong } {
     The ~ key ~ `#1` ~ expects ~ exactly ~ #2 ~ arguments.
 }
+\msg_new:nnn { rpgicons } { individual-option-ignored } {
+    The ~ option ~ `#1` ~ cannot ~ be ~ set ~ globally ~ and ~ will ~ be ~ ignored.
+}
+\msg_new:nnn { rpgicons } { shell-escape-disabled } {
+    Please ~ run ~ LaTeX ~ with ~ enabled ~ shell ~ escape.
+}
 \msg_if_exist:nnF { rpgicons } { tagging-unsupported } {
     \msg_new:nnn { rpgicons } { tagging-unsupported } {
         This ~ LaTeX ~ version ~ does ~ not ~ support ~ tagging.
@@ -2463,8 +2469,16 @@
 
 % USER COMMANDS
 
+\clist_new:N \l__rpgicons_ignored_options_clist
 \NewDocumentCommand { \rpgiconsset } { m } {
-    \keys_set:nn { rpgicons / local } {#1}
+    \clist_clear:N \l__rpgicons_ignored_options_clist
+    \keys_set_exclude_groups:nnnN { rpgicons / local } { individual} {#1}
+        \l__rpgicons_ignored_options_clist
+    \clist_if_empty:NF \l__rpgicons_ignored_options_clist {
+        \clist_map_inline:Nn \l__rpgicons_ignored_options_clist {
+            \msg_warning:nnn { rpgicons } { individual-option-ignored } {##1}
+        }
+    }
 }
 
 \dim_new:N \l_rpgicons_icon_before_sep_dim
@@ -2495,6 +2509,11 @@
 \fp_new:N \l_rpgicons_icon_transform_scale_inner_fp
 \fp_set:Nn \l_rpgicons_icon_transform_scale_inner_fp { 1.0 }
 \fp_new:N \l_rpgicons_icon_transform_rotate_fp
+
+\str_new:N \l_rpgicons_icon_precompose_str
+\bool_new:N \l__rpgicons_icon_precompose_bool
+
+\str_new:N \l_rpgicons_precompose_file_str
 
 \cs_generate_variant:Nn \color_select:n { V }
 \cs_generate_variant:Nn \color_stroke:n { V }
@@ -2600,6 +2619,13 @@
             \msg_error:nnnn { rpgicons } { argument-count-wrong } { alias } { 2 }
         }
     } ,
+    precompose ~ file    .str_set:N  = \l_rpgicons_precompose_file_str ,
+    precompose ~ file    .initial:e  = { \c_sys_jobname_str _icons.tex } ,
+    precompose           .code:n     = {
+        \bool_set_true:N \l__rpgicons_icon_precompose_bool
+        \str_set:Nn \l_rpgicons_icon_precompose_str {#1}
+    } ,
+    precompose           .groups:n   = { individual } ,
     accessible           .code:n     = {
         \msg_warning:nnn { rpgicons } { option-deprecated } { accessible }
     }
@@ -2722,7 +2748,8 @@
 }
 
 \keys_define:nn { rpgicons / local } {
-    actualtext           .code:n     = { \__rpgicons_icon_actualtext_set:n {#1} }
+    actualtext           .code:n     = { \__rpgicons_icon_actualtext_set:n {#1} } ,
+    actualtext           .groups:n   = { individual }
 }
 
 \cs_if_exist:NTF \NewTaggingSocket {
@@ -2785,6 +2812,68 @@
         \cs_new:Npn \tag_resume:n #1 { }
     }
 }
+
+% === precompose icons
+\clist_new:N \g__rpgicons_precompose_clist
+
+\str_new:N \l__rpgicons_precompose_name_str
+
+\NewDocumentCommand \RPGIconsPrecomposeIcon { s O { } o m } {
+    \tl_if_novalue:nTF {#3} {
+        \str_set:Nn \l__rpgicons_precompose_name_str {#4}
+    } {
+        \str_set:Nn \l__rpgicons_precompose_name_str {#3}
+    }
+    \clist_put_right:NV \g__rpgicons_precompose_clist \l__rpgicons_precompose_name_str
+    \prop_new:c { g__rpgicons_precompose_ \l__rpgicons_precompose_name_str _prop }
+    \prop_put:cnn { g__rpgicons_precompose_ \l__rpgicons_precompose_name_str _prop }
+        { negative } {#1}
+    \prop_put:cnn { g__rpgicons_precompose_ \l__rpgicons_precompose_name_str _prop }
+        { style } {#2}
+    \prop_put:cnn { g__rpgicons_precompose_ \l__rpgicons_precompose_name_str _prop }
+        { shape } {#4}
+}
+
+\NewDocumentCommand \RPGIconsPDFDestination { m } {
+    \pdf_destination:nn { rpgicons. #1 } { fit }
+}
+
+\iow_new:N \l__rpgicons_precompose_document_iow
+\hook_gput_code:nnn { begindocument } { . } {
+    \clist_if_empty:NF \g__rpgicons_precompose_clist {
+        \sys_if_shell:TF {
+            \iow_open:NV \l__rpgicons_precompose_document_iow \l_rpgicons_precompose_file_str
+            \iow_now:Nn \l__rpgicons_precompose_document_iow { \documentclass[multi=rpgiconsuse]{standalone} }
+            \iow_now:Nn \l__rpgicons_precompose_document_iow { \usepackage{rpgicons} }
+            \iow_now:Nn \l__rpgicons_precompose_document_iow { \begin{document} }
+            \clist_map_inline:Nn \g__rpgicons_precompose_clist {
+                \iow_now:Ne \l__rpgicons_precompose_document_iow {
+                    \tl_to_str:n { \begin{rpgiconsuse} }
+                    \c_percent_str
+                }
+                \iow_now:Nn \l__rpgicons_precompose_document_iow { \RPGIconsUseIcon }
+                \iow_now:Ne \l__rpgicons_precompose_document_iow {
+                    \bool_if:nT { \prop_item:cn { g__rpgicons_precompose_ #1 _prop } { negative } } { * }
+                    [ \prop_item:cn { g__rpgicons_precompose_ #1 _prop } { style } ]
+                    \c_left_brace_str \prop_item:cn { g__rpgicons_precompose_ #1 _prop } { shape } \c_right_brace_str
+                    \c_percent_str
+                }
+                \iow_now:Nn \l__rpgicons_precompose_document_iow { \RPGIconsPDFDestination }
+                \iow_now:Ne \l__rpgicons_precompose_document_iow {
+                    \c_left_brace_str #1 \c_right_brace_str
+                    \c_percent_str
+                }
+                \iow_now:Nn \l__rpgicons_precompose_document_iow { \end{rpgiconsuse} }
+            }
+            \iow_now:Nn \l__rpgicons_precompose_document_iow { \end{document} }
+            \iow_close:N \l__rpgicons_precompose_document_iow
+            \sys_shell_now:e { pdflatex ~ \str_use:N \l_rpgicons_precompose_file_str }
+        } {
+            \msg_error:nn { rpgicons } { shell-escape-disabled }
+        }
+    }
+}
+% ===
 
 \tl_const:Nn \c__rpgicons_icon_frame_saving_tl { saving }
 \seq_new:N \l__rpgicons_icon_shape_name_parts_seq

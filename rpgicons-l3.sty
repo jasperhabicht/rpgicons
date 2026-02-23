@@ -2842,9 +2842,9 @@
 
 \NewDocumentCommand \RPGIconsPrecomposeIcon { s O { } o m } {
     \tl_if_novalue:nTF {#3} {
-        \__rpgicons_precompose_register:nnnn {#4} {#1} { scale=.333 , #2 } {#4}
+        \__rpgicons_precompose_register:nnnn {#4} {#1} {#2} {#4}
     } {
-        \__rpgicons_precompose_register:nnnn {#3} {#1} { scale=.333 , #2 } {#4}
+        \__rpgicons_precompose_register:nnnn {#3} {#1} {#2} {#4}
     }
 }
 

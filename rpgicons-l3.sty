@@ -2795,31 +2795,31 @@
 % === precompose icons
 \iow_new:N \l__rpgicons_precompose_document_iow
 \clist_new:N \g__rpgicons_precompose_clist
-\fp_new:N \l__rpgicons_precompose_width_fp
-\fp_new:N \l__rpgicons_precompose_width_temp_fp
-\str_new:N \l__rpgicons_precompose_hash_base_str
-\str_new:N \l__rpgicons_precompose_hash_str
+\fp_new:N \l__rpgicons_precompose_scale_fp
+\fp_new:N \l__rpgicons_precompose_scale_temp_fp
+\str_new:N \l__rpgicons_precompose_pdf_hash_base_str
+\str_new:N \l__rpgicons_precompose_pdf_hash_str
 \cs_generate_variant:Nn \hbox_to_wd:nn { ee }
 \cs_generate_variant:Nn \iow_open:Nn { Ne }
 \cs_generate_variant:Nn \prop_to_keyval:N { c }
 \cs_generate_variant:Nn \str_if_eq_p:nn { Ve }
 \cs_generate_variant:Nn \str_mdfive_hash:n { V }
 
-\cs_new_protected:Npn \__rpgicons_precompose_calculate_width_aux:Nnn #1#2#3 {
+\cs_new_protected:Npn \__rpgicons_precompose_calculate_scale_aux:Nnn #1#2#3 {
     \str_if_eq:nnT {#2} { scale } {
-        \fp_set_eq:NN \l__rpgicons_precompose_width_temp_fp #1
+        \fp_set_eq:NN \l__rpgicons_precompose_scale_temp_fp #1
         \fp_set:Nn #1 {
-            \l__rpgicons_precompose_width_temp_fp * #3
+            \l__rpgicons_precompose_scale_temp_fp * #3
         }
     }
 }
 
-\cs_new_protected:Npn \__rpgicons_precompose_calculate_width:Nn #1#2 {
-    \fp_set:Nn #1 { .9cm }
+\cs_new_protected:Npn \__rpgicons_precompose_calculate_scale:Nn #1#2 {
+    \fp_set:Nn #1 { 1.0 }
     \keyval_parse:nnn {
         \use_none:n
     } {
-        \__rpgicons_precompose_calculate_width_aux:Nnn #1
+        \__rpgicons_precompose_calculate_scale_aux:Nnn #1
     } {#2}
 }
 
@@ -2832,19 +2832,19 @@
         { style } {#3}
     \prop_put:cnn { g__rpgicons_precompose_ #1 _prop }
         { shape } {#4}
-    \__rpgicons_precompose_calculate_width:Nn \l__rpgicons_precompose_width_fp {#3}
-    \prop_put:cne { g__rpgicons_precompose_ #1 _prop }
-        { width } { \fp_to_dim:N \l__rpgicons_precompose_width_fp }
-    \str_put_right:Ne \l__rpgicons_precompose_hash_base_str {
+    \__rpgicons_precompose_calculate_scale:Nn \l__rpgicons_precompose_scale_fp {#3}
+    \prop_put:cnV { g__rpgicons_precompose_ #1 _prop }
+        { scale } \l__rpgicons_precompose_scale_fp
+    \str_put_right:Ne \l__rpgicons_precompose_pdf_hash_base_str {
         | #1 | \prop_to_keyval:c { g__rpgicons_precompose_ #1 _prop } |
     }
 }
 
 \NewDocumentCommand \RPGIconsPrecomposeIcon { s O { } o m } {
     \tl_if_novalue:nTF {#3} {
-        \__rpgicons_precompose_register:nnnn {#4} {#1} { scale=.675 , #2 } {#4}
+        \__rpgicons_precompose_register:nnnn {#4} {#1} { scale=.333 , #2 } {#4}
     } {
-        \__rpgicons_precompose_register:nnnn {#3} {#1} { scale=.675 , #2 } {#4}
+        \__rpgicons_precompose_register:nnnn {#3} {#1} { scale=.333 , #2 } {#4}
     }
 }
 
@@ -2853,15 +2853,15 @@
 }
 
 \NewDocumentCommand \RPGIconsPDFHash { m } {
-    \str_set:Nn \l__rpgicons_precompose_hash_str {#1}
+    \str_set:Nn \l__rpgicons_precompose_pdf_hash_str {#1}
 }
 
 \hook_gput_code:nnn { begindocument } { . } {
     \bool_lazy_and:nnF {
         \clist_if_empty_p:N \g__rpgicons_precompose_clist
     } {
-        \str_if_eq_p:Ve \l__rpgicons_precompose_hash_str {
-            \str_mdfive_hash:V \l__rpgicons_precompose_hash_base_str
+        \str_if_eq_p:Ve \l__rpgicons_precompose_pdf_hash_str {
+            \str_mdfive_hash:V \l__rpgicons_precompose_pdf_hash_base_str
         }
     }
     \clist_if_empty:NF \g__rpgicons_precompose_clist {
@@ -2881,8 +2881,8 @@
                     [
                         \prop_item:cn { g__rpgicons_precompose_ #1 _prop } { style }
                     ]
-                    \str_use:N \c_left_brace_str 
-                        \prop_item:cn { g__rpgicons_precompose_ #1 _prop } { shape } 
+                    \str_use:N \c_left_brace_str
+                        \prop_item:cn { g__rpgicons_precompose_ #1 _prop } { shape }
                     \str_use:N \c_right_brace_str
                     \str_use:N \c_percent_str
                 }
@@ -2899,7 +2899,7 @@
             \iow_now:ce { @auxout } {
                 \tl_to_str:n { \RPGIconsPDFHash }
                 \str_use:N \c_left_brace_str
-                \str_mdfive_hash:V \l__rpgicons_precompose_hash_base_str
+                \str_mdfive_hash:V \l__rpgicons_precompose_pdf_hash_base_str
                 \str_use:N \c_right_brace_str
             }
         } {
@@ -2907,24 +2907,49 @@
         }
     }
 }
-% ===
 
 \sys_ensure_backend:
 \cs_new_protected:Npn \__rpgicons_load:nn #1#2 {
-    \bool_lazy_and:nnT { \sys_if_engine_pdftex_p: } { \sys_if_output_pdf_p: } {
-        \pdfximage ~ named { rpgicons. #1 } {#2}
-        \pdfrefximage \pdflastximage \scan_stop:
+    \box_move_up:nn { 
+        \fp_to_dim:n { \prop_item:cn { g__rpgicons_precompose_ #1 _prop } { scale } * \l_rpgicons_icon_baseline_dim }
     } {
-        \hbox_to_wd:ee { \prop_item:cn { g__rpgicons_precompose_ #1 _prop } { width } } {
-            \exp_not:N \special {
-                pdf:image ~ @ \str_mdfive_hash:n { rpgicons. #1 } ~
-                named ~ " rpgicons. #1 " ~ ( rpgicons. #2 )
+        \hbox_to_wd:ee { 
+            \fp_to_dim:n { \prop_item:cn { g__rpgicons_precompose_ #1 _prop } { scale } * 1cm }
+        } {
+            \sys_if_output_pdf:TF {
+                \prop_if_in:cnTF { g__rpgicons_precompose_ #1 _prop } { ref } {
+                    \tex_pdfrefximage:D
+                    \prop_item:cn { g__rpgicons_precompose_ #1 _prop } { ref }
+                    \scan_stop:
+                } {
+                    \tex_pdfximage:D named { rpgicons. #1 } {#2}
+                    \tex_pdfrefximage:D
+                    \tex_pdflastximage:D
+                    \scan_stop:
+                    \prop_put:cnV { g__rpgicons_precompose_ #1 _prop } { ref }
+                        \tex_pdflastximage:D
+                }
+            } {
+                \prop_if_in:cnTF { g__rpgicons_precompose_ #1 _prop } { ref } {
+                    \exp_not:N \tex_special:D {
+                        pdf:usexobj ~ @ \str_mdfive_hash:n { rpgicons. #1 }
+                    }
+                } {
+                    \exp_not:N \tex_special:D {
+                        pdf:image ~ @ \str_mdfive_hash:n { rpgicons. #1 } ~
+                        named ~ " rpgicons. #1 " ~ ( #2 )
+                    }
+                    \prop_put:cne { g__rpgicons_precompose_ #1 _prop } { ref } {
+                        \str_mdfive_hash:n { rpgicons. #1 }
+                    }
+                }
+                \skip_horizontal:n { 0pt plus 1fil minus 1fil }
             }
-            \skip_horizontal:n { 0pt plus 1fil minus 1fil }
         }
     }
 }
 \cs_generate_variant:Nn \__rpgicons_load:nn { ee }
+% ===
 
 \tl_const:Nn \c__rpgicons_icon_frame_saving_tl { saving }
 \seq_new:N \l__rpgicons_icon_shape_name_parts_seq

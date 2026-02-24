@@ -18,7 +18,7 @@ function rpgicons_get_refs(file)
     for i, o in pairs(pdfe.pagestotable(rpgicons_file)) do
         rpgicons_pages[i] = o[3]
     end
-    
+
     local rpgicons_dest = ''
     local rpgicons_dests = rpgicons_file.Catalog.Names.Dests.Names
     for i, o in pairs(pdfe.arraytotable(rpgicons_dests)) do
@@ -32,12 +32,12 @@ end
 
 local function rpgicons_get_page(dest)
     for p, d in pairs(rpgicons_pages) do
-        if (d == rpgicons_objects[ref]) then
+        if (d == rpgicons_objects[dest]) then
             return p
         end
     end
 end
 
-function rpgicons_load_icon(file, dest)
-    img.write({filename=file, page=rpgicons_get_page(dest)})
+function rpgicons_load_icon(dest, file)
+    img.write({page = rpgicons_get_page(dest), filename = file})
 end

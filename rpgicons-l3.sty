@@ -2936,7 +2936,7 @@
             \sys_if_output_pdf:TF {
                 \sys_if_engine_luatex:TF {
                     \lua_now:n {
-                        rpgicons_load_icon('#2', 'rpgicons.#1')
+                        rpgicons_load_icon(' rpgicons. #1 ', '#2')
                     }
                 } {
                     \prop_if_in:cnTF { g__rpgicons_precompose_ #1 _prop } { ref } {

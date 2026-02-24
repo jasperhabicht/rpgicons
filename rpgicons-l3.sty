@@ -2907,7 +2907,7 @@
             }
             \sys_if_engine_luatex:T {
                 \lua_now:e {
-                    rpgicons_get_refs(' \str_use:N \l_rpgicons_precompose_output_str .pdf')
+                    rpgicons_get_dest_pages(' \str_use:N \l_rpgicons_precompose_output_str .pdf')
                 }
             }
         } {
@@ -2920,7 +2920,7 @@
         \sys_if_engine_luatex_p:
     } {
         \lua_now:e {
-            rpgicons_get_refs(' \str_use:N \l_rpgicons_precompose_output_str .pdf')
+            rpgicons_get_dest_pages(' \str_use:N \l_rpgicons_precompose_output_str .pdf')
         }
     }
 }

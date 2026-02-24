@@ -10,34 +10,35 @@
 --
 -- This work has the LPPL maintenance status `maintained'.
 --
-local rpgicons_pages = {}
-local rpgicons_objects = {}
 
-function rpgicons_get_refs(file)
+-- rpgicons_pages = { objnum = page }
+local rpgicons_pages = {}
+
+-- rpgicons_dests = { dest = page }
+local rpgicons_dests = {}
+
+function rpgicons_get_dest_pages(file)
     local rpgicons_file = pdfe.open(file)
     for i, o in pairs(pdfe.pagestotable(rpgicons_file)) do
-        rpgicons_pages[i] = o[3]
+        -- third item of array contains objnum
+        rpgicons_pages[o[3]] = i
     end
 
-    local rpgicons_dest = ''
-    local rpgicons_dests = rpgicons_file.Catalog.Names.Dests.Names
-    for i, o in pairs(pdfe.arraytotable(rpgicons_dests)) do
-        if (math.mod(i, 2) == 0) then
-            rpgicons_objects[rpgicons_dest] = pdfe.arraytotable(rpgicons_dests[i].D)[1][3]
+    local rpgicons_dest_current = ''
+    local rpgicons_dest_names = rpgicons_file.Catalog.Names.Dests.Names
+    for i, o in pairs(pdfe.arraytotable(rpgicons_dest_names)) do
+        -- /Dests/Names contains pairs of name and ref
+        if (math.mod(i, 2) ~= 0) then
+            rpgicons_dest_current = rpgicons_dest_names[i]
         else
-            rpgicons_dest = rpgicons_dests[i]
-        end
-    end
-end
-
-local function rpgicons_get_page(dest)
-    for p, d in pairs(rpgicons_pages) do
-        if (d == rpgicons_objects[dest]) then
-            return p
+            -- /D contains single pair of ref and fit
+            -- third item of array contains objnum
+            rpgicons_dests[rpgicons_dest_current] =
+                rpgicons_pages[pdfe.arraytotable(rpgicons_dest_names[i].D)[1][3]]
         end
     end
 end
 
 function rpgicons_load_icon(dest, file)
-    node.write(img.node({page = rpgicons_get_page(dest), filename = file}))
+    img.write({page = rpgicons_dests[dest], filename = file})
 end

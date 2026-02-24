@@ -2862,7 +2862,7 @@
         local objpages = {}
 
         local function get_refs(file)
-            local document = pdfe.open('output_rpgicons.pdf')
+            local document = pdfe.open(file)
             for i,t in pairs(pdfe.pagestotable(document)) do
                 pageobjs[i] = t[3]
             end
@@ -2880,13 +2880,13 @@
 
         local function get_page(ref)
             for p,r in pairs(pageobjs) do
-                if r == objpages[ref] then
+                if (r == objpages[ref]) then
                     return p
                 end
             end
         end
 
-        local function load_icon(file, ref)
+        local ~ function ~ load_icon(file, ref)
             img.write({filename=file, page=get_page(ref)})
         end
     }
@@ -2937,9 +2937,9 @@
                 \str_mdfive_hash:V \l__rpgicons_precompose_pdf_hash_base_str
                 \str_use:N \c_right_brace_str
             }
-            \system_engine_if_luatex:T {
-                \directlua {    
-                    get_refs( \str_use:N \l_rpgicons_precompose_output_str .pdf ) 
+            \sys_if_engine_luatex:T {
+                \exp_args:Ne \directlua {    
+                    get_refs('\str_use:N \l_rpgicons_precompose_output_str .pdf') 
                 }
             }
         } {
@@ -2949,10 +2949,10 @@
     \bool_lazy_and:nnT {
         \file_if_exist_p:n { \str_use:N \l_rpgicons_precompose_output_str .pdf }
     } {
-        \system_engine_if_luatex_p:
+        \sys_if_engine_luatex_p:
     } {
-        \directlua {    
-            get_refs( \str_use:N \l_rpgicons_precompose_output_str .pdf ) 
+        \exp_args:Ne \directlua {    
+            get_refs('\str_use:N \l_rpgicons_precompose_output_str .pdf') 
         }
     }
 }
@@ -2966,17 +2966,23 @@
             \fp_to_dim:n { \prop_item:cn { g__rpgicons_precompose_ #1 _prop } { scale } * 1cm }
         } {
             \sys_if_output_pdf:TF {
-                \prop_if_in:cnTF { g__rpgicons_precompose_ #1 _prop } { ref } {
-                    \tex_pdfrefximage:D
-                    \prop_item:cn { g__rpgicons_precompose_ #1 _prop } { ref }
-                    \scan_stop:
+                \sys_if_engine_luatex:TF {
+                    \directlua {
+                        load_icon('#2', 'rpgicons.#1')
+                    }
                 } {
-                    \tex_pdfximage:D named { rpgicons. #1 } {#2}
-                    \tex_pdfrefximage:D
-                    \tex_pdflastximage:D
-                    \scan_stop:
-                    \prop_put:cnV { g__rpgicons_precompose_ #1 _prop } { ref }
+                    \prop_if_in:cnTF { g__rpgicons_precompose_ #1 _prop } { ref } {
+                        \tex_pdfrefximage:D
+                        \prop_item:cn { g__rpgicons_precompose_ #1 _prop } { ref }
+                        \scan_stop:
+                    } {
+                        \tex_pdfximage:D named { rpgicons. #1 } {#2}
+                        \tex_pdfrefximage:D
                         \tex_pdflastximage:D
+                        \scan_stop:
+                        \prop_put:cnV { g__rpgicons_precompose_ #1 _prop } { ref }
+                            \tex_pdflastximage:D
+                    }
                 }
             } {
                 \prop_if_in:cnTF { g__rpgicons_precompose_ #1 _prop } { ref } {

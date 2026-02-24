@@ -932,6 +932,8 @@ A lot of icons in a document can affect compilation time. If one or several icon
 
 In order to be able to compile an external PDF file during compilation (which required LaTeX to call another instance of LaTeX), the compilation needs to run with enabled shell escape.
 
+In order to be able to include the external PDF file into the document, a backend that supports PDF inclusion (such as PDFLaTeX, LuaLaTeX or XeLaTeX) needs to be used.
+
 \begin{macrodef}
 |\RPGIconsPrecomposeIcon|[<options>][<reference>]{<shape>}
 |\RPGIconsPrecomposeIcon*|[<options>][<reference>]{<shape>}

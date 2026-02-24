@@ -48,6 +48,9 @@
 \msg_new:nnn { rpgicons } { shell-escape-disabled } {
     Please ~ run ~ LaTeX ~ with ~ enabled ~ shell ~ escape.
 }
+\msg_new:nnn { rpgicons } { backend-unsupported } {
+    Backend ~ `#1` ~ does ~ not ~ support ~ including ~ PDF.
+}
 \msg_new:nnn { rpgicons } { generating-external~file } {
     Generating ~ external ~ PDF ~ file ~ `#1`.
 }
@@ -2846,7 +2849,15 @@
     }
 }
 
+\sys_ensure_backend:
 \NewDocumentCommand \RPGIconsPrecomposeIcon { s O { } o m } {
+    \bool_lazy_or:nnT {
+        \str_if_eq_p:Vn \c_sys_backend_str { dvips }
+    } {
+        \str_if_eq_p:Vn \c_sys_backend_str { dvisvgm }
+    } {
+        \msg_error:nnV { rpgicons } { backend-unsupported } \c_sys_backend_str
+    }
     \tl_if_novalue:nTF {#3} {
         \__rpgicons_precompose_register:nnnn {#4} {#1} {#2} {#4}
     } {
@@ -2936,7 +2947,6 @@
     }
 }
 
-\sys_ensure_backend:
 \cs_new_protected:Npn \__rpgicons_load_icon:nn #1#2 {
     \box_move_up:nn {
         \fp_to_dim:n { \prop_item:cn { g__rpgicons_precompose_ #1 _prop } { scale } * \l_rpgicons_icon_baseline_dim }

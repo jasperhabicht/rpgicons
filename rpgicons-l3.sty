@@ -2856,6 +2856,42 @@
     \str_set:Nn \l__rpgicons_precompose_pdf_hash_str {#1}
 }
 
+\sys_if_engine_luatex:T {
+    \directlua {
+        local pageobjs = {}
+        local objpages = {}
+
+        local function get_refs(file)
+            local document = pdfe.open('output_rpgicons.pdf')
+            for i,t in pairs(pdfe.pagestotable(document)) do
+                pageobjs[i] = t[3]
+            end
+            
+            local destname = ''
+            local nameddests = document.Catalog.Names.Dests.Names
+            for i,t in pairs(pdfe.arraytotable(nameddests)) do
+                if (math.mod(i, 2) == 0) then
+                    objpages[destname] = pdfe.arraytotable(nameddests[i].D)[1][3]
+                else
+                    destname = nameddests[i]
+                end
+            end
+        end
+
+        local function get_page(ref)
+            for p,r in pairs(pageobjs) do
+                if r == objpages[ref] then
+                    return p
+                end
+            end
+        end
+
+        local function load_icon(file, ref)
+            img.write({filename=file, page=get_page(ref)})
+        end
+    }
+}
+
 \hook_gput_code:nnn { begindocument } { . } {
     \bool_lazy_and:nnF {
         \clist_if_empty_p:N \g__rpgicons_precompose_clist
@@ -2863,8 +2899,7 @@
         \str_if_eq_p:Ve \l__rpgicons_precompose_pdf_hash_str {
             \str_mdfive_hash:V \l__rpgicons_precompose_pdf_hash_base_str
         }
-    }
-    \clist_if_empty:NF \g__rpgicons_precompose_clist {
+    } {
         \sys_if_shell:TF {
             \iow_open:Ne \l__rpgicons_precompose_document_iow { \str_use:N \l_rpgicons_precompose_output_str .tex }
             \iow_now:Nn \l__rpgicons_precompose_document_iow { \documentclass [ multi=rpgiconsuse ] { standalone } }
@@ -2902,8 +2937,22 @@
                 \str_mdfive_hash:V \l__rpgicons_precompose_pdf_hash_base_str
                 \str_use:N \c_right_brace_str
             }
+            \system_engine_if_luatex:T {
+                \directlua {    
+                    get_refs( \str_use:N \l_rpgicons_precompose_output_str .pdf ) 
+                }
+            }
         } {
             \msg_error:nn { rpgicons } { shell-escape-disabled }
+        }
+    }
+    \bool_lazy_and:nnT {
+        \file_if_exist_p:n { \str_use:N \l_rpgicons_precompose_output_str .pdf }
+    } {
+        \system_engine_if_luatex_p:
+    } {
+        \directlua {    
+            get_refs( \str_use:N \l_rpgicons_precompose_output_str .pdf ) 
         }
     }
 }

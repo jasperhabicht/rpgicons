@@ -2935,7 +2935,7 @@
         } {
             \sys_if_output_pdf:TF {
                 \sys_if_engine_luatex:TF {
-                    \lua_now:n {
+                    \exp_not:N \lua_now:n {
                         rpgicons_load_icon(' rpgicons. #1 ', '#2')
                     }
                 } {
@@ -2971,7 +2971,7 @@
         }
     }
 }
-\cs_generate_variant:Nn \__rpgicons_load:nn { ee }
+\cs_generate_variant:Nn \__rpgicons_load_icon:nn { ee }
 % ===
 
 \tl_const:Nn \c__rpgicons_icon_frame_saving_tl { saving }

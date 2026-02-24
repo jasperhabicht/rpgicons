@@ -2857,43 +2857,11 @@
 }
 
 \sys_if_engine_luatex:T {
-    \directlua {
-        local pageobjs = {}
-        local objpages = {}
-
-        local function get_refs(file)
-            local document = pdfe.open(file)
-            for i,t in pairs(pdfe.pagestotable(document)) do
-                pageobjs[i] = t[3]
-            end
-            
-            local destname = ''
-            local nameddests = document.Catalog.Names.Dests.Names
-            for i,t in pairs(pdfe.arraytotable(nameddests)) do
-                if (math.mod(i, 2) == 0) then
-                    objpages[destname] = pdfe.arraytotable(nameddests[i].D)[1][3]
-                else
-                    destname = nameddests[i]
-                end
-            end
-        end
-
-        local function get_page(ref)
-            for p,r in pairs(pageobjs) do
-                if (r == objpages[ref]) then
-                    return p
-                end
-            end
-        end
-
-        local ~ function ~ load_icon(file, ref)
-            img.write({filename=file, page=get_page(ref)})
-        end
-    }
+    \lua_load_module:n { rpgicons }
 }
 
 \hook_gput_code:nnn { begindocument } { . } {
-    \bool_lazy_and:nnF {
+    \bool_lazy_or:nnF {
         \clist_if_empty_p:N \g__rpgicons_precompose_clist
     } {
         \str_if_eq_p:Ve \l__rpgicons_precompose_pdf_hash_str {
@@ -2938,8 +2906,8 @@
                 \str_use:N \c_right_brace_str
             }
             \sys_if_engine_luatex:T {
-                \exp_args:Ne \directlua {    
-                    get_refs('\str_use:N \l_rpgicons_precompose_output_str .pdf') 
+                \lua_now:e {    
+                    rpgicons_get_refs(' \str_use:N \l_rpgicons_precompose_output_str .pdf') 
                 }
             }
         } {
@@ -2951,8 +2919,8 @@
     } {
         \sys_if_engine_luatex_p:
     } {
-        \exp_args:Ne \directlua {    
-            get_refs('\str_use:N \l_rpgicons_precompose_output_str .pdf') 
+        \lua_now:e {    
+            rpgicons_get_refs(' \str_use:N \l_rpgicons_precompose_output_str .pdf') 
         }
     }
 }
@@ -2967,8 +2935,8 @@
         } {
             \sys_if_output_pdf:TF {
                 \sys_if_engine_luatex:TF {
-                    \directlua {
-                        load_icon('#2', 'rpgicons.#1')
+                    \lua_now:n {
+                        rpgicons_load_icon('#2', 'rpgicons.#1')
                     }
                 } {
                     \prop_if_in:cnTF { g__rpgicons_precompose_ #1 _prop } { ref } {
@@ -2998,8 +2966,8 @@
                         \str_mdfive_hash:n { rpgicons. #1 }
                     }
                 }
-                \skip_horizontal:n { 0pt plus 1fil minus 1fil }
             }
+            \skip_horizontal:n { 0pt plus 1fil minus 1fil }
         }
     }
 }

@@ -2906,8 +2906,8 @@
                 \str_use:N \c_right_brace_str
             }
             \sys_if_engine_luatex:T {
-                \lua_now:e {    
-                    rpgicons_get_refs(' \str_use:N \l_rpgicons_precompose_output_str .pdf') 
+                \lua_now:e {
+                    rpgicons_get_refs(' \str_use:N \l_rpgicons_precompose_output_str .pdf')
                 }
             }
         } {
@@ -2919,18 +2919,18 @@
     } {
         \sys_if_engine_luatex_p:
     } {
-        \lua_now:e {    
-            rpgicons_get_refs(' \str_use:N \l_rpgicons_precompose_output_str .pdf') 
+        \lua_now:e {
+            rpgicons_get_refs(' \str_use:N \l_rpgicons_precompose_output_str .pdf')
         }
     }
 }
 
 \sys_ensure_backend:
-\cs_new_protected:Npn \__rpgicons_load:nn #1#2 {
-    \box_move_up:nn { 
+\cs_new_protected:Npn \__rpgicons_load_icon:nn #1#2 {
+    \box_move_up:nn {
         \fp_to_dim:n { \prop_item:cn { g__rpgicons_precompose_ #1 _prop } { scale } * \l_rpgicons_icon_baseline_dim }
     } {
-        \hbox_to_wd:ee { 
+        \hbox_to_wd:ee {
             \fp_to_dim:n { \prop_item:cn { g__rpgicons_precompose_ #1 _prop } { scale } * 1cm }
         } {
             \sys_if_output_pdf:TF {
@@ -3008,7 +3008,7 @@
         }
         \tag_socket_use:nV { rpgicons / icon / before } \l_rpgicons_icon_actualtext_str
         \bool_if:NTF \l__rpgicons_icon_precompose_bool {
-            \__rpgicons_load:ee {
+            \__rpgicons_load_icon:ee {
                 \str_if_empty:NTF \l_rpgicons_icon_precompose_ref_str {
                     #4
                 } {

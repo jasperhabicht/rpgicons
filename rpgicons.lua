@@ -39,5 +39,5 @@ local function rpgicons_get_page(dest)
 end
 
 function rpgicons_load_icon(dest, file)
-    img.write({page = rpgicons_get_page(dest), filename = file})
+    node.write(img.node({page = rpgicons_get_page(dest), filename = file}))
 end

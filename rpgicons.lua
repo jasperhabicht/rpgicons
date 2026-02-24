@@ -42,3 +42,5 @@ end
 function rpgicons_load_icon(dest, file)
     img.write({page = rpgicons_dests[dest], filename = file})
 end
+
+-- EOF

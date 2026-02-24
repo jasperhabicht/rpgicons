@@ -48,6 +48,12 @@
 \msg_new:nnn { rpgicons } { shell-escape-disabled } {
     Please ~ run ~ LaTeX ~ with ~ enabled ~ shell ~ escape.
 }
+\msg_new:nnn { rpgicons } { generating-external~file } {
+    Generating ~ external ~ PDF ~ file ~ `#1`.
+}
+\msg_new:nnn { rpgicons } { loading-external~file } {
+    Loading ~ external ~ PDF ~ file ~ `#1`.
+}
 \msg_if_exist:nnF { rpgicons } { tagging-unsupported } {
     \msg_new:nnn { rpgicons } { tagging-unsupported } {
         This ~ LaTeX ~ version ~ does ~ not ~ support ~ tagging.
@@ -2798,12 +2804,12 @@
 \fp_new:N \l__rpgicons_precompose_scale_fp
 \fp_new:N \l__rpgicons_precompose_scale_temp_fp
 \str_new:N \l__rpgicons_precompose_pdf_hash_base_str
-\str_new:N \l__rpgicons_precompose_pdf_hash_str
+\str_new:N \g__rpgicons_precompose_pdf_hash_str
 \cs_generate_variant:Nn \hbox_to_wd:nn { ee }
 \cs_generate_variant:Nn \iow_open:Nn { Ne }
 \cs_generate_variant:Nn \prop_to_keyval:N { c }
-\cs_generate_variant:Nn \str_if_eq_p:nn { Ve }
 \cs_generate_variant:Nn \str_mdfive_hash:n { V }
+\prg_generate_conditional_variant:Nnn \str_if_eq:nn { Ve } { TF }
 
 \cs_new_protected:Npn \__rpgicons_precompose_calculate_scale_aux:Nnn #1#2#3 {
     \str_if_eq:nnT {#2} { scale } {
@@ -2853,7 +2859,7 @@
 }
 
 \NewDocumentCommand \RPGIconsPDFHash { m } {
-    \str_set:Nn \l__rpgicons_precompose_pdf_hash_str {#1}
+    \str_gset:Nn \g__rpgicons_precompose_pdf_hash_str {#1}
 }
 
 \sys_if_engine_luatex:T {
@@ -2861,57 +2867,62 @@
 }
 
 \hook_gput_code:nnn { begindocument } { . } {
-    \bool_lazy_or:nnF {
-        \clist_if_empty_p:N \g__rpgicons_precompose_clist
-    } {
-        \str_if_eq_p:Ve \l__rpgicons_precompose_pdf_hash_str {
+    \clist_if_empty:NF \g__rpgicons_precompose_clist {
+        \str_if_eq:VeTF \g__rpgicons_precompose_pdf_hash_str {
             \str_mdfive_hash:V \l__rpgicons_precompose_pdf_hash_base_str
-        }
-    } {
-        \sys_if_shell:TF {
-            \iow_open:Ne \l__rpgicons_precompose_document_iow { \str_use:N \l_rpgicons_precompose_output_str .tex }
-            \iow_now:Nn \l__rpgicons_precompose_document_iow { \documentclass [ multi=rpgiconsuse ] { standalone } }
-            \iow_now:Nn \l__rpgicons_precompose_document_iow { \usepackage { rpgicons } }
-            \iow_now:Nn \l__rpgicons_precompose_document_iow { \begin { document } }
-            \clist_map_inline:Nn \g__rpgicons_precompose_clist {
-                \iow_now:Ne \l__rpgicons_precompose_document_iow {
-                    \tl_to_str:n { \begin { rpgiconsuse } }
-                    \str_use:N \c_percent_str
-                }
-                \iow_now:Nn \l__rpgicons_precompose_document_iow { \RPGIconsUseIcon }
-                \iow_now:Ne \l__rpgicons_precompose_document_iow {
-                    \prop_item:cn { g__rpgicons_precompose_ #1 _prop } { negative }
-                    [
-                        \prop_item:cn { g__rpgicons_precompose_ #1 _prop } { style }
-                    ]
-                    \str_use:N \c_left_brace_str
-                        \prop_item:cn { g__rpgicons_precompose_ #1 _prop } { shape }
-                    \str_use:N \c_right_brace_str
-                    \str_use:N \c_percent_str
-                }
-                \iow_now:Nn \l__rpgicons_precompose_document_iow { \RPGIconsPDFDestination }
-                \iow_now:Ne \l__rpgicons_precompose_document_iow {
-                    \str_use:N \c_left_brace_str #1 \str_use:N \c_right_brace_str
-                    \str_use:N \c_percent_str
-                }
-                \iow_now:Nn \l__rpgicons_precompose_document_iow { \end { rpgiconsuse } }
-            }
-            \iow_now:Nn \l__rpgicons_precompose_document_iow { \end { document } }
-            \iow_close:N \l__rpgicons_precompose_document_iow
-            \sys_shell_now:e { pdflatex ~ \str_use:N \l_rpgicons_precompose_output_str .tex }
-            \iow_now:ce { @auxout } {
-                \tl_to_str:n { \RPGIconsPDFHash }
-                \str_use:N \c_left_brace_str
-                \str_mdfive_hash:V \l__rpgicons_precompose_pdf_hash_base_str
-                \str_use:N \c_right_brace_str
-            }
-            \sys_if_engine_luatex:T {
-                \lua_now:e {
-                    rpgicons_get_dest_pages(' \str_use:N \l_rpgicons_precompose_output_str .pdf')
-                }
+        } {
+            \msg_info:nne { rpgicons } { loading-external~file } {
+                \str_use:N \l_rpgicons_precompose_output_str
             }
         } {
-            \msg_error:nn { rpgicons } { shell-escape-disabled }
+            \sys_if_shell:TF {
+                \msg_info:nne { rpgicons } { generating-external~file } {
+                    \str_use:N \l_rpgicons_precompose_output_str
+                }
+                \iow_open:Ne \l__rpgicons_precompose_document_iow { \str_use:N \l_rpgicons_precompose_output_str .tex }
+                \iow_now:Nn \l__rpgicons_precompose_document_iow { \documentclass [ multi=rpgiconsuse ] { standalone } }
+                \iow_now:Nn \l__rpgicons_precompose_document_iow { \usepackage { rpgicons } }
+                \iow_now:Nn \l__rpgicons_precompose_document_iow { \begin { document } }
+                \clist_map_inline:Nn \g__rpgicons_precompose_clist {
+                    \iow_now:Ne \l__rpgicons_precompose_document_iow {
+                        \tl_to_str:n { \begin { rpgiconsuse } }
+                        \str_use:N \c_percent_str
+                    }
+                    \iow_now:Nn \l__rpgicons_precompose_document_iow { \RPGIconsUseIcon }
+                    \iow_now:Ne \l__rpgicons_precompose_document_iow {
+                        \prop_item:cn { g__rpgicons_precompose_ #1 _prop } { negative }
+                        [
+                            \prop_item:cn { g__rpgicons_precompose_ #1 _prop } { style }
+                        ]
+                        \str_use:N \c_left_brace_str
+                            \prop_item:cn { g__rpgicons_precompose_ #1 _prop } { shape }
+                        \str_use:N \c_right_brace_str
+                        \str_use:N \c_percent_str
+                    }
+                    \iow_now:Nn \l__rpgicons_precompose_document_iow { \RPGIconsPDFDestination }
+                    \iow_now:Ne \l__rpgicons_precompose_document_iow {
+                        \str_use:N \c_left_brace_str #1 \str_use:N \c_right_brace_str
+                        \str_use:N \c_percent_str
+                    }
+                    \iow_now:Nn \l__rpgicons_precompose_document_iow { \end { rpgiconsuse } }
+                }
+                \iow_now:Nn \l__rpgicons_precompose_document_iow { \end { document } }
+                \iow_close:N \l__rpgicons_precompose_document_iow
+                \sys_shell_now:e { pdflatex ~ \str_use:N \l_rpgicons_precompose_output_str .tex }
+                \iow_now:ce { @auxout } {
+                    \tl_to_str:n { \RPGIconsPDFHash }
+                    \str_use:N \c_left_brace_str
+                    \str_mdfive_hash:V \l__rpgicons_precompose_pdf_hash_base_str
+                    \str_use:N \c_right_brace_str
+                }
+                \sys_if_engine_luatex:T {
+                    \lua_now:e {
+                        rpgicons_get_dest_pages(' \str_use:N \l_rpgicons_precompose_output_str .pdf')
+                    }
+                }
+            } {
+                \msg_error:nn { rpgicons } { shell-escape-disabled }
+            }
         }
     }
     \bool_lazy_and:nnT {

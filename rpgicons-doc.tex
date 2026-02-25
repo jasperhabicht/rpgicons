@@ -926,6 +926,8 @@ The option \macro{actualtext} can be used to change the default replacement text
 
 It is possible to change the replacement texts for specific icon types. For example, setting the key \macro{every saving={every charisma={actualtext={charisma saving}}}} will set the replacement text for every instance of \macro{\saving{charisma}} to \macro{charisma saving}.
 
+Note that the possibility to provide a key-value list to \macro{actualtext} taking shape names as keys and the relevant replacement texts as values has been removed. Instead, use the keys to set the style for all macros or shapes as shown in the previous paragraph.
+
 \subsection{Precompose icons}
 
 A lot of icons in a document can affect compilation time. If one or several icons are used several times, compilation time can be increased by precomposing these icons. In the precomposing process, the relevant icons are compiled into an external PDF file from which they are then loaded into the document. This not only decreases compilation time, because every icon is only created once, but it also reduces the file size, because every icon is only embedded into the file once and further uses just reference to the first embedded instance.
@@ -1130,7 +1132,7 @@ Because the icons cannot simply be used inside \macro{tikzpicture} environments,
 \end{macrodef}
 The command \macro{\provideprotectedrpgicon} creates a box containing the icon that would be created using one of the regular commands this package provides.
 
-\macro{\provideprotectedrpgicon{die}[large]{eightside}[blue, thick]{mybox}}, for example, stores the icon of an eight-sided die with the relevant style and Ti\emph{k}Z options in a new box named \macro{mybox}. Note that no integer can be added to the \macro{die} command in this context.
+\macro{\provideprotectedrpgicon{die}[large]{eightside}[blue, thick]{mybox}}, for example, stores the icon of an eight-sided die with the relevant style and Ti\emph{k}Z options in a new box named \macro{mybox}. Note that no integer can be added to the macros \macro{die} or \macro{currency} in this context.
 
 \provideprotectedrpgicon{die}[large]{eightside}[blue, thick]{mybox}
 

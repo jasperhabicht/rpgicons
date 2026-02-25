@@ -69,8 +69,6 @@ function load_icon(dest, file)
 end
 
 rpgicons = {
-    pages          = pages,
-    dests          = dests,
     get_dest_pages = get_dest_pages,
     load_icon      = load_icon
 }

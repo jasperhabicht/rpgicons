@@ -57,6 +57,9 @@
 \msg_new:nnn { rpgicons } { loading-external~file } {
     Loading ~ external ~ PDF ~ file ~ `#1`.
 }
+\msg_new:nnn { rpgicons } { precomposed-missing } {
+    The ~ icon ~ `#1' ~ has ~ not ~ been ~ precomposed.
+}
 \msg_if_exist:nnF { rpgicons } { tagging-unsupported } {
     \msg_new:nnn { rpgicons } { tagging-unsupported } {
         This ~ LaTeX ~ version ~ does ~ not ~ support ~ tagging.
@@ -2501,7 +2504,7 @@
 \fp_new:N \l_rpgicons_icon_opacity_background_fp
 \fp_set:Nn \l_rpgicons_icon_opacity_background_fp { 1.0 }
 
-\fp_new:N \l__rpgicons_icon_transform_temp_fp
+\fp_new:N \l__rpgicons_icon_transform_aux_fp
 \fp_new:N \l_rpgicons_icon_transform_scale_fp
 \fp_set:Nn \l_rpgicons_icon_transform_scale_fp { 1.0 }
 \fp_new:N \l_rpgicons_icon_transform_scale_inner_fp
@@ -2524,17 +2527,17 @@
     }
 }
 
-\tl_new:N \l__rpgicons_shape_name_tmpa_tl
-\tl_new:N \l__rpgicons_shape_name_tmpb_tl
+\tl_new:N \l__rpgicons_shape_name_tl
+\tl_new:N \l__rpgicons_shape_name_alias_tl
 \cs_new_protected:Npn \rpgicons_shape_set_eq:nn #1#2 {
-    \tl_set:Nn \l__rpgicons_shape_name_tmpa_tl {#1}
-    \tl_set:Nn \l__rpgicons_shape_name_tmpb_tl {#2}
-    \tl_replace_all:Nnn \l__rpgicons_shape_name_tmpa_tl { ~ } { _ }
-    \tl_replace_all:Nnn \l__rpgicons_shape_name_tmpb_tl { ~ } { _ }
+    \tl_set:Nn \l__rpgicons_shape_name_alias_tl {#1}
+    \tl_set:Nn \l__rpgicons_shape_name_tl {#2}
+    \tl_replace_all:Nnn \l__rpgicons_shape_name_alias_tl { ~ } { _ }
+    \tl_replace_all:Nnn \l__rpgicons_shape_name_tl { ~ } { _ }
     \cs_set_eq:cc {
-        rpgicons_draw_shape_ \l__rpgicons_shape_name_tmpa_tl :
+        rpgicons_draw_shape_ \l__rpgicons_shape_name_alias_tl :
     } {
-        rpgicons_draw_shape_ \l__rpgicons_shape_name_tmpb_tl :
+        rpgicons_draw_shape_ \l__rpgicons_shape_name_tl :
     }
 }
 \cs_new_protected:Npn \__rpgicons_shape_set_eq:w #1#2 \q_stop: {
@@ -2594,16 +2597,16 @@
     line ~ width         .dim_set:N  = \l_rpgicons_icon_linewidth_dim ,
     line ~ width         .initial:n  = { \l_draw_default_linewidth_dim } ,
     scale                .code:n     = {
-        \fp_set_eq:NN \l__rpgicons_icon_transform_temp_fp \l_rpgicons_icon_transform_scale_fp
+        \fp_set_eq:NN \l__rpgicons_icon_transform_aux_fp \l_rpgicons_icon_transform_scale_fp
         \fp_set:Nn \l_rpgicons_icon_transform_scale_fp {
-            \l__rpgicons_icon_transform_temp_fp * #1
+            \l__rpgicons_icon_transform_aux_fp * #1
         }
     } ,
     scale                .initial:n  = { 1.0 } ,
     scale ~ inner        .code:n     = {
-        \fp_set_eq:NN \l__rpgicons_icon_transform_temp_fp \l_rpgicons_icon_transform_scale_inner_fp
+        \fp_set_eq:NN \l__rpgicons_icon_transform_aux_fp \l_rpgicons_icon_transform_scale_inner_fp
         \fp_set:Nn \l_rpgicons_icon_transform_scale_inner_fp {
-            \l__rpgicons_icon_transform_temp_fp * #1
+            \l__rpgicons_icon_transform_aux_fp * #1
         }
     } ,
     scale ~ inner        .initial:n  = { 0.675 } ,
@@ -2805,9 +2808,10 @@
 \iow_new:N \l__rpgicons_precompose_document_iow
 \clist_new:N \g__rpgicons_precompose_clist
 \fp_new:N \l__rpgicons_precompose_scale_fp
-\fp_new:N \l__rpgicons_precompose_scale_temp_fp
+\fp_new:N \l__rpgicons_precompose_scale_aux_fp
 \str_new:N \l__rpgicons_precompose_pdf_hash_base_str
 \str_new:N \g__rpgicons_precompose_pdf_hash_str
+\str_new:N \l__rpgicons_precompose_ref_str
 \cs_generate_variant:Nn \hbox_to_wd:nn { ee }
 \cs_generate_variant:Nn \iow_open:Nn { Ne }
 \cs_generate_variant:Nn \prop_to_keyval:N { c }
@@ -2816,9 +2820,9 @@
 
 \cs_new_protected:Npn \__rpgicons_precompose_calculate_scale_aux:Nnn #1#2#3 {
     \str_if_eq:nnT {#2} { scale } {
-        \fp_set_eq:NN \l__rpgicons_precompose_scale_temp_fp #1
+        \fp_set_eq:NN \l__rpgicons_precompose_scale_aux_fp #1
         \fp_set:Nn #1 {
-            \l__rpgicons_precompose_scale_temp_fp * #3
+            \l__rpgicons_precompose_scale_aux_fp * #3
         }
     }
 }
@@ -2848,6 +2852,7 @@
         | #1 | \prop_to_keyval:c { g__rpgicons_precompose_ #1 _prop } |
     }
 }
+\cs_generate_variant:Nn \__rpgicons_precompose_register:nnnn { V }
 
 \sys_ensure_backend:
 \NewDocumentCommand \RPGIconsPrecomposeIcon { s O { } o m } {
@@ -2861,7 +2866,9 @@
     \tl_if_novalue:nTF {#3} {
         \__rpgicons_precompose_register:nnnn {#4} {#1} {#2} {#4}
     } {
-        \__rpgicons_precompose_register:nnnn {#3} {#1} {#2} {#4}
+        \str_set:Nn \l__rpgicons_precompose_ref_str {#3}
+        \str_replace_all:Nnn \l__rpgicons_precompose_ref_str { ~ } { _ }
+        \__rpgicons_precompose_register:Vnnn \l__rpgicons_precompose_ref_str {#1} {#2} {#4}
     }
 }
 
@@ -2947,7 +2954,7 @@
     }
 }
 
-\cs_new_protected:Npn \__rpgicons_load_icon:nn #1#2 {
+\cs_new_protected:Npn \__rpgicons_load_icon_aux:nn #1#2 {
     \box_move_up:nn {
         \fp_to_dim:n { \prop_item:cn { g__rpgicons_precompose_ #1 _prop } { scale } * \l_rpgicons_icon_baseline_dim }
     } {
@@ -2992,6 +2999,17 @@
         }
     }
 }
+\cs_generate_variant:Nn \__rpgicons_load_icon_aux:nn { V }
+
+\cs_new_protected:Npn \__rpgicons_load_icon:nn #1#2 {
+    \str_set:Nn \l__rpgicons_precompose_ref_str {#1}
+    \str_replace_all:Nnn \l__rpgicons_precompose_ref_str { ~ } { _ }    
+    \prop_if_exist:cTF { g__rpgicons_precompose_ \str_use:N \l__rpgicons_precompose_ref_str _prop } {
+        \__rpgicons_load_icon_aux:Vn \l__rpgicons_precompose_ref_str {#2}
+    } {
+        \msg_error:nnn { rpgicons } { precomposed-missing } {#1}
+    }
+}
 \cs_generate_variant:Nn \__rpgicons_load_icon:nn { ee }
 % ===
 
@@ -3031,7 +3049,7 @@
         \bool_if:NTF \l__rpgicons_icon_precompose_bool {
             \__rpgicons_load_icon:ee {
                 \str_if_empty:NTF \l_rpgicons_icon_precompose_ref_str {
-                    #4
+                    \str_use:N \l__rpgicons_icon_shape_name_str
                 } {
                     \str_use:N \l_rpgicons_icon_precompose_ref_str
                 }

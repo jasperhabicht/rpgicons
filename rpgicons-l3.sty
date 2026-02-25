@@ -3003,7 +3003,7 @@
 
 \cs_new_protected:Npn \__rpgicons_load_icon:nn #1#2 {
     \str_set:Nn \l__rpgicons_precompose_ref_str {#1}
-    \str_replace_all:Nnn \l__rpgicons_precompose_ref_str { ~ } { _ }    
+    \str_replace_all:Nnn \l__rpgicons_precompose_ref_str { ~ } { _ }
     \prop_if_exist:cTF { g__rpgicons_precompose_ \str_use:N \l__rpgicons_precompose_ref_str _prop } {
         \__rpgicons_load_icon_aux:Vn \l__rpgicons_precompose_ref_str {#2}
     } {

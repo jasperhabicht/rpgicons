@@ -26,7 +26,6 @@ local rpgicons_dests = {}
 -- For each named dest, gets the objnum of the referenced page
 -- and stores the relevant page number in rpgicons_dests (table).
 -- @param file The PDF file to be processed.
--- @return Boolean true
 function rpgicons_get_dest_pages(file)
     local rpgicons_file = pdfe.open(file)
     for i, o in pairs(pdfe.pagestotable(rpgicons_file)) do
@@ -53,14 +52,14 @@ function rpgicons_get_dest_pages(file)
                 ]
         end
     end
-    return true
 end
 
 --- Retrieves the PDF page including the icon via the relevant named dest.
 -- Finds the page number to the relevant named dest via rpgicons_dests (table).
 -- Outputs a TeX node containing the PDF page as included graphic.
--- @param file The PDF file to be processed.
--- @return TeX node
+-- @param dest The named dest.
+-- @param file The PDF file.
+-- @return PDF page as TeX node.
 function rpgicons_load_icon(dest, file)
     return img.write({page = rpgicons_dests[dest], filename = file})
 end

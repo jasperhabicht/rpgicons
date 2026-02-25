@@ -2935,7 +2935,7 @@
                 }
                 \sys_if_engine_luatex:T {
                     \lua_now:e {
-                        rpgicons_get_dest_pages(' \str_use:N \l_rpgicons_precompose_output_str .pdf')
+                        rpgicons_get_dest_pages(' \lua_escape:e { \str_use:N \l_rpgicons_precompose_output_str } .pdf')
                     }
                 }
             } {
@@ -2949,7 +2949,7 @@
         \sys_if_engine_luatex_p:
     } {
         \lua_now:e {
-            rpgicons_get_dest_pages(' \str_use:N \l_rpgicons_precompose_output_str .pdf')
+            rpgicons_get_dest_pages(' \lua_escape:e { \str_use:N \l_rpgicons_precompose_output_str } .pdf')
         }
     }
 }
@@ -2963,8 +2963,8 @@
         } {
             \sys_if_output_pdf:TF {
                 \sys_if_engine_luatex:TF {
-                    \exp_not:N \lua_now:n {
-                        rpgicons_load_icon(' rpgicons. #1 ', '#2')
+                    \exp_not:N \lua_now:e {
+                        rpgicons_load_icon(' rpgicons. \lua_escape:n {#1} ', ' \lua_escape:n {#2} ')
                     }
                 } {
                     \prop_if_in:cnTF { g__rpgicons_precompose_ #1 _prop } { ref } {

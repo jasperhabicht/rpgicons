@@ -293,7 +293,7 @@
     [The rpgicons package]
     {The \titlemacro{rpgicons} package}
     {A set of high-quality icons for use in notes for tabletop role-playing games}
-    {Jasper Habicht}[E-mail: \href{mailto:mail@jasperhabicht.de}{mail@jasperhabicht.de}. I am grateful to Joseph Wright who fixes bugs at an astonishing speed, to Ulrike Fischer and David Carlisle for their help in adding tagging support to this package and to all other contributors to this package.]
+    {Jasper Habicht}[E-mail: \href{mailto:mail@jasperhabicht.de}{mail@jasperhabicht.de}. I am grateful to Joseph Wright who fixes bugs at an astonishing speed, to Ulrike Fischer and David Carlisle for their help in adding tagging support to this package, to Max Chernoff for inspiring and guiding me in using Lua and to all other contributors to this package.]
     {Version \rpgiconsfileversion, released on \rpgiconsfiledate}
 
 \changes{v1.1.0}{2023/08/15}{First public release.}
@@ -955,7 +955,7 @@ For example, to precompose an icon that uses the \macro{charisma} shape in black
 
 Once an icon has been precomposed, it can be called by adding the \macro{precompose} option to the relevant macro. For example, \macro{\ability{charisma}[precompose]} would load the shape from the external PDF that has been generated using the shape name as reference. To call an icon using a specific reference, this reference can be given as value to the \macro{precompose} option. For example, the above described red variant of the \macro{\ability{charisma}} shape could be called using \macro{\ability{charisma}[precomppse=charisma-red]}.
 
-Due to the fact that styles such as colors and transformations have already been applied when the external PDF was generated, they won't have any effect when used together with the option \macro{precompose}.
+Due to the fact that options that set colors, transformations or other styles have already been applied when the external PDF was generated, they won't have any effect when used together with the option \macro{precompose}.
 
 \subsection{Roll dice syntax}\label{sec:roll-dice-syntax}
 

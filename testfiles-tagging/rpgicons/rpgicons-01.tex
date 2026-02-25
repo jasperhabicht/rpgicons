@@ -1,0 +1,60 @@
+\DocumentMetadata
+  {
+    lang=en-US,
+    pdfversion=2.0,
+    pdfstandard=ua-2,
+    tagging=on,
+  }
+\documentclass{article}
+\usepackage{rpgicons}
+
+\title{rpgicons (L3 variant) tagging test}
+
+\begin{document}
+
+\die{twentyside}{1}
+
+\die[large]{twentyside}{1}
+
+\ability{strength}
+
+\ability[negative]{strength}
+
+\saving{strength}
+
+\saving[empty]{}
+
+\spell{linear}
+
+\spellschool{abjuration}
+
+\spellschool[positive]{abjuration}
+
+\damage{acid}
+
+\attack{melee}
+
+\condition{buff}
+
+\class{barbarian}
+
+\alignment{lawful good}
+
+\currency{gold}{7}
+
+\roll{2d6 + 3d4 - 1}
+
+\rpgiconsset{
+  every twentyside={
+    actualtext={d20}
+  },
+  every saving={
+    actualtext={shield}
+  }
+}
+
+\die{twentyside}{1}
+
+\saving[empty]{}
+
+\end{document}

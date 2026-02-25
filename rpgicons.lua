@@ -28,9 +28,9 @@ local pages = {}
 local dests = {}
 
 --- Retrieves the page numbers of all named dests in a PDF.
--- Stores the objnums of all pages of the PDF file in rpgicons_pages (table). 
+-- Stores the objnums of all pages of the PDF file in table `pages`. 
 -- For each named dest, gets the objnum of the referenced page
--- and stores the relevant page number in rpgicons_dests (table).
+-- and stores the relevant page number in table `dests`.
 -- @param file The PDF file to be processed.
 function get_dest_pages(file)
     local _file = open(file)
@@ -59,7 +59,7 @@ function get_dest_pages(file)
 end
 
 --- Retrieves the PDF page including the icon via the relevant named dest.
--- Finds the page number to the relevant named dest via rpgicons_dests (table).
+-- Finds the page number to the relevant named dest via table `dests`.
 -- Outputs a TeX node containing the PDF page as included graphic.
 -- @param dest The named dest.
 -- @param file The PDF file.

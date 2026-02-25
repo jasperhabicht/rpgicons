@@ -11,12 +11,6 @@
 -- This work has the LPPL maintenance status `maintained'.
 --
 
-local open         = pdfe.open
-local pagestotable = pdfe.pagestotable
-local arraytotable = pdfe.arraytotable
-local mod          = math.mod
-local img_write    = img.write
-
 --- Stores the objnums of all pages of a PDF with the relevant page numbers.
 -- The objnums are stored as keys of the table.
 -- The page numbers are stored as values to the relevant keys. 
@@ -33,8 +27,8 @@ local dests = {}
 -- and stores the relevant page number in table `dests`.
 -- @param file The PDF file to be processed.
 function get_dest_pages(file)
-    local _file = open(file)
-    for i, o in pairs(pagestotable(_file)) do
+    local _file = pdfe.open(file)
+    for i, o in pairs(pdfe.pagestotable(_file)) do
         -- The third item of the array obtained by pdfe.arraytotable
         -- contains the objnum.
         pages[o[3]] = i
@@ -42,10 +36,10 @@ function get_dest_pages(file)
 
     local _dest_name = ''
     local _dest_names = _file.Catalog.Names.Dests.Names
-    for i, o in pairs(arraytotable(_dest_names)) do
+    for i, o in pairs(pdfe.arraytotable(_dest_names)) do
         -- The PDF item /Dests/Names contains pairs
         -- consisting of dest name and object reference.
-        if (mod(i, 2) ~= 0) then
+        if (math.mod(i, 2) ~= 0) then
             _dest_name = _dest_names[i]
         else
             -- The PDF item /D contains a single pair
@@ -53,7 +47,7 @@ function get_dest_pages(file)
             -- The third item of the array obtained by pdfe.arraytotable
             -- contains the objnum.
             dests[_dest_name] =
-                pages[arraytotable(_dest_names[i].D)[1][3]]
+                pages[pdfe.arraytotable(_dest_names[i].D)[1][3]]
         end
     end
 end
@@ -65,7 +59,7 @@ end
 -- @param file The PDF file.
 -- @return PDF page as TeX node.
 function load_icon(dest, file)
-    return img_write({page = dests[dest], filename = file})
+    return img.write({page = dests[dest], filename = file})
 end
 
 rpgicons = {

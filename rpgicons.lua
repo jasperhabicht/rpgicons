@@ -32,7 +32,8 @@ local dests = {}
 -- Stores the objnums of all pages of the PDF file in table `pages`. 
 -- For each named dest, gets the objnum of the referenced page
 -- and stores the relevant page number in table `dests`.
--- @param file The PDF file to be processed.
+-- @param file string The PDF file to be processed.
+-- @return nil - -
 function get_dest_pages(file)
     local _file = pdfe_open(file)
     for i, o in pairs(pdfe_pagestotable(_file)) do
@@ -62,9 +63,9 @@ end
 --- Retrieves the PDF page including the icon via the relevant named dest.
 -- Finds the page number to the relevant named dest via table `dests`.
 -- Outputs a TeX node containing the PDF page as included graphic.
--- @param dest The named dest.
--- @param file The PDF file.
--- @return PDF page as TeX node.
+-- @param dest string The named dest.
+-- @param file string The PDF file.
+-- @return luatex.node PDF page as TeX node.
 function load_icon(dest, file)
     return img_write({page = dests[dest], filename = file})
 end

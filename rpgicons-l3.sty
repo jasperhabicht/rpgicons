@@ -14,6 +14,7 @@
     {RPG Icons Package (l3 Variant)}
 
 \bool_new:N \l__rpgicons_unicode_mode_bool
+\bool_new:N \l__rpgicons_mmzx_bool
 \sys_if_engine_luatex:T {
     \bool_set_true:N \l__rpgicons_unicode_mode_bool
 }
@@ -2744,7 +2745,7 @@
 }
 
 \cs_if_exist:NTF \NewTaggingSocket {
-    \cs_generate_variant:Nn \tag_socket_use:nn { nV }
+    \cs_generate_variant:Nn \tag_socket_use:nn { nV, no }
 
     \NewTaggingSocket { rpgicons / icon / before } { 1 }
     \NewTaggingSocketPlug { rpgicons / icon / before } { actualtext } {
@@ -2786,6 +2787,24 @@
             \tag_mc_begin_pop:n { }
         }
         \AssignTaggingSocketPlug { rpgicons / roll / after } { actualtext }
+    }
+
+    \IfPackageLoadedTF { memoize-ext-tag } {
+        \bool_set_true:N \l__rpgicons_mmzx_bool
+        \NewTaggingSocketPlug { memoize/include/extern/before } { rpgicons / icon / actualtext } {
+          \tag_socket_use:no { rpgicons / icon / before } { \the\mmzxtagtoks }
+        }
+        \NewTaggingSocketPlug { memoize/include/extern/after } { rpgicons / icon / actualtext } {
+            \tag_socket_use:n { rpgicons / icon / after }
+        }
+        \NewTaggingSocketPlug { memoize/include/extern/before } { rpgicons / roll / actualtext } {
+            \tag_socket_use:no { rpgicons / roll / before } { \the\mmzxtagtoks }
+        }
+        \NewTaggingSocketPlug { memoize/include/extern/after } { rpgicons / roll / actualtext } {
+            \tag_socket_use:n { rpgicons / roll / after }
+        }
+    } {
+      \bool_set_false:N \l__rpgicons_mmzx_bool
     }
 } {
     \msg_warning:nn { rpgicons } { tagging-unsupported }
@@ -3046,6 +3065,30 @@
             \str_put_left:Nn \l_rpgicons_icon_actualtext_str { #3 ~ }
         }
         \tag_socket_use:nV { rpgicons / icon / before } \l_rpgicons_icon_actualtext_str
+        \bool_if:NT \l__rpgicons_mmzx_bool {
+            \xtoksapp\mmzCCMemo {
+                \exp_not:N \mmzxtagtoks
+                =
+                \c_left_brace_str
+                \l_rpgicons_icon_actualtext_str
+                \the\mmzxtagtoks
+                \c_right_brace_str
+                \exp_not:N \AssignSocketPlug
+                \c_left_brace_str
+                tagsupport/memoize/include/extern/before
+                \c_right_brace_str
+                \c_left_brace_str
+                rpgicons / icon / actualtext
+                \c_right_brace_str
+                \exp_not:N \AssignSocketPlug
+                \c_left_brace_str
+                tagsupport/memoize/include/extern/after
+                \c_right_brace_str
+                \c_left_brace_str
+                rpgicons / icon / actualtext
+                \c_right_brace_str
+            }
+        }
         \bool_if:NTF \l__rpgicons_icon_precompose_bool {
             \__rpgicons_load_icon:ee {
                 \str_if_empty:NTF \l_rpgicons_icon_precompose_ref_str {
@@ -3360,6 +3403,30 @@
     \mode_leave_vertical:
     \__rpgicons_roll_prepare_actualtext:Nn \l__rpgicons_roll_actualtext_tl {#1}
     \tag_socket_use:nV { rpgicons / roll / before } \l__rpgicons_roll_actualtext_tl
+    \bool_if:NT \l__rpgicons_mmzx_bool {
+        \xtoksapp\mmzCCMemo {
+            \exp_not:N \mmzxtagtoks
+            =
+            \c_left_brace_str
+            \l__rpgicons_roll_actualtext_tl
+            \the\mmzxtagtoks
+            \c_right_brace_str
+            \exp_not:N \AssignSocketPlug
+            \c_left_brace_str
+            tagsupport/memoize/include/extern/before
+            \c_right_brace_str
+            \c_left_brace_str
+            rpgicons / roll / actualtext
+            \c_right_brace_str
+            \exp_not:N \AssignSocketPlug
+            \c_left_brace_str
+            tagsupport/memoize/include/extern/after
+            \c_right_brace_str
+            \c_left_brace_str
+            rpgicons / roll / actualtext
+            \c_right_brace_str
+        }
+    }
     \tag_suspend:n { \RPGIconsRoll }
     \__rpgicons_roll_syntax_parse:e {#1}
     \tag_resume:n { \RPGIconsRoll }

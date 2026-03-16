@@ -15,6 +15,8 @@
 
 \bool_new:N \l__rpgicons_unicode_mode_bool
 \bool_new:N \l__rpgicons_mmzx_bool
+\bool_new:N \l__rpgicons_mmzx_tag_bool
+\bool_set_false:N \l__rpgicons_mmzx_tag_bool
 \sys_if_engine_luatex:T {
     \bool_set_true:N \l__rpgicons_unicode_mode_bool
 }
@@ -2747,6 +2749,59 @@
     }
 }
 
+\IfPackageLoadedTF { memoize } {
+    \IfPackageLoadedF { memoize-ext } {
+        \msg_info:nnnn { rpgicons } { loading-pkg } { memoize-ext } { ~ for ~
+            memoize ~ support. }
+        \RequirePackage { memoize-ext }
+    }
+    \bool_set_true:N \l__rpgicons_mmzx_bool
+    \cs_new_protected_nopar:Npn \__rpgicons_keys_to_context: {
+      \mmznext {
+        direct ~ ccmemo ~ input,
+        context/.expanded = \__rpgicons_keys_context: ,
+      }
+    }
+    \cs_new_nopar:Npn \__rpgicons_keys_context: {
+        before ~ sep           
+          = \dim_to_decimal:n { \l_rpgicons_icon_before_sep_dim } ,
+        after ~ sep            
+          = \dim_to_decimal:n { \l_rpgicons_icon_after_sep_dim } ,
+        baseline               
+          = \dim_to_decimal:n { \l_rpgicons_icon_baseline_dim } ,
+        frame                  = \l_rpgicons_icon_frame_tl ,
+        variant                
+          = \int_to_arabic:n { \l_rpgicons_icon_variant_int } ,
+        stroke                 = \l_rpgicons_icon_color_stroke_tl ,
+        fill                   = \l_rpgicons_icon_color_fill_tl ,
+        text                   = \l_rpgicons_icon_color_text_tl ,
+        color                  = \l_rpgicons_icon_color_stroke_tl ,
+           \l_rpgicons_icon_color_fill_tl ,
+           \l_rpgicons_icon_color_text_tl , 
+        background             = \l_rpgicons_icon_color_background_tl ,
+        stroke ~ opacity 
+          = \fp_to_decimal:N \l_rpgicons_icon_opacity_stroke_fp ,
+        fill ~ opacity 
+          = \fp_to_decimal:N \l_rpgicons_icon_opacity_fill_fp ,
+        text ~ opacity   
+          = \fp_to_decimal:N \l_rpgicons_icon_opacity_text_fp ,
+        background ~ opacity   
+          = \fp_to_decimal:N \l_rpgicons_icon_opacity_background_fp ,
+        line ~ width 
+          = \dim_to_decimal:n { \l_rpgicons_icon_linewidth_dim } ,
+        scale = \fp_to_decimal:N \l_rpgicons_icon_transform_scale_fp ,
+        scale ~ inner  
+          = \fp_to_decimal:N \l_rpgicons_icon_transform_scale_inner_fp ,
+        rotate  = \fp_to_decimal:N \l_rpgicons_icon_transform_rotate_fp ,
+        % alias     ,
+        precompose ~ output    = \l_rpgicons_precompose_output_str ,
+        actualtext             = \l_rpgicons_icon_actualtext_str ,
+    }
+} {
+    \bool_set_false:N \l__rpgicons_mmzx_bool
+    \cs_if_free:cT { ifmemoize } { \newif\ifmemoize\memoizefalse }
+}
+
 \cs_if_exist:NTF \NewTaggingSocket {
     \cs_generate_variant:Nn \tag_socket_use:nn { nV, no }
 
@@ -2792,13 +2847,8 @@
         \AssignTaggingSocketPlug { rpgicons / roll / after } { actualtext }
     }
 
-    \IfPackageLoadedTF { memoize } {
-        \IfPackageLoadedF { memoize-ext } {
-          \msg_info:nnnn { rpgicons } { loading-pkg } { memoize-ext } { ~ for ~
-              memoize ~ tagging ~ support. }
-          \RequirePackage { memoize-ext }
-        }
-        \bool_set_true:N \l__rpgicons_mmzx_bool
+    \IfPackageLoadedT { memoize-ext-tag } {
+        \bool_set_true:N \l__rpgicons_mmzx_tag_bool
         \NewTaggingSocketPlug { memoize/include/extern/before } 
           { rpgicons / icon / actualtext } {
             \tag_socket_use:no { rpgicons / icon / before } { \the\mmzxtagtoks }
@@ -2815,10 +2865,8 @@
           { rpgicons / roll / actualtext } {
             \tag_socket_use:n { rpgicons / roll / after }
         }
-    } {
-      \bool_set_false:N \l__rpgicons_mmzx_bool
-    }
-} {
+    } 
+  } {
     \msg_warning:nn { rpgicons } { tagging-unsupported }
     \cs_if_exist:NF \tag_socket_use:n {
         \cs_new:Npn \tag_socket_use:n #1 { }
@@ -2835,51 +2883,6 @@
     }
 }
 
-\IfPackageLoadedTF { memoize } {
-    \cs_new_protected_nopar:Npn \__rpgicons_keys_to_context: {
-      \mmznext {
-        direct ~ ccmemo ~ input,
-        context/.expanded = \__rpgicons_keys_context: ,
-      }
-    }
-    \cs_new_nopar:Npn \__rpgicons_keys_context: {
-        before ~ sep           
-          = \dim_to_decimal:n { \l_rpgicons_icon_before_sep_dim } ,
-        after ~ sep            
-          = \dim_to_decimal:n { \l_rpgicons_icon_after_sep_dim } ,
-        baseline               
-          = \dim_to_decimal:n { \l_rpgicons_icon_baseline_dim } ,
-        frame                  = \l_rpgicons_icon_frame_tl ,
-        variant                
-          = \int_to_arabic:n { \l_rpgicons_icon_variant_int } ,
-        stroke                 = \l_rpgicons_icon_color_stroke_tl ,
-        fill                   = \l_rpgicons_icon_color_fill_tl ,
-        text                   = \l_rpgicons_icon_color_text_tl ,
-        color                  = \l_rpgicons_icon_color_stroke_tl ,
-           \l_rpgicons_icon_color_fill_tl ,
-           \l_rpgicons_icon_color_text_tl , 
-        background             = \l_rpgicons_icon_color_background_tl ,
-        stroke ~ opacity 
-          = \fp_to_decimal:N \l_rpgicons_icon_opacity_stroke_fp ,
-        fill ~ opacity 
-          = \fp_to_decimal:N \l_rpgicons_icon_opacity_fill_fp ,
-        text ~ opacity   
-          = \fp_to_decimal:N \l_rpgicons_icon_opacity_text_fp ,
-        background ~ opacity   
-          = \fp_to_decimal:N \l_rpgicons_icon_opacity_background_fp ,
-        line ~ width 
-          = \dim_to_decimal:n { \l_rpgicons_icon_linewidth_dim } ,
-        scale = \fp_to_decimal:N \l_rpgicons_icon_transform_scale_fp ,
-        scale ~ inner  
-          = \fp_to_decimal:N \l_rpgicons_icon_transform_scale_inner_fp ,
-        rotate  = \fp_to_decimal:N \l_rpgicons_icon_transform_rotate_fp ,
-        % alias     ,
-        precompose ~ output    = \l_rpgicons_precompose_output_str ,
-        actualtext             = \l_rpgicons_icon_actualtext_str ,
-    }
-} {
-  \cs_if_free:cT { ifmemoize } { \newif\ifmemoize\memoizefalse }
-}
 
 % === precompose icons
 \iow_new:N \l__rpgicons_precompose_document_iow
@@ -3123,9 +3126,9 @@
             \str_put_left:Nn \l_rpgicons_icon_actualtext_str { #3 ~ }
         }
         \tag_socket_use:nV { rpgicons / icon / before } \l_rpgicons_icon_actualtext_str
-        \ifmemoize
+        \bool_if:NT \l__rpgicons_mmzx_bool {
             \__rpgicons_keys_to_context:
-            \bool_if:NT \l__rpgicons_mmzx_bool {
+            \bool_if:NT \l__rpgicons_mmzx_tag_bool {
                 \xtoksapp\mmzCCMemo {
                     \exp_not:N \mmzxtagtoks
                     =
@@ -3149,7 +3152,7 @@
                     \c_right_brace_str
                 }
             }
-        \fi
+        }
         \bool_if:NTF \l__rpgicons_icon_precompose_bool {
             \__rpgicons_load_icon:ee {
                 \str_if_empty:NTF \l_rpgicons_icon_precompose_ref_str {
@@ -3464,9 +3467,9 @@
     \mode_leave_vertical:
     \__rpgicons_roll_prepare_actualtext:Nn \l__rpgicons_roll_actualtext_tl {#1}
     \tag_socket_use:nV { rpgicons / roll / before } \l__rpgicons_roll_actualtext_tl
-    \ifmemoize
+    \bool_if:NT \l__rpgicons_mmzx_bool {
         \__rpgicons_keys_to_context:
-        \bool_if:NT \l__rpgicons_mmzx_bool {
+        \bool_if:NT \l__rpgicons_mmzx_tag_bool {
             \xtoksapp\mmzCCMemo {
                 \exp_not:N \mmzxtagtoks
                 =
@@ -3490,7 +3493,7 @@
                 \c_right_brace_str
             }
         }
-    \fi
+    }
     \tag_suspend:n { \RPGIconsRoll }
     \__rpgicons_roll_syntax_parse:e {#1}
     \tag_resume:n { \RPGIconsRoll }

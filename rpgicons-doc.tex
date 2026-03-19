@@ -11,8 +11,8 @@
 % This work has the LPPL maintenance status `maintained'.
 %
 \documentclass[a4paper]{article}
-\def\rpgiconsfileversion{2.6.0}
-\def\rpgiconsfiledate{25 February 2026}
+\def\rpgiconsfileversion{2.7.0}
+\def\rpgiconsfiledate{20 March 2026}
 
 \usepackage[T1]{fontenc}
 \usepackage{Alegreya}
@@ -345,6 +345,7 @@
 \changes{v2.5.1}{2026/02/06}{Added key to generate alias for shapes in L3 variant. Update documentation.}
 \changes{v2.5.2}{2026/02/15}{Added variant for melee, bard and jewellery shape. Update documentation.}
 \changes{v2.6.0}{2026/02/25}{Added functionality to precompose icons in L3 variant. Update accessibility support.}
+\changes{v2.7.0}{2026/03/20}{Default replacement text provided if tagging is active in PGF variant.}
 
 \begin{document}
 
@@ -1039,7 +1040,7 @@ The PGF variant of the package defines a set of commands on which the user comma
 
 Using the PGF variant of the package, all icons can by styled using arbitrary Ti\emph{k}Z styles in general. As an example, \macro{\die{eightside}[blue, thick]{2}} results in \die{eightside}[blue, thick]{2}.
 
-If PDF tagging is activated by using \macro{\DocumentMetadata{tagging=on}}, it is possible to add a replacement text to an icon using the \macro{actualtext} key.
+If PDF tagging is activated by using \macro{\DocumentMetadata{tagging=on}}, a replacement text is automatically added to the relevant icon which can be copied to the clipboard and can be read by screen readers. Note that tagging support depends on the used PDF reader. It is possible to add a replacement text to an icon using the \macro{actualtext} key.
 
 \begin{macrodef}
 !rpg icons/!|every die|/.style={<options>}

@@ -11,7 +11,7 @@
 % This work has the LPPL maintenance status `maintained'.
 %
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{rpgicons-pgf}[2026-02-25 RPG Icons Package (PGF Variant) (2.6.0)]
+\ProvidesPackage{rpgicons-pgf}[2026-03-20 RPG Icons Package (PGF Variant) (2.7.0)]
 
 % provide pics option
 \newif\ifrpgicons@pics\rpgicons@picsfalse
@@ -584,7 +584,7 @@
     \def\rpgicons@diceiconfg{fgnrm}\fi%
   \ifx\rpgicons@diceiconnrmlrg\rpgicons@diceiconlrg\else\rpgicons@ifEmptyF{#4}{#4\,}\fi%
   \hspace{\rpgicons@beforesep}%
-  \tikz[rpg icons, rpg icons/every die, rpg icons/every #2,
+  \tikz[rpg icons, rpg icons/every die, rpg icons/every #2, actualtext={#2},
     baseline=\rpgicons@baseline, fgnrm/.style={scale=.333}, fglrg/.style={scale=.675}, #3] {
     \node[\rpgicons@shape@variant{#2}, draw, \rpgicons@diceiconfg, font={\footnotesize}] at (0cm,0cm)
       {\ifx\rpgicons@diceiconnrmlrg\rpgicons@diceiconlrg\textbf{#4}\fi};
@@ -1124,7 +1124,7 @@
     \def\rpgicons@abilityiconfg{fgneg}\else%
     \def\rpgicons@abilityiconfg{fgpos}\fi%
   \hspace{\rpgicons@beforesep}%
-  \tikz[rpg icons, rpg icons/every ability, rpg icons/every #2,
+  \tikz[rpg icons, rpg icons/every ability, rpg icons/every #2, actualtext={#2},
     baseline=\rpgicons@baseline, fgpos/.style={draw}, fgneg/.style={draw=rpgicons@bg, line width=.6pt}, #3] {
     \ifx\rpgicons@abilityiconposneg\rpgicons@abilityiconneg%
       \path[scale=.333, fill] (0cm,0cm) circle[radius=.45cm];
@@ -1145,7 +1145,7 @@
     \def\rpgicons@savingstyle{}\else%
     \def\rpgicons@savingstyle{rpg icons/every #2}\fi%
   \hspace{\rpgicons@beforesep}%
-  \tikz[rpg icons, rpg icons/every saving, \rpgicons@savingstyle,
+  \tikz[rpg icons, rpg icons/every saving, \rpgicons@savingstyle, actualtext={#2 saving},
     baseline=\rpgicons@baseline, #3] {
     \path[draw, scale=.333] (-.45cm,.45cm) -- (.45cm,.45cm) -- (.45cm,-.05cm)
       arc[start angle=360, end angle=180, radius=.45cm] -- cycle;
@@ -1408,7 +1408,7 @@
 
 \NewDocumentCommand{\rpgiconsspell}{ m O{} }{%
   \hspace{\rpgicons@beforesep}%
-  \tikz[rpg icons, rpg icons/every spell, rpg icons/every #1,
+  \tikz[rpg icons, rpg icons/every spell, rpg icons/every #1, actualtext={#2},
     baseline=\rpgicons@baseline, #2] {
     \node[\rpgicons@shape@variant{#1}, draw, scale=.333] at (0cm,0cm) {};
     \path[draw=none, scale=.333] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
@@ -1603,7 +1603,7 @@
     \def\rpgicons@spellschooliconbg{bgneg}\else%
     \def\rpgicons@spellschooliconbg{bgpos}\fi%
   \hspace{\rpgicons@beforesep}%
-  \tikz[rpg icons, rpg icons/every spellschool, rpg icons/every #2,
+  \tikz[rpg icons, rpg icons/every spellschool, rpg icons/every #2, actualtext={#2},
     baseline=\rpgicons@baseline, fgpos/.style={draw=rpgicons@bg, line width=.6pt}, fgneg/.style={draw},
     bgpos/.style={fill}, bgneg/.style={draw}, #3] {
     \path[scale=.333, \rpgicons@spellschooliconbg] (-.475cm,.35cm)
@@ -1972,7 +1972,7 @@
 
 \NewDocumentCommand{\rpgiconsdamage}{ m O{} }{%
   \hspace{\rpgicons@beforesep}%
-  \tikz[rpg icons, rpg icons/every damage, rpg icons/every #1,
+  \tikz[rpg icons, rpg icons/every damage, rpg icons/every #1, actualtext={#2},
     baseline=\rpgicons@baseline, #2] {
     \path[draw, scale=.333] (0cm,0cm) circle[radius=.5cm];
     \node[\rpgicons@shape@variant{#1}, draw, scale=.225] at (0cm,0cm) {};
@@ -2158,7 +2158,7 @@
 
 \NewDocumentCommand{\rpgiconsattack}{ m O{} }{%
   \hspace{\rpgicons@beforesep}%
-  \tikz[rpg icons, rpg icons/every attack, rpg icons/every #1,
+  \tikz[rpg icons, rpg icons/every attack, rpg icons/every #1, actualtext={#2},
     baseline=\rpgicons@baseline, #2] {
     \node[\rpgicons@shape@variant{#1}, draw, scale=.333] at (0cm,0cm) {};
     \path[draw=none, scale=.333] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
@@ -2695,7 +2695,7 @@
 
 \NewDocumentCommand{\rpgiconscondition}{ m O{} }{%
   \hspace{\rpgicons@beforesep}%
-  \tikz[rpg icons, rpg icons/every condition, rpg icons/every #1,
+  \tikz[rpg icons, rpg icons/every condition, rpg icons/every #1, actualtext={#2},
     baseline=\rpgicons@baseline, #2] {
     \node[\rpgicons@shape@variant{#1}, draw, scale=.333] at (0cm,0cm) {};
     \path[draw=none, scale=.333] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
@@ -3523,7 +3523,7 @@
     \def\rpgicons@classiconbg{bgneg}\else%
     \def\rpgicons@classiconbg{bgpos}\fi%
   \hspace{\rpgicons@beforesep}%
-  \tikz[rpg icons, rpg icons/every class, rpg icons/every #2,
+  \tikz[rpg icons, rpg icons/every class, rpg icons/every #2, actualtext={#2},
     baseline=\rpgicons@baseline, fgpos/.style={draw=rpgicons@bg, line width=.6pt}, fgneg/.style={draw},
     bgpos/.style={fill}, bgneg/.style={draw}, #3] {
     \path[scale=.333, \rpgicons@classiconbg] (-.45cm,-.45cm) rectangle (.45cm,.45cm);
@@ -3687,7 +3687,7 @@
     \def\rpgicons@alignmenticonbg{bgneg}\else%
     \def\rpgicons@alignmenticonbg{bgpos}\fi%
   \hspace{\rpgicons@beforesep}%
-  \tikz[rpg icons, rpg icons/every alignment, rpg icons/every #2,
+  \tikz[rpg icons, rpg icons/every alignment, rpg icons/every #2, actualtext={#2},
     baseline=\rpgicons@baseline, fgpos/.style={draw=rpgicons@bg, line width=.6pt}, fgneg/.style={draw},
     bgpos/.style={fill}, bgneg/.style={draw}, #3] {
     \path[scale=.333, \rpgicons@alignmenticonbg] (30:.525cm)
@@ -3878,7 +3878,7 @@
 \NewDocumentCommand{\rpgiconscurrency}{ m O{} m }{%
   \rpgicons@ifEmptyF{#3}{#3\,}%
   \hspace{\rpgicons@beforesep}%
-  \tikz[rpg icons, rpg icons/every currency, rpg icons/every #1,
+  \tikz[rpg icons, rpg icons/every currency, rpg icons/every #1, actualtext={#2},
     baseline=\rpgicons@baseline, #2] {
     \node[\rpgicons@shape@variant{#1}, draw, scale=.333] at (0cm,0cm) {};
     \path[draw=none, scale=.333] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);

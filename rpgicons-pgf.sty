@@ -1142,10 +1142,14 @@
   \edef\rpgicons@abilityiconnrmemp{#1}%
   \edef\rpgicons@abilityiconemp{empty}%
   \ifx\rpgicons@abilityiconnrmemp\rpgicons@abilityiconemp%
-    \def\rpgicons@savingstyle{}\else%
-    \def\rpgicons@savingstyle{rpg icons/every #2}\fi%
+    \def\rpgicons@savingstyle{}%
+    \def\rpgicons@savingactualtext{actualtext={saving}}%
+  \else%
+    \def\rpgicons@savingstyle{rpg icons/every #2}%
+    \def\rpgicons@savingactualtext{actualtext={#2 saving}}%
+  \fi%
   \hspace{\rpgicons@beforesep}%
-  \tikz[rpg icons, rpg icons/every saving, \rpgicons@savingstyle, actualtext={#2 saving},
+  \tikz[rpg icons, rpg icons/every saving, \rpgicons@savingstyle, \rpgicons@savingactualtext,
     baseline=\rpgicons@baseline, #3] {
     \path[draw, scale=.333] (-.45cm,.45cm) -- (.45cm,.45cm) -- (.45cm,-.05cm)
       arc[start angle=360, end angle=180, radius=.45cm] -- cycle;
@@ -1408,7 +1412,7 @@
 
 \NewDocumentCommand{\rpgiconsspell}{ m O{} }{%
   \hspace{\rpgicons@beforesep}%
-  \tikz[rpg icons, rpg icons/every spell, rpg icons/every #1, actualtext={#2},
+  \tikz[rpg icons, rpg icons/every spell, rpg icons/every #1, actualtext={#1},
     baseline=\rpgicons@baseline, #2] {
     \node[\rpgicons@shape@variant{#1}, draw, scale=.333] at (0cm,0cm) {};
     \path[draw=none, scale=.333] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
@@ -1972,7 +1976,7 @@
 
 \NewDocumentCommand{\rpgiconsdamage}{ m O{} }{%
   \hspace{\rpgicons@beforesep}%
-  \tikz[rpg icons, rpg icons/every damage, rpg icons/every #1, actualtext={#2},
+  \tikz[rpg icons, rpg icons/every damage, rpg icons/every #1, actualtext={#1},
     baseline=\rpgicons@baseline, #2] {
     \path[draw, scale=.333] (0cm,0cm) circle[radius=.5cm];
     \node[\rpgicons@shape@variant{#1}, draw, scale=.225] at (0cm,0cm) {};
@@ -2158,7 +2162,7 @@
 
 \NewDocumentCommand{\rpgiconsattack}{ m O{} }{%
   \hspace{\rpgicons@beforesep}%
-  \tikz[rpg icons, rpg icons/every attack, rpg icons/every #1, actualtext={#2},
+  \tikz[rpg icons, rpg icons/every attack, rpg icons/every #1, actualtext={#1},
     baseline=\rpgicons@baseline, #2] {
     \node[\rpgicons@shape@variant{#1}, draw, scale=.333] at (0cm,0cm) {};
     \path[draw=none, scale=.333] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
@@ -2695,7 +2699,7 @@
 
 \NewDocumentCommand{\rpgiconscondition}{ m O{} }{%
   \hspace{\rpgicons@beforesep}%
-  \tikz[rpg icons, rpg icons/every condition, rpg icons/every #1, actualtext={#2},
+  \tikz[rpg icons, rpg icons/every condition, rpg icons/every #1, actualtext={#1},
     baseline=\rpgicons@baseline, #2] {
     \node[\rpgicons@shape@variant{#1}, draw, scale=.333] at (0cm,0cm) {};
     \path[draw=none, scale=.333] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
@@ -3878,7 +3882,7 @@
 \NewDocumentCommand{\rpgiconscurrency}{ m O{} m }{%
   \rpgicons@ifEmptyF{#3}{#3\,}%
   \hspace{\rpgicons@beforesep}%
-  \tikz[rpg icons, rpg icons/every currency, rpg icons/every #1, actualtext={#2},
+  \tikz[rpg icons, rpg icons/every currency, rpg icons/every #1, actualtext={#1},
     baseline=\rpgicons@baseline, #2] {
     \node[\rpgicons@shape@variant{#1}, draw, scale=.333] at (0cm,0cm) {};
     \path[draw=none, scale=.333] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);

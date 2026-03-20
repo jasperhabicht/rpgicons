@@ -572,7 +572,10 @@
 
 \ExplSyntaxOn
 \NewDocumentCommand { \rpgicons@ifEmptyF } { m m } {
-    \tl_if_empty:nF { #1 } { #2 }
+    \tl_if_empty:nF {#1} {#2}
+}
+\NewDocumentCommand { \rpgicons@ifEmptyTF } { m m m } {
+    \tl_if_empty:nTF {#1} {#2} {#3}
 }
 \ExplSyntaxOff
 
@@ -582,14 +585,14 @@
   \ifx\rpgicons@dieiconnrmlrg\rpgicons@dieiconlrg%
     \def\rpgicons@dieiconfg{fglrg}\else%
     \def\rpgicons@dieiconfg{fgnrm}\fi%
-  \ifEmptyTF{#3}{%
-    \def\rpgicons@dieactualtext{actualtext={#1}}%
+  \rpgicons@ifEmptyTF{#3}{%
+    \def\rpgicons@dieactualtext{#2}%
   }{%
-    \def\rpgicons@dieactualtext{actualtext={#4 #1}}%
+    \def\rpgicons@dieactualtext{#4 #2}%
   }%
   \ifx\rpgicons@dieiconnrmlrg\rpgicons@dieiconlrg\else\rpgicons@ifEmptyF{#4}{#4\,}\fi%
   \hspace{\rpgicons@beforesep}%
-  \tikz[rpg icons, rpg icons/every die, rpg icons/every #2, \rpgicons@dieactualtext,
+  \tikz[rpg icons, rpg icons/every die, rpg icons/every #2, actualtext=\rpgicons@dieactualtext,
     baseline=\rpgicons@baseline, fgnrm/.style={scale=.333}, fglrg/.style={scale=.675}, #3] {
     \node[\rpgicons@shape@variant{#2}, draw, \rpgicons@dieiconfg, font={\footnotesize}] at (0cm,0cm)
       {\ifx\rpgicons@dieiconnrmlrg\rpgicons@dieiconlrg\textbf{#4}\fi};
@@ -1148,13 +1151,13 @@
   \edef\rpgicons@abilityiconemp{empty}%
   \ifx\rpgicons@abilityiconnrmemp\rpgicons@abilityiconemp%
     \def\rpgicons@savingstyle{}%
-    \def\rpgicons@savingactualtext{actualtext={saving}}%
+    \def\rpgicons@savingactualtext{saving}%
   \else%
     \def\rpgicons@savingstyle{rpg icons/every #2}%
-    \def\rpgicons@savingactualtext{actualtext={#2 saving}}%
+    \def\rpgicons@savingactualtext{#2 saving}%
   \fi%
   \hspace{\rpgicons@beforesep}%
-  \tikz[rpg icons, rpg icons/every saving, \rpgicons@savingstyle, \rpgicons@savingactualtext,
+  \tikz[rpg icons, rpg icons/every saving, \rpgicons@savingstyle, actualtext=\rpgicons@savingactualtext,
     baseline=\rpgicons@baseline, #3] {
     \path[draw, scale=.333] (-.45cm,.45cm) -- (.45cm,.45cm) -- (.45cm,-.05cm)
       arc[start angle=360, end angle=180, radius=.45cm] -- cycle;
@@ -3887,12 +3890,12 @@
 \NewDocumentCommand{\rpgiconscurrency}{ m O{} m }{%
   \rpgicons@ifEmptyF{#3}{#3\,}%
   \hspace{\rpgicons@beforesep}%
-  \ifEmptyTF{#3}{%
-    \def\rpgicons@currencyactualtext{actualtext={#1}}%
+  \rpgicons@ifEmptyTF{#3}{%
+    \def\rpgicons@currencyactualtext{#1}%
   }{%
-    \def\rpgicons@currencyactualtext{actualtext={#3 #1}}%
+    \def\rpgicons@currencyactualtext{#3 #1}%
   }%
-  \tikz[rpg icons, rpg icons/every currency, rpg icons/every #1, \rpgicons@currencyactualtext,
+  \tikz[rpg icons, rpg icons/every currency, rpg icons/every #1, actualtext=\rpgicons@currencyactualtext,
     baseline=\rpgicons@baseline, #2] {
     \node[\rpgicons@shape@variant{#1}, draw, scale=.333] at (0cm,0cm) {};
     \path[draw=none, scale=.333] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);

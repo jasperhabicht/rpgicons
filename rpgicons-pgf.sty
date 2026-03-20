@@ -31,9 +31,13 @@
   \IfPackageLoadedF{nomemoize}{
     \newif\ifmemoize\memoizefalse
     \newif\ifmemoizing\memoizingfalse
+    \RequirePackage{pgfkeys}
     \pgfqkeys{/handlers}{
       .meaning ~ to ~ context/.code = {},
     }
+    \pgfkeys{/mmz/.cd,
+      context/.code={},
+    }%
   }
 }
 \ExplSyntaxOff

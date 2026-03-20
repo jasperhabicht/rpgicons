@@ -16,7 +16,7 @@
      <?MarkedContent page="1" ?>1 
      <Span xmlns="http://iso.org/pdf2/ssn"
         id="ID.007"
-        actualtext="d20"
+        actualtext="twentyside"
        >
       <?MarkedContent page="1" ?>
      </Span>
@@ -34,7 +34,7 @@
       >
      <Span xmlns="http://iso.org/pdf2/ssn"
         id="ID.010"
-        actualtext="1d20"
+        actualtext="1 twentyside"
        >
       <?MarkedContent page="1" ?>1
      </Span>
@@ -88,7 +88,7 @@
       >
      <Span xmlns="http://iso.org/pdf2/ssn"
         id="ID.019"
-        actualtext="strength"
+        actualtext="strength saving"
        >
       <?MarkedContent page="1" ?>
      </Span>

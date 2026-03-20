@@ -577,18 +577,23 @@
 \ExplSyntaxOff
 
 \NewDocumentCommand{\rpgiconsdie}{ O{normal} m O{} m }{%
-  \edef\rpgicons@diceiconnrmlrg{#1}%
-  \edef\rpgicons@diceiconlrg{large}%
-  \ifx\rpgicons@diceiconnrmlrg\rpgicons@diceiconlrg%
-    \def\rpgicons@diceiconfg{fglrg}\else%
-    \def\rpgicons@diceiconfg{fgnrm}\fi%
-  \ifx\rpgicons@diceiconnrmlrg\rpgicons@diceiconlrg\else\rpgicons@ifEmptyF{#4}{#4\,}\fi%
+  \edef\rpgicons@dieiconnrmlrg{#1}%
+  \edef\rpgicons@dieiconlrg{large}%
+  \ifx\rpgicons@dieiconnrmlrg\rpgicons@dieiconlrg%
+    \def\rpgicons@dieiconfg{fglrg}\else%
+    \def\rpgicons@dieiconfg{fgnrm}\fi%
+  \ifEmptyTF{#3}{%
+    \def\rpgicons@dieactualtext{actualtext={#1}}%
+  }{%
+    \def\rpgicons@dieactualtext{actualtext={#4 #1}}%
+  }%
+  \ifx\rpgicons@dieiconnrmlrg\rpgicons@dieiconlrg\else\rpgicons@ifEmptyF{#4}{#4\,}\fi%
   \hspace{\rpgicons@beforesep}%
-  \tikz[rpg icons, rpg icons/every die, rpg icons/every #2, actualtext={#2},
+  \tikz[rpg icons, rpg icons/every die, rpg icons/every #2, \rpgicons@dieactualtext,
     baseline=\rpgicons@baseline, fgnrm/.style={scale=.333}, fglrg/.style={scale=.675}, #3] {
-    \node[\rpgicons@shape@variant{#2}, draw, \rpgicons@diceiconfg, font={\footnotesize}] at (0cm,0cm)
-      {\ifx\rpgicons@diceiconnrmlrg\rpgicons@diceiconlrg\textbf{#4}\fi};
-    \path[draw=none, \rpgicons@diceiconfg] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
+    \node[\rpgicons@shape@variant{#2}, draw, \rpgicons@dieiconfg, font={\footnotesize}] at (0cm,0cm)
+      {\ifx\rpgicons@dieiconnrmlrg\rpgicons@dieiconlrg\textbf{#4}\fi};
+    \path[draw=none, \rpgicons@dieiconfg] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
   }%
   \hspace{\rpgicons@aftersep}%
 }
@@ -3882,7 +3887,12 @@
 \NewDocumentCommand{\rpgiconscurrency}{ m O{} m }{%
   \rpgicons@ifEmptyF{#3}{#3\,}%
   \hspace{\rpgicons@beforesep}%
-  \tikz[rpg icons, rpg icons/every currency, rpg icons/every #1, actualtext={#1},
+  \ifEmptyTF{#3}{%
+    \def\rpgicons@currencyactualtext{actualtext={#1}}%
+  }{%
+    \def\rpgicons@currencyactualtext{actualtext={#3 #1}}%
+  }%
+  \tikz[rpg icons, rpg icons/every currency, rpg icons/every #1, \rpgicons@currencyactualtext,
     baseline=\rpgicons@baseline, #2] {
     \node[\rpgicons@shape@variant{#1}, draw, scale=.333] at (0cm,0cm) {};
     \path[draw=none, scale=.333] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);

@@ -25,6 +25,7 @@
 
 \def\rpgicons@allshapes{%
   twoside, fourside, sixside, eightside, tenside, twelveside, twentyside, hundredside,
+  d2, d4, d6, d8, d10, d12, d20, d100,
   fudge, sixside one, sixside two, sixside three, sixside four, sixside five,
   sixside six, sixside seven, sixside eight, sixside nine, fudge plus, fudge minus,
   strength, dexterity, dexterity i, constitution, intelligence, wisdom, wisdom i, charisma,
@@ -171,6 +172,14 @@
   }
 }
 
+\pgfdeclareshape{d2}{
+  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
+  \anchor{text} % this is used to center the text in the node
+    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+
+  \inheritbackgroundpath[from={twoside}]
+}
+
 % tetrahedron
 \pgfdeclareshape{fourside}{
   \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
@@ -185,6 +194,14 @@
   }
 }
 
+\pgfdeclareshape{d4}{
+  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
+  \anchor{text} % this is used to center the text in the node
+    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+
+  \inheritbackgroundpath[from={fourside}]
+}
+
 % cube
 \pgfdeclareshape{sixside}{
   \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
@@ -194,6 +211,14 @@
   \backgroundpath{
     \pgfpathrectanglecorners{\pgfpoint{.4cm}{.4cm}}{\pgfpoint{-.4cm}{-.4cm}}
   }
+}
+
+\pgfdeclareshape{d6}{
+  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
+  \anchor{text} % this is used to center the text in the node
+    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+
+  \inheritbackgroundpath[from={sixside}]
 }
 
 % octahedron
@@ -214,6 +239,14 @@
     \pgfpathlineto{\pgfpoint{-.433cm}{-.25cm}}
     \pgfpathclose
   }
+}
+
+\pgfdeclareshape{d8}{
+  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
+  \anchor{text} % this is used to center the text in the node
+    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+
+  \inheritbackgroundpath[from={eightside}]
 }
 
 % decahedron
@@ -243,6 +276,14 @@
     \pgfsetarrowsstart{}
     \pgfsetarrowsend{}
   }
+}
+
+\pgfdeclareshape{d10}{
+  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
+  \anchor{text} % this is used to center the text in the node
+    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+
+  \inheritbackgroundpath[from={tenside}]
 }
 
 % dodecahedron
@@ -283,6 +324,14 @@
   }
 }
 
+\pgfdeclareshape{d12}{
+  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
+  \anchor{text} % this is used to center the text in the node
+    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+
+  \inheritbackgroundpath[from={twelveside}]
+}
+
 % icosahedron
 \pgfdeclareshape{twentyside}{
   \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
@@ -317,6 +366,14 @@
   }
 }
 
+\pgfdeclareshape{d20}{
+  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
+  \anchor{text} % this is used to center the text in the node
+    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+
+  \inheritbackgroundpath[from={twentyside}]
+}
+
 % sphere
 \pgfdeclareshape{hundredside}{
   \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
@@ -332,6 +389,14 @@
     \pgfsetarrowsstart{}
     \pgfsetarrowsend{}
   }
+}
+
+\pgfdeclareshape{d100}{
+  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
+  \anchor{text} % this is used to center the text in the node
+    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+
+  \inheritbackgroundpath[from={hundredside}]
 }
 
 % cube (one)

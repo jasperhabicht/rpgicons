@@ -107,6 +107,8 @@
     \draw_path_ellipse:nnn { 0cm , 0cm } { 0cm , .25cm } { .425cm , 0cm }
 }
 
+\cs_set_eq:cN { rpgicons_draw_shape_ d2 : } \rpgicons_draw_shape_twoside:
+
 \cs_new_protected:Npn \rpgicons_draw_shape_fourside: {
     \draw_path_moveto:n { 0cm , .35cm }
     \draw_path_lineto:n { .433cm , -.4cm }
@@ -114,9 +116,13 @@
     \draw_path_close:
 }
 
+\cs_set_eq:cN { rpgicons_draw_shape_ d4 : } \rpgicons_draw_shape_fourside:
+
 \cs_new_protected:Npn \rpgicons_draw_shape_sixside: {
     \draw_path_rectangle_corners:nn { -.4cm , -.4cm } { .4cm , .4cm }
 }
+
+\cs_set_eq:cN { rpgicons_draw_shape_ d6 : } \rpgicons_draw_shape_sixside:
 
 \cs_new_protected:Npn \rpgicons_draw_shape_eightside: {
     \draw_path_moveto:n { 0cm , .5cm }
@@ -130,6 +136,8 @@
     \draw_path_lineto:n { -.433cm , -.25cm }
     \draw_path_close:
 }
+
+\cs_set_eq:cN { rpgicons_draw_shape_ d8 : } \rpgicons_draw_shape_eightside:
 
 \cs_new_protected:Npn \rpgicons_draw_shape_tenside: {
     \draw_path_moveto:n { 0cm , .5cm }
@@ -150,6 +158,8 @@
     \draw_path_moveto:n { 0cm , -.5cm }
     \draw_path_lineto:n { 0cm , -.3cm }
 }
+
+\cs_set_eq:cN { rpgicons_draw_shape_ d10 : } \rpgicons_draw_shape_tenside:
 
 \cs_new_protected:Npn \rpgicons_draw_shape_twelveside: {
     \draw_path_moveto:n { 0cm , .5cm }
@@ -180,6 +190,8 @@
     \draw_path_lineto:n { -.332cm , .108cm }
 }
 
+\cs_set_eq:cN { rpgicons_draw_shape_ d12 : } \rpgicons_draw_shape_twelveside:
+
 \cs_new_protected:Npn \rpgicons_draw_shape_twentyside: {
     \draw_path_moveto:n { 0cm , .5cm }
     \draw_path_lineto:n { .454cm , .262cm }
@@ -205,6 +217,8 @@
     \draw_path_lineto:n { -.253cm , -.146cm }
 }
 
+\cs_set_eq:cN { rpgicons_draw_shape_ d20 : } \rpgicons_draw_shape_twentyside:
+
 \cs_new_protected:Npn \rpgicons_draw_shape_hundredside: {
     \draw_path_circle:nn { 0cm, 0cm } { .425cm }
     \draw_path_moveto:n { .425cm , 0cm }
@@ -212,6 +226,8 @@
     \draw_path_moveto:n { 0cm , -.425cm }
     \draw_path_arc:nnnn { 270 } { 140 } { -.2cm } { .425cm }
 }
+
+\cs_set_eq:cN { rpgicons_draw_shape_ d100 : } \rpgicons_draw_shape_hundredside:
 
 \clist_new:N \l_rpgnicons_pips_clist
 \fp_new:N \l_rpgnicons_pips_coordx_fp
@@ -2696,6 +2712,7 @@
 
 \clist_const:Nn \c__rpgicons_shapes_clist {
     twoside , fourside , sixside , eightside , tenside , twelveside , twentyside , hundredside ,
+    d2 , d4 , d6 , d8 , d10 , d12 , d20 , d100 ,
     fudge , sixside ~ one , sixside ~ two , sixside ~ three , sixside ~ four , sixside ~ five ,
     sixside ~ six , sixside ~ seven , sixside ~ eight , sixside ~ nine , fudge ~ plus , fudge ~ minus ,
     strength , dexterity , dexterity ~ i , constitution , intelligence , wisdom , wisdom ~ i , charisma ,

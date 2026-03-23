@@ -431,14 +431,14 @@ The first optional argument can take the value \macro{normal} or \macro{large}, 
 
 \begin{rpgiconsiconlist}
 \titlemacro*{die}
-    & \die{twoside}{} & \macro{twoside} \\
-    & \die{fourside}{} & \macro{fourside} \\
-    & \die{sixside}{} & \macro{sixside} \\
-    & \die{eightside}{} & \macro{eightside} \\
-    & \die{tenside}{} & \macro{tenside} \\
-    & \die{twelveside}{} & \macro{twelveside} \\
-    & \die{twentyside}{} & \macro{twentyside} \\
-    & \die{hundredside}{} & \macro{hundredside} \\
+    & \die{twoside}{} & \macro{twoside} or \newline \macro{d2} \\
+    & \die{fourside}{} & \macro{fourside} or \newline \macro{d4} \\
+    & \die{sixside}{} & \macro{sixside} or \newline \macro{d6} \\
+    & \die{eightside}{} & \macro{eightside} or \newline \macro{d8} \\
+    & \die{tenside}{} & \macro{tenside} or \newline \macro{d10} \\
+    & \die{twelveside}{} & \macro{twelveside} or \newline \macro{d12} \\
+    & \die{twentyside}{} & \macro{twentyside} or \newline \macro{d20} \\
+    & \die{hundredside}{} & \macro{hundredside} or \newline \macro{d100} \\
     & \die{fudge}{} & \macro{fudge} \\
     & \die{sixside one}{} & \macro{sixside one} \\
     & \die{sixside two}{} & \macro{sixside two} \\
@@ -483,7 +483,7 @@ The first optional argument can take the value \macro{normal} or \macro{empty}, 
     & \ability{sanity} & \macro{sanity} \\
     & \ability{perception} & \macro{perception} \\
     & \ability{luck} & \macro{luck} \\
-    & \ability{armour} & \macro{armour} or \macro{armor} \\
+    & \ability{armour} & \macro{armour} or \newline \macro{armor} \\
     & \ability{proficiency} & \macro{proficiency} \\
 \midrule
 \titlemacro*{saving}
@@ -499,7 +499,7 @@ The first optional argument can take the value \macro{normal} or \macro{empty}, 
     & \saving{sanity} & \macro{sanity} \\
     & \saving{perception} & \macro{perception} \\
     & \saving{luck} & \macro{luck} \\
-    & \saving{armour} & \macro{armour} or \macro{armor} \\
+    & \saving{armour} & \macro{armour} or \newline \macro{armor} \\
     & \saving{proficiency} & \macro{proficiency} \\
 \end{rpgiconsiconlist}
 
@@ -688,8 +688,8 @@ The command provides a second mandatory argument that accepts an integer that is
     & \currency{electrum}{} & \macro{electrum} \\
     & \currency{platinum}{} & \macro{platinum} \\
     & \currency{gem}{} & \macro{gem} \\
-    & \currency{jewellery}{} & \macro{jewellery} or \macro{jewelry} \\
-    & \currency{jewellery}[variant=1]{} & \macro{jewellery} or \macro{jewelry} & 1 \\
+    & \currency{jewellery}{} & \macro{jewellery} or \newline \macro{jewelry} \\
+    & \currency{jewellery}[variant=1]{} & \macro{jewellery} or \newline \macro{jewelry} & 1 \\
 \end{rpgiconsiconlist}
 
 % l3 variant
@@ -751,9 +751,9 @@ The \macro{\RPGIconsUseIcon} command supports PDF tagging. If tagging is activat
 |\RPGIconsCondition|{<shape>}[<options>]
 |\RPGIconsClass|[<style>]{<shape>}[<options>]
 |\RPGIconsAlignment|[<style>]{<shape>}[<options>]
-|\RPGIconsCurrency|{<shape>}[<options>]
+|\RPGIconsCurrency|{<shape>}[<options>]{<integer>}
 \end{macrodef}
-The L3 variant of the package defines a set of commands on which the user commands \macro{\die}, \macro{\ability}, \macro{\saving}, \macro{\spell}, \macro{\spellschool}, \macro{\damage}, \macro{\attack}, \macro{\condition}, \macro{\class}, \macro{\alignment} as well as \macro{\currency} are based. This set of commands can be used in cases where another package defines one of these user commands. These user commands are exact copies of this set of commands.
+This set of commands are the basic commands defined by the L3 variant of the package on which the commands \macro{\die}, \macro{\ability}, \macro{\saving}, \macro{\spell}, \macro{\spellschool}, \macro{\damage}, \macro{\attack}, \macro{\condition}, \macro{\class}, \macro{\alignment} as well as \macro{\currency} are based. This set of commands can be used in cases where another package defines one of these user commands. These user commands are exact copies of this set of commands.
 
 \subsection{Icon options}
 
@@ -925,7 +925,7 @@ Roll\die{eightside}{}a die!
 \end{macrodef}
 The option \macro{actualtext} can be used to change the default replacement text that is used for example by screen readers in a tagged PDF. It expects as string that represents the relevant replacement text. 
 
-It is possible to change the replacement texts for specific icon types. For example, setting the key \macro{every saving={every charisma={actualtext={charisma saving}}}} will set the replacement text for every instance of \macro{\saving{charisma}} to \macro{charisma saving}.
+It is possible to change the replacement texts for specific icon types. For example, by setting \macro{every saving={every charisma={actualtext={charisma saving}}}}, the replacement text for every instance of \macro{\saving{charisma}} will be set to \macro{charisma saving}.
 
 Note that the possibility to provide a key-value list to \macro{actualtext} taking shape names as keys and the relevant replacement texts as values has been removed. Instead, use the keys to set the style for all macros or shapes as shown in the previous paragraph.
 
@@ -1034,7 +1034,7 @@ With the following setting, all occurrences of the \macro{necrotic} shape are se
 |\rpgiconsalignment|[<style>]{<shape>}[<options>]
 |\rpgiconscurrency|{<shape>}[<options>]
 \end{macrodef}
-The PGF variant of the package defines a set of commands on which the user commands \macro{\die}, \macro{\ability}, \macro{\saving}, \macro{\spell}, \macro{\spellschool}, \macro{\damage}, \macro{\attack}, \macro{\condition}, \macro{\class}, \macro{\alignment} as well as \macro{\currency} are based. This set of commands can be used in cases where another package defines one of these user commands. These user commands are exact copies of this set of commands.
+This set of commands are the basic commands defined by the PGF variant of the package on which the commands \macro{\die}, \macro{\ability}, \macro{\saving}, \macro{\spell}, \macro{\spellschool}, \macro{\damage}, \macro{\attack}, \macro{\condition}, \macro{\class}, \macro{\alignment} as well as \macro{\currency} are based. This set of commands can be used in cases where another package defines one of these user commands. These user commands are exact copies of this set of commands.
 
 \subsection{Icon styles}
 

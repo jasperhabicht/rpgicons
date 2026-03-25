@@ -2802,6 +2802,18 @@
     \cs_if_free:cT { ifmemoize } { \newif\ifmemoize\memoizefalse }
 }
 
+\cs_new_protected:Npn \__rpgicons_maybe_memoize:n #1
+{
+    \bool_if:NT \l__rpgicons_mmzx_bool {
+        \__rpgicons_keys_to_context:
+        \bool_if:NT \l__rpgicons_mmzx_tag_bool {
+            \exp_args:NNv \mmzxtagtoks =  { l_rpgicons_#1_actualtext_str }
+            \mmzx_tag_socket_plug_record:nn { rpgicons / #1 / before }
+                { rpgicons / #1 /after }
+        }
+    }
+}
+
 \cs_if_exist:NTF \NewTaggingSocket {
     \cs_generate_variant:Nn \tag_socket_use:nn { nV, no }
 
@@ -3126,33 +3138,7 @@
             \str_put_left:Nn \l_rpgicons_icon_actualtext_str { #3 ~ }
         }
         \tag_socket_use:nV { rpgicons / icon / before } \l_rpgicons_icon_actualtext_str
-        \bool_if:NT \l__rpgicons_mmzx_bool {
-            \__rpgicons_keys_to_context:
-            \bool_if:NT \l__rpgicons_mmzx_tag_bool {
-                \xtoksapp\mmzCCMemo {
-                    \exp_not:N \mmzxtagtoks
-                    =
-                    \c_left_brace_str
-                    \l_rpgicons_icon_actualtext_str
-                    \the\mmzxtagtoks
-                    \c_right_brace_str
-                    \exp_not:N \AssignSocketPlug
-                    \c_left_brace_str
-                    tagsupport/memoize/include/extern/before
-                    \c_right_brace_str
-                    \c_left_brace_str
-                    rpgicons / icon / actualtext
-                    \c_right_brace_str
-                    \exp_not:N \AssignSocketPlug
-                    \c_left_brace_str
-                    tagsupport/memoize/include/extern/after
-                    \c_right_brace_str
-                    \c_left_brace_str
-                    rpgicons / icon / actualtext
-                    \c_right_brace_str
-                }
-            }
-        }
+        \__rpgicons_maybe_memoize:n { icon }
         \bool_if:NTF \l__rpgicons_icon_precompose_bool {
             \__rpgicons_load_icon:ee {
                 \str_if_empty:NTF \l_rpgicons_icon_precompose_ref_str {
@@ -3467,33 +3453,8 @@
     \mode_leave_vertical:
     \__rpgicons_roll_prepare_actualtext:Nn \l__rpgicons_roll_actualtext_tl {#1}
     \tag_socket_use:nV { rpgicons / roll / before } \l__rpgicons_roll_actualtext_tl
-    \bool_if:NT \l__rpgicons_mmzx_bool {
-        \__rpgicons_keys_to_context:
-        \bool_if:NT \l__rpgicons_mmzx_tag_bool {
-            \xtoksapp\mmzCCMemo {
-                \exp_not:N \mmzxtagtoks
-                =
-                \c_left_brace_str
-                \l__rpgicons_roll_actualtext_tl
-                \the\mmzxtagtoks
-                \c_right_brace_str
-                \exp_not:N \AssignSocketPlug
-                \c_left_brace_str
-                tagsupport/memoize/include/extern/before
-                \c_right_brace_str
-                \c_left_brace_str
-                rpgicons / roll / actualtext
-                \c_right_brace_str
-                \exp_not:N \AssignSocketPlug
-                \c_left_brace_str
-                tagsupport/memoize/include/extern/after
-                \c_right_brace_str
-                \c_left_brace_str
-                rpgicons / roll / actualtext
-                \c_right_brace_str
-            }
-        }
-    }
+    \__rpgicons_maybe_memoize:n { roll}
+    
     \tag_suspend:n { \RPGIconsRoll }
     \__rpgicons_roll_syntax_parse:e {#1}
     \tag_resume:n { \RPGIconsRoll }

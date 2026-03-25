@@ -2802,20 +2802,20 @@
     \cs_if_free:cT { ifmemoize } { \newif\ifmemoize\memoizefalse }
 }
 
+\cs_generate_variant:Nn \mmzx_tag_socket_plug_record:nnn {nnv}
 \cs_new_protected:Npn \__rpgicons_maybe_memoize:n #1
 {
     \bool_if:NT \l__rpgicons_mmzx_bool {
         \__rpgicons_keys_to_context:
         \bool_if:NT \l__rpgicons_mmzx_tag_bool {
-            \exp_args:NNv \mmzxtagtoks =  { l_rpgicons_#1_actualtext_str }
-            \mmzx_tag_socket_plug_record:nn { rpgicons / #1 / before }
-                { rpgicons / #1 /after }
+            \mmzx_tag_socket_plug_record:nnv { rpgicons / #1 / before }
+                { rpgicons / #1 /after } { l_rpgicons_#1_actualtext_str }
         }
     }
 }
 
 \cs_if_exist:NTF \NewTaggingSocket {
-    \cs_generate_variant:Nn \tag_socket_use:nn { nV, no }
+    \cs_generate_variant:Nn \tag_socket_use:nn { nV, nv }
 
     \NewTaggingSocket { rpgicons / icon / before } { 1 }
     \NewTaggingSocketPlug { rpgicons / icon / before } { actualtext } {
@@ -2861,21 +2861,20 @@
 
     \IfPackageLoadedT { memoize-ext-tag } {
         \bool_set_true:N \l__rpgicons_mmzx_tag_bool
-        \NewTaggingSocketPlug { memoize/include/extern/before } 
-          { rpgicons / icon / actualtext } {
-            \tag_socket_use:no { rpgicons / icon / before } { \the\mmzxtagtoks }
-        }
-        \NewTaggingSocketPlug { memoize/include/extern/after } 
-          { rpgicons / icon / actualtext } {
-            \tag_socket_use:n { rpgicons / icon / after }
-        }
-        \NewTaggingSocketPlug { memoize/include/extern/before } 
-          { rpgicons / roll / actualtext } {
-            \tag_socket_use:no { rpgicons / roll / before } { \the\mmzxtagtoks }
-        }
-        \NewTaggingSocketPlug { memoize/include/extern/after }
-          { rpgicons / roll / actualtext } {
-            \tag_socket_use:n { rpgicons / roll / after }
+        \cs_generate_variant:Nn \__rpgicons_precompose_register:nnnn { V }
+        \cs_generate_variant:Nn \mmzx_tag_get_recorded:N {c}
+        \clist_map_inline:nn {  icon, roll }
+        {
+            \NewTaggingSocketPlug { memoize/include/extern/before } 
+            { rpgicons / #1 / actualtext } {
+                \mmzx_tag_get_recorded:c { l_rpgicons_#1_actualtext_str }
+                \tag_socket_use:nv { rpgicons / #1 / before } 
+                { l_rpgicons_#1_actualtext_str }
+            }
+            \NewTaggingSocketPlug { memoize/include/extern/after } 
+            { rpgicons / #1 / actualtext } {
+                \tag_socket_use:n { rpgicons / #1 / after }
+            }
         }
     } 
   } {
@@ -2944,7 +2943,6 @@
         | #1 | \prop_to_keyval:c { g__rpgicons_precompose_ #1 _prop } |
     }
 }
-\cs_generate_variant:Nn \__rpgicons_precompose_register:nnnn { V }
 
 \sys_ensure_backend:
 \NewDocumentCommand \RPGIconsPrecomposeIcon { s O { } o m } {

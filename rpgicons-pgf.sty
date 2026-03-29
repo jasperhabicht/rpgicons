@@ -18,6 +18,30 @@
 \DeclareOption{pics}{\rpgicons@picstrue}
 \ProcessOptions\relax
 
+\newif\ifrpgicons@mmzx@tag@bool
+\rpgicons@mmzx@tag@boolfalse
+\ExplSyntaxOn
+% or load memoizable?
+\IfPackageLoadedTF{memoize}{
+  \tag_if_active:T { % not adequate?
+    \RequirePackage{memoize-ext}
+    \rpgicons@mmzx@tag@booltrue
+  }
+} {
+  \IfPackageLoadedF{nomemoize}{
+    \newif\ifmemoize\memoizefalse
+    \newif\ifmemoizing\memoizingfalse
+    \RequirePackage{pgfkeys}
+    \pgfqkeys{/handlers}{
+      .meaning ~ to ~ context/.code = {},
+    }
+    \pgfkeys{/mmz/.cd,
+      context/.code={},
+    }%
+  }
+}
+\ExplSyntaxOff
+
 \RequirePackage{tikz}
 \newlength{\rpgicons@beforesep}
 \newlength{\rpgicons@aftersep}
@@ -98,7 +122,7 @@
   %
   rpg icons/create every style/.code={
     \tikzset{
-      rpg icons/every #1/.style={}
+      rpg icons/every #1/.style={},
     }
   },
   rpg icons/create every style/.list/.expanded={%
@@ -662,10 +686,16 @@
   \ifx\rpgicons@dieiconnrmlrg\rpgicons@dieiconlrg\else\rpgicons@ifEmptyF{#4}{#4\,}\fi%
   \hspace{\rpgicons@beforesep}%
   \tikz[rpg icons, rpg icons/every die, rpg icons/every #2, actualtext=\rpgicons@dieactualtext,
+    rpg icons/.meaning to context, 
+    rpg icons/every die/.meaning to context, 
+    rpg icons/every #2/.meaning to context,
     baseline=\rpgicons@baseline, fgnrm/.style={scale=.333}, fglrg/.style={scale=.675}, #3] {
-    \node[\rpgicons@shape@variant{#2}, draw, \rpgicons@dieiconfg, font={\footnotesize}] at (0cm,0cm)
-      {\ifx\rpgicons@dieiconnrmlrg\rpgicons@dieiconlrg\textbf{#4}\fi};
-    \path[draw=none, \rpgicons@dieiconfg] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
+    \ifmemoizing\xtoksapp\mmzContextExtra{baseline=\the\rpgicons@baseline,
+        actualtext=\UseName{l__tikz_tagging_actualtext_tl},
+    }\fi
+    \node[\rpgicons@shape@variant{#2}, draw, \rpgicons@diceiconfg, font={\footnotesize}] at (0cm,0cm)
+      {\ifx\rpgicons@diceiconnrmlrg\rpgicons@diceiconlrg\textbf{#4}\fi};
+    \path[draw=none, \rpgicons@diceiconfg] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
   }%
   \hspace{\rpgicons@aftersep}%
 }
@@ -1201,8 +1231,26 @@
     \def\rpgicons@abilityiconfg{fgneg}\else%
     \def\rpgicons@abilityiconfg{fgpos}\fi%
   \hspace{\rpgicons@beforesep}%
-  \tikz[rpg icons, rpg icons/every ability, rpg icons/every #2, actualtext={#2},
-    baseline=\rpgicons@baseline, fgpos/.style={draw}, fgneg/.style={draw=rpgicons@bg, line width=.6pt}, #3] {
+  \tikz[rpg icons, 
+    rpg icons/.meaning to context,
+    rpg icons/every ability, 
+    rpg icons/every ability/.meaning to context,
+    rpg icons/every #2,
+    rpg icons/every #2/.meaning to context,
+    baseline=\rpgicons@baseline, 
+    actualtext={#2},
+    fgpos/.style={draw}, fgneg/.style={draw=rpgicons@bg, line width=.6pt}, #3,
+  ] {
+    \ifmemoizing
+      \begingroup
+        \color{rpgicons@bg}%
+        \xtoksapp\mmzContextExtra{%
+          baseline=\the\rpgicons@baseline,
+          draw=\current@color,
+          actualtext=\UseName{l__tikz_tagging_actualtext_tl},
+        }
+      \endgroup
+    \fi
     \ifx\rpgicons@abilityiconposneg\rpgicons@abilityiconneg%
       \path[scale=.333, fill] (0cm,0cm) circle[radius=.45cm];
       \node[\rpgicons@shape@variant{#2}, \rpgicons@abilityiconfg, scale=.225] at (0cm,0cm) {};
@@ -1226,8 +1274,23 @@
     \def\rpgicons@savingactualtext{#2 saving}%
   \fi%
   \hspace{\rpgicons@beforesep}%
-  \tikz[rpg icons, rpg icons/every saving, \rpgicons@savingstyle, actualtext=\rpgicons@savingactualtext,
+  \tikz[rpg icons, 
+    rpg icons/.meaning to context,
+    rpg icons/every saving, 
+    rpg icons/every saving/.meaning to context,
+    \rpgicons@savingstyle,
+    actualtext=\rpgicons@savingactualtext,
     baseline=\rpgicons@baseline, #3] {
+    \ifmemoizing
+      \begingroup
+      \color{rpgicons@bg}
+      \xtoksapp\mmzContextExtra{%
+        baseline=\the\rpgicons@baseline,
+        draw=\current@color,
+        actualtext=\UseName{l__tikz_tagging_actualtext_tl},
+      }
+      \endgroup
+    \fi
     \path[draw, scale=.333] (-.45cm,.45cm) -- (.45cm,.45cm) -- (.45cm,-.05cm)
       arc[start angle=360, end angle=180, radius=.45cm] -- cycle;
     \ifx\rpgicons@abilityiconnrmemp\rpgicons@abilityiconemp\else%
@@ -1489,8 +1552,20 @@
 
 \NewDocumentCommand{\rpgiconsspell}{ m O{} }{%
   \hspace{\rpgicons@beforesep}%
-  \tikz[rpg icons, rpg icons/every spell, rpg icons/every #1, actualtext={#1},
+  \tikz[rpg icons, 
+    rpg icons/.meaning to context,
+    rpg icons/every spell, 
+    rpg icons/every spell/.meaning to context,
+    rpg icons/every #1,
+    rpg icons/every #1/.meaning to context,
+    actualtext={#1},
     baseline=\rpgicons@baseline, #2] {
+      \ifmemoizing
+        \xtoksapp\mmzContextExtra{%
+          baseline=\the\rpgicons@baseline,
+          actualtext=\UseName{l__tikz_tagging_actualtext_tl},
+        }
+      \fi
     \node[\rpgicons@shape@variant{#1}, draw, scale=.333] at (0cm,0cm) {};
     \path[draw=none, scale=.333] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
   }%
@@ -1684,9 +1759,25 @@
     \def\rpgicons@spellschooliconbg{bgneg}\else%
     \def\rpgicons@spellschooliconbg{bgpos}\fi%
   \hspace{\rpgicons@beforesep}%
-  \tikz[rpg icons, rpg icons/every spellschool, rpg icons/every #2, actualtext={#2},
+  \tikz[rpg icons, 
+    rpg icons/.meaning to context,
+    rpg icons/every spellschool, 
+    rpg icons/.meaning to context, 
+    rpg icons/every #2,
+    rpg icons/every #2/.meaning to context,
+    actualtext={#2},
     baseline=\rpgicons@baseline, fgpos/.style={draw=rpgicons@bg, line width=.6pt}, fgneg/.style={draw},
     bgpos/.style={fill}, bgneg/.style={draw}, #3] {
+    \ifmemoizing
+      \begingroup
+      \color{rpgicons@bg}
+      \xtoksapp\mmzContextExtra{%
+        baseline=\the\rpgicons@baseline,
+        draw=\current@color,
+        actualtext=\UseName{l__tikz_tagging_actualtext_tl},
+      }
+      \endgroup
+    \fi
     \path[scale=.333, \rpgicons@spellschooliconbg] (-.475cm,.35cm)
       -- (-.35cm,.475cm) -- (.35cm,.475cm) -- (.475cm,.35cm) -- (.425cm,-.375cm) -- (0cm,-.475cm) -- (-.425cm,-.375cm) -- cycle;
     \node[\rpgicons@shape@variant{#2}, \rpgicons@spellschooliconfg, scale=.225] at (0cm,0cm) {};
@@ -2053,8 +2144,18 @@
 
 \NewDocumentCommand{\rpgiconsdamage}{ m O{} }{%
   \hspace{\rpgicons@beforesep}%
-  \tikz[rpg icons, rpg icons/every damage, rpg icons/every #1, actualtext={#1},
+  \tikz[rpg icons, 
+    rpg icons/.meaning to context,
+    rpg icons/every damage, 
+    rpg icons/every damage/.meaning to context, 
+    rpg icons/every #1,
+    rpg icons/every #1/.meaning to context,
+    actualtext={#1},
+    /mmz/context=\rpgicons@baseline,
     baseline=\rpgicons@baseline, #2] {
+      \ifmemoizing\xtoksapp\mmzContextExtra{baseline=\the\rpgicons@baseline,
+        actualtext=\UseName{l__tikz_tagging_actualtext_tl},
+      }\fi
     \path[draw, scale=.333] (0cm,0cm) circle[radius=.5cm];
     \node[\rpgicons@shape@variant{#1}, draw, scale=.225] at (0cm,0cm) {};
     \path[draw=none, scale=.333] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
@@ -2239,8 +2340,17 @@
 
 \NewDocumentCommand{\rpgiconsattack}{ m O{} }{%
   \hspace{\rpgicons@beforesep}%
-  \tikz[rpg icons, rpg icons/every attack, rpg icons/every #1, actualtext={#1},
+  \tikz[rpg icons, 
+    rpg icons/.meaning to context,
+    rpg icons/every attack, 
+    rpg icons/every attack/.meaning to context, 
+    rpg icons/every #1,
+    rpg icons/every #1/.meaning to context,
+    actualtext={#1},
     baseline=\rpgicons@baseline, #2] {
+      \ifmemoizing\xtoksapp\mmzContextExtra{baseline=\the\rpgicons@baseline,
+        actualtext=\UseName{l__tikz_tagging_actualtext_tl},
+      }\fi
     \node[\rpgicons@shape@variant{#1}, draw, scale=.333] at (0cm,0cm) {};
     \path[draw=none, scale=.333] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
   }%
@@ -2776,8 +2886,17 @@
 
 \NewDocumentCommand{\rpgiconscondition}{ m O{} }{%
   \hspace{\rpgicons@beforesep}%
-  \tikz[rpg icons, rpg icons/every condition, rpg icons/every #1, actualtext={#1},
+  \tikz[rpg icons, 
+    rpg icons/.meaning to context,
+    rpg icons/every condition, 
+    rpg icons/every condition/.meaning to context, 
+    rpg icons/every #1,
+    rpg icons/every #1/.meaning to context,
+    actualtext={#1},
     baseline=\rpgicons@baseline, #2] {
+      \ifmemoizing\xtoksapp\mmzContextExtra{baseline=\the\rpgicons@baseline,
+        actualtext=\UseName{l__tikz_tagging_actualtext_tl},
+      }\fi
     \node[\rpgicons@shape@variant{#1}, draw, scale=.333] at (0cm,0cm) {};
     \path[draw=none, scale=.333] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
   }%
@@ -3604,9 +3723,25 @@
     \def\rpgicons@classiconbg{bgneg}\else%
     \def\rpgicons@classiconbg{bgpos}\fi%
   \hspace{\rpgicons@beforesep}%
-  \tikz[rpg icons, rpg icons/every class, rpg icons/every #2, actualtext={#2},
+  \tikz[rpg icons, 
+    rpg icons/.meaning to context,
+    rpg icons/every class, 
+    rpg icons/every class/.meaning to context, 
+    rpg icons/every #2,
+    rpg icons/every #2/.meaning to context,
+    actualtext={#2},
     baseline=\rpgicons@baseline, fgpos/.style={draw=rpgicons@bg, line width=.6pt}, fgneg/.style={draw},
     bgpos/.style={fill}, bgneg/.style={draw}, #3] {
+    \ifmemoizing
+      \begingroup
+      \color{rpgicons@bg}%
+      \xtoksapp\mmzContextExtra{%
+        baseline=\the\rpgicons@baseline,
+        draw=\current@color,
+        actualtext=\UseName{l__tikz_tagging_actualtext_tl},
+      }
+      \endgroup
+    \fi
     \path[scale=.333, \rpgicons@classiconbg] (-.45cm,-.45cm) rectangle (.45cm,.45cm);
     \node[\rpgicons@shape@variant{#2}, \rpgicons@classiconfg, scale=.225] at (0cm,0cm) {};
     \path[draw=none, scale=.333] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
@@ -3768,9 +3903,25 @@
     \def\rpgicons@alignmenticonbg{bgneg}\else%
     \def\rpgicons@alignmenticonbg{bgpos}\fi%
   \hspace{\rpgicons@beforesep}%
-  \tikz[rpg icons, rpg icons/every alignment, rpg icons/every #2, actualtext={#2},
+  \tikz[rpg icons, 
+    rpg icons/.meaning to context,
+    rpg icons/every alignment, 
+    rpg icons/every alignment/.meaning to context, 
+    rpg icons/every #2,
+    rpg icons/every #2/.meaning to context,
+    actualtext={#2},
     baseline=\rpgicons@baseline, fgpos/.style={draw=rpgicons@bg, line width=.6pt}, fgneg/.style={draw},
     bgpos/.style={fill}, bgneg/.style={draw}, #3] {
+    \ifmemoizing
+      \begingroup
+      \color{rpgicons@bg}%
+      \xtoksapp\mmzContextExtra{%
+        baseline=\the\rpgicons@baseline,
+        draw=\current@color,
+        actualtext=\UseName{l__tikz_tagging_actualtext_tl},
+      }
+      \endgroup
+    \fi
     \path[scale=.333, \rpgicons@alignmenticonbg] (30:.525cm)
       -- (90:.525cm) -- (150:.525cm) -- (210:.525cm) -- (270:.525cm) -- (330:.525cm) -- cycle;
     \node[\rpgicons@shape@variant{#2}, \rpgicons@alignmenticonfg, scale=.225] at (0cm,0cm) {};
@@ -3964,8 +4115,17 @@
   }{%
     \def\rpgicons@currencyactualtext{#3 #1}%
   }%
-  \tikz[rpg icons, rpg icons/every currency, rpg icons/every #1, actualtext=\rpgicons@currencyactualtext,
+  \tikz[rpg icons,
+    rpg icons/.meaning to context, 
+    rpg icons/every currency,
+    rpg icons/every currency/.meaning to context, 
+    rpg icons/every #1,
+    rpg icons/every #1/.meaning to context,
+    actualtext=\rpgicons@currencyactualtext,
     baseline=\rpgicons@baseline, #2] {
+    \ifmemoizing\xtoksapp\mmzContextExtra{baseline=\the\rpgicons@baseline,
+        actualtext=\UseName{l__tikz_tagging_actualtext_tl},
+    }\fi
     \node[\rpgicons@shape@variant{#1}, draw, scale=.333] at (0cm,0cm) {};
     \path[draw=none, scale=.333] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
   }%
@@ -4133,6 +4293,28 @@
     }
     \AssignTaggingSocketPlug { rpgicons/roll/after } { actualtext }
   }
+
+  \ifrpgicons@mmzx@tag@bool
+    \socket_if_plug_exist:nnF { memoize/include/extern/before }
+      { rpgicons / roll / actualtext } 
+    {
+      \NewTaggingSocketPlug { memoize/include/extern/before } 
+      { rpgicons / roll / actualtext } 
+      {
+        \tag_socket_use:no { rpgicons / roll / before } { \the\mmzxtagtoks }
+      }
+    }
+    \socket_if_plug_exist:nnF { memoize/include/extern/after }
+      { rpgicons / roll / actualtext } 
+    {
+      \NewTaggingSocketPlug { memoize/include/extern/after } 
+      { rpgicons / roll / actualtext } 
+      {
+        \tag_socket_use:no { rpgicons / roll / after }
+      }
+    }
+  \fi
+
 } {
   \msg_warning:nn { rpgicons } { tagging-unsupported }
   \cs_if_exist:NF \tag_socket_use:n {
@@ -4237,7 +4419,43 @@
 \NewDocumentCommand { \rpgiconsroll } { m } {
   \mode_leave_vertical:
   \__rpgicons_roll_prepare_actualtext:Nn \l__rpgicons_roll_actualtext_tl {#1}
+  \ifmemoizing
+    \begingroup
+    \color{rpgicons@bg}
+    \xtoksapp\mmzContextExtra{
+      actualtext=\l__rpgicons_roll_actualtext_tl,
+      bg=\current@color,
+      variant=\rpgicons@variant,
+      % beforesep=\rpgicons@beforesep,
+      % aftersep=\rpgicons@aftersep,
+    }
+    \endgroup
+  \fi
   \tag_socket_use:nV { rpgicons/roll/before } \l__rpgicons_roll_actualtext_tl
+  \ifrpgicons@mmzx@tag@bool
+    \xtoksapp\mmzCCMemo {
+      \exp_not:N \mmzxtagtoks
+      =
+      \c_left_brace_str
+      \l_rpgicons_icon_actualtext_tl
+      \the\mmzxtagtoks
+      \c_right_brace_str
+      \exp_not:N \AssignSocketPlug
+      \c_left_brace_str
+      tagsupport/memoize/include/extern/before
+      \c_right_brace_str
+      \c_left_brace_str
+      rpgicons / roll / actualtext
+      \c_right_brace_str
+      \exp_not:N \AssignSocketPlug
+      \c_left_brace_str
+      tagsupport/memoize/include/extern/after
+      \c_right_brace_str
+      \c_left_brace_str
+      rpgicons / roll / actualtext
+      \c_right_brace_str
+    }
+  \fi
   \tag_suspend:n { \rpgiconsroll }
   \__rpgicons_roll_syntax_parse:e {#1}
   \tag_resume:n { \rpgiconsroll }

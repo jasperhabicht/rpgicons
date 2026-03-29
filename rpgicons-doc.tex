@@ -32,7 +32,6 @@
 \linespread{1.1}\selectfont
 \addtolength{\skip\footins}{1em plus 5pt}
 \makeatletter
-\renewcommand*{\thefootnote}{\fnsymbol{footnote}}
 \renewcommand{\@makefntext}[1]{%
     \noindent\hbox to 0.75em{\normalfont\@thefnmark\hss}~#1%
 }
@@ -100,6 +99,7 @@
     }
     \tl_set:Nn \l_rpgicons_doc_doctitle_tl {
         \group_begin:
+            \renewcommand*{\thefootnote}{\fnsymbol{footnote}}
             \tcbset{
                 title ~ style ~ hook/.style={
                     boxrule=2pt,
@@ -116,6 +116,7 @@
             #7\par\bigskip
             \rule{\textwidth}{.08em}
         \group_end:
+        \setcounter{footnote}{0}
     }
 }
 
@@ -419,7 +420,7 @@ Note that shape names ending with \macro{alt} have been deprecated. Instead, use
 \begin{macrodef}
 |\die|[<style>]{<shape>}[<options>]{<integer>}
 \end{macrodef}
-The command \macro{\die} typesets an icon to depict a die with a certain number of sides.\footnote{The code for the dice shapes is based on the \href{https://tex.stackexchange.com/a/144474/47927}{idea of John Kormylo}.} Additionally, icons exist for a two-sided die (which would be equivalent to a coin) and for a hundred-sided die (which typically comes in the shape of a sphere). There is also a special icon for a fudge die.
+The command \macro{\die} typesets an icon to depict a die with a certain number of sides.\footnote{The code for the dice shapes is based on the idea of John Kormylo (see: \url{https://tex.stackexchange.com/a/144474/47927}).} Additionally, icons exist for a two-sided die (which would be equivalent to a coin) and for a hundred-sided die (which typically comes in the shape of a sphere). There is also a special icon for a fudge die.
 
 For the six-sided die, nine additional shapes exist representing the values one to nine as pips. Also, additional shapes exist representing the plus or minus side of a fudge die.
 

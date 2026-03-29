@@ -163,9 +163,8 @@
 
 % disc
 \pgfdeclareshape{twoside}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathellipse{\pgfpointorigin}{\pgfpoint{0cm}{.25cm}}{\pgfpoint{.425cm}{0cm}}
@@ -173,18 +172,16 @@
 }
 
 \pgfdeclareshape{d2}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \inheritbackgroundpath[from={twoside}]
 }
 
 % tetrahedron
 \pgfdeclareshape{fourside}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathmoveto{\pgfpoint{0cm}{.35cm}}
@@ -195,18 +192,16 @@
 }
 
 \pgfdeclareshape{d4}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \inheritbackgroundpath[from={fourside}]
 }
 
 % cube
 \pgfdeclareshape{sixside}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathrectanglecorners{\pgfpoint{.4cm}{.4cm}}{\pgfpoint{-.4cm}{-.4cm}}
@@ -214,18 +209,16 @@
 }
 
 \pgfdeclareshape{d6}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \inheritbackgroundpath[from={sixside}]
 }
 
 % octahedron
 \pgfdeclareshape{eightside}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathmoveto{\pgfpoint{0cm}{.5cm}}
@@ -242,18 +235,16 @@
 }
 
 \pgfdeclareshape{d8}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \inheritbackgroundpath[from={eightside}]
 }
 
 % decahedron
 \pgfdeclareshape{tenside}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathmoveto{\pgfpoint{0cm}{.5cm}}
@@ -279,18 +270,16 @@
 }
 
 \pgfdeclareshape{d10}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \inheritbackgroundpath[from={tenside}]
 }
 
 % dodecahedron
 \pgfdeclareshape{twelveside}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathmoveto{\pgfpoint{0cm}{.5cm}}
@@ -325,18 +314,16 @@
 }
 
 \pgfdeclareshape{d12}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \inheritbackgroundpath[from={twelveside}]
 }
 
 % icosahedron
 \pgfdeclareshape{twentyside}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathmoveto{\pgfpoint{0cm}{.5cm}}
@@ -367,18 +354,16 @@
 }
 
 \pgfdeclareshape{d20}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \inheritbackgroundpath[from={twentyside}]
 }
 
 % sphere
 \pgfdeclareshape{hundredside}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathcircle{\pgfpointorigin}{.425cm}
@@ -392,18 +377,16 @@
 }
 
 \pgfdeclareshape{d100}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \inheritbackgroundpath[from={hundredside}]
 }
 
 % cube (one)
 \pgfdeclareshape{sixside one}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \behindbackgroundpath{
     \foreach \x/\y in {
@@ -420,9 +403,8 @@
 
 % cube (two)
 \pgfdeclareshape{sixside two}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \behindbackgroundpath{
     \foreach \x/\y in {
@@ -439,9 +421,8 @@
 
 % cube (three)
 \pgfdeclareshape{sixside three}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \behindbackgroundpath{
     \foreach \x/\y in {
@@ -458,9 +439,8 @@
 
 % cube (four)
 \pgfdeclareshape{sixside four}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \behindbackgroundpath{
     \foreach \x/\y in {
@@ -478,9 +458,8 @@
 
 % cube (five)
 \pgfdeclareshape{sixside five}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \behindbackgroundpath{
     \foreach \x/\y in {
@@ -499,9 +478,8 @@
 
 % cube (six)
 \pgfdeclareshape{sixside six}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \behindbackgroundpath{
     \foreach \x/\y in {
@@ -520,9 +498,8 @@
 
 % cube (seven)
 \pgfdeclareshape{sixside seven}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \behindbackgroundpath{
     \foreach \x/\y in {
@@ -541,9 +518,8 @@
 
 % cube (eight)
 \pgfdeclareshape{sixside eight}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \behindbackgroundpath{
     \foreach \x/\y in {
@@ -562,9 +538,8 @@
 
 % cube (nine)
 \pgfdeclareshape{sixside nine}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \behindbackgroundpath{
     \foreach \x/\y in {
@@ -583,9 +558,8 @@
 
 % cube (fudge)
 \pgfdeclareshape{fudge}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \behindbackgroundpath{
     \pgfpathmoveto{\pgfpoint{-.15cm}{.1cm}}
@@ -603,9 +577,8 @@
 
 % cube (fudge plus)
 \pgfdeclareshape{fudge plus}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \behindbackgroundpath{
     \pgfpathmoveto{\pgfpoint{0cm}{.15cm}}
@@ -621,9 +594,8 @@
 
 % cube (fudge)
 \pgfdeclareshape{fudge minus}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \behindbackgroundpath{
     \pgfpathmoveto{\pgfpoint{-.15cm}{0cm}}
@@ -657,9 +629,22 @@
   }%
   \ifx\rpgicons@dieiconnrmlrg\rpgicons@dieiconlrg\else\rpgicons@ifEmptyF{#4}{#4\,}\fi%
   \hspace{\rpgicons@beforesep}%
-  \tikz[rpg icons, rpg icons/every die, rpg icons/every #2, actualtext=\rpgicons@dieactualtext,
-    baseline=\rpgicons@baseline, fgnrm/.style={scale=.333}, fglrg/.style={scale=.675}, #3] {
-    \node[\rpgicons@shape@variant{#2}, draw, \rpgicons@dieiconfg, font={\footnotesize}] at (0cm,0cm)
+  \tikz[
+    rpg icons,
+    rpg icons/every die,
+    rpg icons/every #2,
+    actualtext=\rpgicons@dieactualtext,
+    baseline=\rpgicons@baseline,
+    fgnrm/.style={scale=.333},
+    fglrg/.style={scale=.675},
+    #3
+  ] {
+    \node[
+      \rpgicons@shape@variant{#2},
+      draw,
+      \rpgicons@dieiconfg,
+      font={\footnotesize}
+    ] at (0cm,0cm)
       {\ifx\rpgicons@dieiconnrmlrg\rpgicons@dieiconlrg\textbf{#4}\fi};
     \path[draw=none, \rpgicons@dieiconfg] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
   }%
@@ -671,9 +656,8 @@
 
 % strength
 \pgfdeclareshape{strength}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathmoveto{\pgfpointadd{\pgfpoint{0cm}{-.075cm}}{\pgfpointpolar{90}{.425cm}}}
@@ -705,9 +689,8 @@
 
 % dexterity
 \pgfdeclareshape{dexterity}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathmoveto{\pgfpointadd{\pgfpoint{0cm}{-.075cm}}{\pgfpointpolar{90}{.425cm}}}
@@ -749,9 +732,8 @@
 
 % dexterity i
 \pgfdeclareshape{dexterity i}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathmoveto{\pgfpointadd{\pgfpoint{0cm}{-.15cm}}{\pgfpointpolar{90}{.425cm}}}
@@ -791,9 +773,8 @@
 
 % constitution
 \pgfdeclareshape{constitution}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathmoveto{\pgfpoint{0cm}{.25cm}}
@@ -833,9 +814,8 @@
 
 % intelligence
 \pgfdeclareshape{intelligence}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathmoveto{\pgfpointadd{\pgfpoint{0cm}{-.2cm}}{\pgfpointpolar{90}{.425cm}}}
@@ -865,9 +845,8 @@
 
 % wisdom
 \pgfdeclareshape{wisdom}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathmoveto{\pgfpointadd{\pgfpoint{0cm}{.175cm+.425cm+.425cm}}{\pgfpointpolar{240}{.425cm+.425cm}}}
@@ -891,9 +870,8 @@
 
 % wisdom i
 \pgfdeclareshape{wisdom i}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathmoveto{\pgfpointadd{\pgfpoint{0cm}{-.125cm}}{\pgfpointpolar{110}{.55cm}}}
@@ -926,9 +904,8 @@
 
 % charisma
 \pgfdeclareshape{charisma}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathmoveto{\pgfpoint{0cm}{.15cm}}
@@ -975,9 +952,8 @@
 
 % resilience
 \pgfdeclareshape{resilience}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathmoveto{\pgfpointadd{\pgfpoint{-.425cm}{-.475cm}}{\pgfpointpolar{65}{.5cm}}}
@@ -1011,9 +987,8 @@
 
 % sanity
 \pgfdeclareshape{sanity}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathmoveto{\pgfpointadd{\pgfpoint{-.125cm + .175cm * sin(30)}{.425cm - .175cm * cos(30)}}
@@ -1045,9 +1020,8 @@
 
 % perception
 \pgfdeclareshape{perception}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathmoveto{\pgfpointadd{\pgfpoint{0cm}{.35cm}}{\pgfpointpolar{150}{.125cm}}}
@@ -1085,9 +1059,8 @@
 
 % luck
 \pgfdeclareshape{luck}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathmoveto{\pgfpoint{.1cm}{.15cm}}
@@ -1115,9 +1088,8 @@
 
 % armour
 \pgfdeclareshape{armour}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathmoveto{\pgfpoint{-.25cm}{-.425cm}}
@@ -1150,18 +1122,16 @@
 }
 
 \pgfdeclareshape{armor}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \inheritbackgroundpath[from={armour}]
 }
 
 % proficiency
 \pgfdeclareshape{proficiency}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathmoveto{\pgfpointpolar{90}{.35cm}}
@@ -1197,8 +1167,16 @@
     \def\rpgicons@abilityiconfg{fgneg}\else%
     \def\rpgicons@abilityiconfg{fgpos}\fi%
   \hspace{\rpgicons@beforesep}%
-  \tikz[rpg icons, rpg icons/every ability, rpg icons/every #2, actualtext={#2},
-    baseline=\rpgicons@baseline, fgpos/.style={draw}, fgneg/.style={draw=rpgicons@bg, line width=.6pt}, #3] {
+  \tikz[
+    rpg icons,
+    rpg icons/every ability,
+    rpg icons/every #2,
+    actualtext={#2},
+    baseline=\rpgicons@baseline,
+    fgpos/.style={draw},
+    fgneg/.style={draw=rpgicons@bg, line width=.6pt},
+    #3
+  ] {
     \ifx\rpgicons@abilityiconposneg\rpgicons@abilityiconneg%
       \path[scale=.333, fill] (0cm,0cm) circle[radius=.45cm];
       \node[\rpgicons@shape@variant{#2}, \rpgicons@abilityiconfg, scale=.225] at (0cm,0cm) {};
@@ -1222,8 +1200,14 @@
     \def\rpgicons@savingactualtext{#2 saving}%
   \fi%
   \hspace{\rpgicons@beforesep}%
-  \tikz[rpg icons, rpg icons/every saving, \rpgicons@savingstyle, actualtext=\rpgicons@savingactualtext,
-    baseline=\rpgicons@baseline, #3] {
+  \tikz[
+    rpg icons,
+    rpg icons/every saving,
+    \rpgicons@savingstyle,
+    actualtext=\rpgicons@savingactualtext,
+    baseline=\rpgicons@baseline,
+    #3
+  ] {
     \path[draw, scale=.333] (-.45cm,.45cm) -- (.45cm,.45cm) -- (.45cm,-.05cm)
       arc[start angle=360, end angle=180, radius=.45cm] -- cycle;
     \ifx\rpgicons@abilityiconnrmemp\rpgicons@abilityiconemp\else%
@@ -1239,9 +1223,8 @@
 
 % linear
 \pgfdeclareshape{linear}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \behindbackgroundpath{
     \pgfpathcircle{\pgfpoint{-.4cm}{0cm}}{2pt}
@@ -1257,9 +1240,8 @@
 
 % conic
 \pgfdeclareshape{conic}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \behindbackgroundpath{
     \pgfpathcircle{\pgfpoint{-.425cm}{0cm}}{2pt}
@@ -1288,9 +1270,8 @@
 
 % quadratic
 \pgfdeclareshape{quadratic}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \behindbackgroundpath{
     \pgfpathcircle{\pgfpointorigin}{2pt}
@@ -1303,9 +1284,8 @@
 
 % cubic
 \pgfdeclareshape{cubic}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \behindbackgroundpath{
     \pgfpathcircle{\pgfpoint{.1125cm}{-.1125cm}}{2pt}
@@ -1330,9 +1310,8 @@
 
 % spheric
 \pgfdeclareshape{spheric}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \behindbackgroundpath{
     \pgfpathcircle{\pgfpointorigin}{2pt}
@@ -1351,9 +1330,8 @@
 
 % cylindric
 \pgfdeclareshape{cylindric}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \behindbackgroundpath{
     \pgfpathcircle{\pgfpoint{0cm}{-.2125cm}}{2pt}
@@ -1372,9 +1350,8 @@
 
 % emanation
 \pgfdeclareshape{emanation}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathcircle{\pgfpoint{0cm}{.1cm}}{.075cm}
@@ -1388,9 +1365,8 @@
 
 % verbal
 \pgfdeclareshape{verbal}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathmoveto{\pgfpoint{-.35cm}{0cm}}
@@ -1404,9 +1380,8 @@
 
 % somatic
 \pgfdeclareshape{somatic}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathmoveto{\pgfpoint{-.425cm}{0cm}}
@@ -1420,9 +1395,8 @@
 
 % material
 \pgfdeclareshape{material}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathmoveto{\pgfpoint{-.4cm}{.2cm}}
@@ -1443,9 +1417,8 @@
 
 % ritual
 \pgfdeclareshape{ritual}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathmoveto{\pgfpointpolar{90}{.425cm}}
@@ -1464,9 +1437,8 @@
 
 % focus
 \pgfdeclareshape{focus}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathcircle{\pgfpointorigin}{.35cm}
@@ -1485,8 +1457,14 @@
 
 \NewDocumentCommand{\rpgiconsspell}{ m O{} }{%
   \hspace{\rpgicons@beforesep}%
-  \tikz[rpg icons, rpg icons/every spell, rpg icons/every #1, actualtext={#1},
-    baseline=\rpgicons@baseline, #2] {
+  \tikz[
+    rpg icons,
+    rpg icons/every spell,
+    rpg icons/every #1,
+    actualtext={#1},
+    baseline=\rpgicons@baseline,
+    #2
+  ] {
     \node[\rpgicons@shape@variant{#1}, draw, scale=.333] at (0cm,0cm) {};
     \path[draw=none, scale=.333] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
   }%
@@ -1498,9 +1476,8 @@
 
 % abjuration
 \pgfdeclareshape{abjuration}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathmoveto{\pgfpoint{0cm}{.025cm}}
@@ -1522,9 +1499,8 @@
 
 % conjuration
 \pgfdeclareshape{conjuration}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathmoveto{\pgfpoint{-.425cm}{.425cm}}
@@ -1543,9 +1519,8 @@
 
 % divination
 \pgfdeclareshape{divination}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathmoveto{\pgfpoint{-.35cm}{-.175cm}}
@@ -1561,9 +1536,8 @@
 
 % enchantment
 \pgfdeclareshape{enchantment}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathmoveto{\pgfpoint{-.2cm}{-.425cm}}
@@ -1581,9 +1555,8 @@
 
 % evocation
 \pgfdeclareshape{evocation}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathellipse{\pgfpointorigin}{\pgfpoint{.325cm}{0cm}}{\pgfpoint{0cm}{.225cm}}
@@ -1614,9 +1587,8 @@
 
 % illusion
 \pgfdeclareshape{illusion}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathmoveto{\pgfpoint{0cm}{.225cm}}
@@ -1635,9 +1607,8 @@
 
 % necromancy
 \pgfdeclareshape{necromancy}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathmoveto{\pgfpointpolar{210}{.25cm}}
@@ -1652,9 +1623,8 @@
 
 % transmutation
 \pgfdeclareshape{transmutation}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathmoveto{\pgfpoint{-.25cm}{.35cm}}
@@ -1680,9 +1650,18 @@
     \def\rpgicons@spellschooliconbg{bgneg}\else%
     \def\rpgicons@spellschooliconbg{bgpos}\fi%
   \hspace{\rpgicons@beforesep}%
-  \tikz[rpg icons, rpg icons/every spellschool, rpg icons/every #2, actualtext={#2},
-    baseline=\rpgicons@baseline, fgpos/.style={draw=rpgicons@bg, line width=.6pt}, fgneg/.style={draw},
-    bgpos/.style={fill}, bgneg/.style={draw}, #3] {
+  \tikz[
+    rpg icons,
+    rpg icons/every spellschool,
+    rpg icons/every #2,
+    actualtext={#2},
+    baseline=\rpgicons@baseline,
+    fgpos/.style={draw=rpgicons@bg, line width=.6pt},
+    fgneg/.style={draw},
+    bgpos/.style={fill},
+    bgneg/.style={draw},
+    #3
+  ] {
     \path[scale=.333, \rpgicons@spellschooliconbg] (-.475cm,.35cm)
       -- (-.35cm,.475cm) -- (.35cm,.475cm) -- (.475cm,.35cm) -- (.425cm,-.375cm) -- (0cm,-.475cm) -- (-.425cm,-.375cm) -- cycle;
     \node[\rpgicons@shape@variant{#2}, \rpgicons@spellschooliconfg, scale=.225] at (0cm,0cm) {};
@@ -1696,9 +1675,8 @@
 
 % acid
 \pgfdeclareshape{acid}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathmoveto{\pgfpointadd{\pgfpoint{-.175cm}{.05cm}}{\pgfpointpolar{-20}{.175}}}
@@ -1718,9 +1696,8 @@
 
 % bludgeoning
 \pgfdeclareshape{bludgeoning}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathmoveto{\pgfpoint{-.2cm}{.225cm}}
@@ -1743,9 +1720,8 @@
 
 % cold
 \pgfdeclareshape{cold}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathmoveto{\pgfpointpolar{90}{.425cm}}
@@ -1779,9 +1755,8 @@
 
 % fire
 \pgfdeclareshape{fire}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathmoveto{\pgfpoint{-.15cm}{-.425cm}}
@@ -1801,9 +1776,8 @@
 
 % force
 \pgfdeclareshape{force}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathmoveto{\pgfpointpolar{90}{.425cm}}
@@ -1824,9 +1798,8 @@
 
 % lightning
 \pgfdeclareshape{lightning}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathmoveto{\pgfpoint{0cm}{.425cm}}
@@ -1840,9 +1813,8 @@
 
 % necrotic
 \pgfdeclareshape{necrotic}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathmoveto{\pgfpoint{-.35cm}{-.425cm}}
@@ -1861,9 +1833,8 @@
 
 % necrotic i
 \pgfdeclareshape{necrotic i}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathmoveto{\pgfpoint{-.35cm}{-.425cm}}
@@ -1882,9 +1853,8 @@
 
 % piercing
 \pgfdeclareshape{piercing}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathmoveto{\pgfpoint{-.425cm}{.075cm}}
@@ -1907,9 +1877,8 @@
 
 % poison
 \pgfdeclareshape{poison}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathmoveto{\pgfpointadd{\pgfpoint{0cm}{.175cm}}{\pgfpointpolar{-40}{.25cm}}}
@@ -1930,9 +1899,8 @@
 
 % psychic
 \pgfdeclareshape{psychic}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathmoveto{\pgfpoint{.075cm}{.4cm}}
@@ -1950,9 +1918,8 @@
 
 % radiant
 \pgfdeclareshape{radiant}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathcircle{\pgfpointorigin}{.225cm}
@@ -1975,9 +1942,8 @@
 
 % slashing
 \pgfdeclareshape{slashing}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathmoveto{\pgfpoint{-.15cm}{.225cm}}
@@ -2007,9 +1973,8 @@
 
 % thunder
 \pgfdeclareshape{thunder}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathmoveto{\pgfpoint{.225cm}{-.075cm}}
@@ -2034,9 +1999,8 @@
 
 % healing
 \pgfdeclareshape{healing}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathmoveto{\pgfpoint{0cm}{-.375cm}}
@@ -2049,8 +2013,14 @@
 
 \NewDocumentCommand{\rpgiconsdamage}{ m O{} }{%
   \hspace{\rpgicons@beforesep}%
-  \tikz[rpg icons, rpg icons/every damage, rpg icons/every #1, actualtext={#1},
-    baseline=\rpgicons@baseline, #2] {
+  \tikz[
+    rpg icons,
+    rpg icons/every damage,
+    rpg icons/every #1,
+    actualtext={#1},
+    baseline=\rpgicons@baseline,
+    #2
+  ] {
     \path[draw, scale=.333] (0cm,0cm) circle[radius=.5cm];
     \node[\rpgicons@shape@variant{#1}, draw, scale=.225] at (0cm,0cm) {};
     \path[draw=none, scale=.333] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
@@ -2063,9 +2033,8 @@
 
 % melee
 \pgfdeclareshape{melee}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathmoveto{\pgfpoint{-.15cm}{-.225cm}}
@@ -2091,9 +2060,8 @@
 
 % melee i
 \pgfdeclareshape{melee i}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathmoveto{\pgfpoint{.15cm}{.2cm}}
@@ -2116,9 +2084,8 @@
 
 % ranged
 \pgfdeclareshape{ranged}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathmoveto{\pgfpoint{0cm}{0cm}}
@@ -2144,9 +2111,8 @@
 
 % magic
 \pgfdeclareshape{magic}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathmoveto{\pgfpoint{-.225cm}{-.425cm}}
@@ -2175,9 +2141,8 @@
 
 % singlehanded
 \pgfdeclareshape{singlehanded}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathmoveto{\pgfpoint{-.25cm}{-.425cm}}
@@ -2199,9 +2164,8 @@
 
 % doublehanded
 \pgfdeclareshape{doublehanded}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathmoveto{\pgfpoint{-.25cm}{-.425cm}}
@@ -2235,8 +2199,14 @@
 
 \NewDocumentCommand{\rpgiconsattack}{ m O{} }{%
   \hspace{\rpgicons@beforesep}%
-  \tikz[rpg icons, rpg icons/every attack, rpg icons/every #1, actualtext={#1},
-    baseline=\rpgicons@baseline, #2] {
+  \tikz[
+    rpg icons,
+    rpg icons/every attack,
+    rpg icons/every #1,
+    actualtext={#1},
+    baseline=\rpgicons@baseline,
+    #2
+  ] {
     \node[\rpgicons@shape@variant{#1}, draw, scale=.333] at (0cm,0cm) {};
     \path[draw=none, scale=.333] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
   }%
@@ -2248,9 +2218,8 @@
 
 % buff
 \pgfdeclareshape{buff}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathmoveto{\pgfpoint{-.425cm}{-.225cm}}
@@ -2279,9 +2248,8 @@
 
 % blinded
 \pgfdeclareshape{blinded}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathmoveto{\pgfpoint{0cm}{.225cm}}
@@ -2300,9 +2268,8 @@
 
 % charmed
 \pgfdeclareshape{charmed}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathcircle{\pgfpoint{0cm}{0cm}}{.425cm}
@@ -2324,9 +2291,8 @@
 
 % deafened
 \pgfdeclareshape{deafened}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathmoveto{\pgfpoint{-.175cm}{-.275cm}}
@@ -2350,9 +2316,8 @@
 
 % exhausted
 \pgfdeclareshape{exhausted}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathcircle{\pgfpoint{0cm}{0cm}}{.425cm}
@@ -2370,9 +2335,8 @@
 
 % frightened
 \pgfdeclareshape{frightened}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathcircle{\pgfpoint{0cm}{0cm}}{.425cm}
@@ -2386,9 +2350,8 @@
 
 % grappled
 \pgfdeclareshape{grappled}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathmoveto{\pgfpoint{-.25cm}{.3cm}}
@@ -2432,9 +2395,8 @@
 
 % incapacitated
 \pgfdeclareshape{incapacitated}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathmoveto{\pgfpointpolar{30}{.425cm}}
@@ -2463,9 +2425,8 @@
 
 % invisible
 \pgfdeclareshape{invisible}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathmoveto{\pgfpointpolar{-15}{.425cm}}
@@ -2491,9 +2452,8 @@
 
 % paralyzed
 \pgfdeclareshape{paralyzed}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathcircle{\pgfpoint{0cm}{0cm}}{.425cm}
@@ -2515,9 +2475,8 @@
 
 % petrified
 \pgfdeclareshape{petrified}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathmoveto{\pgfpointpolar{45}{.425cm}}
@@ -2554,9 +2513,8 @@
 
 % poisoned
 \pgfdeclareshape{poisoned}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathcircle{\pgfpoint{0cm}{0cm}}{.425cm}
@@ -2578,9 +2536,8 @@
 
 % prone
 \pgfdeclareshape{prone}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathcircle{\pgfpoint{.2cm}{-.125cm}}{.125cm}
@@ -2605,9 +2562,8 @@
 
 % restrained
 \pgfdeclareshape{restrained}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathmoveto{\pgfpoint{-.075cm}{-.225cm}}
@@ -2645,9 +2601,8 @@
 
 % restrained i
 \pgfdeclareshape{restrained i}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathmoveto{\pgfpoint{.35cm}{-.425cm}}
@@ -2675,9 +2630,8 @@
 
 % stunned
 \pgfdeclareshape{stunned}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathcircle{\pgfpoint{0cm}{0cm}}{.425cm}
@@ -2709,9 +2663,8 @@
 
 % unconscious
 \pgfdeclareshape{unconscious}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathmoveto{\pgfpoint{0cm}{.15cm}}
@@ -2735,9 +2688,8 @@
 
 % hearing
 \pgfdeclareshape{hearing}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathmoveto{\pgfpoint{-.175cm}{-.275cm}}
@@ -2757,9 +2709,8 @@
 
 % seeing
 \pgfdeclareshape{seeing}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathmoveto{\pgfpoint{0cm}{.225cm}}
@@ -2772,8 +2723,14 @@
 
 \NewDocumentCommand{\rpgiconscondition}{ m O{} }{%
   \hspace{\rpgicons@beforesep}%
-  \tikz[rpg icons, rpg icons/every condition, rpg icons/every #1, actualtext={#1},
-    baseline=\rpgicons@baseline, #2] {
+  \tikz[
+    rpg icons,
+    rpg icons/every condition,
+    rpg icons/every #1,
+    actualtext={#1},
+    baseline=\rpgicons@baseline,
+    #2
+  ] {
     \node[\rpgicons@shape@variant{#1}, draw, scale=.333] at (0cm,0cm) {};
     \path[draw=none, scale=.333] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
   }%
@@ -2785,9 +2742,8 @@
 
 % artificer
 \pgfdeclareshape{artificer}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathmoveto{\pgfpoint{-.05cm}{.3cm}}
@@ -2814,9 +2770,8 @@
 
 % artificer i
 \pgfdeclareshape{artificer i}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathmoveto{\pgfpointadd{\pgfpoint{-.075cm}{.15cm}}{\pgfpointpolar{350}{.275cm}}}
@@ -2837,9 +2792,8 @@
 
 % barbarian
 \pgfdeclareshape{barbarian}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathmoveto{\pgfpoint{.05cm}{-.375cm}}
@@ -2866,9 +2820,8 @@
 
 % bard
 \pgfdeclareshape{bard}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathcircle{\pgfpoint{-.35cm}{.35cm}}{.075cm}
@@ -2900,9 +2853,8 @@
 
 % bard i
 \pgfdeclareshape{bard i}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathmoveto{\pgfpoint{-.425cm}{-.425cm}}
@@ -2917,9 +2869,8 @@
 
 % cleric
 \pgfdeclareshape{cleric}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathmoveto{\pgfpoint{-.075cm}{-.425cm}}
@@ -2939,9 +2890,8 @@
 
 % cleric i
 \pgfdeclareshape{cleric i}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \foreach \x in {-1,0,1} {
@@ -2972,9 +2922,8 @@
 
 % cleric ii
 \pgfdeclareshape{cleric ii}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathmoveto{\pgfpoint{-.15cm}{-.325cm}}
@@ -2997,9 +2946,8 @@
 
 % druid
 \pgfdeclareshape{druid}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathmoveto{\pgfpointadd{\pgfpoint{.1cm}{-.1cm}}{\pgfpointpolar{45}{.05cm}}}
@@ -3018,9 +2966,8 @@
 
 % druid i
 \pgfdeclareshape{druid i}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathmoveto{\pgfpoint{-.375cm}{0cm}}
@@ -3047,9 +2994,8 @@
 
 % druid ii
 \pgfdeclareshape{druid ii}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathmoveto{\pgfpoint{-.425cm}{-.425cm}}
@@ -3063,9 +3009,8 @@
 
 % fighter
 \pgfdeclareshape{fighter}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathmoveto{\pgfpoint{-.05cm}{.425cm}}
@@ -3098,9 +3043,8 @@
 
 % gunslinger
 \pgfdeclareshape{gunslinger}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathmoveto{\pgfpoint{-.125cm}{-.125cm}}
@@ -3132,9 +3076,8 @@
 
 % monk
 \pgfdeclareshape{monk}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathmoveto{\pgfpoint{-.425cm}{-.15cm}}
@@ -3168,9 +3111,8 @@
 
 % monk i
 \pgfdeclareshape{monk i}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathcircle{\pgfpoint{0cm}{0cm}}{.35cm}
@@ -3207,9 +3149,8 @@
 
 % paladin
 \pgfdeclareshape{paladin}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathcircle{\pgfpoint{0cm}{-.15cm}}{.275cm}
@@ -3247,9 +3188,8 @@
 
 % paladin i
 \pgfdeclareshape{paladin i}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathmoveto{\pgfpoint{-.25cm}{.425cm}}
@@ -3273,9 +3213,8 @@
 
 % psion
 \pgfdeclareshape{psion}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathmoveto{\pgfpoint{-.425cm}{-.425cm}}
@@ -3294,9 +3233,8 @@
 
 % psion i
 \pgfdeclareshape{psion i}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathmoveto{\pgfpoint{0cm}{.025cm}}
@@ -3323,9 +3261,8 @@
 
 % ranger
 \pgfdeclareshape{ranger}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathcircle{\pgfpoint{0cm}{0cm}}{.425cm}
@@ -3352,9 +3289,8 @@
 
 % ranger i
 \pgfdeclareshape{ranger i}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathmoveto{\pgfpoint{-.425cm}{.325cm}}
@@ -3389,9 +3325,8 @@
 
 % rogue
 \pgfdeclareshape{rogue}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathmoveto{\pgfpointadd{\pgfpoint{.15cm}{.15cm}}{\pgfpointpolar{-45}{.05cm}}}
@@ -3413,9 +3348,8 @@
 
 % rogue i
 \pgfdeclareshape{rogue i}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathmoveto{\pgfpoint{.225cm}{.425cm}}
@@ -3443,9 +3377,8 @@
 
 % sorcerer
 \pgfdeclareshape{sorcerer}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathmoveto{\pgfpoint{-.25cm}{-.425cm}}
@@ -3471,9 +3404,8 @@
 
 % sorcerer i
 \pgfdeclareshape{sorcerer i}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathmoveto{\pgfpoint{-.325cm}{.4cm}}
@@ -3507,9 +3439,8 @@
 
 % warlock
 \pgfdeclareshape{warlock}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathmoveto{\pgfpointpolar{150}{.4cm}}
@@ -3533,9 +3464,8 @@
 
 % wizard
 \pgfdeclareshape{wizard}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathmoveto{\pgfpoint{.4cm}{-.425cm}}
@@ -3561,9 +3491,8 @@
 
 % wizard i
 \pgfdeclareshape{wizard i}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathmoveto{\pgfpoint{-.425cm}{-.375cm}}
@@ -3600,9 +3529,18 @@
     \def\rpgicons@classiconbg{bgneg}\else%
     \def\rpgicons@classiconbg{bgpos}\fi%
   \hspace{\rpgicons@beforesep}%
-  \tikz[rpg icons, rpg icons/every class, rpg icons/every #2, actualtext={#2},
-    baseline=\rpgicons@baseline, fgpos/.style={draw=rpgicons@bg, line width=.6pt}, fgneg/.style={draw},
-    bgpos/.style={fill}, bgneg/.style={draw}, #3] {
+  \tikz[
+    rpg icons,
+    rpg icons/every class,
+    rpg icons/every #2,
+    actualtext={#2},
+    baseline=\rpgicons@baseline,
+    fgpos/.style={draw=rpgicons@bg, line width=.6pt},
+    fgneg/.style={draw},
+    bgpos/.style={fill},
+    bgneg/.style={draw},
+    #3
+  ] {
     \path[scale=.333, \rpgicons@classiconbg] (-.45cm,-.45cm) rectangle (.45cm,.45cm);
     \node[\rpgicons@shape@variant{#2}, \rpgicons@classiconfg, scale=.225] at (0cm,0cm) {};
     \path[draw=none, scale=.333] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
@@ -3615,9 +3553,8 @@
 
 % lawful good
 \pgfdeclareshape{lawful good}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathmoveto{\pgfpoint{.4cm}{-.1cm}}
@@ -3632,9 +3569,8 @@
 
 % neutral good
 \pgfdeclareshape{neutral good}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathcircle{\pgfpoint{0cm}{-.1cm}}{.2cm}
@@ -3648,9 +3584,8 @@
 
 % chaotic good
 \pgfdeclareshape{chaotic good}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathmoveto{\pgfpoint{0cm}{.4cm}}
@@ -3665,9 +3600,8 @@
 
 % lawful neutral
 \pgfdeclareshape{lawful neutral}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathcircle{\pgfpoint{0cm}{0cm}}{.2cm}
@@ -3680,9 +3614,8 @@
 
 % true neutral
 \pgfdeclareshape{true neutral}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathcircle{\pgfpoint{0cm}{0cm}}{.2cm}
@@ -3691,9 +3624,8 @@
 
 % chaotic neutral
 \pgfdeclareshape{chaotic neutral}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathcircle{\pgfpoint{0cm}{0cm}}{.2cm}
@@ -3706,9 +3638,8 @@
 
 % lawful evil
 \pgfdeclareshape{lawful evil}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathmoveto{\pgfpoint{.4cm}{.1cm}}
@@ -3723,9 +3654,8 @@
 
 % neutral evil
 \pgfdeclareshape{neutral evil}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathcircle{\pgfpoint{0cm}{.1cm}}{.2cm}
@@ -3739,9 +3669,8 @@
 
 % chaotic evil
 \pgfdeclareshape{chaotic evil}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathmoveto{\pgfpoint{0cm}{.4cm}}
@@ -3764,9 +3693,18 @@
     \def\rpgicons@alignmenticonbg{bgneg}\else%
     \def\rpgicons@alignmenticonbg{bgpos}\fi%
   \hspace{\rpgicons@beforesep}%
-  \tikz[rpg icons, rpg icons/every alignment, rpg icons/every #2, actualtext={#2},
-    baseline=\rpgicons@baseline, fgpos/.style={draw=rpgicons@bg, line width=.6pt}, fgneg/.style={draw},
-    bgpos/.style={fill}, bgneg/.style={draw}, #3] {
+  \tikz[
+    rpg icons,
+    rpg icons/every alignment,
+    rpg icons/every #2,
+    actualtext={#2},
+    baseline=\rpgicons@baseline,
+    fgpos/.style={draw=rpgicons@bg, line width=.6pt},
+    fgneg/.style={draw},
+    bgpos/.style={fill},
+    bgneg/.style={draw},
+    #3
+  ] {
     \path[scale=.333, \rpgicons@alignmenticonbg] (30:.525cm)
       -- (90:.525cm) -- (150:.525cm) -- (210:.525cm) -- (270:.525cm) -- (330:.525cm) -- cycle;
     \node[\rpgicons@shape@variant{#2}, \rpgicons@alignmenticonfg, scale=.225] at (0cm,0cm) {};
@@ -3780,9 +3718,8 @@
 
 % copper
 \pgfdeclareshape{copper}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathmoveto{\pgfpoint{-.375cm}{-.225cm}}
@@ -3800,9 +3737,8 @@
 
 % silver
 \pgfdeclareshape{silver}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathmoveto{\pgfpoint{0cm}{.35cm}}
@@ -3815,9 +3751,8 @@
 
 % gold
 \pgfdeclareshape{gold}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathmoveto{\pgfpoint{-.375cm}{-.375cm}}
@@ -3834,9 +3769,8 @@
 
 % electrum
 \pgfdeclareshape{electrum}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathmoveto{\pgfpoint{-.225cm}{-.325cm}}
@@ -3850,9 +3784,8 @@
 
 % platinum
 \pgfdeclareshape{platinum}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathmoveto{\pgfpoint{.075cm}{.4cm}}
@@ -3869,9 +3802,8 @@
 
 % gem
 \pgfdeclareshape{gem}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathmoveto{\pgfpoint{-.25cm}{.425cm}}
@@ -3897,9 +3829,8 @@
 
 % jewellery
 \pgfdeclareshape{jewellery}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathellipse{\pgfpoint{0cm}{-.15cm}}{\pgfpoint{.175cm}{0cm}}{\pgfpoint{0cm}{.275cm}}
@@ -3918,18 +3849,16 @@
 }
 
 \pgfdeclareshape{jewelry}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \inheritbackgroundpath[from={jewellery}]
 }
 
 % jewellery i
 \pgfdeclareshape{jewellery i}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \backgroundpath{
     \pgfpathcircle{\pgfpoint{0cm}{-.075cm}}{.225cm}
@@ -3945,9 +3874,8 @@
 }
 
 \pgfdeclareshape{jewelry i}{
-  \anchor{center}{\pgfpointorigin} % within the node, (0,0) is the center
-  \anchor{text} % this is used to center the text in the node
-    {\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
 
   \inheritbackgroundpath[from={jewellery i}]
 }
@@ -3960,8 +3888,14 @@
   }{%
     \def\rpgicons@currencyactualtext{#3 #1}%
   }%
-  \tikz[rpg icons, rpg icons/every currency, rpg icons/every #1, actualtext=\rpgicons@currencyactualtext,
-    baseline=\rpgicons@baseline, #2] {
+  \tikz[
+    rpg icons,
+    rpg icons/every currency,
+    rpg icons/every #1,
+    actualtext=\rpgicons@currencyactualtext,
+    baseline=\rpgicons@baseline,
+    #2
+  ] {
     \node[\rpgicons@shape@variant{#1}, draw, scale=.333] at (0cm,0cm) {};
     \path[draw=none, scale=.333] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
   }%

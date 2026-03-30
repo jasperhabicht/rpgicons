@@ -11,7 +11,7 @@
 -- This work has the LPPL maintenance status `maintained'.
 --
 
--- v2.7.0 2026-03-30
+-- v2.7.1 2026-03-31
 
 local pairs             = pairs
 local pdfe_open         = pdfe.open

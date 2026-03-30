@@ -22,21 +22,21 @@ local img_write         = img.write
 
 --- Stores the objnums of all pages of a PDF with the relevant page numbers.
 -- The objnums are stored as keys of the table.
--- The page numbers are stored as values to the relevant keys. 
+-- The page numbers are stored as values to the relevant keys.
 local pages = {}
 
 --- Stores the named dests in a PDF with the relevant page numbers.
 -- The named dests are stored as keys of the table.
--- The page numbers are stored as values to the relevant keys. 
+-- The page numbers are stored as values to the relevant keys.
 local dests = {}
 
 --- Retrieves the page numbers of all named dests in a PDF.
--- Stores the objnums of all pages of the PDF file in table `pages`. 
+-- Stores the objnums of all pages of the PDF file in table `pages`.
 -- For each named dest, gets the objnum of the referenced page
 -- and stores the relevant page number in table `dests`.
 -- @param file string The PDF file to be processed.
 -- @return nil - -
-function get_dest_pages(file)
+local function get_dest_pages(file)
     local _file = pdfe_open(file)
     for i, o in pairs(pdfe_pagestotable(_file)) do
         -- The third item of the array obtained by pdfe.arraytotable
@@ -68,7 +68,7 @@ end
 -- @param dest string The named dest.
 -- @param file string The PDF file.
 -- @return luatex.node PDF page as TeX node.
-function load_icon(dest, file)
+local function load_icon(dest, file)
     return img_write({page = dests[dest], filename = file})
 end
 

@@ -2910,7 +2910,7 @@
                 \str_use:N \l_rpgicons_precompose_output_str
             }
         } {
-            \sys_if_shell:TF {
+            \sys_if_shell_unrestricted:TF {
                 \msg_info:nne { rpgicons } { generating-external~file } {
                     \str_use:N \l_rpgicons_precompose_output_str
                 }
@@ -2961,9 +2961,9 @@
         }
     }
     \bool_lazy_and:nnT {
-        \file_if_exist_p:n { \str_use:N \l_rpgicons_precompose_output_str .pdf }
-    } {
         \sys_if_engine_luatex_p:
+    } {
+        \file_if_exist_p:n { \str_use:N \l_rpgicons_precompose_output_str .pdf }
     } {
         \lua_now:e {
             rpgicons.get_dest_pages(' \lua_escape:e { \str_use:N \l_rpgicons_precompose_output_str } .pdf')

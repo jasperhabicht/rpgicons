@@ -13,6 +13,10 @@
 
 -- v2.7.1 2026-03-31
 
+if rpgicons then
+    return
+end
+
 local pairs             = pairs
 local pdfe_open         = pdfe.open
 local pdfe_pagestotable = pdfe.pagestotable

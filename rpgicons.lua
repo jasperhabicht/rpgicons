@@ -38,7 +38,7 @@ local dests = {}
 -- and stores the relevant page number in table `dests`.
 -- @param file string The PDF file to be processed.
 -- @return nil - -
-function rpgcions.get_dest_pages(file)
+function rpgicons.get_dest_pages(file)
     local _file = pdfe_open(file)
     for i, o in pairs(pdfe_pagestotable(_file)) do
         -- The third item of the array obtained by pdfe.arraytotable
@@ -70,7 +70,7 @@ end
 -- @param dest string The named dest.
 -- @param file string The PDF file.
 -- @return luatex.node PDF page as TeX node.
-function rpgcions.load_icon(dest, file)
+function rpgicons.load_icon(dest, file)
     return img_write({page = dests[dest], filename = file})
 end
 

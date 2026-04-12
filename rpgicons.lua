@@ -13,7 +13,7 @@
 
 -- v2.7.2 2026-04-10
 
-local rpgicons = rpgicons or {}
+rpgicons = rpgicons or {}
 
 local pairs             = pairs
 local pdfe_open         = pdfe.open

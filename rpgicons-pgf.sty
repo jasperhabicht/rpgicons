@@ -11,7 +11,7 @@
 % This work has the LPPL maintenance status `maintained'.
 %
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{rpgicons-pgf}[2026-04-10 RPG Icons Package (PGF Variant) (2.7.2)]
+\ProvidesPackage{rpgicons-pgf}[2026-04-15 RPG Icons Package (PGF Variant) (2.8.0)]
 
 % provide pics option
 \newif\ifrpgicons@pics\rpgicons@picsfalse
@@ -46,6 +46,7 @@
   lawful good, neutral good, chaotic good, lawful neutral, true neutral,
   chaotic neutral, lawful evil, neutral evil, chaotic evil,
   copper, silver, gold, electrum, platinum, gem, jewellery, jewelry, jewellery i, jewelry i,
+  upward, downward, leftward, rightward, forward, backward,
   % === backward compatibility
   dexterity alt, wisdom alt, necrotic alt, melee alt, restrained alt,
   artificer alt, bard alt, cleric alt, druid alt, monk alt, paladin alt,
@@ -95,6 +96,7 @@
   rpg icons/every class/.style={},
   rpg icons/every alignment/.style={},
   rpg icons/every currency/.style={},
+  rpg icons/every direction/.style={},
   %
   rpg icons/create every style/.code={
     \tikzset{
@@ -3906,6 +3908,146 @@
   \hspace{\rpgicons@aftersep}%
 }
 \@ifundefined{currency}{\NewCommandCopy\currency\rpgiconscurrency}{}
+
+% DIRECTION
+
+% upward
+\pgfdeclareshape{upward}{
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+
+  \backgroundpath{
+    \pgfpathmoveto{\pgfpoint{-.25cm}{-.425cm}}
+    \pgfpathlineto{\pgfpoint{.25cm}{-.425cm}}
+    \pgfpathlineto{\pgfpoint{.25cm}{0cm}}
+    \pgfpathlineto{\pgfpoint{.425cm}{0cm}}
+    \pgfpathlineto{\pgfpoint{0cm}{.425cm}}
+    \pgfpathlineto{\pgfpoint{-.425cm}{0cm}}
+    \pgfpathlineto{\pgfpoint{-.25cm}{0cm}}
+    \pgfpathclose
+  }
+}
+
+% downward
+\pgfdeclareshape{downward}{
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+
+  \backgroundpath{
+    \pgfpathmoveto{\pgfpoint{-.25cm}{.425cm}}
+    \pgfpathlineto{\pgfpoint{.25cm}{.425cm}}
+    \pgfpathlineto{\pgfpoint{.25cm}{0cm}}
+    \pgfpathlineto{\pgfpoint{.425cm}{0cm}}
+    \pgfpathlineto{\pgfpoint{0cm}{-.425cm}}
+    \pgfpathlineto{\pgfpoint{-.425cm}{0cm}}
+    \pgfpathlineto{\pgfpoint{-.25cm}{0cm}}
+    \pgfpathclose
+  }
+}
+
+% leftward
+\pgfdeclareshape{leftward}{
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+
+  \backgroundpath{
+    \pgfpathmoveto{\pgfpoint{.425cm}{-.25cm}}
+    \pgfpathlineto{\pgfpoint{.425cm}{.25cm}}
+    \pgfpathlineto{\pgfpoint{0cm}{.25cm}}
+    \pgfpathlineto{\pgfpoint{0cm}{.425cm}}
+    \pgfpathlineto{\pgfpoint{-.425cm}{0cm}}
+    \pgfpathlineto{\pgfpoint{0cm}{-.425cm}}
+    \pgfpathlineto{\pgfpoint{0cm}{-.25cm}}
+    \pgfpathclose
+  }
+}
+
+% rightward
+\pgfdeclareshape{rightward}{
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+
+  \backgroundpath{
+    \pgfpathmoveto{\pgfpoint{-.425cm}{-.25cm}}
+    \pgfpathlineto{\pgfpoint{-.425cm}{.25cm}}
+    \pgfpathlineto{\pgfpoint{0cm}{.25cm}}
+    \pgfpathlineto{\pgfpoint{0cm}{.425cm}}
+    \pgfpathlineto{\pgfpoint{.425cm}{0cm}}
+    \pgfpathlineto{\pgfpoint{0cm}{-.425cm}}
+    \pgfpathlineto{\pgfpoint{0cm}{-.25cm}}
+    \pgfpathclose
+  }
+}
+
+% forward
+\pgfdeclareshape{forward}{
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+
+  \backgroundpath{
+    \pgfpathmoveto{\pgfpoint{-.325cm}{-.3cm}}
+    \pgfpathlineto{\pgfpoint{.325cm}{-.3cm}}
+    \pgfpathlineto{\pgfpoint{.25cm}{0cm}}
+    \pgfpathlineto{\pgfpoint{.425cm}{0cm}}
+    \pgfpathlineto{\pgfpoint{0cm}{.3cm}}
+    \pgfpathlineto{\pgfpoint{-.425cm}{0cm}}
+    \pgfpathlineto{\pgfpoint{-.25cm}{0cm}}
+    \pgfpathclose
+  }
+}
+
+% backward
+\pgfdeclareshape{backward}{
+  \anchor{center}{\pgfpointorigin}
+  \anchor{text}{\pgfpoint{-.5\wd\pgfnodeparttextbox}{-.5\ht\pgfnodeparttextbox}}
+
+  \backgroundpath{
+    \pgfpathmoveto{\pgfpoint{-.175cm}{.3cm}}
+    \pgfpathlineto{\pgfpoint{.175cm}{.3cm}}
+    \pgfpathlineto{\pgfpoint{.25cm}{0cm}}
+    \pgfpathlineto{\pgfpoint{.425cm}{0cm}}
+    \pgfpathlineto{\pgfpoint{0cm}{-.3cm}}
+    \pgfpathlineto{\pgfpoint{-.425cm}{0cm}}
+    \pgfpathlineto{\pgfpoint{-.25cm}{0cm}}
+    \pgfpathclose
+  }
+}
+
+\NewDocumentCommand{\rpgiconsdirection}{ O{normal} m O{} m }{%
+  \edef\rpgicons@directioniconnrmlrg{#1}%
+  \edef\rpgicons@directioniconlrg{large}%
+  \ifx\rpgicons@directioniconnrmlrg\rpgicons@directioniconlrg%
+    \def\rpgicons@directioniconfg{fglrg}\else%
+    \def\rpgicons@directioniconfg{fgnrm}\fi%
+  \rpgicons@ifEmptyTF{#3}{%
+    \def\rpgicons@directionactualtext{#2}%
+  }{%
+    \def\rpgicons@directionactualtext{#4 #2}%
+  }%
+  \ifx\rpgicons@directioniconnrmlrg\rpgicons@directioniconlrg\else\rpgicons@ifEmptyF{#4}{#4\,}\fi%
+  \hspace{\rpgicons@beforesep}%
+  \tikz[
+    rpg icons,
+    rpg icons/every direction,
+    rpg icons/every #2,
+    actualtext=\rpgicons@directionactualtext,
+    baseline=\rpgicons@baseline,
+    fgnrm/.style={scale=.333},
+    fglrg/.style={scale=.675},
+    #3
+  ] {
+    \node[
+      \rpgicons@shape@variant{#2},
+      draw,
+      \rpgicons@directioniconfg,
+      font={\footnotesize}
+    ] at (0cm,0cm)
+      {\ifx\rpgicons@directioniconnrmlrg\rpgicons@directioniconlrg\textbf{#4}\fi};
+    \path[draw=none, \rpgicons@directioniconfg] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
+  }%
+  \hspace{\rpgicons@aftersep}%
+}
+\@ifundefined{direction}{\NewCommandCopy\direction\rpgiconsdirection}{}
 
 % make tikz icons available as pics
 \ifrpgicons@pics

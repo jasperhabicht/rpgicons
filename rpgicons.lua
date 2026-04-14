@@ -11,9 +11,9 @@
 -- This work has the LPPL maintenance status `maintained'.
 --
 
--- v2.7.2 2026-04-10
+-- v2.8.0 2026-04-15
 
-rpgicons = {}
+rpgicons = rpgicons or {}
 
 local pairs             = pairs
 local pdfe_open         = pdfe.open

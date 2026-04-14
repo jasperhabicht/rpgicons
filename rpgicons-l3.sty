@@ -10,7 +10,7 @@
 %
 % This work has the LPPL maintenance status `maintained'.
 %
-\ProvidesExplPackage {rpgicons-l3} {2026-04-10} {2.7.2}
+\ProvidesExplPackage {rpgicons-l3} {2026-04-15} {2.8.0}
     {RPG Icons Package (l3 Variant)}
 
 \bool_new:N \l__rpgicons_unicode_mode_bool
@@ -2449,6 +2449,74 @@
 \cs_set_eq:NN \rpgicons_draw_shape_jewellery_alt: \rpgicons_draw_shape_jewellery_i:
 % ===
 
+% DIRECTION
+
+\cs_new_protected:Npn \rpgicons_draw_shape_upward: {
+    \draw_path_moveto:n { -.25cm , -.425cm }
+    \draw_path_lineto:n { .25cm , -.425cm }
+    \draw_path_lineto:n { .25cm , 0cm }
+    \draw_path_lineto:n { .425cm , 0cm }
+    \draw_path_lineto:n { 0cm , .425cm }
+    \draw_path_lineto:n { -.425cm , 0cm }
+    \draw_path_lineto:n { -.25cm , 0cm }
+    \draw_path_close:
+}
+
+\cs_new_protected:Npn \rpgicons_draw_shape_downward: {
+    \draw_path_moveto:n { -.25cm , .425cm }
+    \draw_path_lineto:n { .25cm , .425cm }
+    \draw_path_lineto:n { .25cm , 0cm }
+    \draw_path_lineto:n { .425cm , 0cm }
+    \draw_path_lineto:n { 0cm , -.425cm }
+    \draw_path_lineto:n { -.425cm , 0cm }
+    \draw_path_lineto:n { -.25cm , 0cm }
+    \draw_path_close:
+}
+
+\cs_new_protected:Npn \rpgicons_draw_shape_leftward: {
+    \draw_path_moveto:n { .425cm , -.25cm }
+    \draw_path_lineto:n { .425cm , .25cm }
+    \draw_path_lineto:n { 0cm , .25cm }
+    \draw_path_lineto:n { 0cm , .425cm }
+    \draw_path_lineto:n { -.425cm , 0cm }
+    \draw_path_lineto:n { 0cm , -.425cm }
+    \draw_path_lineto:n { 0cm , -.25cm }
+    \draw_path_close:
+}
+
+\cs_new_protected:Npn \rpgicons_draw_shape_rightward: {
+    \draw_path_moveto:n { -.425cm , -.25cm }
+    \draw_path_lineto:n { -.425cm , .25cm }
+    \draw_path_lineto:n { 0cm , .25cm }
+    \draw_path_lineto:n { 0cm , .425cm }
+    \draw_path_lineto:n { .425cm , 0cm }
+    \draw_path_lineto:n { 0cm , -.425cm }
+    \draw_path_lineto:n { 0cm , -.25cm }
+    \draw_path_close:
+}
+
+\cs_new_protected:Npn \rpgicons_draw_shape_forward: {
+    \draw_path_moveto:n { -.325cm , -.3cm }
+    \draw_path_lineto:n { .325cm , -.3cm }
+    \draw_path_lineto:n { .25cm , 0cm }
+    \draw_path_lineto:n { .425cm , 0cm }
+    \draw_path_lineto:n { 0cm , .3cm }
+    \draw_path_lineto:n { -.425cm , 0cm }
+    \draw_path_lineto:n { -.25cm , 0cm }
+    \draw_path_close:
+}
+
+\cs_new_protected:Npn \rpgicons_draw_shape_backward: {
+    \draw_path_moveto:n { -.175cm , .3cm }
+    \draw_path_lineto:n { .175cm , .3cm }
+    \draw_path_lineto:n { .25cm , 0cm }
+    \draw_path_lineto:n { .425cm , 0cm }
+    \draw_path_lineto:n { 0cm , -.3cm }
+    \draw_path_lineto:n { -.425cm , 0cm }
+    \draw_path_lineto:n { -.25cm , 0cm }
+    \draw_path_close:
+}
+
 % FRAMES
 
 \cs_new_protected:Npn \rpgicons_draw_frame_ability: {
@@ -2688,7 +2756,7 @@
 % ===
 
 \clist_const:Nn \c__rpgicons_types_clist {
-    die , ability , saving , spell , spellschool , damage , attack , condition , class , alignment , currency
+    die , ability , saving , spell , spellschool , damage , attack , condition , class , alignment , currency , direction
 }
 
 \str_new:N \l__rpgicons_icon_type_name_str
@@ -2733,6 +2801,7 @@
     lawful ~ good , neutral ~ good , chaotic ~ good , lawful ~ neutral , true ~ neutral ,
     chaotic ~ neutral , lawful ~ evil , neutral ~ evil , chaotic ~ evil ,
     copper , silver , gold , electrum , platinum , gem , jewellery , jewelry , jewellery ~ i , jewelry ~ i ,
+    upward , downward , leftward , rightward , forward , backward ,
     % === backward compatibility
     dexterity ~ alt , wisdom ~ alt , necrotic ~ alt , melee ~ alt , restrained ~ alt ,
     artificer ~ alt , bard ~ alt , cleric ~ alt , druid ~ alt , monk ~ alt , paladin ~ alt ,
@@ -3300,6 +3369,23 @@
     \group_end:
 }
 \cs_if_exist:NF \currency { \cs_new_eq:NN \currency \RPGIconsCurrency }
+
+\NewDocumentCommand { \RPGIconsDirection } { O { normal } m O { } m } {
+    \group_begin:
+        \keys_set_groups:nne { rpgicons / local } { extra } {#3}
+        \keys_set:ne { rpgicons / local } { \clist_use:Nn \l_rpgicons_types_every_direction_style_clist { , } }
+        \str_set:Ne \l__rpgicons_icon_integer_str {#4}
+        \skip_horizontal:n { \l_rpgicons_icon_before_sep_dim }
+        \str_if_eq:neTF { large } {#1} {
+            \RPGIconsUseIcon [ scale=.675 , #3 ] [#4] {#2}
+        } {
+            \str_if_empty:NF \l__rpgicons_icon_integer_str { \str_use:N \l__rpgicons_icon_integer_str \, }
+            \RPGIconsUseIcon [ scale=.333 , #3 ] {#2}
+        }
+        \skip_horizontal:n { \l_rpgicons_icon_after_sep_dim }
+    \group_end:
+}
+\cs_if_exist:NF \direction { \cs_new_eq:NN \direction \RPGIconsDirection }
 
 % ROLL SYNTAX
 

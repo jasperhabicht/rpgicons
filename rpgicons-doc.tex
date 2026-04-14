@@ -100,6 +100,7 @@
     \tl_set:Nn \l_rpgicons_doc_doctitle_tl {
         \group_begin:
             \renewcommand*{\thefootnote}{\fnsymbol{footnote}}
+            \renewcommand{\@makefnmark}{\normalfont\@thefnmark}
             \tcbset{
                 title ~ style ~ hook/.style={
                     boxrule=2pt,

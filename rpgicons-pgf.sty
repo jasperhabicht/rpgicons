@@ -96,7 +96,7 @@
   rpg icons/every class/.style={},
   rpg icons/every alignment/.style={},
   rpg icons/every currency/.style={},
-  rpg icons/every direction/.style={},
+  rpg icons/every movement/.style={},
   %
   rpg icons/create every style/.code={
     \tikzset{
@@ -3909,7 +3909,7 @@
 }
 \@ifundefined{currency}{\NewCommandCopy\currency\rpgiconscurrency}{}
 
-% DIRECTION
+% MOVEMENT
 
 % upward
 \pgfdeclareshape{upward}{
@@ -4013,24 +4013,24 @@
   }
 }
 
-\NewDocumentCommand{\rpgiconsdirection}{ O{normal} m O{} m }{%
-  \edef\rpgicons@directioniconnrmlrg{#1}%
-  \edef\rpgicons@directioniconlrg{large}%
-  \ifx\rpgicons@directioniconnrmlrg\rpgicons@directioniconlrg%
-    \def\rpgicons@directioniconfg{fglrg}\else%
-    \def\rpgicons@directioniconfg{fgnrm}\fi%
+\NewDocumentCommand{\rpgiconsmovement}{ O{normal} m O{} m }{%
+  \edef\rpgicons@movementiconnrmlrg{#1}%
+  \edef\rpgicons@movementiconlrg{large}%
+  \ifx\rpgicons@movementiconnrmlrg\rpgicons@movementiconlrg%
+    \def\rpgicons@movementiconfg{fglrg}\else%
+    \def\rpgicons@movementiconfg{fgnrm}\fi%
   \rpgicons@ifEmptyTF{#3}{%
-    \def\rpgicons@directionactualtext{#2}%
+    \def\rpgicons@movementactualtext{#2}%
   }{%
-    \def\rpgicons@directionactualtext{#4 #2}%
+    \def\rpgicons@movementactualtext{#4 #2}%
   }%
-  \ifx\rpgicons@directioniconnrmlrg\rpgicons@directioniconlrg\else\rpgicons@ifEmptyF{#4}{#4\,}\fi%
+  \ifx\rpgicons@movementiconnrmlrg\rpgicons@movementiconlrg\else\rpgicons@ifEmptyF{#4}{#4\,}\fi%
   \hspace{\rpgicons@beforesep}%
   \tikz[
     rpg icons,
-    rpg icons/every direction,
+    rpg icons/every movement,
     rpg icons/every #2,
-    actualtext=\rpgicons@directionactualtext,
+    actualtext=\rpgicons@movementactualtext,
     baseline=\rpgicons@baseline,
     fgnrm/.style={scale=.333},
     fglrg/.style={scale=.675},
@@ -4039,15 +4039,15 @@
     \node[
       \rpgicons@shape@variant{#2},
       draw,
-      \rpgicons@directioniconfg,
+      \rpgicons@movementiconfg,
       font={\footnotesize}
     ] at (0cm,0cm)
-      {\ifx\rpgicons@directioniconnrmlrg\rpgicons@directioniconlrg\textbf{#4}\fi};
-    \path[draw=none, \rpgicons@directioniconfg] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
+      {\ifx\rpgicons@movementiconnrmlrg\rpgicons@movementiconlrg\textbf{#4}\fi};
+    \path[draw=none, \rpgicons@movementiconfg] ([yshift=-1pt].425cm,.425cm) rectangle ([yshift=1pt]-.425cm,-.425cm);
   }%
   \hspace{\rpgicons@aftersep}%
 }
-\@ifundefined{direction}{\NewCommandCopy\direction\rpgiconsdirection}{}
+\@ifundefined{movement}{\NewCommandCopy\movement\rpgiconsmovement}{}
 
 % make tikz icons available as pics
 \ifrpgicons@pics

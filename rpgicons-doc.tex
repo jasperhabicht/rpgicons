@@ -90,6 +90,7 @@
     \end{description}
 }
 
+\makeatletter
 \tl_new:N \l_rpgicons_doc_doctitle_tl
 \NewExpandableDocumentCommand{\makedoctitle}{ o m o m m o m }{
     \hypersetup{
@@ -120,6 +121,7 @@
         \setcounter{footnote}{0}
     }
 }
+\makeatother
 
 \NewExpandableDocumentCommand{\printdoctitle}{ }{
     \tl_use:N \l_rpgicons_doc_doctitle_tl
@@ -371,23 +373,25 @@ The package comes in two variants, a L3 variant based on the \macro{l3draw} pack
 
 \section{Loading the package}
 
-To install the package, copy the relevant package files \macro{rpgicons.sty}, \macro{rpgicons-l3.sty} and \macro{rpgicons-pgf.sty} into the working directory or into the \macro{texmf} directory. You may want to use a TeX package manager for this. After the package has been installed, the \macro{rpgicons} package is loaded by calling \macro{\usepackage{rpgicons}} in the preamble of the document.
+To install the package, copy the relevant package files \macro{rpgicons.sty}, \macro{rpgicons-l3.sty} and \macro{rpgicons-pgf.sty} as well as \macro{rpgicons.lua} into the working directory or into the \macro{texmf} directory. You may want to use a TeX package manager for this. After the package has been installed, the \macro{rpgicons} package is loaded by calling \macro{\usepackage{rpgicons}} in the preamble of the document.
+
+The file \macro{rpgicons.sty} acts as a wrapper that loads either the file \macro{rpgicons-l3.sty} or \macro{rpgicons-pgf.sty} depending on the variant of the package that is used. Therefore, if only one of the variants should be used, technically speaking it is sufficient to only install on of these two files and load the package using \macro{\usepackage{rpgicons-l3}} or \macro{\usepackage{rpgicons-pgf}} respectively. Note, however, that the file \macro{rpgicons.lua} needs to be installed if the L3 variant is used with LuaLaTeX.
 
 The package can be loaded with one of the following options.
 
 \begin{macrodef}
 |l3|
 \end{macrodef}
-The L3 variant of the package is loaded by default. To load it explicitly, the package can be loaded using the option \macro{l3}. Alternatively, \macro{\usepackage{rpgicons-l3}} can be called instead.
+The L3 variant of the package is loaded by default. To load it explicitly, the package can be loaded using the option \macro{l3}.
 
 \begin{macrodef}
 |pgf|
 \end{macrodef}
-To load the PGF variant of the package the package needs to be loaded with the option \macro{pgf}. Alternatively, \macro{\usepackage{rpgicons-pgf}} can be called instead.
+To load the PGF variant of the package the package needs to be loaded with the option \macro{pgf}.
 
 \subsection{Dependencies}
 
-The L3 variant of the package loads the \macro{l3draw} package.
+The L3 variant of the package loads the \macro{l3draw} package. When compiled with LuaLaTeX, the file \macro{rpgicons.lua} needs to be installed.
 
 The PGF variant of the package loads the \macro{tikz} package which in turn loads the \macro{xcolor} package. To make use of specific options these packages provide, you need to load the packages with the relevant options beforehand or explicitly pass the relevant options to the package using a command such as \macro{\PassOptionsToPackage{svgnames}{xcolor}}.
 
@@ -428,7 +432,7 @@ The command \macro{\die} typesets an icon to depict a die with a certain number 
 
 For the six-sided die, nine additional shapes exist representing the values one to nine as pips. Also, additional shapes exist representing the plus or minus side of a fudge die.
 
-The command takes two mandatory arguments, the first of which describes the shape (see the lists below) and the second taking an integer that is placed in front of the shape. For example, \macro{\die{eightside}{2}} results in \die{eightside}{2} (meaning two eight-sided dice are rolled). If tagging is enabled, the default replacement text of this command is ``2 eightside''.
+The command takes two mandatory arguments, the first of which describes the shape (see the lists below) and the second taking an integer that is placed in front of the shape. For example, \macro{\die{eightside}{2}} results in \die{eightside}{2} (meaning that two eight-sided dice are rolled). If tagging is enabled, the default replacement text of this command is ``2 eightside''.
 
 The command also takes two optional arguments, the second of which can take additional options to style the icon or to select different variants of the icon shape. The options affect the shape, but not the integer when it is typeset before the icon. The usable options differ depending on the package variant. See the relevant sections below.
 
@@ -697,27 +701,27 @@ The command provides a second mandatory argument that accepts an integer that is
     & \currency{jewellery}[variant=1]{} & \macro{jewellery} or \newline \macro{jewelry} & 1 \\
 \end{rpgiconsiconlist}
 
-\subsection[Command \textbackslash direction]{Command \titlemacro*{direction}}
+\subsection[Command \textbackslash movement]{Command \titlemacro*{movement}}
 
 \begin{macrodef}
-|\direction|[<style>]{<shape>}[<options>]{<integer>}
+|\movement|[<style>]{<shape>}[<options>]{<integer>}
 \end{macrodef}
-The command \macro{\direction} typesets an icon depicting a direction of movement.
+The command \macro{\movement} typesets an icon depicting a direction of movement.
 
-The command takes two mandatory arguments, the first of which describes the shape (see the lists below) and the second taking an integer that is placed in front of the shape. For example, \macro{\direction{forward}{5}} results in \direction{forward}{5}. If tagging is enabled, the default replacement text of this command is ``5 forward''.
+The command takes two mandatory arguments, the first of which describes the shape (see the lists below) and the second taking an integer that is placed in front of the shape. For example, \macro{\movement{forward}{5}} results in \movement{forward}{5}. If tagging is enabled, the default replacement text of this command is ``5 forward''.
 
 The command also takes two optional arguments, the second of which can take additional options to style the icon or to select different variants of the icon shape. The options affect the shape, but not the integer when it is typeset before the icon. The usable options differ depending on the package variant. See the relevant sections below.
 
-The first optional argument can take the value \macro{normal} or \macro{large}, \macro{normal} being the default value. With \macro{large} given as argument, the icon is drawn larger and the integer is typeset inside the shape. As an example, \macro{\direction[large]{forward}{5}} results in \direction[large]{forward}{5}.
+The first optional argument can take the value \macro{normal} or \macro{large}, \macro{normal} being the default value. With \macro{large} given as argument, the icon is drawn larger and the integer is typeset inside the shape. As an example, \macro{\movement[large]{forward}{5}} results in \movement[large]{forward}{5}.
 
 \begin{rpgiconsiconlist}
-\titlemacro*{direction}
-    & \direction{upward}{} & \macro{upward} \\
-    & \direction{downward}{} & \macro{downward} \\
-    & \direction{leftward}{} & \macro{leftward} \\
-    & \direction{rightward}{} & \macro{rightward} \\
-    & \direction{forward}{} & \macro{forward} \\
-    & \direction{backward}{} & \macro{backward} \\
+\titlemacro*{movement}
+    & \movement{upward}{} & \macro{upward} \\
+    & \movement{downward}{} & \macro{downward} \\
+    & \movement{leftward}{} & \macro{leftward} \\
+    & \movement{rightward}{} & \macro{rightward} \\
+    & \movement{forward}{} & \macro{forward} \\
+    & \movement{backward}{} & \macro{backward} \\
 \end{rpgiconsiconlist}
 
 % l3 variant
@@ -1277,6 +1281,79 @@ If the \macro{rpgicons} package is to be loaded together with some other package
 The Ti\emph{k}Z style \macro{rpg icons/roll syntax} can be used to change the character that denotes a die in the dice rolling syntax. Multiple characters can be given using a comma separated list. The default setting is \macro{d,D}.
 
 % =====
+
+\section{L3 token variables and commands}
+
+The L3 variant of the package provides the following token variables and commands for defining user functions by package authors.
+
+\begin{macrodef}
+|\rpgicons_draw_shape_<<shape>>:|
+\end{macrodef}
+These commands contain the definitions of the shapes of the icons. If the shape name contains a space, this is substituted by an underscore in the command name. For example, the command \macro{\rpgicons_draw_shape_charisma:} contains the definition of the charisma shape, the command \macro{\rpgicons_draw_shape_psion_i:} contains the definition of variant one of the psion shape (\macro{psion i}).
+
+\begin{macrodef}
+|\rpgicons_draw_shape_sixside_pips:n| {<integer>}
+\end{macrodef}
+The command \macro{\rpgicons_draw_shape_sixside_pips:n} takes as argument an integer from one to nine and outputs the definition of paths representing the relevant number and arrangement of pips inside the shape of a sixside die.
+
+\begin{macrodef}
+|\rpgicons_draw_frame_ability:|
+|\rpgicons_draw_frame_saving:|
+|\rpgicons_draw_frame_spellschool:|
+|\rpgicons_draw_frame_damage:|
+|\rpgicons_draw_frame_class:|
+|\rpgicons_draw_frame_alignment:|
+\end{macrodef}
+These commands contain the definitions of the relevant frames that are used by the relevant icon commands.
+
+\begin{macrodef}
+|\l_rpgicons_icon_before_sep_dim|
+|\l_rpgicons_icon_after_sep_dim|
+|\l_rpgicons_icon_baseline_dim|
+|\l_rpgicons_icon_linewidth_dim|
+\end{macrodef}
+
+\begin{macrodef}
+|\l_rpgicons_icon_frame_tl|
+|\l_rpgicons_icon_color_stroke_tl|
+|\l_rpgicons_icon_color_fill_tl|
+|\l_rpgicons_icon_color_text_tl|
+|\l_rpgicons_icon_color_background_tl|
+\end{macrodef}
+
+\begin{macrodef}
+|\l_rpgicons_icon_variant_int|
+\end{macrodef}
+
+\begin{macrodef}
+|\l_rpgicons_icon_opacity_stroke_fp|
+|\l_rpgicons_icon_opacity_fill_fp|
+|\l_rpgicons_icon_opacity_text_fp|
+|\l_rpgicons_icon_opacity_background_fp|
+|\l_rpgicons_icon_transform_scale_fp|
+|\l_rpgicons_icon_transform_scale_inner_fp|
+|\l_rpgicons_icon_transform_rotate_fp|
+\end{macrodef}
+
+\begin{macrodef}
+|\l_rpgicons_icon_actualtext_str|
+\end{macrodef}
+These token lists contain the values set by the ueer via the relevant options. The floating point token lists \macro{\l_rpgicons_icon_opacity_stroke_fp}, \macro{\l_rpgicons_icon_opacity_fill_fp}, \newline \macro{\l_rpgicons_icon_opacity_text_fp}, \macro{\l_rpgicons_icon_opacity_background_fp}, \newline as well as \macro{\l_rpgicons_icon_transform_scale_fp} and \newline \macro{\l_rpgicons_icon_transform_scale_inner_fp} are initialised with the value 1.0.
+
+\begin{macrodef}
+|\l_rpgicons_icon_precompose_ref_str|
+|\l_rpgicons_precompose_output_str|
+\end{macrodef}
+The token list \macro{\l_rpgicons_icon_precompose_ref_str} contain the values set by the ueer via the option \macro{precompose}.
+
+The token list \macro{\l_rpgicons_precompose_output_str} contains the value set by the user via the option \macro{precompose output}. Its default value is \macro{\c_sys_jobname_str _rpgicons} which means the name of the current file with the suffix \macro{_rpgicons} added.
+
+\begin{macrodef}
+|\rpgicons_shape_set_eq:nn| {<shape>} {<shape>}
+\end{macrodef}
+The command \macro{\rpgicons_shape_set_eq:nn} sets the definition of the shape given in the first argument equal to that given in the second argument. If either shape name contains spaces, these are replaced by underscores and used to create an internal command to contain the relevant shape definition. For example, \macro{\rpgicons_shape_set_eq:nn {foo} {charisma}} will create the command \macro{\rpgicons_draw_shape_foo:} as copy of \macro{\rpgicons_draw_shape_charisma:}. If the shape given in the first argument already exits, its definition will be replaced. 
+
+% ===
 
 \printchanges
 

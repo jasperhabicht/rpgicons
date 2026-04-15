@@ -229,54 +229,54 @@
 
 \cs_set_eq:cN { rpgicons_draw_shape_ d100 : } \rpgicons_draw_shape_hundredside:
 
-\clist_new:N \l_rpgnicons_pips_clist
-\fp_new:N \l_rpgnicons_pips_coordx_fp
-\fp_new:N \l_rpgnicons_pips_coordy_fp
+\clist_new:N \l__rpgnicons_pips_clist
+\fp_new:N \l__rpgnicons_pips_coordx_fp
+\fp_new:N \l__rpgnicons_pips_coordy_fp
 \cs_new_protected:Npn \rpgicons_draw_shape_sixside_pips:n #1 {
     \str_case:nn {#1} {
-        { one } { \clist_set:Nn \l_rpgnicons_pips_clist {
+        { one } { \clist_set:Nn \l__rpgnicons_pips_clist {
             { 0cm , 0cm }
         } }
-        { two } { \clist_set:Nn \l_rpgnicons_pips_clist {
+        { two } { \clist_set:Nn \l__rpgnicons_pips_clist {
             { -.2cm , .2cm } , { .2cm , -.2cm }
         } }
-        { three } { \clist_set:Nn \l_rpgnicons_pips_clist {
+        { three } { \clist_set:Nn \l__rpgnicons_pips_clist {
             { -.2cm , .2cm } , { 0cm , 0cm } , { .2cm , -.2cm }
         } }
-        { four } { \clist_set:Nn \l_rpgnicons_pips_clist {
+        { four } { \clist_set:Nn \l__rpgnicons_pips_clist {
             { -.2cm , .2cm } , { .2cm , .2cm } ,
             { -.2cm , -.2cm } , { .2cm , -.2cm }
         } }
-        { five } { \clist_set:Nn \l_rpgnicons_pips_clist {
+        { five } { \clist_set:Nn \l__rpgnicons_pips_clist {
             { -.2cm , .2cm } , { .2cm , .2cm } ,
             { 0cm , 0cm } ,
             { -.2cm , -.2cm } , { .2cm , -.2cm }
         } }
-        { six } { \clist_set:Nn \l_rpgnicons_pips_clist {
+        { six } { \clist_set:Nn \l__rpgnicons_pips_clist {
             { -.2cm , .2cm } , { .2cm , .2cm } ,
             { -.2cm , 0cm } , { .2cm , 0cm } ,
             { -.2cm , -.2cm } , { .2cm , -.2cm }
         } }
-        { seven } { \clist_set:Nn \l_rpgnicons_pips_clist {
+        { seven } { \clist_set:Nn \l__rpgnicons_pips_clist {
             { -.2cm , .2cm } , { .2cm , .2cm } ,
             { -.2cm , 0cm } , { 0cm , 0cm } , { .2cm , 0cm } ,
             { -.2cm , -.2cm } , { .2cm , -.2cm }
         } }
-        { eight } { \clist_set:Nn \l_rpgnicons_pips_clist {
+        { eight } { \clist_set:Nn \l__rpgnicons_pips_clist {
             { -.2cm , .2cm } , { 0cm , .2cm } , { .2cm , .2cm } ,
             { -.2cm , 0cm } , { .2cm , 0cm } ,
             { -.2cm , -.2cm } , { 0cm , -.2cm } , { .2cm , -.2cm }
         } }
-        { nine } { \clist_set:Nn \l_rpgnicons_pips_clist {
+        { nine } { \clist_set:Nn \l__rpgnicons_pips_clist {
             { -.2cm , .2cm } , { 0cm , .2cm } , { .2cm , .2cm } ,
             { -.2cm , 0cm } , { 0cm , 0cm } , { .2cm , 0cm } ,
             { -.2cm , -.2cm } , { 0cm , -.2cm } , { .2cm , -.2cm }
         } }
     }
-    \clist_map_inline:Nn \l_rpgnicons_pips_clist {
-        \fp_set:Nn \l_rpgnicons_pips_coordx_fp { \clist_item:nn {##1} { 1 } }
-        \fp_set:Nn \l_rpgnicons_pips_coordy_fp { \clist_item:nn {##1} { 2 } }
-        \draw_path_circle:nn { \l_rpgnicons_pips_coordx_fp , \l_rpgnicons_pips_coordy_fp } { 2pt }
+    \clist_map_inline:Nn \l__rpgnicons_pips_clist {
+        \fp_set:Nn \l__rpgnicons_pips_coordx_fp { \clist_item:nn {##1} { 1 } }
+        \fp_set:Nn \l__rpgnicons_pips_coordy_fp { \clist_item:nn {##1} { 2 } }
+        \draw_path_circle:nn { \l__rpgnicons_pips_coordx_fp , \l__rpgnicons_pips_coordy_fp } { 2pt }
     }
     \draw_path_use_clear:n { fill }
     \rpgicons_draw_shape_sixside:
@@ -2449,7 +2449,7 @@
 \cs_set_eq:NN \rpgicons_draw_shape_jewellery_alt: \rpgicons_draw_shape_jewellery_i:
 % ===
 
-% DIRECTION
+% MOVEMENT
 
 \cs_new_protected:Npn \rpgicons_draw_shape_upward: {
     \draw_path_moveto:n { -.25cm , -.425cm }
@@ -2756,7 +2756,7 @@
 % ===
 
 \clist_const:Nn \c__rpgicons_types_clist {
-    die , ability , saving , spell , spellschool , damage , attack , condition , class , alignment , currency , direction
+    die , ability , saving , spell , spellschool , damage , attack , condition , class , alignment , currency , movement
 }
 
 \str_new:N \l__rpgicons_icon_type_name_str
@@ -3370,10 +3370,10 @@
 }
 \cs_if_exist:NF \currency { \cs_new_eq:NN \currency \RPGIconsCurrency }
 
-\NewDocumentCommand { \RPGIconsDirection } { O { normal } m O { } m } {
+\NewDocumentCommand { \RPGIconsMovement } { O { normal } m O { } m } {
     \group_begin:
         \keys_set_groups:nne { rpgicons / local } { extra } {#3}
-        \keys_set:ne { rpgicons / local } { \clist_use:Nn \l_rpgicons_types_every_direction_style_clist { , } }
+        \keys_set:ne { rpgicons / local } { \clist_use:Nn \l_rpgicons_types_every_movement_style_clist { , } }
         \str_set:Ne \l__rpgicons_icon_integer_str {#4}
         \skip_horizontal:n { \l_rpgicons_icon_before_sep_dim }
         \str_if_eq:neTF { large } {#1} {
@@ -3385,7 +3385,7 @@
         \skip_horizontal:n { \l_rpgicons_icon_after_sep_dim }
     \group_end:
 }
-\cs_if_exist:NF \direction { \cs_new_eq:NN \direction \RPGIconsDirection }
+\cs_if_exist:NF \movement { \cs_new_eq:NN \movement \RPGIconsMovement }
 
 % ROLL SYNTAX
 

@@ -628,12 +628,16 @@
   \ifx\rpgicons@dieiconnrmlrg\rpgicons@dieiconlrg%
     \def\rpgicons@dieiconfg{fglrg}\else%
     \def\rpgicons@dieiconfg{fgnrm}\fi%
-  \rpgicons@ifEmptyTF{#3}{%
+  \ifx\rpgicons@dieiconnrmlrg\rpgicons@dieiconlrg%
+    \rpgicons@ifEmptyTF{#4}{%
+      \def\rpgicons@dieactualtext{#2}%
+    }{%
+      \def\rpgicons@dieactualtext{#4 #2}%
+    }%
+  \else%
     \def\rpgicons@dieactualtext{#2}%
-  }{%
-    \def\rpgicons@dieactualtext{#4 #2}%
-  }%
-  \ifx\rpgicons@dieiconnrmlrg\rpgicons@dieiconlrg\else\rpgicons@ifEmptyF{#4}{#4\,}\fi%
+    \rpgicons@ifEmptyF{#4}{#4\,}%
+  \fi%
   \hspace{\rpgicons@beforesep}%
   \tikz[
     rpg icons,
@@ -3889,16 +3893,11 @@
 \NewDocumentCommand{\rpgiconscurrency}{ m O{} m }{%
   \rpgicons@ifEmptyF{#3}{#3\,}%
   \hspace{\rpgicons@beforesep}%
-  \rpgicons@ifEmptyTF{#3}{%
-    \def\rpgicons@currencyactualtext{#1}%
-  }{%
-    \def\rpgicons@currencyactualtext{#3 #1}%
-  }%
   \tikz[
     rpg icons,
     rpg icons/every currency,
     rpg icons/every #1,
-    actualtext=\rpgicons@currencyactualtext,
+    actualtext={#1},
     baseline=\rpgicons@baseline,
     #2
   ] {
@@ -4019,12 +4018,16 @@
   \ifx\rpgicons@movementiconnrmlrg\rpgicons@movementiconlrg%
     \def\rpgicons@movementiconfg{fglrg}\else%
     \def\rpgicons@movementiconfg{fgnrm}\fi%
-  \rpgicons@ifEmptyTF{#3}{%
+  \ifx\rpgicons@movementiconnrmlrg\rpgicons@movementiconlrg%
+    \rpgicons@ifEmptyTF{#4}{%
+      \def\rpgicons@movementactualtext{#2}%
+    }{%
+      \def\rpgicons@movementactualtext{#4 #2}%
+    }%
+  \else%
     \def\rpgicons@movementactualtext{#2}%
-  }{%
-    \def\rpgicons@movementactualtext{#4 #2}%
-  }%
-  \ifx\rpgicons@movementiconnrmlrg\rpgicons@movementiconlrg\else\rpgicons@ifEmptyF{#4}{#4\,}\fi%
+    \rpgicons@ifEmptyF{#4}{#4\,}%
+  \fi%
   \hspace{\rpgicons@beforesep}%
   \tikz[
     rpg icons,

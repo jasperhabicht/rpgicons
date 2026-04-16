@@ -1291,6 +1291,16 @@ The L3 variant of the package provides the following token variables and command
 \end{macrodef}
 These commands contain the definitions of the shapes of the icons. If the shape name contains a space, this is substituted by an underscore in the command name. For example, the command \macro{\rpgicons_draw_shape_charisma:} contains the definition of the charisma shape, the command \macro{\rpgicons_draw_shape_psion_i:} contains the definition of variant one of the psion shape (\macro{psion i}).
 
+The definition of a shape consists of a row of commands to describe one or more paths. The definition should be a valid code snippet that can be placed between the commands \macro{\draw_begin:} and \macro{\draw_path_use:n { stroke } \draw_end:}. The shape \macro{lawful neutral}, for example, has the following definition:
+
+\begin{codeexample}
+\cs_new_protected:Npn \rpgicons_draw_shape_lawful_neutral: {
+    \draw_path_circle:nn { 0cm , 0cm } { .2cm }
+    \draw_path_moveto:n { .4cm , 0cm }
+    \draw_path_lineto:n { -.4cm , 0cm }
+}
+\end{codeexample}
+
 \begin{macrodef}
 |\rpgicons_draw_shape_sixside_pips:n| {<integer>}
 \end{macrodef}
@@ -1346,12 +1356,12 @@ These token lists contain the values set by the ueer via the relevant options. T
 \end{macrodef}
 The token list \macro{\l_rpgicons_icon_precompose_ref_str} contain the values set by the ueer via the option \macro{precompose}.
 
-The token list \macro{\l_rpgicons_precompose_output_str} contains the value set by the user via the option \macro{precompose output}. Its default value is \macro{\c_sys_jobname_str _rpgicons} which means the name of the current file with the suffix \macro{_rpgicons} added.
+The token list \macro{\l_rpgicons_precompose_output_str} contains the value set by the user via the option \macro{precompose output}. Its default value is \macro{\c_sys_jobname_str _rpgicons} which is the name of the current file with the suffix \macro{_rpgicons} added.
 
 \begin{macrodef}
 |\rpgicons_shape_set_eq:nn| {<shape>} {<shape>}
 \end{macrodef}
-The command \macro{\rpgicons_shape_set_eq:nn} sets the definition of the shape given in the first argument equal to that given in the second argument. If either shape name contains spaces, these are replaced by underscores and used to create an internal command to contain the relevant shape definition. For example, \macro{\rpgicons_shape_set_eq:nn {foo} {charisma}} will create the command \macro{\rpgicons_draw_shape_foo:} as copy of \macro{\rpgicons_draw_shape_charisma:}. If the shape given in the first argument already exits, its definition will be replaced. 
+The command \macro{\rpgicons_shape_set_eq:nn} sets the definition of the shape given in the first argument equal to that given in the second argument. If either shape name contains spaces, these are replaced by underscores. The relevant internal command is then set to contain the relevant shape definition. For example, \macro{\rpgicons_shape_set_eq:nn {foo} {charisma}} will create the command \macro{\rpgicons_draw_shape_foo:} as copy of \macro{\rpgicons_draw_shape_charisma:}. If the shape given in the first argument already exits, its definition will be replaced. 
 
 % ===
 

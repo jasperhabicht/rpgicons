@@ -99,6 +99,15 @@
 \cs_if_exist:NF \draw_set_join_round: {
     \cs_set_eq:NN \draw_set_join_round: \draw_join_round:
 }
+\IfExplAtLeastTF { 2027-01-01 } { } {
+    \cs_set_eq:NN \__rpgicons_compat_draw_path_arc:nnnn \draw_path_arc:nnnn
+    \cs_set_protected:Npn \draw_path_arc:nnnn #1#2#3#4 {
+        \__rpgicons_compat_draw_path_arc:nnnn {#3} {#4} {#1} {#2}
+    }
+    \cs_set_protected:Npn \draw_path_arc:nnn #1#2#3 {
+        \__rpgicons_compat_draw_path_arc:nnnn {#2} {#3} {#1} {#1}
+    }
+}
 % ===
 
 % DICE
@@ -222,9 +231,9 @@
 \cs_new_protected:Npn \rpgicons_draw_shape_hundredside: {
     \draw_path_circle:nn { 0cm, 0cm } { .425cm }
     \draw_path_moveto:n { .425cm , 0cm }
-    \draw_path_arc:nnnn { 180 } { 50 } { -.425cm } { -.2cm }
+    \draw_path_arc:nnnn { -.425cm } { -.2cm } { 180 } { 50 }
     \draw_path_moveto:n { 0cm , -.425cm }
-    \draw_path_arc:nnnn { 270 } { 140 } { -.2cm } { .425cm }
+    \draw_path_arc:nnnn { -.2cm } { .425cm } { 270 } { 140 }
 }
 
 \cs_set_eq:cN { rpgicons_draw_shape_ d100 : } \rpgicons_draw_shape_hundredside:
@@ -310,46 +319,46 @@
 
 \cs_new_protected:Npn \rpgicons_draw_shape_strength: {
     \draw_path_moveto:n { ( 0cm , -.075cm ) + ( \draw_point_polar:nn { .425cm } { 90 } ) }
-    \draw_path_arc:nnn { 90 } { 60 } { .425cm }
-    \draw_path_arc:nnn { 200 } { -40 } { .1cm }
+    \draw_path_arc:nnn { .425cm } { 90 } { 60 }
+    \draw_path_arc:nnn { .1cm } { 200 } { -40 }
     \draw_path_moveto:n { ( 0cm , -.075cm ) + ( \draw_point_polar:nn { .425cm } { 45 } ) }
-    \draw_path_arc:nnn { 45 } { -20 } { .425cm }
-    \draw_path_arc:nnn { -50 } { -80 } { .35cm }
+    \draw_path_arc:nnn { .425cm } { 45 } { -20 }
+    \draw_path_arc:nnn { .35cm } { -50 } { -80 }
     \draw_path_moveto:n { ( 0cm , -.075cm ) + ( \draw_point_polar:nn { .425cm } { 90 } ) }
-    \draw_path_arc:nnn { 90 } { 120 } { .425cm }
-    \draw_path_arc:nnn { -20 } { 220 } { .1cm }
+    \draw_path_arc:nnn { .425cm } { 90 } { 120 }
+    \draw_path_arc:nnn { .1cm } { -20 } { 220 }
     \draw_path_moveto:n { ( 0cm , -.075cm ) + ( \draw_point_polar:nn { .425cm } { 135 } ) }
-    \draw_path_arc:nnn { 135 } { 200 } { .425cm }
-    \draw_path_arc:nnn { 230 } { 260 } { .35cm }
+    \draw_path_arc:nnn { .425cm } { 135 } { 200 }
+    \draw_path_arc:nnn { .35cm } { 230 } { 260 }
     \draw_path_moveto:n { -.2cm , -.025cm }
     \draw_path_lineto:n { -.1cm , -.05cm }
     \draw_path_lineto:n { -.125cm , -.325cm }
-    \draw_path_arc:nnnn { 180 } { 360 } { .125cm } { .1cm }
+    \draw_path_arc:nnnn { .125cm } { .1cm } { 180 } { 360 }
     \draw_path_lineto:n { .1cm , -.05cm }
     \draw_path_lineto:n { .2cm , -.025cm }
     \draw_path_moveto:n { 0cm , -.3cm }
-    \draw_path_arc:nnn { 90 } { 70 } { .1cm }
+    \draw_path_arc:nnn { .1cm } { 90 } { 70 }
     \draw_path_moveto:n { 0cm , -.3cm }
-    \draw_path_arc:nnn { 90 } { 110 } { .1cm }
+    \draw_path_arc:nnn { .1cm } { 90 } { 110 }
 }
 
 \cs_new_protected:Npn \rpgicons_draw_shape_dexterity: {
     \draw_path_moveto:n { ( 0cm , -.075cm ) + ( \draw_point_polar:nn { .425cm } { 90 } ) }
-    \draw_path_arc:nnn { 90 } { 65 } { .425cm }
-    \draw_path_arc:nnnn { 200 } { 90 } { .1cm } { .075cm }
-    \draw_path_arc:nnnn { 90 } { -30 } { .1cm } { .075cm }
+    \draw_path_arc:nnn { .425cm } { 90 } { 65 }
+    \draw_path_arc:nnnn { .1cm } { .075cm } { 200 } { 90 }
+    \draw_path_arc:nnnn { .1cm } { .075cm } { 90 } { -30 }
     \draw_path_moveto:n { ( 0cm , -.075cm ) + ( \draw_point_polar:nn { .425cm } { 45 } ) }
-    \draw_path_arc:nnnn { 45 } { -20 } { .425cm } { .35cm }
-    \draw_path_arc:nnn { 110 } { 160 } { .175cm }
+    \draw_path_arc:nnnn { .425cm } { .35cm } { 45 } { -20 }
+    \draw_path_arc:nnn { .175cm } { 110 } { 160 }
     \draw_path_moveto:n { ( 0cm , -.075cm ) + ( \draw_point_polar:nn { .425cm } { 90 } ) }
-    \draw_path_arc:nnn { 90 } { 115 } { .425cm }
-    \draw_path_arc:nnnn { -20 } { 90 } { .1cm } { .075cm }
-    \draw_path_arc:nnnn { 90 } { 220 } { .1cm } { .075cm }
+    \draw_path_arc:nnn { .425cm } { 90 } { 115 }
+    \draw_path_arc:nnnn { .1cm } { .075cm } { -20 } { 90 }
+    \draw_path_arc:nnnn { .1cm } { .075cm } { 90 } { 220 }
     \draw_path_moveto:n { ( 0cm , -.075cm ) + ( \draw_point_polar:nn { .425cm } { 135 } ) }
-    \draw_path_arc:nnnn { 135 } { 200 } { .425cm } { .35cm }
-    \draw_path_arc:nnn { 70 } { 20 } { .175cm }
+    \draw_path_arc:nnnn { .425cm } { .35cm } { 135 } { 200 }
+    \draw_path_arc:nnn { .175cm } { 70 } { 20 }
     \draw_path_moveto:n { -.075cm , -.175cm }
-    \draw_path_arc:nnnn { 180 } { 360 } { .075cm } { .05cm }
+    \draw_path_arc:nnnn { .075cm } { .05cm } { 180 } { 360 }
     \draw_path_moveto:n { 0cm , -.225cm }
     \draw_path_lineto:n { 0cm , -.25cm }
     \draw_path_moveto:n { -.2cm , .025cm }
@@ -359,45 +368,45 @@
     \draw_path_lineto:n { .075cm , 0cm }
     \draw_path_lineto:n { .2cm , .025cm }
     \draw_path_moveto:n { 0cm , -.25cm }
-    \draw_path_arc:nnnn { 360 } { 140 } { .1cm } { .075cm }
+    \draw_path_arc:nnnn { .1cm } { .075cm } { 360 } { 140 }
     \draw_path_moveto:n { 0cm , -.25cm }
-    \draw_path_arc:nnnn { 180 } { 400 } { .1cm } { .075cm }
+    \draw_path_arc:nnnn { .1cm } { .075cm } { 180 } { 400 }
     \draw_path_moveto:n { -.1cm , -.325cm }
     \draw_path_lineto:n { -.1cm , -.375cm }
-    \draw_path_arc:nnnn { 180 } { 360 } { .1cm } { .05cm }
+    \draw_path_arc:nnnn { .1cm } { .05cm } { 180 } { 360 }
     \draw_path_lineto:n { .1cm , -.325cm }
 }
 
 \cs_new_protected:Npn \rpgicons_draw_shape_dexterity_i: {
     \draw_path_moveto:n { ( 0cm , -.15cm ) + ( \draw_point_polar:nn { .425cm } { 90 } ) }
-    \draw_path_arc:nnn { 90 } { 80 } { .425cm }
+    \draw_path_arc:nnn { .425cm } { 90 } { 80 }
     \draw_path_moveto:n { ( 0cm , -.15cm ) + ( \draw_point_polar:nn { .425cm } { 90 } ) }
-    \draw_path_arc:nnn { 90 } { 100 } { .425cm }
+    \draw_path_arc:nnn { .425cm } { 90 } { 100 }
     \draw_path_moveto:n { .125cm , .175cm }
     \draw_path_lineto:n { .375cm , .425cm }
-    \draw_path_arc:nnn { 30 } { -20 } { .25cm }
+    \draw_path_arc:nnn { .25cm } { 30 } { -20 }
     \draw_path_lineto:n { ( 0cm , -.1cm ) + ( \draw_point_polar:nn { .425cm } { 30 } ) }
-    \draw_path_arc:nnnn { 30 } { -45 } { .425cm } { .35cm }
+    \draw_path_arc:nnnn { .425cm } { .35cm } { 30 } { -45 }
     \draw_path_moveto:n { -.125cm , .175cm }
     \draw_path_lineto:n { -.375cm , .425cm }
-    \draw_path_arc:nnn { 150 } { 200 } { .25cm }
+    \draw_path_arc:nnn { .25cm } { 150 } { 200 }
     \draw_path_lineto:n { ( 0cm , -.1cm ) + ( \draw_point_polar:nn { .425cm } { 150 } ) }
-    \draw_path_arc:nnnn { 150 } { 225 } { .425cm } { .35cm }
+    \draw_path_arc:nnnn { .425cm } { .35cm } { 150 } { 225 }
     \draw_path_moveto:n { .075cm , -.075cm }
-    \draw_path_arc:nnnn { 170 } { 90 } { .15cm } { .05cm }
+    \draw_path_arc:nnnn { .15cm } { .05cm } { 170 } { 90 }
     \draw_path_moveto:n { -.075cm , -.075cm }
-    \draw_path_arc:nnnn { 10 } { 90 } { .15cm } { .05cm }
+    \draw_path_arc:nnnn { .15cm } { .05cm } { 10 } { 90 }
     \draw_path_moveto:n { 0cm , -.275cm }
-    \draw_path_arc:nnnn { 0 } { 90 } { .075cm } { .05cm }
+    \draw_path_arc:nnnn { .075cm } { .05cm } { 0 } { 90 }
     \draw_path_moveto:n { 0cm , -.275cm }
-    \draw_path_arc:nnnn { 180 } { 90 } { .075cm } { .05cm }
+    \draw_path_arc:nnnn { .075cm } { .05cm } { 180 } { 90 }
     \draw_path_moveto:n { 0cm , -.275cm }
-    \draw_path_arc:nnnn { 360 } { 180 } { .1cm } { .075cm }
+    \draw_path_arc:nnnn { .1cm } { .075cm } { 360 } { 180 }
     \draw_path_moveto:n { 0cm , -.275cm }
-    \draw_path_arc:nnnn { 180 } { 360 } { .1cm } { .075cm }
+    \draw_path_arc:nnnn { .1cm } { .075cm } { 180 } { 360 }
     \draw_path_moveto:n { -.1cm , -.35cm }
     \draw_path_lineto:n { -.1cm , -.375cm }
-    \draw_path_arc:nnnn { 180 } { 360 } { .1cm } { .05cm }
+    \draw_path_arc:nnnn { .1cm } { .05cm } { 180 } { 360 }
     \draw_path_lineto:n { .1cm , -.35cm }
 }
 
@@ -408,28 +417,28 @@
 \cs_new_protected:Npn \rpgicons_draw_shape_constitution: {
     \draw_path_moveto:n { 0cm , .25cm }
     \draw_path_lineto:n { .125cm , .25cm }
-    \draw_path_arc:nnn { -90 } { -30 } { .325cm }
-    \draw_path_arc:nnn { 0 } { -80 } { .3cm }
+    \draw_path_arc:nnn { .325cm } { -90 } { -30 }
+    \draw_path_arc:nnn { .3cm } { 0 } { -80 }
     \draw_path_moveto:n { 0cm , .25cm }
     \draw_path_lineto:n { -.125cm , .25cm }
-    \draw_path_arc:nnn { 270 } { 210 } { .325cm }
-    \draw_path_arc:nnn { 180 } { 260 } { .3cm }
+    \draw_path_arc:nnn { .325cm } { 270 } { 210 }
+    \draw_path_arc:nnn { .3cm } { 180 } { 260 }
     \draw_path_moveto:n { .325cm , .1cm }
     \draw_path_lineto:n { .425cm , .075cm }
-    \draw_path_arc:nnnn { 0 } { -90 } { .175cm } { .1cm }
+    \draw_path_arc:nnnn { .175cm } { .1cm } { 0 } { -90 }
     \draw_path_lineto:n { .2cm , -.15cm }
     \draw_path_moveto:n { -.325cm , .1cm }
     \draw_path_lineto:n { -.425cm , .075cm }
-    \draw_path_arc:nnnn { 180 } { 270 } { .175cm } { .1cm }
+    \draw_path_arc:nnnn { .175cm } { .1cm } { 180 } { 270 }
     \draw_path_lineto:n { -.2cm , -.15cm }
     \draw_path_moveto:n { -.15cm , -.225cm }
-    \draw_path_arc:nnn { 90 } { 270 } { .1cm }
+    \draw_path_arc:nnn { .1cm } { 90 } { 270 }
     \draw_path_lineto:n { .15cm , -.425cm }
-    \draw_path_arc:nnn { -90 } { 90 } { .1cm }
+    \draw_path_arc:nnn { .1cm } { -90 } { 90 }
     \draw_path_moveto:n { -.125cm , -.35cm }
-    \draw_path_arc:nnn { -90 } { 0 } { .05cm }
+    \draw_path_arc:nnn { .05cm } { -90 } { 0 }
     \draw_path_moveto:n { .125cm , -.35cm }
-    \draw_path_arc:nnn { 90 } { 0 } { -.05cm }
+    \draw_path_arc:nnn { -.05cm } { 90 } { 0 }
     \draw_path_moveto:n { -.125cm , -.025cm }
     \draw_path_lineto:n { -.075cm , -.05cm }
     \draw_path_lineto:n { -.075cm , -.1cm }
@@ -440,68 +449,68 @@
 
 \cs_new_protected:Npn \rpgicons_draw_shape_intelligence: {
     \draw_path_moveto:n { ( 0cm , -.2cm ) + ( \draw_point_polar:nn { .425cm } { 90 } ) }
-    \draw_path_arc:nnn { 90 } { 60 } { .25cm }
+    \draw_path_arc:nnn { .25cm } { 90 } { 60 }
     \draw_path_lineto:n { ( 0cm , -.1cm ) + ( \draw_point_polar:nn { .6cm } { 60 } ) }
-    \draw_path_arc:nnn { 40 } { -2.5 } { .425cm }
+    \draw_path_arc:nnn { .425cm } { 40 } { -2.5 }
     \draw_path_moveto:n { ( 0cm , -.2cm ) + ( \draw_point_polar:nn { .425cm } { 90 } ) }
-    \draw_path_arc:nnn { 90 } { 120 } { .25cm }
+    \draw_path_arc:nnn { .25cm } { 90 } { 120 }
     \draw_path_lineto:n { ( 0cm , -.1cm ) + ( \draw_point_polar:nn { .6cm } { 120 } ) }
-    \draw_path_arc:nnn { 140 } { 182.5 } { .425cm }
+    \draw_path_arc:nnn { .425cm } { 140 } { 182.5 }
     \draw_path_moveto:n { ( 0cm , -.2cm ) + ( \draw_point_polar:nn { .425cm } { 45 } ) }
-    \draw_path_arc:nnn { 45 } { 0 } { .425cm }
+    \draw_path_arc:nnn { .425cm } { 45 } { 0 }
     \draw_path_lineto:n { .2cm , -.275cm }
     \draw_path_moveto:n { ( 0cm , -.2cm ) + ( \draw_point_polar:nn { .425cm } { 135 } ) }
-    \draw_path_arc:nnn { 135 } { 180 } { .425cm }
+    \draw_path_arc:nnn { .425cm } { 135 } { 180 }
     \draw_path_lineto:n { -.2cm , -.275cm }
     \draw_path_moveto:n { -.2cm , -.075cm }
     \draw_path_lineto:n { -.1cm , -.1cm }
     \draw_path_lineto:n { -.075cm , -.375cm }
-    \draw_path_arc:nnnn { 180 } { 360 } { .075cm } { .05cm }
+    \draw_path_arc:nnnn { .075cm } { .05cm } { 180 } { 360 }
     \draw_path_lineto:n { .1cm , -.1cm }
     \draw_path_lineto:n { .2cm , -.075cm }
 }
 
 \cs_new_protected:Npn \rpgicons_draw_shape_wisdom: {
     \draw_path_moveto:n { ( 0cm , .175cm + .425cm + .425cm ) + ( \draw_point_polar:nn { .425cm + .425cm } { 240 } ) }
-    \draw_path_arc:nnn { 240 } { 270 } { .425cm }
-    \draw_path_arc:nnn { 90 } { 60 } { .425cm }
-    \draw_path_arc:nnn { 120 } { 90 } { .425cm }
-    \draw_path_arc:nnn { 270 } { 300 } { .425cm }
+    \draw_path_arc:nnn { .425cm } { 240 } { 270 }
+    \draw_path_arc:nnn { .425cm } { 90 } { 60 }
+    \draw_path_arc:nnn { .425cm } { 120 } { 90 }
+    \draw_path_arc:nnn { .425cm } { 270 } { 300 }
     \draw_path_circle:nn { -.175cm , 0cm } { .075cm }
     \draw_path_circle:nn { .175cm , 0cm } { .075cm }
     \draw_path_moveto:n { .075cm , -.125cm }
     \draw_path_lineto:n { 0cm , -.325cm }
     \draw_path_lineto:n { -.075cm , -.125cm }
     \draw_path_moveto:n { -.375cm , .125cm }
-    \draw_path_arc:nnn { 150 } { 270 } { .25cm }
+    \draw_path_arc:nnn { .25cm } { 150 } { 270 }
     \draw_path_moveto:n { .375cm , .125cm }
-    \draw_path_arc:nnn { 30 } { -90 } { .25cm }
+    \draw_path_arc:nnn { .25cm } { 30 } { -90 }
 }
 
 \cs_new_protected:Npn \rpgicons_draw_shape_wisdom_i: {
     \draw_path_moveto:n { ( 0cm , -.125cm ) + ( \draw_point_polar:nn { .55cm } { 110 } ) }
-    \draw_path_arc:nnn { 110 } { 70 } { .55cm }
+    \draw_path_arc:nnn { .55cm } { 110 } { 70 }
     \draw_path_moveto:n { -.425cm , .125cm }
-    \draw_path_arc:nnnn { 180 } { 270 } { .1cm } { .175cm }
-    \draw_path_arc:nnnn { 330 } { 420 } { .1cm } { .2cm }
+    \draw_path_arc:nnnn { .1cm } { .175cm } { 180 } { 270 }
+    \draw_path_arc:nnnn { .1cm } { .2cm } { 330 } { 420 }
     \draw_path_moveto:n { .425cm , .125cm }
-    \draw_path_arc:nnnn { 360 } { 270 } { .1cm } { .175cm }
-    \draw_path_arc:nnnn { 210 } { 120 } { .1cm } { .2cm }
+    \draw_path_arc:nnnn { .1cm } { .175cm } { 360 } { 270 }
+    \draw_path_arc:nnnn { .1cm } { .2cm } { 210 } { 120 }
     \draw_path_moveto:n { -.3cm , .3cm }
-    \draw_path_arc:nnnn { 110 } { 30 } { .1cm } { .25cm }
+    \draw_path_arc:nnnn { .1cm } { .25cm } { 110 } { 30 }
     \draw_path_moveto:n { .3cm , .3cm }
-    \draw_path_arc:nnnn { 70 } { 150 } { .1cm } { .25cm }
+    \draw_path_arc:nnnn { .1cm } { .25cm } { 70 } { 150 }
     \draw_path_moveto:n { -.075cm , .05cm }
     \draw_path_lineto:n { -.1cm , -.05cm }
     \draw_path_moveto:n { .075cm , .05cm }
     \draw_path_lineto:n { .1cm , -.05cm }
     \draw_path_moveto:n { ( 2 * sind(30) * -.3cm , -.3cm ) + ( \draw_point_polar:nnn { .1cm } { .175cm } { 120 } ) }
-    \draw_path_arc:nnnn { 180 } { 240 } { .1cm } { .175cm }
-    \draw_path_arc:nnnn { 120 } { 60 } { .3cm } { .5cm }
-    \draw_path_arc:nnnn { 120 } { 60 } { .3cm } { .5cm }
-    \draw_path_arc:nnnn { 300 } { 360 } { .1cm } { .175cm }
+    \draw_path_arc:nnnn { .1cm } { .175cm } { 180 } { 240 }
+    \draw_path_arc:nnnn { .3cm } { .5cm } { 120 } { 60 }
+    \draw_path_arc:nnnn { .3cm } { .5cm } { 120 } { 60 }
+    \draw_path_arc:nnnn { .1cm } { .175cm } { 300 } { 360 }
     \draw_path_moveto:n { ( 0cm , .125cm ) + ( \draw_point_polar:nn { .55cm } { 245 } ) }
-    \draw_path_arc:nnn { 245 } { 295 } { .55cm }
+    \draw_path_arc:nnn { .55cm } { 245 } { 295 }
 }
 
 % === backward compatibility
@@ -510,65 +519,65 @@
 
 \cs_new_protected:Npn \rpgicons_draw_shape_charisma: {
     \draw_path_moveto:n { 0cm , .15cm }
-    \draw_path_arc:nnnn { 270 } { 190 } { .15cm } { .1cm }
-    \draw_path_arc:nnnn { 10 } { 90 } { .175cm } { .225cm }
-    \draw_path_arc:nnnn { 40 } { 0 } { .125cm } { .175cm }
+    \draw_path_arc:nnnn { .15cm } { .1cm } { 270 } { 190 }
+    \draw_path_arc:nnnn { .175cm } { .225cm } { 10 } { 90 }
+    \draw_path_arc:nnnn { .125cm } { .175cm } { 40 } { 0 }
     \draw_path_moveto:n { 0cm , .15cm }
-    \draw_path_arc:nnnn { 270 } { 350 } { .15cm } { .1cm }
-    \draw_path_arc:nnnn { 170 } { 90 } { .175cm } { .225cm }
-    \draw_path_arc:nnnn { 140 } { 180 } { .125cm } { .175cm }
+    \draw_path_arc:nnnn { .15cm } { .1cm } { 270 } { 350 }
+    \draw_path_arc:nnnn { .175cm } { .225cm } { 170 } { 90 }
+    \draw_path_arc:nnnn { .125cm } { .175cm } { 140 } { 180 }
     \draw_path_moveto:n { -.2cm , .125cm }
-    \draw_path_arc:nnnn { 0 } { 90 } { .175cm } { .1cm }
-    \draw_path_arc:nnnn { 180 } { 270 } { .15cm } { .2cm }
+    \draw_path_arc:nnnn { .175cm } { .1cm } { 0 } { 90 }
+    \draw_path_arc:nnnn { .15cm } { .2cm } { 180 } { 270 }
     \draw_path_lineto:n { -.25cm , -.05cm }
-    \draw_path_arc:nnn { 40 } { 0 } { .45cm }
+    \draw_path_arc:nnn { .45cm } { 40 } { 0 }
     \draw_path_lineto:n { 0cm , -.425cm }
     \draw_path_lineto:n { ( .25cm - .45cm , -.05cm ) + ( \draw_point_polar:nn { .45cm } { -40 } ) }
-    \draw_path_arc:nnn { 180 } { 140 } { .45cm }
+    \draw_path_arc:nnn { .45cm } { 180 } { 140 }
     \draw_path_lineto:n { .2cm + .175cm - .15cm , .125cm + .1cm - .2cm }
-    \draw_path_arc:nnnn { -90 } { 0 } { .15cm } { .2cm }
-    \draw_path_arc:nnnn { 90 } { 180 } { .175cm } { .1cm }
+    \draw_path_arc:nnnn { .15cm } { .2cm } { -90 } { 0 }
+    \draw_path_arc:nnnn { .175cm } { .1cm } { 90 } { 180 }
     \draw_path_moveto:n { -.05cm , -.275cm }
-    \draw_path_arc:nnn { -30 } { 60 } { .05cm }
+    \draw_path_arc:nnn { .05cm } { -30 } { 60 }
     \draw_path_moveto:n { .05cm , -.275cm }
-    \draw_path_arc:nnn { 210 } { 120 } { .05cm }
+    \draw_path_arc:nnn { .05cm } { 210 } { 120 }
     \draw_path_moveto:n { -.125cm , -.05cm }
     \draw_path_lineto:n { -.05cm , -.075cm }
     \draw_path_moveto:n { .125cm , -.05cm }
     \draw_path_lineto:n { .05cm , -.075cm }
     \draw_path_moveto:n { -.35cm , -.05cm }
     \draw_path_lineto:n { -.425cm , -.05cm }
-    \draw_path_arc:nnn { 30 } { -30 } { .15cm }
-    \draw_path_arc:nnn { 80 } { 10 } { .15cm }
+    \draw_path_arc:nnn { .15cm } { 30 } { -30 }
+    \draw_path_arc:nnn { .15cm } { 80 } { 10 }
     \draw_path_lineto:n { -.25cm , -.275cm }
     \draw_path_moveto:n { .35cm , -.05cm }
     \draw_path_lineto:n { .425cm , -.05cm }
-    \draw_path_arc:nnn { 150 } { 210 } { .15cm }
-    \draw_path_arc:nnn { 100 } { 170 } { .15cm }
+    \draw_path_arc:nnn { .15cm } { 150 } { 210 }
+    \draw_path_arc:nnn { .15cm } { 100 } { 170 }
     \draw_path_lineto:n { .25cm , -.275cm }
 }
 
 \cs_new_protected:Npn \rpgicons_draw_shape_resilience: {
     \draw_path_moveto:n { ( -.425cm , -.475cm ) + ( \draw_point_polar:nn { .5cm } { 65 } ) }
-    \draw_path_arc:nnn { 65 } { 90 } { .5cm }
+    \draw_path_arc:nnn { .5cm } { 65 } { 90 }
     \draw_path_lineto:n { ( 0cm , -.075cm ) + ( \draw_point_polar:nn { .55cm } { 135 } ) }
-    \draw_path_arc:nnn { 135 } { 45 } { .55cm }
+    \draw_path_arc:nnn { .55cm } { 135 } { 45 }
     \draw_path_lineto:n { .425cm , .025cm }
-    \draw_path_arc:nnn { 90 } { 115 } { .5cm }
+    \draw_path_arc:nnn { .5cm } { 90 } { 115 }
     \draw_path_moveto:n { .2cm , .3cm }
     \draw_path_lineto:n { .125cm , .275cm }
     \draw_path_lineto:n { .2cm , .15cm }
     \draw_path_moveto:n { .125cm , .075cm }
     \draw_path_lineto:n { .05cm , .05cm }
     \draw_path_moveto:n { .15cm , -.1cm }
-    \draw_path_arc:nnn { 200 } { 230 } { .4cm }
+    \draw_path_arc:nnn { .4cm } { 200 } { 230 }
     \draw_path_moveto:n { -.2cm , .3cm }
     \draw_path_lineto:n { -.125cm , .275cm }
     \draw_path_lineto:n { -.2cm , .15cm }
     \draw_path_moveto:n { -.125cm , .075cm }
     \draw_path_lineto:n { -.05cm , .05cm }
     \draw_path_moveto:n { -.15cm , -.1cm }
-    \draw_path_arc:nnn { 340 } { 310 } { .4cm }
+    \draw_path_arc:nnn { .4cm } { 340 } { 310 }
     \draw_path_moveto:n { -.065cm , -.075cm }
     \draw_path_lineto:n { -.045cm , -.425cm }
     \draw_path_lineto:n { .045cm , -.425cm }
@@ -578,15 +587,15 @@
 \cs_new_protected:Npn \rpgicons_draw_shape_sanity: {
     \draw_path_moveto:n { ( -.125cm + .175cm * sind(30) , .425cm - .175cm * cosd(30) ) +
         ( \draw_point_polar:nn { .175cm } { 210 } ) }
-    \draw_path_arc:nnn { 210 } { 120 } { .175cm }
+    \draw_path_arc:nnn { .175cm } { 210 } { 120 }
     \draw_path_lineto:n { \draw_point_polar:nn { .25cm } { 110 } }
-    \draw_path_arc:nnn { 110 } { 70 } { .25cm }
+    \draw_path_arc:nnn { .25cm } { 110 } { 70 }
     \draw_path_lineto:n { .125cm , .425cm }
-    \draw_path_arc:nnn { 420 } { 330 } { .175cm }
+    \draw_path_arc:nnn { .175cm } { 420 } { 330 }
     \draw_path_moveto:n { .25cm , .1cm }
-    \draw_path_arc:nnn { 390 } { 305 } { .15cm }
+    \draw_path_arc:nnn { .15cm } { 390 } { 305 }
     \draw_path_moveto:n { -.25cm , .1cm }
-    \draw_path_arc:nnn { 150 } { 235 } { .15cm }
+    \draw_path_arc:nnn { .15cm } { 150 } { 235 }
     \draw_path_moveto:n { -.15cm , .075cm }
     \draw_path_lineto:n { -.1cm , .05cm }
     \draw_path_lineto:n { -.1cm , .025cm }
@@ -595,26 +604,26 @@
     \draw_path_lineto:n { .1cm , .025cm }
     \draw_path_moveto:n { ( -.55cm , -.35cm ) + ( \draw_point_polar:nnn { .125cm } { .075cm } { 135 } ) +
         ( \draw_point_polar:nn { .55cm } { 20 } ) }
-    \draw_path_arc:nnn { 380 } { 360 } { .55cm }
-    \draw_path_arc:nnnn { 135 } { 405 } { .125cm } { .075cm }
-    \draw_path_arc:nnn { 180 } { 160 } { .55cm }
+    \draw_path_arc:nnn { .55cm } { 380 } { 360 }
+    \draw_path_arc:nnnn { .125cm } { .075cm } { 135 } { 405 }
+    \draw_path_arc:nnn { .55cm } { 180 } { 160 }
 }
 
 \cs_new_protected:Npn \rpgicons_draw_shape_perception: {
     \draw_path_moveto:n { ( 0cm , .35cm ) + ( \draw_point_polar:nn { .125cm } { 150 } ) }
-    \draw_path_arc:nnn { 150 } { 390 } { .125cm }
+    \draw_path_arc:nnn { .125cm } { 150 } { 390 }
     \draw_path_moveto:n { -.3cm , .425cm }
-    \draw_path_arc:nnnn { 180 } { 360 } { .3cm } { .2cm }
+    \draw_path_arc:nnnn { .3cm } { .2cm } { 180 } { 360 }
     \draw_path_moveto:n { ( 0cm , .425cm ) + ( \draw_point_polar:nnn { .3cm } { .2cm } { 330 } ) }
-    \draw_path_arc:nnnn { 270 } { 350 } { .15cm } { .1cm }
+    \draw_path_arc:nnnn { .15cm } { .1cm } { 270 } { 350 }
     \draw_path_moveto:n { ( 0cm , .425cm ) + ( \draw_point_polar:nnn { .3cm } { .2cm } { 210 } ) }
-    \draw_path_arc:nnnn { 270 } { 190 } { .15cm } { .1cm }
+    \draw_path_arc:nnnn { .15cm } { .1cm } { 270 } { 190 }
     \draw_path_moveto:n { -.2cm , .15cm }
     \draw_path_lineto:n { -.375cm , .125cm }
-    \draw_path_arc:nnn { 210 } { 250 } { .225cm }
+    \draw_path_arc:nnn { .225cm } { 210 } { 250 }
     \draw_path_moveto:n { .2cm , .15cm }
     \draw_path_lineto:n { .375cm , .125cm }
-    \draw_path_arc:nnn { 330 } { 290 } { .225cm }
+    \draw_path_arc:nnn { .225cm } { 330 } { 290 }
     \draw_path_moveto:n { -.15cm , 0cm }
     \draw_path_lineto:n { -.075cm , -.025cm }
     \draw_path_lineto:n { -.075cm , -.05cm }
@@ -624,31 +633,31 @@
     \draw_path_moveto:n { ( -.075cm , ( -.35cm + .075cm * ( 2 + sqrt(3) ) ) ) +
         ( \draw_point_polar:nnn { .1cm } { .075cm } { 195 } ) }
     \draw_path_lineto:n { ( 0cm , -.35cm ) + ( \draw_point_polar:nnn { .1cm } { .075cm } { 195 } ) }
-    \draw_path_arc:nnnn { 195 } { 345 } { .1cm } { .075cm }
+    \draw_path_arc:nnnn { .1cm } { .075cm } { 195 } { 345 }
     \draw_path_lineto:n { ( .075cm , ( -.35cm + .075cm * ( 2 + sqrt(3) ) ) ) +
         ( \draw_point_polar:nnn { .1cm } { .075cm } { 345 } ) }
     \draw_path_moveto:n { .025cm , -.325cm }
-    \draw_path_arc:nnn { 0 } { 180 } { .025cm }
+    \draw_path_arc:nnn { .025cm } { 0 } { 180 }
 }
 
 \cs_new_protected:Npn \rpgicons_draw_shape_luck: {
     \draw_path_moveto:n { .1cm , .15cm }
     \draw_path_lineto:n { .1cm , -.05cm }
-    \draw_path_arc:nnn { -75 } { -15 } { .425cm }
-    \draw_path_arc:nnn { 40 } { 85 } { .425cm }
+    \draw_path_arc:nnn { .425cm } { -75 } { -15 }
+    \draw_path_arc:nnn { .425cm } { 40 } { 85 }
     \draw_path_moveto:n { -.1cm , .15cm }
     \draw_path_lineto:n { -.1cm , -.05cm }
-    \draw_path_arc:nnn { -105 } { -165 } { .425cm }
-    \draw_path_arc:nnn { 140 } { 95 } { .425cm }
+    \draw_path_arc:nnn { .425cm } { -105 } { -165 }
+    \draw_path_arc:nnn { .425cm } { 140 } { 95 }
     \draw_path_moveto:n { ( 0cm , -.05cm ) + ( \draw_point_polar:nn { .425cm } { 15 } ) }
-    \draw_path_arc:nnnn { 15 } { -55 } { .425cm } { .3cm }
+    \draw_path_arc:nnnn { .425cm } { .3cm } { 15 } { -55 }
     \draw_path_moveto:n { ( 0cm , -.05cm ) + ( \draw_point_polar:nn { .425cm } { 165 } ) }
-    \draw_path_arc:nnnn { 165 } { 235 } { .425cm } { .3cm }
+    \draw_path_arc:nnnn { .425cm } { .3cm } { 165 } { 235 }
     \draw_path_moveto:n { 0cm , -.175cm }
-    \draw_path_arc:nnnn { 90 } { 250 } { .175cm } { .125cm }
+    \draw_path_arc:nnnn { .175cm } { .125cm } { 90 } { 250 }
     \draw_path_lineto:n { -.05cm , -.325cm }
     \draw_path_moveto:n { 0cm , -.175cm }
-    \draw_path_arc:nnnn { 90 } { -70 } { .175cm } { .125cm }
+    \draw_path_arc:nnnn { .175cm } { .125cm } { 90 } { -70 }
     \draw_path_lineto:n { .05cm , -.325cm }
 }
 
@@ -658,20 +667,20 @@
     \draw_path_lineto:n { .2cm , -.225cm }
     \draw_path_lineto:n { .25cm , .125cm }
     \draw_path_lineto:n { .425cm , .125cm }
-    \draw_path_arc:nnn { 0 } { 90 } { .3cm }
+    \draw_path_arc:nnn { .3cm } { 0 } { 90 }
     \draw_path_lineto:n { .125cm , .35cm }
-    \draw_path_arc:nnn { 360 } { 180 } { .125cm }
+    \draw_path_arc:nnn { .125cm } { 360 } { 180 }
     \draw_path_lineto:n { -.125cm , .425cm }
-    \draw_path_arc:nnn { 90 } { 180 } { .3cm }
+    \draw_path_arc:nnn { .3cm } { 90 } { 180 }
     \draw_path_lineto:n { -.25cm , .125cm }
     \draw_path_lineto:n { -.2cm , -.225cm }
     \draw_path_close:
     \draw_path_moveto:n { .125cm , .425cm }
     \draw_path_lineto:n { .125cm , .25cm }
-    \draw_path_arc:nnn { 180 } { 270 } { .125cm }
+    \draw_path_arc:nnn { .125cm } { 180 } { 270 }
     \draw_path_moveto:n { -.125cm , .425cm }
     \draw_path_lineto:n { -.125cm , .25cm }
-    \draw_path_arc:nnn { 360 } { 270 } { .125cm }
+    \draw_path_arc:nnn { .125cm } { 360 } { 270 }
     \draw_path_moveto:n { 0cm , .225cm }
     \draw_path_lineto:n { 0cm , -.275cm }
     \draw_path_moveto:n { -.2cm , -.225cm }
@@ -750,9 +759,9 @@
     \draw_path_use_clear:n { fill }
     \draw_path_circle:nn { 0cm , 0cm } { .425cm }
     \draw_path_moveto:n { .425cm , 0cm }
-    \draw_path_arc:nnnn { 180 } { 50 } { -.425cm } { -.2cm }
+    \draw_path_arc:nnnn { -.425cm } { -.2cm } { 180 } { 50 }
     \draw_path_moveto:n { 0cm , -.425cm }
-    \draw_path_arc:nnnn { 270 } { 140 } { -.2cm } { .425cm }
+    \draw_path_arc:nnnn { -.2cm } { .425cm } { 270 } { 140 }
 }
 
 \cs_new_protected:Npn \rpgicons_draw_shape_cylindric: {
@@ -761,31 +770,31 @@
     \draw_path_ellipse:nnn { 0cm , .2125cm } { 0cm , .2cm } { .425cm , 0cm }
     \draw_path_moveto:n { -.425cm , .2125cm }
     \draw_path_lineto:n { -.425cm , -.2125cm }
-    \draw_path_arc:nnnn { 0 } { 180 } { -.425cm } { -.2cm }
+    \draw_path_arc:nnnn { -.425cm } { -.2cm } { 0 } { 180 }
     \draw_path_lineto:n { .425cm , .2125cm }
 }
 
 \cs_new_protected:Npn \rpgicons_draw_shape_emanation: {
     \draw_path_circle:nn { 0cm , .1cm } { .075cm }
     \draw_path_moveto:n { -.15cm , -.15cm }
-    \draw_path_arc:nnn { 180 } { 90 } { .075cm }
+    \draw_path_arc:nnn { .075cm } { 180 } { 90 }
     \draw_path_lineto:n { .075cm , -.075cm }
-    \draw_path_arc:nnn { 90 } { 0 } { .075cm }
+    \draw_path_arc:nnn { .075cm } { 90 } { 0 }
     \draw_path_circle:nn { 0cm , 0cm } { .425cm }
 }
 
 \cs_new_protected:Npn \rpgicons_draw_shape_verbal: {
     \draw_path_moveto:n { -.35cm , 0cm }
-    \draw_path_arc:nnn { 180 } { -115 } { .35cm }
+    \draw_path_arc:nnn { .35cm } { 180 } { -115 }
     \draw_path_lineto:n { -.4cm , -.4cm }
     \draw_path_lineto:n { \draw_point_polar:nn { .35cm } { 215 } }
 }
 
 \cs_new_protected:Npn \rpgicons_draw_shape_somatic: {
     \draw_path_moveto:n { -.425cm , 0cm }
-    \draw_path_arc:nnnn { 0 } { 270 } { -.425cm } { -.2cm }
+    \draw_path_arc:nnnn { -.425cm } { -.2cm } { 0 } { 270 }
     \draw_path_moveto:n { 0cm , -.425cm }
-    \draw_path_arc:nnnn { 90 } { 360 } { -.2cm } { -.425cm }
+    \draw_path_arc:nnnn { -.2cm } { -.425cm } { 90 } { 360 }
 }
 
 \cs_new_protected:Npn \rpgicons_draw_shape_material: {
@@ -804,7 +813,7 @@
 
 \cs_new_protected:Npn \rpgicons_draw_shape_ritual: {
     \draw_path_moveto:n { \draw_point_polar:nn { .425cm } { 90 } }
-    \draw_path_arc:nnn { 90 } { -198 } { .425cm }
+    \draw_path_arc:nnn { .425cm } { 90 } { -198 }
     \draw_path_lineto:n { \draw_point_polar:nn { .425cm } { 306 } }
     \draw_path_lineto:n { \draw_point_polar:nn { .425cm } { 90 } }
     \draw_path_close:
@@ -830,11 +839,11 @@
 
 \cs_new_protected:Npn \rpgicons_draw_shape_abjuration: {
     \draw_path_moveto:n { 0cm , .025cm }
-    \draw_path_arc:nnnn { 270 } { 390 } { .275cm } { .175cm }
-    \draw_path_arc:nnn { 210 } { 120 } { .095cm }
+    \draw_path_arc:nnnn { .275cm } { .175cm } { 270 } { 390 }
+    \draw_path_arc:nnn { .095cm } { 210 } { 120 }
     \draw_path_moveto:n { 0cm , .025cm }
-    \draw_path_arc:nnnn { 270 } { 150 } { .275cm } { .175cm }
-    \draw_path_arc:nnn { -30 } { 60 } { .095cm }
+    \draw_path_arc:nnnn { .275cm } { .175cm } { 270 } { 150 }
+    \draw_path_arc:nnn { .095cm } { -30 } { 60 }
     \draw_path_moveto:n { 0cm , .25cm }
     \draw_path_lineto:n { 0cm , -.425cm }
     \draw_path_moveto:n { -.25cm , -.125cm }
@@ -850,18 +859,18 @@
     \draw_path_moveto:n { -.225cm , .05cm }
     \draw_path_lineto:n { .225cm , .05cm }
     \draw_path_moveto:n { 0cm , -.15cm }
-    \draw_path_arc:nnn { 110 } { 70 } { .5cm }
+    \draw_path_arc:nnn { .5cm } { 110 } { 70 }
     \draw_path_moveto:n { 0cm , -.15cm }
-    \draw_path_arc:nnn { 110 } { 70 } { -.5cm }
+    \draw_path_arc:nnn { -.5cm } { 110 } { 70 }
 }
 
 \cs_new_protected:Npn \rpgicons_draw_shape_divination: {
     \draw_path_moveto:n { -.35cm , -.175cm }
-    \draw_path_arc:nnnn { 180 } { 0 } { .15cm } { -.25cm }
-    \draw_path_arc:nnn { 180 } { 90 } { .4cm }
+    \draw_path_arc:nnnn { .15cm } { -.25cm } { 180 } { 0 }
+    \draw_path_arc:nnn { .4cm } { 180 } { 90 }
     \draw_path_moveto:n { -.05cm , -.175cm }
     \draw_path_lineto:n { -.05cm , 0cm }
-    \draw_path_arc:nnn { 180 } { 90 } { .4cm }
+    \draw_path_arc:nnn { .4cm } { 180 } { 90 }
 }
 
 \cs_new_protected:Npn \rpgicons_draw_shape_enchantment: {
@@ -870,9 +879,9 @@
     \draw_path_moveto:n { -.425cm , .175cm }
     \draw_path_lineto:n { .025cm , .175cm }
     \draw_path_moveto:n { -.2cm , -.225cm }
-    \draw_path_arc:nnnn { 180 } { 0 } { .1cm } { .2cm }
-    \draw_path_arc:nnnn { 180 } { 0 } { .1cm } { .2cm }
-    \draw_path_arc:nnnn { 180 } { 0 } { .1cm } { -.2cm }
+    \draw_path_arc:nnnn { .1cm } { .2cm } { 180 } { 0 }
+    \draw_path_arc:nnnn { .1cm } { .2cm } { 180 } { 0 }
+    \draw_path_arc:nnnn { .1cm } { -.2cm } { 180 } { 0 }
 }
 
 \cs_new_protected:Npn \rpgicons_draw_shape_evocation: {
@@ -901,9 +910,9 @@
 
 \cs_new_protected:Npn \rpgicons_draw_shape_illusion: {
     \draw_path_moveto:n { 0cm , .225cm }
-    \draw_path_arc:nnn { 90 } { 30 } { .45cm }
-    \draw_path_arc:nnn { 330 } { 210 } { .45cm }
-    \draw_path_arc:nnn { 150 } { 90 } { .45cm }
+    \draw_path_arc:nnn { .45cm } { 90 } { 30 }
+    \draw_path_arc:nnn { .45cm } { 330 } { 210 }
+    \draw_path_arc:nnn { .45cm } { 150 } { 90 }
     \draw_path_moveto:n { ( 0cm , .225cm ) + ( \draw_point_polar:nn { .45cm } { 270 } ) }
     \draw_path_lineto:n { \draw_point_polar:nn { .35cm } { 270 } }
     \draw_path_moveto:n { ( 0cm , .225cm ) + ( \draw_point_polar:nn { .45cm } { 240 } ) }
@@ -915,10 +924,10 @@
 
 \cs_new_protected:Npn \rpgicons_draw_shape_necromancy: {
     \draw_path_moveto:n { \draw_point_polar:nn { .25cm } { 210 } }
-    \draw_path_arc:nnn { 210 } { -30 } { .25cm }
-    \draw_path_arc:nnn { 150 } { 390 } { .1cm }
+    \draw_path_arc:nnn { .25cm } { 210 } { -30 }
+    \draw_path_arc:nnn { .1cm } { 150 } { 390 }
     \draw_path_moveto:n { \draw_point_polar:nn { .25cm } { 210 } }
-    \draw_path_arc:nnn { 390 } { 150 } { .1cm }
+    \draw_path_arc:nnn { .1cm } { 390 } { 150 }
 }
 
 \cs_new_protected:Npn \rpgicons_draw_shape_transmutation: {
@@ -928,15 +937,15 @@
     \draw_path_lineto:n { 0cm , -.35cm }
     \draw_path_moveto:n { -.425cm , .35cm }
     \draw_path_lineto:n { .15cm , .35cm }
-    \draw_path_arc:nnn { 90 } { -45 } { .1cm }
-    \draw_path_arc:nnn { 135 } { 360 } { .1cm }
+    \draw_path_arc:nnn { .1cm } { 90 } { -45 }
+    \draw_path_arc:nnn { .1cm } { 135 } { 360 }
 }
 
 % DAMAGES
 
 \cs_new_protected:Npn \rpgicons_draw_shape_acid: {
     \draw_path_moveto:n { ( -.175cm , .05cm ) + ( \draw_point_polar:nn { .175 } { -20 } ) }
-    \draw_path_arc:nnn { -20 } { 200 } { -.175cm }
+    \draw_path_arc:nnn { -.175cm } { -20 } { 200 }
     \draw_path_lineto:n { 0cm , .425cm }
     \draw_path_close:
     \draw_path_moveto:n {
@@ -946,7 +955,7 @@
         { -.425cm , -.425cm } { -.425cm , .425cm }
     }
     \draw_path_lineto:n { ( 0cm , -.175cm ) + ( \draw_point_polar:nn { -.25cm } { 20 } ) }
-    \draw_path_arc:nnn { 20 } { 160 } { -.25cm }
+    \draw_path_arc:nnn { -.25cm } { 20 } { 160 }
     \draw_path_lineto:n {
       \draw_point_intersect_lines:nnnn
         { ( 0cm , -.175cm ) + ( \draw_point_polar:nn { -.25cm } { 20 } ) }
@@ -967,7 +976,7 @@
     \draw_path_lineto:n { -.025cm , .05cm }
     \draw_path_moveto:n { .175cm , .25cm }
     \draw_path_lineto:n { .2cm , .275cm }
-    \draw_path_arc:nnn { 315 } { 135 } { sqrt(2) * -.0375cm }
+    \draw_path_arc:nnn { sqrt(2) * -.0375cm } { 315 } { 135 }
     \draw_path_lineto:n { .25cm , .175cm }
 }
 
@@ -1000,15 +1009,15 @@
 
 \cs_new_protected:Npn \rpgicons_draw_shape_fire: {
     \draw_path_moveto:n { -.15cm , -.425cm }
-    \draw_path_arc:nnnn { 240 } { 135 } { .45cm } { .35cm }
+    \draw_path_arc:nnnn { .45cm } { .35cm } { 240 } { 135 }
     \draw_path_curveto:nnn { -.15cm , .2cm } { 0cm , .25cm } { -.05cm , .425cm }
     \draw_path_curveto:nnn { .15cm , .375cm } { .375cm , .15cm } {
         ( .15cm , -.425cm ) + ( \draw_point_polar:nnn { .45cm } { .375cm } { 60 } )
     }
-    \draw_path_arc:nnnn { 0 } { -60 } { .45cm } { .375cm }
+    \draw_path_arc:nnnn { .45cm } { .375cm } { 0 } { -60 }
     \draw_path_moveto:n { -.075cm , -.3cm }
-    \draw_path_arc:nnnn { 220 } { 150 } { .35cm } { .2cm }
-    \draw_path_arc:nnnn { 225 } { 360 } { .1cm } { .25cm }
+    \draw_path_arc:nnnn { .35cm } { .2cm } { 220 } { 150 }
+    \draw_path_arc:nnnn { .1cm } { .25cm } { 225 } { 360 }
     \draw_path_curveto:nnn { .2cm , -.05cm } { .2cm , -.2cm } { .075cm , -.3cm }
 }
 
@@ -1038,7 +1047,7 @@
 \cs_new_protected:Npn \rpgicons_draw_shape_necrotic: {
     \draw_path_moveto:n { -.35cm , -.425cm }
     \draw_path_lineto:n { -.35cm , .075cm }
-    \draw_path_arc:nnn { 180 } { 0 } { .35cm }
+    \draw_path_arc:nnn { .35cm } { 180 } { 0 }
     \draw_path_lineto:n { .35cm , -.425cm }
     \draw_path_close:
     \draw_path_moveto:n { 0cm , -.2cm }
@@ -1050,7 +1059,7 @@
 \cs_new_protected:Npn \rpgicons_draw_shape_necrotic_i: {
     \draw_path_moveto:n { -.35cm , -.425cm }
     \draw_path_lineto:n { -.35cm , .075cm }
-    \draw_path_arc:nnn { 180 } { 0 } { .35cm }
+    \draw_path_arc:nnn { .35cm } { 180 } { 0 }
     \draw_path_lineto:n { .35cm , -.425cm }
     \draw_path_close:
     \draw_path_moveto:n { -.1cm , -.075cm }
@@ -1081,7 +1090,7 @@
 
 \cs_new_protected:Npn \rpgicons_draw_shape_poison: {
     \draw_path_moveto:n { ( 0cm , .175cm ) + ( \draw_point_polar:nn { .25cm } { -40 } ) }
-    \draw_path_arc:nnn { -40 } { 220 } { .25cm }
+    \draw_path_arc:nnn { .25cm } { -40 } { 220 }
     \draw_path_lineto:n { -.15cm , -.1cm }
     \draw_path_lineto:n { .15cm , -.1cm }
     \draw_path_close:
@@ -1095,35 +1104,35 @@
 
 \cs_new_protected:Npn \rpgicons_draw_shape_psychic: {
     \draw_path_moveto:n { .075cm , .4cm }
-    \draw_path_arc:nnn { 90 } { 180 } { .425cm }
-    \draw_path_arc:nnn { 180 } { 270 } { .375cm }
-    \draw_path_arc:nnn { 270 } { 360 } { .325cm }
-    \draw_path_arc:nnn { 0 } { 90 } { .275cm }
-    \draw_path_arc:nnn { 90 } { 180 } { .225cm }
-    \draw_path_arc:nnn { 180 } { 270 } { .175cm }
-    \draw_path_arc:nnn { 270 } { 360 } { .125cm }
+    \draw_path_arc:nnn { .425cm } { 90 } { 180 }
+    \draw_path_arc:nnn { .375cm } { 180 } { 270 }
+    \draw_path_arc:nnn { .325cm } { 270 } { 360 }
+    \draw_path_arc:nnn { .275cm } { 0 } { 90 }
+    \draw_path_arc:nnn { .225cm } { 90 } { 180 }
+    \draw_path_arc:nnn { .175cm } { 180 } { 270 }
+    \draw_path_arc:nnn { .125cm } { 270 } { 360 }
 }
 
 \cs_new_protected:Npn \rpgicons_draw_shape_radiant: {
     \draw_path_circle:nn { 0cm , 0cm } { .225cm }
     \draw_path_moveto:n { \draw_point_polar:nn { .425cm } { 15 } }
-    \draw_path_arc:nnn { 15 } { 45 } { .425cm }
+    \draw_path_arc:nnn { .425cm } { 15 } { 45 }
     \draw_path_moveto:n { \draw_point_polar:nn { .425cm } { 75 } }
-    \draw_path_arc:nnn { 75 } { 105 } { .425cm }
+    \draw_path_arc:nnn { .425cm } { 75 } { 105 }
     \draw_path_moveto:n { \draw_point_polar:nn { .425cm } { 135 } }
-    \draw_path_arc:nnn { 135 } { 165 } { .425cm }
+    \draw_path_arc:nnn { .425cm } { 135 } { 165 }
     \draw_path_moveto:n { \draw_point_polar:nn { .425cm } { 195 } }
-    \draw_path_arc:nnn { 195 } { 225 } { .425cm }
+    \draw_path_arc:nnn { .425cm } { 195 } { 225 }
     \draw_path_moveto:n { \draw_point_polar:nn { .425cm } { 255 } }
-    \draw_path_arc:nnn { 255 } { 285 } { .425cm }
+    \draw_path_arc:nnn { .425cm } { 255 } { 285 }
     \draw_path_moveto:n { \draw_point_polar:nn { .425cm } { 315 } }
-    \draw_path_arc:nnn { 315 } { 345 } { .425cm }
+    \draw_path_arc:nnn { .425cm } { 315 } { 345 }
 }
 
 \cs_new_protected:Npn \rpgicons_draw_shape_slashing: {
     \draw_path_moveto:n { -.15cm , .225cm }
     \draw_path_lineto:n { -.275cm , .35cm }
-    \draw_path_arc:nnn { 0 } { 270 } { .075cm }
+    \draw_path_arc:nnn { .075cm } { 0 } { 270 }
     \draw_path_lineto:n { -.225cm , .15cm }
     \draw_path_lineto:n { -.425cm , -.05cm }
     \draw_path_lineto:n { -.35cm , -.125cm }
@@ -1145,24 +1154,24 @@
 
 \cs_new_protected:Npn \rpgicons_draw_shape_thunder: {
     \draw_path_moveto:n { .225cm , -.075cm }
-    \draw_path_arc:nnn { -90 } { 120 } { .2cm }
-    \draw_path_arc:nnn { 30 } { 180 } { .225cm }
+    \draw_path_arc:nnn { .2cm } { -90 } { 120 }
+    \draw_path_arc:nnn { .225cm } { 30 } { 180 }
     \draw_path_lineto:n { -.3cm , .125cm + cosd( 30 ) * .2cm - sind( 30 ) * .225cm }
-    \draw_path_arc:nnn { 90 } { 180 } { .125cm }
+    \draw_path_arc:nnn { .125cm } { 90 } { 180 }
     \draw_path_lineto:n { -.425cm , .05cm }
-    \draw_path_arc:nnn { 180 } { 270 } { .125cm }
+    \draw_path_arc:nnn { .125cm } { 180 } { 270 }
     \draw_path_close:
     \draw_path_moveto:n { -.1cm , -.225cm }
-    \draw_path_arc:nnn { 240 } { 300 } { .3cm }
+    \draw_path_arc:nnn { .3cm } { 240 } { 300 }
     \draw_path_moveto:n { -.2cm , -.35cm }
-    \draw_path_arc:nnn { 240 } { 300 } { .5cm }
+    \draw_path_arc:nnn { .5cm } { 240 } { 300 }
 }
 
 \cs_new_protected:Npn \rpgicons_draw_shape_healing: {
     \draw_path_moveto:n { 0cm , .-.375cm }
     \draw_path_lineto:n { ( .2cm , .125cm ) + ( \draw_point_polar:nn { .2cm } { -45 } ) }
-    \draw_path_arc:nnn { -45 } { 180 } { .2cm }
-    \draw_path_arc:nnn { 0 } { 225 } { .2cm }
+    \draw_path_arc:nnn { .2cm } { -45 } { 180 }
+    \draw_path_arc:nnn { .2cm } { 0 } { 225 }
     \draw_path_close:
 }
 
@@ -1171,7 +1180,7 @@
 \cs_new_protected:Npn \rpgicons_draw_shape_melee: {
     \draw_path_moveto:n { -.15cm , -.225cm }
     \draw_path_lineto:n { -.275cm , -.35cm }
-    \draw_path_arc:nnn { 360 } { 90 } { .075cm }
+    \draw_path_arc:nnn { .075cm } { 360 } { 90 }
     \draw_path_lineto:n { -.225cm , -.15cm }
     \draw_path_lineto:n { -.425cm , .05cm }
     \draw_path_lineto:n { -.35cm , .125cm }
@@ -1190,7 +1199,7 @@
 \cs_new_protected:Npn \rpgicons_draw_shape_melee_i: {
     \draw_path_moveto:n { .15cm , .2cm }
     \draw_path_lineto:n { .275cm , .325cm }
-    \draw_path_arc:nnn { 180 } { -90 } { .075cm }
+    \draw_path_arc:nnn { .075cm } { 180 } { -90 }
     \draw_path_lineto:n { .225cm , .125cm }
     \draw_path_lineto:n { .325cm , .025cm }
     \draw_path_lineto:n { .25cm , -.05cm }
@@ -1199,7 +1208,7 @@
     \draw_path_close:
     \draw_path_moveto:n { .175cm , .025cm }
     \draw_path_lineto:n { -.175cm , -.325cm }
-    \draw_path_arc:nnn { 315 } { 225 } { .175cm }
+    \draw_path_arc:nnn { .175cm } { 315 } { 225 }
     \draw_path_lineto:n { .05cm , .15cm }
 }
 
@@ -1210,12 +1219,12 @@
 \cs_new_protected:Npn \rpgicons_draw_shape_ranged: {
     \draw_path_moveto:n { 0cm , 0cm }
     \draw_path_lineto:n { 0cm , -.225cm }
-    \draw_path_arc:nnn { 0 } { -30 } { .4cm }
-    \draw_path_arc:nnn { -45 } { 0 } { .6cm }
+    \draw_path_arc:nnn { .4cm } { 0 } { -30 }
+    \draw_path_arc:nnn { .6cm } { -45 } { 0 }
     \draw_path_moveto:n { 0cm , 0cm }
     \draw_path_lineto:n { 0cm , .225cm }
-    \draw_path_arc:nnn { 0 } { 30 } { .4cm }
-    \draw_path_arc:nnn { 45 } { 0 } { .6cm }
+    \draw_path_arc:nnn { .4cm } { 0 } { 30 }
+    \draw_path_arc:nnn { .6cm } { 45 } { 0 }
     \draw_path_moveto:n { -.425cm , 0cm }
     \draw_path_lineto:n { .425cm , 0cm }
     \draw_path_moveto:n { .275cm , .1cm }
@@ -1232,21 +1241,21 @@
     \draw_path_lineto:n { -.3cm , -.1cm }
     \draw_path_lineto:n { -.3cm , .125cm }
     \draw_path_lineto:n { 0cm , .425cm }
-    \draw_path_arc:nnn { 405 } { 315 } { .1cm }
+    \draw_path_arc:nnn { .1cm } { 405 } { 315 }
     \draw_path_lineto:n { -.15cm , .1cm }
     \draw_path_lineto:n { -.15cm , -.05cm }
-    \draw_path_arc:nnn { 180 } { 360 } { .05cm }
+    \draw_path_arc:nnn { .05cm } { 180 } { 360 }
     \draw_path_lineto:n { -.05cm , 0cm }
-    \draw_path_arc:nnn { 180 } { 90 } { .1cm }
+    \draw_path_arc:nnn { .1cm } { 180 } { 90 }
     \draw_path_lineto:n { .05cm , -.1cm }
-    \draw_path_arc:nnn { 360 } { 315 } { .125cm }
+    \draw_path_arc:nnn { .125cm } { 360 } { 315 }
     \draw_path_close:
     \draw_path_moveto:n { -.225cm , -.25cm }
     \draw_path_lineto:n { -.325cm , -.15cm }
     \draw_path_moveto:n { .2cm , .2cm }
-    \draw_path_arc:nnn { 180 } { 360 } { .1cm }
-    \draw_path_arc:nnn { 0 } { 45 } { .1cm }
-    \draw_path_arc:nnn { 225 } { 180 } { .2cm }
+    \draw_path_arc:nnn { .1cm } { 180 } { 360 }
+    \draw_path_arc:nnn { .1cm } { 0 } { 45 }
+    \draw_path_arc:nnn { .2cm } { 225 } { 180 }
     \draw_path_circle:nn { .3cm , -.075cm } { .075cm }
 }
 
@@ -1254,14 +1263,14 @@
     \draw_path_moveto:n { -.25cm , -.425cm }
     \draw_path_lineto:n { .025cm , -.425cm }
     \draw_path_lineto:n { .325cm , -.125cm }
-    \draw_path_arc:nnn { 45 } { 135 } { .1cm }
+    \draw_path_arc:nnn { .1cm } { 45 } { 135 }
     \draw_path_lineto:n { 0cm , -.275cm }
     \draw_path_lineto:n { -.15cm , -.275cm }
-    \draw_path_arc:nnn { 270 } { 90 } { .05cm }
+    \draw_path_arc:nnn { .05cm } { 270 } { 90 }
     \draw_path_lineto:n { -.1cm , -.175cm }
-    \draw_path_arc:nnn { 270 } { 360 } { .1cm }
+    \draw_path_arc:nnn { .1cm } { 270 } { 360 }
     \draw_path_lineto:n { -.2cm , -.075cm }
-    \draw_path_arc:nnn { 90 } { 135 } { .125cm }
+    \draw_path_arc:nnn { .125cm } { 90 } { 135 }
     \draw_path_lineto:n { -.425cm , -.25cm }
 }
 
@@ -1269,26 +1278,26 @@
     \draw_path_moveto:n { -.25cm , -.425cm }
     \draw_path_lineto:n { .025cm , -.425cm }
     \draw_path_lineto:n { .325cm , -.125cm }
-    \draw_path_arc:nnn { 45 } { 135 } { .1cm }
+    \draw_path_arc:nnn { .1cm } { 45 } { 135 }
     \draw_path_lineto:n { 0cm , -.275cm }
     \draw_path_lineto:n { -.15cm , -.275cm }
-    \draw_path_arc:nnn { 270 } { 90 } { .05cm }
+    \draw_path_arc:nnn { .05cm } { 270 } { 90 }
     \draw_path_lineto:n { -.1cm , -.175cm }
-    \draw_path_arc:nnn { 270 } { 360 } { .1cm }
+    \draw_path_arc:nnn { .1cm } { 270 } { 360 }
     \draw_path_lineto:n { -.2cm , -.075cm }
-    \draw_path_arc:nnn { 90 } { 135 } { .125cm }
+    \draw_path_arc:nnn { .125cm } { 90 } { 135 }
     \draw_path_lineto:n { -.425cm , -.25cm }
     \draw_path_moveto:n { .25cm , .425cm }
     \draw_path_lineto:n { -.025cm , .425cm }
     \draw_path_lineto:n { -.325cm , .125cm }
-    \draw_path_arc:nnn { 225 } { 315 } { .1cm }
+    \draw_path_arc:nnn { .1cm } { 225 } { 315 }
     \draw_path_lineto:n { 0cm , .275cm }
     \draw_path_lineto:n { .15cm , .275cm }
-    \draw_path_arc:nnn { 450 } { 270 } { .05cm }
+    \draw_path_arc:nnn { .05cm } { 450 } { 270 }
     \draw_path_lineto:n { .1cm , .175cm }
-    \draw_path_arc:nnn { 90 } { 180 } { .1cm }
+    \draw_path_arc:nnn { .1cm } { 90 } { 180 }
     \draw_path_lineto:n { .2cm , .075cm }
-    \draw_path_arc:nnn { 270 } { 315 } { .125cm }
+    \draw_path_arc:nnn { .125cm } { 270 } { 315 }
     \draw_path_lineto:n { .425cm , .25cm }
 }
 
@@ -1300,29 +1309,29 @@
     \draw_path_lineto:n { -.1cm , -.3cm }
     \draw_path_lineto:n { .125cm , -.3cm }
     \draw_path_lineto:n { .425cm , 0cm }
-    \draw_path_arc:nnn { 45 } { 135 } { .1cm }
+    \draw_path_arc:nnn { .1cm } { 45 } { 135 }
     \draw_path_lineto:n { .1cm , -.15cm }
     \draw_path_lineto:n { -.05cm , -.15cm }
-    \draw_path_arc:nnn { 270 } { 90 } { .05cm }
+    \draw_path_arc:nnn { .05cm } { 270 } { 90 }
     \draw_path_lineto:n { 0cm , -.05cm }
-    \draw_path_arc:nnn { 270 } { 360 } { .1cm }
+    \draw_path_arc:nnn { .1cm } { 270 } { 360 }
     \draw_path_lineto:n { -.1cm , .05cm }
-    \draw_path_arc:nnn { 90 } { 135 } { .125cm }
+    \draw_path_arc:nnn { .125cm } { 90 } { 135 }
     \draw_path_close:
     \draw_path_moveto:n { -.25cm , -.225cm }
     \draw_path_lineto:n { -.15cm , -.325cm }
     \draw_path_moveto:n { 0cm , .425cm }
     \draw_path_lineto:n { .25cm , .425cm }
     \draw_path_lineto:n { .25cm , .275cm }
-    \draw_path_arc:nnn { 360 } { 180 } { .125cm }
+    \draw_path_arc:nnn { .125cm } { 360 } { 180 }
     \draw_path_close:
 }
 
 \cs_new_protected:Npn \rpgicons_draw_shape_blinded: {
     \draw_path_moveto:n { 0cm , .225cm }
-    \draw_path_arc:nnn { 90 } { 30 } { .45cm }
-    \draw_path_arc:nnn { 330 } { 210 } { .45cm }
-    \draw_path_arc:nnn { 150 } { 90 } { .45cm }
+    \draw_path_arc:nnn { .45cm } { 90 } { 30 }
+    \draw_path_arc:nnn { .45cm } { 330 } { 210 }
+    \draw_path_arc:nnn { .45cm } { 150 } { 90 }
     \draw_path_circle:nn { 0cm , 0cm } { .15cm }
     \draw_path_moveto:n { -.425cm , -.425cm }
     \draw_path_lineto:n { -.25cm , -.25cm }
@@ -1333,31 +1342,31 @@
 \cs_new_protected:Npn \rpgicons_draw_shape_charmed: {
     \draw_path_circle:nn { 0cm , 0cm } { .425cm }
     \draw_path_moveto:n { -.175cm , -.1cm }
-    \draw_path_arc:nnn { 180 } { 360 } { .175cm }
+    \draw_path_arc:nnn { .175cm } { 180 } { 360 }
     \draw_path_close:
     \draw_path_moveto:n { -.175cm , 0cm }
     \draw_path_lineto:n { ( -.175cm + .0625cm , .15cm ) + ( \draw_point_polar:nn { .0635cm } { -45 } ) }
-    \draw_path_arc:nnn { -45 } { 180 } { .0625cm }
-    \draw_path_arc:nnn { 0 } { 225 } { .0625cm }
+    \draw_path_arc:nnn { .0625cm } { -45 } { 180 }
+    \draw_path_arc:nnn { .0625cm } { 0 } { 225 }
     \draw_path_close:
     \draw_path_moveto:n { .175cm , 0cm }
     \draw_path_lineto:n { ( .175cm + .0625cm , .15cm ) + ( \draw_point_polar:nn { .0635cm } { -45 } ) }
-    \draw_path_arc:nnn { -45 } { 180 } { .0625cm }
-    \draw_path_arc:nnn { 0 } { 225 } { .0625cm }
+    \draw_path_arc:nnn { .0625cm } { -45 } { 180 }
+    \draw_path_arc:nnn { .0625cm } { 0 } { 225 }
     \draw_path_close:
 }
 
 \cs_new_protected:Npn \rpgicons_draw_shape_deafened: {
     \draw_path_moveto:n { -.175cm , -.275cm }
-    \draw_path_arc:nnn { 180 } { 360 } { .15cm }
+    \draw_path_arc:nnn { .15cm } { 180 } { 360 }
     \draw_path_lineto:n { .125cm , -.225cm }
-    \draw_path_arc:nnn { 180 } { 135 } { .25cm }
-    \draw_path_arc:nnn { 315 } { 360 } { .25cm }
-    \draw_path_arc:nnn { 0 } { 180 } { .275cm }
+    \draw_path_arc:nnn { .25cm } { 180 } { 135 }
+    \draw_path_arc:nnn { .25cm } { 315 } { 360 }
+    \draw_path_arc:nnn { .275cm } { 0 } { 180 }
     \draw_path_moveto:n { -.15cm , -.1cm }
-    \draw_path_arc:nnn { -90 } { 90 } { .075cm }
+    \draw_path_arc:nnn { .075cm } { -90 } { 90 }
     \draw_path_lineto:n { -.15cm , .125cm }
-    \draw_path_arc:nnn { 180 } { 45 } { .15cm }
+    \draw_path_arc:nnn { .15cm } { 180 } { 45 }
     \draw_path_moveto:n { -.425cm , -.425cm }
     \draw_path_lineto:n { -.2cm , -.2cm }
     \draw_path_moveto:n { 0cm , 0cm }
@@ -1367,18 +1376,18 @@
 \cs_new_protected:Npn \rpgicons_draw_shape_exhausted: {
     \draw_path_circle:nn { 0cm , 0cm } { .425cm }
     \draw_path_moveto:n { -.175cm , -.225cm }
-    \draw_path_arc:nnn { 180 } { 0 } { .175cm }
+    \draw_path_arc:nnn { .175cm } { 180 } { 0 }
     \draw_path_close:
     \draw_path_moveto:n { .275cm , .15cm }
-    \draw_path_arc:nnn { 180 } { 0 } { -.1cm }
+    \draw_path_arc:nnn { -.1cm } { 180 } { 0 }
     \draw_path_moveto:n { -.075cm , .15cm }
-    \draw_path_arc:nnn { 180 } { 0 } { -.1cm }
+    \draw_path_arc:nnn { -.1cm } { 180 } { 0 }
 }
 
 \cs_new_protected:Npn \rpgicons_draw_shape_frightened: {
     \draw_path_circle:nn { 0cm , 0cm } { .425cm }
     \draw_path_moveto:n { -.175cm , -.225cm }
-    \draw_path_arc:nnn { 180 } { 0 } { .175cm }
+    \draw_path_arc:nnn { .175cm } { 180 } { 0 }
     \draw_path_close:
     \draw_path_circle:nn { -.175cm , .125cm } { .075cm }
     \draw_path_circle:nn { .175cm , .125cm } { .075cm }
@@ -1386,29 +1395,29 @@
 
 \cs_new_protected:Npn \rpgicons_draw_shape_grappled: {
     \draw_path_moveto:n { -.25cm , .3cm }
-    \draw_path_arc:nnn { 90 } { -90 } { .075cm }
+    \draw_path_arc:nnn { .075cm } { 90 } { -90 }
     \draw_path_lineto:n { -.35cm , .15cm }
-    \draw_path_arc:nnn { 270 } { 90 } { .075cm }
+    \draw_path_arc:nnn { .075cm } { 270 } { 90 }
     \draw_path_close:
     \draw_path_moveto:n { -.2cm , .15cm }
-    \draw_path_arc:nnn { 90 } { -90 } { .075cm }
+    \draw_path_arc:nnn { .075cm } { 90 } { -90 }
     \draw_path_lineto:n { -.35cm , 0cm }
-    \draw_path_arc:nnn { 270 } { 90 } { .075cm }
+    \draw_path_arc:nnn { .075cm } { 270 } { 90 }
     \draw_path_close:
     \draw_path_moveto:n { -.2cm , 0cm }
-    \draw_path_arc:nnn { 90 } { -90 } { .075cm }
+    \draw_path_arc:nnn { .075cm } { 90 } { -90 }
     \draw_path_lineto:n { -.35cm , -.15cm }
-    \draw_path_arc:nnn { 270 } { 90 } { .075cm }
+    \draw_path_arc:nnn { .075cm } { 270 } { 90 }
     \draw_path_close:
     \draw_path_moveto:n { -.2cm , -.15cm }
-    \draw_path_arc:nnn { 90 } { -90 } { .075cm }
+    \draw_path_arc:nnn { .075cm } { 90 } { -90 }
     \draw_path_lineto:n { -.3cm , -.3cm }
-    \draw_path_arc:nnn { 270 } { 90 } { .075cm }
+    \draw_path_arc:nnn { .075cm } { 270 } { 90 }
     \draw_path_close:
     \draw_path_moveto:n { .425cm , .05cm }
-    \draw_path_arc:nnn { 0 } { 90 } { .25cm }
+    \draw_path_arc:nnn { .25cm } { 0 } { 90 }
     \draw_path_lineto:n { -.05cm , .3cm }
-    \draw_path_arc:nnn { 180 } { 270 } { .15cm }
+    \draw_path_arc:nnn { .15cm } { 180 } { 270 }
     \draw_path_lineto:n { .175cm , .15cm }
     \draw_path_lineto:n { .175cm , -.425cm }
     \draw_path_moveto:n { .175cm , -.275cm }
@@ -1423,49 +1432,49 @@
 
 \cs_new_protected:Npn \rpgicons_draw_shape_incapacitated: {
     \draw_path_moveto:n { \draw_point_polar:nn { .425cm } { 30 } }
-    \draw_path_arc:nnn { 270 } { 210 } { .425cm }
+    \draw_path_arc:nnn { .425cm } { 270 } { 210 }
     \draw_path_lineto:n { \draw_point_polar:nn { -.425cm } { 90 } }
-    \draw_path_arc:nnn { 30 } { 90 } { .425cm }
+    \draw_path_arc:nnn { .425cm } { 30 } { 90 }
     \draw_path_moveto:n { \draw_point_polar:nn { .425cm } { 90 } }
-    \draw_path_arc:nnn { 330 } { 270 } { .425cm }
+    \draw_path_arc:nnn { .425cm } { 330 } { 270 }
     \draw_path_lineto:n { \draw_point_polar:nn { -.425cm } { 150 } }
-    \draw_path_arc:nnn { 90 } { 150 } { .425cm }
+    \draw_path_arc:nnn { .425cm } { 90 } { 150 }
     \draw_path_moveto:n { \draw_point_polar:nn { .425cm } { 150 } }
-    \draw_path_arc:nnn { 30 } { -30 } { .425cm }
+    \draw_path_arc:nnn { .425cm } { 30 } { -30 }
     \draw_path_lineto:n { \draw_point_polar:nn { -.425cm } { 210 } }
-    \draw_path_arc:nnn { 150 } { 210 } { .425cm }
+    \draw_path_arc:nnn { .425cm } { 150 } { 210 }
     \draw_path_moveto:n { \draw_point_polar:nn { .25cm } { 30 } }
-    \draw_path_arc:nnn { 270 } { 210 } { .25cm }
-    \draw_path_arc:nnn { 330 } { 270 } { .25cm }
-    \draw_path_arc:nnn { 30 } { -30 } { .25cm }
-    \draw_path_arc:nnn { 90 } { 30 } { .25cm }
-    \draw_path_arc:nnn { 150 } { 90 } { .25cm }
-    \draw_path_arc:nnn { 210 } { 150 } { .25cm }
+    \draw_path_arc:nnn { .25cm } { 270 } { 210 }
+    \draw_path_arc:nnn { .25cm } { 330 } { 270 }
+    \draw_path_arc:nnn { .25cm } { 30 } { -30 }
+    \draw_path_arc:nnn { .25cm } { 90 } { 30 }
+    \draw_path_arc:nnn { .25cm } { 150 } { 90 }
+    \draw_path_arc:nnn { .25cm } { 210 } { 150 }
 }
 
 \cs_new_protected:Npn \rpgicons_draw_shape_invisible: {
     \draw_path_moveto:n { \draw_point_polar:nn { .425cm } { -15 } }
-    \draw_path_arc:nnn { -15 } { 15 } { .425cm }
+    \draw_path_arc:nnn { .425cm } { -15 } { 15 }
     \draw_path_moveto:n { \draw_point_polar:nn { .425cm } { 30 } }
-    \draw_path_arc:nnn { 30 } { 60 } { .425cm }
+    \draw_path_arc:nnn { .425cm } { 30 } { 60 }
     \draw_path_moveto:n { \draw_point_polar:nn { .425cm } { 75 } }
-    \draw_path_arc:nnn { 75 } { 105 } { .425cm }
+    \draw_path_arc:nnn { .425cm } { 75 } { 105 }
     \draw_path_moveto:n { \draw_point_polar:nn { .425cm } { 120 } }
-    \draw_path_arc:nnn { 120 } { 150 } { .425cm }
+    \draw_path_arc:nnn { .425cm } { 120 } { 150 }
     \draw_path_moveto:n { \draw_point_polar:nn { .425cm } { 165 } }
-    \draw_path_arc:nnn { 165 } { 195 } { .425cm }
+    \draw_path_arc:nnn { .425cm } { 165 } { 195 }
     \draw_path_moveto:n { \draw_point_polar:nn { .425cm } { 210 } }
-    \draw_path_arc:nnn { 210 } { 240 } { .425cm }
+    \draw_path_arc:nnn { .425cm } { 210 } { 240 }
     \draw_path_moveto:n { \draw_point_polar:nn { .425cm } { 255 } }
-    \draw_path_arc:nnn { 255 } { 285 } { .425cm }
+    \draw_path_arc:nnn { .425cm } { 255 } { 285 }
     \draw_path_moveto:n { \draw_point_polar:nn { .425cm } { 300 } }
-    \draw_path_arc:nnn { 300 } { 330 } { .425cm }
+    \draw_path_arc:nnn { .425cm } { 300 } { 330 }
 }
 
 \cs_new_protected:Npn \rpgicons_draw_shape_paralyzed: {
     \draw_path_circle:nn { 0cm , 0cm } { .425cm }
     \draw_path_moveto:n { -.175cm , -.225cm }
-    \draw_path_arc:nnn { 180 } { 0 } { .175cm }
+    \draw_path_arc:nnn { .175cm } { 180 } { 0 }
     \draw_path_close:
     \draw_path_moveto:n { .25cm , .2cm }
     \draw_path_lineto:n { .1cm , .05cm }
@@ -1526,50 +1535,50 @@
     \draw_path_circle:nn { .2cm , -.125cm } { .125cm }
     \draw_path_moveto:n { -.425cm , 0cm }
     \draw_path_lineto:n { -.15cm , 0cm }
-    \draw_path_arc:nnn { 90 } { -90 } { .125cm }
+    \draw_path_arc:nnn { .125cm } { 90 } { -90 }
     \draw_path_lineto:n { -.425cm , -.25cm }
     \draw_path_moveto:n { .225cm , .15cm }
-    \draw_path_arc:nnn { 270 } { 360 } { .1cm }
-    \draw_path_arc:nnn { 180 } { 270 } { .1cm }
-    \draw_path_arc:nnn { 90 } { 180 } { .1cm }
-    \draw_path_arc:nnn { 0 } { 90 } { .1cm }
+    \draw_path_arc:nnn { .1cm } { 270 } { 360 }
+    \draw_path_arc:nnn { .1cm } { 180 } { 270 }
+    \draw_path_arc:nnn { .1cm } { 90 } { 180 }
+    \draw_path_arc:nnn { .1cm } { 0 } { 90 }
     \draw_path_moveto:n { 0cm , .25cm }
-    \draw_path_arc:nnn { 270 } { 360 } { .1cm }
-    \draw_path_arc:nnn { 180 } { 270 } { .1cm }
-    \draw_path_arc:nnn { 90 } { 180 } { .1cm }
-    \draw_path_arc:nnn { 0 } { 90 } { .1cm }
+    \draw_path_arc:nnn { .1cm } { 270 } { 360 }
+    \draw_path_arc:nnn { .1cm } { 180 } { 270 }
+    \draw_path_arc:nnn { .1cm } { 90 } { 180 }
+    \draw_path_arc:nnn { .1cm } { 0 } { 90 }
 }
 
 \cs_new_protected:Npn \rpgicons_draw_shape_restrained: {
     \draw_path_moveto:n { -.075cm , -.225cm }
     \draw_path_lineto:n { -.075cm , .225cm }
-    \draw_path_arc:nnn { 90 } { 180 } { .125cm }
+    \draw_path_arc:nnn { .125cm } { 90 } { 180 }
     \draw_path_lineto:n { -.2cm , 0cm }
-    \draw_path_arc:nnn { 270 } { 180 } { .1cm }
+    \draw_path_arc:nnn { .1cm } { 270 } { 180 }
     \draw_path_lineto:n { -.3cm , .3cm }
-    \draw_path_arc:nnn { 0 } { 90 } { .125cm }
+    \draw_path_arc:nnn { .125cm } { 0 } { 90 }
     \draw_path_lineto:n { -.425cm , -.075cm }
-    \draw_path_arc:nnn { 180 } { 235 } { .1cm }
+    \draw_path_arc:nnn { .1cm } { 180 } { 235 }
     \draw_path_lineto:n { -.3cm , -.225cm }
     \draw_path_moveto:n { .075cm , -.225cm }
     \draw_path_lineto:n { .075cm , .225cm }
-    \draw_path_arc:nnn { 90 } { 0 } { .125cm }
+    \draw_path_arc:nnn { .125cm } { 90 } { 0 }
     \draw_path_lineto:n { .2cm , 0cm }
-    \draw_path_arc:nnn { -90 } { 0 } { .1cm }
+    \draw_path_arc:nnn { .1cm } { -90 } { 0 }
     \draw_path_lineto:n { .3cm , .3cm }
-    \draw_path_arc:nnn { 180 } { 90 } { .125cm }
+    \draw_path_arc:nnn { .125cm } { 180 } { 90 }
     \draw_path_lineto:n { .425cm , -.075cm }
-    \draw_path_arc:nnn { 360 } { 330 } { .1cm }
+    \draw_path_arc:nnn { .1cm } { 360 } { 330 }
     \draw_path_lineto:n { .3cm , -.225cm }
     \draw_path_moveto:n { .35cm , -.225cm }
-    \draw_path_arc:nnn { 90 } { -90 } { .05cm }
+    \draw_path_arc:nnn { .05cm } { 90 } { -90 }
     \draw_path_lineto:n { -.35cm , -.325cm }
-    \draw_path_arc:nnn { 270 } { 90 } { .05cm }
+    \draw_path_arc:nnn { .05cm } { 270 } { 90 }
     \draw_path_close:
     \draw_path_moveto:n { .35cm , -.325cm }
-    \draw_path_arc:nnn { 90 } { -90 } { .05cm }
+    \draw_path_arc:nnn { .05cm } { 90 } { -90 }
     \draw_path_lineto:n { -.35cm , -.425cm }
-    \draw_path_arc:nnn { 270 } { 90 } { .05cm }
+    \draw_path_arc:nnn { .05cm } { 270 } { 90 }
     \draw_path_close:
 }
 
@@ -1581,16 +1590,16 @@
     \draw_path_close:
     \draw_path_moveto:n { .075cm , -.325cm }
     \draw_path_lineto:n { ( 0cm , -.1cm ) + ( \draw_point_polar:nn { .075cm } { -60 } ) }
-    \draw_path_arc:nnn { -60 } { 240 } { .075cm }
+    \draw_path_arc:nnn { .075cm } { -60 } { 240 }
     \draw_path_lineto:n { -.075cm , -.325cm }
     \draw_path_close:
     \draw_path_moveto:n { .225cm , .1cm }
     \draw_path_lineto:n { .225cm , .2cm }
-    \draw_path_arc:nnn { 0 } { 180 } { .225cm }
+    \draw_path_arc:nnn { .225cm } { 0 } { 180 }
     \draw_path_lineto:n { -.225cm , .1cm }
     \draw_path_moveto:n { .125cm , .1cm }
     \draw_path_lineto:n { .125cm , .2cm }
-    \draw_path_arc:nnn { 0 } { 180 } { .125cm }
+    \draw_path_arc:nnn { .125cm } { 0 } { 180 }
     \draw_path_lineto:n { -.125cm , .1cm }
 }
 
@@ -1627,39 +1636,39 @@
 
 \cs_new_protected:Npn \rpgicons_draw_shape_unconscious: {
     \draw_path_moveto:n { 0cm , .15cm }
-    \draw_path_arc:nnnn { 90 } { -30 } { .425cm } { .15cm }
+    \draw_path_arc:nnnn { .425cm } { .15cm } { 90 } { -30 }
     \draw_path_moveto:n { 0cm , -.15cm }
-    \draw_path_arc:nnnn { 270 } { 150 } { .425cm } { .15cm }
+    \draw_path_arc:nnnn { .425cm } { .15cm } { 270 } { 150 }
     \draw_path_moveto:n { -.35cm , .15cm }
-    \draw_path_arc:nnn { 270 } { 360 } { .125cm }
-    \draw_path_arc:nnn { 180 } { 270 } { .125cm }
-    \draw_path_arc:nnn { 90 } { 180 } { .125cm }
-    \draw_path_arc:nnn { 0 } { 90 } { .125cm }
+    \draw_path_arc:nnn { .125cm } { 270 } { 360 }
+    \draw_path_arc:nnn { .125cm } { 180 } { 270 }
+    \draw_path_arc:nnn { .125cm } { 90 } { 180 }
+    \draw_path_arc:nnn { .125cm } { 0 } { 90 }
     \draw_path_moveto:n { .1cm , -.15cm }
-    \draw_path_arc:nnn { 270 } { 360 } { .125cm }
-    \draw_path_arc:nnn { 180 } { 270 } { .125cm }
-    \draw_path_arc:nnn { 90 } { 180 } { .125cm }
-    \draw_path_arc:nnn { 0 } { 90 } { .125cm }
+    \draw_path_arc:nnn { .125cm } { 270 } { 360 }
+    \draw_path_arc:nnn { .125cm } { 180 } { 270 }
+    \draw_path_arc:nnn { .125cm } { 90 } { 180 }
+    \draw_path_arc:nnn { .125cm } { 0 } { 90 }
 }
 
 \cs_new_protected:Npn \rpgicons_draw_shape_hearing: {
     \draw_path_moveto:n { -.175cm , -.275cm }
-    \draw_path_arc:nnn { 180 } { 360 } { .15cm }
+    \draw_path_arc:nnn { .15cm } { 180 } { 360 }
     \draw_path_lineto:n { .125cm , -.225cm }
-    \draw_path_arc:nnn { 180 } { 135 } { .25cm }
-    \draw_path_arc:nnn { 315 } { 360 } { .25cm }
-    \draw_path_arc:nnn { 0 } { 180 } { .275cm }
+    \draw_path_arc:nnn { .25cm } { 180 } { 135 }
+    \draw_path_arc:nnn { .25cm } { 315 } { 360 }
+    \draw_path_arc:nnn { .275cm } { 0 } { 180 }
     \draw_path_moveto:n { -.15cm , -.1cm }
-    \draw_path_arc:nnn { -90 } { 90 } { .075cm }
+    \draw_path_arc:nnn { .075cm } { -90 } { 90 }
     \draw_path_lineto:n { -.15cm , .125cm }
-    \draw_path_arc:nnn { 180 } { 45 } { .15cm }
+    \draw_path_arc:nnn { .15cm } { 180 } { 45 }
 }
 
 \cs_new_protected:Npn \rpgicons_draw_shape_seeing: {
     \draw_path_moveto:n { 0cm , .225cm }
-    \draw_path_arc:nnn { 90 } { 30 } { .45cm }
-    \draw_path_arc:nnn { 330 } { 210 } { .45cm }
-    \draw_path_arc:nnn { 150 } { 90 } { .45cm }
+    \draw_path_arc:nnn { .45cm } { 90 } { 30 }
+    \draw_path_arc:nnn { .45cm } { 330 } { 210 }
+    \draw_path_arc:nnn { .45cm } { 150 } { 90 }
     \draw_path_circle:nn { 0cm , 0cm } { .15cm }
 }
 
@@ -1689,7 +1698,7 @@
 
 \cs_new_protected:Npn \rpgicons_draw_shape_artificer_i: {
     \draw_path_moveto:n { ( -.075cm , .15cm ) + ( \draw_point_polar:nn { .275cm } { 350 } ) }
-    \draw_path_arc:nnn { 350 } { acosd( .275cm / .5cm ) } { .275cm }
+    \draw_path_arc:nnn { .275cm } { 350 } { acosd( .275cm / .5cm ) }
     \draw_path_lineto:n { .425cm , .15cm }
     \draw_path_lineto:n { .375cm , .05cm }
     \draw_path_close:
@@ -1707,38 +1716,38 @@
 
 \cs_new_protected:Npn \rpgicons_draw_shape_barbarian: {
     \draw_path_moveto:n { .05cm , -.375cm }
-    \draw_path_arc:nnn { 360 } { 180 } { .05cm }
+    \draw_path_arc:nnn { .05cm } { 360 } { 180 }
     \draw_path_lineto:n { -.05cm , .375cm }
-    \draw_path_arc:nnn { 180 } { 0 } { .05cm }
+    \draw_path_arc:nnn { .05cm } { 180 } { 0 }
     \draw_path_close:
     \draw_path_moveto:n { -.05cm , .25cm }
     \draw_path_lineto:n { .05cm , .15cm }
     \draw_path_moveto:n { -.05cm , .1cm }
     \draw_path_lineto:n { .05cm , 0cm }
     \draw_path_moveto:n { .05cm , .2cm }
-    \draw_path_arc:nnn { 270 } { 360 } { .15cm }
-    \draw_path_arc:nnn { 90 } { -90 } { .225cm }
-    \draw_path_arc:nnn { 0 } { 90 } { .15cm }
+    \draw_path_arc:nnn { .15cm } { 270 } { 360 }
+    \draw_path_arc:nnn { .225cm } { 90 } { -90 }
+    \draw_path_arc:nnn { .15cm } { 0 } { 90 }
     \draw_path_moveto:n { -.05cm , .2cm }
-    \draw_path_arc:nnn { 270 } { 180 } { .15cm }
-    \draw_path_arc:nnn { 90 } { 270 } { .225cm }
-    \draw_path_arc:nnn { 180 } { 90 } { .15cm }
+    \draw_path_arc:nnn { .15cm } { 270 } { 180 }
+    \draw_path_arc:nnn { .225cm } { 90 } { 270 }
+    \draw_path_arc:nnn { .15cm } { 180 } { 90 }
 }
 
 \cs_new_protected:Npn \rpgicons_draw_shape_bard: {
     \draw_path_circle:nn { -.35cm , .35cm } { .075cm }
     \draw_path_moveto:n { -.275cm , .35cm }
-    \draw_path_arc:nnnn { 0 } { -45 } { sind(45) * .3cm } { sind(45) * .45cm }
-    \draw_path_arc:nnnn { 135 } { 180 } { sind(45) * .3cm } { sind(45) * .45cm }
+    \draw_path_arc:nnnn { sind(45) * .3cm } { sind(45) * .45cm } { 0 } { -45 }
+    \draw_path_arc:nnnn { sind(45) * .3cm } { sind(45) * .45cm } { 135 } { 180 }
     \draw_path_lineto:n { -.4cm , -.2cm }
-    \draw_path_arc:nnnn { 180 } { 360 } { .4cm } { .225cm }
+    \draw_path_arc:nnnn { .4cm } { .225cm } { 180 } { 360 }
     \draw_path_lineto:n { .4cm , -.1cm }
-    \draw_path_arc:nnnn { 0 } { 45 } { sind(45) * .3cm } { sind(45) * .45cm }
-    \draw_path_arc:nnnn { 225 } { 180 } { sind(45) * .3cm } { sind(45) * .45cm }
+    \draw_path_arc:nnnn { sind(45) * .3cm } { sind(45) * .45cm } { 0 } { 45 }
+    \draw_path_arc:nnnn { sind(45) * .3cm } { sind(45) * .45cm } { 225 } { 180 }
     \draw_path_circle:nn { .35cm , .35cm } { .075cm }
     \draw_path_moveto:n { -.275cm , .35cm }
     \draw_path_lineto:n { -.275cm , -.15cm }
-    \draw_path_arc:nnnn { 180 } { 360 } { .275cm } { .1cm }
+    \draw_path_arc:nnnn { .275cm } { .1cm } { 180 } { 360 }
     \draw_path_lineto:n { .275cm , .35cm }
     \draw_path_moveto:n { -.275cm , .2cm }
     \draw_path_lineto:n { .275cm , .2cm }
@@ -1752,10 +1761,10 @@
 
 \cs_new_protected:Npn \rpgicons_draw_shape_bard_i: {
     \draw_path_moveto:n { -.425cm , -.425cm }
-    \draw_path_arc:nnn { 180 } { 90 } { .85cm }
-    \draw_path_arc:nnn { 360 } { 270 } { .45cm }
-    \draw_path_arc:nnn { 240 } { 270 } { .35cm }
-    \draw_path_arc:nnn { 310 } { 280 } { .85cm }
+    \draw_path_arc:nnn { .85cm } { 180 } { 90 }
+    \draw_path_arc:nnn { .45cm } { 360 } { 270 }
+    \draw_path_arc:nnn { .35cm } { 240 } { 270 }
+    \draw_path_arc:nnn { .85cm } { 310 } { 280 }
 }
 
 % === backward compatibility
@@ -1768,7 +1777,7 @@
     \draw_path_lineto:n { -.35cm , -.15cm }
     \draw_path_lineto:n { -.35cm , 0cm }
     \draw_path_lineto:n { -.1cm , 0cm }
-    \draw_path_arc:nnnn { 240 } { -60 } { .2cm } { .225cm }
+    \draw_path_arc:nnnn { .2cm } { .225cm } { 240 } { -60 }
     \draw_path_lineto:n { .35cm , 0cm }
     \draw_path_lineto:n { .35cm , -.15cm }
     \draw_path_lineto:n { .05cm , -.1cm }
@@ -1784,22 +1793,22 @@
         \draw_path_lineto:n { ##1 * .325cm + .05cm , .175cm }
         \draw_path_lineto:n { ##1 * .325cm + .05cm , -.05cm }
         \draw_path_moveto:n { ##1 * .325cm - .05cm , .3cm }
-        \draw_path_arc:nnn { 180 } { 405 } { .05cm }
-        \draw_path_arc:nnn { 215 } { 180 } { .15cm }
+        \draw_path_arc:nnn { .05cm } { 180 } { 405 }
+        \draw_path_arc:nnn { .15cm } { 215 } { 180 }
         \draw_path_moveto:n { ##1 * .325cm - .1cm , -.05cm }
         \draw_path_lineto:n { ##1 * .325cm + .1cm , -.05cm }
-        \draw_path_arc:nnn { 360 } { 180 } { .1cm }
+        \draw_path_arc:nnn { .1cm } { 360 } { 180 }
     }
     \draw_path_moveto:n { -.325cm , -.15cm }
-    \draw_path_arc:nnnn { 180 } { 360 } { .15cm } { .1cm }
+    \draw_path_arc:nnnn { .15cm } { .1cm } { 180 } { 360 }
     \draw_path_moveto:n { .325cm , -.15cm }
-    \draw_path_arc:nnnn { 360 } { 180 } { .15cm } { .1cm }
+    \draw_path_arc:nnnn { .15cm } { .1cm } { 360 } { 180 }
     \draw_path_moveto:n { 0cm , -.15cm }
-    \draw_path_arc:nnn { 0 } { -90 } { .225cm }
+    \draw_path_arc:nnn { .225cm } { 0 } { -90 }
     \draw_path_lineto:n { -.225cm , -.425cm }
     \draw_path_lineto:n { .225cm , -.425cm }
     \draw_path_lineto:n { .225cm , -.375cm }
-    \draw_path_arc:nnn { 270 } { 180 } { .225cm }
+    \draw_path_arc:nnn { .225cm } { 270 } { 180 }
     \draw_path_close:
 }
 
@@ -1813,25 +1822,25 @@
     \draw_path_lineto:n { 0cm , .075cm }
     \draw_path_lineto:n { 0cm , -.325cm }
     \draw_path_moveto:n { -.15cm , .25cm }
-    \draw_path_arc:nnn { 180 } { 405 } { .075cm }
-    \draw_path_arc:nnn { 215 } { 180 } { .225cm }
+    \draw_path_arc:nnn { .075cm } { 180 } { 405 }
+    \draw_path_arc:nnn { .225cm } { 215 } { 180 }
     \draw_path_moveto:n { .225cm , -.325cm }
     \draw_path_lineto:n { -.375cm , -.325cm }
-    \draw_path_arc:nnn { 180 } { 270 } { .1cm }
+    \draw_path_arc:nnn { .1cm } { 180 } { 270 }
     \draw_path_lineto:n { .125cm , -.425cm }
-    \draw_path_arc:nnn { 270 } { 360 } { .1cm }
-    \draw_path_arc:nnn { 180 } { -90 } { .1cm }
+    \draw_path_arc:nnn { .1cm } { 270 } { 360 }
+    \draw_path_arc:nnn { .1cm } { 180 } { -90 }
 }
 
 \cs_new_protected:Npn \rpgicons_draw_shape_druid: {
     \draw_path_moveto:n { ( .1cm , -.1cm ) + ( \draw_point_polar:nn { .05cm } { 45 } ) }
     \draw_path_lineto:n { ( .35cm , -.35cm ) + ( \draw_point_polar:nn { .05cm } { 45 } ) }
-    \draw_path_arc:nnn { 45 } { -135 } { .05cm }
+    \draw_path_arc:nnn { .05cm } { 45 } { -135 }
     \draw_path_lineto:n { ( .1cm , -.1cm ) + ( \draw_point_polar:nn { .05cm } { -135 } ) }
     \draw_path_moveto:n { ( .125cm , -.075cm ) + ( \draw_point_polar:nn { .05cm } { -135 } ) }
-    \draw_path_arc:nnn { 315 } { 80 } { .3cm }
+    \draw_path_arc:nnn { .3cm } { 315 } { 80 }
     \draw_path_lineto:n { ( -.075cm , .125cm ) + ( \draw_point_polar:nn { .05cm } { 45 } ) + ( \draw_point_polar:nn { .2cm } { 90 } ) }
-    \draw_path_arc:nnn { 90 } { 315 } { .2cm }
+    \draw_path_arc:nnn { .2cm } { 90 } { 315 }
     \draw_path_lineto:n { ( .125cm , -.075cm ) + ( \draw_point_polar:nn { .05cm } { 45 } ) }
     \draw_path_close:
 }
@@ -1839,16 +1848,16 @@
 \cs_new_protected:Npn \rpgicons_draw_shape_druid_i: {
     \draw_path_moveto:n { -.375cm , 0cm }
     \draw_path_lineto:n { -.375cm , -.1cm }
-    \draw_path_arc:nnn { 180 } { 270 } { .225cm }
+    \draw_path_arc:nnn { .225cm } { 180 } { 270 }
     \draw_path_lineto:n { -.175cm , -.425cm }
     \draw_path_lineto:n { .175cm , -.425cm }
     \draw_path_lineto:n { .15cm , -.325cm }
-    \draw_path_arc:nnn { 270 } { 360 } { .225cm }
+    \draw_path_arc:nnn { .225cm } { 270 } { 360 }
     \draw_path_lineto:n { .375cm , 0cm }
     \draw_path_moveto:n { .375cm , .1cm }
-    \draw_path_arc:nnn { 90 } { -90 } { .05cm }
+    \draw_path_arc:nnn { .05cm } { 90 } { -90 }
     \draw_path_lineto:n { -.375cm , 0cm }
-    \draw_path_arc:nnn { 270 } { 90 } { .05cm }
+    \draw_path_arc:nnn { .05cm } { 270 } { 90 }
     \draw_path_close:
     \draw_path_moveto:n { .225cm , .1cm }
     \draw_path_lineto:n { .425cm , .325cm }
@@ -1862,10 +1871,10 @@
 
 \cs_new_protected:Npn \rpgicons_draw_shape_druid_ii: {
     \draw_path_moveto:n { -.425cm , -.425cm }
-    \draw_path_arc:nnnn { 180 } { 120 } { 1cm } { .75cm }
+    \draw_path_arc:nnnn { 1cm } { .75cm } { 180 } { 120 }
     \draw_path_moveto:n { .425cm , .425cm }
     \draw_path_lineto:n { -.075cm , .425cm }
-    \draw_path_arc:nnn { 90 } { 330 } { .5cm * tand(30) }
+    \draw_path_arc:nnn { .5cm * tand(30) } { 90 } { 330 }
     \draw_path_close:
 }
 
@@ -1876,11 +1885,11 @@
     \draw_path_lineto:n { -.05cm , .2cm }
     \draw_path_close:
     \draw_path_moveto:n { .05cm , .375cm }
-    \draw_path_arc:nnn { 90 } { 0 } { .275cm }
+    \draw_path_arc:nnn { .275cm } { 90 } { 0 }
     \draw_path_lineto:n { .325cm , -.25cm }
     \draw_path_lineto:n { .15cm , -.425cm }
     \draw_path_lineto:n { .15cm , -.15cm }
-    \draw_path_arc:nnn { 180 } { 145 } { .35cm }
+    \draw_path_arc:nnn { .35cm } { 180 } { 145 }
     \draw_path_lineto:n { .2cm , .1cm }
     \draw_path_lineto:n { .05cm , .05cm }
     \draw_path_lineto:n { .025cm , -.2cm }
@@ -1888,30 +1897,30 @@
     \draw_path_lineto:n { -.05cm , .05cm }
     \draw_path_lineto:n { -.2cm , .1cm }
     \draw_path_lineto:n { ( -.5cm , -.15cm ) + ( \draw_point_polar:nn { .35cm } { 35 } ) }
-    \draw_path_arc:nnn { 35 } { 0 } { .35cm }
+    \draw_path_arc:nnn { .35cm } { 35 } { 0 }
     \draw_path_lineto:n { -.15cm , -.425cm }
     \draw_path_lineto:n { -.325cm , -.25cm }
     \draw_path_lineto:n { -.325cm , .1cm }
-    \draw_path_arc:nnn { 180 } { 90 } { .275cm }
+    \draw_path_arc:nnn { .275cm } { 180 } { 90 }
 }
 
 \cs_new_protected:Npn \rpgicons_draw_shape_gunslinger: {
     \draw_path_moveto:n { -.125cm , -.125cm }
-    \draw_path_arc:nnn { 90 } { 180 } { .075cm }
+    \draw_path_arc:nnn { .075cm } { 90 } { 180 }
     \draw_path_lineto:n { -.2cm , -.325cm }
     \draw_path_lineto:n { -.425cm , -.325cm }
     \draw_path_lineto:n { -.425cm , -.225cm }
-    \draw_path_arc:nnn { 180 } { 90 } { .3cm }
+    \draw_path_arc:nnn { .3cm } { 180 } { 90 }
     \draw_path_lineto:n { -.125cm , .075cm }
     \draw_path_moveto:n { -.125cm , .225cm }
     \draw_path_lineto:n { .125cm , .225cm }
     \draw_path_lineto:n { .125cm , -.025cm }
-    \draw_path_arc:nnn { 360 } { 270 } { .125cm }
+    \draw_path_arc:nnn { .125cm } { 360 } { 270 }
     \draw_path_lineto:n { -.125cm , -.15cm }
     \draw_path_close:
     \draw_path_moveto:n { -.125cm , .175cm }
     \draw_path_lineto:n { -.175cm , .175cm }
-    \draw_path_arc:nnn { 270 } { 180 } { .075cm }
+    \draw_path_arc:nnn { .075cm } { 270 } { 180 }
     \draw_path_moveto:n { .125cm , .175cm }
     \draw_path_lineto:n { .425cm , .175cm }
     \draw_path_lineto:n { .425cm , .05cm }
@@ -1924,26 +1933,26 @@
     \draw_path_moveto:n { -.425cm , -.15cm }
     \draw_path_lineto:n { -.425cm , .125cm }
     \draw_path_lineto:n { -.125cm , .425cm }
-    \draw_path_arc:nnn { 45 } { -45 } { .1cm }
+    \draw_path_arc:nnn { .1cm } { 45 } { -45 }
     \draw_path_lineto:n { -.275cm , .1cm }
     \draw_path_lineto:n { -.275cm , -.05cm }
-    \draw_path_arc:nnn { 180 } { 360 } { .05cm }
+    \draw_path_arc:nnn { .05cm } { 180 } { 360 }
     \draw_path_lineto:n { -.175cm , 0cm }
-    \draw_path_arc:nnn { 180 } { 90 } { .1cm }
+    \draw_path_arc:nnn { .1cm } { 180 } { 90 }
     \draw_path_lineto:n { -.075cm , -.1cm }
-    \draw_path_arc:nnn { 0 } { -45 } { .125cm }
+    \draw_path_arc:nnn { .125cm } { 0 } { -45 }
     \draw_path_lineto:n { -.35cm , -.425cm }
     \draw_path_moveto:n { .425cm , -.15cm }
     \draw_path_lineto:n { .425cm , .125cm }
     \draw_path_lineto:n { .125cm , .425cm }
-    \draw_path_arc:nnn { 135 } { 215 } { .1cm }
+    \draw_path_arc:nnn { .1cm } { 135 } { 215 }
     \draw_path_lineto:n { .275cm , .1cm }
     \draw_path_lineto:n { .275cm , -.05cm }
-    \draw_path_arc:nnn { 360 } { 180 } { .05cm }
+    \draw_path_arc:nnn { .05cm } { 360 } { 180 }
     \draw_path_lineto:n { .175cm , 0cm }
-    \draw_path_arc:nnn { 0 } { 90 } { .1cm }
+    \draw_path_arc:nnn { .1cm } { 0 } { 90 }
     \draw_path_lineto:n { .075cm , -.1cm }
-    \draw_path_arc:nnn { 180 } { 215 } { .125cm }
+    \draw_path_arc:nnn { .125cm } { 180 } { 215 }
     \draw_path_lineto:n { .35cm , -.425cm }
 }
 
@@ -2007,17 +2016,17 @@
     \draw_path_moveto:n { \draw_point_intersect_circles:nnnnn
         { 0cm , .2cm } { .075cm } { 0cm , .7cm } { .5cm } { 1 }
     }
-    \draw_path_arc:nnn { 280 } { 325 } { .5cm }
+    \draw_path_arc:nnn { .5cm } { 280 } { 325 }
     \draw_path_moveto:n { \draw_point_intersect_circles:nnnnn
         { 0cm , .2cm } { .075cm } { 0cm , .7cm } { .5cm } { 2 }
     }
-    \draw_path_arc:nnn { 260 } { 215 } { .5cm }
+    \draw_path_arc:nnn { .5cm } { 260 } { 215 }
 }
 
 \cs_new_protected:Npn \rpgicons_draw_shape_paladin_i: {
     \draw_path_moveto:n { -.25cm , .425cm }
     \draw_path_lineto:n { -.25cm , .2cm }
-    \draw_path_arc:nnn { 180 } { 360 } { .25cm }
+    \draw_path_arc:nnn { .25cm } { 180 } { 360 }
     \draw_path_lineto:n { .25cm , .425cm }
     \draw_path_close:
     \draw_path_moveto:n { -.25cm , .325cm }
@@ -2027,9 +2036,9 @@
     \draw_path_moveto:n { .05cm , -.05cm }
     \draw_path_lineto:n { .05cm , -.325cm }
     \draw_path_moveto:n { -.2cm , -.425cm }
-    \draw_path_arc:nnn { 180 } { 90 } { .1cm }
+    \draw_path_arc:nnn { .1cm } { 180 } { 90 }
     \draw_path_lineto:n { .125cm , -.325cm }
-    \draw_path_arc:nnn { 90 } { 0 } { .1cm }
+    \draw_path_arc:nnn { .1cm } { 90 } { 0 }
     \draw_path_close:
 }
 
@@ -2039,28 +2048,28 @@
 
 \cs_new_protected:Npn \rpgicons_draw_shape_psion: {
     \draw_path_moveto:n { -.425cm , -.425cm }
-    \draw_path_arc:nnn { 180 } { 90 } { .15cm }
+    \draw_path_arc:nnn { .15cm } { 180 } { 90 }
     \draw_path_lineto:n { .275cm , -.275cm }
-    \draw_path_arc:nnn { 90 } { 0 } { .15cm }
+    \draw_path_arc:nnn { .15cm } { 90 } { 0 }
     \draw_path_close:
     \draw_path_moveto:n { ( 0cm , .025cm ) + ( \draw_point_polar:nn { .4cm } { 270 - acosd( .3cm / .4cm ) } ) }
-    \draw_path_arc:nnn { 270 - acosd( .3cm / .4cm ) } { acosd( .3cm / .4cm ) - 90 } { .4cm }
+    \draw_path_arc:nnn { .4cm } { 270 - acosd( .3cm / .4cm ) } { acosd( .3cm / .4cm ) - 90 }
     \draw_path_moveto:n { ( 0cm , .025cm ) + ( \draw_point_polar:nn { .25cm } { 95 } ) }
-    \draw_path_arc:nnn { 95 } { 175 } { .25cm }
+    \draw_path_arc:nnn { .25cm } { 95 } { 175 }
 }
 
 \cs_new_protected:Npn \rpgicons_draw_shape_psion_i: {
     \draw_path_moveto:n { 0cm , .025cm }
-    \draw_path_arc:nnn { 90 } { 30 } { .45cm }
-    \draw_path_arc:nnn { 330 } { 210 } { .45cm }
-    \draw_path_arc:nnn { 150 } { 90 } { .45cm }
+    \draw_path_arc:nnn { .45cm } { 90 } { 30 }
+    \draw_path_arc:nnn { .45cm } { 330 } { 210 }
+    \draw_path_arc:nnn { .45cm } { 150 } { 90 }
     \draw_path_moveto:n { -.15cm , -.175cm }
-    \draw_path_arc:nnn { 180 } { 270 } { .15cm }
-    \draw_path_arc:nnn { 270 } { 360 } { .125cm }
-    \draw_path_arc:nnn { 0 } { 90 } { .1cm }
-    \draw_path_arc:nnn { 90 } { 180 } { .075cm }
-    \draw_path_arc:nnn { 180 } { 270 } { .05cm }
-    \draw_path_arc:nnn { 270 } { 360 } { .025cm }
+    \draw_path_arc:nnn { .15cm } { 180 } { 270 }
+    \draw_path_arc:nnn { .125cm } { 270 } { 360 }
+    \draw_path_arc:nnn { .1cm } { 0 } { 90 }
+    \draw_path_arc:nnn { .075cm } { 90 } { 180 }
+    \draw_path_arc:nnn { .05cm } { 180 } { 270 }
+    \draw_path_arc:nnn { .025cm } { 270 } { 360 }
     \draw_path_moveto:n { 0cm , .175cm }
     \draw_path_lineto:n { 0cm , .425cm }
     \draw_path_moveto:n { .275cm , .125cm }
@@ -2111,8 +2120,8 @@
     \draw_path_moveto:n { .2cm , -.3cm }
     \draw_path_lineto:n { .3cm , -.2cm }
     \draw_path_moveto:n { .125cm , -.125cm }
-    \draw_path_arc:nnn { 45 } { 90 } { .325cm }
-    \draw_path_arc:nnn { 270 } { 150 } { .2cm }
+    \draw_path_arc:nnn { .325cm } { 45 } { 90 }
+    \draw_path_arc:nnn { .2cm } { 270 } { 150 }
     \draw_path_moveto:n { -.1cm , .15cm }
     \draw_path_lineto:n { 0cm , .25cm }
     \draw_path_lineto:n { .1cm , .15cm }
@@ -2127,16 +2136,16 @@
 
 \cs_new_protected:Npn \rpgicons_draw_shape_rogue: {
     \draw_path_moveto:n { ( .15cm , .15cm ) + ( \draw_point_polar:nn { .05cm } { -45 } ) }
-    \draw_path_arc:nnn { 135 } { 405 } { .125cm }
-    \draw_path_arc:nnn { -45 } { 135 } { .175cm }
-    \draw_path_arc:nnn { 45 } { 315 } { .125cm }
+    \draw_path_arc:nnn { .125cm } { 135 } { 405 }
+    \draw_path_arc:nnn { .175cm } { -45 } { 135 }
+    \draw_path_arc:nnn { .125cm } { 45 } { 315 }
     \draw_path_moveto:n { ( -.275cm , -.275cm ) + ( \draw_point_polar:nn { .05cm } { 315 } ) }
     \draw_path_lineto:n { ( -.175cm , -.375cm ) + ( \draw_point_polar:nn { .05cm } { 315 } ) }
     \draw_path_lineto:n { ( 0cm , -.2cm ) + ( \draw_point_polar:nn { .05cm } { 315 } ) }
     \draw_path_lineto:n { ( -.1cm , -.1cm ) + ( \draw_point_polar:nn { .05cm } { 315 } ) }
     \draw_path_moveto:n { ( .2cm , .2cm ) + ( \draw_point_polar:nn { .05cm } { 135 } ) }
     \draw_path_lineto:n { ( -.325cm , -.325cm ) + ( \draw_point_polar:nn { .05cm } { 135 } ) }
-    \draw_path_arc:nnn { 135 } { 315 } { .05cm }
+    \draw_path_arc:nnn { .05cm } { 135 } { 315 }
     \draw_path_lineto:n { ( .2cm , .2cm ) + ( \draw_point_polar:nn { .05cm } { 315 } ) }
 }
 
@@ -2169,39 +2178,39 @@
     \draw_path_moveto:n { -.25cm , -.425cm }
     \draw_path_lineto:n { .025cm , -.425cm }
     \draw_path_lineto:n { .325cm , -.125cm }
-    \draw_path_arc:nnn { 45 } { 135 } { .1cm }
+    \draw_path_arc:nnn { .1cm } { 45 } { 135 }
     \draw_path_lineto:n { 0cm , -.275cm }
     \draw_path_lineto:n { -.15cm , -.275cm }
-    \draw_path_arc:nnn { 270 } { 90 } { .05cm }
+    \draw_path_arc:nnn { .05cm } { 270 } { 90 }
     \draw_path_lineto:n { -.1cm , -.175cm }
-    \draw_path_arc:nnn { 270 } { 360 } { .1cm }
+    \draw_path_arc:nnn { .1cm } { 270 } { 360 }
     \draw_path_lineto:n { -.2cm , -.075cm }
-    \draw_path_arc:nnn { 90 } { 135 } { .125cm }
+    \draw_path_arc:nnn { .125cm } { 90 } { 135 }
     \draw_path_lineto:n { -.425cm , -.25cm }
     \draw_path_moveto:n { -.125cm , .175cm }
-    \draw_path_arc:nnn { 180 } { 360 } { .125cm }
-    \draw_path_arc:nnn { 0 } { 45 } { .125cm }
-    \draw_path_arc:nnn { 225 } { 180 } { .225cm }
+    \draw_path_arc:nnn { .125cm } { 180 } { 360 }
+    \draw_path_arc:nnn { .125cm } { 0 } { 45 }
+    \draw_path_arc:nnn { .225cm } { 225 } { 180 }
 }
 
 \cs_new_protected:Npn \rpgicons_draw_shape_sorcerer_i: {
     \draw_path_moveto:n { -.325cm , .4cm }
     \draw_path_lineto:n { -.375cm , .4cm }
-    \draw_path_arc:nnn { 90 } { 270 } { .05cm }
+    \draw_path_arc:nnn { .05cm } { 90 } { 270 }
     \draw_path_lineto:n { -.325cm , .3cm }
     \draw_path_moveto:n { .3cm , .4cm }
     \draw_path_lineto:n { .35cm , .4cm }
-    \draw_path_arc:nnn { 90 } { -90 } { .05cm }
+    \draw_path_arc:nnn { .05cm } { 90 } { -90 }
     \draw_path_lineto:n { .3cm , .3cm }
     \draw_path_rectangle_corners:nn { -.325cm , .425cm } { .3cm , .275cm }
     \draw_path_moveto:n { .275cm , .275cm }
     \draw_path_lineto:n { .275cm , -.325cm }
     \draw_path_lineto:n { -.1cm , -.325cm }
-    \draw_path_arc:nnn { 360 } { 180 } { .1cm }
+    \draw_path_arc:nnn { .1cm } { 360 } { 180 }
     \draw_path_lineto:n { -.3cm , .275cm }
     \draw_path_moveto:n { -.2cm , -.425cm }
     \draw_path_lineto:n { .325cm , -.425cm }
-    \draw_path_arc:nnn { 270 } { 360 } { .1cm }
+    \draw_path_arc:nnn { .1cm } { 270 } { 360 }
     \draw_path_lineto:n { .275cm , -.325cm }
     \draw_path_moveto:n { -.15cm , .125cm }
     \draw_path_lineto:n { .125cm , .125cm }
@@ -2217,29 +2226,29 @@
 
 \cs_new_protected:Npn \rpgicons_draw_shape_warlock: {
     \draw_path_moveto:n { \draw_point_polar:nn { .4cm } { 150 } }
-    \draw_path_arc:nnn { 150 } { 30 } { .4cm }
-    \draw_path_arc:nnn { -30 } { -150 } { .4cm }
+    \draw_path_arc:nnn { .4cm } { 150 } { 30 }
+    \draw_path_arc:nnn { .4cm } { -30 } { -150 }
     \draw_path_close:
     \draw_path_circle:nn { 0cm , .2cm } { .1cm }
     \draw_path_moveto:n { -.425cm , -.425cm }
-    \draw_path_arc:nnn { 180 } { 150 } { .75cm }
+    \draw_path_arc:nnn { .75cm } { 180 } { 150 }
     \draw_path_moveto:n { .425cm , -.425cm }
-    \draw_path_arc:nnn { 0 } { 30 } { .75cm }
+    \draw_path_arc:nnn { .75cm } { 0 } { 30 }
     \draw_path_circle:nn { 0cm , -.175cm } { .075cm }
     \draw_path_moveto:n { -.15cm , -.425cm }
-    \draw_path_arc:nnn { 180 } { 90 } { .075cm }
+    \draw_path_arc:nnn { .075cm } { 180 } { 90 }
     \draw_path_lineto:n { .075cm , -.35cm }
-    \draw_path_arc:nnn { 90 } { 0 } { .075cm }
+    \draw_path_arc:nnn { .075cm } { 90 } { 0 }
 }
 
 \cs_new_protected:Npn \rpgicons_draw_shape_wizard: {
     \draw_path_moveto:n { .4cm , -.425cm }
     \draw_path_lineto:n { -.3cm , -.425cm }
-    \draw_path_arc:nnn { 270 } { 90 } { .1cm }
+    \draw_path_arc:nnn { .1cm } { 270 } { 90 }
     \draw_path_lineto:n { .4cm , -.225cm }
     \draw_path_lineto:n { .4cm , .425cm }
     \draw_path_lineto:n { -.3cm , .425cm }
-    \draw_path_arc:nnn { 90 } { 180 } { .1cm }
+    \draw_path_arc:nnn { .1cm } { 90 } { 180 }
     \draw_path_lineto:n { -.4cm , -.325cm }
     \draw_path_moveto:n { -.25cm , -.325cm }
     \draw_path_lineto:n { .35cm , -.325cm }
@@ -2364,20 +2373,20 @@
 \cs_new_protected:Npn \rpgicons_draw_shape_gold: {
     \draw_path_moveto:n { -.375cm , -.375cm }
     \draw_path_lineto:n { ( -.5375cm , 0cm ) + ( \draw_point_polar:nn { .325cm } { -60 } ) }
-    \draw_path_arc:nnn { -60 } { 60 } { .325cm }
+    \draw_path_arc:nnn { .325cm } { -60 } { 60 }
     \draw_path_lineto:n { -.375cm , .375cm }
     \draw_path_lineto:n { .375cm , .375cm }
     \draw_path_lineto:n { ( .5375cm , 0cm ) + ( \draw_point_polar:nn { .325cm } { 120 } ) }
-    \draw_path_arc:nnn { 120 } { 240 } { .325cm }
+    \draw_path_arc:nnn { .325cm } { 120 } { 240 }
     \draw_path_lineto:n { .375cm , -.375cm }
     \draw_path_close:
 }
 
 \cs_new_protected:Npn \rpgicons_draw_shape_electrum: {
     \draw_path_moveto:n { -.225cm , -.325cm }
-    \draw_path_arc:nnn { 240 } { 120 } { .375cm }
+    \draw_path_arc:nnn { .375cm } { 240 } { 120 }
     \draw_path_lineto:n { .225cm , .325cm }
-    \draw_path_arc:nnn { 60 } { -60 } { .375cm }
+    \draw_path_arc:nnn { .375cm } { 60 } { -60 }
     \draw_path_close:
     \draw_path_circle:nn { 0cm , -.125cm } { .075cm }
 }
@@ -2416,16 +2425,16 @@
 \cs_new_protected:Npn \rpgicons_draw_shape_jewellery: {
     \draw_path_ellipse:nnn { 0cm , -.15cm } { .175cm , 0cm } { 0cm , .275cm }
     \draw_path_moveto:n { ( 0cm , -.15cm ) + ( \draw_point_polar:nnn { .075cm } { .175cm } { 0 } ) }
-    \draw_path_arc:nnnn { 0 } { -60 } { .075cm } { .175cm }
+    \draw_path_arc:nnnn { .075cm } { .175cm } { 0 } { -60 }
     \draw_path_circle:nn { 0cm , .2cm } { .075cm }
     \draw_path_moveto:n { \draw_point_intersect_circles:nnnnn
         { 0cm , .2cm } { .075cm } { 0cm , .7cm } { .5cm } { 1 }
     }
-    \draw_path_arc:nnn { 280 } { 325 } { .5cm }
+    \draw_path_arc:nnn { .5cm } { 280 } { 325 }
     \draw_path_moveto:n { \draw_point_intersect_circles:nnnnn
         { 0cm , .2cm } { .075cm } { 0cm , .7cm } { .5cm } { 2 }
     }
-    \draw_path_arc:nnn { 260 } { 215 } { .5cm }
+    \draw_path_arc:nnn { .5cm } { 260 } { 215 }
 }
 
 \cs_set_eq:NN \rpgicons_draw_shape_jewelry: \rpgicons_draw_shape_jewellery:
@@ -2433,7 +2442,7 @@
 \cs_new_protected:Npn \rpgicons_draw_shape_jewellery_i: {
     \draw_path_circle:nn { 0cm , -.075cm } { .225cm }
     \draw_path_moveto:n { ( 0cm , -.075cm ) + ( \draw_point_polar:nn { .35cm } { 120 } ) }
-    \draw_path_arc:nnn { 120 } { 420 } { .35cm }
+    \draw_path_arc:nnn { .35cm } { 120 } { 420 }
     \draw_path_moveto:n { 0cm , .225cm }
     \draw_path_lineto:n { .2cm , .35cm }
     \draw_path_lineto:n { .15cm , .425cm }
@@ -2527,7 +2536,7 @@
     \draw_path_moveto:n { -.45cm, . 45cm }
     \draw_path_lineto:n { .45cm , .45cm }
     \draw_path_lineto:n { .45cm , -.05cm }
-    \draw_path_arc:nnn { 360 } { 180 } { .45cm }
+    \draw_path_arc:nnn { .45cm } { 360 } { 180 }
     \draw_path_close:
 }
 

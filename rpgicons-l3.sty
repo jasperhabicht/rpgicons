@@ -2588,6 +2588,7 @@
 
 \int_new:N \l_rpgicons_icon_variant_int
 
+\fp_new:N \l_rpgicons_icon_miterlimit_fp
 \fp_new:N \l_rpgicons_icon_opacity_stroke_fp
 \fp_set:Nn \l_rpgicons_icon_opacity_stroke_fp { 1.0 }
 \fp_new:N \l_rpgicons_icon_opacity_fill_fp
@@ -2689,6 +2690,16 @@
     } ,
     line ~ width         .dim_set:N  = \l_rpgicons_icon_linewidth_dim ,
     line ~ width         .initial:n  = { \l_draw_default_linewidth_dim } ,
+    line ~ cap           .code:n     = {
+        \use:c { draw_set_cap_ #1 : }
+    } ,
+    line ~ cap           .initial:n  = { round } ,
+    line ~ join          .code:n     = {
+        \use:c { draw_set_join_ #1 : }
+    } ,
+    line ~ join          .initial:n  = { round } ,
+    miter ~ limit        .fp_set:N   = \l_rpgicons_icon_miterlimit_fp ,
+    miter ~ limit        .initial:n  = { \l_draw_default_miterlimit_fp } ,
     scale                .code:n     = {
         \fp_set_eq:NN \l__rpgicons_icon_transform_aux_fp \l_rpgicons_icon_transform_scale_fp
         \fp_set:Nn \l_rpgicons_icon_transform_scale_fp {

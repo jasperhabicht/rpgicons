@@ -2604,6 +2604,11 @@
 \fp_set:Nn \l_rpgicons_icon_transform_scale_inner_fp { 1.0 }
 \fp_new:N \l_rpgicons_icon_transform_rotate_fp
 
+\prop_new:N \l__rpgicons_icon_path_state_prop
+\prop_put:Nnn \l__rpgicons_icon_path_state_prop { cap } { round }
+\prop_put:Nnn \l__rpgicons_icon_path_state_prop { join } { round }
+\prop_put:Nnn \l__rpgicons_icon_path_state_prop { miterlimit } { 10 }
+
 \str_new:N \l_rpgicons_icon_actualtext_str
 \str_new:N \l_rpgicons_icon_precompose_ref_str
 \bool_new:N \l__rpgicons_icon_precompose_bool
@@ -2689,17 +2694,9 @@
     } ,
     line ~ width         .dim_set:N  = \l_rpgicons_icon_linewidth_dim ,
     line ~ width         .initial:n  = { \l_draw_default_linewidth_dim } ,
-    line ~ cap           .code:n     = {
-        \use:c { draw_set_cap_ #1 : }
-    } ,
-    line ~ cap           .initial:n  = { round } ,
-    line ~ join          .code:n     = {
-        \use:c { draw_set_join_ #1 : }
-    } ,
-    line ~ join          .initial:n  = { round } ,
-    miter ~ limit        .code:n  = {
-        \draw_set_miterlimit:n {#1}
-    } ,
+    line ~ cap           .prop_set:Nn = \l__rpgicons_icon_path_state { cap } ,
+    line ~ join          .prop_set:Nn = \l__rpgicons_icon_path_state { join } ,
+    miter ~ limit        .prop_set:Nn = \l__rpgicons_icon_path_state { miterlimit } ,
     scale                .code:n     = {
         \fp_set_eq:NN \l__rpgicons_icon_transform_aux_fp \l_rpgicons_icon_transform_scale_fp
         \fp_set:Nn \l_rpgicons_icon_transform_scale_fp {

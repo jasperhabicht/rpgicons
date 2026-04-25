@@ -2698,8 +2698,9 @@
         \use:c { draw_set_join_ #1 : }
     } ,
     line ~ join          .initial:n  = { round } ,
-    miter ~ limit        .fp_set:N   = \l_rpgicons_icon_miterlimit_fp ,
-    miter ~ limit        .initial:n  = { \l_draw_default_miterlimit_fp } ,
+    miter ~ limit        .code:n  = {
+        \draw_set_miterlimit:n {#1}
+    } ,
     scale                .code:n     = {
         \fp_set_eq:NN \l__rpgicons_icon_transform_aux_fp \l_rpgicons_icon_transform_scale_fp
         \fp_set:Nn \l_rpgicons_icon_transform_scale_fp {

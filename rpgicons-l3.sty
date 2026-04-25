@@ -3161,6 +3161,19 @@
             }
         } {
             \draw_begin:
+                \use:c {
+                    draw_set_cap_
+                    \prop_item:Nn \l__rpgicons_icon_path_state_prop { cap }
+                    :
+                }
+                \use:c {
+                    draw_set_join_
+                    \prop_item:Nn \l__rpgicons_icon_path_state_prop { join }
+                    :
+                }
+                \draw_set_miterlimit:n {
+                    \prop_item:Nn \l__rpgicons_icon_path_state_prop { miterlimit }
+                }
                 \color_stroke:V \l_rpgicons_icon_color_stroke_tl
                 \color_fill:V \l_rpgicons_icon_color_fill_tl
                 \opacity_stroke:n { \l_rpgicons_icon_opacity_stroke_fp }

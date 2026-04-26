@@ -1110,7 +1110,7 @@ Using Ti\emph{k}Z styles, all instances of a certain command or a certain shape 
 \begin{macrodef}
 |rpg icons|/.style={<options>}
 \end{macrodef}
-All icons share the Ti\emph{k}Z style \macro{rpg icons} that is empty per default but can be used to style all icons at once. For example, if \macro{\tikzset{rpg icons/.append style={draw=red}}} is placed at the beginning of the document, all icons will be drawn in red. Per default, the icons are drawn in the color of the surrounding text. Per default, \macro{line cap} and \macro{line join} are set to \macro{round}.
+All icons share the Ti\emph{k}Z style \macro{rpg icons} that is empty per default but can be used to style all icons at once. For example, if \macro{\tikzset{rpg icons/.append style={draw=red}}} is placed at the beginning of the document, all icons will be drawn in red. Per default, the icons are drawn in the color of the surrounding text. Per default, the Ti\emph{k}Z keys \macro{line cap} and \macro{line join} are set to \macro{round}.
 
 Note that it may be necessary to add the Ti\emph{k}Z option \macro{transform shape} when applying transformations to the icons, because the icons are constructed as Ti\emph{k}Z nodes which are not affected by some transformations per default.
 

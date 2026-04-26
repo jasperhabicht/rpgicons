@@ -836,14 +836,23 @@ Some icons can be used with a negative color scheme where the icon is drawn nega
 
 \begin{macrodef}
 |line width|={<dimension>}
+|line cap|={<string>}
+|line join|={<string>}
+|miter limit|={<float>}
 \end{macrodef}
+The option \macro{line width} sets the line width for strokes. The default line width is the default line width of Ti\emph{k}Z or the \macro{l3draw} package respectively which in both cases is 0.4\,pt.
+
+The option \macro{line cap} takes as value one of \macro{butt}, \macro{rectangle} or \macro{round} and sets the style of stroke terminals to butt caps, rectangle caps (projecting square caps) or round caps respectively. Per default, round caps are set.
+
+The option \macro{line join} takes as value one of \macro{bevel}, \macro{miter} or \macro{round} and sets the style of stroke joins to bevel joins, miter joins or round joins respectively. Per default, round line joins are set.
+
+The option \macro{miter limit} takes as value floating point number and sets the miter factor of lines joined as a miter. The default factor is 10.
+
 \begin{macrodef}
 |scale|={<float>}
 |scale inner|={<float>}
 |rotate|={<float>}
 \end{macrodef}
-The option \macro{line width} sets the line width for strokes. The default line width is the default line width of Ti\emph{k}Z or the \macro{l3draw} package respectively which in both cases is 0.4\,pt.
-
 Using the \macro{scale} and \macro{rotate} options, the shape can be scaled and rotated (in degrees).
 
 The \macro{scale inner} option can be used to change the scaling of the icon placed inside a frame when using the \macro{\ability}, \macro{\saving}, \macro{\spellschool}, \macro{\damage}, \macro{\class} and \macro{\alignment} macros. The default value is 0.675.
@@ -1101,7 +1110,7 @@ Using Ti\emph{k}Z styles, all instances of a certain command or a certain shape 
 \begin{macrodef}
 |rpg icons|/.style={<options>}
 \end{macrodef}
-All icons share the Ti\emph{k}Z style \macro{rpg icons} that is empty per default but can be used to style all icons at once. For example, if \macro{\tikzset{rpg icons/.append style={draw=red}}} is placed at the beginning of the document, all icons will be drawn in red. Per default, the icons are drawn in the color of the surrounding text.
+All icons share the Ti\emph{k}Z style \macro{rpg icons} that is empty per default but can be used to style all icons at once. For example, if \macro{\tikzset{rpg icons/.append style={draw=red}}} is placed at the beginning of the document, all icons will be drawn in red. Per default, the icons are drawn in the color of the surrounding text. Per default, \macro{line cap} and \macro{line join} are set to \macro{round}.
 
 Note that it may be necessary to add the Ti\emph{k}Z option \macro{transform shape} when applying transformations to the icons, because the icons are constructed as Ti\emph{k}Z nodes which are not affected by some transformations per default.
 
@@ -1362,7 +1371,7 @@ The token list \macro{\l_rpgicons_precompose_output_str} contains the value set 
 \begin{macrodef}
 |\rpgicons_shape_set_eq:nn| {<shape>} {<shape>}
 \end{macrodef}
-The command \macro{\rpgicons_shape_set_eq:nn} sets the definition of the shape given in the first argument equal to that given in the second argument. If either shape name contains spaces, these are replaced by underscores. The relevant internal command is then set to contain the relevant shape definition. For example, \macro{\rpgicons_shape_set_eq:nn {foo} {charisma}} will create the command \macro{\rpgicons_draw_shape_foo:} as copy of \macro{\rpgicons_draw_shape_charisma:}. If the shape given in the first argument already exits, its definition will be replaced. 
+The command \macro{\rpgicons_shape_set_eq:nn} sets the definition of the shape given in the first argument equal to that given in the second argument. If either shape name contains spaces, these are replaced by underscores. The relevant internal command is then set to contain the relevant shape definition. For example, \macro{\rpgicons_shape_set_eq:nn {foo} {charisma}} will create the command \macro{\rpgicons_draw_shape_foo:} as copy of \macro{\rpgicons_draw_shape_charisma:}. If the shape given in the first argument already exits, its definition will be replaced.
 
 % ===
 

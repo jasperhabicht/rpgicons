@@ -1432,17 +1432,19 @@
 
 \cs_new_protected:Npn \rpgicons_draw_shape_incapacitated: {
     \draw_path_moveto:n { \draw_point_polar:nn { .425cm } { 30 } }
-    \draw_path_arc:nnn { .425cm } { 270 } { 210 }
-    \draw_path_lineto:n { \draw_point_polar:nn { -.425cm } { 90 } }
-    \draw_path_arc:nnn { .425cm } { 30 } { 90 }
+    \draw_path_lineto:n { \draw_point_polar:nn { -.425cm } { 30 } }
     \draw_path_moveto:n { \draw_point_polar:nn { .425cm } { 90 } }
-    \draw_path_arc:nnn { .425cm } { 330 } { 270 }
-    \draw_path_lineto:n { \draw_point_polar:nn { -.425cm } { 150 } }
-    \draw_path_arc:nnn { .425cm } { 90 } { 150 }
+    \draw_path_lineto:n { \draw_point_polar:nn { -.425cm } { 90 } }
     \draw_path_moveto:n { \draw_point_polar:nn { .425cm } { 150 } }
+    \draw_path_lineto:n { \draw_point_polar:nn { -.425cm } { 150 } }
+    \draw_path_moveto:n { \draw_point_polar:nn { .425cm } { 30 } }
+    \draw_path_arc:nnn { .425cm } { 270 } { 210 }
+    \draw_path_arc:nnn { .425cm } { 330 } { 270 }
     \draw_path_arc:nnn { .425cm } { 30 } { -30 }
-    \draw_path_lineto:n { \draw_point_polar:nn { -.425cm } { 210 } }
-    \draw_path_arc:nnn { .425cm } { 150 } { 210 }
+    \draw_path_arc:nnn { .425cm } { 90 } { 30 }
+    \draw_path_arc:nnn { .425cm } { 150 } { 90 }
+    \draw_path_arc:nnn { .425cm } { 210 } { 150 }
+    \draw_path_close:
     \draw_path_moveto:n { \draw_point_polar:nn { .25cm } { 30 } }
     \draw_path_arc:nnn { .25cm } { 270 } { 210 }
     \draw_path_arc:nnn { .25cm } { 330 } { 270 }
@@ -1450,6 +1452,7 @@
     \draw_path_arc:nnn { .25cm } { 90 } { 30 }
     \draw_path_arc:nnn { .25cm } { 150 } { 90 }
     \draw_path_arc:nnn { .25cm } { 210 } { 150 }
+    \draw_path_close:
 }
 
 \cs_new_protected:Npn \rpgicons_draw_shape_invisible: {
@@ -1795,9 +1798,9 @@
         \draw_path_moveto:n { ##1 * .325cm - .05cm , .3cm }
         \draw_path_arc:nnn { .05cm } { 180 } { 405 }
         \draw_path_arc:nnn { .15cm } { 215 } { 180 }
-        \draw_path_moveto:n { ##1 * .325cm - .1cm , -.05cm }
-        \draw_path_lineto:n { ##1 * .325cm + .1cm , -.05cm }
+        \draw_path_moveto:n { ##1 * .325cm + .1cm , -.05cm }
         \draw_path_arc:nnn { .1cm } { 360 } { 180 }
+        \draw_path_close:
     }
     \draw_path_moveto:n { -.325cm , -.15cm }
     \draw_path_arc:nnnn { .15cm } { .1cm } { 180 } { 360 }

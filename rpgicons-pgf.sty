@@ -2410,17 +2410,19 @@
 
   \backgroundpath{
     \pgfpathmoveto{\pgfpointpolar{30}{.425cm}}
-    \pgfpatharc{270}{210}{.425cm}
-    \pgfpathlineto{\pgfpointpolar{90}{-.425cm}}
-    \pgfpatharc{30}{90}{.425cm}
+    \pgfpathlineto{\pgfpointpolar{30}{-.425cm}}
     \pgfpathmoveto{\pgfpointpolar{90}{.425cm}}
-    \pgfpatharc{330}{270}{.425cm}
-    \pgfpathlineto{\pgfpointpolar{150}{-.425cm}}
-    \pgfpatharc{90}{150}{.425cm}
+    \pgfpathlineto{\pgfpointpolar{90}{-.425cm}}
     \pgfpathmoveto{\pgfpointpolar{150}{.425cm}}
+    \pgfpathlineto{\pgfpointpolar{150}{-.425cm}}
+    \pgfpathmoveto{\pgfpointpolar{30}{.425cm}}
+    \pgfpatharc{270}{210}{.425cm}
+    \pgfpatharc{330}{270}{.425cm}
     \pgfpatharc{30}{-30}{.425cm}
-    \pgfpathlineto{\pgfpointpolar{210}{-.425cm}}
-    \pgfpatharc{150}{210}{.425cm}
+    \pgfpatharc{90}{30}{.425cm}
+    \pgfpatharc{150}{90}{.425cm}
+    \pgfpatharc{210}{150}{.425cm}
+    \pgfpathclose
     \pgfpathmoveto{\pgfpointpolar{30}{.25cm}}
     \pgfpatharc{270}{210}{.25cm}
     \pgfpatharc{330}{270}{.25cm}
@@ -2428,6 +2430,7 @@
     \pgfpatharc{90}{30}{.25cm}
     \pgfpatharc{150}{90}{.25cm}
     \pgfpatharc{210}{150}{.25cm}
+    \pgfpathclose
     \pgfsetarrowsstart{}
     \pgfsetarrowsend{}
   }
@@ -2912,9 +2915,9 @@
       \pgfpathmoveto{\pgfpoint{\x*.325cm-.05cm}{.3cm}}
       \pgfpatharc{180}{405}{.05cm}
       \pgfpatharc{215}{180}{.15cm}
-      \pgfpathmoveto{\pgfpoint{\x*.325cm-.1cm}{-.05cm}}
-      \pgfpathlineto{\pgfpoint{\x*.325cm+.1cm}{-.05cm}}
+      \pgfpathmoveto{\pgfpoint{\x*.325cm+.1cm}{-.05cm}}
       \pgfpatharc{360}{180}{.1cm}
+      \pgfpathclose
     }
     \pgfpathmoveto{\pgfpoint{-.325cm}{-.15cm}}
     \pgfpatharc{180}{360}{.15cm and .1cm}

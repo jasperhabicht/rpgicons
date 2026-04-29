@@ -2697,8 +2697,12 @@
     } ,
     line ~ width         .dim_set:N  = \l_rpgicons_icon_linewidth_dim ,
     line ~ width         .initial:n  = { \l_draw_default_linewidth_dim } ,
-    line ~ cap           .prop_put:N = \l__rpgicons_icon_path_state_prop ,
-    line ~ join          .prop_put:N = \l__rpgicons_icon_path_state_prop ,
+    line ~ cap           .choices:nn = { butt , round , rectangle } {
+        \prop_put:NnV \l__rpgicons_icon_path_state_prop { line ~ cap } \l_keys_choice_str
+    } ,
+    line ~ join          .choices:nn = { miter , round , bevel } {
+        \prop_put:NnV \l__rpgicons_icon_path_state_prop { line ~ join } \l_keys_choice_str
+    } ,
     miter ~ limit        .prop_put:N = \l__rpgicons_icon_path_state_prop ,
     scale                .code:n     = {
         \fp_set_eq:NN \l__rpgicons_icon_transform_aux_fp \l_rpgicons_icon_transform_scale_fp

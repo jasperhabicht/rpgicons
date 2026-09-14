@@ -2741,7 +2741,7 @@
     }
 }
 
-\cs_new:Npn \__rpgicons_style_set:nn #1#2 {
+\cs_new_protected:Npn \__rpgicons_style_set:nn #1#2 {
     \clist_if_exist:cF { l__rpgicons_style_ #1 _value_clist } {
         \clist_new:c { l__rpgicons_style_ #1 _value_clist }
     }
@@ -2752,7 +2752,7 @@
         }
     }
 }
-\cs_new:Npn \__rpgicons_style_put_right:nn #1#2 {
+\cs_new_protected:Npn \__rpgicons_style_put_right:nn #1#2 {
     \clist_if_exist:cTF { l__rpgicons_style_ #1 _value_clist } {
         \clist_put_right:cn { l__rpgicons_style_ #1 _value_clist } {#2}
         \keys_define:ne { rpgicons / local } {

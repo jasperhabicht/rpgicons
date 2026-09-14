@@ -2926,7 +2926,7 @@
 \cs_generate_variant:Nn \iow_open:Nn { Ne }
 \cs_generate_variant:Nn \prop_to_keyval:N { c }
 \cs_generate_variant:Nn \str_mdfive_hash:n { V }
-\prg_generate_conditional_variant:Nnn \str_if_eq:nn { Ve } { TF }
+\prg_generate_conditional_variant:Nnn \str_if_eq:nn { ne , Ve } { TF }
 
 \cs_new_protected:Npn \__rpgicons_precompose_calculate_scale_aux:Nnn #1#2#3 {
     \str_if_eq:nnT {#2} { scale } {
@@ -3255,7 +3255,6 @@
 }
 
 \str_new:N \l__rpgicons_icon_integer_str
-\cs_generate_variant:Nn \str_if_eq:nnTF { ne }
 \NewDocumentCommand { \RPGIconsDie } { O { normal } m O { } m } {
     \group_begin:
         \keys_set_groups:nne { rpgicons / local } { extra } {#3}

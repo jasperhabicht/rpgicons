@@ -11,7 +11,7 @@
 -- This work has the LPPL maintenance status `maintained'.
 --
 
--- v2.9.0 2026-04-30
+-- v2.9.1 2026-09-15
 
 rpgicons = rpgicons or {}
 

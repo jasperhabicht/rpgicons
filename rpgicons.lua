@@ -88,7 +88,8 @@ luatexbase.new_luacommand(
     function()
         rpgicons.load_icon(token.scan_argument(), token.scan_argument())
     end,
-    'global, protected'
+    'global',
+    'protected'
 )
 
 -- EOF

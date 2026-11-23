@@ -76,9 +76,9 @@ end
 
 --- Wrapper TeX functions
 luatexbase.new_luacommand(
-    '__rpgicons_lua_get_dest_pages:n',
+    '__rpgicons_lua_get_dest_pages:e',
     function()
-        rpgicons.get_dest_pages(token.scan_argument())
+        rpgicons.get_dest_pages(token.scan_argument(true))
     end,
     'global'
 )
@@ -88,7 +88,7 @@ luatexbase.new_luacommand(
     function()
         rpgicons.load_icon(token.scan_argument(), token.scan_argument())
     end,
-    'global'
+    'global, protected'
 )
 
 -- EOF

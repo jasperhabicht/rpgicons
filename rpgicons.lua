@@ -74,6 +74,21 @@ function rpgicons.load_icon(dest, file)
     return img_write({page = dests[dest], filename = file})
 end
 
-return rpgicons
+--- Wrapper TeX functions
+luatexbase.new_luacommand(
+    '__rpgicons_lua_get_dest_pages:n',
+    function()
+        rpgicons.get_dest_pages(token.scan_argument())
+    end,
+    'global'
+)
+
+luatexbase.new_luacommand(
+    '__rpgicons_lua_load_icon:nn',
+    function()
+        rpgicons.load_icon(token.scan_argument(), token.scan_argument())
+    end,
+    'global'
+)
 
 -- EOF

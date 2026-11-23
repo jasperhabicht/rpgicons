@@ -3071,7 +3071,7 @@
         } {
             \sys_if_output_pdf:TF {
                 \sys_if_engine_luatex:TF {
-                    \__rpgicons_lua_load_icon:nn { rpgicons. #1 } {#2}
+                    \exp_not:N \__rpgicons_lua_load_icon:nn { rpgicons. #1 } {#2}
                 } {
                     \prop_if_in:cnTF { g__rpgicons_precompose_ #1 _prop } { ref } {
                         \tex_pdfrefximage:D

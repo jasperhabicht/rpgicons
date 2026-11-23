@@ -11,7 +11,7 @@
 -- This work has the LPPL maintenance status `maintained'.
 --
 
--- v2.9.1 2026-09-15
+-- v2.9.2 2026-11-23
 
 rpgicons = rpgicons or {}
 
@@ -74,6 +74,22 @@ function rpgicons.load_icon(dest, file)
     return img_write({page = dests[dest], filename = file})
 end
 
-return rpgicons
+--- Wrapper TeX functions
+luatexbase.new_luacommand(
+    '__rpgicons_lua_get_dest_pages:e',
+    function()
+        rpgicons.get_dest_pages(token.scan_argument(true))
+    end,
+    'global'
+)
+
+luatexbase.new_luacommand(
+    '__rpgicons_lua_load_icon:nn',
+    function()
+        rpgicons.load_icon(token.scan_argument(), token.scan_argument())
+    end,
+    'global',
+    'protected'
+)
 
 -- EOF

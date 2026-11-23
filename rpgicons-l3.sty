@@ -10,7 +10,7 @@
 %
 % This work has the LPPL maintenance status `maintained'.
 %
-\ProvidesExplPackage {rpgicons-l3} {2026-04-30} {2.9.0}
+\ProvidesExplPackage {rpgicons-l3} {2026-11-23} {2.9.2}
     {RPG Icons Package (l3 Variant)}
 
 \bool_new:N \l__rpgicons_unicode_mode_bool
@@ -3044,9 +3044,7 @@
                     \str_use:N \c_right_brace_str
                 }
                 \sys_if_engine_luatex:T {
-                    \lua_now:e {
-                        rpgicons.get_dest_pages(' \lua_escape:e { \str_use:N \l_rpgicons_precompose_output_str } .pdf')
-                    }
+                    \__rpgicons_lua_get_dest_pages:e { \str_use:N \l_rpgicons_precompose_output_str .pdf }
                 }
             } {
                 \msg_error:nn { rpgicons } { shell-escape-disabled }
@@ -3058,9 +3056,7 @@
     } {
         \file_if_exist_p:n { \str_use:N \l_rpgicons_precompose_output_str .pdf }
     } {
-        \lua_now:e {
-            rpgicons.get_dest_pages(' \lua_escape:e { \str_use:N \l_rpgicons_precompose_output_str } .pdf')
-        }
+        \__rpgicons_lua_get_dest_pages:e { \str_use:N \l_rpgicons_precompose_output_str .pdf }
     }
 }
 
@@ -3073,9 +3069,7 @@
         } {
             \sys_if_output_pdf:TF {
                 \sys_if_engine_luatex:TF {
-                    \exp_not:N \lua_now:e {
-                        rpgicons.load_icon(' rpgicons. \lua_escape:n {#1} ', ' \lua_escape:n {#2} ')
-                    }
+                    \__rpgicons_lua_load_icon:nn { rpgicons. #1 } {#2}
                 } {
                     \prop_if_in:cnTF { g__rpgicons_precompose_ #1 _prop } { ref } {
                         \tex_pdfrefximage:D
